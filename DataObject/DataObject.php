@@ -17,7 +17,7 @@
 		 * @param Dao $dao The dao that created this object.
 		 */
 		public function __construct($data, $dao) {
-			$this->data = $data;
+			$this->setData($data);
 			$this->dao = $dao;
 		}
 
@@ -28,6 +28,21 @@
 		 * @return Dao
 		 */
 		public function getDao() { return $this->dao; }
+
+
+		public function setData($data) {
+			$this->data = $data;	
+		}
+
+		/**
+		 * This method only exists temporarly!
+		 */
+		public function getData($data) { return $this->data; }
+
+		public function save() {
+			if (!$this->id) { $this->setData($this->getDao()->insert($this)->getData()); } // this is an ugly fix, until the Dao sets the right data.
+			else            { $this->getDao()->update($this); }	
+		}
 
 
 		/**

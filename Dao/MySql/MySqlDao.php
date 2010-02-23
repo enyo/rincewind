@@ -12,10 +12,10 @@
 	class MySqlDao extends SqlDao {
 	
 		protected function escapeString($string) {
-			return mysql_real_escape_string($string, $this->db->getResource());
+			return $this->db->escapeString($string);
 		}
 		
-		public function escapeColumn($column) { return '`' . $this->escapeString($column) . '`'; }
+		public function escapeColumn($column) { return '`' . $this->db->escapeColumn($column) . '`'; }
 		public function exportString($text)   { return "'" . $this->escapeString($text) . "'"; }
 		
 		

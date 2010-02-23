@@ -8,37 +8,37 @@ require_once ('DatabaseResult/AbstractDatabaseResult.php');
 
 class MySqlResult extends AbstractDatabaseResult {
 
-	protected $fetch_result_row = 0;
+	protected $fetchResultRow = 0;
 
 
 	public function fetchArray($row = NULL, $result_type = MYSQL_ASSOC) {
-		$return = mysql_fetch_array($this->result, $result_type);
+		$return = $this->result->fetch_array($result_type);
 		return ($return);
 	}
 
 	public function fetchResult($field, $row = NULL) {
 		if ($row === NULL) { $row = $this->getFetchResultRow(); }
-		$return = mysql_result($this->result, $row, $field);
-		return ($return);
+		$return = $this->fetchArray($row);
+		return ($return[$field]);
 	}
 
 	public function fetchRow($row = NULL) {
-		$return = mysql_fetch_row($this->result);
+		$return = $this->result->fetch_row();
 		return ($return);
 	}
 
 	public function numRows() {
-		$return = @mysql_num_rows ($this->result);
+		$return = $this->result->num_rows;
 		return ($return);
 	}
 
 
 	protected function getFetchResultRow() {
-		return ($this->fetch_result_row ++);
+		return ($this->fetchResultRow ++);
 	}
 
 	public function reset() {
-		mysql_data_seek($this->result, 0);
+		$this->result->data_seek(0);
 	}
 
 

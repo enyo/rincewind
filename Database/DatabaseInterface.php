@@ -29,6 +29,23 @@ interface DatabaseInterface {
 	 */
 	public function query($query, $print_only = 'bool');
 
+
+	/**
+	 * @param string $string
+	 */
+	public function escapeString($string);
+
+	/**
+	 * @param string $column
+	 */
+	public function escapeColumn($column);
+
+	/**
+	 * @param string $table
+	 */
+	public function escapeTable($table);
+
+
 	/**
 	 * Returns the last error.
 	 */

@@ -19,8 +19,9 @@ abstract class Database implements DatabaseInterface {
 
 
 	public function ensureConnection() {
-		if (!$this->connected) { $this->connect (); }
+		if (!$this->connected) { $this->connect(); }
 	}
+
 
 
 
@@ -87,6 +88,19 @@ abstract class Database implements DatabaseInterface {
 	public function __destruct() {
 		$this->close();
 	}
+
+
+
+
+	public function escapeColumn($column) {
+		return $this->escapeString($column);
+	}
+
+	public function escapeTable($table) {
+		return $this->escapeString($table);
+	}
+
+
 
 }
 

@@ -21,11 +21,22 @@ class MySql extends Database {
 
 		$this->dbname       = $dbname;
 		$this->host         = $host;
-		$this->port         = $port;
+		$this->port         = (int) $port;
 		$this->user         = $user;
 		$this->password     = $password;
 
 	}
+
+
+
+	/**
+	 * @param string $string
+	 */
+	public function escapeString($string) {
+		$this->ensureConnection();
+		return $this->resource->real_escape_string($string);
+	}
+
 
 	public function beginTransaction() { $this->query('start transaction'); }
 	public function commit() { $this->query('commit'); }
@@ -33,14 +44,13 @@ class MySql extends Database {
 
 
 	public function connect() {
-		if (!function_exists("mysql_connect")) { throw new SqlException("The function mysql_connect is not available! Please install the mysql php module."); }
-		$this->resource = mysql_connect($this->host . ($this->port ? ':' . $this->port : ''), $this->user, $this->password);
+		if (!function_exists("mysqli_connect")) { throw new SqlException("The function mysqli_connect is not available! Please install the mysqli php module."); }
 
-		if (!$this->resource) {
-			throw new SqlException("Sorry, impossible to connect to the server with this connection string: '" . $this->getConnectionString()."'.");
+		$this->resource = new mysqli($this->host, $this->user, $this->password, $this->dbname, $this->port);
+
+		if ($this->resource->connect_error) {
+			throw new SqlException("Sorry, impossible to connect to the server with this connection string: '" . $this->getConnectionString()."'. " . ' (#' . $this->resource->connect_errno . ' ' . $mysqli->connect_error);
 		}
-
-		if ($this->dbname) { $this->selectDatabase($this->dbname); }
 
 		$this->connected = true;
 		
@@ -49,10 +59,6 @@ class MySql extends Database {
 		return true;
 	}
 
-	public function selectDatabase($dbname) {
-		$this->dbname = $dbname;
-		mysql_select_db($this->dbname, $this->resource);
-	}
 
 	/**
 	 * Sets the charsetName for future queries.
@@ -63,13 +69,13 @@ class MySql extends Database {
 	public function setCharacterSet($charsetName = null) {
 		if ($charsetName)   $this->charsetName = $charsetName;
 		if ($this->connected) {
-			$this->query("SET CHARACTER SET '" . mysql_real_escape_string($this->charsetName, $this->resource) . "'");
+			$this->query("SET CHARACTER SET '" . $this->escapeString($this->charsetName) . "'");
 		}
 	}
 	
 	public function close() {
 		if ($this->connected) {
-			@mysql_close($this->resource);
+			@$this->resource->close();
 			$this->connected = false;
 		}
 	}
@@ -79,77 +85,29 @@ class MySql extends Database {
 
 
 	// Default Queries
-	public function query($query, $print_only = false) {
-		parent::query($query, $print_only);
-		if (!$print_only)
-		{
-			$result = @mysql_query($query, $this->resource);
-			if ($result === false) $this->error ($query);
+	public function query($query, $printOnly = false) {
+		parent::query($query, $printOnly);
+		if (!$printOnly) {
+			$result = @$this->resource->query($query);
+			if ($result === false) $this->error($query);
 
 			return new MySqlResult ($result);
 		}
 	}
 
 	public function multiQuery($query, $printOnly = false) {
-		$delimiter = ';';
-		if (strpos($query, 'delimiter') === false)
-		{
-			$this->processMultiQueries($query, $delimiter, $printOnly);
+		parent::query($query, $printOnly);
+		if (!$printOnly) {
+			$result = @$this->resource->multi_query($query);
+			if ($result === false) $this->error($query);
+			return new MySqlResult ($result);
 		}
-		else
-		{
-			preg_match('/(.*?)(?:(?:\n|\r|\n\r)\s*delimiter|\z)/ism', $query, $matches);
-			$this->processMultiQueries($matches[1], $delimiter, $printOnly);
-			preg_match_all('/(?:\A|\n|\r|\n\r)\s*delimiter\s+([^\s]*)(.*?)(?=(?:\n|\r|\n\r)\s*delimiter|\z)/ism', $query, $matches, PREG_SET_ORDER);
 
-			foreach ($matches as $thisMatch)
-			{
-				$delimiter = $thisMatch[1];
-				$this->processMultiQueries($thisMatch[2], $delimiter, $printOnly);
-			}
-		}
-	}
-	public function processMultiQueries($query, $delimiter, $printOnly)
-	{
-		// Remove the comments: (they could contain delimiters)
-		$query = preg_replace('/[\v\A]\s*'.preg_quote($this->commentString).'(.*)/i', "\n", $query);
-		if (!empty($query))
-		{
-			// Split the queries by delimiter.
-			// TODO: do this the correct way.
-			$queries = explode($delimiter . "\n", $query . "\n");
-			
-// 			$queryRegexp = '/((?:[^"\'`]*?|(["\'`]).*?(?:[^\\\\](?:\\\\\\\\)*)\2)*?)'.preg_quote($delimiter).'/ism';
-			
-			
-// 			$realQuery = '';
-			foreach($queries as $thisQuery)
-			{
-				$thisQuery = trim($thisQuery);
-				if (!empty($thisQuery))
-				{
-					$this->query($thisQuery, $printOnly);
-				}
-			}
-
-
-// 			$queryRegexp = '/((?:[^"\'`]*?|(["\'`])(?:.*?(?:[^\\\\](?:\\\\\\\\)*)|)\2)*?)'.preg_quote($delimiter).'/ism';
-// 			$queryRegexp = '/((?:[^"\'`]*?|(["\'`])\2|(["\'`]).*?(?:[^\\\\](?:\\\\\\\\)*)\3)*?)'.preg_quote($delimiter).'/ism';
-/*			preg_match_all($queryRegexp, $query, $matches, PREG_SET_ORDER);
-			foreach ($matches as $thisQuery)
-			{
-				$thisQuery = trim($thisQuery[1]);
-				if (!empty($thisQuery))
-				{
-					$this->query($thisQuery, $printOnly);
-				}
-			}*/
-		}
 	}
 
 
 	public function lastError() {
-		$return = @mysql_error($this->resource);
+		$return = @$this->resource->error;
 		return ($return);
 	}
 }

@@ -75,6 +75,10 @@ class Snap_FileAnalyzer {
         // otherwise, add that class as a valid test
         $methods = array();
         foreach ($classes as $class_name) {
+
+			$class = new ReflectionClass($class_name);
+			if ($class->isAbstract()) continue;
+
             // skip classes that don't have a runTests method
             if (!method_exists($class_name, 'runTests')) {
                 continue;

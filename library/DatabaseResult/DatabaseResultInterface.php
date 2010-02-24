@@ -1,47 +1,48 @@
 <?php
 
 
+	interface DatabaseResultInterface {
 
-interface DatabaseResultInterface
-{
-
-	/**
-	 * The default fetch_array command
-	 * @param: row      -> (Optional) The row (record) number. 0 = first row. NULL = all rows
-	 * @param: constant -> (Optional) Parameter that controls how the return value is initialized. 
-	 */
-	public function fetchArray($row = null, $result_type = null);
+		/**
+		 * Sets the internal pointer to specific row
+		 */
+		public function seek($rowNumber);
 
 
-	/**
-	 * Returns a result
-	 * @param string $field
-	 * @param int $row
-	 */
-	public function fetchResult($field, $row = null);
+		/**
+		 * If $field is given, fetchResult is used.
+		 *
+		 * @param string $field
+		 */
+		public function fetch($field = null);
 
 
-	/**
-	 * Fetchs a row
-	 * @param: see fetch array
-	 */
-	public function fetchRow($row = null);
+		/**
+		 * Returns the current row as an associative array.
+		 */
+		public function fetchArray();
 
 
-	/**
-	 * Returns the number of rows
-	 */
-	public function numRows();
+		/**
+		 * Returns the value of one field in the current row.
+		 *
+		 * @param string $field
+		 */
+		public function fetchResult($field);
+	
+	
+		/**
+		 * Returns the number of rows
+		 */
+		public function numRows();
 
 
-
-	/**
-	 * Resets the pointer to 0
-	 */
-	public function reset();
-
-}
-
+		/**
+		 * Resets the pointer to 0
+		 */
+		public function reset();
+	
+	}
 
 
 ?>

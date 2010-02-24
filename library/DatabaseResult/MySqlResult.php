@@ -1,47 +1,31 @@
 <?php
 
+	require_once ('DatabaseResult/AbstractDatabaseResult.php');
 
+	class MySqlResult extends AbstractDatabaseResult {
 
-require_once ('DatabaseResult/AbstractDatabaseResult.php');
+		private $currentRowNumber = 0;
 
+		public function fetchArray() {
+			$this->currentRowNumber ++;
+			return ($this->result->fetch_assoc());
+		}
 
+		public function fetchResult($field) {
+			$return = $this->fetchArray();
+			$this->seek($this->currentRowNumber - 1);
+			return ($return[$field]);
+		}
 
-class MySqlResult extends AbstractDatabaseResult {
+		public function numRows() {
+			return ($this->result->num_rows);
+		}
 
-	protected $fetchResultRow = 0;
+		public function seek($rowNumber) {
+			$this->currentRowNumber = $rowNumber;
+			$this->result->data_seek($rowNumber);	
+		}
 
-
-	public function fetchArray($row = NULL, $result_type = MYSQL_ASSOC) {
-		$return = $this->result->fetch_array($result_type);
-		return ($return);
 	}
-
-	public function fetchResult($field, $row = NULL) {
-		if ($row === NULL) { $row = $this->getFetchResultRow(); }
-		$return = $this->fetchArray($row);
-		return ($return[$field]);
-	}
-
-	public function fetchRow($row = NULL) {
-		$return = $this->result->fetch_row();
-		return ($return);
-	}
-
-	public function numRows() {
-		$return = $this->result->num_rows;
-		return ($return);
-	}
-
-
-	protected function getFetchResultRow() {
-		return ($this->fetchResultRow ++);
-	}
-
-	public function reset() {
-		$this->result->data_seek(0);
-	}
-
-
-}
 
 ?>

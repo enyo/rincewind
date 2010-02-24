@@ -1,0 +1,66 @@
+/** Fixes the test path / match display **/
+#testing_parameters dd {
+	float: left;
+	margin-top: -1.27em;
+	padding-left: 8em;
+}
+
+#testing_parameters dt {
+	float: none;
+}
+
+/** YUI SAM SKIN OVERRIDES **/
+.yui-skin-sam .mask {
+	*filter:alpha(opacity=75);
+}
+
+/**
+ * IE 6 Needs a proper "fixed" setting
+ **/
+html div#footer_container {
+	position: absolute;
+	top: expression(eval(document.compatMode && document.compatMode=='CSS1Compat') ? documentElement.scrollTop + (documentElement.clientHeight - this.clientHeight) : document.body.scrollTop + (document.body.clientHeight-this.clientHeight));
+	left: 0;
+}
+
+html div#logger {
+	position: absolute;
+	top: expression(eval(document.compatMode && document.compatMode=='CSS1Compat') ? documentElement.scrollTop : document.body.scrollTop);
+	right: 0;
+}
+
+/** Adjustments for Rounded Corners **/
+.test_group {
+	height: 1%;
+}
+
+.test_group .test {
+	height: 1%;
+}
+
+.test_group .rc_tr {
+	right: -0.1em;
+}
+
+.test_group .rc_bl,
+.test_group .rc_br {
+	bottom: -1px;
+}
+
+.test_group .rc_br {
+	right: -1px;
+}
+
+.test_group ul li label p {
+	float: left;
+}
+
+#footer_container {
+	height: 25px;
+	padding-top: 10px;
+}
+
+#footer button {
+	width: 5em;
+	top: 11px;
+}

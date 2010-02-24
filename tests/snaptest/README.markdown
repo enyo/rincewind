@@ -27,15 +27,18 @@ When ran, you should see output like the following:
 
 <code><pre>
 User@Host ~/snaptest> ./snaptest.sh ./
-..............................................................................
-.................
+..............................................................................................................................
 ______________________________________________________________________
-Total Cases:    37
-Total Tests:    95
-Total Pass:     95
+Total Cases:    50
+Total Tests:    126
+Total Pass:     126
 Total Defects:  0
 Total Failures: 0
+Total Skips:    0
+Total Todo:     0
 </pre></code>
+
+Sanity Check: There are 50 Cases and 126 Tests
 
 If you don't get any failures (marked with an F followed by information about the error, you're ready to go!
 

@@ -89,8 +89,13 @@ class Snap_Dispatcher {
             2   => array('pipe', 'w'),
         );
         
+        writelog('Dispatching subprocess: '.$exec);
+        
         $process = proc_open($exec, $descriptors, $pipes);
+        $status = proc_get_status($process);
         stream_set_blocking($pipes[1], 0);
+        
+        writelog('Spawned process ['.$status['pid'].']');
         
         if (is_resource($process)) {
             fclose($pipes[0]);
@@ -158,10 +163,7 @@ class Snap_Dispatcher {
             
                     $dispatch = array();
                     foreach ($options['dispatch'] as $k => $v) {
-                        if ($k == '$key') {
-                            $k = $key;
-                        }
-                        if ($v == '$key') {
+                        if ($v === '__KEY__') {
                             $v = $key;
                         }
                         $dispatch[$k] = $v;
@@ -195,15 +197,33 @@ class Snap_Dispatcher {
             if ($ready_streams !== FALSE) {
                 foreach ($ready_streams as $key => $stream) {
                     $handle = $procs[$key];
-                    call_user_func_array($options['onThreadComplete'], array($handle['key'], stream_get_contents($stream)));
+                    $status = proc_get_status($handle['proc']);
                     
+                    // while available for read, the process has not completed
+                    if ($status['running']) {
+                      continue;
+                    }
+                    
+                    $read = trim(stream_get_contents($handle['read']));
+                    $errors = trim(stream_get_contents($handle['err']));
+                    
+                    // close up the process
                     fclose($handle['read']);
                     fclose($handle['err']);
                     proc_close($handle['proc']);
+                    
+                    // if there is anything in error buffer, it failed
+                    if (strlen($errors) > 0) {
+                      writelog('Spawned process ['.$status['pid'].'] failed with message: '.$errors);
+                      call_user_func_array($options['onThreadFail'], array($handle['key'], $errors));
+                    }
+                    else {
+                      writelog('Spawned process ['.$status['pid'].'] succeeded with data: '.$read);
+                      call_user_func_array($options['onThreadComplete'], array($handle['key'], $read));
+                    }
                 
+                    // free the slot for a new process spawn
                     unset($reads[$key]);
-                    unset($procs[$key]);
-                    unset($ready_streams[$key]);
                     $procs[$key] = NULL;
                 }
                 

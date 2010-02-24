@@ -54,10 +54,24 @@ harness. By default, SnapTest looks for the pattern ^.*\.stest\.php$
 
 --help :: display this message
 
+--verbose :: does output logging to snaptest.log. Useful for debugging
+
 Additional information can always be found on the SnapTest home page:
 http://www.snaptest.net
 
 SNAPDOC;
+}
+
+/**
+ * performs a logging statement (verbose mode)
+ * @param $msg string output to display
+ * @return void
+ */
+function writelog($msg) {
+  if (defined('SNAPTEST_CLI_INTERFACE') && defined('SNAPTEST_VERBOSE_MODE') && SNAPTEST_VERBOSE_MODE) {
+    $msg = "\n" . '['.getmypid().'] ' . date('Y-m-d H:i:s - ', time()) . $msg;
+    file_put_contents(SNAPTEST_LOGFILE, $msg, FILE_APPEND);
+  }
 }
 
 /**

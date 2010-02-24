@@ -53,7 +53,7 @@ fi
 
 # parse the options
 CMD=""
-while getoptex "out. php. match. help;" "$@"
+while getoptex "out. php. match. verbose; help;" "$@"
 do
     if [ "$OPTOPT" = "php" ] ; then
         if [ -x "$OPTARG" ] ; then

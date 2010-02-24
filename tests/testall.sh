@@ -1,3 +1,3 @@
 #/bin/bash
-./snaptest/snaptest.sh ./library/
+./snaptest/snaptest.sh --verbose ./library/
 

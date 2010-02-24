@@ -19,6 +19,7 @@ $options = Snap_Request::getLongOptions(array(
     'help'      => FALSE,
     'test'      => '',
     'analyze'   => FALSE,
+    'verbose'   => FALSE,
 ));
 
 $path       = str_replace('\ ', ' ', $options[0]);
@@ -28,6 +29,10 @@ $xtn        = $options['match'];
 $help       = $options['help'];
 $test       = $options['test'];
 $analyze    = $options['analyze'];
+
+define('SNAPTEST_VERBOSE_MODE', $options['verbose']);
+
+writelog('Initialized');
 
 // help output if no path is specified
 if ((!$path || $help) && (!$test)) {
@@ -40,6 +45,7 @@ $path = realpath($path);
 
 // analyze subprocess
 if ($analyze) {
+    writelog('Doing analyze substep');
     $analyzer = new Snap_FileAnalyzer();
     $results = $analyzer->analyzeFile($path);
     echo SNAPTEST_TOKEN_START;
@@ -62,6 +68,8 @@ if ($test) {
     
     // add the class now that it exists
     $snap->addInput('local', $test['class']);
+
+    writelog('Doing test substep: '.$test['class'].'::'.$test['method']);
     
     // run tests with an exact match on the test name
     $snap->runTests('^'.$test['method'].'$');
@@ -77,6 +85,8 @@ else {
     $file_list = array($path);
 }
 
+writelog('Path contains '.count($file_list).' files for scanning');
+
 // start a dispatcher for multi-processing
 $dispatcher = new Snap_Dispatcher($php, __FILE__);
 
@@ -86,7 +96,8 @@ $master_test_list = $dispatcher->dispatch(array(
     'keys'          => $file_list,
     'dispatch'      => array(
         'analyze'       => TRUE,
-        1               => '$key',
+        'verbose'       => SNAPTEST_VERBOSE_MODE,
+        1               => '__KEY__',
         ),
     'onThreadComplete'  => array($analyzer, 'onThreadComplete'),
     'onThreadFail'      => array($analyzer, 'onThreadFail'),
@@ -108,6 +119,8 @@ foreach ($master_test_list as $file => $classes) {
 }
 unset($master_test_list);
 
+writelog('Total tests found by analyzer: '.count($master_test_key_list));
+
 // create a test aggregator for $outmode
 $reporter = new Snap_TestAggregator($out_mode, count($master_test_key_list));
 
@@ -115,12 +128,15 @@ $reporter = new Snap_TestAggregator($out_mode, count($master_test_key_list));
 $dispatcher->dispatch(array(
     'keys'          => $master_test_key_list,
     'dispatch'      => array(
-        'test'          => '$key',
+        'test'          => '__KEY__',
+        'verbose'       => SNAPTEST_VERBOSE_MODE,
         ),
     'onThreadComplete'  => array($reporter, 'onThreadComplete'),
     'onThreadFail'      => array($reporter, 'onThreadFail'),
     'onComplete'        => array($reporter, 'onComplete'),
 ));
+
+writelog('Complete, shutting down.'."\n");
 
 exit;
 

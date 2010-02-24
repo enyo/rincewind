@@ -24,6 +24,7 @@ class Snap_FileAnalyzer {
         
         if (!$results) {
             $data = str_replace(array(SNAPTEST_TOKEN_START, SNAPTEST_TOKEN_END), '', $data);
+            $this->results[$file] = $data;
             return FALSE;
         }
         $this->results[$file] = $results;

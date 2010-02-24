@@ -75,13 +75,16 @@ class Snap_Request {
     public static function makeLongOptions($opts) {
         $opt_pieces = array();
         $opt_tail = array();
+
         foreach ($opts as $key => $value) {
             if (is_numeric($key)) {
                 $opt_tail[$key] = Snap_Request::mangleRequest($value);
             }
             else {
                 if (is_bool($value)) {
-                    $opt_pieces[] = '--'. Snap_Request::mangleRequest($key);
+                    if ($value === TRUE) {
+                        $opt_pieces[] = '--'. Snap_Request::mangleRequest($key);
+                    }
                 }
                 else {
                     $opt_pieces[] = '--' . Snap_Request::mangleRequest($key) . '=' . Snap_Request::mangleRequest($value);

@@ -65,10 +65,10 @@
 
 		public function setUp() {
 	    	$this->db = getDatabaseConnection();
-			$this->db->query(sprintf("create temporary table `%s` (id int auto_increment primary key, username varchar(100))", $this->tableName));
-			$this->db->query(sprintf("insert into test set username='%s'", $this->tableName));
-			$this->db->query(sprintf("insert into test set username='%s'", $this->tableName));
-			$this->db->query(sprintf("insert into test set username='%s'", $this->tableName));
+			$this->db->query(sprintf("create temporary table `%s` (id int primary key, username varchar(100))", $this->tableName));
+			$this->db->query(sprintf("insert into `%s` set id=1, username='user1'", $this->tableName));
+			$this->db->query(sprintf("insert into `%s` set id=2, username='user2'", $this->tableName));
+			$this->db->query(sprintf("insert into `%s` set id=3, username='user3'", $this->tableName));
 		}
 
 		public function tearDown() {
@@ -78,6 +78,17 @@
 		public function testResultNumRows() {
 			$result = $this->db->query(sprintf("select * from `%s`", $this->tableName));
 			return $this->assertTrue($result->numRows() == 3);
+		}
+
+		public function testFetchArrayCount() {
+			$result = $this->db->query(sprintf("select * from `%s` where id=1", $this->tableName));
+			return $this->assertEqual(count($result->fetchArray()), 2);
+		}
+
+		public function testFetchArray() {
+			$result = $this->db->query(sprintf("select * from `%s` where id=1", $this->tableName));
+			$array = $result->fetchArray();
+			return $this->assertEqual($array['username'], 'user1');
 		}
 
 	}
@@ -122,6 +133,33 @@
 
 
 
+	class Mysql_EscapeFunctions_Test extends Snap_UnitTestCase {
+		protected $db;
+
+		protected $table = 'te"s\'t';
+		protected $escapedTable = 'te\"s\\\'t';
+
+		public function setUp() {
+	    	$this->db = getDatabaseConnection();
+		}
+
+		public function tearDown() {
+			unset($this->db);
+		}
+
+
+		public function testEscapeTable() {
+			return $this->assertEqual($this->db->escapeTable($this->table), $this->escapedTable);
+		}
+
+		public function testEscapeColumn() {
+			return $this->assertEqual($this->db->escapeColumn($this->table), $this->escapedTable);
+		}
+
+		public function testEscapeString() {
+			return $this->assertEqual($this->db->escapeString($this->table), $this->escapedTable);
+		}
+	}
 
 
 

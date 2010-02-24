@@ -8,14 +8,30 @@ abstract class Database implements DatabaseInterface {
 
 	public    $connected  = false;
 
-	protected $resource   = null;
+	protected $resource;
 
-	protected $host         = null;
-	protected $port         = null;
-	protected $dbname       = null;
-	protected $user         = null;
-	protected $password     = null;
-	protected $search_path  = null;
+	protected $host;
+	protected $port;
+	protected $dbname;
+	protected $user;
+	protected $password;
+	protected $search_path;
+
+
+	/**
+	 * You have to submit all connection infos.
+	 */
+	public function __construct($dbname, $user = null, $host = null, $port = null, $password = null) {
+		$this->dbname       = $dbname;
+		$this->host         = $host;
+		$this->port         = (int) $port;
+		$this->user         = $user;
+		$this->password     = $password;
+		$this->connect();
+	}
+
+
+	abstract protected function connect();
 
 
 	public function ensureConnection() {
@@ -24,41 +40,21 @@ abstract class Database implements DatabaseInterface {
 
 
 
-
-	public function query($query, $print_only = false) {
-		if ($print_only) { echo '<br />', $query, '<br />'; }
-		else             { $this->ensureConnection(); }
+	public function getResource() {
+		return $this->resource;
 	}
+
+
+
 
 	/**
 	 * Some databases (eg: Mysql) do not support multiple queries by themselves.
 	 * This function takes care of this problem.
 	 */
-	public function multiQuery($query, $printOnly = false) {
-		$this->query($query, $printOnly);
+	public function multiQuery($query) {
+		$this->query($query);
 	}
 
-
-
-	public function error($query = false) {
-		if (!empty($query)) { echo "A DATABASE ERROR OCCURED WITH THIS QUERY:\n$error\n"; }
-		else { echo "A DATABASE ERROR OCCURED.\n"; }
-		echo "\nThe server responded:\n" . $this->lastError() . "\n";
-		throw new SqlException('Database Error');
-	}
-
-	public function getResource() {
-		$this->ensureConnection();
-		return $this->resource;
-	}
-	
-	public function getSchema() {
-		return $this->search_path;
-	}
-	
-	public function getDatabaseName() {
-		return $this->dbname;
-	}
 
 	public function getConnectionString($separator = '/') {
 		$path = array();
@@ -78,6 +74,7 @@ abstract class Database implements DatabaseInterface {
 		$this->close();
 	}
 
+	abstract protected function close();
 
 
 

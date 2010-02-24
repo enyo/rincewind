@@ -338,10 +338,8 @@
 		public function importValue($externalValue, $type, $notNull = true) {
 			if (!$notNull && $externalValue === NULL) { return NULL; }
 			$dateWithTime = false;
-			try
-			{
-				switch ($type)
-				{
+			try {
+				switch ($type) {
 					case Dao::BOOL:  return $this->importBool($externalValue); break;
 					case Dao::INT:   return $this->importInteger($externalValue); break;
 					case Dao::FLOAT: return $this->importFloat($externalValue); break;
@@ -351,8 +349,7 @@
 					default: throw new DaoException('Unknown type when importing a value.'); break;
 				}
 			}
-			catch (Exception $e)
-			{
+			catch (Exception $e) {
 				throw new Exception('There was an error processing the table "' . $this->tableName . '": ' . $e->getMessage());
 			}
 		}
@@ -369,8 +366,7 @@
 			if (!$value) return false;
 			if (is_int($value)) return true;
 			$value = strtolower($value);
-			switch ($value)
-			{
+			switch ($value) {
 				case 'false': case 'f': case '0': return false; break;
 				case 'true': case 't': case '1': return true; break;
 				default: throw new DaoException("The boolean ($value) could not be converted."); break;
@@ -389,8 +385,7 @@
 		 *
 		 * @return mixed
 		 */
-		public function exportValue($internalValue, $type, $notNull = true)
-		{
+		public function exportValue($internalValue, $type, $notNull = true) {
 			if (!$notNull && $internalValue === NULL) {
 				return $this->exportNull();
 			}

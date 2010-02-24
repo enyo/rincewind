@@ -9,13 +9,20 @@
 	require_once('Dao/DaoResultIterator.php');
 	
 	
-	class SqlResultIterator extends DaoResultIterator
-	{
+	class SqlResultIterator extends DaoResultIterator {
 	
 		private $result = false;
 		private $dao = false;
-		private $nextData = true;
-		private $totalLength     = 0;
+		
+		/**
+		 * Contains the data of the current set.
+		 *
+		 * @var array
+		 */
+		private $currentData;
+
+		private $totalLength = 0;
+
 		private $length = 0;
 	
 	
@@ -33,9 +40,9 @@
 		public function rewind() { if ($this->length > 0) { $this->result->reset(); $this->next(); } }
 	
 	
-		public function current() { return $this->dao->getObjectFromDatabaseData($this->nextData); }
-		public function next()   { $this->nextData = $this->result->fetchArray(); }
-		public function valid()  { return ($this->nextData != false); }
+		public function current() { return $this->dao->getObjectFromDatabaseData($this->currentData); }
+		public function next()   { $this->currentData = $this->result->fetchArray(); }
+		public function valid()  { return ($this->currentData != false); }
 	
 		public function count()    { return $this->length; }
 		public function countAll() { return $this->totalLength; }

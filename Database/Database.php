@@ -41,21 +41,10 @@ abstract class Database implements DatabaseInterface {
 
 
 	public function error($query = false) {
-		if (!empty($query)) {
-			$error  = '<h1 align="center" class="db_error">An error occured during this query:</h1><br>'."\n";	
-			$error .= $query;
-		}
-		else
-		{
-			$error = '<h1 align="center" class="db_error">An error occured!</h1>'."\n";	
-		}
-		$error .= '<br><br>'."\n";
-		$error .= '<h2 align="center" class="db_error">The server responded:</h2><br>'."\n";
-		$error .= $this->lastError ()."\n";
-		$error .= '<br><br>'."\n";
-		$error .= '<h2 align="center" class="db_error">No values have been saved or selected.</h2>'."\n";
-		echo $error;
-		throw new SqlException ('Database Error');
+		if (!empty($query)) { echo "A DATABASE ERROR OCCURED WITH THIS QUERY:\n$error\n"; }
+		else { echo "A DATABASE ERROR OCCURED.\n"; }
+		echo "\nThe server responded:\n" . $this->lastError() . "\n";
+		throw new SqlException('Database Error');
 	}
 
 	public function getResource() {

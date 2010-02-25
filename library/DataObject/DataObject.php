@@ -37,7 +37,7 @@
 		/**
 		 * This method only exists temporarly!
 		 */
-		public function getData($data) { return $this->data; }
+		public function getData() { return $this->data; }
 
 		public function save() {
 			if (!$this->id) { $this->setData($this->getDao()->insert($this)->getData()); } // this is an ugly fix, until the Dao sets the right data.

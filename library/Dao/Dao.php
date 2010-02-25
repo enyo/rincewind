@@ -277,7 +277,34 @@
 		 */
 		protected function getObjectFromData($data, $columnTypes, $nullColumns) { return new DataObject($data, $this); }
 	
+		/**
+		 * Prepares the data, and gets a new object
+		 *
+		 * @param array $data The data returned from the database
+		 */
 		public function getObjectFromDatabaseData($data) {
+			return $this->getObjectFromData($this->prepareDataForObject($data), $this->columnTypes, $this->nullColumns);
+		}
+
+		/**
+		 * Prepares the data, and updates the object
+		 *
+		 * @param array $data The data returned from the database
+		 * @param DataObject $object The object to be updated
+		 * @return void
+		 */
+		public function updateObjectWithDatabaseData($data, $object) {
+			$object->setData($this->prepareDataForObject($data));
+		}
+
+
+
+		/**
+		 * Goes through the data array returned from the databse, and converts the values that are necessary
+		 *
+		 * @param array $data
+		 */
+		protected function prepareDataForObject($data) {
 			$neededValues = $this->columnTypes;
 			foreach ($data as $column=>$value)
 			{
@@ -310,8 +337,11 @@
 					}
 				}
 			}
-			return $this->getObjectFromData($data, $this->columnTypes, $this->nullColumns);
+			return $data;			
 		}
+
+
+
 		public function getRawObject() {
 			$data = array();
 			foreach ($this->columnTypes as $column=>$type) {

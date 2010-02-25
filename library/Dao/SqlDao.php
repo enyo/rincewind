@@ -73,7 +73,8 @@
 			
 			$newId = $this->insertByQuery($insertSql, $id);
 
-			$object->setData($this->getData(array('id'=>$newId)));
+			
+			$this->updateObjectWithDatabaseData($this->getData(array('id'=>$newId)), $object);
 			
 			$this->afterInsert($object);
 			

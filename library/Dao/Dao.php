@@ -191,7 +191,10 @@
 			return isset($this->columnTypes[$column]);
 		}
 
+
+
 		public function getById($id) { return $this->get(array('id'=>intval($id))); }
+
 		public function getAll($sort = null, $offset = null, $limit = null) { return $this->getIterator(array(), $sort, $offset, $limit); }
 
 
@@ -253,22 +256,20 @@
 		 * @return DataObject
 		 */
 		public function get($map, $sort = null, $offset = null, $exportValues = true) {
-			$iterator = $this->getIterator($map, $sort, $offset, 1, $exportValues);
-			if ($iterator->count() == 0) { throw new DaoException("The query on table ".$this->tableName." did not return anything."); }
-			return $iterator->current();
+			return $this->getFromQuery($this->generateQuery($map, $sort, $offset, $limit = 1, $exportValues));
+		}
+
+		/**
+		 * Same as get() but returns an array with the data instead of an object
+		 */
+		protected function getData($map, $sort = null, $offset = null, $exportValues = true) {
+			return $this->getFromQuery($this->generateQuery($map, $sort, $offset, $limit = 1, $exportValues), $returnData = true);
 		}
 
 		public function getIterator($map, $sort = null, $offset = null, $limit = null, $exportValues = true) {
-			$this->checkGetIteratorAttributes($sort, $offset, $limit, $exportValues);
+			return $this->getIteratorFromQuery($this->generateQuery($map, $sort, $offset, $limit, $exportValues));
 		}
-		protected function checkGetIteratorAttributes($sort, $offset, $limit, $exportValues) {
-			if ($offset !== null && !is_int($offset) ||
-				$limit !== null && !is_int($limit) ||
-				!is_bool($exportValues)) {
-				$trace = debug_backtrace();
-				trigger_error('Wrong parameters in ' . $trace[0]['file'] . ' on line ' . $trace[0]['line'], E_USER_ERROR);
-			}
-		}
+
 	
 	
 		/**

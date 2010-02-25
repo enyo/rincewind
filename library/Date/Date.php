@@ -48,21 +48,6 @@
 			return date($format === null ? $this->defaultFormat : $format, $this->timestamp);
 		}
 
-		/**
-		 * @param int $timestamp
-		 */
-		public function setTimestamp($timestamp) {
-			$this->timestamp = (int) $timestamp;	
-		}
-
-
-		/**
-		 * @param int $timestamp
-		 */
-		public function set($year, $month, $day, $hour = 0, $minute = 0, $second = 0) {
-			$this->timestamp = mktime((int) $hour, (int) $minute, (int) $second, (int) $month, (int) $day, (int) $year);
-		}
-
 
 
 		/**

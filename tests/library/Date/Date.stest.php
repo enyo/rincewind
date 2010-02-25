@@ -51,20 +51,6 @@
 			return $this->assertEqual((string) $date, '04.07.1983 12:30:00');
 		}
 
-		public function testSettingTimestamp() {
-			$date = new Date();
-			$ts = 191919;
-			$date->setTimestamp($ts);
-			return $this->assertEqual($date->getTimestamp(), $ts);
-		}
-
-		public function testSettingTime() {
-			$date = new Date();
-			$date->set(1983, 07, 04, 12, 30, 00);
-
-			return $this->assertEqual($date->getTimestamp(), 426166200);
-		}
-
 	}
 
 

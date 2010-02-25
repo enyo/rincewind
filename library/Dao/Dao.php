@@ -32,7 +32,8 @@
 		const FLOAT          = 2;
 		const BOOL           = 3;
 		const BOOLEAN        = 3;
-		const DATE_WITH_TIME = 4;
+		const TIMESTAMP      = 4;
+		const DATE_WITH_TIME = self::TIMESTAMP;
 		const DATE           = 5;
 		const TEXT           = 6;
 		const STRING         = 6;

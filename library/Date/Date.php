@@ -49,14 +49,34 @@
 		}
 
 		/**
+		 * @param int $timestamp
+		 */
+		public function setTimestamp($timestamp) {
+			$this->timestamp = (int) $timestamp;	
+		}
+
+
+		/**
+		 * @param int $timestamp
+		 */
+		public function set($year, $month, $day, $hour = 0, $minute = 0, $second = 0) {
+			$this->timestamp = mktime((int) $hour, (int) $minute, (int) $second, (int) $month, (int) $day, (int) $year);
+		}
+
+
+
+		/**
 		 * Simply returns the timestamp.
 		 */
 		public function getTimestamp() { return $this->timestamp; }
 
 		/**
 		 * @param string $format Sets the defaultFormat.
-		 **/
+		 */
 		public function setFormat($format) { $this->defaultFormat = $format; }
+
+
+
 
 		public function __toString() { return $this->format(); }
 	

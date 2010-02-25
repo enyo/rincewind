@@ -32,7 +32,8 @@
 		const FLOAT          = 2;
 		const BOOL           = 3;
 		const BOOLEAN        = 3;
-		const DATE_WITH_TIME = 4;
+		const TIMESTAMP      = 4;
+		const DATE_WITH_TIME = self::TIMESTAMP;
 		const DATE           = 5;
 		const TEXT           = 6;
 		const STRING         = 6;
@@ -191,7 +192,10 @@
 			return isset($this->columnTypes[$column]);
 		}
 
+
+
 		public function getById($id) { return $this->get(array('id'=>intval($id))); }
+
 		public function getAll($sort = null, $offset = null, $limit = null) { return $this->getIterator(array(), $sort, $offset, $limit); }
 
 
@@ -253,22 +257,20 @@
 		 * @return DataObject
 		 */
 		public function get($map, $sort = null, $offset = null, $exportValues = true) {
-			$iterator = $this->getIterator($map, $sort, $offset, 1, $exportValues);
-			if ($iterator->count() == 0) { throw new DaoException("The query on table ".$this->tableName." did not return anything."); }
-			return $iterator->current();
+			return $this->getFromQuery($this->generateQuery($map, $sort, $offset, $limit = 1, $exportValues));
+		}
+
+		/**
+		 * Same as get() but returns an array with the data instead of an object
+		 */
+		protected function getData($map, $sort = null, $offset = null, $exportValues = true) {
+			return $this->getFromQuery($this->generateQuery($map, $sort, $offset, $limit = 1, $exportValues), $returnData = true);
 		}
 
 		public function getIterator($map, $sort = null, $offset = null, $limit = null, $exportValues = true) {
-			$this->checkGetIteratorAttributes($sort, $offset, $limit, $exportValues);
+			return $this->getIteratorFromQuery($this->generateQuery($map, $sort, $offset, $limit, $exportValues));
 		}
-		protected function checkGetIteratorAttributes($sort, $offset, $limit, $exportValues) {
-			if ($offset !== null && !is_int($offset) ||
-				$limit !== null && !is_int($limit) ||
-				!is_bool($exportValues)) {
-				$trace = debug_backtrace();
-				trigger_error('Wrong parameters in ' . $trace[0]['file'] . ' on line ' . $trace[0]['line'], E_USER_ERROR);
-			}
-		}
+
 	
 	
 		/**
@@ -276,7 +278,34 @@
 		 */
 		protected function getObjectFromData($data, $columnTypes, $nullColumns) { return new DataObject($data, $this); }
 	
+		/**
+		 * Prepares the data, and gets a new object
+		 *
+		 * @param array $data The data returned from the database
+		 */
 		public function getObjectFromDatabaseData($data) {
+			return $this->getObjectFromData($this->prepareDataForObject($data), $this->columnTypes, $this->nullColumns);
+		}
+
+		/**
+		 * Prepares the data, and updates the object
+		 *
+		 * @param array $data The data returned from the database
+		 * @param DataObject $object The object to be updated
+		 * @return void
+		 */
+		public function updateObjectWithDatabaseData($data, $object) {
+			$object->setData($this->prepareDataForObject($data));
+		}
+
+
+
+		/**
+		 * Goes through the data array returned from the databse, and converts the values that are necessary
+		 *
+		 * @param array $data
+		 */
+		protected function prepareDataForObject($data) {
 			$neededValues = $this->columnTypes;
 			foreach ($data as $column=>$value)
 			{
@@ -309,8 +338,11 @@
 					}
 				}
 			}
-			return $this->getObjectFromData($data, $this->columnTypes, $this->nullColumns);
+			return $data;			
 		}
+
+
+
 		public function getRawObject() {
 			$data = array();
 			foreach ($this->columnTypes as $column=>$type) {

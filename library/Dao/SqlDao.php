@@ -71,7 +71,10 @@
 			}
 			$insertSql = "insert into " . $this->escapeTable($this->tableName) . " (" . implode(', ', $columns) . ") values (" . implode(', ', $values) . ");";
 			
-			$object = $this->insertByQuery($insertSql, $id);
+			$newId = $this->insertByQuery($insertSql, $id);
+
+			
+			$this->updateObjectWithDatabaseData($this->getData(array('id'=>$newId)), $object);
 			
 			$this->afterInsert($object);
 			
@@ -116,14 +119,15 @@
 			return $this->db->query("select count(id) as count from " . $this->escapeTable())->fetch('count');
 		}
 
-	
-	
-	
-	
-	
-		public function getIterator($map, $sort = null, $offset = null, $limit = null, $exportValues = true) {
-			parent::getIterator($map, $sort, $offset, $limit, $exportValues);
-	
+
+		protected function generateQuery($map, $sort = null, $offset = null, $limit = null, $exportValues = true) {
+			if ($offset !== null && !is_int($offset) ||
+				$limit !== null && !is_int($limit) ||
+				!is_bool($exportValues)) {
+				$trace = debug_backtrace();
+				trigger_error('Wrong parameters in ' . $trace[0]['file'] . ' on line ' . $trace[0]['line'], E_USER_ERROR);
+			}
+
 			$assignments = array();
 	
 			foreach($map as $column=>$value)
@@ -157,16 +161,22 @@
 			$query .= " " . $sort;
 			if ($offset !== null) { $query .= " offset " . intval($offset); }
 			if ($limit  !== null) { $query .= " limit " . intval($limit); }
-	
-			return $this->getIteratorFromQuery($query);
+			return $query;
 		}
+
 	
-	
-	
-		protected function getFromQuery($query) {
-			$Result = $this->db->query($query);
-			if ($Result->numRows() == 0) { throw new DaoException("The query ($query) did not return any results."); }
-			return $this->getObjectFromDatabaseData($Result->fetchArray());
+
+		/**
+		 * @param string $query
+		 * @param bool $returnData If set to true, only the data as array is returned, not a DataObject.
+		 */
+		protected function getFromQuery($query, $returnData = false) {
+			$result = $this->db->query($query);
+			if ($result->numRows() == 0) { throw new DaoException("The query ($query) did not return any results."); }
+
+			if ($returnData) return $result->fetchArray();
+
+			return $this->getObjectFromDatabaseData($result->fetchArray());
 		}
 	
 	
@@ -189,11 +199,13 @@
 		 *
 		 * @param string $query The query.
 		 * @param int $id If an insert is done with an id, you can pass it. If not, the last insert id is used.
+		 *
+		 * @return int The id.
 		 */
 		protected function insertByQuery($query, $id = null) {
 			$this->db->query($query);
 			$id = $id ? $id : $this->getLastInsertId();
-			return $this->getById($id);
+			return $id;
 		}
 	
 	

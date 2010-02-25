@@ -34,13 +34,9 @@
 			$this->data = $data;	
 		}
 
-		/**
-		 * This method only exists temporarly!
-		 */
-		public function getData($data) { return $this->data; }
 
 		public function save() {
-			if (!$this->id) { $this->setData($this->getDao()->insert($this)->getData()); } // this is an ugly fix, until the Dao sets the right data.
+			if (!$this->id) { $this->getDao()->insert($this); }
 			else            { $this->getDao()->update($this); }	
 		}
 
@@ -64,7 +60,10 @@
 				$this->triggerUndefinedPropertyWarning($column);
 				return null;
 			}
-			return $this->data[$column];
+			$value = $this->data[$column];
+			$columnType = $this->getColumnType($column);
+			if ($columnType == Dao::DATE || $columnType == Dao::DATE_WITH_TIME) $value = new Date($value);
+			return $value;
 		}
 	
 		public function setValue($column, $value) {
@@ -163,11 +162,11 @@
 					break;
 				case Dao::DATE:
 				case Dao::DATE_WITH_TIME:
-					if ($value instanceof Date) { return $value; }
-					elseif (is_numeric($value)) { return new Date($value); }
+					if ($value instanceof Date) { return $value->getTimestamp(); }
+					elseif (is_numeric($value)) { return (int) $value; }
 					else {
 						if (!$quiet && !empty($value)) trigger_error('The value of the type "DATE/DATE_WITH_TIME" '.$value.' was not valid in ' . $trace[0]['file'] . ' on line ' . $trace[0]['line'], E_USER_WARNING);
-						return new Date();
+						return time();
 					}
 					break;
 				case Dao::STRING:

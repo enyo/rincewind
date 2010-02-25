@@ -48,6 +48,8 @@
 			return date($format === null ? $this->defaultFormat : $format, $this->timestamp);
 		}
 
+
+
 		/**
 		 * Simply returns the timestamp.
 		 */
@@ -55,8 +57,11 @@
 
 		/**
 		 * @param string $format Sets the defaultFormat.
-		 **/
+		 */
 		public function setFormat($format) { $this->defaultFormat = $format; }
+
+
+
 
 		public function __toString() { return $this->format(); }
 	

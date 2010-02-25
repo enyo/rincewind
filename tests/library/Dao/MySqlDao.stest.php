@@ -7,7 +7,7 @@
 	    public function tearDown() {}
 
 	    public function testSomething() {
-	        return $this->todo();
+	        return $this->assertTrue(true);
 	    }
 
 	}

@@ -55,7 +55,13 @@
 			return $data;
 		}
 
-		public function getValue($column) {
+		/**
+		 * Gets the value of the $data array and returns it.
+		 * If the value is a DATE or DATE_WITH_TIME type, it returns a Date OBject.
+		 *
+		 * @return mixed
+		 **/
+		public function get($column) {
 			if (!array_key_exists($column, $this->data)) {
 				$this->triggerUndefinedPropertyWarning($column);
 				return null;
@@ -65,15 +71,32 @@
 			if ($columnType == Dao::DATE || $columnType == Dao::DATE_WITH_TIME) $value = new Date($value);
 			return $value;
 		}
-	
-		public function setValue($column, $value) {
+		/**
+		 * @deprecated Use get() instead
+		 **/
+		public function getValue($column) { return $this->get($column); }
+
+		
+		/**
+		 * Sets the value in the $data array after calling coerce() on the value.
+		 *
+		 * @param string $column
+		 * @param mixed $value
+		 * @return DataObject Returns itself for chaining.
+		 **/
+		public function set($column, $value) {
 			if (!array_key_exists($column, $this->data)) {
 				$this->triggerUndefinedPropertyWarning($column);
 				return;
 			}
 			$value = self::coerce($value, $this->getColumnType($column), in_array($column, $this->dao->getNullColumns()));
 			$this->data[$column] = $value;
+			return $this;
 		}
+		/**
+		 * @deprecated Use set() instead
+		 **/
+		function setValue($column, $value) { return $this->set($column, $value); }
 	
 	
 		protected function convertPhpNameToDbColumn($column) { return preg_replace('/([A-Z])/e', 'strtolower("_$1");', $column); }
@@ -97,12 +120,12 @@
 	
 		public function __set($phpColumn, $value) {
 			$column = $this->convertPhpNameToDbColumn($phpColumn);
-			$this->setValue($column, $value);
+			$this->set($column, $value);
 		}
 	
 		public function __get($phpColumn) {
 			$column = $this->convertPhpNameToDbColumn($phpColumn);
-			return $this->getValue($column);
+			return $this->get($column);
 		}
 	
 		function __call($method, $param) {
@@ -113,13 +136,13 @@
 		
 			if (strpos($method, 'is') === 0 || strpos($method, 'has') === 0) {
 				$column = $this->convertPhpNameToDbColumn($method);
-				return $this->getValue($column);
+				return $this->get($column);
 			} elseif (strpos($method, 'get') === 0) {
 				$column = $this->convertGetMethodToDbColumn($method);
-				return $this->getValue($column);
+				return $this->get($column);
 			} elseif (strpos($method, 'set') === 0) {
 				$column = $this->convertSetMethodToDbColumn($method);
-				return $this->setValue($column, $param[0]);
+				return $this->set($column, $param[0]);
 			} else {
 				$trace = debug_backtrace();
 				trigger_error("Call to undefined method $method in " . $trace[1]['file'] . ' on line ' . $trace[1]['line'], E_USER_ERROR);

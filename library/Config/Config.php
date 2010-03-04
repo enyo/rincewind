@@ -11,7 +11,7 @@
 	/**
 	 * Loading all exceptions
 	 */
-	include dirname(__FILE__) . 'ConfigExceptions.php';
+	include dirname(__FILE__) . '/ConfigExceptions.php';
 
 	/**
 	 * This is the Config interface.

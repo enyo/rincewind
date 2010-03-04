@@ -11,7 +11,7 @@
 	/**
 	 * Including the base Class
 	 */
-	include dirname(__FILE__) . 'Config.php';
+	include dirname(__FILE__) . '/Config.php';
 
 	/**
 	 * This is the IniFileConfig implementation of Config

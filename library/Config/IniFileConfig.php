@@ -1,7 +1,24 @@
 <?php
 
-	require_once('Config/Config.php');
+	/**
+	 * The basic implementation of the IniFileConfig
+	 *
+	 * @author Matthias Loitsch
+	 * @copyright Copyright (c) 2010, Matthias Loitsch
+	 * @package Config
+	 */
 
+	/**
+	 * Including the base Class
+	 */
+	include dirname(__FILE__) . 'Config.php';
+
+	/**
+	 * This is the IniFileConfig implementation of Config
+	 * It's written to parse default php.ini files to set the config.
+	 *
+	 * @package Config
+	 */
 	class IniFileConfig extends Config {
 		
 		protected $config;

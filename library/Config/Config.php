@@ -1,12 +1,25 @@
 <?php
 
-	
-	class ConfigException extends Exception { }
-	
-	
+	/**
+	 * This file contains the Config class definition.
+	 *
+	 * @author Matthias Loitsch <developer@ma.tthias.com>
+	 * @copyright Copyright (c) 2010, Matthias Loitsch
+	 * @package Config
+	 **/
+
+	/**
+	 * Loading all exceptions
+	 */
+	include dirname(__FILE__) . 'ConfigExceptions.php';
+
 	/**
 	 * This is the Config interface.
 	 * It doesn't define much, but Config classes inheriting this class have to support sections (as in php.ini files).
+	 *
+	 * @author Matthias Loitsch <developer@ma.tthias.com>
+	 * @copyright Copyright (c) 2010, Matthias Loitsch
+	 * @package Config
 	 */
 	abstract class Config {
 

@@ -20,6 +20,7 @@
 	    		->setReturnValue('getNullColumns', array('null_column'))
 				->listenTo('insert')
 				->listenTo('update')
+				->listenTo('delete')
 	    		->construct();
 
 	    	$this->dataObject = new DataObject(array('id'=>$this->testId, 'integer'=>$this->testInteger, 'time'=>$this->testTime, 'name'=>'matthias', 'null_column'=>null), $this->dao);
@@ -106,6 +107,11 @@
 		public function testUpdate() {
 			$this->dataObject->save();
 			return $this->assertCallCount($this->dao, 'update', 1);
+		}
+
+		public function testDelete() {
+			$this->dataObject->delete();
+			return $this->assertCallCount($this->dao, 'delete', 1);
 		}
 
 

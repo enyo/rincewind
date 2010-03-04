@@ -80,6 +80,15 @@ class DataObject {
 		return $this;
 	}
 
+	/**
+	 * Calls delete($this) on the dao.
+	 * Throws an exception if no id is set.
+	 */
+	public function delete() {
+		if (!$this->id) throw new DataObjectException("Can't delete an object with no id.");
+		$this->getDao()->delete($this);
+	}
+
 
 	/**
 	 * Returns an associative array with the values.

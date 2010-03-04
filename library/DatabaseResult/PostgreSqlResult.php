@@ -1,6 +1,12 @@
 <?php
 
+/**
+ * THIS FILE IS DEPRECATED!!!
+ * I HAVE TO UPDATE IT TO WORK
+ * @package DatabaseResult
+ */
 
+/*
 
 require_once ('DatabaseResult/AbstractDatabaseResult.php');
 
@@ -55,5 +61,5 @@ class PostgreSqlResult extends AbstractDatabaseResult
 
 
 }
-
+*/
 ?>

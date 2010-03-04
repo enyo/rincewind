@@ -1,55 +1,87 @@
 <?php
 
-	class SqlException extends Exception { }
+/**
+ * This file contains the abstract Database interface definition.
+ *
+ * @author Matthias Loitsch <developer@ma.tthias.com>
+ * @copyright Copyright (c) 2010, Matthias Loitsch
+ * @package Database
+ **/
 
-	class SqlConnectionException extends SqlException { }
-
-	class SqlQueryException extends SqlException { }
-
-
-
-	interface DatabaseInterface {
-	
-
-		/**
-		 * Do a query
-		 * @param: string -> The query
-		 * @param: bool   -> (Optional) If true, the query won't be done, but only printed.
-		 */
-		public function query($query);
-
-		public function multiQuery($query);
+/**
+ * Loading the exceptions
+ */
+include dirname(__FILE__) . '/DatabaseExceptions.php';
 
 
-	
-		/**
-		 * @param string $string
-		 */
-		public function escapeString($string);
-	
-		/**
-		 * @param string $column
-		 */
-		public function escapeColumn($column);
-	
-		/**
-		 * @param string $table
-		 */
-		public function escapeTable($table);
+/**
+ * The database interface.
+ *
+ * @author Matthias Loitsch <developer@ma.tthias.com>
+ * @copyright Copyright (c) 2010, Matthias Loitsch
+ * @package Database
+ **/
+interface DatabaseInterface {
 
 
-		/**
-		 * Returns the database resource
-		 */
-		public function getResource();
+	/**
+	 * Perform query.
+	 * @param string The query
+	 * @return DatabaseResult
+	 */
+	public function query($query);
+
+	/**
+	 * Perform multiple queries at once.
+	 * Some databases (eg: mysql) have another command for that.
+	 * Postgresql theoratically does not need another function call. Call multiQuery anyway!
+	 * For Postgresql this call simply gets redirected to query()
+	 * @param string $query
+	 * @return void
+	 */
+	public function multiQuery($query);
 
 
-		/**
-		 * Returns the last error.
-		 */
-		public function lastError();
-	
 
-	}
+	/**
+	 * Escapes a string so it can be used in a query.
+	 * IMPORTANT: You still have to put quotes around it.
+	 * @param string $string
+	 * @return string
+	 */
+	public function escapeString($string);
+
+	/**
+	 * Escapes a column so it can be used in a query.
+	 * IMPORTANT: You still have to put quotes around it.
+	 * @param string $column
+	 * @return string
+	 */
+	public function escapeColumn($column);
+
+	/**
+	 * Escapes a table so it can be used in a query.
+	 * IMPORTANT: You still have to put quotes around it.
+	 * @param string $table
+	 * @return string
+	 */
+	public function escapeTable($table);
+
+
+	/**
+	 * Returns the database resource
+	 * @return mixed
+	 */
+	public function getResource();
+
+
+	/**
+	 * Returns the last error.
+	 * @return string
+	 */
+	public function lastError();
+
+
+}
 
 ?>

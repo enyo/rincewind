@@ -31,6 +31,8 @@
 
 		abstract protected function getDatabaseConnection($username = null);
 
+		protected $resultType;
+
 		public function setUp() {
 	    	$this->db = $this->getDatabaseConnection();
 		}
@@ -46,8 +48,13 @@
 		}
 
 		public function testGoodQueries() {
-			return $this->assertIsA($this->db->query("show tables"), 'MySqlResult');
+			return $this->assertIsA($this->db->query("show tables"), $this->resultType);
 		}
+
+		public function testMultipleQueries() {
+			return $this->assertNull($this->db->multiQuery("show tables; show tables;"));
+		}
+
 
 	}
 
@@ -61,6 +68,8 @@
 
 		abstract protected function getDatabaseConnection($username = null);
 
+		protected $phpInternalResultType;
+
 		public function setUp() {
 	    	$this->db = $this->getDatabaseConnection();
 			$this->db->query(sprintf("create temporary table `%s` (id int primary key, username varchar(100))", $this->tableName));
@@ -71,6 +80,17 @@
 
 		public function tearDown() {
 			unset($this->db);
+		}
+
+		public function testQueryReturnsResult() {
+			return $this->assertIsA($this->db->query(sprintf("select * from `%s`", $this->tableName))->getResult(), $this->phpInternalResultType);
+		}
+
+		public function testQueryAfterMultiQuery() {
+			$this->db->multiQuery(sprintf("insert into `%s` set id=4, username='user4'; insert into `%s` set id=5, username='user5';", $this->tableName, $this->tableName));
+			$this->db->query(sprintf("insert into `%s` set id=6, username='user6'", $this->tableName));
+			// This would have thrown an error if not possible.
+			return $this->assertTrue(true);
 		}
 
 		public function testResultNumRows() {

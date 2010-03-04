@@ -1,7 +1,12 @@
 <?php
 
+/**
+ * THIS FILE IS DEPRECATED!!!
+ * I HAVE TO UPDATE IT TO WORK
+ * @package Database
+ */
 
-
+/*
 require_once ('Database/Database.php');
 require_once ('DatabaseResult/PostgreSqlResult.php');
 
@@ -88,5 +93,5 @@ class PostgreSql extends Database {
 		return ($return);
 	}
 }
-
+*/
 ?>

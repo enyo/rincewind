@@ -18,10 +18,13 @@
 	}
 
 	class MySql_General_Tests extends SqlDatabase_General_Tests {
+		protected $resultType = 'MySqlResult';
 		protected function getDatabaseConnection($username = null) { return getMySqlConnection($username); }
 	}
 
 	class MySql_Result_Test extends SqlDatabase_Result_Test {
+		protected $resultType = 'MySqlResult';
+		protected $phpInternalResultType = 'mysqli_result';
 		protected function getDatabaseConnection($username = null) { return getMySqlConnection($username); }
 	}
 

@@ -5,7 +5,8 @@
  *
  * @author Matthias Loitsch <developer@ma.tthias.com>
  * @copyright Copyright (c) 2010, Matthias Loitsch
- * @package DatabaseResult
+ * @package Database
+ * @subpackage DatabaseResult
  **/
 
 /**
@@ -13,7 +14,8 @@
  *
  * @author Matthias Loitsch <developer@ma.tthias.com>
  * @copyright Copyright (c) 2010, Matthias Loitsch
- * @package DatabaseResult
+ * @package Database
+ * @subpackage DatabaseResult
  **/
 interface DatabaseResultInterface {
 

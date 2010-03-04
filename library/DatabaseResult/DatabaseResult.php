@@ -5,7 +5,8 @@
  *
  * @author Matthias Loitsch <developer@ma.tthias.com>
  * @copyright Copyright (c) 2010, Matthias Loitsch
- * @package DatabaseResult
+ * @package Database
+ * @subpackage DatabaseResult
  **/
 
 
@@ -20,7 +21,8 @@ include dirname(__FILE__) . '/DatabaseResultInterface.php';
  *
  * @author Matthias Loitsch <developer@ma.tthias.com>
  * @copyright Copyright (c) 2010, Matthias Loitsch
- * @package DatabaseResult
+ * @package Database
+ * @subpackage DatabaseResult
  **/
 abstract class DatabaseResult implements DatabaseResultInterface {
 

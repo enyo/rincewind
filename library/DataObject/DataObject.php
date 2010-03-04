@@ -1,12 +1,40 @@
 <?php
 
-require_once('Dao/Dao.php');
+/**
+ * This file contains the DataObject definition.
+ *
+ * @author Matthias Loitsch <developer@ma.tthias.com>
+ * @copyright Copyright (c) 2010, Matthias Loitsch
+ * @package Dao
+ * @subpackage DataObject
+ **/
 
-class DataObjectException extends Exception { }
 
+
+/**
+ * Loading the Exceptions
+ */
+include dirname(__FILE__) . '/DataObjectExceptions.php';
+
+/**
+ * The DataObject is the data representation of one row from a Database request done with a Dao.
+ *
+ * @author Matthias Loitsch <developer@ma.tthias.com>
+ * @copyright Copyright (c) 2010, Matthias Loitsch
+ * @package Dao
+ * @subpackage DataObject
+ **/
 class DataObject {
 
+	/**
+	 * This array holds all the data from a record.
+	 * @var array
+	 */
 	protected $data;
+
+	/**
+	 * @var Dao
+	 */
 	protected $dao;
 
 
@@ -30,14 +58,26 @@ class DataObject {
 	public function getDao() { return $this->dao; }
 
 
+	/**
+	 * Sets a new data array
+	 *
+	 * @param array $data
+	 */
 	public function setData($data) {
 		$this->data = $data;	
 	}
 
 
+	/**
+	 * When there is an id, update() is called on the dao.
+	 * If there is no id insert() is called, and the dao updates the data in this DataObject.
+	 * 
+	 * @return DataObject itself for chaining.
+	 */
 	public function save() {
 		if (!$this->id) { $this->getDao()->insert($this); }
 		else            { $this->getDao()->update($this); }	
+		return $this;
 	}
 
 
@@ -45,6 +85,7 @@ class DataObject {
 	 * Returns an associative array with the values.
 	 *
 	 * @param bool $phpNames If true the indices will be camelized, if false, the indices will be like the database names.
+	 * @return array
 	 */
 	public function getArray($phpNames = true) {
 		$data = array();
@@ -57,8 +98,9 @@ class DataObject {
 
 	/**
 	 * Gets the value of the $data array and returns it.
-	 * If the value is a DATE or DATE_WITH_TIME type, it returns a Date OBject.
+	 * If the value is a DATE or DATE_WITH_TIME type, it returns a Date Object.
 	 *
+	 * @param string $column
 	 * @return mixed
 	 **/
 	public function get($column) {

@@ -3,7 +3,8 @@
 /**
  * THIS FILE IS DEPRECATED!!!
  * I HAVE TO UPDATE IT TO WORK
- * @package DatabaseResult
+ * @package Database
+ * @subpackage DatabaseResult
  */
 
 /*

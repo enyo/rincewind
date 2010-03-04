@@ -2,8 +2,7 @@
 
 	require_once(dirname(dirname(__FILE__)) . '/setup.php');
 
-	require_once(LIBRARY_ROOT_PATH . 'DataObject/DataObject.php');
-	require_once(LIBRARY_ROOT_PATH . 'Dao/DaoInterface.php');
+	require_once(LIBRARY_ROOT_PATH . 'Dao/Dao.php');
 
 
 	class DataObjectWithIdTest extends Snap_UnitTestCase {

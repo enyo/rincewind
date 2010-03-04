@@ -1,11 +1,16 @@
 <?php
 
+/**
+ * This file contains the PostgresqlDao definition.
+ * This file is not yet finished!
+ *
+ * @author Matthias Loitsch <developer@ma.tthias.com>
+ * @copyright Copyright (c) 2010, Matthias Loitsch
+ * @package Dao
+ **/
 
-	/**
-	 * @author     Matthias Loitsch <develop@matthias.loitsch.com>
-	 * @copyright  Copyright (c) 2009, Matthias Loitsch
-	 */
 
+/*
 	require_once('Dao/SqlDao.php');
 	require_once('Dao/PostgreSql/PostgreSqlResultIterator.php');
 	
@@ -33,5 +38,5 @@
 	
 	
 	}
-
+*/
 ?>

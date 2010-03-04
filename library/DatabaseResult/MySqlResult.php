@@ -1,10 +1,33 @@
 <?php
 
-	require_once ('DatabaseResult/AbstractDatabaseResult.php');
+	/**
+	 * This file contains the MysqlResult class definition.
+	 *
+	 * @author Matthias Loitsch <developer@ma.tthias.com>
+	 * @copyright Copyright (c) 2010, Matthias Loitsch
+	 * @package DatabaseResult
+	 **/
 
-	class MySqlResult extends AbstractDatabaseResult {
 
+	/**
+	 * Loading the interface
+	 */
+	include dirname(__FILE__) . '/DatabaseResult.php';
+
+	/**
+	 * The Mysql DatabaseResult implementation.
+	 *
+	 * @author Matthias Loitsch <developer@ma.tthias.com>
+	 * @copyright Copyright (c) 2010, Matthias Loitsch
+	 * @package DatabaseResult
+	 **/
+	class MySqlResult extends DatabaseResult {
+
+		/**
+		 * @var int
+		 **/
 		private $currentRowNumber = 0;
+
 
 		public function fetchArray() {
 			$this->currentRowNumber ++;
@@ -24,6 +47,10 @@
 		public function seek($rowNumber) {
 			$this->currentRowNumber = $rowNumber;
 			$this->result->data_seek($rowNumber);	
+		}
+
+		public function free() {
+			$this->result->free();
 		}
 
 	}

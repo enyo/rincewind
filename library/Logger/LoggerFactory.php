@@ -47,8 +47,7 @@
 			return $logger;
 		}
 	
-		public function apply($objectList)
-		{
+		public function apply($objectList) {
 			foreach($objectList as $o) {
 				$o->setLoggerFactory($this);
 			}

@@ -104,6 +104,8 @@ class DataObject {
 	 * @return mixed
 	 **/
 	public function get($column) {
+		$column = $this->convertPhpNameToDbColumn($column);
+
 		if (!array_key_exists($column, $this->data)) {
 			$this->triggerUndefinedPropertyWarning($column);
 			return null;
@@ -127,6 +129,8 @@ class DataObject {
 	 * @return DataObject Returns itself for chaining.
 	 **/
 	public function set($column, $value) {
+		$column = $this->convertPhpNameToDbColumn($column);
+
 		if (!array_key_exists($column, $this->data)) {
 			$this->triggerUndefinedPropertyWarning($column);
 			return;
@@ -143,12 +147,11 @@ class DataObject {
 
 	protected function convertPhpNameToDbColumn($column) { return preg_replace('/([A-Z])/e', 'strtolower("_$1");', $column); }
 	protected function convertDbColumnToPhpName($column) { return preg_replace('/_([a-z])/e', 'strtoupper("$1");', $column); }
-	protected function convertGetMethodToDbColumn($method) {
+	protected function convertGetMethodToPhpColumn($method) {
 		$method = substr($method, 3);
-		$method = strtolower(substr($method, 0, 1)) . substr($method, 1);
-		return $this->convertPhpNameToDbColumn($method);
+		return strtolower(substr($method, 0, 1)) . substr($method, 1);
 	}
-	protected function convertSetMethodToDbColumn($method) { return $this->convertGetMethodToDbColumn($method); }
+	protected function convertSetMethodToPhpColumn($method) { return $this->convertGetMethodToPhpColumn($method); }
 
 	private function triggerUndefinedPropertyWarning($column) {
 		$trace = debug_backtrace();
@@ -161,13 +164,11 @@ class DataObject {
 	public function __isset($column) { return isset($this->data[$this->convertPhpNameToDbColumn($column)]); }
 
 	public function __set($phpColumn, $value) {
-		$column = $this->convertPhpNameToDbColumn($phpColumn);
-		$this->set($column, $value);
+		$this->set($phpColumn, $value);
 	}
 
 	public function __get($phpColumn) {
-		$column = $this->convertPhpNameToDbColumn($phpColumn);
-		return $this->get($column);
+		return $this->get($phpColumn);
 	}
 
 	function __call($method, $param) {
@@ -177,14 +178,11 @@ class DataObject {
 		}
 	
 		if (strpos($method, 'is') === 0 || strpos($method, 'has') === 0) {
-			$column = $this->convertPhpNameToDbColumn($method);
-			return $this->get($column);
+			return $this->get($method);
 		} elseif (strpos($method, 'get') === 0) {
-			$column = $this->convertGetMethodToDbColumn($method);
-			return $this->get($column);
+			return $this->get($this->convertGetMethodToPhpColumn($method));
 		} elseif (strpos($method, 'set') === 0) {
-			$column = $this->convertSetMethodToDbColumn($method);
-			return $this->set($column, $param[0]);
+			return $this->set($this->convertSetMethodToPhpColumn($method), $param[0]);
 		} else {
 			$trace = debug_backtrace();
 			trigger_error("Call to undefined method $method in " . $trace[1]['file'] . ' on line ' . $trace[1]['line'], E_USER_ERROR);

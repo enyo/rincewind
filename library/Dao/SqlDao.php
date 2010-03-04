@@ -103,8 +103,8 @@ abstract class SqlDao extends Dao {
 	 * @param string $table
 	 * @return string
 	 */
-	protected function escapeTable($table) {
-		return $this->db->escapeTable($table);
+	protected function escapeTable($table = null) {
+		return $this->db->escapeTable($table ? $table : $this->tableName);
 	}
 	
 

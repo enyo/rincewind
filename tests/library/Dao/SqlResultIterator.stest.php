@@ -6,7 +6,7 @@
 	require_once(LIBRARY_ROOT_PATH . 'Dao/Dao.php');
 
 
-	class SqlResultIterator_Na_Test extends Snap_UnitTestCase {
+	class SqlResultIterator_Test extends Snap_UnitTestCase {
 
 	    public function setUp() {
     	}

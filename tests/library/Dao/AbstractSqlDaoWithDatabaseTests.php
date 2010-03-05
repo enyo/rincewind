@@ -1,12 +1,13 @@
 <?php
 
-	abstract class SqlDaoWithDatabaseTest extends Snap_UnitTestCase {
+	abstract class AbstractSqlDaoWithDatabaseTest extends Snap_UnitTestCase {
 
 		abstract protected function getDatabaseConnection();
 		abstract protected function getDao();
 
 		protected $db;
 		protected $dao;
+		protected $iteratorClassName;
 		protected $tableName = 'dao_test';
 
 		protected $defaultValue = 7;
@@ -53,6 +54,14 @@
 			$object2 = $this->dao->update($object);
 	        return $this->assertIdentical($object, $object2, "The dao should return the same object after update, not create a new one.");
 	    }
+
+		public function testGetAllReturnsIterator() {
+			return $this->assertIsA($this->dao->getAll(), $this->iteratorClassName);
+		}
+
+		public function testGetAllAsArraysReturnsIterator() {
+			return $this->assertIsA($this->dao->getAllAsArray(), $this->iteratorClassName);
+		}
 
 	}
 

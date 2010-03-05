@@ -39,13 +39,14 @@
 
 
 
-	require_once(dirname(__FILE__) . '/SqlDaoWithDatabaseTests.php');
+	require_once(dirname(__FILE__) . '/AbstractSqlDaoWithDatabaseTests.php');
 
 
-	class MySqlDaoWithDatabaseTest extends SqlDaoWithDatabaseTest {
+	class MySqlDaoWithDatabaseTest extends AbstractSqlDaoWithDatabaseTest {
 
 		protected function getDatabaseConnection() { return getMysqlConnection(); }
 		protected function getDao() { return new MySqlTestDao($this->db); }
+		protected $iteratorClassName = 'MySqlResultIterator';
 
 	}
 

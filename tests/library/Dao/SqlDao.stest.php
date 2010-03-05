@@ -21,14 +21,14 @@
 		protected function getObjectFromPreparedData($data) {
 			return new RawTestDataObject($data);
 		}
-		public function exportColumn($column) { throw new Exception('Unsupported'); }
-		public function exportTable($table = null) { throw new Exception('Unsupported'); }
-		public function exportString($text) { throw new Exception('Unsupported'); }
-		protected function getLastInsertId() { throw new Exception('Unsupported'); }
-		protected function createIterator($result) { throw new Exception('Unsupported'); }
+		public function exportColumn($column) {  }
+		public function exportTable($table = null) {  }
+		public function exportString($text) {  }
+		protected function getLastInsertId() {  }
+		protected function createIterator($result) { return $result; }
 
 	}
-	class Dao_RawObjects_Test extends Snap_UnitTestCase {
+	class SqlDao_RawObjects_Test extends Snap_UnitTestCase {
 
 		protected $dao;
 
@@ -58,6 +58,30 @@
 
 	}
 
+	
+	require_once(LIBRARY_ROOT_PATH . 'Database/DatabaseInterface.php');
+
+	class SqlDao_Returns_Test extends Snap_UnitTestCase {
+		protected $dao;
+
+	    public function setUp() {
+			$database = $this->mock('DatabaseInterface')
+				->setReturnValue('query', 'The Result')
+				->construct();
+				
+			$this->dao = new RawTestDao($database);
+    	}
+
+	    public function tearDown() {
+			unset($this->dao);
+	    }
+
+		public function testGetAll() {
+			// This should just return the result because the RawTestDao returns the result instead of an iterator.
+			return $this->assertIdentical($this->dao->getAll(), 'The Result');
+		}
+
+	}
 
 
 ?>

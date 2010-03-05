@@ -1,7 +1,7 @@
 <?php
 
 
-	abstract class SqlDatabase_EstablishConnection_Test extends Snap_UnitTestCase {
+	abstract class AbstractSqlDatabase_EstablishConnection_Test extends Snap_UnitTestCase {
 
 		abstract protected function getDatabaseConnection($username = null);
 
@@ -25,7 +25,7 @@
 
 
 
-	abstract class SqlDatabase_General_Tests extends Snap_UnitTestCase {
+	abstract class AbstractSqlDatabase_General_Tests extends Snap_UnitTestCase {
 
 		protected $db;
 
@@ -61,7 +61,7 @@
 
 
 
-	abstract class SqlDatabase_Result_Test extends Snap_UnitTestCase {
+	abstract class AbstractSqlDatabase_Result_Test extends Snap_UnitTestCase {
 
 		protected $db;
 		protected $tableName = 'test';
@@ -131,7 +131,7 @@
 
 
 
-	abstract class SqlDatabase_Transaction_Test extends Snap_UnitTestCase {
+	abstract class AbstractSqlDatabase_Transaction_Test extends Snap_UnitTestCase {
 
 		protected $db;
 		protected $tableName = 'test2';
@@ -172,7 +172,7 @@
 
 
 
-	abstract class SqlDatabase_EscapeFunctions_Test extends Snap_UnitTestCase {
+	abstract class AbstractSqlDatabase_EscapeFunctions_Test extends Snap_UnitTestCase {
 		protected $db;
 
 		protected $table = "TABLE-1\"2'3\x1a4\n5\r6\x00";

@@ -73,12 +73,14 @@ class SqlResultIterator extends DaoResultIterator {
 
 
 	/**
-	 * Return the current DataObject
+	 * Return the current DataObject.
+	 * If getAsArray() has been called, returns an array instead of the DataObject.
 	 *
-	 * @return DataObject
+	 * @return DataObject|array
 	 */
 	public function current() {
-		return $this->dao->getObjectFromDatabaseData($this->currentData);
+		$dataObject = $this->dao->getObjectFromDatabaseData($this->currentData);
+		return $this->returnDataObjectsAsArray ? $dataObject->getArray() : $dataObject;
 	}
 
 	/**

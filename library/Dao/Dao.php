@@ -286,6 +286,17 @@ abstract class Dao implements DaoInterface {
 	}
 
 	/**
+	 * Gets the object by id and deletes it.
+	 * 
+	 * @param int $id
+	 */
+	public function deleteById($id) {
+		$object = $this->getById($id);
+		$this->delete($object);
+	}
+
+
+	/**
 	 * Returns all rows (but you can specify offset &amp; limit)
 	 *
 	 * @param string|array $sort
@@ -300,33 +311,21 @@ abstract class Dao implements DaoInterface {
 
 
 	/**
-	 * Gets the object by id and deletes it.
-	 * 
-	 * @param int $id
-	 */
-	public function deleteById($id) {
-		$object = $this->getById($id);
-		$this->delete($object);
-	}
-
-
-	/**
-	 * This is the same as getAll() but all DataObjects are returned as arrays.
+	 * This returns an iterator on which asArrays() has been called.
+	 * Calling this, is the same as:
+	 * <code>
+	 * <?php $dao->getAll()->asArrays(); ?>
+	 * </code>
 	 *
 	 * @param string|array $sort
 	 * @param int $offset
 	 * @param int $limit
-	 * @return array
+	 * @return DaoResultIterator
 	 * @see getAll()
 	 */
-	public function getAllAsArray($sort = null, $offset = null, $limit = null) {
+	public function getAllAsArray() {
 		$args = func_get_args();
-		$i = call_user_func(array($this, 'getAll'), $args);
-		$list = array();
-		foreach ($i as $object) {
-			$list[] = $object->getArray();
-		}
-		return $list;
+		return call_user_func(array($this, 'getAll'), $args)->asArrays();
 	}
 
 

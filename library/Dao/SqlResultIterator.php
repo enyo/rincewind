@@ -68,8 +68,14 @@ class SqlResultIterator extends DaoResultIterator {
 
 	/**
 	 * Sets the pointer to row 1.
+	 * @return SqlResultIterator Returns itself for chaining.
 	 */
-	public function rewind() { if ($this->length > 0) { $this->result->reset(); $this->next(); } }
+	public function rewind() {
+		if ($this->length > 0) {
+			$this->result->reset(); $this->next();
+		}
+		return $this;
+	}
 
 
 	/**
@@ -85,9 +91,11 @@ class SqlResultIterator extends DaoResultIterator {
 
 	/**
 	 * Set the pointer to the next row.
+	 * @return SqlResultIterator Returns itself for chaining.
 	 */
 	public function next() {
 		$this->currentData = $this->result->fetchArray();
+		return $this;
 	}
 
 	/**

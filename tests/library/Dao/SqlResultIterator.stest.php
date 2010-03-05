@@ -22,6 +22,14 @@
 			return $this->todo();
 	    }
 
+	    public function testNextReturnsItself() {
+			return $this->todo();
+	    }
+
+	    public function testRewindReturnsItself() {
+			return $this->todo();
+	    }
+
 	}
 
 

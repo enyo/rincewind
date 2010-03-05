@@ -6,7 +6,7 @@
 	require_once(LIBRARY_ROOT_PATH . 'Dao/Dao.php');
 
 
-	class DaoWithDatabaseTest extends Snap_UnitTestCase {
+	class Dao_WithDatabase_Test extends Snap_UnitTestCase {
 
 	    public function setUp() {
     	}
@@ -29,7 +29,7 @@
 	    public function testStringIdenticalText() {
 	        return $this->assertIdentical(Dao::STRING, Dao::TEXT);
 	    }
-
 	}
+
 
 ?>

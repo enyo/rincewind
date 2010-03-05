@@ -165,7 +165,6 @@ abstract class Dao implements DaoInterface {
 
 
 
-
 	/**
 	 * Given the $sort parameter, it generates a sort String used in the query.
 	 * If $sort is not provied, $defaultSort is used.
@@ -404,6 +403,7 @@ abstract class Dao implements DaoInterface {
 	/**
 	 * This is the method to get a DataObject from the database.
 	 * If you want to select more objects, call getIterator.
+	 * If you call get() without parameters, a "raw object" will be returned, containing only default values, and null as id.
 	 *
 	 * @param array $map A map containing the column assignments.
 	 * @param string|array $sort can be an array with ASCENDING values, or a map like this: array('login'=>Dao::DESC), or simply a string containing the column. This value will be passed to generateSortString()
@@ -413,7 +413,8 @@ abstract class Dao implements DaoInterface {
 	 * @see generateQuery()
 	 * @return DataObject
 	 */
-	public function get($map, $sort = null, $offset = null, $exportValues = true) {
+	public function get($map = null, $sort = null, $offset = null, $exportValues = true) {
+		if (!$map) return $this->getRawObject();
 		return $this->getFromQuery($this->generateQuery($map, $sort, $offset, $limit = 1, $exportValues));
 	}
 
@@ -536,11 +537,15 @@ abstract class Dao implements DaoInterface {
 	/**
 	 * Returns an object with all columns defined, but only set if necessary.
 	 * nullColumns will be null as well as defaultValueColumns. All other columns will have a default value set with coerce().
+	 * Be careful! This function will soon be protected, and should not be called anymore! Use get() (without map) instead (which will call
+	 * getRawObject() for you).
+	 * You can not depend on this function... it is subject to change.
 	 *
 	 * @see $nullColumns
 	 * @see defaultValueColumns
 	 * @see $columnTypes
 	 * @see coerce()
+	 * @see get()
 	 * @return DataObject
 	 */
 	public function getRawObject() {

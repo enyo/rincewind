@@ -16,6 +16,13 @@
  */
 include dirname(__FILE__) . '/DataObjectExceptions.php';
 
+
+/**
+ * Loading the DataObject interface
+ */
+include dirname(__FILE__) . '/DataObjectInterface.php';
+
+
 /**
  * The DataObject is the data representation of one row from a Database request done with a Dao.
  *
@@ -24,7 +31,7 @@ include dirname(__FILE__) . '/DataObjectExceptions.php';
  * @package Dao
  * @subpackage DataObject
  **/
-class DataObject {
+class DataObject implements DataObjectInterface {
 
 	/**
 	 * This array holds all the data from a record.

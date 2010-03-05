@@ -74,6 +74,8 @@ CONVERTER=frames
 
 #/**
 #  * template to use
+#  * Be careful when changing the template!! I made a change to the template so the date will not be include.
+#  * enyo
 #  *
 #  * @var               string TEMPLATE
 #  */

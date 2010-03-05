@@ -311,21 +311,15 @@ abstract class Dao implements DaoInterface {
 
 
 	/**
-	 * This returns an iterator on which asArrays() has been called.
-	 * Calling this, is the same as:
+	 * @deprecated
+	 * Use this instead:
 	 * <code>
 	 * <?php $dao->getAll()->asArrays(); ?>
 	 * </code>
-	 *
-	 * @param string|array $sort
-	 * @param int $offset
-	 * @param int $limit
-	 * @return DaoResultIterator
-	 * @see getAll()
 	 */
 	public function getAllAsArrays() {
-		$args = func_get_args();
-		return call_user_func(array($this, 'getAll'), $args)->asArrays();
+		$trace = debug_backtrace();
+		trigger_error(sprintf('The method getAllAsArrays() is deprecated in %s on line %u.', $trace[0]['file'], $trace[0]['line']), E_USER_ERROR);
 	}
 
 

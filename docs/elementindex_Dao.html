@@ -15,6 +15,8 @@
 				<li><a href="elementindex_Config.html">Config</a></li>
 					<li><a href="elementindex_php-library.html">php-library</a></li>
 							<li><a href="elementindex_Database.html">Database</a></li>
+					<li><a href="elementindex_Date.html">Date</a></li>
+					<li><a href="elementindex_Storage.html">Storage</a></li>
 			</ul>
 <a href="elementindex.html">All elements</a>
 <br />
@@ -346,10 +348,10 @@
 					</dd>
 			<dt class="field">
 						<img src="media/images/Method.png" alt="Method" title="Method" />
-			<span class="method-title">convertGetMethodToDbColumn</span>
+			<span class="method-title">convertGetMethodToPhpColumn</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Dao/DataObject/DataObject.html#methodconvertGetMethodToDbColumn">DataObject::convertGetMethodToDbColumn()</a> in DataObject.php</div>
+			<div class="index-item-details"><a href="Dao/DataObject/DataObject.html#methodconvertGetMethodToPhpColumn">DataObject::convertGetMethodToPhpColumn()</a> in DataObject.php</div>
 					</dd>
 			<dt class="field">
 						<img src="media/images/Method.png" alt="Method" title="Method" />
@@ -360,10 +362,10 @@
 					</dd>
 			<dt class="field">
 						<img src="media/images/Method.png" alt="Method" title="Method" />
-			<span class="method-title">convertSetMethodToDbColumn</span>
+			<span class="method-title">convertSetMethodToPhpColumn</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Dao/DataObject/DataObject.html#methodconvertSetMethodToDbColumn">DataObject::convertSetMethodToDbColumn()</a> in DataObject.php</div>
+			<div class="index-item-details"><a href="Dao/DataObject/DataObject.html#methodconvertSetMethodToPhpColumn">DataObject::convertSetMethodToPhpColumn()</a> in DataObject.php</div>
 					</dd>
 		</dl>
 	<a name="d"></a>
@@ -570,6 +572,37 @@
 					</dt>
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Dao/DataObject/_DataObject---DataObjectExceptions.php.html">DataObjectExceptions.php</a> in DataObjectExceptions.php</div>
+					</dd>
+			<dt class="field">
+						<img src="media/images/Page.png" alt="Page" title="Page" />
+			<span class="include-title">DataObjectInterface.php</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Dao/DataObject/_DataObject---DataObjectInterface.php.html">DataObjectInterface.php</a> in DataObjectInterface.php</div>
+					</dd>
+			<dt class="field">
+						<img src="media/images/Class.png" alt="Class" title="Class" />
+			DataObjectInterface
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Dao/DataObject/DataObjectInterface.html">DataObjectInterface</a> in DataObjectInterface.php</div>
+							<div class="index-item-description">The DataObjectInterface</div>
+					</dd>
+			<dt class="field">
+						<img src="media/images/Method.png" alt="Method" title="Method" />
+			<span class="method-title">delete</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Dao/DataObject/DataObjectInterface.html#methoddelete">DataObjectInterface::delete()</a> in DataObjectInterface.php</div>
+							<div class="index-item-description">Calls delete($this) on the dao.</div>
+					</dd>
+			<dt class="field">
+						<img src="media/images/Method.png" alt="Method" title="Method" />
+			<span class="method-title">delete</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Dao/DataObject/DataObject.html#methoddelete">DataObject::delete()</a> in DataObject.php</div>
+							<div class="index-item-description">Calls delete($this) on the dao.</div>
 					</dd>
 			<dt class="field">
 						<img src="media/images/Page.png" alt="Page" title="Page" />
@@ -1046,6 +1079,14 @@
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Dao/SqlDao.html#methodgetTotalCount">SqlDao::getTotalCount()</a> in SqlDao.php</div>
 							<div class="index-item-description">Returns the total row count in the table the Dao is assigned to.</div>
+					</dd>
+			<dt class="field">
+						<img src="media/images/Method.png" alt="Method" title="Method" />
+			<span class="method-title">get</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Dao/DataObject/DataObjectInterface.html#methodget">DataObjectInterface::get()</a> in DataObjectInterface.php</div>
+							<div class="index-item-description">Returns the value of a column</div>
 					</dd>
 			<dt class="field">
 						<img src="media/images/Method.png" alt="Method" title="Method" />
@@ -1549,6 +1590,22 @@
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Dao/DataObject/DataObject.html#methodsave">DataObject::save()</a> in DataObject.php</div>
 							<div class="index-item-description">When there is an id, update() is called on the dao.</div>
+					</dd>
+			<dt class="field">
+						<img src="media/images/Method.png" alt="Method" title="Method" />
+			<span class="method-title">save</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Dao/DataObject/DataObjectInterface.html#methodsave">DataObjectInterface::save()</a> in DataObjectInterface.php</div>
+							<div class="index-item-description">Depending on the state of the DataObject does dao-&gt;update($this) or dao-&gt;insert($this)</div>
+					</dd>
+			<dt class="field">
+						<img src="media/images/Method.png" alt="Method" title="Method" />
+			<span class="method-title">set</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Dao/DataObject/DataObjectInterface.html#methodset">DataObjectInterface::set()</a> in DataObjectInterface.php</div>
+							<div class="index-item-description">Sets the value of a column</div>
 					</dd>
 			<dt class="field">
 						<img src="media/images/Method.png" alt="Method" title="Method" />

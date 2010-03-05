@@ -25,6 +25,11 @@
 						
 					</div>
 	<div class="info-box-body">
+                <p class="implements">
+            Implements interfaces:
+            <ul>
+                <li><a href="../../Dao/DataObject/DataObjectInterface.html">DataObjectInterface</a></li>            </ul>
+        </p>
         		<!-- ========== Info from phpDoc block ========= -->
 <p class="short-description">The DataObject is the data representation of one row from a Database request done with a Dao.</p>
 	<ul class="tags">
@@ -32,7 +37,7 @@
 				<li><span class="field">copyright:</span> Copyright (c) 2010, Matthias Loitsch</li>
 			</ul>
 		<p class="notes">
-			Located in <a class="field" href="_DataObject---DataObject.php.html">/DataObject/DataObject.php</a> (line <span class="field">27</span>)
+			Located in <a class="field" href="_DataObject---DataObject.php.html">/DataObject/DataObject.php</a> (line <span class="field">34</span>)
 		</p>
 		
 				
@@ -120,7 +125,7 @@
 										<a href="#coerce" title="details" class="method-name">coerce</a>
 											(<span class="var-type"></span>&nbsp;<span class="var-name">$value</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$type</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$allowNull</span> = <span class="var-default">false</span>], [<span class="var-type"></span>&nbsp;<span class="var-name">$quiet</span> = <span class="var-default">false</span>])
 									</div>
-																																																																																																																																																												<div class="method-definition">
+																																																																																																																																																																				<div class="method-definition">
 					<img src="../../media/images/Constructor.png" alt=" "/>
 											<span class="method-result">DataObject</span>
 										<a href="#__construct" title="details" class="method-name">__construct</a>
@@ -135,7 +140,7 @@
 																<div class="method-definition">
 					<img src="../../media/images/Method.png" alt=" "/>
 											<span class="method-result">void</span>
-										<a href="#convertGetMethodToDbColumn" title="details" class="method-name">convertGetMethodToDbColumn</a>
+										<a href="#convertGetMethodToPhpColumn" title="details" class="method-name">convertGetMethodToPhpColumn</a>
 											(<span class="var-type"></span>&nbsp;<span class="var-name">$method</span>)
 									</div>
 																<div class="method-definition">
@@ -147,8 +152,14 @@
 																<div class="method-definition">
 					<img src="../../media/images/Method.png" alt=" "/>
 											<span class="method-result">void</span>
-										<a href="#convertSetMethodToDbColumn" title="details" class="method-name">convertSetMethodToDbColumn</a>
+										<a href="#convertSetMethodToPhpColumn" title="details" class="method-name">convertSetMethodToPhpColumn</a>
 											(<span class="var-type"></span>&nbsp;<span class="var-name">$method</span>)
+									</div>
+																<div class="method-definition">
+					<img src="../../media/images/Method.png" alt=" "/>
+											<span class="method-result">void</span>
+										<a href="#delete" title="details" class="method-name">delete</a>
+										()
 									</div>
 																<div class="method-definition">
 					<img src="../../media/images/Method.png" alt=" "/>
@@ -255,7 +266,7 @@
 		<span class="var-title">
 			<span class="var-type"><a href="../../Dao/Dao.html">Dao</a></span>
 			<span class="var-name">$dao</span>
-						(line <span class="line-number">38</span>)
+						(line <span class="line-number">45</span>)
 		</span>
 	</div>
 
@@ -277,7 +288,7 @@
 		<span class="var-title">
 			<span class="var-type">array</span>
 			<span class="var-name">$data</span>
-						(line <span class="line-number">33</span>)
+						(line <span class="line-number">40</span>)
 		</span>
 	</div>
 
@@ -313,7 +324,7 @@
 	
 	<div class="method-header">
 		<img src="../../media/images/StaticMethod.png" />
-		<span class="method-title">static coerce</span> (line <span class="line-number">212</span>)
+		<span class="method-title">static coerce</span> (line <span class="line-number">226</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -348,7 +359,7 @@
 	
 	<div class="method-header">
 		<img src="../../media/images/Constructor.png" />
-		<span class="method-title">Constructor __construct</span> (line <span class="line-number">47</span>)
+		<span class="method-title">Constructor __construct</span> (line <span class="line-number">54</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -381,7 +392,7 @@
 	
 	<div class="method-header">
 		<img src="../../media/images/Method.png" />
-		<span class="method-title">convertDbColumnToPhpName</span> (line <span class="line-number">145</span>)
+		<span class="method-title">convertDbColumnToPhpName</span> (line <span class="line-number">165</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -405,12 +416,12 @@
 		
 			
 	</div>
-<a name="methodconvertGetMethodToDbColumn" id="convertGetMethodToDbColumn"><!-- --></a>
+<a name="methodconvertGetMethodToPhpColumn" id="convertGetMethodToPhpColumn"><!-- --></a>
 <div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../../media/images/Method.png" />
-		<span class="method-title">convertGetMethodToDbColumn</span> (line <span class="line-number">146</span>)
+		<span class="method-title">convertGetMethodToPhpColumn</span> (line <span class="line-number">166</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -421,7 +432,7 @@
 	<div class="method-signature">
 		<span class="method-result">void</span>
 		<span class="method-name">
-			convertGetMethodToDbColumn
+			convertGetMethodToPhpColumn
 		</span>
 					(<span class="var-type"></span>&nbsp;<span class="var-name">$method</span>)
 			</div>
@@ -439,7 +450,7 @@
 	
 	<div class="method-header">
 		<img src="../../media/images/Method.png" />
-		<span class="method-title">convertPhpNameToDbColumn</span> (line <span class="line-number">144</span>)
+		<span class="method-title">convertPhpNameToDbColumn</span> (line <span class="line-number">164</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -463,12 +474,12 @@
 		
 			
 	</div>
-<a name="methodconvertSetMethodToDbColumn" id="convertSetMethodToDbColumn"><!-- --></a>
+<a name="methodconvertSetMethodToPhpColumn" id="convertSetMethodToPhpColumn"><!-- --></a>
 <div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../../media/images/Method.png" />
-		<span class="method-title">convertSetMethodToDbColumn</span> (line <span class="line-number">151</span>)
+		<span class="method-title">convertSetMethodToPhpColumn</span> (line <span class="line-number">170</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -479,7 +490,7 @@
 	<div class="method-signature">
 		<span class="method-result">void</span>
 		<span class="method-name">
-			convertSetMethodToDbColumn
+			convertSetMethodToPhpColumn
 		</span>
 					(<span class="var-type"></span>&nbsp;<span class="var-name">$method</span>)
 			</div>
@@ -492,12 +503,44 @@
 		
 			
 	</div>
-<a name="methodget" id="get"><!-- --></a>
+<a name="methoddelete" id="delete"><!-- --></a>
 <div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../../media/images/Method.png" />
-		<span class="method-title">get</span> (line <span class="line-number">106</span>)
+		<span class="method-title">delete</span> (line <span class="line-number">94</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Calls delete($this) on the dao.</p>
+<p class="description"><p>Throws an exception if no id is set.</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			delete
+		</span>
+				()
+			</div>
+	
+		
+				<hr class="separator" />
+		<div class="notes">Implementation of:</div>
+			<dl>
+			<dt><a href="../../Dao/DataObject/DataObjectInterface.html#methoddelete">DataObjectInterface::delete()</a></dt>
+						<dd>Calls delete($this) on the dao.</dd>
+					</dl>
+			
+	</div>
+<a name="methodget" id="get"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../../media/images/Method.png" />
+		<span class="method-title">get</span> (line <span class="line-number">122</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -521,14 +564,20 @@
 				<span class="var-name">$column</span>			</li>
 				</ul>
 		
+				<hr class="separator" />
+		<div class="notes">Implementation of:</div>
+			<dl>
+			<dt><a href="../../Dao/DataObject/DataObjectInterface.html#methodget">DataObjectInterface::get()</a></dt>
+						<dd>Returns the value of a column</dd>
+					</dl>
 			
 	</div>
 <a name="methodgetArray" id="getArray"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../../media/images/Method.png" />
-		<span class="method-title">getArray</span> (line <span class="line-number">90</span>)
+		<span class="method-title">getArray</span> (line <span class="line-number">106</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -554,11 +603,11 @@
 			
 	</div>
 <a name="methodgetColumnType" id="getColumnType"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../../media/images/Method.png" />
-		<span class="method-title">getColumnType</span> (line <span class="line-number">201</span>)
+		<span class="method-title">getColumnType</span> (line <span class="line-number">215</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -584,11 +633,11 @@
 			
 	</div>
 <a name="methodgetDao" id="getDao"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../../media/images/Method.png" />
-		<span class="method-title">getDao</span> (line <span class="line-number">58</span>)
+		<span class="method-title">getDao</span> (line <span class="line-number">65</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -609,11 +658,11 @@
 			
 	</div>
 <a name="methodgetValue" id="getValue"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../../media/images/Method.png" />
-		<span class="method-title">getValue</span> (line <span class="line-number">119</span>)
+		<span class="method-title">getValue</span> (line <span class="line-number">137</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -639,11 +688,11 @@
 			
 	</div>
 <a name="methodsave" id="save"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../../media/images/Method.png" />
-		<span class="method-title">save</span> (line <span class="line-number">77</span>)
+		<span class="method-title">save</span> (line <span class="line-number">84</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -663,14 +712,20 @@
 			</div>
 	
 		
+				<hr class="separator" />
+		<div class="notes">Implementation of:</div>
+			<dl>
+			<dt><a href="../../Dao/DataObject/DataObjectInterface.html#methodsave">DataObjectInterface::save()</a></dt>
+						<dd>Depending on the state of the DataObject does dao-&gt;update($this) or dao-&gt;insert($this)</dd>
+					</dl>
 			
 	</div>
 <a name="methodset" id="set"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../../media/images/Method.png" />
-		<span class="method-title">set</span> (line <span class="line-number">129</span>)
+		<span class="method-title">set</span> (line <span class="line-number">147</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -697,14 +752,20 @@
 				<span class="var-name">$value</span>			</li>
 				</ul>
 		
+				<hr class="separator" />
+		<div class="notes">Implementation of:</div>
+			<dl>
+			<dt><a href="../../Dao/DataObject/DataObjectInterface.html#methodset">DataObjectInterface::set()</a></dt>
+						<dd>Sets the value of a column</dd>
+					</dl>
 			
 	</div>
 <a name="methodsetData" id="setData"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../../media/images/Method.png" />
-		<span class="method-title">setData</span> (line <span class="line-number">66</span>)
+		<span class="method-title">setData</span> (line <span class="line-number">73</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -730,11 +791,11 @@
 			
 	</div>
 <a name="methodsetValue" id="setValue"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../../media/images/Method.png" />
-		<span class="method-title">setValue</span> (line <span class="line-number">141</span>)
+		<span class="method-title">setValue</span> (line <span class="line-number">161</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -762,11 +823,11 @@
 			
 	</div>
 <a name="method__call" id="__call"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../../media/images/Method.png" />
-		<span class="method-title">__call</span> (line <span class="line-number">173</span>)
+		<span class="method-title">__call</span> (line <span class="line-number">190</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -791,11 +852,11 @@
 			
 	</div>
 <a name="method__get" id="__get"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../../media/images/Method.png" />
-		<span class="method-title">__get</span> (line <span class="line-number">168</span>)
+		<span class="method-title">__get</span> (line <span class="line-number">186</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -820,11 +881,11 @@
 			
 	</div>
 <a name="method__isset" id="__isset"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../../media/images/Method.png" />
-		<span class="method-title">__isset</span> (line <span class="line-number">161</span>)
+		<span class="method-title">__isset</span> (line <span class="line-number">180</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -850,11 +911,11 @@
 			
 	</div>
 <a name="method__set" id="__set"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../../media/images/Method.png" />
-		<span class="method-title">__set</span> (line <span class="line-number">163</span>)
+		<span class="method-title">__set</span> (line <span class="line-number">182</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -887,7 +948,7 @@
 
 	
 	<p class="notes" id="credit">
-		Documentation generated on Thu, 04 Mar 2010 18:24:01 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+		Documentation generated by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
 	</p>
 	</div></body>
 </html>

@@ -20,7 +20,8 @@
 	<div class="nav-bar">
 					<span class="disabled">Description</span> |
 							<a href="#sec-descendents">Descendents</a>
-			|													<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+			|											<a href="#sec-vars">Vars</a>
+						|											<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
 						
 					</div>
 	<div class="info-box-body">
@@ -49,7 +50,8 @@
 		<div class="nav-bar">
 			<a href="#sec-description">Description</a> |
 			<span class="disabled">Descendents</span>
-			|															<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+			|												<a href="#sec-vars">Vars</a>
+								|															<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
 							
 								</div>
 		<div class="info-box-body">
@@ -94,7 +96,10 @@
 		<div class="nav-bar">
 			<a href="#sec-description">Description</a> |
 							<a href="#sec-descendents">Descendants</a> |
-												<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
+																		<a href="#sec-vars">Vars</a>
+				 
+				|
+						<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
 		</div>
 		<div class="info-box-body">			
 			<div class="method-summary">
@@ -112,7 +117,7 @@
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result"><a href="../Dao/DataObject/DataObject.html">DataObject</a></span>
+											<span class="method-result"><a href="../Dao/DataObject/DataObject.html">DataObject</a>|array</span>
 										<a href="#current" title="details" class="method-name">current</a>
 										()
 									</div>
@@ -144,6 +149,33 @@
 		</div>
 	</div>		
 
+	<a name="sec-vars"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variables</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+							<a href="#sec-descendents">Descendents</a> |
+										<a href="#sec-var-summary">Vars</a> (<span class="disabled">details</span>)
+						
+			
+										| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			
+							<h4>Inherited Variables</h4>
+				<A NAME='inherited_vars'><!-- --></A>
+									<p>Inherited from <span class="classname"><a href="../Dao/DaoResultIterator.html">DaoResultIterator</a></span></p>
+					<blockquote>
+													<img src="../media/images/Variable.png" />
+							<span class="var-title">
+								<span class="var-name"><a href="../Dao/DaoResultIterator.html#var$returnDataObjectsAsArray">DaoResultIterator::$returnDataObjectsAsArray</a></span><br>
+							</span>
+											</blockquote> 
+										
+		</div>
+	</div>
 	
 	<a name="sec-methods"></a>
 	<div class="info-box">
@@ -151,7 +183,8 @@
 		<div class="nav-bar">
 			<a href="#sec-description">Description</a> |
 							<a href="#sec-descendents">Descendents</a> |
-													<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
+															<a href="#sec-vars">Vars</a>
+														<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
 						
 		</div>
 		<div class="info-box-body">
@@ -193,7 +226,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">count</span> (line <span class="line-number">105</span>)
+		<span class="method-title">count</span> (line <span class="line-number">107</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -218,17 +251,18 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">current</span> (line <span class="line-number">80</span>)
+		<span class="method-title">current</span> (line <span class="line-number">81</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Return the current DataObject</p>
+<p class="short-description">Return the current DataObject.</p>
+<p class="description"><p>If getAsArray() has been called, returns an array instead of the DataObject.</p></p>
 	<ul class="tags">
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result"><a href="../Dao/DataObject/DataObject.html">DataObject</a></span>
+		<span class="method-result"><a href="../Dao/DataObject/DataObject.html">DataObject</a>|array</span>
 		<span class="method-name">
 			current
 		</span>
@@ -267,7 +301,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">next</span> (line <span class="line-number">87</span>)
+		<span class="method-title">next</span> (line <span class="line-number">89</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -317,7 +351,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">valid</span> (line <span class="line-number">96</span>)
+		<span class="method-title">valid</span> (line <span class="line-number">98</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -337,7 +371,15 @@
 		
 			
 	</div>
-						
+							<h4>Inherited Methods</h4>
+				<a name='inherited_methods'><!-- --></a>	
+									<!-- =========== Summary =========== -->
+					<p>Inherited From <span class="classname"><a href="../Dao/DaoResultIterator.html">DaoResultIterator</a></span></p>
+					<blockquote>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../Dao/DaoResultIterator.html#methodasArrays">DaoResultIterator::asArrays()</a></span><br>
+											</blockquote>
+										
 		</div>
 	</div>
 

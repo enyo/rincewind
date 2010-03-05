@@ -60,7 +60,7 @@
 		}
 
 		public function testGetAllAsArraysReturnsIterator() {
-			return $this->assertIsA($this->dao->getAllAsArray(), $this->iteratorClassName);
+			return $this->assertIsA($this->dao->getAllAsArrays(), $this->iteratorClassName);
 		}
 
 	}

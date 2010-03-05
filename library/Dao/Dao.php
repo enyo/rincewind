@@ -323,7 +323,7 @@ abstract class Dao implements DaoInterface {
 	 * @return DaoResultIterator
 	 * @see getAll()
 	 */
-	public function getAllAsArray() {
+	public function getAllAsArrays() {
 		$args = func_get_args();
 		return call_user_func(array($this, 'getAll'), $args)->asArrays();
 	}

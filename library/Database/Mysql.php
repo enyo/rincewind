@@ -15,9 +15,9 @@
 include dirname(__FILE__) . '/Database.php';
 
 /**
- * Loading the MySqlResult
+ * Loading the MysqlResult
  */
-include dirname(dirname(__FILE__)) . '/DatabaseResult/MySqlResult.php';
+include dirname(dirname(__FILE__)) . '/DatabaseResult/MysqlResult.php';
 
 
 /**
@@ -27,7 +27,7 @@ include dirname(dirname(__FILE__)) . '/DatabaseResult/MySqlResult.php';
  * @copyright Copyright (c) 2010, Matthias Loitsch
  * @package Database
  **/
-class MySql extends Database {
+class Mysql extends Database {
 
 	/**
 	 * The string used for comments.
@@ -117,14 +117,14 @@ class MySql extends Database {
 	/**
 	 * Performs a query
 	 * @param string $query
-	 * @return MySqlResult
+	 * @return MysqlResult
 	 */
 	public function query($query) {
 		$result = @$this->resource->query($query);
 		if ($result === false) {
 			throw new SqlQueryException('Database Error with this query: ' . $query . "\nThe server responded: " . $this->lastError());
 		}
-		return new MySqlResult($result);
+		return new MysqlResult($result);
 	}
 
 	/**

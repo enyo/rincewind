@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file contains the MySqlUserDao definition.
+ * This file contains the MysqlUserDao definition.
  *
  * @author Matthias Loitsch <developer@ma.tthias.com>
  * @copyright Copyright (c) 2010, Matthias Loitsch
@@ -16,19 +16,19 @@
 include dirname(dirname(__FILE__)) . '/UserDaoInterface.php';
 
 /**
- * Loading the MySqlDao
+ * Loading the MysqlDao
  */
-include_once dirname(__FILE__) . '/MySqlDao.php';
+include_once dirname(__FILE__) . '/MysqlDao.php';
 
 
 /**
- * The MySqlUserDao implements the UserDaoInterface.
+ * The MysqlUserDao implements the UserDaoInterface.
  *
  * @author Matthias Loitsch <developer@ma.tthias.com>
  * @copyright Copyright (c) 2010, Matthias Loitsch
  * @package Dao
  **/
-class MySqlUserDao extends MysqlDao implements UserDaoInterface {
+class MysqlUserDao extends MysqlDao implements UserDaoInterface {
 
 	/**
 	 * Returns the user by username

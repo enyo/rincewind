@@ -13,7 +13,7 @@ require_once ('DatabaseResult/AbstractDatabaseResult.php');
 
 
 
-class PostgreSqlResult extends AbstractDatabaseResult
+class PostgresqlResult extends AbstractDatabaseResult
 {
 
 

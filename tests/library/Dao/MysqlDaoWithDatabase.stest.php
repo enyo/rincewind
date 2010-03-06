@@ -3,15 +3,15 @@
 
 	require_once(dirname(dirname(__FILE__)) . '/setup.php');
 
-	require_once(LIBRARY_ROOT_PATH . 'Database/MySql.php');
-	require_once(LIBRARY_ROOT_PATH . 'Dao/MySql/MySqlDao.php');
+	require_once(LIBRARY_ROOT_PATH . 'Database/Mysql.php');
+	require_once(LIBRARY_ROOT_PATH . 'Dao/Mysql/MysqlDao.php');
 
 
 
 	/**
 	 * The test dao with all column types to be tested.
 	 */
-	class MySqlTestDao extends MySqlDao {
+	class MysqlTestDao extends MysqlDao {
 		protected $tableName = 'dao_test';
 		
 		protected $columnTypes = array(
@@ -31,8 +31,8 @@
 	}
 
 
-	function getMySqlConnection() {
-		return new MySql(CONF_MYSQL_DBNAME, CONF_MYSQL_USERNAME, CONF_MYSQL_HOST, CONF_MYSQL_PORT, CONF_MYSQL_PASSWORD);
+	function getMysqlConnection() {
+		return new Mysql(CONF_MYSQL_DBNAME, CONF_MYSQL_USERNAME, CONF_MYSQL_HOST, CONF_MYSQL_PORT, CONF_MYSQL_PASSWORD);
 	}
 
 
@@ -42,11 +42,11 @@
 	require_once(dirname(__FILE__) . '/AbstractSqlDaoWithDatabaseTests.php');
 
 
-	class MySqlDaoWithDatabaseTest extends AbstractSqlDaoWithDatabaseTest {
+	class MysqlDaoWithDatabaseTest extends AbstractSqlDaoWithDatabaseTest {
 
 		protected function getDatabaseConnection() { return getMysqlConnection(); }
-		protected function getDao() { return new MySqlTestDao($this->db); }
-		protected $iteratorClassName = 'MySqlResultIterator';
+		protected function getDao() { return new MysqlTestDao($this->db); }
+		protected $iteratorClassName = 'MysqlResultIterator';
 
 	}
 

@@ -8,11 +8,11 @@
 
 /*
 require_once ('Database/Database.php');
-require_once ('DatabaseResult/PostgreSqlResult.php');
+require_once ('DatabaseResult/PostgresqlResult.php');
 
 
 
-class PostgreSql extends Database {
+class Postgresql extends Database {
 
 	public function __construct($dbname, $search_path, $user = false, $host = false, $port = false, $password = false) {
 
@@ -77,7 +77,7 @@ class PostgreSql extends Database {
 			$result = @pg_query($this->resource, $query);
 			if ($result === false) $this->error ($query);
 
-			return new PostgreSqlResult ($result);
+			return new PostgresqlResult ($result);
 		}
 	}
 

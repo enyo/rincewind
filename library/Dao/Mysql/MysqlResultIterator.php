@@ -2,7 +2,7 @@
 
 
 /**
- * This file contains the MySqlResultIterator definition.
+ * This file contains the MysqlResultIterator definition.
  *
  * @author Matthias Loitsch <developer@ma.tthias.com>
  * @copyright Copyright (c) 2010, Matthias Loitsch
@@ -15,13 +15,13 @@
 include dirname(dirname(__FILE__)) . '/SqlResultIterator.php';
 
 /**
- * The class does nothing different then the SqlResultIterator, but is used everytime a MySql request is made.
+ * The class does nothing different then the SqlResultIterator, but is used everytime a Mysql request is made.
  *
  * @author Matthias Loitsch <developer@ma.tthias.com>
  * @copyright Copyright (c) 2010, Matthias Loitsch
  * @package Dao
  */	
-class MySqlResultIterator extends SqlResultIterator { }
+class MysqlResultIterator extends SqlResultIterator { }
 
 
 ?>

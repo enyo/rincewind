@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file contains the MySql Dao definition.
+ * This file contains the Mysql Dao definition.
  *
  * @author Matthias Loitsch <developer@ma.tthias.com>
  * @copyright Copyright (c) 2010, Matthias Loitsch
@@ -17,9 +17,9 @@ include dirname(dirname(__FILE__)) . '/SqlDao.php';
 
 
 /**
- * Loading the MySqlResultIterator
+ * Loading the MysqlResultIterator
  */
-include dirname(__FILE__) . '/MySqlResultIterator.php';
+include dirname(__FILE__) . '/MysqlResultIterator.php';
 
 
 /**
@@ -29,7 +29,7 @@ include dirname(__FILE__) . '/MySqlResultIterator.php';
  * @copyright Copyright (c) 2010, Matthias Loitsch
  * @package Dao
  **/
-class MySqlDao extends SqlDao {
+class MysqlDao extends SqlDao {
 
 	/**
 	 * Takes a php column name, converts it via import/export column mapping, escapes it, and adds quotes.
@@ -77,10 +77,10 @@ class MySqlDao extends SqlDao {
 	 * Creates an iterator for a mysql result.
 	 *
 	 * @param mysqli_result $result
-	 * @return MySqlResultIterator
+	 * @return MysqlResultIterator
 	 */
 	protected function createIterator($result) {
-		return new MySqlResultIterator($result, $this);
+		return new MysqlResultIterator($result, $this);
 	}
 
 

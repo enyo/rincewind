@@ -12,10 +12,10 @@
 
 /*
 	require_once('Dao/SqlDao.php');
-	require_once('Dao/PostgreSql/PostgreSqlResultIterator.php');
+	require_once('Dao/Postgresql/PostgresqlResultIterator.php');
 	
 	
-	class PostgreSqlDao extends SqlDao {
+	class PostgresqlDao extends SqlDao {
 	
 		
 		protected function escapeString($string) {
@@ -33,7 +33,7 @@
 		}
 	
 		protected function createIterator($result, $totalRowCount) {
-			return new PostgreSqlResultIterator($result, $this, $totalRowCount);
+			return new PostgresqlResultIterator($result, $this, $totalRowCount);
 		}
 	
 	

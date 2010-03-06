@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file contains the PostgreSqlUserDao definition.
+ * This file contains the PostgresqlUserDao definition.
  *
  * @author Matthias Loitsch <developer@ma.tthias.com>
  * @copyright Copyright (c) 2010, Matthias Loitsch
@@ -16,19 +16,19 @@
 include dirname(dirname(__FILE__)) . '/UserDaoInterface.php';
 
 /**
- * Loading the PostgreSqlDao
+ * Loading the PostgresqlDao
  */
-include_once dirname(__FILE__) . '/PostgreSqlDao.php';
+include_once dirname(__FILE__) . '/PostgresqlDao.php';
 
 
 /**
- * The PostgreSqlUserDao implements the UserDaoInterface.
+ * The PostgresqlUserDao implements the UserDaoInterface.
  *
  * @author Matthias Loitsch <developer@ma.tthias.com>
  * @copyright Copyright (c) 2010, Matthias Loitsch
  * @package Dao
  **/
-class PostgreSqlUserDao extends PostgreSqlDao implements UserDaoInterface {
+class PostgresqlUserDao extends PostgresqlDao implements UserDaoInterface {
 
 	/**
 	 * Returns the user by username

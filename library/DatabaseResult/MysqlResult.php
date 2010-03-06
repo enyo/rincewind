@@ -23,7 +23,7 @@ include dirname(__FILE__) . '/DatabaseResult.php';
  * @package Database
  * @subpackage DatabaseResult
  **/
-class MySqlResult extends DatabaseResult {
+class MysqlResult extends DatabaseResult {
 
 	/**
 	 * @var int

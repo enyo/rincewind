@@ -23,7 +23,9 @@
 			$this->result = $this->mock('DatabaseResultInterface')
 				->setReturnValue('numRows', $this->numRows)
 				->setReturnValue('fetchArray', array())
+				->setReturnValue('reset', 0)
 				->listenTo('fetchArray')
+				->listenTo('reset')
 				->construct();
 			$this->dao = $this->mock('DaoInterface')
 				->setReturnValue('getObjectFromDatabaseData', $this->dataObject)
@@ -61,10 +63,25 @@
 			return $this->assertEqual($this->iterator->key(), 1);
 	    }
 
+		public function testRewindCallsResetOnResult() {
+			$this->iterator->next();
+			$this->iterator->next();
+			$this->iterator->next();
+			$this->iterator->rewind();
+			return $this->assertCallCount($this->result, 'reset', 1);
+		}
+
 
 		public function testCurrentCallsFetchArray() {
 			$this->iterator->current();
 			return $this->assertCallCount($this->result, 'fetchArray', 1);
+		}
+
+		public function testCurrentCallsFetchArrayEachTime() {
+			$this->iterator->current();
+			$this->iterator->next();
+			$this->iterator->current();
+			return $this->assertCallCount($this->result, 'fetchArray', 2);
 		}
 
 	    public function testNextReturnsItself() {

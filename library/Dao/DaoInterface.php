@@ -90,6 +90,17 @@ interface DaoInterface {
 	 */
 	public function getNullColumns();
 
+
+
+	/**
+	 * Returns an object filled with an array of database values.
+	 * (Typically this array comes from DatabaseResult::fetchArray())
+	 *
+	 * @param array $data
+	 * @return DataObject
+	 */
+	public function getObjectFromDatabaseData($data);
+
 }
 
 ?>

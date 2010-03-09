@@ -30,12 +30,28 @@
 abstract class DaoResultIterator implements Iterator {
 
 	/**
+	 * Stores the current key (in this case: row number) of the iterator.
+	 * @var integer
+	 */
+	protected $currentKey = 0;
+
+	/**
 	 * If set to true, instead of returning the DataObject, DataObject->getArray() is returned.
 	 *
 	 * @var bool
 	 * @see asArrays()
 	 */
 	protected $returnDataObjectsAsArray = false;
+
+
+	/**
+	 * Returns the current key (row number).
+	 * @return int
+	 */
+	public function key() {
+		return $this->currentKey;
+	}
+
 
 	/**
 	 * @param bool $returnDataObjectsAsArray

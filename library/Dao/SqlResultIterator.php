@@ -62,17 +62,14 @@ class SqlResultIterator extends DaoResultIterator {
 	}
 
 	/**
-	 * @access private
-	 */
-	public function key() { throw new Exception('not implemented'); }
-
-	/**
 	 * Sets the pointer to row 1.
 	 * @return SqlResultIterator Returns itself for chaining.
 	 */
 	public function rewind() {
 		if ($this->length > 0) {
-			$this->result->reset(); $this->next();
+			$this->result->reset();
+			$this->currentKey = 0;
+			$this->next();
 		}
 		return $this;
 	}
@@ -90,10 +87,11 @@ class SqlResultIterator extends DaoResultIterator {
 	}
 
 	/**
-	 * Set the pointer to the next row.
+	 * Set the pointer to the next row, and fetches the data to return in current.
 	 * @return SqlResultIterator Returns itself for chaining.
 	 */
 	public function next() {
+		$this->currentKey ++;
 		$this->currentData = $this->result->fetchArray();
 		return $this;
 	}

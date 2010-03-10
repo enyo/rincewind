@@ -122,13 +122,18 @@ class DataObject implements DataObjectInterface {
 	public function get($column) {
 		$column = $this->convertPhpNameToDbColumn($column);
 
-		if (!array_key_exists($column, $this->data)) {
-			$this->triggerUndefinedPropertyWarning($column);
+		if (array_key_exists($column, $this->dao->getColumnTypes())) {
+			$value = $this->data[$column];
+		}
+		elseif (array_key_exists($column, $this->dao->getAdditionalColumnTypes())) {
+			$value = array_key_exists($column, $this->data) ? $this->data[$column] : null;
+		}
+		else {
+			$this->triggerUndefinedPropertyError($column);
 			return null;
 		}
-		$value = $this->data[$column];
 		$columnType = $this->getColumnType($column);
-		if ($columnType == Dao::DATE || $columnType == Dao::DATE_WITH_TIME) $value = new Date($value);
+		if ($value !== null && ($columnType == Dao::DATE || $columnType == Dao::DATE_WITH_TIME)) $value = new Date($value);
 		return $value;
 	}
 	/**
@@ -147,9 +152,9 @@ class DataObject implements DataObjectInterface {
 	public function set($column, $value) {
 		$column = $this->convertPhpNameToDbColumn($column);
 
-		if (!array_key_exists($column, $this->data)) {
-			$this->triggerUndefinedPropertyWarning($column);
-			return;
+		if (!array_key_exists($column, $this->dao->getColumnTypes())) {
+			$this->triggerUndefinedPropertyError($column);
+			return $this;
 		}
 		$value = self::coerce($value, $this->getColumnType($column), in_array($column, $this->dao->getNullColumns()));
 		$this->data[$column] = $value;
@@ -169,9 +174,9 @@ class DataObject implements DataObjectInterface {
 	}
 	protected function convertSetMethodToPhpColumn($method) { return $this->convertGetMethodToPhpColumn($method); }
 
-	private function triggerUndefinedPropertyWarning($column) {
+	private function triggerUndefinedPropertyError($column) {
 		$trace = debug_backtrace();
-		trigger_error("Undefined column: $column in " . $trace[1]['file'] . ' on line ' . $trace[1]['line'], E_USER_WARNING);
+		trigger_error("Undefined column: $column in " . $trace[1]['file'] . ' on line ' . $trace[1]['line'], E_USER_ERROR);
 	}
 
 	/**
@@ -207,18 +212,24 @@ class DataObject implements DataObjectInterface {
 
 
 	/**
-	 * Returns the type of the column defined in the DAO
+	 * Returns the type of the column defined in the Dao.
+	 * If getColumnTypes() does not return the correct type, getAdditionalColumnTypes is tried.
 	 *
 	 * @param string $column The column name
 	 * @return INT
 	 */
 	protected function getColumnType($column) {
-		$columnTypes = $this->dao->getColumnTypes();
-		if (!array_key_exists($column, $columnTypes)) {
+		if (array_key_exists($column, $this->dao->getColumnTypes())) {
+			$columnTypes = $this->dao->getColumnTypes();
+		}
+		elseif (array_key_exists($column, $this->dao->getAdditionalColumnTypes())) {
+			$columnTypes = $this->dao->getAdditionalColumnTypes();
+		}
+		else {
 			$trace = debug_backtrace();
 			trigger_error('No valid type found for column '.$column.' in ' . $trace[0]['file'] . ' on line ' . $trace[0]['line'], E_USER_ERROR);
+			return;
 		}
-
 		return $columnTypes[$column];
 	}
 

@@ -119,6 +119,9 @@ abstract class Dao implements DaoInterface {
 	 * This works exactly the same as the column types, except that it only defines columns, that may additionally be returned by the
 	 * database (for example in joins).
 	 * Those values can *not* be set in the DataObjects afterwards, but are checked for their types when retrieved.
+	 * When trying to get an additional column out of a DataObject, that has not been retrieved from the database, the DataObject should
+	 * just return null and not error.
+	 * When trying to set an additional column the DataObject should trigger an error.
 	 *
 	 * @var array
 	 */

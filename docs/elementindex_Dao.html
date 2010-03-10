@@ -268,6 +268,14 @@
 							<div class="index-item-description">This array/map must contain all column types. eg: array('id'=&gt;Dao::INT)</div>
 					</dd>
 			<dt class="field">
+						<img src="media/images/Variable.png" alt="Variable" title="Variable" />
+			<span class="var-title">$currentKey</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Dao/DaoResultIterator.html#var$currentKey">DaoResultIterator::$currentKey</a> in DaoResultIterator.php</div>
+							<div class="index-item-description">Stores the current key (in this case: row number) of the iterator.</div>
+					</dd>
+			<dt class="field">
 						<img src="media/images/Method.png" alt="Method" title="Method" />
 			<span class="method-title">columnExists</span>
 					</dt>
@@ -850,20 +858,20 @@
 							<div class="index-item-description">This function generates the SQL query for the getters.</div>
 					</dd>
 			<dt class="field">
-						<img src="media/images/AbstractMethod.png" alt="Method" title="Method" />
-			<span class="method-title">generateSortString</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Dao/Dao.html#methodgenerateSortString">Dao::generateSortString()</a> in Dao.php</div>
-							<div class="index-item-description">Given the $sort parameter, it generates a sort String used in the query.</div>
-					</dd>
-			<dt class="field">
 						<img src="media/images/Method.png" alt="Method" title="Method" />
 			<span class="method-title">generateSortString</span>
 					</dt>
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Dao/SqlDao.html#methodgenerateSortString">SqlDao::generateSortString()</a> in SqlDao.php</div>
 							<div class="index-item-description">This method takes the $sort attribute and returns a typical 'order by ' SQL string.</div>
+					</dd>
+			<dt class="field">
+						<img src="media/images/AbstractMethod.png" alt="Method" title="Method" />
+			<span class="method-title">generateSortString</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Dao/Dao.html#methodgenerateSortString">Dao::generateSortString()</a> in Dao.php</div>
+							<div class="index-item-description">Given the $sort parameter, it generates a sort String used in the query.</div>
 					</dd>
 			<dt class="field">
 						<img src="media/images/Method.png" alt="Method" title="Method" />
@@ -875,11 +883,19 @@
 					</dd>
 			<dt class="field">
 						<img src="media/images/Method.png" alt="Method" title="Method" />
-			<span class="method-title">getAll</span>
+			<span class="method-title">getAdditionalColumnTypes</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Dao/DaoInterface.html#methodgetAll">DaoInterface::getAll()</a> in DaoInterface.php</div>
-							<div class="index-item-description">Retrieves all rows</div>
+			<div class="index-item-details"><a href="Dao/Dao.html#methodgetAdditionalColumnTypes">Dao::getAdditionalColumnTypes()</a> in Dao.php</div>
+							<div class="index-item-description">Returns the additional column types array</div>
+					</dd>
+			<dt class="field">
+						<img src="media/images/Method.png" alt="Method" title="Method" />
+			<span class="method-title">getAdditionalColumnTypes</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Dao/DaoInterface.html#methodgetAdditionalColumnTypes">DaoInterface::getAdditionalColumnTypes()</a> in DaoInterface.php</div>
+							<div class="index-item-description">Returns all the additional column types.</div>
 					</dd>
 			<dt class="field">
 						<img src="media/images/Method.png" alt="Method" title="Method" />
@@ -888,6 +904,14 @@
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Dao/Dao.html#methodgetAll">Dao::getAll()</a> in Dao.php</div>
 							<div class="index-item-description">Returns all rows (but you can specify offset &amp;amp; limit)</div>
+					</dd>
+			<dt class="field">
+						<img src="media/images/Method.png" alt="Method" title="Method" />
+			<span class="method-title">getAll</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Dao/DaoInterface.html#methodgetAll">DaoInterface::getAll()</a> in DaoInterface.php</div>
+							<div class="index-item-description">Retrieves all rows</div>
 					</dd>
 			<dt class="field">
 						<img src="media/images/Method.png" alt="Method" title="Method" />
@@ -940,16 +964,16 @@
 			<span class="method-title">getColumnTypes</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Dao/DaoInterface.html#methodgetColumnTypes">DaoInterface::getColumnTypes()</a> in DaoInterface.php</div>
-							<div class="index-item-description">Returns all the column types.</div>
+			<div class="index-item-details"><a href="Dao/Dao.html#methodgetColumnTypes">Dao::getColumnTypes()</a> in Dao.php</div>
+							<div class="index-item-description">Returns the column types array</div>
 					</dd>
 			<dt class="field">
 						<img src="media/images/Method.png" alt="Method" title="Method" />
 			<span class="method-title">getColumnTypes</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Dao/Dao.html#methodgetColumnTypes">Dao::getColumnTypes()</a> in Dao.php</div>
-							<div class="index-item-description">Returns the column types array</div>
+			<div class="index-item-details"><a href="Dao/DaoInterface.html#methodgetColumnTypes">DaoInterface::getColumnTypes()</a> in DaoInterface.php</div>
+							<div class="index-item-description">Returns all the column types.</div>
 					</dd>
 			<dt class="field">
 						<img src="media/images/Method.png" alt="Method" title="Method" />
@@ -1024,19 +1048,19 @@
 							<div class="index-item-description">Returns an Iterator for a query</div>
 					</dd>
 			<dt class="field">
+						<img src="media/images/AbstractMethod.png" alt="Method" title="Method" />
+			<span class="method-title">getLastInsertId</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Dao/SqlDao.html#methodgetLastInsertId">SqlDao::getLastInsertId()</a> in SqlDao.php</div>
+					</dd>
+			<dt class="field">
 						<img src="media/images/Method.png" alt="Method" title="Method" />
 			<span class="method-title">getLastInsertId</span>
 					</dt>
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Dao/MysqlDao.html#methodgetLastInsertId">MysqlDao::getLastInsertId()</a> in MysqlDao.php</div>
 							<div class="index-item-description">Returns the id of the last inserted record.</div>
-					</dd>
-			<dt class="field">
-						<img src="media/images/AbstractMethod.png" alt="Method" title="Method" />
-			<span class="method-title">getLastInsertId</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Dao/SqlDao.html#methodgetLastInsertId">SqlDao::getLastInsertId()</a> in SqlDao.php</div>
 					</dd>
 			<dt class="field">
 						<img src="media/images/Method.png" alt="Method" title="Method" />
@@ -1053,6 +1077,14 @@
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Dao/Dao.html#methodgetNullColumns">Dao::getNullColumns()</a> in Dao.php</div>
 							<div class="index-item-description">Returns the null columns</div>
+					</dd>
+			<dt class="field">
+						<img src="media/images/Method.png" alt="Method" title="Method" />
+			<span class="method-title">getObjectFromDatabaseData</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Dao/DaoInterface.html#methodgetObjectFromDatabaseData">DaoInterface::getObjectFromDatabaseData()</a> in DaoInterface.php</div>
+							<div class="index-item-description">Returns an object filled with an array of database values.</div>
 					</dd>
 			<dt class="field">
 						<img src="media/images/Method.png" alt="Method" title="Method" />
@@ -1116,7 +1148,7 @@
 					</dt>
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Dao/DataObject/DataObject.html#methodgetColumnType">DataObject::getColumnType()</a> in DataObject.php</div>
-							<div class="index-item-description">Returns the type of the column defined in the DAO</div>
+							<div class="index-item-description">Returns the type of the column defined in the Dao.</div>
 					</dd>
 			<dt class="field">
 						<img src="media/images/Method.png" alt="Method" title="Method" />
@@ -1282,7 +1314,8 @@
 			<span class="method-title">key</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Dao/SqlResultIterator.html#methodkey">SqlResultIterator::key()</a> in SqlResultIterator.php</div>
+			<div class="index-item-details"><a href="Dao/DaoResultIterator.html#methodkey">DaoResultIterator::key()</a> in DaoResultIterator.php</div>
+							<div class="index-item-description">Returns the current key (row number).</div>
 					</dd>
 		</dl>
 	<a name="l"></a>
@@ -1381,7 +1414,7 @@
 					</dt>
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Dao/SqlResultIterator.html#methodnext">SqlResultIterator::next()</a> in SqlResultIterator.php</div>
-							<div class="index-item-description">Set the pointer to the next row.</div>
+							<div class="index-item-description">Set the pointer to the next row, and fetches the data to return in current.</div>
 					</dd>
 			<dt class="field">
 						<img src="media/images/Method.png" alt="Method" title="Method" />

@@ -101,7 +101,12 @@
 								</div>
 		<div class="info-box-body">
 			<div class="var-summary">
-																								<div class="var-title">
+																																<div class="var-title">
+					<img src="../media/images/Variable.png" alt=" " />
+					<span class="var-type">integer</span>
+					<a href="#$currentKey" title="details" class="var-name">$currentKey</a>
+				</div>
+																<div class="var-title">
 					<img src="../media/images/Variable.png" alt=" " />
 					<span class="var-type">bool</span>
 					<a href="#$returnDataObjectsAsArray" title="details" class="var-name">$returnDataObjectsAsArray</a>
@@ -123,11 +128,17 @@
 		</div>
 		<div class="info-box-body">			
 			<div class="method-summary">
-																								<div class="method-definition">
+																																<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
 											<span class="method-result"><a href="../Dao/DaoResultIterator.html">DaoResultIterator</a></span>
 										<a href="#asArrays" title="details" class="method-name">asArrays</a>
 											([<span class="var-type">bool</span>&nbsp;<span class="var-name">$returnDataObjectsAsArray</span> = <span class="var-default">true</span>])
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">int</span>
+										<a href="#key" title="details" class="method-name">key</a>
+										()
 									</div>
 											</div>
 		</div>
@@ -148,6 +159,29 @@
 					</div>
 		<div class="info-box-body">
 			
+<a name="var$currentKey" id="$currentKey"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<img src="../media/images/Variable.png" />
+		<span class="var-title">
+			<span class="var-type">integer</span>
+			<span class="var-name">$currentKey</span>
+			 = <span class="var-default"> 0</span>			(line <span class="line-number">36</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Stores the current key (in this case: row number) of the iterator.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
 <a name="var$returnDataObjectsAsArray" id="$returnDataObjectsAsArray"><!-- --></A>
 <div class="oddrow">
 
@@ -156,7 +190,7 @@
 		<span class="var-title">
 			<span class="var-type">bool</span>
 			<span class="var-name">$returnDataObjectsAsArray</span>
-			 = <span class="var-default"> false</span>			(line <span class="line-number">38</span>)
+			 = <span class="var-default"> false</span>			(line <span class="line-number">44</span>)
 		</span>
 	</div>
 
@@ -193,7 +227,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">asArrays</span> (line <span class="line-number">45</span>)
+		<span class="method-title">asArrays</span> (line <span class="line-number">61</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -217,6 +251,36 @@
 				<span class="var-name">$returnDataObjectsAsArray</span>			</li>
 				</ul>
 		
+			
+	</div>
+<a name="methodkey" id="key"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">key</span> (line <span class="line-number">51</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Returns the current key (row number).</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">int</span>
+		<span class="method-name">
+			key
+		</span>
+				()
+			</div>
+	
+		
+				<hr class="separator" />
+		<div class="notes">Implementation of:</div>
+			<dl>
+			<dt>Iterator::key</dt>
+					</dl>
 			
 	</div>
 						

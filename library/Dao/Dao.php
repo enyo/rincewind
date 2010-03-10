@@ -206,6 +206,13 @@ abstract class Dao implements DaoInterface {
 	public function getColumnTypes() { return $this->columnTypes; }
 
 	/**
+	 * Returns the additional column types array
+	 *
+	 * @return array
+	 */		
+	public function getAdditionalColumnTypes() { return $this->additionalColumnTypes; }
+
+	/**
 	 * Returns the null columns
 	 * @return array
 	 */		

@@ -83,6 +83,14 @@ interface DaoInterface {
 	public function getColumnTypes();
 
 	/**
+	 * Returns all the additional column types.
+	 * columnTypes is an associative array. Eg: array('parent_name'=>Dao::STRING)
+	 *
+	 * @return array
+	 */
+	public function getAdditionalColumnTypes();
+
+	/**
 	 * Returns all the column that can be null.
 	 * nullColumns is an associative array. Eg: array('id'=>Dao::INT)
 	 *

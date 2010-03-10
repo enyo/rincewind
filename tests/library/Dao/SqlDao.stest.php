@@ -17,6 +17,10 @@
 			'possibly_null'=>Dao::STRING,
 			'string_not_null'=>Dao::STRING
 		);
+		protected $additionalColumnTypes = array(
+			'additional_column'=>Dao::STRING,
+		);
+
 		protected $nullColumns = array('possibly_null');
 		protected function getObjectFromPreparedData($data) {
 			return new RawTestDataObject($data);
@@ -58,6 +62,33 @@
 
 	}
 
+
+
+	class SqlDao_Getters_Test extends Snap_UnitTestCase {
+		protected $dao;
+
+	    public function setUp() {
+			$this->dao = new RawTestDao(null);
+    	}
+
+	    public function tearDown() {
+			unset($this->dao);
+	    }
+
+		public function testGetColumnTypes() {
+			return $this->assertEqual($this->dao->getColumnTypes(), array('id'=>Dao::INT, 'possibly_null'=>Dao::STRING, 'string_not_null'=>Dao::STRING));
+		}
+
+		public function testGetNullColumns() {
+			return $this->assertEqual($this->dao->getNullColumns(), array('possibly_null'));
+		}
+
+		public function testGetAdditionalColumnTypes() {
+			return $this->assertEqual($this->dao->getAdditionalColumnTypes(), array('additional_column'=>Dao::STRING));
+		}
+	}
+
+
 	
 	require_once(LIBRARY_ROOT_PATH . 'Database/DatabaseInterface.php');
 
@@ -80,7 +111,6 @@
 			// This should just return the result because the RawTestDao returns the result instead of an iterator.
 			return $this->assertIdentical($this->dao->getAll(), 'The Result');
 		}
-
 	}
 
 

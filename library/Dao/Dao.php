@@ -41,6 +41,9 @@ include_once dirname(dirname(__FILE__)) . '/Date/Date.php';
 
 /**
  * This abstract base class for all Daos.
+ * IMPORTANT NOTE: The Dao (and DataObject for that matter) depend on the table
+ * having a primary `id` column!
+ * If your table layout does not provide this column, the framework will not work.
  *
  * The typical usage of the Dao is as follows:
  * <code>
@@ -106,7 +109,7 @@ abstract class Dao implements DaoInterface {
 	const DATE           = 5;
 	const TEXT           = 6;
 	const STRING         = self::TEXT;
-	const IGNORE		 = -1;
+	const IGNORE         = -1;
 	/**#@-*/
 
 
@@ -623,6 +626,9 @@ abstract class Dao implements DaoInterface {
 		if (!$notNull && $externalValue === null) { return null; }
 		$dateWithTime = false;
 		try {
+			if (is_array($type)) {
+				return $this->importEnum($externalValue, $type);
+			}
 			switch ($type) {
 				case Dao::BOOL:  return $this->importBool($externalValue); break;
 				case Dao::INT:   return $this->importInteger($externalValue); break;
@@ -694,6 +700,19 @@ abstract class Dao implements DaoInterface {
 		return (string) $value;
 	}
 
+
+	/**
+	 * Checks if the value is present in the enum. Throws a DaoException if not.
+	 *
+	 * @param string $value
+	 * @param array $list
+	 * @return string
+	 */
+	public function importEnum($value, $list) {
+		if (!in_array($value, $list)) throw new DaoException("The value provided is not defined in the enum.");
+		return (string) $value;
+	}
+
 	/**
 	 * This function tries to convert strings integers and stuff into a bool.
 	 *
@@ -726,6 +745,9 @@ abstract class Dao implements DaoInterface {
 	public function exportValue($internalValue, $type, $notNull = true) {
 		if (!$notNull && $internalValue === NULL) {
 			return $this->exportNull();
+		}
+		if (is_array($type)) {
+			return $this->exportEnum($internalValue, $type);
 		}
 		$dateWithTime = false;
 		switch ($type) {
@@ -776,24 +798,36 @@ abstract class Dao implements DaoInterface {
 	abstract public function exportNull();
 
 	/**
+	 * @param bool $bool
 	 * @return mixed
 	 */
 	abstract public function exportBool($bool);
 
 	/**
+	 * @param int $int
 	 * @return mixed
 	 */
 	abstract public function exportInteger($int);
 
 	/**
+	 * @param float $float
 	 * @return mixed
 	 */
 	abstract public function exportFloat($float);
 
 	/**
+	 * @param Date $date
+	 * @param bool $withTime
 	 * @return mixed
 	 */
 	abstract public function exportDate($date, $withTime);
+
+	/**
+	 * @param string $value
+	 * @param array $list
+	 * @return mixed
+	 */
+	abstract public function exportEnum($value, $list);
 
 
 }

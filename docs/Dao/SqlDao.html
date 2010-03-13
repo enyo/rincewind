@@ -121,7 +121,7 @@
 		</div>
 		<div class="info-box-body">			
 			<div class="method-summary">
-																																																																																																																																																																																																																																<div class="method-definition">
+																																																																																																																																																																																																																																								<div class="method-definition">
 					<img src="../media/images/Constructor.png" alt=" "/>
 											<span class="method-result">SqlDao</span>
 										<a href="#__construct" title="details" class="method-name">__construct</a>
@@ -179,25 +179,31 @@
 					<img src="../media/images/Method.png" alt=" "/>
 											<span class="method-result">string</span>
 										<a href="#exportBool" title="details" class="method-name">exportBool</a>
-											(<span class="var-type"></span>&nbsp;<span class="var-name">$bool</span>)
+											(<span class="var-type">bool</span>&nbsp;<span class="var-name">$bool</span>)
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
 											<span class="method-result">string</span>
 										<a href="#exportDate" title="details" class="method-name">exportDate</a>
-											(<span class="var-type"></span>&nbsp;<span class="var-name">$date</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$withTime</span>)
+											(<span class="var-type"><a href="../Date/Date.html">Date</a></span>&nbsp;<span class="var-name">$date</span>, <span class="var-type">bool</span>&nbsp;<span class="var-name">$withTime</span>)
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">string</span>
+										<a href="#exportEnum" title="details" class="method-name">exportEnum</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$value</span>, <span class="var-type">array</span>&nbsp;<span class="var-name">$list</span>)
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
 											<span class="method-result">float</span>
 										<a href="#exportFloat" title="details" class="method-name">exportFloat</a>
-											(<span class="var-type"></span>&nbsp;<span class="var-name">$float</span>)
+											(<span class="var-type">float</span>&nbsp;<span class="var-name">$float</span>)
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
 											<span class="method-result">int</span>
 										<a href="#exportInteger" title="details" class="method-name">exportInteger</a>
-											(<span class="var-type"></span>&nbsp;<span class="var-name">$int</span>)
+											(<span class="var-type">int</span>&nbsp;<span class="var-name">$int</span>)
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
@@ -673,7 +679,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">exportBool</span> (line <span class="line-number">375</span>)
+		<span class="method-title">exportBool</span> (line <span class="line-number">376</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -687,12 +693,12 @@
 		<span class="method-name">
 			exportBool
 		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$bool</span>)
+					(<span class="var-type">bool</span>&nbsp;<span class="var-name">$bool</span>)
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type"></span>
+				<span class="var-type">bool</span>
 				<span class="var-name">$bool</span>			</li>
 				</ul>
 		
@@ -708,7 +714,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">exportDate</span> (line <span class="line-number">397</span>)
+		<span class="method-title">exportDate</span> (line <span class="line-number">402</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -722,15 +728,15 @@
 		<span class="method-name">
 			exportDate
 		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$date</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$withTime</span>)
+					(<span class="var-type"><a href="../Date/Date.html">Date</a></span>&nbsp;<span class="var-name">$date</span>, <span class="var-type">bool</span>&nbsp;<span class="var-name">$withTime</span>)
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type"></span>
+				<span class="var-type"><a href="../Date/Date.html">Date</a></span>
 				<span class="var-name">$date</span>			</li>
 					<li>
-				<span class="var-type"></span>
+				<span class="var-type">bool</span>
 				<span class="var-name">$withTime</span>			</li>
 				</ul>
 		
@@ -741,12 +747,51 @@
 					</dl>
 			
 	</div>
-<a name="methodexportFloat" id="exportFloat"><!-- --></a>
+<a name="methodexportEnum" id="exportEnum"><!-- --></a>
 <div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">exportFloat</span> (line <span class="line-number">389</span>)
+		<span class="method-title">exportEnum</span> (line <span class="line-number">413</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">If the value is in the enum list, it calls exportString, and returns it.</p>
+<p class="description"><p>Throws a DaoException if not.</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			exportEnum
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$value</span>, <span class="var-type">array</span>&nbsp;<span class="var-name">$list</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$value</span>			</li>
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">$list</span>			</li>
+				</ul>
+		
+			<hr class="separator" />
+		<div class="notes">Redefinition of:</div>
+		<dl>
+			<dt><a href="../Dao/Dao.html#methodexportEnum">Dao::exportEnum()</a></dt>
+					</dl>
+			
+	</div>
+<a name="methodexportFloat" id="exportFloat"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">exportFloat</span> (line <span class="line-number">392</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -759,12 +804,12 @@
 		<span class="method-name">
 			exportFloat
 		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$float</span>)
+					(<span class="var-type">float</span>&nbsp;<span class="var-name">$float</span>)
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type"></span>
+				<span class="var-type">float</span>
 				<span class="var-name">$float</span>			</li>
 				</ul>
 		
@@ -776,11 +821,11 @@
 			
 	</div>
 <a name="methodexportInteger" id="exportInteger"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">exportInteger</span> (line <span class="line-number">382</span>)
+		<span class="method-title">exportInteger</span> (line <span class="line-number">384</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -793,12 +838,12 @@
 		<span class="method-name">
 			exportInteger
 		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$int</span>)
+					(<span class="var-type">int</span>&nbsp;<span class="var-name">$int</span>)
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type"></span>
+				<span class="var-type">int</span>
 				<span class="var-name">$int</span>			</li>
 				</ul>
 		
@@ -810,7 +855,7 @@
 			
 	</div>
 <a name="methodexportNull" id="exportNull"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
@@ -840,7 +885,7 @@
 			
 	</div>
 <a name="methodgenerateQuery" id="generateQuery"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
@@ -882,7 +927,7 @@
 			
 	</div>
 <a name="methodgenerateSortString" id="generateSortString"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
@@ -919,7 +964,7 @@
 			
 	</div>
 <a name="methodgetDb" id="getDb"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
@@ -945,7 +990,7 @@
 			
 	</div>
 <a name="methodgetFromQuery" id="getFromQuery"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
@@ -978,7 +1023,7 @@
 			
 	</div>
 <a name="methodgetIteratorFromQuery" id="getIteratorFromQuery"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
@@ -1008,7 +1053,7 @@
 			
 	</div>
 <a name="methodgetLastInsertId" id="getLastInsertId"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/AbstractMethod.png" />
@@ -1042,7 +1087,7 @@
 				</ul>
 	</div>
 <a name="methodgetTotalCount" id="getTotalCount"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
@@ -1067,7 +1112,7 @@
 			
 	</div>
 <a name="methodinsert" id="insert"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
@@ -1101,7 +1146,7 @@
 			
 	</div>
 <a name="methodinsertByQuery" id="insertByQuery"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
@@ -1135,7 +1180,7 @@
 			
 	</div>
 <a name="methodinterpretSortVariable" id="interpretSortVariable"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
@@ -1167,7 +1212,7 @@
 			
 	</div>
 <a name="methodrollback" id="rollback"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
@@ -1193,7 +1238,7 @@
 			
 	</div>
 <a name="methodupdate" id="update"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
@@ -1253,6 +1298,8 @@
 													<img src="../media/images/AbstractMethod.png" alt=" "/>
 							<span class="method-name"><a href="../Dao/Dao.html#methodexportDate">Dao::exportDate()</a></span><br>
 													<img src="../media/images/AbstractMethod.png" alt=" "/>
+							<span class="method-name"><a href="../Dao/Dao.html#methodexportEnum">Dao::exportEnum()</a></span><br>
+													<img src="../media/images/AbstractMethod.png" alt=" "/>
 							<span class="method-name"><a href="../Dao/Dao.html#methodexportFloat">Dao::exportFloat()</a></span><br>
 													<img src="../media/images/AbstractMethod.png" alt=" "/>
 							<span class="method-name"><a href="../Dao/Dao.html#methodexportInteger">Dao::exportInteger()</a></span><br>
@@ -1298,6 +1345,8 @@
 							<span class="method-name"><a href="../Dao/Dao.html#methodimportColumn">Dao::importColumn()</a></span><br>
 													<img src="../media/images/Method.png" alt=" "/>
 							<span class="method-name"><a href="../Dao/Dao.html#methodimportDate">Dao::importDate()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../Dao/Dao.html#methodimportEnum">Dao::importEnum()</a></span><br>
 													<img src="../media/images/Method.png" alt=" "/>
 							<span class="method-name"><a href="../Dao/Dao.html#methodimportFloat">Dao::importFloat()</a></span><br>
 													<img src="../media/images/Method.png" alt=" "/>

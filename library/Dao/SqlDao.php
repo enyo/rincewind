@@ -370,6 +370,7 @@ abstract class SqlDao extends Dao {
 	}
 
 	/**
+	 * @param bool $bool
 	 * @return string 'true' or 'false'
 	 */
 	public function exportBool($bool) {
@@ -377,6 +378,7 @@ abstract class SqlDao extends Dao {
 	}
 
 	/**
+	 * @param int $int
 	 * @return int
 	 */
 	public function exportInteger($int) {
@@ -384,6 +386,7 @@ abstract class SqlDao extends Dao {
 	}
 	
 	/**
+	 * @param float $float
 	 * @return float
 	 */
 	public function exportFloat($float) {
@@ -392,12 +395,25 @@ abstract class SqlDao extends Dao {
 	
 	/**
 	 * Returns a formatted date, and escaped with exportString.
+	 * @param Date $date
+	 * @param bool $withTime
 	 * @return string
 	 */
 	public function exportDate($date, $withTime) {
 		return $this->exportString($date->format('Y-m-d' . ($withTime ? ' H:i:s' : '')));
 	}
 
+	/**
+	 * If the value is in the enum list, it calls exportString, and returns it.
+	 * Throws a DaoException if not.
+	 * @param string $value
+	 * @param array $list
+	 * @return string
+	 */
+	public function exportEnum($value, $list) {
+		if (!in_array($value, $list)) throw new DaoException("The value provided is not defined in the enum.");
+		return $this->exportString($value);
+	}
 
 }
 

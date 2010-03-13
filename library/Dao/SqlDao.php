@@ -211,13 +211,21 @@ abstract class SqlDao extends Dao {
 	 * This function generates the SQL query for the getters.
 	 *
 	 * @param array $map A map containing the column assignments.
-	 * @param string|array $sort can be an array with ASCENDING values, or a map like this: array('login'=>Dao::DESC), or simply a string containing the column. This value will be passed to generateSortString()
+	 * @param string|array $sort can be an array with ASCENDING values, or a map like
+	 *                           this: array('login'=>Dao::DESC), or simply a string
+	 *                           containing the column. This value will be passed to
+	 *                           generateSortString()
 	 * @param int $offset 
 	 * @param int $limit 
-	 * @param bool $exportValues When you want to have complete control over the $map column names, you can set exportValues to false, so they won't be processed.
-	 *           WARNING: Be sure to escape them yourself if you do so.
+	 * @param bool $exportValues When you want to have complete control over the $map
+	 *                           column names, you can set exportValues to false, so
+	 *                           they won't be processed.
+	 *                           WARNING: Be sure to escape them yourself if you do so.
+	 * @param string $tableName You can pass a different table name than the default
+	 *                          one. This is mostly used for views. 
+	 * @return string
 	 */
-	protected function generateQuery($map, $sort = null, $offset = null, $limit = null, $exportValues = true) {
+	protected function generateQuery($map, $sort = null, $offset = null, $limit = null, $exportValues = true, $tableName = null) {
 		if ($offset !== null && !is_int($offset) ||
 			$limit !== null && !is_int($limit) ||
 			!is_bool($exportValues)) {
@@ -249,7 +257,7 @@ abstract class SqlDao extends Dao {
 
 		$sort = $this->generateSortString($sort);
 
-		$query  = 'select * from ' . $this->exportTable();
+		$query  = 'select * from ' . $this->exportTable($tableName);
 		if (count($assignments) > 0) $query .= ' where ' . implode(' and ', $assignments);
 		$query .= " " . $sort;
 		if ($offset !== null) { $query .= " offset " . intval($offset); }

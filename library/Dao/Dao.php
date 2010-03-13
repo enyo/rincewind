@@ -144,6 +144,13 @@ abstract class Dao implements DaoInterface {
 	protected $tableName = null;
 
 	/**
+	 * This viewName will be used in every get() (and getIterator) instead of the tableName.
+	 * For updating and inserts tableName is still used.
+	 * @var string
+	 */
+	protected $viewName = null;
+
+	/**
 	 * If no sort attribute is passed to a query method, this will be used.
 	 *
 	 * @see generateSortString()
@@ -451,19 +458,29 @@ abstract class Dao implements DaoInterface {
 	/**
 	 * This is the method to get a DataObject from the database.
 	 * If you want to select more objects, call getIterator.
-	 * If you call get() without parameters, a "raw object" will be returned, containing only default values, and null as id.
+	 * If you call get() without parameters, a "raw object" will be returned, containing
+	 * only default values, and null as id.
 	 *
 	 * @param array $map A map containing the column assignments.
-	 * @param string|array $sort can be an array with ASCENDING values, or a map like this: array('login'=>Dao::DESC), or simply a string containing the column. This value will be passed to generateSortString()
+	 * @param string|array $sort can be an array with ASCENDING values, or a map like
+	 *                           this: array('login'=>Dao::DESC), or simply a string 
+	 *                           containing the column. This value will be passed to
+	 *                           generateSortString()
 	 * @param int $offset 
-	 * @param bool $exportValues When you want to have complete control over the $map column names, you can set exportValues to false, so they won't be processed.
-	 *           WARNING: Be sure to escape them yourself if you do so.
+	 * @param bool $exportValues When you want to have complete control over the $map
+	 *                           column names, you can set exportValues to false, so they
+	 *                           won't be processed.
+	 *                           WARNING: Be sure to escape them yourself if you do so.
+	 * @param string $tableName You can specify a different table (most probably a view)
+	 *                          to get data from.
+	 *                          If not set, $this->viewName will be used if present; if not
+	 *                          $this->tableName is used.
 	 * @see generateQuery()
 	 * @return DataObject
 	 */
-	public function get($map = null, $sort = null, $offset = null, $exportValues = true) {
+	public function get($map = null, $sort = null, $offset = null, $exportValues = true, $tableName = null) {
 		if (!$map) return $this->getRawObject();
-		return $this->getFromQuery($this->generateQuery($map, $sort, $offset, $limit = 1, $exportValues));
+		return $this->getFromQuery($this->generateQuery($map, $sort, $offset, $limit = 1, $exportValues, $tableName ? $tableName : ($this->viewName ? $this->viewName : $this->tableName)));
 	}
 
 	/**
@@ -473,12 +490,13 @@ abstract class Dao implements DaoInterface {
 	 * @param string|array $sort
 	 * @param int $offset 
 	 * @param bool $exportValues
+	 * @param string $tableName
 	 * @see get()
 	 * @see generateQuery()
 	 * @return array
 	 */
-	protected function getData($map, $sort = null, $offset = null, $exportValues = true) {
-		return $this->getFromQuery($this->generateQuery($map, $sort, $offset, $limit = 1, $exportValues), $returnData = true);
+	protected function getData($map, $sort = null, $offset = null, $exportValues = true, $tableName = null) {
+		return $this->getFromQuery($this->generateQuery($map, $sort, $offset, $limit = 1, $exportValues, $tableName ? $tableName : ($this->viewName ? $this->viewName : $this->tableName)), $returnData = true);
 	}
 
 	/**
@@ -489,12 +507,13 @@ abstract class Dao implements DaoInterface {
 	 * @param int $offset 
 	 * @param int $limit 
 	 * @param bool $exportValues
+	 * @param string $tableName
 	 * @see get()
 	 * @see generateQuery()
 	 * @return DaoResultIterator
 	 */
-	public function getIterator($map, $sort = null, $offset = null, $limit = null, $exportValues = true) {
-		return $this->getIteratorFromQuery($this->generateQuery($map, $sort, $offset, $limit, $exportValues));
+	public function getIterator($map, $sort = null, $offset = null, $limit = null, $exportValues = true, $tableName = null) {
+		return $this->getIteratorFromQuery($this->generateQuery($map, $sort, $offset, $limit, $exportValues, $tableName ? $tableName : ($this->viewName ? $this->viewName : $this->tableName)));
 	}
 
 

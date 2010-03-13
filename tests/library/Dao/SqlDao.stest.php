@@ -15,7 +15,8 @@
 		protected $columnTypes = array(
 			'id'=>Dao::INT,
 			'possibly_null'=>Dao::STRING,
-			'string_not_null'=>Dao::STRING
+			'string_not_null'=>Dao::STRING,
+			'enum'=>array('enum_a', 'enum_b', 'enum_c')
 		);
 		protected $additionalColumnTypes = array(
 			'additional_column'=>Dao::STRING,
@@ -60,6 +61,10 @@
 			return $this->assertIdentical($this->dao->get()->data['string_not_null'], '');
 		}
 
+		public function testEnumIsFirstValueInObject() {
+			return $this->assertEqual($this->dao->get()->data['enum'], 'enum_a');
+		}
+
 	}
 
 
@@ -76,7 +81,7 @@
 	    }
 
 		public function testGetColumnTypes() {
-			return $this->assertEqual($this->dao->getColumnTypes(), array('id'=>Dao::INT, 'possibly_null'=>Dao::STRING, 'string_not_null'=>Dao::STRING));
+			return $this->assertEqual($this->dao->getColumnTypes(), array('id'=>Dao::INT, 'possibly_null'=>Dao::STRING, 'string_not_null'=>Dao::STRING, 'enum'=>array('enum_a', 'enum_b', 'enum_c')));
 		}
 
 		public function testGetNullColumns() {

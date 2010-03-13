@@ -237,18 +237,39 @@ class DataObject implements DataObjectInterface {
 	static function coerce($value, $type, $allowNull = false, $quiet = false) {
 		if ($allowNull && $value === null) { return null; }
 		$trace = debug_backtrace();
+		if (is_array($type)) {
+			// This is an enum.
+			if (!count($type)) trigger_error('Invalid enum in ' . $trace[0]['file'] . ' on line ' . $trace[0]['line'], E_USER_ERROR);
+			if (!in_array($value, $type)) {
+				if (!$quiet) trigger_error('The value provided was not in the enum in ' . $trace[0]['file'] . ' on line ' . $trace[0]['line'], E_USER_WARNING);
+				$value = $allowNull ? null : $type[0];
+			}
+			return $value;
+		}
 		switch ($type) {
 			case Dao::BOOL:
-				if (!$quiet && !is_bool($value) && $value != 1 && $value != 0) { trigger_error('The value of the type "BOOL" was not valid in ' . $trace[0]['file'] . ' on line ' . $trace[0]['line'], E_USER_WARNING); }
+				if     ($value === 'true' || $value === '1' || $value === 1) $value = true;
+				elseif ($value === 'false' || $value === '0' || $value === 0) $value = false;
+				elseif (!is_bool($value)) {
+					if (!$quiet) trigger_error('The value of the type "BOOL" was not valid in ' . $trace[0]['file'] . ' on line ' . $trace[0]['line'], E_USER_WARNING);
+					if ($allowNull) return null;
+					else $value = true;
+				}
 				return $value ? true : false;
 				break;
 			case Dao::INT:
-				if (!$quiet && !is_int($value) && !is_numeric($value) && (strval(intval($value)) !== strval($value))) { trigger_error('The value of the type "INT" was not valid in ' . $trace[0]['file'] . ' on line ' . $trace[0]['line'], E_USER_WARNING); }
-				return intval($value);
+				if (!is_int($value) && !is_numeric($value) && (strval(intval($value)) !== strval($value))) {
+					if (!$quiet) trigger_error('The value of the type "INT" was not valid in ' . $trace[0]['file'] . ' on line ' . $trace[0]['line'], E_USER_WARNING);
+					if ($allowNull) return null;
+				}
+				return (int) $value;
 				break;
 			case Dao::FLOAT:
-				if (!$quiet && !is_float($value) && !is_numeric($value)) { trigger_error('The value of the type "FLOAT" was not valid in ' . $trace[0]['file'] . ' on line ' . $trace[0]['line'], E_USER_WARNING); }
-				return floatval($value);
+				if (!is_float($value) && !is_numeric($value)) {
+					if (!$quiet) trigger_error('The value of the type "FLOAT" was not valid in ' . $trace[0]['file'] . ' on line ' . $trace[0]['line'], E_USER_WARNING);
+					if ($allowNull) return null;
+				}
+				return (float) $value;
 				break;
 			case Dao::DATE:
 			case Dao::DATE_WITH_TIME:
@@ -256,11 +277,12 @@ class DataObject implements DataObjectInterface {
 				elseif (is_numeric($value)) { return (int) $value; }
 				else {
 					if (!$quiet && !empty($value)) trigger_error('The value of the type "DATE/DATE_WITH_TIME" '.$value.' was not valid in ' . $trace[0]['file'] . ' on line ' . $trace[0]['line'], E_USER_WARNING);
+					if ($allowNull) return null;
 					return time();
 				}
 				break;
 			case Dao::STRING:
-				return strval($value);
+				return (string) $value;
 				break;
 			default: trigger_error('Unknown type in ' . $trace[0]['file'] . ' on line ' . $trace[0]['line'], E_USER_ERROR);
 		}

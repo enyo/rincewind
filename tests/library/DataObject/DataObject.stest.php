@@ -16,13 +16,13 @@
 
 	    public function setUp() {
 	    	$this->dao = $this->mock('DaoInterface')
-				->setReturnValue('getColumnTypes', array('id'=>Dao::INT, 'integer'=>Dao::INT, 'time'=>Dao::TIMESTAMP, 'name'=>Dao::STRING, 'null_column'=>Dao::STRING))
+				->setReturnValue('getColumnTypes', array('id'=>Dao::INT, 'integer'=>Dao::INT, 'time'=>Dao::TIMESTAMP, 'name'=>Dao::STRING, 'null_column'=>Dao::STRING, 'enum'=>array('a', 'b', 'c')))
 				->setReturnValue('getNullColumns', array('null_column'))
 				->listenTo('insert')
 				->listenTo('update')
 				->listenTo('delete')
 				->construct();
-			$this->dataObject = new DataObject(array('id'=>$this->testId, 'integer'=>$this->testInteger, 'time'=>$this->testTime, 'name'=>'matthias', 'null_column'=>null, 'additional_column_string'=>'ADDCOLUMNSTTT'), $this->dao);
+			$this->dataObject = new DataObject(array('id'=>$this->testId, 'integer'=>$this->testInteger, 'time'=>$this->testTime, 'name'=>'matthias', 'null_column'=>null, 'additional_column_string'=>'ADDCOLUMNSTTT', 'enum'=>'b'), $this->dao);
 		}
 
 		public function tearDown() {
@@ -53,6 +53,10 @@
 			return $this->assertNull($this->dataObject->nullColumn);
 		}
 
+		public function testDataObjectEnum() {
+			return $this->assertEqual($this->dataObject->enum, 'b');
+		}
+
 		public function testSettingInteger() {
 			$int = $this->testInteger + 877;
 			$this->dataObject->integer = $int;
@@ -71,6 +75,31 @@
 			return $this->assertIdentical($this->dataObject->name, $name);
 		}
 
+		public function testSettingEnumA() {
+			$this->dataObject->enum = 'a';
+			return $this->assertIdentical($this->dataObject->enum, 'a');
+		}
+		public function testSettingEnumB() {
+			$this->dataObject->enum = 'b';
+			return $this->assertIdentical($this->dataObject->enum, 'b');
+		}
+		public function testSettingEnumC() {
+			$this->dataObject->enum = 'c';
+			return $this->assertIdentical($this->dataObject->enum, 'c');
+		}
+		public function testSettingWrongEnum() {
+			$this->willError();
+			$this->dataObject->enum = 'd';
+			return $this->assertIdentical($this->dataObject->enum, 'a'); // Gets reset to the default value since null is not allowed
+		}
+		public function testSettingEmptyEnum() {
+			$this->willError();
+			$this->dataObject->enum = '';
+			return $this->assertIdentical($this->dataObject->enum, 'a'); // Gets reset to the default value since null is not allowed
+		}
+
+
+
 		public function testSettingNull() {
 			$this->dataObject->nullColumn = null;
 			return $this->assertNull($this->dataObject->nullColumn);
@@ -86,6 +115,7 @@
 			$this->dataObject->nullColumn = $string;
 			return $this->assertIdentical($this->dataObject->nullColumn, $string);
 		}
+
 
 		public function testSetter() {
 			$name = 'Some new name';

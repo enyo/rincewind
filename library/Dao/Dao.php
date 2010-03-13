@@ -52,6 +52,33 @@ include_once dirname(dirname(__FILE__)) . '/Date/Date.php';
  * ?>
  * </code>
  *
+ * To create a Dao for you table, simply extend a Dao implementation (eg: MysqlDao) and set the necessary properties.
+ * Example:
+ * <code>
+ * <?php
+ *   class UserDao extends MysqlDao {
+ *
+ *     protected $tableName = 'users';
+ *
+ *     protected $columnTypes = array(
+ *       'id'=>Dao::INT,
+ *       'username'=>Dao::STRING,
+ *       'status'=>array('online', 'offline'), // This is an enum. The DataObject will check this.
+ *       'comment'=>Dao::TEXT,
+ *       'creation_time'=>Dao::TIMESTAMP
+ *     );
+ *
+ *     protected $nullColumns = array('comment');
+ *
+ *     protected $defaultSort = array('creation_time'=>Dao::DESC, 'username'=>Dao::ASC);
+ *
+ *     // No checking for SQL Injections has to be done here, since get() will do all of that (including
+ *     // checking the type of the column username)
+ *     public function getByUsername($username) { return $this->get(array('username'=>$username)); }
+ *   }
+ * ?>
+ * </code>
+ *
  * @author Matthias Loitsch <developer@ma.tthias.com>
  * @copyright Copyright (c) 2010, Matthias Loitsch
  * @package Dao

@@ -122,7 +122,7 @@ class Mysql extends Database {
 	public function query($query) {
 		$result = @$this->resource->query($query);
 		if ($result === false) {
-			throw new SqlQueryException('Database Error with this query: ' . $query . "\nThe server responded: " . $this->lastError());
+			throw new SqlQueryException("There was a problem with the query.\nThe server responded: " . $this->lastError());
 		}
 		return new MysqlResult($result);
 	}
@@ -135,7 +135,7 @@ class Mysql extends Database {
 	public function multiQuery($query) {
 		$result = @$this->resource->multi_query($query);
 		if ($result === false) {
-			throw new SqlQueryException('Database Error with this query: ' . $query . "\nThe server responded: " . $this->lastError());
+			throw new SqlQueryException("There was a problem with the query.\nThe server responded: " . $this->lastError());
 		}
 
 		// This is really strange:

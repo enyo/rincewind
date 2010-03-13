@@ -48,11 +48,13 @@ include_once dirname(dirname(__FILE__)) . '/Date/Date.php';
  *   $userDao = new UserDao($database); // UserDao extends MysqlDao for example
  *   $userDao->get()->set('username', 'user2000')->save(); // Insert new user
  *   $userDao->getById(4)->set('name', 'New Name')->save(); // Update existing user
- *   $userDao->getByUsername('user2000')->delete(); // Deletes the user. (getByUsername() has to be implemented by the UserDao)
+ *   $userDao->getByUsername('user2000')->delete(); // Deletes the user.
+ *   // getByUsername() has to be implemented by the UserDao
  * ?>
  * </code>
  *
- * To create a Dao for you table, simply extend a Dao implementation (eg: MysqlDao) and set the necessary properties.
+ * To create a Dao for you table, simply extend a Dao implementation (eg: MysqlDao)
+ * and set the necessary properties.
  * Example:
  * <code>
  * <?php
@@ -63,7 +65,7 @@ include_once dirname(dirname(__FILE__)) . '/Date/Date.php';
  *     protected $columnTypes = array(
  *       'id'=>Dao::INT,
  *       'username'=>Dao::STRING,
- *       'status'=>array('online', 'offline'), // This is an enum. The DataObject will check this.
+ *       'status'=>array('online', 'offline'), // This is an enum.
  *       'comment'=>Dao::TEXT,
  *       'creation_time'=>Dao::TIMESTAMP
  *     );
@@ -72,9 +74,11 @@ include_once dirname(dirname(__FILE__)) . '/Date/Date.php';
  *
  *     protected $defaultSort = array('creation_time'=>Dao::DESC, 'username'=>Dao::ASC);
  *
- *     // No checking for SQL Injections has to be done here, since get() will do all of that (including
- *     // checking the type of the column username)
- *     public function getByUsername($username) { return $this->get(array('username'=>$username)); }
+ *     public function getByUsername($username) {
+ *       // No checking for SQL Injections has to be done here, since get() will do all of
+ *       // that (including checking the type of the column username)
+ *       return $this->get(array('username'=>$username));
+ *     }
  *   }
  * ?>
  * </code>

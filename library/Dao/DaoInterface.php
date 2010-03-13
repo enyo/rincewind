@@ -15,6 +15,7 @@
  * @author Matthias Loitsch <developer@ma.tthias.com>
  * @copyright Copyright (c) 2010, Matthias Loitsch
  * @package Dao
+ * @see Dao
  **/
 interface DaoInterface {
 

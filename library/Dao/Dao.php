@@ -42,9 +42,20 @@ include_once dirname(dirname(__FILE__)) . '/Date/Date.php';
 /**
  * This abstract base class for all Daos.
  *
+ * The typical usage of the Dao is as follows:
+ * <code>
+ * <?php
+ *   $userDao = new UserDao($database); // UserDao extends MysqlDao for example
+ *   $userDao->get()->set('username', 'user2000')->save(); // Insert new user
+ *   $userDao->getById(4)->set('name', 'New Name')->save(); // Update existing user
+ *   $userDao->getByUsername('user2000')->delete(); // Deletes the user. (getByUsername() has to be implemented by the UserDao)
+ * ?>
+ * </code>
+ *
  * @author Matthias Loitsch <developer@ma.tthias.com>
  * @copyright Copyright (c) 2010, Matthias Loitsch
  * @package Dao
+ * @see Database
  **/
 abstract class Dao implements DaoInterface {
 

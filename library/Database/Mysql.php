@@ -50,7 +50,7 @@ class Mysql extends Database {
 	 * @return string The escaped string
 	 */
 	public function escapeString($string) {
-		return $this->resource->real_escape_string($string);
+		return $this->resource->real_escape_string((string) $string);
 	}
 
 	/**

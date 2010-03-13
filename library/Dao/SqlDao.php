@@ -268,7 +268,7 @@ abstract class SqlDao extends Dao {
 	 */
 	protected function getFromQuery($query, $returnData = false) {
 		$result = $this->db->query($query);
-		if ($result->numRows() == 0) { throw new DaoException("The query ($query) did not return any results."); }
+		if ($result->numRows() == 0) { throw new DaoNotFoundException("The query ($query) did not return any results."); }
 
 		if ($returnData) return $result->fetchArray();
 

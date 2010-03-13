@@ -43,4 +43,14 @@ class DaoWrongValueException extends DaoException { }
 class DaoNotSupportedException extends DaoException { }
 
 
+/**
+ * The Exception if a query that should return a result gets nothing.
+ *
+ * @author Matthias Loitsch <developer@ma.tthias.com>
+ * @copyright Copyright (c) 2010, Matthias Loitsch
+ * @package Dao
+ * @subpackage Exceptions
+ */
+class DaoNotFoundException extends DaoException { }
+
 ?>

@@ -22,7 +22,14 @@ class FileException extends Exception { };
 
 /**
  * The file class makes mostly sense in combination with a FileFactory.
- * Normally you would get a File from one of the FileFactories getter methods.
+ * You shouldn't include this file, but rather include the FileFactory which
+ * takes care of dependencies.
+ * You then call:
+ * <code>
+ * <?php
+ *   FileFactory::get($uri);
+ * ?>
+ * </code>
  *
  * @author Matthias Loitsch <developer@ma.tthias.com>
  * @copyright Copyright (c) 2010, Matthias Loitsch

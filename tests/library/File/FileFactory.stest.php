@@ -51,7 +51,7 @@ class FileFactory_General_Test extends Snap_UnitTestCase {
 }
 
 
-class FileFactory_WithFile_Test extends Snap_UnitTestCase {
+class FileFactory_File_Test extends Snap_UnitTestCase {
 
 	protected $testFile;
 
@@ -61,7 +61,7 @@ class FileFactory_WithFile_Test extends Snap_UnitTestCase {
 	}
 
 	public function tearDown() {
-		unlink($this->testFile);
+		@unlink($this->testFile);
 	}
 
 	public function testGettingWrongLocalFile() {
@@ -77,6 +77,10 @@ class FileFactory_WithFile_Test extends Snap_UnitTestCase {
 		return $this->assertIsA(FileFactory::get($this->testFile, File::SOURCE_FILE), 'File', 'Class returned should be a File');
 	}
 
+	public function testSourceOfFile() {
+		return $this->assertEqual(FileFactory::get($this->testFile, File::SOURCE_FILE)->getSource(), File::SOURCE_FILE, 'Source type should be SOURCE_FILE.');
+	}
+
 	public function testName() {
 		$file = FileFactory::get($this->testFile, File::SOURCE_FILE);
 		return $this->assertEqual($file->getName(), 'test.txt', 'The name of the file should be test.txt');
@@ -85,6 +89,42 @@ class FileFactory_WithFile_Test extends Snap_UnitTestCase {
 	public function testSize() {
 		$file = FileFactory::get($this->testFile, File::SOURCE_FILE);
 		return $this->assertTrue($file->getSize() > 0, 'The size should be greater then 0');
+	}
+
+
+}
+
+
+class FileFactory_HTTP_Test extends Snap_UnitTestCase {
+
+	protected $testUri = 'http://www.google.com';
+
+	public function setUp() {
+	}
+
+	public function tearDown() {
+	}
+
+	public function testGettingWrongUriFile() {
+		try {
+			FileFactory::get('http://abcde/', File::SOURCE_HTTP);
+		}
+		catch (FileFactoryException $e) {
+			return $this->assertEqual($e->getCode(), 400, "The error code is not correct");
+		}
+	}
+
+	public function testGettingCorrectUriFile() {
+		return $this->assertIsA(FileFactory::get('http://ma.tthias.com/', File::SOURCE_HTTP), 'File', "Fetching website failed... Maybe you're not connected to the internet?");
+	}
+
+	public function testSourceOfFile() {
+		return $this->assertEqual(FileFactory::get('http://ma.tthias.com/', File::SOURCE_HTTP)->getSource(), File::SOURCE_HTTP, 'Source should be SOURCE_HTTP');
+	}
+
+	public function gettingContentOfFile() {
+		$content = FileFactory::get('http://ma.tthias.com/', File::SOURCE_HTTP)->getContent();
+		return $this->assertTrue(!empty($content), 'Content should not be empty');
 	}
 
 

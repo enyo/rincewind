@@ -74,6 +74,26 @@ class File {
 	 */
 	protected $uri;
 
+
+	/**
+	 * The content of the file.
+	 * When you get a file, and read the content, the file is first read, and the content
+	 * put in this variable for caching purposes.
+	 * Also: When you set the content manually with setContent, and save the file,
+	 * This content is used instead of moving some file.
+	 * The FileFactory get method for HTTP sets this content for example.
+	 *
+	 * @var mixed
+	 */
+	protected $content;
+
+
+	/**
+	 * Whether the content has been fetched or not.
+	 * @var bool
+	 */
+	protected $fetchedContent = false;
+
 	/**
 	 * The filename without the path of the file. This gets automatically set in the constructor
 	 * (from the uri), but can be overwritten.
@@ -124,7 +144,17 @@ class File {
 	public function setName($name) {
 		$this->name = $name;
 	}
-	
+
+	/**
+	 * Sets the content of the file
+	 *
+	 * @param mixed $content
+	 */
+	public function setContent($content) {
+		$this->fetchedContent = true;
+		$this->content = $content;
+	}
+
 	/**
 	 * Set the size of the file.
 	 *
@@ -163,6 +193,21 @@ class File {
 	public function getUri() {
 		return $this->uri;
 	}
+
+	/**
+	 * Get the content of the file.
+	 * If $this->content has not been set, it reads the file.
+	 *
+	 * @return mixed
+	 */
+	public function getContent() {
+		if (!$this->fetchedContent) {
+			$this->setContent(file_get_contents($this->uri));
+		}
+		return $this->content;
+	}
+
+
 
 	/**
 	 * Get the file name.
@@ -211,7 +256,12 @@ class File {
 			if (!move_uploaded_file ($this->uri, $targetUri)) { throw new FileException ("Possible file upload attack!"); }
 		}
 		else {
-			if (!copy ($this->uri, $targetUri)) { throw new FileException ("Failed to copy the file..."); }
+			if ($this->fetchedContent) {
+				if (file_put_contents($targetUri, $this->getContent()) === false) throw new FileException ("Failed to save the file...");
+			}
+			else {
+				if (!copy ($this->uri, $targetUri)) { throw new FileException ("Failed to copy the file..."); }
+			}
 		}
 		chmod ($targetUri, $mode);
 	}

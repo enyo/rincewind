@@ -80,13 +80,13 @@ class FileFactory {
 	public static function get($data, $source, $maxFileSize = 100000) {
 		switch ($source) {
 			case File::SOURCE_FILE:
-				return self::getFromLocalFile($data, $maxFileSize);
+				return self::getFromLocalFile($data);
 				break;
 			case File::SOURCE_FORM:
 				return self::getFromFormUpload($data, $maxFileSize);
 				break;
 			case File::SOURCE_HTTP:
-				return self::getFromHTTP($data, $maxFileSize);
+				return self::getFromHTTP($data);
 				break;
 			case FILE::SOURCE_LOCAL:
 			case FILE::SOURCE_REMOTE:
@@ -159,14 +159,43 @@ class FileFactory {
 	/**
 	 * This static function is the way to get a file from a http source.
 	 *
-	 * @param array $srcUri the location of the file
+	 * @param array $url the location of the file
+	 * @param int $port
+	 * @param int $timeout in seconds
 	 * @deprecated Use get() instead.
 	 * @return File
 	 */
-	public static function getFromHTTP($srcUri) {
-		// TODO: finish
-		throw new FileFactoryException('Not implemented yet');
+	public static function getFromHTTP($url, $port = 80, $timeout = 30) {
+
+    $curlHandle = curl_init();
+
+		curl_setopt($curlHandle, CURLOPT_URL, $url);
+    curl_setopt($curlHandle, CURLOPT_PORT, $port);
+		curl_setopt($curlHandle, CURLOPT_TIMEOUT, $timeout);
+		curl_setopt($curlHandle, CURLOPT_FAILONERROR, true);
+		curl_setopt($curlHandle, CURLOPT_FOLLOWLOCATION, true);
+		// return into a variable
+		curl_setopt($curlHandle, CURLOPT_RETURNTRANSFER, true);
+
+		$result = curl_exec($curlHandle);
+
+    if ($result === false) $info = curl_getinfo($curlHandle);
+
+		curl_close($curlHandle);
+
+    if ($result === false) {
+
+			$errorCode = $info['http_code'] ? $info['http_code'] : 400;
+      $errorTypes = array(400=>'Bad Request', 500=>'Internal Server Error');
+      throw new FileFactoryException('File could not be downloaded. ' . $errorCode . ' - ' . $errorTypes[floor($errorCode / 100) * 100] . '.', $errorCode);
+    }
+
+		$file = static::getFile($url);
+		$file->setSource(File::SOURCE_HTTP);
+		$file->setContent($result);
+
 		static::processFile($file);
+
 		return $file;
 	}
 

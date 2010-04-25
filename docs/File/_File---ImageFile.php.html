@@ -3,13 +3,13 @@
   <html xmlns="http://www.w3.org/1999/xhtml">
 		<head>
 			<!-- template designed by Marco Von Ballmoos -->
-			<title>Docs for page IniFileConfig.php</title>
+			<title>Docs for page ImageFile.php</title>
 			<link rel="stylesheet" href="../media/stylesheet.css" />
 			<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
 		</head>
 		<body>
 			<div class="page-body">			
-<h2 class="file-name"><img src="../media/images/Page_logo.png" alt="File" style="vertical-align: middle">/Config/IniFileConfig.php</h2>
+<h2 class="file-name"><img src="../media/images/Page_logo.png" alt="File" style="vertical-align: middle">/File/ImageFile.php</h2>
 
 <a name="sec-description"></a>
 <div class="info-box">
@@ -17,13 +17,13 @@
 	<div class="nav-bar">
 					<span class="disabled">Description</span> |
 							<a href="#sec-classes">Classes</a>
-			|							<a href="#sec-includes">Includes</a>
-												</div>
+														</div>
 	<div class="info-box-body">	
 		<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">The basic implementation of the IniFileConfig</p>
+<p class="short-description">This file contains the basic ImageFile class.</p>
+<p class="description"><p>It should be included by including the ImageFileFactory, which  includes this file.</p></p>
 	<ul class="tags">
-				<li><span class="field">author:</span> Matthias Loitsch</li>
+				<li><span class="field">author:</span> Matthias Loitsch &lt;<a href="mailto:developer@ma.tthias.com">developer@ma.tthias.com</a>&gt;</li>
 				<li><span class="field">copyright:</span> Copyright (c) 2010, Matthias Loitsch</li>
 			</ul>
 		
@@ -36,8 +36,7 @@
 		<div class="nav-bar">
 			<a href="#sec-description">Description</a> |
 			<span class="disabled">Classes</span>
-			|							<a href="#sec-includes">Includes</a>
-																		</div>
+																	</div>
 		<div class="info-box-body">	
 			<table cellpadding="2" cellspacing="0" class="class-table">
 				<tr>
@@ -49,43 +48,27 @@
 						<img src="../media/images/Class.png"
 								 alt=" class"
 								 title=" class"/>
-						<a href="../Config/IniFileConfig.html">IniFileConfig</a>
+						<a href="../File/FileExceptions/ImageFileException.html">ImageFileException</a>
 					</td>
 					<td>
-											This is the IniFileConfig implementation of Config  It's written to parse default php.ini files to set the config.
+											The Exception base class for ImageFileException.
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; vertical-align: top; white-space: nowrap">
+						<img src="../media/images/Class.png"
+								 alt=" class"
+								 title=" class"/>
+						<a href="../File/ImageFile.html">ImageFile</a>
+					</td>
+					<td>
+											You get an ImageFile by calling ImageFileFactory::get($uri).
 										</td>
 				</tr>
 							</table>
 		</div>
 	</div>
 
-	<a name="sec-includes"></a>	
-	<div class="info-box">
-		<div class="info-box-title">Includes</div>
-		<div class="nav-bar">
-			<a href="#sec-description">Description</a> |
-							<a href="#sec-classes">Classes</a>
-				|						<span class="disabled">Includes</span>
-														</div>
-		<div class="info-box-body">	
-			<a name="_dirname(__FILE__)_/Config_php"><!-- --></a>
-<div class="evenrow">
-	
-	<div>
-		<img src="../media/images/Page.png" alt=" " />
-		<span class="include-title">
-			<span class="include-type">include</span>
-			(<span class="include-name">dirname(__FILE__).'/Config.php'</span>)
-			(line <span class="line-number">14</span>)
-		</span>
-	</div>
-
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Including the base Class</p>
-	
-</div>
-		</div>
-	</div>
 	
 	
 	

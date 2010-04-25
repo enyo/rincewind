@@ -1,30 +1,74 @@
 <?php
 
-	require_once('FileFactory/FileFactory.php');
-	require_once('File/ImageFile.php');
+/**
+ * This file contains the basic ImageFileFile class.
+ *
+ * @author Matthias Loitsch <developer@ma.tthias.com>
+ * @copyright Copyright (c) 2010, Matthias Loitsch
+ * @package File
+ **/
 
-	class ImageFileFactoryException extends FileFactoryException { }
+/**
+ * Loading the image file class
+ */
+require('File/ImageFile.php');
 
-	class ImageFileFactory extends FileFactory {
+/**
+ * Loading the file factory class
+ */
+require('FileFactory/FileFactory.php');
 
-		protected $allowedImageTypes = array(IMAGETYPE_GIF, IMAGETYPE_JPEG, IMAGETYPE_PNG);
+/**
+ * The Exception base class for ImageFileFactoryException.
+ *
+ * @author Matthias Loitsch <developer@ma.tthias.com>
+ * @copyright Copyright (c) 2010, Matthias Loitsch
+ * @package File
+ * @subpackage FileExceptions
+ */
+class ImageFileFactoryException extends FileFactoryException { };
 
-		protected function getFile($srcUri) {
-			return new ImageFile($srcUri);	
-		}
 
-		protected function processFile($file) {
-			if (!($imageInfo = @getimagesize ($file->getUri()))) {
-				throw new ImageFileFactoryException ('The uploaded file is not an image, or the file was not readable.');
-			}
-			if (!in_array($imageInfo[2], $this->allowedImageTypes)) {
-				throw new ImageFileFactoryException ('The image type you uploaded is not allowed. Allowed image types are: '.implode (', ', $this->allowed_image_types).'.');
-			}
-			$file->setWidth($imageInfo[0]);
-			$file->setHeight($imageInfo[1]);
-			$file->setType($imageInfo[2]);
-		}
+/**
+ * This factory is used to get image files.
+ * The difference is, that it returns ImageFiles, instead of normal Files, which
+ * have additional image manipulation functions.
+ * 
+ * @see FileFactory
+ * @author Matthias Loitsch <developer@ma.tthias.com>
+ * @copyright Copyright (c) 2010, Matthias Loitsch
+ * @package File
+ */
+class ImageFileFactory extends FileFactory {
 
+	/**
+	 * @var array The allow image types this Factory can handle
+	 */
+	static protected $allowedImageTypes = array(IMAGETYPE_GIF, IMAGETYPE_JPEG, IMAGETYPE_PNG);
+
+	/**
+	 * @param string $srcUri
+	 * @return ImageFile
+	 */
+	protected static function getFile($srcUri) {
+		return new ImageFile($srcUri);	
 	}
+
+	/**
+	 * @param File $file
+	 */
+	protected static function processFile($file) {
+		if (!($imageInfo = @getimagesize ($file->getUri()))) {
+			throw new ImageFileFactoryException ('The uploaded file is not an image, or the file was not readable.');
+		}
+		if (!in_array($imageInfo[2], self::$allowedImageTypes)) {
+			throw new ImageFileFactoryException ('The image type you uploaded is not allowed. Allowed image types are: '.implode (', ', self::$allowedImageTypes).'.');
+		}
+		$file->setWidth($imageInfo[0]);
+		$file->setHeight($imageInfo[1]);
+		$file->setType($imageInfo[2]);
+	}
+
+}
 
 ?>

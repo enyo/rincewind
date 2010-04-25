@@ -2,7 +2,7 @@
 
 
 /**
- * This file contains the basic File class.
+ * This file contains the basic FileFactory class.
  *
  * @author Matthias Loitsch <developer@ma.tthias.com>
  * @copyright Copyright (c) 2010, Matthias Loitsch

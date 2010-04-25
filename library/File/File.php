@@ -31,13 +31,33 @@ class FileException extends Exception { };
 class File {
 
 	/**#@+
-	 * Source constants that represent all sources for a file.
+	 * Source constants that represent all source categories for a file.
+	 * They are not set directly, but are used to group the real sources
+	 * together.
+	 * Test if a source is remote, local or user by using the bit operator &.
+	 * Example:
+	 * <code>
+	 * <?php
+	 *   $isRemote = $source & File::SOURCE_REMOTE;
+	 * ?>
+	 * </code>
 	 *
 	 * @var int
 	 */
-	const SOURCE_FILE = 0;
-	const SOURCE_FORM = 1;
-	const SOURCE_URL  = 2;
+	const SOURCE_REMOTE = 0x001000;
+	const SOURCE_LOCAL  = 0x010000;
+	const SOURCE_USER   = 0x100000;
+	/**#@-*/
+
+	/**#@+
+	 * Source constants that represent all source types for a file.
+	 *
+	 * @var int
+	 */
+	const SOURCE_FILE = 0x010001; // Local
+	const SOURCE_FORM = 0x100001; // User
+	const SOURCE_HTTP = 0x001001; // Remote
+	const SOURCE_FTP  = 0x001010; // Remote
 	/**#@-*/
 
 	/**

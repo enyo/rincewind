@@ -80,13 +80,13 @@ class FileFactory {
 	public static function get($data, $source, $maxFileSize = 100000) {
 		switch ($source) {
 			case File::SOURCE_FILE:
-				return self::getFromLocalFile($data, $maxFileSize)
+				return self::getFromLocalFile($data, $maxFileSize);
 				break;
 			case File::SOURCE_FORM:
-				return self::getFromFormUpload($data, $maxFileSize)
+				return self::getFromFormUpload($data, $maxFileSize);
 				break;
 			case File::SOURCE_HTTP:
-				return self::getFromHTTP($data, $maxFileSize)
+				return self::getFromHTTP($data, $maxFileSize);
 				break;
 			case FILE::SOURCE_LOCAL:
 			case FILE::SOURCE_REMOTE:
@@ -106,7 +106,7 @@ class FileFactory {
 	 * @deprecated use get() instead
 	 * @return File
 	 */
-	public function getFromFormUpload($FILE, $maxFileSize = 100000) {
+	public static function getFromFormUpload($FILE, $maxFileSize = 100000) {
 		if (!is_array ($FILE) || count ($FILE) == 0) { throw new FileFactoryException ('The FILE array from the form was not valid.'); }
 
 		if (empty($FILE['tmp_name']) || empty($FILE['size'])) { throw new FileFactoryException ('The file was probably larger than allowed by the html property MAX_FILE_SIZE.'); }
@@ -147,9 +147,11 @@ class FileFactory {
 	 * @deprecated Use get() instead.
 	 * @return File
 	 */
-	public function getFromLocalFile($srcUri) {
+	public static function getFromLocalFile($srcUri) {
+		if (!is_file($srcUri)) throw new FileFactoryException("File '$srcUri' does not exist.");
 		$file = static::getFile($srcUri);
 		$file->setSource(File::SOURCE_FILE);
+		$file->setSize(filesize($srcUri));
 		static::processFile($file);
 		return $file;
 	}
@@ -161,7 +163,7 @@ class FileFactory {
 	 * @deprecated Use get() instead.
 	 * @return File
 	 */
-	public function getFromHTTP($srcUri) {
+	public static function getFromHTTP($srcUri) {
 		// TODO: finish
 		throw new FileFactoryException('Not implemented yet');
 		static::processFile($file);

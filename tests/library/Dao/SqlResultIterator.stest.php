@@ -28,7 +28,7 @@
 				->listenTo('reset')
 				->construct();
 			$this->dao = $this->mock('DaoInterface')
-				->setReturnValue('getObjectFromDatabaseData', $this->dataObject)
+				->setReturnValue('getObjectFromData', $this->dataObject)
 				->construct();
 			$this->iterator = new SqlResultIterator($this->result, $this->dao);
     	}

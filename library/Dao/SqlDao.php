@@ -333,7 +333,7 @@ abstract class SqlDao extends Dao {
 	 * @return SqlResultIterator
 	 */
 	protected function getIteratorFromQuery($query) {
-		return $this->createIterator($this->db->query($query), $this);
+		return $this->createIterator($this->db->query($query));
 	}
 
 

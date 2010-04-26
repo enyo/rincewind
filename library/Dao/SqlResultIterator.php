@@ -82,7 +82,7 @@ class SqlResultIterator extends DaoResultIterator {
 	 * @return DataObject|array
 	 */
 	public function current() {
-		$dataObject = $this->dao->getObjectFromDatabaseData($this->currentData);
+		$dataObject = $this->dao->getObjectFromData($this->currentData);
 		return $this->returnDataObjectsAsArray ? $dataObject->getArray() : $dataObject;
 	}
 

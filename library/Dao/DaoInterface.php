@@ -26,11 +26,6 @@ interface DaoInterface {
 	 * only default values, and null as id.
 	 *
 	 * @param array $map A map containing the column assignments.
-	 * @param string|array $sort can be an array with ASCENDING values, or a map like
-	 *                           this: array('login'=>Dao::DESC), or simply a string 
-	 *                           containing the column. This value will be passed to
-	 *                           generateSortString()
-	 * @param int $offset 
 	 * @param bool $exportValues When you want to have complete control over the $map
 	 *                           column names, you can set exportValues to false, so they
 	 *                           won't be processed.
@@ -41,13 +36,16 @@ interface DaoInterface {
 	 *                          $this->tableName is used.
 	 * @return DataObject
 	 */
-	public function get($map = null, $sort = null, $offset = null, $exportValues = true, $tableName = null);
+	public function get($map = null, $exportValues = true, $tableName = null);
 
 	/**
 	 * The same as get, but returns an iterator to go through all the rows.
 	 *
 	 * @param array $map
-	 * @param string|array $sort
+	 * @param string|array $sort can be an array with ASCENDING values, or a map like
+	 *                           this: array('login'=>Dao::DESC), or simply a string 
+	 *                           containing the column. This value will be passed to
+	 *                           generateSortString()
 	 * @param int $offset 
 	 * @param int $limit 
 	 * @param bool $exportValues
@@ -141,8 +139,9 @@ interface DaoInterface {
 
 	/**
 	 * Returns the total number of entries
-	 */
+	 *
 	 * @return int
+	 */
 	public function getTotalCount();
 
 	/**
@@ -152,7 +151,7 @@ interface DaoInterface {
 	 * @param array $data
 	 * @return DataObject
 	 */
-	public function getObjectFromDatabaseData($data);
+	public function getObjectFromData($data);
 
 }
 

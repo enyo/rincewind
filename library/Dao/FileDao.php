@@ -60,17 +60,12 @@ abstract class FileDao extends Dao {
 	public function getFileFactory() { return $this->fileFactory; }
 
 	/**
-	 * @return int The last id that has been inserted
-	 */
-	abstract protected function getLastInsertId();
-
-	/**
-	 * Creates an iterator from a php result.
+	 * Creates an iterator from a data hash.
 	 *
-	 * @param result $result
+	 * @param array $data
 	 * @return FileResultIterator
 	 */
-	abstract protected function createIterator($result);
+	abstract protected function createIterator($data);
 
 	/**
 	 * Most file data connections will transfer time values as timestamps.

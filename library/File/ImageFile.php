@@ -2,13 +2,17 @@
 
 /**
  * This file contains the basic ImageFile class.
- * It should be included by including the ImageFileFactory, which
- * includes this file.
  *
  * @author Matthias Loitsch <developer@ma.tthias.com>
  * @copyright Copyright (c) 2010, Matthias Loitsch
  * @package File
  **/
+
+
+/**
+ * Loading the file class
+ */
+if (!class_exists('File')) require('File/File.php');
 
 
 /**

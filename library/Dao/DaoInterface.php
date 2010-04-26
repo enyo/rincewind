@@ -20,6 +20,44 @@
 interface DaoInterface {
 
 	/**
+	 * This is the method to get a DataObject from the database.
+	 * If you want to select more objects, call getIterator.
+	 * If you call get() without parameters, a "raw object" will be returned, containing
+	 * only default values, and null as id.
+	 *
+	 * @param array $map A map containing the column assignments.
+	 * @param string|array $sort can be an array with ASCENDING values, or a map like
+	 *                           this: array('login'=>Dao::DESC), or simply a string 
+	 *                           containing the column. This value will be passed to
+	 *                           generateSortString()
+	 * @param int $offset 
+	 * @param bool $exportValues When you want to have complete control over the $map
+	 *                           column names, you can set exportValues to false, so they
+	 *                           won't be processed.
+	 *                           WARNING: Be sure to escape them yourself if you do so.
+	 * @param string $tableName You can specify a different table (most probably a view)
+	 *                          to get data from.
+	 *                          If not set, $this->viewName will be used if present; if not
+	 *                          $this->tableName is used.
+	 * @return DataObject
+	 */
+	public function get($map = null, $sort = null, $offset = null, $exportValues = true, $tableName = null);
+
+	/**
+	 * The same as get, but returns an iterator to go through all the rows.
+	 *
+	 * @param array $map
+	 * @param string|array $sort
+	 * @param int $offset 
+	 * @param int $limit 
+	 * @param bool $exportValues
+	 * @param string $tableName
+	 * @see get()
+	 * @return DaoResultIterator
+	 */
+	public function getIterator($map, $sort = null, $offset = null, $limit = null, $exportValues = true, $tableName = null);
+
+	/**
 	 * @param int $id
 	 * @return DataObject
 	 */
@@ -100,6 +138,12 @@ interface DaoInterface {
 	public function getNullColumns();
 
 
+
+	/**
+	 * Returns the total number of entries
+	 */
+	 * @return int
+	public function getTotalCount();
 
 	/**
 	 * Returns an object filled with an array of database values.

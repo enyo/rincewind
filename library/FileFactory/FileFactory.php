@@ -12,7 +12,7 @@
 /**
  * Loading the file class
  */
-require('File/File.php');
+if (!class_exists('File')) require('File/File.php');
 
 /**
  * The Exception base class for FileFactoryExceptions.
@@ -22,7 +22,7 @@ require('File/File.php');
  * @package File
  * @subpackage FileExceptions
  */
-class FileFactoryException extends FileException { };
+abstract class FileFactoryException extends FileException { };
 
 
 /**

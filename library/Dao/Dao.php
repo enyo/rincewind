@@ -452,75 +452,32 @@ abstract class Dao implements DaoInterface {
 
 
 
-
-
-
 	/**
-	 * This is the method to get a DataObject from the database.
-	 * If you want to select more objects, call getIterator.
-	 * If you call get() without parameters, a "raw object" will be returned, containing
-	 * only default values, and null as id.
+	 * Returns the arrays containing the columns, and values to perform an insert.
+	 * Values that are null are simply left out. So are Dao::IGNORE types.
 	 *
-	 * @param array $map A map containing the column assignments.
-	 * @param string|array $sort can be an array with ASCENDING values, or a map like
-	 *                           this: array('login'=>Dao::DESC), or simply a string 
-	 *                           containing the column. This value will be passed to
-	 *                           generateSortString()
-	 * @param int $offset 
-	 * @param bool $exportValues When you want to have complete control over the $map
-	 *                           column names, you can set exportValues to false, so they
-	 *                           won't be processed.
-	 *                           WARNING: Be sure to escape them yourself if you do so.
-	 * @param string $tableName You can specify a different table (most probably a view)
-	 *                          to get data from.
-	 *                          If not set, $this->viewName will be used if present; if not
-	 *                          $this->tableName is used.
-	 * @see generateQuery()
-	 * @return DataObject
+	 * @param DataObject $object
+	 * @return array With $columns and $values as 0 and 1st index respectively.
 	 */
-	public function get($map = null, $sort = null, $offset = null, $exportValues = true, $tableName = null) {
-		if (!$map) return $this->getRawObject();
-		return $this->getFromQuery($this->generateQuery($map, $sort, $offset, $limit = 1, $exportValues, $tableName ? $tableName : ($this->viewName ? $this->viewName : $this->tableName)));
-	}
-
-	/**
-	 * Same as get() but returns an array with the data instead of an object
-	 *
-	 * @param array $map
-	 * @param string|array $sort
-	 * @param int $offset 
-	 * @param bool $exportValues
-	 * @param string $tableName
-	 * @see get()
-	 * @see generateQuery()
-	 * @return array
-	 */
-	protected function getData($map, $sort = null, $offset = null, $exportValues = true, $tableName = null) {
-		return $this->getFromQuery($this->generateQuery($map, $sort, $offset, $limit = 1, $exportValues, $tableName ? $tableName : ($this->viewName ? $this->viewName : $this->tableName)), $returnData = true);
-	}
-
-	/**
-	 * The same as get, but returns an iterator to go through all the rows.
-	 *
-	 * @param array $map
-	 * @param string|array $sort
-	 * @param int $offset 
-	 * @param int $limit 
-	 * @param bool $exportValues
-	 * @param string $tableName
-	 * @see get()
-	 * @see generateQuery()
-	 * @return DaoResultIterator
-	 */
-	public function getIterator($map, $sort = null, $offset = null, $limit = null, $exportValues = true, $tableName = null) {
-		return $this->getIteratorFromQuery($this->generateQuery($map, $sort, $offset, $limit, $exportValues, $tableName ? $tableName : ($this->viewName ? $this->viewName : $this->tableName)));
+	protected function generateInsertArrays($object) {
+		$values = array();
+		$columns = array();
+		$id = null;
+		foreach ($this->columnTypes as $column=>$type) {
+			$value = $object->getValue($column);
+			if ($value !== null && $type != Dao::IGNORE) {
+				$columns[] = $this->exportColumn($column);
+				$values[]  = $this->exportValue($value, $type, $this->notNull($column));
+			}
+		}
+		return array($columns, $values);
 	}
 
 
 
 	/**
 	 * Returns a data object with the data in it.
-	 * Override this function if you want a specifi DataObject, not the default one.
+	 * Override this function if you want a specific DataObject, not the default one.
 	 *
 	 * @param array $data
 	 * @return DataObject
@@ -538,7 +495,7 @@ abstract class Dao implements DaoInterface {
 	 * @see getObjectFromPreparedData()
 	 * @return DataObject
 	 */
-	public function getObjectFromDatabaseData($data) {
+	public function getObjectFromData($data) {
 		return $this->getObjectFromPreparedData($this->prepareDataForObject($data));
 	}
 
@@ -550,7 +507,7 @@ abstract class Dao implements DaoInterface {
 	 * @see prepareDataForObject()
 	 * @return void
 	 */
-	public function updateObjectWithDatabaseData($data, $object) {
+	public function updateObjectWithData($data, $object) {
 		$object->setData($this->prepareDataForObject($data));
 	}
 
@@ -812,41 +769,90 @@ abstract class Dao implements DaoInterface {
 
 
 	/**
-	 * @return mixed
+	 * @return string
 	 */
-	abstract public function exportNull();
+	public function exportNull() {
+		return 'NULL';
+	}
 
 	/**
 	 * @param bool $bool
-	 * @return mixed
+	 * @return string
 	 */
-	abstract public function exportBool($bool);
+	public function exportBool($bool) {
+		return $bool ? 'true' : 'false';
+	}
 
 	/**
 	 * @param int $int
-	 * @return mixed
+	 * @return int
 	 */
-	abstract public function exportInteger($int);
+	public function exportInteger($int) {
+		return (int) $int;
+	}
 
 	/**
 	 * @param float $float
-	 * @return mixed
+	 * @return float
 	 */
-	abstract public function exportFloat($float);
+	public function exportFloat($float) {
+		return (float) $float;
+	}
 
 	/**
 	 * @param Date $date
 	 * @param bool $withTime
-	 * @return mixed
+	 * @return int a timestamp
 	 */
-	abstract public function exportDate($date, $withTime);
+	public function exportDate($date, $withTime) {
+		return $this->exportInteger($date->getTimestamp());
+	}
 
 	/**
+	 * If the value is in the enum list, it calls exportString, and returns it.
+	 * Throws a DaoException if not.
 	 * @param string $value
 	 * @param array $list
-	 * @return mixed
+	 * @return string
 	 */
-	abstract public function exportEnum($value, $list);
+	public function exportEnum($value, $list) {
+		if (!in_array($value, $list)) throw new DaoWrongValueException("The value provided is not defined in the enum.");
+		return $this->exportString($value);
+	}
+
+
+
+	/**
+	 * Tries to interpret a $sort parameter, which can be one of following:
+	 *
+	 * - A string: It will be interpreted as one ascending column.
+	 * - An array containing strings: It will be cycled through and every string is interpreted as ascending column
+	 * - A map (associative array): It will be interpreted as columnName=>sortType. E.g: array('name'=>Dao::DESC, 'age'=>Dao::ASC)
+	 *
+	 * @param string|array $sort
+	 * @return array An array containing all columns to sort by, escaped, and ASC or DESC appended. E.g.: array('name DESC', 'age');
+	 */
+	protected function interpretSortVariable($sort) {
+		if (!is_array($sort)) {
+			return $this->columnExists($sort) ? array($this->exportColumn($sort)) : null;
+		}
+
+		if (count($sort) == 0) return null;
+
+		$columnArray = array();
+		if (self::isVector($sort)) {
+			foreach ($sort as $column) {
+				if ($this->columnExists($column)) $columnArray[] = $this->exportColumn($column);
+			}
+		}
+		else {
+			foreach ($sort as $column=>$sort) {
+				if ($this->columnExists($column)) $columnArray[] = $this->exportColumn($column) . ($sort == Dao::DESC ? ' desc' : '');
+			}
+		}
+
+		return $columnArray;
+	}
 
 
 }

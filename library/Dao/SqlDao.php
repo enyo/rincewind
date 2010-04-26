@@ -15,9 +15,7 @@ include dirname(__FILE__) . '/Dao.php';
 
 
 /**
- * The SqlDao could as well have been implemented in the Dao class, since the Dao does not support
- * other Database types.
- * I simply split those two classe to have all the SQL stuff separated.
+ * The SqlDao has all the main functionality for SQL databases.
  *
  * @author Matthias Loitsch <developer@ma.tthias.com>
  * @copyright Copyright (c) 2010, Matthias Loitsch
@@ -32,7 +30,7 @@ abstract class SqlDao extends Dao {
 
 
 	/**
-	 * @param Database
+	 * @param Database $db
 	 * @param string $tableName You can specify this as an attribute when writing a Dao implementation
 	 * @param array $columnTypes You can specify this as an attribute when writing a Dao implementation
 	 * @param array $nullColumns You can specify this as an attribute when writing a Dao implementation
@@ -129,35 +127,79 @@ abstract class SqlDao extends Dao {
 
 
 
+
 	/**
-	 * Inserts an object in the database.
+	 * This is the method to get a DataObject from the database.
+	 * If you want to select more objects, call getIterator.
+	 * If you call get() without parameters, a "raw object" will be returned, containing
+	 * only default values, and null as id.
+	 *
+	 * @param array $map A map containing the column assignments.
+	 * @param bool $exportValues When you want to have complete control over the $map
+	 *                           column names, you can set exportValues to false, so they
+	 *                           won't be processed.
+	 *                           WARNING: Be sure to escape them yourself if you do so.
+	 * @param string $tableName You can specify a different table (most probably a view)
+	 *                          to get data from.
+	 *                          If not set, $this->viewName will be used if present; if not
+	 *                          $this->tableName is used.
+	 * @see generateQuery()
+	 * @return DataObject
+	 */
+	public function get($map = null, $exportValues = true, $tableName = null) {
+		if (!$map) return $this->getRawObject();
+		return $this->getFromQuery($this->generateQuery($map, $sort = null, $offset = null, $limit = 1, $exportValues, $tableName ? $tableName : ($this->viewName ? $this->viewName : $this->tableName)));
+	}
+
+	/**
+	 * Same as get() but returns an array with the data instead of an object
+	 *
+	 * @param array $map
+	 * @param bool $exportValues
+	 * @param string $tableName
+	 * @see get()
+	 * @see generateQuery()
+	 * @return array
+	 */
+	protected function getData($map, $exportValues = true, $tableName = null) {
+		return $this->getFromQuery($this->generateQuery($map, $sort = null, $offset = null, $limit = 1, $exportValues, $tableName ? $tableName : ($this->viewName ? $this->viewName : $this->tableName)), $returnData = true);
+	}
+
+	/**
+	 * The same as get, but returns an iterator to go through all the rows.
+	 *
+	 * @param array $map
+	 * @param string|array $sort
+	 * @param int $offset 
+	 * @param int $limit 
+	 * @param bool $exportValues
+	 * @param string $tableName
+	 * @see get()
+	 * @see generateQuery()
+	 * @return DaoResultIterator
+	 */
+	public function getIterator($map, $sort = null, $offset = null, $limit = null, $exportValues = true, $tableName = null) {
+		return $this->getIteratorFromQuery($this->generateQuery($map, $sort, $offset, $limit, $exportValues, $tableName ? $tableName : ($this->viewName ? $this->viewName : $this->tableName)));
+	}
+
+
+
+	/**
+	 * Inserts an object in the database, and updates the object with the new data (in
+	 * case some default values of the database have been set.)
 	 *
 	 * @param DataObject $object
-	 * @param bool $withoutId If true, 'id' will be ignored in the query (so it will be set by auto_increment).
-	 *                        This is deprecated. You should get a raw object, and the ID will be null, when you added
-	 *                        the ID to defaultValueColumns.
 	 * @return DataObject The updated object.
 	 */
-	public function insert($object, $withoutId = true) {
-		$values = array();
-		$columns = array();
-		$id = null;
-		foreach ($this->columnTypes as $column=>$type) {
-			$value = $object->getValue($column);
-			if ($value !== null && $type != Dao::IGNORE) {
-				if ($column != 'id' || !$withoutId) {
-					if ($column == 'id') $id = $object->id;
-					$columns[] = $this->exportColumn($column);
-					$values[]  = $this->exportValue($value, $type, $this->notNull($column));
-				}
-			}
-		}
+	public function insert($object) {
+		
+		list ($columns, $values) = $this->generateInsertArrays($object);
+
 		$insertSql = "insert into " . $this->exportTable() . " (" . implode(', ', $columns) . ") values (" . implode(', ', $values) . ");";
 		
-		$newId = $this->insertByQuery($insertSql, $id);
+		$newId = $this->insertByQuery($insertSql, $object->id);
 
-		
-		$this->updateObjectWithDatabaseData($this->getData(array('id'=>$newId)), $object);
+		$this->updateObjectWithData($this->getData(array('id'=>$newId)), $object);
 		
 		$this->afterInsert($object);
 		
@@ -280,7 +322,7 @@ abstract class SqlDao extends Dao {
 
 		if ($returnData) return $result->fetchArray();
 
-		return $this->getObjectFromDatabaseData($result->fetchArray());
+		return $this->getObjectFromData($result->fetchArray());
 	}
 
 
@@ -298,7 +340,7 @@ abstract class SqlDao extends Dao {
 
 
 	/**
-	 * Inserts and returns the new Object
+	 * Inserts and returns the new id
 	 *
 	 * @param string $query The query.
 	 * @param int $id If an insert is done with an id, you can pass it. If not, the last insert id is used.
@@ -337,70 +379,7 @@ abstract class SqlDao extends Dao {
 		return ' order by ' . implode(', ', $columnArray);
 	}
 
-	/**
-	 * Tries to interpret a $sort paramater, which can ba one of following:
-	 *
-	 * - A string: It will be interpreted as one ascending column.
-	 * - An array containing strings: It will be cycled through and every string is interpreted as ascending column
-	 * - A map (associative array): It will be interpreted as columnName=>sortType. E.g: array('name'=>Dao::DESC, 'age'=>Dao::ASC)
-	 *
-	 * @param string|array $sort
-	 * @return array An array containing all columns to sort by, escaped, and ASC or DESC appended. E.g.: array('name DESC', 'age');
-	 */
-	protected function interpretSortVariable($sort) {
-		if (!is_array($sort)) {
-			return $this->columnExists($sort) ? array($this->exportColumn($sort)) : null;
-		}
 
-		if (count($sort) == 0) return null;
-
-		$columnArray = array();
-		if (self::isVector($sort)) {
-			foreach ($sort as $column) {
-				if ($this->columnExists($column)) $columnArray[] = $this->exportColumn($column);
-			}
-		}
-		else {
-			foreach ($sort as $column=>$sort) {
-				if ($this->columnExists($column)) $columnArray[] = $this->exportColumn($column) . ($sort == Dao::DESC ? ' desc' : '');
-			}
-		}
-
-		return $columnArray;
-	}
-
-
-	/**
-	 * @return string 'NULL'
-	 */
-	public function exportNull() {
-		return 'NULL';
-	}
-
-	/**
-	 * @param bool $bool
-	 * @return string 'true' or 'false'
-	 */
-	public function exportBool($bool) {
-		return $bool ? 'true' : 'false';
-	}
-
-	/**
-	 * @param int $int
-	 * @return int
-	 */
-	public function exportInteger($int) {
-		return intval($int);
-	}
-	
-	/**
-	 * @param float $float
-	 * @return float
-	 */
-	public function exportFloat($float) {
-		return floatval($float);
-	}
-	
 	/**
 	 * Returns a formatted date, and escaped with exportString.
 	 * @param Date $date
@@ -409,18 +388,6 @@ abstract class SqlDao extends Dao {
 	 */
 	public function exportDate($date, $withTime) {
 		return $this->exportString($date->format('Y-m-d' . ($withTime ? ' H:i:s' : '')));
-	}
-
-	/**
-	 * If the value is in the enum list, it calls exportString, and returns it.
-	 * Throws a DaoException if not.
-	 * @param string $value
-	 * @param array $list
-	 * @return string
-	 */
-	public function exportEnum($value, $list) {
-		if (!in_array($value, $list)) throw new DaoException("The value provided is not defined in the enum.");
-		return $this->exportString($value);
 	}
 
 }

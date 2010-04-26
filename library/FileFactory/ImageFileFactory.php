@@ -11,12 +11,12 @@
 /**
  * Loading the image file class
  */
-require('File/ImageFile.php');
+if (!class_exists('ImageFile')) require('File/ImageFile.php');
 
 /**
  * Loading the file factory class
  */
-require('FileFactory/FileFactory.php');
+if (!class_exists('FileFactory')) require('FileFactory/FileFactory.php');
 
 /**
  * The Exception base class for ImageFileFactoryException.
@@ -39,7 +39,7 @@ class ImageFileFactoryException extends FileFactoryException { };
  * @copyright Copyright (c) 2010, Matthias Loitsch
  * @package File
  */
-class ImageFileFactory extends FileFactory {
+abstract class ImageFileFactory extends FileFactory {
 
 	/**
 	 * @var array The allow image types this Factory can handle

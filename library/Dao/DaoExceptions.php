@@ -22,7 +22,7 @@
 class DaoException extends Exception { }
 
 /**
- * The WrongValue Exception. To be honest: I don't know anymore what that exception's for.
+ * The WrongValue Exception. It's used if a value is not present in an enum for example.
  *
  * @author Matthias Loitsch <developer@ma.tthias.com>
  * @copyright Copyright (c) 2010, Matthias Loitsch

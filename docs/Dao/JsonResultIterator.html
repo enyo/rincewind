@@ -3,7 +3,7 @@
   <html xmlns="http://www.w3.org/1999/xhtml">
 		<head>
 			<!-- template designed by Marco Von Ballmoos -->
-			<title>Docs For Class SqlResultIterator</title>
+			<title>Docs For Class JsonResultIterator</title>
 			<link rel="stylesheet" href="../media/stylesheet.css" />
 			<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
 		</head>
@@ -12,81 +12,36 @@
 <h2 class="class-name"><img src="../media/images/Class_logo.png"
 														alt=" Class"
 														title=" Class"
-														style="vertical-align: middle"> SqlResultIterator</h2>
+														style="vertical-align: middle"> JsonResultIterator</h2>
 
 <a name="sec-description"></a>
 <div class="info-box">
 	<div class="info-box-title">Description</div>
 	<div class="nav-bar">
 					<span class="disabled">Description</span> |
-							<a href="#sec-descendents">Descendents</a>
-			|											<a href="#sec-vars">Vars</a>
+													<a href="#sec-vars">Vars</a>
 						|											<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
 						
 					</div>
 	<div class="info-box-body">
         		<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">The SQL result iterator is the implementation of the DaoResultIterator.</p>
-<p class="description"><p>It allows managing the result of a sql query.</p></p>
+<p class="short-description">This class implements the JsonResultIterator.</p>
 	<ul class="tags">
 				<li><span class="field">author:</span> Matthias Loitsch &lt;<a href="mailto:developer@ma.tthias.com">developer@ma.tthias.com</a>&gt;</li>
 				<li><span class="field">copyright:</span> Copyright (c) 2010, Matthias Loitsch</li>
 			</ul>
 		<p class="notes">
-			Located in <a class="field" href="_Dao---SqlResultIterator.php.html">/Dao/SqlResultIterator.php</a> (line <span class="field">24</span>)
+			Located in <a class="field" href="_Dao---Json---JsonResultIterator.php.html">/Dao/Json/JsonResultIterator.php</a> (line <span class="field">24</span>)
 		</p>
 		
 				
 		<pre><a href="../Dao/DaoResultIterator.html">DaoResultIterator</a>
    |
-   --SqlResultIterator</pre>
+   --JsonResultIterator</pre>
 	
 			</div>
 </div>
 
-	<a name="sec-descendents"></a>
-	<div class="info-box">
-		<div class="info-box-title">Direct descendents</div>
-		<div class="nav-bar">
-			<a href="#sec-description">Description</a> |
-			<span class="disabled">Descendents</span>
-			|												<a href="#sec-vars">Vars</a>
-								|															<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
-							
-								</div>
-		<div class="info-box-body">
-			<table cellpadding="2" cellspacing="0" class="class-table">
-				<tr>
-					<th class="class-table-header">Class</th>
-					<th class="class-table-header">Description</th>
-				</tr>
-								<tr>
-					<td style="padding-right: 2em; white-space: nowrap">
-						<img src="../media/images/Class.png"
-								 alt=" class"
-								 title=" class"
-								 style="vertical-align: center"/>
-						<a href="../Dao/MysqlResultIterator.html">MysqlResultIterator</a>
-					</td>
-					<td>
-											The class does nothing different then the SqlResultIterator, but is used everytime a Mysql request is made.
-										</td>
-				</tr>
-								<tr>
-					<td style="padding-right: 2em; white-space: nowrap">
-						<img src="../media/images/Class.png"
-								 alt=" class"
-								 title=" class"
-								 style="vertical-align: center"/>
-						<a href="../Dao/PostgresqlResultIterator.html">PostgresqlResultIterator</a>
-					</td>
-					<td>
-											The class does nothing different then the SqlResultIterator, but is used everytime a Postgresql request is made.
-										</td>
-				</tr>
-							</table>
-		</div>
-	</div>
 
 
 
@@ -95,7 +50,6 @@
 		<div class="info-box-title">Method Summary</span></div>
 		<div class="nav-bar">
 			<a href="#sec-description">Description</a> |
-							<a href="#sec-descendents">Descendants</a> |
 																		<a href="#sec-vars">Vars</a>
 				 
 				|
@@ -105,19 +59,19 @@
 			<div class="method-summary">
 																																								<div class="method-definition">
 					<img src="../media/images/Constructor.png" alt=" "/>
-											<span class="method-result">SqlResultIterator</span>
+											<span class="method-result">JsonResultIterator</span>
 										<a href="#__construct" title="details" class="method-name">__construct</a>
-											(<span class="var-type">result</span>&nbsp;<span class="var-name">$result</span>, <span class="var-type"><a href="../Dao/Dao.html">Dao</a></span>&nbsp;<span class="var-name">$dao</span>)
+											(<span class="var-type">array</span>&nbsp;<span class="var-name">$data</span>, <span class="var-type"><a href="../Dao/Dao.html">Dao</a></span>&nbsp;<span class="var-name">$dao</span>)
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result"><a href="../Dao/SqlResultIterator.html">SqlResultIterator</a></span>
+											<span class="method-result"><a href="../Dao/JsonResultIterator.html">JsonResultIterator</a></span>
 										<a href="#next" title="details" class="method-name">next</a>
 										()
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result"><a href="../Dao/SqlResultIterator.html">SqlResultIterator</a></span>
+											<span class="method-result"><a href="../Dao/JsonResultIterator.html">JsonResultIterator</a></span>
 										<a href="#rewind" title="details" class="method-name">rewind</a>
 										()
 									</div>
@@ -130,7 +84,6 @@
 		<div class="info-box-title">Variables</div>
 		<div class="nav-bar">
 			<a href="#sec-description">Description</a> |
-							<a href="#sec-descendents">Descendents</a> |
 										<a href="#sec-var-summary">Vars</a> (<span class="disabled">details</span>)
 						
 			
@@ -174,7 +127,6 @@
 		<div class="info-box-title">Methods</div>
 		<div class="nav-bar">
 			<a href="#sec-description">Description</a> |
-							<a href="#sec-descendents">Descendents</a> |
 															<a href="#sec-vars">Vars</a>
 														<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
 						
@@ -182,11 +134,11 @@
 		<div class="info-box-body">
 			<A NAME='method_detail'></A>
 <a name="method__construct" id="__construct"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Constructor.png" />
-		<span class="method-title">Constructor __construct</span> (line <span class="line-number">35</span>)
+		<span class="method-title">Constructor __construct</span> (line <span class="line-number">36</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -195,17 +147,17 @@
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">SqlResultIterator</span>
+		<span class="method-result">JsonResultIterator</span>
 		<span class="method-name">
 			__construct
 		</span>
-					(<span class="var-type">result</span>&nbsp;<span class="var-name">$result</span>, <span class="var-type"><a href="../Dao/Dao.html">Dao</a></span>&nbsp;<span class="var-name">$dao</span>)
+					(<span class="var-type">array</span>&nbsp;<span class="var-name">$data</span>, <span class="var-type"><a href="../Dao/Dao.html">Dao</a></span>&nbsp;<span class="var-name">$dao</span>)
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type">result</span>
-				<span class="var-name">$result</span>			</li>
+				<span class="var-type">array</span>
+				<span class="var-name">$data</span>			</li>
 					<li>
 				<span class="var-type"><a href="../Dao/Dao.html">Dao</a></span>
 				<span class="var-name">$dao</span>			</li>
@@ -214,11 +166,11 @@
 			
 	</div>
 <a name="methodnext" id="next"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">next</span> (line <span class="line-number">60</span>)
+		<span class="method-title">next</span> (line <span class="line-number">62</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -229,7 +181,7 @@
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result"><a href="../Dao/SqlResultIterator.html">SqlResultIterator</a></span>
+		<span class="method-result"><a href="../Dao/JsonResultIterator.html">JsonResultIterator</a></span>
 		<span class="method-name">
 			next
 		</span>
@@ -240,22 +192,22 @@
 			
 	</div>
 <a name="methodrewind" id="rewind"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">rewind</span> (line <span class="line-number">46</span>)
+		<span class="method-title">rewind</span> (line <span class="line-number">49</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Sets the pointer to row 1.</p>
+<p class="short-description">Sets the pointer to entry 1.</p>
 	<ul class="tags">
 				<li><span class="field">return:</span> Returns itself for chaining.</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result"><a href="../Dao/SqlResultIterator.html">SqlResultIterator</a></span>
+		<span class="method-result"><a href="../Dao/JsonResultIterator.html">JsonResultIterator</a></span>
 		<span class="method-name">
 			rewind
 		</span>

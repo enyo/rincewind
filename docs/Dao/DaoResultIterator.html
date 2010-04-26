@@ -34,7 +34,7 @@
 <p class="short-description">The Dao Result iterator is returned whenever a query returns more than one row.</p>
 <p class="description"><p>It implements the default php Iterator Interface, so foreach() and stuff works on it.</p><p>Typical usage:  <div class="src-code"><ol><li><div class="src-line">&nbsp;<span class="src-php">&lt;?php</span></div></li>
 <li><div class="src-line">&nbsp;<span class="src-var">$users&nbsp;</span>=&nbsp;<span class="src-var">$userDao</span><span class="src-sym">-&gt;</span><span class="src-id">getAll</span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;&nbsp;</span><span class="src-comm">//&nbsp;Returns&nbsp;the&nbsp;iterator</span></div></li>
-<li><div class="src-line">&nbsp;echo&nbsp;<span class="src-var">$users</span><span class="src-sym">-&gt;</span><a href="http://www.php.net/count">count</a><span class="src-sym">(</span><span class="src-sym">)&nbsp;</span>.&nbsp;<span class="src-str">'&nbsp;users&nbsp;returned.'</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;echo&nbsp;<span class="src-var">$users</span><span class="src-sym">-&gt;</span><a href="../Dao/DaoResultIterator.html#methodcount">count</a><span class="src-sym">(</span><span class="src-sym">)&nbsp;</span>.&nbsp;<span class="src-str">'&nbsp;users&nbsp;returned.'</span><span class="src-sym">;</span></div></li>
 <li><div class="src-line">&nbsp;<span class="src-key">foreach&nbsp;</span><span class="src-sym">(</span><span class="src-var">$users&nbsp;</span><span class="src-key">as&nbsp;</span><span class="src-var">$user</span><span class="src-sym">)&nbsp;</span><span class="src-sym">{</span></div></li>
 <li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-comm">//&nbsp;...do&nbsp;stuff...</span></div></li>
 <li><div class="src-line">&nbsp;<span class="src-sym">}</span></div></li>
@@ -77,6 +77,18 @@
 								 alt=" class"
 								 title=" class"
 								 style="vertical-align: center"/>
+						<a href="../Dao/JsonResultIterator.html">JsonResultIterator</a>
+					</td>
+					<td>
+											This class implements the JsonResultIterator.
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; white-space: nowrap">
+						<img src="../media/images/Class.png"
+								 alt=" class"
+								 title=" class"
+								 style="vertical-align: center"/>
 						<a href="../Dao/SqlResultIterator.html">SqlResultIterator</a>
 					</td>
 					<td>
@@ -101,10 +113,25 @@
 								</div>
 		<div class="info-box-body">
 			<div class="var-summary">
-																																<div class="var-title">
+																																																								<div class="var-title">
+					<img src="../media/images/Variable.png" alt=" " />
+					<span class="var-type">array</span>
+					<a href="#$currentData" title="details" class="var-name">$currentData</a>
+				</div>
+																<div class="var-title">
 					<img src="../media/images/Variable.png" alt=" " />
 					<span class="var-type">integer</span>
 					<a href="#$currentKey" title="details" class="var-name">$currentKey</a>
+				</div>
+																<div class="var-title">
+					<img src="../media/images/Variable.png" alt=" " />
+					<span class="var-type"><a href="../Dao/Dao.html">Dao</a></span>
+					<a href="#$dao" title="details" class="var-name">$dao</a>
+				</div>
+																<div class="var-title">
+					<img src="../media/images/Variable.png" alt=" " />
+					<span class="var-type">int</span>
+					<a href="#$length" title="details" class="var-name">$length</a>
 				</div>
 																<div class="var-title">
 					<img src="../media/images/Variable.png" alt=" " />
@@ -128,7 +155,7 @@
 		</div>
 		<div class="info-box-body">			
 			<div class="method-summary">
-																																<div class="method-definition">
+																																																								<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
 											<span class="method-result"><a href="../Dao/DaoResultIterator.html">DaoResultIterator</a></span>
 										<a href="#asArrays" title="details" class="method-name">asArrays</a>
@@ -137,7 +164,25 @@
 																<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
 											<span class="method-result">int</span>
+										<a href="#count" title="details" class="method-name">count</a>
+										()
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result"><a href="../Dao/DataObject/DataObject.html">DataObject</a>|array</span>
+										<a href="#current" title="details" class="method-name">current</a>
+										()
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">int</span>
 										<a href="#key" title="details" class="method-name">key</a>
+										()
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">bool</span>
+										<a href="#valid" title="details" class="method-name">valid</a>
 										()
 									</div>
 											</div>
@@ -159,15 +204,38 @@
 					</div>
 		<div class="info-box-body">
 			
-<a name="var$currentKey" id="$currentKey"><!-- --></A>
+<a name="var$currentData" id="$currentData"><!-- --></A>
 <div class="oddrow">
+
+	<div class="var-header">
+		<img src="../media/images/Variable.png" />
+		<span class="var-title">
+			<span class="var-type">array</span>
+			<span class="var-name">$currentData</span>
+						(line <span class="line-number">44</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Contains the data of the current set.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$currentKey" id="$currentKey"><!-- --></A>
+<div class="evenrow">
 
 	<div class="var-header">
 		<img src="../media/images/Variable.png" />
 		<span class="var-title">
 			<span class="var-type">integer</span>
 			<span class="var-name">$currentKey</span>
-			 = <span class="var-default"> 0</span>			(line <span class="line-number">36</span>)
+			 = <span class="var-default"> 0</span>			(line <span class="line-number">58</span>)
 		</span>
 	</div>
 
@@ -182,15 +250,60 @@
 		
 
 </div>
-<a name="var$returnDataObjectsAsArray" id="$returnDataObjectsAsArray"><!-- --></A>
+<a name="var$dao" id="$dao"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<img src="../media/images/Variable.png" />
+		<span class="var-title">
+			<span class="var-type"><a href="../Dao/Dao.html">Dao</a></span>
+			<span class="var-name">$dao</span>
+			 = <span class="var-default"> false</span>			(line <span class="line-number">36</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$length" id="$length"><!-- --></A>
 <div class="evenrow">
+
+	<div class="var-header">
+		<img src="../media/images/Variable.png" />
+		<span class="var-title">
+			<span class="var-type">int</span>
+			<span class="var-name">$length</span>
+			 = <span class="var-default"> 0</span>			(line <span class="line-number">52</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">The number of rows</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$returnDataObjectsAsArray" id="$returnDataObjectsAsArray"><!-- --></A>
+<div class="oddrow">
 
 	<div class="var-header">
 		<img src="../media/images/Variable.png" />
 		<span class="var-title">
 			<span class="var-type">bool</span>
 			<span class="var-name">$returnDataObjectsAsArray</span>
-			 = <span class="var-default"> false</span>			(line <span class="line-number">44</span>)
+			 = <span class="var-default"> false</span>			(line <span class="line-number">66</span>)
 		</span>
 	</div>
 
@@ -223,11 +336,11 @@
 		<div class="info-box-body">
 			<A NAME='method_detail'></A>
 <a name="methodasArrays" id="asArrays"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">asArrays</span> (line <span class="line-number">61</span>)
+		<span class="method-title">asArrays</span> (line <span class="line-number">96</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -253,12 +366,68 @@
 		
 			
 	</div>
-<a name="methodkey" id="key"><!-- --></a>
+<a name="methodcount" id="count"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">count</span> (line <span class="line-number">116</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Return the number of rows.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">int</span>
+		<span class="method-name">
+			count
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodcurrent" id="current"><!-- --></a>
 <div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">key</span> (line <span class="line-number">51</span>)
+		<span class="method-title">current</span> (line <span class="line-number">85</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Return the current DataObject.</p>
+<p class="description"><p>If getAsArray() has been called, returns an array instead of the DataObject.</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../Dao/DataObject/DataObject.html">DataObject</a>|array</span>
+		<span class="method-name">
+			current
+		</span>
+				()
+			</div>
+	
+		
+				<hr class="separator" />
+		<div class="notes">Implementation of:</div>
+			<dl>
+			<dt>Iterator::current</dt>
+					</dl>
+			
+	</div>
+<a name="methodkey" id="key"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">key</span> (line <span class="line-number">73</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -280,6 +449,36 @@
 		<div class="notes">Implementation of:</div>
 			<dl>
 			<dt>Iterator::key</dt>
+					</dl>
+			
+	</div>
+<a name="methodvalid" id="valid"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">valid</span> (line <span class="line-number">107</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Check if the pointer is still valid.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">bool</span>
+		<span class="method-name">
+			valid
+		</span>
+				()
+			</div>
+	
+		
+				<hr class="separator" />
+		<div class="notes">Implementation of:</div>
+			<dl>
+			<dt>Iterator::valid</dt>
 					</dl>
 			
 	</div>

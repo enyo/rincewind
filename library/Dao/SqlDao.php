@@ -72,7 +72,7 @@ abstract class SqlDao extends Dao {
 	 * @param string $databaseValue
 	 * @param bool $withTime
 	 */
-	protected function convertDatabaseValueToTimestamp($databaseValue, $withTime) { return strtotime($databaseValue); }
+	protected function convertRemoteValueToTimestamp($databaseValue, $withTime) { return strtotime($databaseValue); }
 
 
 	/**

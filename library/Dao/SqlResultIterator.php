@@ -29,28 +29,6 @@ class SqlResultIterator extends DaoResultIterator {
 	private $result = false;
 
 	/**
-	 * @var Dao
-	 */
-	private $dao = false;
-
-
-	/**
-	 * Contains the data of the current set.
-	 *
-	 * @var array
-	 */
-	private $currentData;
-
-
-	/**
-	 * The number of rows
-	 *
-	 * @var int
-	 */
-	private $length = 0;
-
-
-	/**
 	 * @param result $result
 	 * @param Dao $dao
 	 */
@@ -76,17 +54,6 @@ class SqlResultIterator extends DaoResultIterator {
 
 
 	/**
-	 * Return the current DataObject.
-	 * If getAsArray() has been called, returns an array instead of the DataObject.
-	 *
-	 * @return DataObject|array
-	 */
-	public function current() {
-		$dataObject = $this->dao->getObjectFromData($this->currentData);
-		return $this->returnDataObjectsAsArray ? $dataObject->getArray() : $dataObject;
-	}
-
-	/**
 	 * Set the pointer to the next row, and fetches the data to return in current.
 	 * @return SqlResultIterator Returns itself for chaining.
 	 */
@@ -94,24 +61,6 @@ class SqlResultIterator extends DaoResultIterator {
 		$this->currentKey ++;
 		$this->currentData = $this->result->fetchArray();
 		return $this;
-	}
-
-	/**
-	 * Check if the pointer is still valid.
-	 *
-	 * @return bool
-	 */
-	public function valid() {
-		return ($this->currentData != false);
-	}
-
-	/**
-	 * Return the number of rows.
-	 *
-	 * @return int
-	 */
-	public function count() {
-		return $this->length;
 	}
 
 }

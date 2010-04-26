@@ -29,6 +29,28 @@
  **/
 abstract class DaoResultIterator implements Iterator {
 
+
+	/**
+	 * @var Dao
+	 */
+	protected $dao = false;
+
+
+	/**
+	 * Contains the data of the current set.
+	 *
+	 * @var array
+	 */
+	protected $currentData;
+
+
+	/**
+	 * The number of rows
+	 *
+	 * @var int
+	 */
+	protected $length = 0;
+
 	/**
 	 * Stores the current key (in this case: row number) of the iterator.
 	 * @var integer
@@ -53,6 +75,19 @@ abstract class DaoResultIterator implements Iterator {
 	}
 
 
+
+	/**
+	 * Return the current DataObject.
+	 * If getAsArray() has been called, returns an array instead of the DataObject.
+	 *
+	 * @return DataObject|array
+	 */
+	public function current() {
+		$dataObject = $this->dao->getObjectFromData($this->currentData);
+		return $this->returnDataObjectsAsArray ? $dataObject->getArray() : $dataObject;
+	}
+
+
 	/**
 	 * @param bool $returnDataObjectsAsArray
 	 * @see $returnDataObjectsAsArray
@@ -61,6 +96,25 @@ abstract class DaoResultIterator implements Iterator {
 	public function asArrays($returnDataObjectsAsArray = true) {
 		$this->returnDataObjectsAsArray = !!$returnDataObjectsAsArray;
 		return $this;
+	}
+
+
+	/**
+	 * Check if the pointer is still valid.
+	 *
+	 * @return bool
+	 */
+	public function valid() {
+		return ($this->currentData != false);
+	}
+
+	/**
+	 * Return the number of rows.
+	 *
+	 * @return int
+	 */
+	public function count() {
+		return $this->length;
 	}
 
 }

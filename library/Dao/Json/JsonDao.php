@@ -15,6 +15,10 @@
  */
 include dirname(dirname(__FILE__)) . '/FileDao.php';
 
+/**
+ * Loading the Exceptions
+ */
+include_once dirname(__FILE__) . '/JsonDaoExceptions.php';
 
 /**
  * Loading the JsonResultIterator
@@ -38,8 +42,8 @@ class JsonDao extends FileDao {
 	 * @return objects
 	 */
 	protected function interpretFileContent($content) {
-		$return = json_decode($content);
-		if ($return === null) throw new DaoException("Json could not be decoded.");
+		$return = json_decode($content, true);
+		if ($return === null) throw new JsonDaoException("Json could not be decoded.");
 		return $return;
 	}
 

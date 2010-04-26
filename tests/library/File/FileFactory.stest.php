@@ -97,8 +97,6 @@ class FileFactory_File_Test extends Snap_UnitTestCase {
 
 class FileFactory_HTTP_Test extends Snap_UnitTestCase {
 
-	protected $testUri = 'http://www.google.com';
-
 	public function setUp() {
 	}
 
@@ -115,15 +113,15 @@ class FileFactory_HTTP_Test extends Snap_UnitTestCase {
 	}
 
 	public function testGettingCorrectUriFile() {
-		return $this->assertIsA(FileFactory::get('http://ma.tthias.com/', File::SOURCE_HTTP), 'File', "Fetching website failed... Maybe you're not connected to the internet?");
+		return $this->assertIsA(FileFactory::get(CONF_FILE_TEST_URI, File::SOURCE_HTTP), 'File', "Fetching website failed... Maybe you're not connected to the internet?");
 	}
 
 	public function testSourceOfFile() {
-		return $this->assertEqual(FileFactory::get('http://ma.tthias.com/', File::SOURCE_HTTP)->getSource(), File::SOURCE_HTTP, 'Source should be SOURCE_HTTP');
+		return $this->assertEqual(FileFactory::get(CONF_FILE_TEST_URI, File::SOURCE_HTTP)->getSource(), File::SOURCE_HTTP, 'Source should be SOURCE_HTTP');
 	}
 
 	public function gettingContentOfFile() {
-		$content = FileFactory::get('http://ma.tthias.com/', File::SOURCE_HTTP)->getContent();
+		$content = FileFactory::get(CONF_FILE_TEST_URI, File::SOURCE_HTTP)->getContent();
 		return $this->assertTrue(!empty($content), 'Content should not be empty');
 	}
 

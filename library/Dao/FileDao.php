@@ -19,7 +19,7 @@ if (!class_exists('Dao')) include dirname(__FILE__) . '/Dao.php';
  * Loading the abstract Dao Class
  * Checking for the class is actually faster then include_once
  */
-if (!class_exists('FileFactory')) include dirname(dirname(__FILE__)) . 'FileFactory/FileFactory.php';
+if (!class_exists('FileFactory')) include dirname(dirname(__FILE__)) . '/FileFactory/FileFactory.php';
 
 
 /**
@@ -73,7 +73,7 @@ abstract class FileDao extends Dao {
 	 * @param string $databaseValue
 	 * @param bool $withTime
 	 */
-	protected function convertFileValueToTimestamp($databaseValue, $withTime) { return (int) $databaseValue; }
+	protected function convertRemoteValueToTimestamp($databaseValue, $withTime) { return (int) $databaseValue; }
 
 
 	/**
@@ -114,7 +114,7 @@ abstract class FileDao extends Dao {
 	public function get($map = null, $exportValues = true, $tableName = null) {
 		if (!$map) return $this->getRawObject();
 
-		$content = $this->fileFactory->view($tableName ? $tableName : ($this->viewName ? $this->viewName : $this->tableName), $exportValues ? $this->exportMap($map) : $map);
+		$content = $this->fileFactory->view($this->exportTable($tableName ? $tableName : ($this->viewName ? $this->viewName : $this->tableName)), $exportValues ? $this->exportMap($map) : $map);
 
 		$data = $this->interpretFileContent($content);
 
@@ -131,7 +131,7 @@ abstract class FileDao extends Dao {
 	 * @return array
 	 */
 	protected function getData($map, $exportValues = true, $tableName = null) {
-		return $this->interpretFileContent($this->fileFactory->view($tableName ? $tableName : ($this->viewName ? $this->viewName : $this->tableName), $exportValues ? $this->exportMap($map) : $map));
+		return $this->interpretFileContent($this->fileFactory->view($this->exportTable($tableName ? $tableName : ($this->viewName ? $this->viewName : $this->tableName)), $exportValues ? $this->exportMap($map) : $map));
 	}
 
 	/**
@@ -154,7 +154,7 @@ abstract class FileDao extends Dao {
 	 * @return DaoResultIterator
 	 */
 	public function getIterator($map, $sort = null, $offset = null, $limit = null, $exportValues = true, $tableName = null) {
-		$data = $this->interpretFileContent($this->fileFactory->list($tableName ? $tableName : ($this->viewName ? $this->viewName : $this->tableName), $exportValues ? $this->exportMap($map) : $map, $this->generateSortString($sort), $offset, $limit));
+		$data = $this->interpretFileContent($this->fileFactory->viewList($this->exportTable($tableName ? $tableName : ($this->viewName ? $this->viewName : $this->tableName)), $exportValues ? $this->exportMap($map) : $map, $this->generateSortString($sort), $offset, $limit));
 		return $this->getIteratorFromData($data);
 	}
 
@@ -190,10 +190,10 @@ abstract class FileDao extends Dao {
 	 * @return DataObject The updated object.
 	 */
 	public function update($object) {
-		$attibutes = array();
+		$attributes = array();
 
 		foreach ($this->columnTypes as $column=>$type) {
-			if ($column != 'id' && $type != Dao::IGNORE) $attibutes[$column] = $this->exportValue($object->getValue($column), $type, $this->notNull($column));
+			if ($column != 'id' && $type != Dao::IGNORE) $attributes[$column] = $this->exportValue($object->getValue($column), $type, $this->notNull($column));
 		}
 
 		$this->fileFactory->update($this->tableName, $object->id, $attributes);
@@ -243,7 +243,7 @@ abstract class FileDao extends Dao {
 			}
 
 			$type = $this->columnTypes[$column];
-			$map[$column] = $this->exportValue($value, $type, $this->notNull($column));
+			$map[$this->exportColumn($column)] = $this->exportValue($value, $type, $this->notNull($column));
 		}
 
 		return $map;
@@ -287,6 +287,48 @@ abstract class FileDao extends Dao {
 	}
 
 
+	/**
+	 * Takes a php column name, converts it via import/export column mapping and calls escapeColumn.
+	 * This is the correct way to insert column names in a map.
+	 *
+	 * @param string $column
+	 * @return string
+	 */
+	public function exportColumn($column) {
+		return $this->escapeColumn($this->applyColumnExportMapping($column));
+	}
+
+
+	/**
+	 * By default does nothing for FileDaos.
+	 * 
+	 * @param string $column
+	 * @return string
+	 */
+	protected function escapeColumn($column) {
+		return $column;
+	}
+
+	/**
+	 * Escapes a table name and potentially quotes a table name.
+	 * By default it simply calls escapeTable
+	 *
+	 * @param string $table
+	 * @return string The escaped and quoted table name.
+	 */
+	public function exportTable($table = null) {
+		return $this->escapeTable($table ? $table : $this->tableName);
+	}
+
+	/**
+	 * Does nothing by default.
+	 * 
+	 * @param string $table
+	 * @return string
+	 */
+	protected function escapeTable($table = null) {
+		return $table ? $table : $this->tableName;
+	}
 
 }
 

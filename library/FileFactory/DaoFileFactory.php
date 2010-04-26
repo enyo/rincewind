@@ -35,7 +35,7 @@ class DaoFileFactoryException extends FileFactoryException { };
  * @copyright Copyright (c) 2010, Matthias Loitsch
  * @package File
  */
-class DaoFileFactory extends FileFactory {
+abstract class DaoFileFactory extends FileFactory {
 
 	/**
 	 * Returns ONE object.
@@ -56,7 +56,8 @@ class DaoFileFactory extends FileFactory {
 	 * @param int $limit 
 	 * @return string The file content
 	 */
-	abstract public function list($resource, $attributes, $sort, $offset, $limit);
+	abstract public function viewList($resource, $attributes, $sort, $offset, $limit);
+
 	/**
 	 * Inserts the object, and returns the id.
 	 *
@@ -64,7 +65,7 @@ class DaoFileFactory extends FileFactory {
 	 * @param string $attributes Associative array
 	 * @return int The new id
 	 */
-	abstract function insert($resource, $attributes);
+	abstract public function insert($resource, $attributes);
 
 	/**
 	 * Updates the object.
@@ -74,7 +75,7 @@ class DaoFileFactory extends FileFactory {
 	 * @param array $attributes Associative array
 	 * @return string The file content
 	 */
-	public function update($resource, $id, $attributes);
+	abstract public function update($resource, $id, $attributes);
 
 	/**
 	 * Deletes the object
@@ -82,7 +83,7 @@ class DaoFileFactory extends FileFactory {
 	 * @param string $resource
 	 * @param int $id
 	 */
-	public function delete($resource, $id);
+	abstract public function delete($resource, $id);
 }
 
 

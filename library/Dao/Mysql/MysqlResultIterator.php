@@ -10,7 +10,7 @@
  **/
 
 /**
- * Loading the SqlDao
+ * Loading the SqlResultIterator
  */
 include dirname(dirname(__FILE__)) . '/SqlResultIterator.php';
 

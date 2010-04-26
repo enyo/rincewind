@@ -629,18 +629,18 @@ abstract class Dao implements DaoInterface {
 	 * @param bool $withTime
 	 * @return mixed
 	 */
-	abstract protected function convertDatabaseValueToTimestamp($string, $withTime);
+	abstract protected function convertRemoteValueToTimestamp($string, $withTime);
 
 	
 	/**
-	 * Calls convertDatabaseValueToTimestamp and returns a Date Object.
+	 * Calls convertRemoteValueToTimestamp and returns a Date Object.
 	 * If you do not count on implementing this just overwrite the function and throw a DaoNotSupportedException inside.
 	 *
 	 * @param string $value
 	 * @param bool $withTime
 	 */
 	public function importDate($value, $withTime) {
-		return new Date($this->convertDatabaseValueToTimestamp($value, $withTime));
+		return new Date($this->convertRemoteValueToTimestamp($value, $withTime));
 	}
 
 	/**
@@ -748,14 +748,6 @@ abstract class Dao implements DaoInterface {
 	 */
 	abstract public function exportColumn($column);
 
-	/**
-	 * Escapes and quotes the string.
-	 * (eg.: value becomes 'value')
-	 *
-	 * @param string $string
-	 * @return string
-	 */
-	abstract public function exportString($string);
 
 	/**
 	 * Escapes and quotes a table name.
@@ -767,6 +759,17 @@ abstract class Dao implements DaoInterface {
 	 */
 	abstract public function exportTable($table = null);
 
+
+
+	/**
+	 * If your strings need quoting, do that in here.
+	 *
+	 * @param string $string
+	 * @return string
+	 */
+	public function exportString($string) {
+		return (string) $string;
+	}
 
 	/**
 	 * @return string

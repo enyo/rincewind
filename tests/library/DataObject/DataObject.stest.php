@@ -14,7 +14,7 @@
 		protected $testInteger = 77;
 		protected $testTime = 123123;
 
-	    public function setUp() {
+	  public function setUp() {
 	    	$this->dao = $this->mock('DaoInterface')
 				->setReturnValue('getColumnTypes', array('id'=>Dao::INT, 'integer'=>Dao::INT, 'time'=>Dao::TIMESTAMP, 'name'=>Dao::STRING, 'null_column'=>Dao::STRING, 'enum'=>array('a', 'b', 'c')))
 				->setReturnValue('getNullColumns', array('null_column'))

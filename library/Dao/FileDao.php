@@ -15,12 +15,6 @@
 if (!class_exists('Dao')) include dirname(__FILE__) . '/Dao.php';
 
 
-/**
- * Loading the abstract Dao Class
- * Checking for the class is actually faster then include_once
- */
-if (!class_exists('FileFactory')) include dirname(dirname(__FILE__)) . '/FileFactory/FileFactory.php';
-
 
 /**
  * The FileDao is used to get a file somewhere, interpret it and act as a normal datasource.
@@ -34,17 +28,17 @@ abstract class FileDao extends Dao {
 	/**
 	 * @var mixed
 	 */
-	protected $fileFactory;
+	protected $fileDataSource;
 
 	/**
-	 * @param DaoFileFactory $fileFactory The fileFactory is used to create the requests.
+	 * @param FileDataSource $fileDataSource The fileDataSource is used to create the requests.
 	 * @param string $tableName You can specify this as an attribute when writing a Dao implementation
 	 * @param array $columnTypes You can specify this as an attribute when writing a Dao implementation
 	 * @param array $nullColumns You can specify this as an attribute when writing a Dao implementation
 	 * @param array $defaultColumns You can specify this as an attribute when writing a Dao implementation
 	 */
-	public function __construct($fileFactory, $tableName = null, $columnTypes = null, $nullColumns = null, $defaultColumns = null) {
-		$this->fileFactory = $fileFactory;
+	public function __construct($fileDataSource, $tableName = null, $columnTypes = null, $nullColumns = null, $defaultColumns = null) {
+		$this->fileDataSource = $fileDataSource;
 		if ($tableName) $this->tableName = $tableName;
 		if ($columnTypes) $this->columnTypes = $columnTypes;
 		if ($nullColumns) $this->nullColumns = $nullColumns;
@@ -53,11 +47,11 @@ abstract class FileDao extends Dao {
 
 
 	/**
-	 * Returns the fileFactory.
+	 * Returns the fileDataSource.
 	 *
-	 * @return DaoFileFactory
+	 * @return FileDataSource
 	 */
-	public function getFileFactory() { return $this->fileFactory; }
+	public function getFileDataSource() { return $this->fileDataSource; }
 
 	/**
 	 * Creates an iterator from a data hash.
@@ -114,7 +108,7 @@ abstract class FileDao extends Dao {
 	public function get($map = null, $exportValues = true, $tableName = null) {
 		if (!$map) return $this->getRawObject();
 
-		$content = $this->fileFactory->view($this->exportTable($tableName ? $tableName : ($this->viewName ? $this->viewName : $this->tableName)), $exportValues ? $this->exportMap($map) : $map);
+		$content = $this->fileDataSource->view($this->exportTable($tableName ? $tableName : ($this->viewName ? $this->viewName : $this->tableName)), $exportValues ? $this->exportMap($map) : $map);
 
 		$data = $this->interpretFileContent($content);
 
@@ -131,7 +125,7 @@ abstract class FileDao extends Dao {
 	 * @return array
 	 */
 	protected function getData($map, $exportValues = true, $tableName = null) {
-		return $this->interpretFileContent($this->fileFactory->view($this->exportTable($tableName ? $tableName : ($this->viewName ? $this->viewName : $this->tableName)), $exportValues ? $this->exportMap($map) : $map));
+		return $this->interpretFileContent($this->fileDataSource->view($this->exportTable($tableName ? $tableName : ($this->viewName ? $this->viewName : $this->tableName)), $exportValues ? $this->exportMap($map) : $map));
 	}
 
 	/**
@@ -154,7 +148,7 @@ abstract class FileDao extends Dao {
 	 * @return DaoResultIterator
 	 */
 	public function getIterator($map, $sort = null, $offset = null, $limit = null, $exportValues = true, $tableName = null) {
-		$data = $this->interpretFileContent($this->fileFactory->viewList($this->exportTable($tableName ? $tableName : ($this->viewName ? $this->viewName : $this->tableName)), $exportValues ? $this->exportMap($map) : $map, $this->generateSortString($sort), $offset, $limit));
+		$data = $this->interpretFileContent($this->fileDataSource->viewList($this->exportTable($tableName ? $tableName : ($this->viewName ? $this->viewName : $this->tableName)), $exportValues ? $this->exportMap($map) : $map, $this->generateSortString($sort), $offset, $limit));
 		return $this->getIteratorFromData($data);
 	}
 
@@ -174,7 +168,7 @@ abstract class FileDao extends Dao {
 
 		$attibutes = array_combine($columns, $values);
 
-		$id = $this->fileFactory->insert($this->tableName, $attributes);
+		$id = $this->fileDataSource->insert($this->tableName, $attributes);
 
 		$this->updateObjectWithData($this->getData(array('id'=>$newId)), $object);
 		
@@ -196,7 +190,7 @@ abstract class FileDao extends Dao {
 			if ($column != 'id' && $type != Dao::IGNORE) $attributes[$column] = $this->exportValue($object->getValue($column), $type, $this->notNull($column));
 		}
 
-		$this->fileFactory->update($this->tableName, $object->id, $attributes);
+		$this->fileDataSource->update($this->tableName, $object->id, $attributes);
 
 		$this->afterUpdate($object);
 
@@ -209,7 +203,7 @@ abstract class FileDao extends Dao {
 	 * @param DataObject $object
 	 */
 	public function delete($object) {
-		$this->fileFactory->delete($this->tableName, $object->id);
+		$this->fileDataSource->delete($this->tableName, $object->id);
 		$this->afterDelete($object);
 	}
 
@@ -219,7 +213,7 @@ abstract class FileDao extends Dao {
 	 * @return int
 	 */
 	public function getTotalCount() {
-		return $this->fileFactory->getTotalCount($this->tableName);
+		return $this->fileDataSource->getTotalCount($this->tableName);
 	}
 
 	/**

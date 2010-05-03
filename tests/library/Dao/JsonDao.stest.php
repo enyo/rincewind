@@ -3,7 +3,7 @@
 require_once(dirname(dirname(__FILE__)) . '/setup.php');
 
 require_once(LIBRARY_ROOT_PATH . 'Dao/Json/JsonDao.php');
-require_once(LIBRARY_ROOT_PATH . 'FileFactory/DaoFileFactory.php');
+require_once(LIBRARY_ROOT_PATH . 'DataSource/FileDataSource.php');
 
 
 
@@ -36,7 +36,7 @@ class JsonDao_FileFactory_Test extends Snap_UnitTestCase {
 	protected $fileFactory;
 
   public function setUp() {
-    	$this->fileFactory = $this->mock('DaoFileFactory')
+    	$this->fileFactory = $this->mock('FileDataSource')
 			// ->setReturnValue('getColumnTypes', array('id'=>Dao::INT, 'integer'=>Dao::INT, 'time'=>Dao::TIMESTAMP, 'name'=>Dao::STRING, 'null_column'=>Dao::STRING, 'enum'=>array('a', 'b', 'c')))
 			// ->setReturnValue('getNullColumns', array('null_column'))
 			->setReturnValue('insert', 4)

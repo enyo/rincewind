@@ -15,27 +15,27 @@
 if (!class_exists('File')) require('File/File.php');
 
 /**
- * The Exception base class for DaoFileFactoryException.
+ * The Exception base class for FileDataSourceException.
  *
  * @author Matthias Loitsch <developer@ma.tthias.com>
  * @copyright Copyright (c) 2010, Matthias Loitsch
  * @package File
  * @subpackage FileExceptions
  */
-class DaoFileFactoryException extends FileFactoryException { };
+class FileDataSourceException extends Exception { };
 
 
 /**
  * This factory is used to get files to use for a Dao.
  * It implements basic Dao functionality like view(), list(), update(),
- * insert() and delete(), and uses the FileFactory functions to push them
- * to the datasource.
+ * insert() and delete(), and uses the FileFactory functions to transport
+ * them.
  *
  * @author Matthias Loitsch <developer@ma.tthias.com>
  * @copyright Copyright (c) 2010, Matthias Loitsch
  * @package File
  */
-abstract class DaoFileFactory extends FileFactory {
+abstract class FileDataSource {
 
 	/**
 	 * Returns ONE object.

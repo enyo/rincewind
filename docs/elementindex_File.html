@@ -15,9 +15,9 @@
 				<li><a href="elementindex_Config.html">Config</a></li>
 					<li><a href="elementindex_php-library.html">php-library</a></li>
 					<li><a href="elementindex_Dao.html">Dao</a></li>
-					<li><a href="elementindex_Database.html">Database</a></li>
+							<li><a href="elementindex_Database.html">Database</a></li>
 					<li><a href="elementindex_Date.html">Date</a></li>
-							<li><a href="elementindex_Storage.html">Storage</a></li>
+					<li><a href="elementindex_Storage.html">Storage</a></li>
 			</ul>
 <a href="elementindex.html">All elements</a>
 <br />
@@ -61,6 +61,7 @@
 					</dt>
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="File/ImageFile.html#method__destruct">ImageFile::__destruct()</a> in ImageFile.php</div>
+							<div class="index-item-description">Destroys the image if it has been created</div>
 					</dd>
 		</dl>
 	<a name="a"></a>
@@ -75,7 +76,7 @@
 			<span class="var-title">$allowedImageTypes</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="File/ImageFileFactory.html#var$allowedImageTypes">ImageFileFactory::$allowedImageTypes</a> in ImageFileFactory.php</div>
+			<div class="index-item-details"><a href="File/ImageFile.html#var$allowedImageTypes">ImageFile::$allowedImageTypes</a> in ImageFile.php</div>
 					</dd>
 		</dl>
 	<a name="c"></a>
@@ -92,6 +93,38 @@
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="File/File.html#var$content">File::$content</a> in File.php</div>
 							<div class="index-item-description">The content of the file.</div>
+					</dd>
+			<dt class="field">
+						<img src="media/images/Method.png" alt="Method" title="Method" />
+			<span class="method-title">create</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="File/File.html#methodcreate">File::create()</a> in File.php</div>
+							<div class="index-item-description">This is the way to create a file.</div>
+					</dd>
+			<dt class="field">
+						<img src="media/images/Method.png" alt="Method" title="Method" />
+			<span class="method-title">createFromFormUpload</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="File/File.html#methodcreateFromFormUpload">File::createFromFormUpload()</a> in File.php</div>
+							<div class="index-item-description">This static function is the way to get a file from a form upload.</div>
+					</dd>
+			<dt class="field">
+						<img src="media/images/Method.png" alt="Method" title="Method" />
+			<span class="method-title">createFromHTTP</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="File/File.html#methodcreateFromHTTP">File::createFromHTTP()</a> in File.php</div>
+							<div class="index-item-description">This static function is the way to get a file from a http source.</div>
+					</dd>
+			<dt class="field">
+						<img src="media/images/Method.png" alt="Method" title="Method" />
+			<span class="method-title">createFromLocalFile</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="File/File.html#methodcreateFromLocalFile">File::createFromLocalFile()</a> in File.php</div>
+							<div class="index-item-description">This static function is the way to get a file from a local file.</div>
 					</dd>
 		</dl>
 	<a name="d"></a>
@@ -116,35 +149,12 @@
 			<div class="index-item-details"><a href="File/ImageFile.html#var$destinationWidth">ImageFile::$destinationWidth</a> in ImageFile.php</div>
 					</dd>
 			<dt class="field">
-						<img src="media/images/AbstractClass.png" alt="Class" title="Class" />
-			DaoFileFactory
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="File/DaoFileFactory.html">DaoFileFactory</a> in DaoFileFactory.php</div>
-							<div class="index-item-description">This factory is used to get files to use for a Dao.</div>
-					</dd>
-			<dt class="field">
 						<img src="media/images/AbstractMethod.png" alt="Method" title="Method" />
 			<span class="method-title">delete</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="File/DaoFileFactory.html#methoddelete">DaoFileFactory::delete()</a> in DaoFileFactory.php</div>
+			<div class="index-item-details"><a href="File/FileDataSource.html#methoddelete">FileDataSource::delete()</a> in FileDataSource.php</div>
 							<div class="index-item-description">Deletes the object</div>
-					</dd>
-			<dt class="field">
-						<img src="media/images/Page.png" alt="Page" title="Page" />
-			<span class="include-title">DaoFileFactory.php</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="File/_FileFactory---DaoFileFactory.php.html">DaoFileFactory.php</a> in DaoFileFactory.php</div>
-					</dd>
-			<dt class="field">
-						<img src="media/images/Class.png" alt="Class" title="Class" />
-			DaoFileFactoryException
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="File/FileExceptions/DaoFileFactoryException.html">DaoFileFactoryException</a> in DaoFileFactory.php</div>
-							<div class="index-item-description">The Exception base class for DaoFileFactoryException.</div>
 					</dd>
 		</dl>
 	<a name="f"></a>
@@ -163,6 +173,13 @@
 							<div class="index-item-description">Whether the content has been fetched or not.</div>
 					</dd>
 			<dt class="field">
+						<img src="media/images/Page.png" alt="Page" title="Page" />
+			<span class="include-title">FileDataSource.php</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="File/_DataSource---FileDataSource.php.html">FileDataSource.php</a> in FileDataSource.php</div>
+					</dd>
+			<dt class="field">
 						<img src="media/images/Class.png" alt="Class" title="Class" />
 			File
 					</dt>
@@ -179,18 +196,19 @@
 					</dd>
 			<dt class="field">
 						<img src="media/images/AbstractClass.png" alt="Class" title="Class" />
-			FileFactory
+			FileDataSource
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="File/FileFactory.html">FileFactory</a> in FileFactory.php</div>
-							<div class="index-item-description">This factory is used to get files.</div>
+			<div class="index-item-details"><a href="File/FileDataSource.html">FileDataSource</a> in FileDataSource.php</div>
+							<div class="index-item-description">This factory is used to get files to use for a Dao.</div>
 					</dd>
 			<dt class="field">
-						<img src="media/images/Page.png" alt="Page" title="Page" />
-			<span class="include-title">FileFactory.php</span>
+						<img src="media/images/Class.png" alt="Class" title="Class" />
+			FileDataSourceException
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="File/_FileFactory---FileFactory.php.html">FileFactory.php</a> in FileFactory.php</div>
+			<div class="index-item-details"><a href="File/FileExceptions/FileDataSourceException.html">FileDataSourceException</a> in FileDataSource.php</div>
+							<div class="index-item-description">The Exception base class for FileDataSourceException.</div>
 					</dd>
 			<dt class="field">
 						<img src="media/images/Class.png" alt="Class" title="Class" />
@@ -200,14 +218,6 @@
 			<div class="index-item-details"><a href="File/FileExceptions/FileException.html">FileException</a> in File.php</div>
 							<div class="index-item-description">The Exception base class for FileExceptions.</div>
 					</dd>
-			<dt class="field">
-						<img src="media/images/Class.png" alt="Class" title="Class" />
-			FileFactoryException
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="File/FileExceptions/FileFactoryException.html">FileFactoryException</a> in FileFactory.php</div>
-							<div class="index-item-description">The Exception base class for FileFactoryExceptions.</div>
-					</dd>
 		</dl>
 	<a name="g"></a>
 	<div class="index-letter-section">
@@ -216,14 +226,6 @@
 		<div style="clear: both"></div>
 	</div>
 	<dl>
-			<dt class="field">
-						<img src="media/images/Method.png" alt="Method" title="Method" />
-			<span class="method-title">get</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="File/FileFactory.html#methodget">FileFactory::get()</a> in FileFactory.php</div>
-							<div class="index-item-description">This is the way to get a file from the factory.</div>
-					</dd>
 			<dt class="field">
 						<img src="media/images/Method.png" alt="Method" title="Method" />
 			<span class="method-title">getContent</span>
@@ -245,45 +247,6 @@
 					</dt>
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="File/ImageFile.html#methodgetDestinationWidth">ImageFile::getDestinationWidth()</a> in ImageFile.php</div>
-					</dd>
-			<dt class="field">
-						<img src="media/images/Method.png" alt="Method" title="Method" />
-			<span class="method-title">getFile</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="File/FileFactory.html#methodgetFile">FileFactory::getFile()</a> in FileFactory.php</div>
-							<div class="index-item-description">This function returns a file.</div>
-					</dd>
-			<dt class="field">
-						<img src="media/images/Method.png" alt="Method" title="Method" />
-			<span class="method-title">getFile</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="File/ImageFileFactory.html#methodgetFile">ImageFileFactory::getFile()</a> in ImageFileFactory.php</div>
-					</dd>
-			<dt class="field">
-						<img src="media/images/Method.png" alt="Method" title="Method" />
-			<span class="method-title">getFromFormUpload</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="File/FileFactory.html#methodgetFromFormUpload">FileFactory::getFromFormUpload()</a> in FileFactory.php</div>
-							<div class="index-item-description">This static function is the way to get a file from a form upload.</div>
-					</dd>
-			<dt class="field">
-						<img src="media/images/Method.png" alt="Method" title="Method" />
-			<span class="method-title">getFromHTTP</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="File/FileFactory.html#methodgetFromHTTP">FileFactory::getFromHTTP()</a> in FileFactory.php</div>
-							<div class="index-item-description">This static function is the way to get a file from a http source.</div>
-					</dd>
-			<dt class="field">
-						<img src="media/images/Method.png" alt="Method" title="Method" />
-			<span class="method-title">getFromLocalFile</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="File/FileFactory.html#methodgetFromLocalFile">FileFactory::getFromLocalFile()</a> in FileFactory.php</div>
-							<div class="index-item-description">This static function is the way to get a file from a local file.</div>
 					</dd>
 			<dt class="field">
 						<img src="media/images/Method.png" alt="Method" title="Method" />
@@ -393,13 +356,6 @@
 			<div class="index-item-details"><a href="File/_File---ImageFile.php.html">ImageFile.php</a> in ImageFile.php</div>
 					</dd>
 			<dt class="field">
-						<img src="media/images/Page.png" alt="Page" title="Page" />
-			<span class="include-title">ImageFileFactory.php</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="File/_FileFactory---ImageFileFactory.php.html">ImageFileFactory.php</a> in ImageFileFactory.php</div>
-					</dd>
-			<dt class="field">
 						<img src="media/images/Class.png" alt="Class" title="Class" />
 			ImageFile
 					</dt>
@@ -408,19 +364,11 @@
 							<div class="index-item-description">You get an ImageFile by calling ImageFileFactory::get($uri).</div>
 					</dd>
 			<dt class="field">
-						<img src="media/images/AbstractClass.png" alt="Class" title="Class" />
-			ImageFileFactory
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="File/ImageFileFactory.html">ImageFileFactory</a> in ImageFileFactory.php</div>
-							<div class="index-item-description">This factory is used to get image files.</div>
-					</dd>
-			<dt class="field">
 						<img src="media/images/AbstractMethod.png" alt="Method" title="Method" />
 			<span class="method-title">insert</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="File/DaoFileFactory.html#methodinsert">DaoFileFactory::insert()</a> in DaoFileFactory.php</div>
+			<div class="index-item-details"><a href="File/FileDataSource.html#methodinsert">FileDataSource::insert()</a> in FileDataSource.php</div>
 							<div class="index-item-description">Inserts the object, and returns the id.</div>
 					</dd>
 			<dt class="field">
@@ -430,14 +378,6 @@
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="File/FileExceptions/ImageFileException.html">ImageFileException</a> in ImageFile.php</div>
 							<div class="index-item-description">The Exception base class for ImageFileException.</div>
-					</dd>
-			<dt class="field">
-						<img src="media/images/Class.png" alt="Class" title="Class" />
-			ImageFileFactoryException
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="File/FileExceptions/ImageFileFactoryException.html">ImageFileFactoryException</a> in ImageFileFactory.php</div>
-							<div class="index-item-description">The Exception base class for ImageFileFactoryException.</div>
 					</dd>
 		</dl>
 	<a name="m"></a>
@@ -481,18 +421,18 @@
 	<dl>
 			<dt class="field">
 						<img src="media/images/Method.png" alt="Method" title="Method" />
-			<span class="method-title">processFile</span>
+			<span class="method-title">process</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="File/ImageFileFactory.html#methodprocessFile">ImageFileFactory::processFile()</a> in ImageFileFactory.php</div>
+			<div class="index-item-details"><a href="File/ImageFile.html#methodprocess">ImageFile::process()</a> in ImageFile.php</div>
 					</dd>
 			<dt class="field">
 						<img src="media/images/Method.png" alt="Method" title="Method" />
-			<span class="method-title">processFile</span>
+			<span class="method-title">process</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="File/FileFactory.html#methodprocessFile">FileFactory::processFile()</a> in FileFactory.php</div>
-							<div class="index-item-description">After a file gets created with the factory, the method creating it calls  processFile($file), so the file can be processed before it's returned.</div>
+			<div class="index-item-details"><a href="File/File.html#methodprocess">File::process()</a> in File.php</div>
+							<div class="index-item-description">After a file gets created, the method creating it calls  process($file), so the file can be processed before it's returned.</div>
 					</dd>
 		</dl>
 	<a name="s"></a>
@@ -717,7 +657,7 @@
 			<span class="method-title">update</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="File/DaoFileFactory.html#methodupdate">DaoFileFactory::update()</a> in DaoFileFactory.php</div>
+			<div class="index-item-details"><a href="File/FileDataSource.html#methodupdate">FileDataSource::update()</a> in FileDataSource.php</div>
 							<div class="index-item-description">Updates the object.</div>
 					</dd>
 		</dl>
@@ -733,7 +673,7 @@
 			<span class="method-title">view</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="File/DaoFileFactory.html#methodview">DaoFileFactory::view()</a> in DaoFileFactory.php</div>
+			<div class="index-item-details"><a href="File/FileDataSource.html#methodview">FileDataSource::view()</a> in FileDataSource.php</div>
 							<div class="index-item-description">Returns ONE object.</div>
 					</dd>
 			<dt class="field">
@@ -741,7 +681,7 @@
 			<span class="method-title">viewList</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="File/DaoFileFactory.html#methodviewList">DaoFileFactory::viewList()</a> in DaoFileFactory.php</div>
+			<div class="index-item-details"><a href="File/FileDataSource.html#methodviewList">FileDataSource::viewList()</a> in FileDataSource.php</div>
 							<div class="index-item-description">Returns all objects found.</div>
 					</dd>
 		</dl>

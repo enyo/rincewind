@@ -35,7 +35,7 @@
 				<li><span class="field">abstract:</span> </li>
 			</ul>
 		<p class="notes">
-			Located in <a class="field" href="_Dao---FileDao.php.html">/Dao/FileDao.php</a> (line <span class="field">32</span>)
+			Located in <a class="field" href="_Dao---FileDao.php.html">/Dao/FileDao.php</a> (line <span class="field">26</span>)
 		</p>
 		
 				
@@ -99,7 +99,7 @@
 																								<div class="var-title">
 					<img src="../media/images/Variable.png" alt=" " />
 					<span class="var-type">mixed</span>
-					<a href="#$fileFactory" title="details" class="var-name">$fileFactory</a>
+					<a href="#$fileDataSource" title="details" class="var-name">$fileDataSource</a>
 				</div>
 											</div>
 		</div>
@@ -124,7 +124,7 @@
 					<img src="../media/images/Constructor.png" alt=" "/>
 											<span class="method-result">FileDao</span>
 										<a href="#__construct" title="details" class="method-name">__construct</a>
-											(<span class="var-type"><a href="../File/DaoFileFactory.html">DaoFileFactory</a></span>&nbsp;<span class="var-name">$fileFactory</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$tableName</span> = <span class="var-default">null</span>], [<span class="var-type">array</span>&nbsp;<span class="var-name">$columnTypes</span> = <span class="var-default">null</span>], [<span class="var-type">array</span>&nbsp;<span class="var-name">$nullColumns</span> = <span class="var-default">null</span>], [<span class="var-type">array</span>&nbsp;<span class="var-name">$defaultColumns</span> = <span class="var-default">null</span>])
+											(<span class="var-type"><a href="../File/FileDataSource.html">FileDataSource</a></span>&nbsp;<span class="var-name">$fileDataSource</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$tableName</span> = <span class="var-default">null</span>], [<span class="var-type">array</span>&nbsp;<span class="var-name">$columnTypes</span> = <span class="var-default">null</span>], [<span class="var-type">array</span>&nbsp;<span class="var-name">$nullColumns</span> = <span class="var-default">null</span>], [<span class="var-type">array</span>&nbsp;<span class="var-name">$defaultColumns</span> = <span class="var-default">null</span>])
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
@@ -206,8 +206,8 @@
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result"><a href="../File/DaoFileFactory.html">DaoFileFactory</a></span>
-										<a href="#getFileFactory" title="details" class="method-name">getFileFactory</a>
+											<span class="method-result"><a href="../File/FileDataSource.html">FileDataSource</a></span>
+										<a href="#getFileDataSource" title="details" class="method-name">getFileDataSource</a>
 										()
 									</div>
 																<div class="method-definition">
@@ -273,15 +273,15 @@
 					</div>
 		<div class="info-box-body">
 			
-<a name="var$fileFactory" id="$fileFactory"><!-- --></A>
-<div class="oddrow">
+<a name="var$fileDataSource" id="$fileDataSource"><!-- --></A>
+<div class="evenrow">
 
 	<div class="var-header">
 		<img src="../media/images/Variable.png" />
 		<span class="var-title">
 			<span class="var-type">mixed</span>
-			<span class="var-name">$fileFactory</span>
-						(line <span class="line-number">37</span>)
+			<span class="var-name">$fileDataSource</span>
+						(line <span class="line-number">31</span>)
 		</span>
 	</div>
 
@@ -357,11 +357,11 @@
 		<div class="info-box-body">
 			<A NAME='method_detail'></A>
 <a name="method__construct" id="__construct"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Constructor.png" />
-		<span class="method-title">Constructor __construct</span> (line <span class="line-number">46</span>)
+		<span class="method-title">Constructor __construct</span> (line <span class="line-number">40</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -374,13 +374,13 @@
 		<span class="method-name">
 			__construct
 		</span>
-					(<span class="var-type"><a href="../File/DaoFileFactory.html">DaoFileFactory</a></span>&nbsp;<span class="var-name">$fileFactory</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$tableName</span> = <span class="var-default">null</span>], [<span class="var-type">array</span>&nbsp;<span class="var-name">$columnTypes</span> = <span class="var-default">null</span>], [<span class="var-type">array</span>&nbsp;<span class="var-name">$nullColumns</span> = <span class="var-default">null</span>], [<span class="var-type">array</span>&nbsp;<span class="var-name">$defaultColumns</span> = <span class="var-default">null</span>])
+					(<span class="var-type"><a href="../File/FileDataSource.html">FileDataSource</a></span>&nbsp;<span class="var-name">$fileDataSource</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$tableName</span> = <span class="var-default">null</span>], [<span class="var-type">array</span>&nbsp;<span class="var-name">$columnTypes</span> = <span class="var-default">null</span>], [<span class="var-type">array</span>&nbsp;<span class="var-name">$nullColumns</span> = <span class="var-default">null</span>], [<span class="var-type">array</span>&nbsp;<span class="var-name">$defaultColumns</span> = <span class="var-default">null</span>])
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type"><a href="../File/DaoFileFactory.html">DaoFileFactory</a></span>
-				<span class="var-name">$fileFactory</span><span class="var-description">: The fileFactory is used to create the requests.</span>			</li>
+				<span class="var-type"><a href="../File/FileDataSource.html">FileDataSource</a></span>
+				<span class="var-name">$fileDataSource</span><span class="var-description">: The fileDataSource is used to create the requests.</span>			</li>
 					<li>
 				<span class="var-type">string</span>
 				<span class="var-name">$tableName</span><span class="var-description">: You can specify this as an attribute when writing a Dao implementation</span>			</li>
@@ -398,11 +398,11 @@
 			
 	</div>
 <a name="methodbeginTransaction" id="beginTransaction"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">beginTransaction</span> (line <span class="line-number">82</span>)
+		<span class="method-title">beginTransaction</span> (line <span class="line-number">76</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -423,11 +423,11 @@
 			
 	</div>
 <a name="methodcommit" id="commit"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">commit</span> (line <span class="line-number">87</span>)
+		<span class="method-title">commit</span> (line <span class="line-number">81</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -448,11 +448,11 @@
 			
 	</div>
 <a name="methodconvertRemoteValueToTimestamp" id="convertRemoteValueToTimestamp"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">convertRemoteValueToTimestamp</span> (line <span class="line-number">76</span>)
+		<span class="method-title">convertRemoteValueToTimestamp</span> (line <span class="line-number">70</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -487,11 +487,11 @@
 			
 	</div>
 <a name="methodcreateIterator" id="createIterator"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/AbstractMethod.png" />
-		<span class="method-title">createIterator</span> (line <span class="line-number">68</span>)
+		<span class="method-title">createIterator</span> (line <span class="line-number">62</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -526,11 +526,11 @@
 				</ul>
 	</div>
 <a name="methoddelete" id="delete"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">delete</span> (line <span class="line-number">211</span>)
+		<span class="method-title">delete</span> (line <span class="line-number">205</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -556,11 +556,11 @@
 			
 	</div>
 <a name="methodescapeColumn" id="escapeColumn"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">escapeColumn</span> (line <span class="line-number">308</span>)
+		<span class="method-title">escapeColumn</span> (line <span class="line-number">302</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -586,11 +586,11 @@
 			
 	</div>
 <a name="methodescapeTable" id="escapeTable"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">escapeTable</span> (line <span class="line-number">329</span>)
+		<span class="method-title">escapeTable</span> (line <span class="line-number">323</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -616,11 +616,11 @@
 			
 	</div>
 <a name="methodexportColumn" id="exportColumn"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">exportColumn</span> (line <span class="line-number">297</span>)
+		<span class="method-title">exportColumn</span> (line <span class="line-number">291</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -653,11 +653,11 @@
 			
 	</div>
 <a name="methodexportMap" id="exportMap"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">exportMap</span> (line <span class="line-number">231</span>)
+		<span class="method-title">exportMap</span> (line <span class="line-number">225</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -684,11 +684,11 @@
 			
 	</div>
 <a name="methodexportTable" id="exportTable"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">exportTable</span> (line <span class="line-number">319</span>)
+		<span class="method-title">exportTable</span> (line <span class="line-number">313</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -722,11 +722,11 @@
 			
 	</div>
 <a name="methodgenerateSortString" id="generateSortString"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">generateSortString</span> (line <span class="line-number">273</span>)
+		<span class="method-title">generateSortString</span> (line <span class="line-number">267</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -759,11 +759,11 @@
 			
 	</div>
 <a name="methodget" id="get"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">get</span> (line <span class="line-number">114</span>)
+		<span class="method-title">get</span> (line <span class="line-number">108</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -796,11 +796,11 @@
 			
 	</div>
 <a name="methodgetData" id="getData"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">getData</span> (line <span class="line-number">133</span>)
+		<span class="method-title">getData</span> (line <span class="line-number">127</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -832,24 +832,24 @@
 		
 			
 	</div>
-<a name="methodgetFileFactory" id="getFileFactory"><!-- --></a>
-<div class="evenrow">
+<a name="methodgetFileDataSource" id="getFileDataSource"><!-- --></a>
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">getFileFactory</span> (line <span class="line-number">60</span>)
+		<span class="method-title">getFileDataSource</span> (line <span class="line-number">54</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Returns the fileFactory.</p>
+<p class="short-description">Returns the fileDataSource.</p>
 	<ul class="tags">
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result"><a href="../File/DaoFileFactory.html">DaoFileFactory</a></span>
+		<span class="method-result"><a href="../File/FileDataSource.html">FileDataSource</a></span>
 		<span class="method-name">
-			getFileFactory
+			getFileDataSource
 		</span>
 				()
 			</div>
@@ -858,11 +858,11 @@
 			
 	</div>
 <a name="methodgetIterator" id="getIterator"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">getIterator</span> (line <span class="line-number">156</span>)
+		<span class="method-title">getIterator</span> (line <span class="line-number">150</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -904,11 +904,11 @@
 			
 	</div>
 <a name="methodgetIteratorFromData" id="getIteratorFromData"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">getIteratorFromData</span> (line <span class="line-number">259</span>)
+		<span class="method-title">getIteratorFromData</span> (line <span class="line-number">253</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -934,11 +934,11 @@
 			
 	</div>
 <a name="methodgetTotalCount" id="getTotalCount"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">getTotalCount</span> (line <span class="line-number">221</span>)
+		<span class="method-title">getTotalCount</span> (line <span class="line-number">215</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -959,11 +959,11 @@
 			
 	</div>
 <a name="methodinsert" id="insert"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">insert</span> (line <span class="line-number">171</span>)
+		<span class="method-title">insert</span> (line <span class="line-number">165</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -990,11 +990,11 @@
 			
 	</div>
 <a name="methodinterpretFileContent" id="interpretFileContent"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/AbstractMethod.png" />
-		<span class="method-title">interpretFileContent</span> (line <span class="line-number">142</span>)
+		<span class="method-title">interpretFileContent</span> (line <span class="line-number">136</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1030,11 +1030,11 @@
 				</ul>
 	</div>
 <a name="methodrollback" id="rollback"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">rollback</span> (line <span class="line-number">92</span>)
+		<span class="method-title">rollback</span> (line <span class="line-number">86</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1055,11 +1055,11 @@
 			
 	</div>
 <a name="methodupdate" id="update"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">update</span> (line <span class="line-number">192</span>)
+		<span class="method-title">update</span> (line <span class="line-number">186</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->

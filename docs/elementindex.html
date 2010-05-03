@@ -15,9 +15,9 @@
 	<li><a href="elementindex_Config.html">Config</a></li>
 	<li><a href="elementindex_php-library.html">php-library</a></li>
 	<li><a href="elementindex_Dao.html">Dao</a></li>
+	<li><a href="elementindex_File.html">File</a></li>
 	<li><a href="elementindex_Database.html">Database</a></li>
 	<li><a href="elementindex_Date.html">Date</a></li>
-	<li><a href="elementindex_File.html">File</a></li>
 	<li><a href="elementindex_Storage.html">Storage</a></li>
 </ul>
 <br />
@@ -89,7 +89,7 @@
 			<span class="var-title">$allowedImageTypes</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="File/ImageFileFactory.html#var$allowedImageTypes">ImageFileFactory::$allowedImageTypes</a> in ImageFileFactory.php</div>
+			<div class="index-item-details"><a href="File/ImageFile.html#var$allowedImageTypes">ImageFile::$allowedImageTypes</a> in ImageFile.php</div>
 					</dd>
 			<dt class="field">
 						<img src="media/images/AbstractClass.png" alt="Class" title="Class" />
@@ -326,20 +326,20 @@
 							<div class="index-item-description">Stores the current key (in this case: row number) of the iterator.</div>
 					</dd>
 			<dt class="field">
-						<img src="media/images/AbstractMethod.png" alt="Method" title="Method" />
-			<span class="method-title">close</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Database/Database.html#methodclose">Database::close()</a> in Database.php</div>
-							<div class="index-item-description">Implement your database specific close implementation here.</div>
-					</dd>
-			<dt class="field">
 						<img src="media/images/Method.png" alt="Method" title="Method" />
 			<span class="method-title">close</span>
 					</dt>
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Database/Mysql.html#methodclose">Mysql::close()</a> in Mysql.php</div>
 							<div class="index-item-description">Closes the database connection</div>
+					</dd>
+			<dt class="field">
+						<img src="media/images/AbstractMethod.png" alt="Method" title="Method" />
+			<span class="method-title">close</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Database/Database.html#methodclose">Database::close()</a> in Database.php</div>
+							<div class="index-item-description">Implement your database specific close implementation here.</div>
 					</dd>
 			<dt class="field">
 						<img src="media/images/Method.png" alt="Method" title="Method" />
@@ -361,8 +361,8 @@
 			<span class="method-title">commit</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Dao/SqlDao.html#methodcommit">SqlDao::commit()</a> in SqlDao.php</div>
-							<div class="index-item-description">Shorthand for: Dao.getDb()-&gt;commit()</div>
+			<div class="index-item-details"><a href="Dao/FileDao.html#methodcommit">FileDao::commit()</a> in FileDao.php</div>
+							<div class="index-item-description">Overwrite this if your file connection allows transaction.</div>
 					</dd>
 			<dt class="field">
 						<img src="media/images/Method.png" alt="Method" title="Method" />
@@ -377,16 +377,16 @@
 			<span class="method-title">commit</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Dao/FileDao.html#methodcommit">FileDao::commit()</a> in FileDao.php</div>
-							<div class="index-item-description">Overwrite this if your file connection allows transaction.</div>
+			<div class="index-item-details"><a href="Database/Mysql.html#methodcommit">Mysql::commit()</a> in Mysql.php</div>
+							<div class="index-item-description">Commits a transaction</div>
 					</dd>
 			<dt class="field">
 						<img src="media/images/Method.png" alt="Method" title="Method" />
 			<span class="method-title">commit</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Database/Mysql.html#methodcommit">Mysql::commit()</a> in Mysql.php</div>
-							<div class="index-item-description">Commits a transaction</div>
+			<div class="index-item-details"><a href="Dao/SqlDao.html#methodcommit">SqlDao::commit()</a> in SqlDao.php</div>
+							<div class="index-item-description">Shorthand for: Dao.getDb()-&gt;commit()</div>
 					</dd>
 			<dt class="field">
 						<img src="media/images/AbstractClass.png" alt="Class" title="Class" />
@@ -419,20 +419,20 @@
 							<div class="index-item-description">The normal ConfigException gets thrown whenever there is a Config error.</div>
 					</dd>
 			<dt class="field">
-						<img src="media/images/AbstractMethod.png" alt="Method" title="Method" />
-			<span class="method-title">connect</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Database/Database.html#methodconnect">Database::connect()</a> in Database.php</div>
-							<div class="index-item-description">Implement your database specific connection here.</div>
-					</dd>
-			<dt class="field">
 						<img src="media/images/Method.png" alt="Method" title="Method" />
 			<span class="method-title">connect</span>
 					</dt>
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Database/Mysql.html#methodconnect">Mysql::connect()</a> in Mysql.php</div>
 							<div class="index-item-description">This is the connect function that tries to create a mysql connection, and set the correct character set.</div>
+					</dd>
+			<dt class="field">
+						<img src="media/images/AbstractMethod.png" alt="Method" title="Method" />
+			<span class="method-title">connect</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Database/Database.html#methodconnect">Database::connect()</a> in Database.php</div>
+							<div class="index-item-description">Implement your database specific connection here.</div>
 					</dd>
 			<dt class="field">
 						<img src="media/images/Method.png" alt="Method" title="Method" />
@@ -456,6 +456,14 @@
 			<div class="index-item-details"><a href="Dao/DataObject/DataObject.html#methodconvertPhpNameToDbColumn">DataObject::convertPhpNameToDbColumn()</a> in DataObject.php</div>
 					</dd>
 			<dt class="field">
+						<img src="media/images/AbstractMethod.png" alt="Method" title="Method" />
+			<span class="method-title">convertRemoteValueToTimestamp</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Dao/Dao.html#methodconvertRemoteValueToTimestamp">Dao::convertRemoteValueToTimestamp()</a> in Dao.php</div>
+							<div class="index-item-description">Converts a database value to a timestamp.</div>
+					</dd>
+			<dt class="field">
 						<img src="media/images/Method.png" alt="Method" title="Method" />
 			<span class="method-title">convertRemoteValueToTimestamp</span>
 					</dt>
@@ -470,14 +478,6 @@
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Dao/FileDao.html#methodconvertRemoteValueToTimestamp">FileDao::convertRemoteValueToTimestamp()</a> in FileDao.php</div>
 							<div class="index-item-description">Most file data connections will transfer time values as timestamps.</div>
-					</dd>
-			<dt class="field">
-						<img src="media/images/AbstractMethod.png" alt="Method" title="Method" />
-			<span class="method-title">convertRemoteValueToTimestamp</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Dao/Dao.html#methodconvertRemoteValueToTimestamp">Dao::convertRemoteValueToTimestamp()</a> in Dao.php</div>
-							<div class="index-item-description">Converts a database value to a timestamp.</div>
 					</dd>
 			<dt class="field">
 						<img src="media/images/Method.png" alt="Method" title="Method" />
@@ -495,20 +495,36 @@
 							<div class="index-item-description">Return the number of rows.</div>
 					</dd>
 			<dt class="field">
-						<img src="media/images/AbstractMethod.png" alt="Method" title="Method" />
-			<span class="method-title">createIterator</span>
+						<img src="media/images/Method.png" alt="Method" title="Method" />
+			<span class="method-title">create</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Dao/SqlDao.html#methodcreateIterator">SqlDao::createIterator()</a> in SqlDao.php</div>
-							<div class="index-item-description">Creates an iterator from a php result.</div>
+			<div class="index-item-details"><a href="File/File.html#methodcreate">File::create()</a> in File.php</div>
+							<div class="index-item-description">This is the way to create a file.</div>
 					</dd>
 			<dt class="field">
 						<img src="media/images/Method.png" alt="Method" title="Method" />
-			<span class="method-title">createIterator</span>
+			<span class="method-title">createFromFormUpload</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Dao/MysqlDao.html#methodcreateIterator">MysqlDao::createIterator()</a> in MysqlDao.php</div>
-							<div class="index-item-description">Creates an iterator for a mysql result.</div>
+			<div class="index-item-details"><a href="File/File.html#methodcreateFromFormUpload">File::createFromFormUpload()</a> in File.php</div>
+							<div class="index-item-description">This static function is the way to get a file from a form upload.</div>
+					</dd>
+			<dt class="field">
+						<img src="media/images/Method.png" alt="Method" title="Method" />
+			<span class="method-title">createFromHTTP</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="File/File.html#methodcreateFromHTTP">File::createFromHTTP()</a> in File.php</div>
+							<div class="index-item-description">This static function is the way to get a file from a http source.</div>
+					</dd>
+			<dt class="field">
+						<img src="media/images/Method.png" alt="Method" title="Method" />
+			<span class="method-title">createFromLocalFile</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="File/File.html#methodcreateFromLocalFile">File::createFromLocalFile()</a> in File.php</div>
+							<div class="index-item-description">This static function is the way to get a file from a local file.</div>
 					</dd>
 			<dt class="field">
 						<img src="media/images/AbstractMethod.png" alt="Method" title="Method" />
@@ -525,6 +541,22 @@
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Dao/JsonDao.html#methodcreateIterator">JsonDao::createIterator()</a> in JsonDao.php</div>
 							<div class="index-item-description">Creates an iterator for a json data hash.</div>
+					</dd>
+			<dt class="field">
+						<img src="media/images/AbstractMethod.png" alt="Method" title="Method" />
+			<span class="method-title">createIterator</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Dao/SqlDao.html#methodcreateIterator">SqlDao::createIterator()</a> in SqlDao.php</div>
+							<div class="index-item-description">Creates an iterator from a php result.</div>
+					</dd>
+			<dt class="field">
+						<img src="media/images/Method.png" alt="Method" title="Method" />
+			<span class="method-title">createIterator</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Dao/MysqlDao.html#methodcreateIterator">MysqlDao::createIterator()</a> in MysqlDao.php</div>
+							<div class="index-item-description">Creates an iterator for a mysql result.</div>
 					</dd>
 			<dt class="field">
 						<img src="media/images/Method.png" alt="Method" title="Method" />
@@ -696,22 +728,6 @@
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Dao/Exceptions/DaoException.html">DaoException</a> in DaoExceptions.php</div>
 							<div class="index-item-description">The Exception base class for DaoExceptions.</div>
-					</dd>
-			<dt class="field">
-						<img src="media/images/AbstractClass.png" alt="Class" title="Class" />
-			DaoFileFactory
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="File/DaoFileFactory.html">DaoFileFactory</a> in DaoFileFactory.php</div>
-							<div class="index-item-description">This factory is used to get files to use for a Dao.</div>
-					</dd>
-			<dt class="field">
-						<img src="media/images/Class.png" alt="Class" title="Class" />
-			DaoFileFactoryException
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="File/FileExceptions/DaoFileFactoryException.html">DaoFileFactoryException</a> in DaoFileFactory.php</div>
-							<div class="index-item-description">The Exception base class for DaoFileFactoryException.</div>
 					</dd>
 			<dt class="field">
 						<img src="media/images/Class.png" alt="Class" title="Class" />
@@ -923,6 +939,13 @@
 			<span class="method-title">debug</span>
 					</dt>
 		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Dao/Dao.html#methoddebug">Dao::debug()</a> in Dao.php</div>
+					</dd>
+			<dt class="field">
+						<img src="media/images/Method.png" alt="Method" title="Method" />
+			<span class="method-title">debug</span>
+					</dt>
+		<dd class="index-item-body">
 			<div class="index-item-details"><a href="php-library/LoggerInterface.html#methoddebug">LoggerInterface::debug()</a> in LoggerInterface.php</div>
 							<div class="index-item-description">The debug function does the same as log, but only if the logger is in debug mode.</div>
 					</dd>
@@ -938,15 +961,16 @@
 			<span class="method-title">debug</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Dao/Dao.html#methoddebug">Dao::debug()</a> in Dao.php</div>
-					</dd>
-			<dt class="field">
-						<img src="media/images/Method.png" alt="Method" title="Method" />
-			<span class="method-title">debug</span>
-					</dt>
-		<dd class="index-item-body">
 			<div class="index-item-details"><a href="php-library/Logger.html#methoddebug">Logger::debug()</a> in Logger.php</div>
 							<div class="index-item-description">The same as log, but only logs when in debug mode, and puts &lt;debug&gt; in front of the text.</div>
+					</dd>
+			<dt class="field">
+						<img src="media/images/AbstractMethod.png" alt="Method" title="Method" />
+			<span class="method-title">delete</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="File/FileDataSource.html#methoddelete">FileDataSource::delete()</a> in FileDataSource.php</div>
+							<div class="index-item-description">Deletes the object</div>
 					</dd>
 			<dt class="field">
 						<img src="media/images/Method.png" alt="Method" title="Method" />
@@ -969,24 +993,8 @@
 			<span class="method-title">delete</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Dao/SqlDao.html#methoddelete">SqlDao::delete()</a> in SqlDao.php</div>
-							<div class="index-item-description">Deletes an object in the database using the id.</div>
-					</dd>
-			<dt class="field">
-						<img src="media/images/AbstractMethod.png" alt="Method" title="Method" />
-			<span class="method-title">delete</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="File/DaoFileFactory.html#methoddelete">DaoFileFactory::delete()</a> in DaoFileFactory.php</div>
-							<div class="index-item-description">Deletes the object</div>
-					</dd>
-			<dt class="field">
-						<img src="media/images/Method.png" alt="Method" title="Method" />
-			<span class="method-title">delete</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Dao/DaoInterface.html#methoddelete">DaoInterface::delete()</a> in DaoInterface.php</div>
-							<div class="index-item-description">Takes a DataObject and delets it in the database. (Again the id is used)</div>
+			<div class="index-item-details"><a href="Dao/DataObject/DataObjectInterface.html#methoddelete">DataObjectInterface::delete()</a> in DataObjectInterface.php</div>
+							<div class="index-item-description">Calls delete($this) on the dao.</div>
 					</dd>
 			<dt class="field">
 						<img src="media/images/Method.png" alt="Method" title="Method" />
@@ -1001,8 +1009,16 @@
 			<span class="method-title">delete</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Dao/DataObject/DataObjectInterface.html#methoddelete">DataObjectInterface::delete()</a> in DataObjectInterface.php</div>
-							<div class="index-item-description">Calls delete($this) on the dao.</div>
+			<div class="index-item-details"><a href="Dao/DaoInterface.html#methoddelete">DaoInterface::delete()</a> in DaoInterface.php</div>
+							<div class="index-item-description">Takes a DataObject and delets it in the database. (Again the id is used)</div>
+					</dd>
+			<dt class="field">
+						<img src="media/images/Method.png" alt="Method" title="Method" />
+			<span class="method-title">delete</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Dao/SqlDao.html#methoddelete">SqlDao::delete()</a> in SqlDao.php</div>
+							<div class="index-item-description">Deletes an object in the database using the id.</div>
 					</dd>
 			<dt class="field">
 						<img src="media/images/Method.png" alt="Method" title="Method" />
@@ -1042,13 +1058,6 @@
 					</dt>
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Dao/Dao.html#constDO_NOT_EXPORT_VALUES">Dao::DO_NOT_EXPORT_VALUES</a> in Dao.php</div>
-					</dd>
-			<dt class="field">
-						<img src="media/images/Page.png" alt="Page" title="Page" />
-			<span class="include-title">DaoFileFactory.php</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="File/_FileFactory---DaoFileFactory.php.html">DaoFileFactory.php</a> in DaoFileFactory.php</div>
 					</dd>
 			<dt class="field">
 						<img src="media/images/Page.png" alt="Page" title="Page" />
@@ -1318,10 +1327,10 @@
 					</dd>
 			<dt class="field">
 						<img src="media/images/Variable.png" alt="Variable" title="Variable" />
-			<span class="var-title">$fileFactory</span>
+			<span class="var-title">$fileDataSource</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Dao/FileDao.html#var$fileFactory">FileDao::$fileFactory</a> in FileDao.php</div>
+			<div class="index-item-details"><a href="Dao/FileDao.html#var$fileDataSource">FileDao::$fileDataSource</a> in FileDao.php</div>
 					</dd>
 			<dt class="field">
 						<img src="media/images/Variable.png" alt="Variable" title="Variable" />
@@ -1336,6 +1345,13 @@
 					</dt>
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Dao/_Dao---FileDao.php.html">FileDao.php</a> in FileDao.php</div>
+					</dd>
+			<dt class="field">
+						<img src="media/images/Page.png" alt="Page" title="Page" />
+			<span class="include-title">FileDataSource.php</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="File/_DataSource---FileDataSource.php.html">FileDataSource.php</a> in FileDataSource.php</div>
 					</dd>
 			<dt class="field">
 						<img src="media/images/Method.png" alt="Method" title="Method" />
@@ -1358,15 +1374,22 @@
 			<span class="method-title">fetchArray</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Database/DatabaseResult/DatabaseResultInterface.html#methodfetchArray">DatabaseResultInterface::fetchArray()</a> in DatabaseResultInterface.php</div>
-							<div class="index-item-description">Returns the current row as an associative array.</div>
+			<div class="index-item-details"><a href="Database/DatabaseResult/MysqlResult.html#methodfetchArray">MysqlResult::fetchArray()</a> in MysqlResult.php</div>
 					</dd>
 			<dt class="field">
 						<img src="media/images/Method.png" alt="Method" title="Method" />
 			<span class="method-title">fetchArray</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Database/DatabaseResult/MysqlResult.html#methodfetchArray">MysqlResult::fetchArray()</a> in MysqlResult.php</div>
+			<div class="index-item-details"><a href="Database/DatabaseResult/DatabaseResultInterface.html#methodfetchArray">DatabaseResultInterface::fetchArray()</a> in DatabaseResultInterface.php</div>
+							<div class="index-item-description">Returns the current row as an associative array.</div>
+					</dd>
+			<dt class="field">
+						<img src="media/images/Method.png" alt="Method" title="Method" />
+			<span class="method-title">fetchResult</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Database/DatabaseResult/MysqlResult.html#methodfetchResult">MysqlResult::fetchResult()</a> in MysqlResult.php</div>
 					</dd>
 			<dt class="field">
 						<img src="media/images/Method.png" alt="Method" title="Method" />
@@ -1375,13 +1398,6 @@
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Database/DatabaseResult/DatabaseResultInterface.html#methodfetchResult">DatabaseResultInterface::fetchResult()</a> in DatabaseResultInterface.php</div>
 							<div class="index-item-description">Returns the value of one field in the current row.</div>
-					</dd>
-			<dt class="field">
-						<img src="media/images/Method.png" alt="Method" title="Method" />
-			<span class="method-title">fetchResult</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Database/DatabaseResult/MysqlResult.html#methodfetchResult">MysqlResult::fetchResult()</a> in MysqlResult.php</div>
 					</dd>
 			<dt class="field">
 						<img src="media/images/Class.png" alt="Class" title="Class" />
@@ -1407,35 +1423,28 @@
 							<div class="index-item-description">The FileDao is used to get a file somewhere, interpret it and act as a normal datasource.</div>
 					</dd>
 			<dt class="field">
+						<img src="media/images/AbstractClass.png" alt="Class" title="Class" />
+			FileDataSource
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="File/FileDataSource.html">FileDataSource</a> in FileDataSource.php</div>
+							<div class="index-item-description">This factory is used to get files to use for a Dao.</div>
+					</dd>
+			<dt class="field">
+						<img src="media/images/Class.png" alt="Class" title="Class" />
+			FileDataSourceException
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="File/FileExceptions/FileDataSourceException.html">FileDataSourceException</a> in FileDataSource.php</div>
+							<div class="index-item-description">The Exception base class for FileDataSourceException.</div>
+					</dd>
+			<dt class="field">
 						<img src="media/images/Class.png" alt="Class" title="Class" />
 			FileException
 					</dt>
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="File/FileExceptions/FileException.html">FileException</a> in File.php</div>
 							<div class="index-item-description">The Exception base class for FileExceptions.</div>
-					</dd>
-			<dt class="field">
-						<img src="media/images/AbstractClass.png" alt="Class" title="Class" />
-			FileFactory
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="File/FileFactory.html">FileFactory</a> in FileFactory.php</div>
-							<div class="index-item-description">This factory is used to get files.</div>
-					</dd>
-			<dt class="field">
-						<img src="media/images/Page.png" alt="Page" title="Page" />
-			<span class="include-title">FileFactory.php</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="File/_FileFactory---FileFactory.php.html">FileFactory.php</a> in FileFactory.php</div>
-					</dd>
-			<dt class="field">
-						<img src="media/images/Class.png" alt="Class" title="Class" />
-			FileFactoryException
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="File/FileExceptions/FileFactoryException.html">FileFactoryException</a> in FileFactory.php</div>
-							<div class="index-item-description">The Exception base class for FileFactoryExceptions.</div>
 					</dd>
 			<dt class="field">
 						<img src="media/images/Class.png" alt="Class" title="Class" />
@@ -1536,20 +1545,20 @@
 							<div class="index-item-description">This method takes the $sort attribute and returns a typical 'order by ' SQL string.</div>
 					</dd>
 			<dt class="field">
-						<img src="media/images/AbstractMethod.png" alt="Method" title="Method" />
-			<span class="method-title">generateSortString</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Dao/Dao.html#methodgenerateSortString">Dao::generateSortString()</a> in Dao.php</div>
-							<div class="index-item-description">Given the $sort parameter, it generates a sort String used in the query.</div>
-					</dd>
-			<dt class="field">
 						<img src="media/images/Method.png" alt="Method" title="Method" />
 			<span class="method-title">generateSortString</span>
 					</dt>
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Dao/FileDao.html#methodgenerateSortString">FileDao::generateSortString()</a> in FileDao.php</div>
 							<div class="index-item-description">This method takes the $sort attribute and returns a typical 'order by ' SQL string.</div>
+					</dd>
+			<dt class="field">
+						<img src="media/images/AbstractMethod.png" alt="Method" title="Method" />
+			<span class="method-title">generateSortString</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Dao/Dao.html#methodgenerateSortString">Dao::generateSortString()</a> in Dao.php</div>
+							<div class="index-item-description">Given the $sort parameter, it generates a sort String used in the query.</div>
 					</dd>
 			<dt class="field">
 						<img src="media/images/Method.png" alt="Method" title="Method" />
@@ -1563,15 +1572,15 @@
 			<span class="method-title">generateVariableString</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="php-library/SignedFileRetriever.html#methodgenerateVariableString">SignedFileRetriever::generateVariableString()</a> in SignedFileRetriever.php</div>
-							<div class="index-item-description">This function signs the data.</div>
+			<div class="index-item-details"><a href="php-library/FileRetriever.html#methodgenerateVariableString">FileRetriever::generateVariableString()</a> in FileRetriever.php</div>
 					</dd>
 			<dt class="field">
 						<img src="media/images/Method.png" alt="Method" title="Method" />
 			<span class="method-title">generateVariableString</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="php-library/FileRetriever.html#methodgenerateVariableString">FileRetriever::generateVariableString()</a> in FileRetriever.php</div>
+			<div class="index-item-details"><a href="php-library/SignedFileRetriever.html#methodgenerateVariableString">SignedFileRetriever::generateVariableString()</a> in SignedFileRetriever.php</div>
+							<div class="index-item-description">This function signs the data.</div>
 					</dd>
 			<dt class="field">
 						<img src="media/images/Method.png" alt="Method" title="Method" />
@@ -1579,38 +1588,6 @@
 					</dt>
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Dao/DaoInterface.html#methodget">DaoInterface::get()</a> in DaoInterface.php</div>
-							<div class="index-item-description">This is the method to get a DataObject from the database.</div>
-					</dd>
-			<dt class="field">
-						<img src="media/images/AbstractMethod.png" alt="Method" title="Method" />
-			<span class="method-title">get</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Config/Config.html#methodget">Config::get()</a> in Config.php</div>
-							<div class="index-item-description">Get a configuration value.</div>
-					</dd>
-			<dt class="field">
-						<img src="media/images/Method.png" alt="Method" title="Method" />
-			<span class="method-title">get</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Dao/DataObject/DataObjectInterface.html#methodget">DataObjectInterface::get()</a> in DataObjectInterface.php</div>
-							<div class="index-item-description">Returns the value of a column</div>
-					</dd>
-			<dt class="field">
-						<img src="media/images/Method.png" alt="Method" title="Method" />
-			<span class="method-title">get</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Config/IniFileConfig.html#methodget">IniFileConfig::get()</a> in IniFileConfig.php</div>
-							<div class="index-item-description">Just returns the appropriate indices.</div>
-					</dd>
-			<dt class="field">
-						<img src="media/images/Method.png" alt="Method" title="Method" />
-			<span class="method-title">get</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Dao/SqlDao.html#methodget">SqlDao::get()</a> in SqlDao.php</div>
 							<div class="index-item-description">This is the method to get a DataObject from the database.</div>
 					</dd>
 			<dt class="field">
@@ -1634,16 +1611,32 @@
 			<span class="method-title">get</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="File/FileFactory.html#methodget">FileFactory::get()</a> in FileFactory.php</div>
-							<div class="index-item-description">This is the way to get a file from the factory.</div>
+			<div class="index-item-details"><a href="Config/IniFileConfig.html#methodget">IniFileConfig::get()</a> in IniFileConfig.php</div>
+							<div class="index-item-description">Just returns the appropriate indices.</div>
+					</dd>
+			<dt class="field">
+						<img src="media/images/AbstractMethod.png" alt="Method" title="Method" />
+			<span class="method-title">get</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Config/Config.html#methodget">Config::get()</a> in Config.php</div>
+							<div class="index-item-description">Get a configuration value.</div>
 					</dd>
 			<dt class="field">
 						<img src="media/images/Method.png" alt="Method" title="Method" />
-			<span class="method-title">getAdditionalColumnTypes</span>
+			<span class="method-title">get</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Dao/Dao.html#methodgetAdditionalColumnTypes">Dao::getAdditionalColumnTypes()</a> in Dao.php</div>
-							<div class="index-item-description">Returns the additional column types array</div>
+			<div class="index-item-details"><a href="Dao/SqlDao.html#methodget">SqlDao::get()</a> in SqlDao.php</div>
+							<div class="index-item-description">This is the method to get a DataObject from the database.</div>
+					</dd>
+			<dt class="field">
+						<img src="media/images/Method.png" alt="Method" title="Method" />
+			<span class="method-title">get</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Dao/DataObject/DataObjectInterface.html#methodget">DataObjectInterface::get()</a> in DataObjectInterface.php</div>
+							<div class="index-item-description">Returns the value of a column</div>
 					</dd>
 			<dt class="field">
 						<img src="media/images/Method.png" alt="Method" title="Method" />
@@ -1652,6 +1645,14 @@
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Dao/DaoInterface.html#methodgetAdditionalColumnTypes">DaoInterface::getAdditionalColumnTypes()</a> in DaoInterface.php</div>
 							<div class="index-item-description">Returns all the additional column types.</div>
+					</dd>
+			<dt class="field">
+						<img src="media/images/Method.png" alt="Method" title="Method" />
+			<span class="method-title">getAdditionalColumnTypes</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Dao/Dao.html#methodgetAdditionalColumnTypes">Dao::getAdditionalColumnTypes()</a> in Dao.php</div>
+							<div class="index-item-description">Returns the additional column types array</div>
 					</dd>
 			<dt class="field">
 						<img src="media/images/Method.png" alt="Method" title="Method" />
@@ -1677,19 +1678,19 @@
 			<div class="index-item-details"><a href="Dao/Dao.html#methodgetAllAsArrays">Dao::getAllAsArrays()</a> in Dao.php</div>
 					</dd>
 			<dt class="field">
-						<img src="media/images/Method.png" alt="Method" title="Method" />
-			<span class="method-title">getArray</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Config/IniFileConfig.html#methodgetArray">IniFileConfig::getArray()</a> in IniFileConfig.php</div>
-					</dd>
-			<dt class="field">
 						<img src="media/images/AbstractMethod.png" alt="Method" title="Method" />
 			<span class="method-title">getArray</span>
 					</dt>
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Config/Config.html#methodgetArray">Config::getArray()</a> in Config.php</div>
 							<div class="index-item-description">This gets all variables and returns an associative array with the sections and variables.</div>
+					</dd>
+			<dt class="field">
+						<img src="media/images/Method.png" alt="Method" title="Method" />
+			<span class="method-title">getArray</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Config/IniFileConfig.html#methodgetArray">IniFileConfig::getArray()</a> in IniFileConfig.php</div>
 					</dd>
 			<dt class="field">
 						<img src="media/images/Method.png" alt="Method" title="Method" />
@@ -1704,22 +1705,22 @@
 			<span class="method-title">getById</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Dao/DaoInterface.html#methodgetById">DaoInterface::getById()</a> in DaoInterface.php</div>
+			<div class="index-item-details"><a href="Dao/Dao.html#methodgetById">Dao::getById()</a> in Dao.php</div>
+							<div class="index-item-description">This is a wrapper for get() and the id as parameter.</div>
 					</dd>
 			<dt class="field">
 						<img src="media/images/Method.png" alt="Method" title="Method" />
 			<span class="method-title">getById</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Dao/Dao.html#methodgetById">Dao::getById()</a> in Dao.php</div>
-							<div class="index-item-description">This is a wrapper for get() and the id as parameter.</div>
+			<div class="index-item-details"><a href="Dao/DaoInterface.html#methodgetById">DaoInterface::getById()</a> in DaoInterface.php</div>
 					</dd>
 			<dt class="field">
 						<img src="media/images/Method.png" alt="Method" title="Method" />
 			<span class="method-title">getByUsername</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Dao/PostgresqlUserDao.html#methodgetByUsername">PostgresqlUserDao::getByUsername()</a> in PostgresqlUserDao.php</div>
+			<div class="index-item-details"><a href="Dao/MysqlUserDao.html#methodgetByUsername">MysqlUserDao::getByUsername()</a> in MysqlUserDao.php</div>
 							<div class="index-item-description">Returns the user by username</div>
 					</dd>
 			<dt class="field">
@@ -1735,7 +1736,7 @@
 			<span class="method-title">getByUsername</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Dao/MysqlUserDao.html#methodgetByUsername">MysqlUserDao::getByUsername()</a> in MysqlUserDao.php</div>
+			<div class="index-item-details"><a href="Dao/PostgresqlUserDao.html#methodgetByUsername">PostgresqlUserDao::getByUsername()</a> in PostgresqlUserDao.php</div>
 							<div class="index-item-description">Returns the user by username</div>
 					</dd>
 			<dt class="field">
@@ -1791,7 +1792,7 @@
 			<span class="method-title">getData</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Dao/FileDao.html#methodgetData">FileDao::getData()</a> in FileDao.php</div>
+			<div class="index-item-details"><a href="Dao/SqlDao.html#methodgetData">SqlDao::getData()</a> in SqlDao.php</div>
 							<div class="index-item-description">Same as get() but returns an array with the data instead of an object</div>
 					</dd>
 			<dt class="field">
@@ -1799,7 +1800,7 @@
 			<span class="method-title">getData</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Dao/SqlDao.html#methodgetData">SqlDao::getData()</a> in SqlDao.php</div>
+			<div class="index-item-details"><a href="Dao/FileDao.html#methodgetData">FileDao::getData()</a> in FileDao.php</div>
 							<div class="index-item-description">Same as get() but returns an array with the data instead of an object</div>
 					</dd>
 			<dt class="field">
@@ -1837,7 +1838,7 @@
 			<span class="method-title">getFile</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="File/ImageFileFactory.html#methodgetFile">ImageFileFactory::getFile()</a> in ImageFileFactory.php</div>
+			<div class="index-item-details"><a href="php-library/FileRetriever.html#methodgetFile">FileRetriever::getFile()</a> in FileRetriever.php</div>
 					</dd>
 			<dt class="field">
 						<img src="media/images/Method.png" alt="Method" title="Method" />
@@ -1848,50 +1849,11 @@
 					</dd>
 			<dt class="field">
 						<img src="media/images/Method.png" alt="Method" title="Method" />
-			<span class="method-title">getFile</span>
+			<span class="method-title">getFileDataSource</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="File/FileFactory.html#methodgetFile">FileFactory::getFile()</a> in FileFactory.php</div>
-							<div class="index-item-description">This function returns a file.</div>
-					</dd>
-			<dt class="field">
-						<img src="media/images/Method.png" alt="Method" title="Method" />
-			<span class="method-title">getFile</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="php-library/FileRetriever.html#methodgetFile">FileRetriever::getFile()</a> in FileRetriever.php</div>
-					</dd>
-			<dt class="field">
-						<img src="media/images/Method.png" alt="Method" title="Method" />
-			<span class="method-title">getFileFactory</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Dao/FileDao.html#methodgetFileFactory">FileDao::getFileFactory()</a> in FileDao.php</div>
-							<div class="index-item-description">Returns the fileFactory.</div>
-					</dd>
-			<dt class="field">
-						<img src="media/images/Method.png" alt="Method" title="Method" />
-			<span class="method-title">getFromFormUpload</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="File/FileFactory.html#methodgetFromFormUpload">FileFactory::getFromFormUpload()</a> in FileFactory.php</div>
-							<div class="index-item-description">This static function is the way to get a file from a form upload.</div>
-					</dd>
-			<dt class="field">
-						<img src="media/images/Method.png" alt="Method" title="Method" />
-			<span class="method-title">getFromHTTP</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="File/FileFactory.html#methodgetFromHTTP">FileFactory::getFromHTTP()</a> in FileFactory.php</div>
-							<div class="index-item-description">This static function is the way to get a file from a http source.</div>
-					</dd>
-			<dt class="field">
-						<img src="media/images/Method.png" alt="Method" title="Method" />
-			<span class="method-title">getFromLocalFile</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="File/FileFactory.html#methodgetFromLocalFile">FileFactory::getFromLocalFile()</a> in FileFactory.php</div>
-							<div class="index-item-description">This static function is the way to get a file from a local file.</div>
+			<div class="index-item-details"><a href="Dao/FileDao.html#methodgetFileDataSource">FileDao::getFileDataSource()</a> in FileDao.php</div>
+							<div class="index-item-description">Returns the fileDataSource.</div>
 					</dd>
 			<dt class="field">
 						<img src="media/images/Method.png" alt="Method" title="Method" />
@@ -1900,14 +1862,6 @@
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Dao/SqlDao.html#methodgetFromQuery">SqlDao::getFromQuery()</a> in SqlDao.php</div>
 							<div class="index-item-description">Returns a DataObject or data array from a query.</div>
-					</dd>
-			<dt class="field">
-						<img src="media/images/Method.png" alt="Method" title="Method" />
-			<span class="method-title">getGuest</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Dao/MysqlUserDao.html#methodgetGuest">MysqlUserDao::getGuest()</a> in MysqlUserDao.php</div>
-							<div class="index-item-description">Returns a raw object with 'guest' as username</div>
 					</dd>
 			<dt class="field">
 						<img src="media/images/Method.png" alt="Method" title="Method" />
@@ -1924,6 +1878,14 @@
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Dao/UserDaoInterface.html#methodgetGuest">UserDaoInterface::getGuest()</a> in UserDaoInterface.php</div>
 							<div class="index-item-description">Get a raw object with username 'guest'</div>
+					</dd>
+			<dt class="field">
+						<img src="media/images/Method.png" alt="Method" title="Method" />
+			<span class="method-title">getGuest</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Dao/MysqlUserDao.html#methodgetGuest">MysqlUserDao::getGuest()</a> in MysqlUserDao.php</div>
+							<div class="index-item-description">Returns a raw object with 'guest' as username</div>
 					</dd>
 			<dt class="field">
 						<img src="media/images/Method.png" alt="Method" title="Method" />
@@ -1945,7 +1907,7 @@
 			<span class="method-title">getIterator</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Dao/SqlDao.html#methodgetIterator">SqlDao::getIterator()</a> in SqlDao.php</div>
+			<div class="index-item-details"><a href="Dao/FileDao.html#methodgetIterator">FileDao::getIterator()</a> in FileDao.php</div>
 							<div class="index-item-description">The same as get, but returns an iterator to go through all the rows.</div>
 					</dd>
 			<dt class="field">
@@ -1961,7 +1923,7 @@
 			<span class="method-title">getIterator</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Dao/FileDao.html#methodgetIterator">FileDao::getIterator()</a> in FileDao.php</div>
+			<div class="index-item-details"><a href="Dao/SqlDao.html#methodgetIterator">SqlDao::getIterator()</a> in SqlDao.php</div>
 							<div class="index-item-description">The same as get, but returns an iterator to go through all the rows.</div>
 					</dd>
 			<dt class="field">
@@ -2000,16 +1962,16 @@
 			<span class="method-title">getLogger</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="php-library/LoggerFactory.html#methodgetLogger">LoggerFactory::getLogger()</a> in LoggerFactory.php</div>
-							<div class="index-item-description">Get a logger with the</div>
+			<div class="index-item-details"><a href="php-library/LoggerFactoryInterface.html#methodgetLogger">LoggerFactoryInterface::getLogger()</a> in LoggerFactoryInterface.php</div>
+							<div class="index-item-description">Returns a logger</div>
 					</dd>
 			<dt class="field">
 						<img src="media/images/Method.png" alt="Method" title="Method" />
 			<span class="method-title">getLogger</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="php-library/LoggerFactoryInterface.html#methodgetLogger">LoggerFactoryInterface::getLogger()</a> in LoggerFactoryInterface.php</div>
-							<div class="index-item-description">Returns a logger</div>
+			<div class="index-item-details"><a href="php-library/LoggerFactory.html#methodgetLogger">LoggerFactory::getLogger()</a> in LoggerFactory.php</div>
+							<div class="index-item-description">Get a logger with the</div>
 					</dd>
 			<dt class="field">
 						<img src="media/images/Method.png" alt="Method" title="Method" />
@@ -2048,16 +2010,16 @@
 			<span class="method-title">getObjectFromData</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Dao/Dao.html#methodgetObjectFromData">Dao::getObjectFromData()</a> in Dao.php</div>
-							<div class="index-item-description">Prepares the data, and gets a new object.</div>
+			<div class="index-item-details"><a href="Dao/DaoInterface.html#methodgetObjectFromData">DaoInterface::getObjectFromData()</a> in DaoInterface.php</div>
+							<div class="index-item-description">Returns an object filled with an array of database values.</div>
 					</dd>
 			<dt class="field">
 						<img src="media/images/Method.png" alt="Method" title="Method" />
 			<span class="method-title">getObjectFromData</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Dao/DaoInterface.html#methodgetObjectFromData">DaoInterface::getObjectFromData()</a> in DaoInterface.php</div>
-							<div class="index-item-description">Returns an object filled with an array of database values.</div>
+			<div class="index-item-details"><a href="Dao/Dao.html#methodgetObjectFromData">Dao::getObjectFromData()</a> in Dao.php</div>
+							<div class="index-item-description">Prepares the data, and gets a new object.</div>
 					</dd>
 			<dt class="field">
 						<img src="media/images/Method.png" alt="Method" title="Method" />
@@ -2096,22 +2058,15 @@
 			<span class="method-title">getResource</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Database/Database.html#methodgetResource">Database::getResource()</a> in Database.php</div>
+			<div class="index-item-details"><a href="Database/DatabaseInterface.html#methodgetResource">DatabaseInterface::getResource()</a> in DatabaseInterface.php</div>
+							<div class="index-item-description">Returns the database resource</div>
 					</dd>
 			<dt class="field">
 						<img src="media/images/Method.png" alt="Method" title="Method" />
 			<span class="method-title">getResource</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Database/DatabaseInterface.html#methodgetResource">DatabaseInterface::getResource()</a> in DatabaseInterface.php</div>
-							<div class="index-item-description">Returns the database resource</div>
-					</dd>
-			<dt class="field">
-						<img src="media/images/Method.png" alt="Method" title="Method" />
-			<span class="method-title">getResult</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Database/DatabaseResult/DatabaseResult.html#methodgetResult">DatabaseResult::getResult()</a> in DatabaseResult.php</div>
+			<div class="index-item-details"><a href="Database/Database.html#methodgetResource">Database::getResource()</a> in Database.php</div>
 					</dd>
 			<dt class="field">
 						<img src="media/images/Method.png" alt="Method" title="Method" />
@@ -2120,6 +2075,13 @@
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Database/DatabaseResult/DatabaseResultInterface.html#methodgetResult">DatabaseResultInterface::getResult()</a> in DatabaseResultInterface.php</div>
 							<div class="index-item-description">Returns the result stored from the actual php command.</div>
+					</dd>
+			<dt class="field">
+						<img src="media/images/Method.png" alt="Method" title="Method" />
+			<span class="method-title">getResult</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Database/DatabaseResult/DatabaseResult.html#methodgetResult">DatabaseResult::getResult()</a> in DatabaseResult.php</div>
 					</dd>
 			<dt class="field">
 						<img src="media/images/Method.png" alt="Method" title="Method" />
@@ -2265,13 +2227,6 @@
 			<div class="index-item-details"><a href="File/_File---ImageFile.php.html">ImageFile.php</a> in ImageFile.php</div>
 					</dd>
 			<dt class="field">
-						<img src="media/images/Page.png" alt="Page" title="Page" />
-			<span class="include-title">ImageFileFactory.php</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="File/_FileFactory---ImageFileFactory.php.html">ImageFileFactory.php</a> in ImageFileFactory.php</div>
-					</dd>
-			<dt class="field">
 						<img src="media/images/Class Constant.png" alt="Class Constant" title="Class Constant" />
 			IGNORE
 					</dt>
@@ -2294,22 +2249,6 @@
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="File/FileExceptions/ImageFileException.html">ImageFileException</a> in ImageFile.php</div>
 							<div class="index-item-description">The Exception base class for ImageFileException.</div>
-					</dd>
-			<dt class="field">
-						<img src="media/images/AbstractClass.png" alt="Class" title="Class" />
-			ImageFileFactory
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="File/ImageFileFactory.html">ImageFileFactory</a> in ImageFileFactory.php</div>
-							<div class="index-item-description">This factory is used to get image files.</div>
-					</dd>
-			<dt class="field">
-						<img src="media/images/Class.png" alt="Class" title="Class" />
-			ImageFileFactoryException
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="File/FileExceptions/ImageFileFactoryException.html">ImageFileFactoryException</a> in ImageFileFactory.php</div>
-							<div class="index-item-description">The Exception base class for ImageFileFactoryException.</div>
 					</dd>
 			<dt class="field">
 						<img src="media/images/Method.png" alt="Method" title="Method" />
@@ -2384,20 +2323,12 @@
 							<div class="index-item-description">This is the IniFileConfig implementation of Config  It's written to parse default php.ini files to set the config.</div>
 					</dd>
 			<dt class="field">
-						<img src="media/images/AbstractMethod.png" alt="Method" title="Method" />
-			<span class="method-title">insert</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="File/DaoFileFactory.html#methodinsert">DaoFileFactory::insert()</a> in DaoFileFactory.php</div>
-							<div class="index-item-description">Inserts the object, and returns the id.</div>
-					</dd>
-			<dt class="field">
 						<img src="media/images/Method.png" alt="Method" title="Method" />
 			<span class="method-title">insert</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Dao/DaoInterface.html#methodinsert">DaoInterface::insert()</a> in DaoInterface.php</div>
-							<div class="index-item-description">Takes a DataObject and inserts it in the database.</div>
+			<div class="index-item-details"><a href="php-library/DatabaseFileRetriever.html#methodinsert">DatabaseFileRetriever::insert()</a> in DatabaseFileRetriever.php</div>
+							<div class="index-item-description">See select()</div>
 					</dd>
 			<dt class="field">
 						<img src="media/images/Method.png" alt="Method" title="Method" />
@@ -2416,12 +2347,20 @@
 							<div class="index-item-description">Inserts an object in the database, and updates the object with the new data (in  case some default values of the database have been set.)</div>
 					</dd>
 			<dt class="field">
+						<img src="media/images/AbstractMethod.png" alt="Method" title="Method" />
+			<span class="method-title">insert</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="File/FileDataSource.html#methodinsert">FileDataSource::insert()</a> in FileDataSource.php</div>
+							<div class="index-item-description">Inserts the object, and returns the id.</div>
+					</dd>
+			<dt class="field">
 						<img src="media/images/Method.png" alt="Method" title="Method" />
 			<span class="method-title">insert</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="php-library/DatabaseFileRetriever.html#methodinsert">DatabaseFileRetriever::insert()</a> in DatabaseFileRetriever.php</div>
-							<div class="index-item-description">See select()</div>
+			<div class="index-item-details"><a href="Dao/DaoInterface.html#methodinsert">DaoInterface::insert()</a> in DaoInterface.php</div>
+							<div class="index-item-description">Takes a DataObject and inserts it in the database.</div>
 					</dd>
 			<dt class="field">
 						<img src="media/images/Method.png" alt="Method" title="Method" />
@@ -3017,18 +2956,18 @@
 					</dd>
 			<dt class="field">
 						<img src="media/images/Method.png" alt="Method" title="Method" />
-			<span class="method-title">processFile</span>
+			<span class="method-title">process</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="File/FileFactory.html#methodprocessFile">FileFactory::processFile()</a> in FileFactory.php</div>
-							<div class="index-item-description">After a file gets created with the factory, the method creating it calls  processFile($file), so the file can be processed before it's returned.</div>
+			<div class="index-item-details"><a href="File/File.html#methodprocess">File::process()</a> in File.php</div>
+							<div class="index-item-description">After a file gets created, the method creating it calls  process($file), so the file can be processed before it's returned.</div>
 					</dd>
 			<dt class="field">
 						<img src="media/images/Method.png" alt="Method" title="Method" />
-			<span class="method-title">processFile</span>
+			<span class="method-title">process</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="File/ImageFileFactory.html#methodprocessFile">ImageFileFactory::processFile()</a> in ImageFileFactory.php</div>
+			<div class="index-item-details"><a href="File/ImageFile.html#methodprocess">ImageFile::process()</a> in ImageFile.php</div>
 					</dd>
 		</dl>
 	<a name="q"></a>
@@ -3127,16 +3066,24 @@
 			<span class="method-title">rewind</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Dao/JsonResultIterator.html#methodrewind">JsonResultIterator::rewind()</a> in JsonResultIterator.php</div>
-							<div class="index-item-description">Sets the pointer to entry 1.</div>
+			<div class="index-item-details"><a href="Dao/SqlResultIterator.html#methodrewind">SqlResultIterator::rewind()</a> in SqlResultIterator.php</div>
+							<div class="index-item-description">Sets the pointer to row 1.</div>
 					</dd>
 			<dt class="field">
 						<img src="media/images/Method.png" alt="Method" title="Method" />
 			<span class="method-title">rewind</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Dao/SqlResultIterator.html#methodrewind">SqlResultIterator::rewind()</a> in SqlResultIterator.php</div>
-							<div class="index-item-description">Sets the pointer to row 1.</div>
+			<div class="index-item-details"><a href="Dao/JsonResultIterator.html#methodrewind">JsonResultIterator::rewind()</a> in JsonResultIterator.php</div>
+							<div class="index-item-description">Sets the pointer to entry 1.</div>
+					</dd>
+			<dt class="field">
+						<img src="media/images/Method.png" alt="Method" title="Method" />
+			<span class="method-title">rollback</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Dao/DaoInterface.html#methodrollback">DaoInterface::rollback()</a> in DaoInterface.php</div>
+							<div class="index-item-description">Rolls back a transaction</div>
 					</dd>
 			<dt class="field">
 						<img src="media/images/Method.png" alt="Method" title="Method" />
@@ -3151,14 +3098,6 @@
 			<span class="method-title">rollback</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Database/Mysql.html#methodrollback">Mysql::rollback()</a> in Mysql.php</div>
-							<div class="index-item-description">Rolls back a transaction</div>
-					</dd>
-			<dt class="field">
-						<img src="media/images/Method.png" alt="Method" title="Method" />
-			<span class="method-title">rollback</span>
-					</dt>
-		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Dao/FileDao.html#methodrollback">FileDao::rollback()</a> in FileDao.php</div>
 							<div class="index-item-description">Overwrite this if your file connection allows transaction.</div>
 					</dd>
@@ -3167,7 +3106,7 @@
 			<span class="method-title">rollback</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Dao/DaoInterface.html#methodrollback">DaoInterface::rollback()</a> in DaoInterface.php</div>
+			<div class="index-item-details"><a href="Database/Mysql.html#methodrollback">Mysql::rollback()</a> in Mysql.php</div>
 							<div class="index-item-description">Rolls back a transaction</div>
 					</dd>
 		</dl>
@@ -3829,7 +3768,7 @@
 			<span class="method-title">update</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="File/DaoFileFactory.html#methodupdate">DaoFileFactory::update()</a> in DaoFileFactory.php</div>
+			<div class="index-item-details"><a href="File/FileDataSource.html#methodupdate">FileDataSource::update()</a> in FileDataSource.php</div>
 							<div class="index-item-description">Updates the object.</div>
 					</dd>
 			<dt class="field">
@@ -3845,16 +3784,16 @@
 			<span class="method-title">update</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Dao/DaoInterface.html#methodupdate">DaoInterface::update()</a> in DaoInterface.php</div>
-							<div class="index-item-description">Takes a DataObject and updates it in the database.</div>
+			<div class="index-item-details"><a href="php-library/DatabaseFileRetriever.html#methodupdate">DatabaseFileRetriever::update()</a> in DatabaseFileRetriever.php</div>
+							<div class="index-item-description">See select()</div>
 					</dd>
 			<dt class="field">
 						<img src="media/images/Method.png" alt="Method" title="Method" />
 			<span class="method-title">update</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="php-library/DatabaseFileRetriever.html#methodupdate">DatabaseFileRetriever::update()</a> in DatabaseFileRetriever.php</div>
-							<div class="index-item-description">See select()</div>
+			<div class="index-item-details"><a href="Dao/DaoInterface.html#methodupdate">DaoInterface::update()</a> in DaoInterface.php</div>
+							<div class="index-item-description">Takes a DataObject and updates it in the database.</div>
 					</dd>
 			<dt class="field">
 						<img src="media/images/Method.png" alt="Method" title="Method" />
@@ -3923,7 +3862,7 @@
 			<span class="method-title">view</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="File/DaoFileFactory.html#methodview">DaoFileFactory::view()</a> in DaoFileFactory.php</div>
+			<div class="index-item-details"><a href="File/FileDataSource.html#methodview">FileDataSource::view()</a> in FileDataSource.php</div>
 							<div class="index-item-description">Returns ONE object.</div>
 					</dd>
 			<dt class="field">
@@ -3931,7 +3870,7 @@
 			<span class="method-title">viewList</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="File/DaoFileFactory.html#methodviewList">DaoFileFactory::viewList()</a> in DaoFileFactory.php</div>
+			<div class="index-item-details"><a href="File/FileDataSource.html#methodviewList">FileDataSource::viewList()</a> in FileDataSource.php</div>
 							<div class="index-item-description">Returns all objects found.</div>
 					</dd>
 		</dl>
@@ -4099,6 +4038,7 @@
 					</dt>
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="File/ImageFile.html#method__destruct">ImageFile::__destruct()</a> in ImageFile.php</div>
+							<div class="index-item-description">Destroys the image if it has been created</div>
 					</dd>
 			<dt class="field">
 						<img src="media/images/Method.png" alt="Method" title="Method" />

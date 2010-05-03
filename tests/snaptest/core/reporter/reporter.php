@@ -195,6 +195,8 @@ class Snap_UnitTestReporter {
         
         return $output;
     }
+    
+    public function announceWillError() {}
 
 }
 

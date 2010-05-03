@@ -18,6 +18,7 @@ if (!defined('SNAPTEST_ROOT')) {
     
     define('SNAPTEST_TOKEN_START', '===START===');
     define('SNAPTEST_TOKEN_END', '===END===');
+    define('SNAPTEST_FATAL_ALLOWED', '===FATAL_ALLOWED===');
     define('SNAP_MANGLE_STRING', '__D_O_T__');
     define('SNAP_STREAM_ENDING_TOKEN', '===SNAPSTREAM_END===');
     

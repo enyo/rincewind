@@ -88,12 +88,12 @@
 			return $this->assertIdentical($this->dataObject->enum, 'c');
 		}
 		public function testSettingWrongEnum() {
-			$this->willError();
+			$this->willWarn();
 			$this->dataObject->enum = 'd';
 			return $this->assertIdentical($this->dataObject->enum, 'a'); // Gets reset to the default value since null is not allowed
 		}
 		public function testSettingEmptyEnum() {
-			$this->willError();
+			$this->willWarn();
 			$this->dataObject->enum = '';
 			return $this->assertIdentical($this->dataObject->enum, 'a'); // Gets reset to the default value since null is not allowed
 		}
@@ -213,7 +213,7 @@
 		}
 
 		public function testSettingAdditionalValueFailsButChains() {
-			$this->willError();
+			$this->willWarn();
 			return $this->assertEqual($this->dataObject->set('additionalColumnString', 'test'), $this->dataObject);
 		}
 

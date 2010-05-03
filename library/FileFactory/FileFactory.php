@@ -22,7 +22,7 @@ if (!class_exists('File')) require('File/File.php');
  * @package File
  * @subpackage FileExceptions
  */
-abstract class FileFactoryException extends FileException { };
+class FileFactoryException extends FileException { };
 
 
 /**
@@ -44,7 +44,7 @@ abstract class FileFactoryException extends FileException { };
  * @copyright Copyright (c) 2010, Matthias Loitsch
  * @package File
  */
-class FileFactory {
+abstract class FileFactory {
 
 	/**
 	 * This function returns a file.

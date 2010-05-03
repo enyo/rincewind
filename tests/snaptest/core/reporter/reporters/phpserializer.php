@@ -21,6 +21,10 @@ class Snap_PHPSerializer_UnitTestReporter extends Snap_UnitTestReporter implemen
     
     public function announceTestCaseComplete($report) {}
     
+    public function announceWillError() {
+        echo SNAPTEST_FATAL_ALLOWED;
+    }
+    
     public function generateReport($reports) {
         echo SNAPTEST_TOKEN_START . serialize($reports) . SNAPTEST_TOKEN_END;
     }

@@ -42,11 +42,12 @@ class JsonDao_FileFactory_Test extends Snap_UnitTestCase {
 			->setReturnValue('insert', 4)
 			->setReturnValue('view', '{"id":4,"integer":5,"string":"STRING TO TEST","timestamp":23423423,"float":23.23,"null_value":null,"default_value":1234}')
 			->setReturnValue('viewList', '[{"id":4,"integer":5,"string":"bla","timestamp":23423423,"float":23.23,"null_value":null,"default_value":1234},{"id":5,"integer":5,"string":"bla","timestamp":23423423,"float":23.23,"null_value":null,"default_value":1234}]')
-			->listenTo('insert')
-			->listenTo('update')
+			->listenTo('insert', array(new Snap_Equals_Expectation('dao_test_table')))
+			->listenTo('update', array(new Snap_Equals_Expectation('dao_test_table')))
 			->listenTo('delete', array(new Snap_Equals_Expectation('dao_test_table'), new Snap_Equals_Expectation(4)))
-			->listenTo('viewList')
-			->listenTo('view', array(new Snap_Equals_Expectation('dao_test_table')))
+			->listenTo('viewList', array(new Snap_Equals_Expectation('dao_test_table'), new Snap_Equals_Expectation(array('integer'=>132456))))
+			->listenTo('view', array(new Snap_Equals_Expectation('dao_test_table'), new Snap_Equals_Expectation(array('id'=>4))))
+			->listenTo('view', array(new Snap_Equals_Expectation('dao_test_table'), new Snap_Equals_Expectation(array('string'=>'TEST', 'integer'=>17))))
 			->construct();
 		$this->dao = new JsonTestDao($this->fileFactory);
 	}
@@ -57,12 +58,17 @@ class JsonDao_FileFactory_Test extends Snap_UnitTestCase {
 
 	public function testViewCount() {
 		$this->dao->getById(4);
-		return $this->assertCallCount($this->fileFactory, 'view', 1, array(new Snap_Equals_Expectation('dao_test_table')));
+		return $this->assertCallCount($this->fileFactory, 'view', 1, array(new Snap_Equals_Expectation('dao_test_table'), new Snap_Equals_Expectation(array('id'=>4))));
+	}
+
+	public function testViewStringAndIntegerCount() {
+		$this->dao->get(array('string'=>'TEST', 'integer'=>17));
+		return $this->assertCallCount($this->fileFactory, 'view', 1, array(new Snap_Equals_Expectation('dao_test_table'), new Snap_Equals_Expectation(array('string'=>'TEST', 'integer'=>17))));
 	}
 
 	public function testViewListCount() {
 		$this->dao->getIterator(array('integer'=>132456));
-		return $this->assertCallCount($this->fileFactory, 'viewList', 1);
+		return $this->assertCallCount($this->fileFactory, 'viewList', 1, array(new Snap_Equals_Expectation('dao_test_table'), new Snap_Equals_Expectation(array('integer'=>132456))));
 	}
 
 	public function testDeleteCount() {
@@ -73,13 +79,13 @@ class JsonDao_FileFactory_Test extends Snap_UnitTestCase {
 	public function testUpdateCount() {
 		$object = $this->dao->getById(4);
 		$object->set('string', 'Name')->save();
-		return $this->assertCallCount($this->fileFactory, 'update', 1);
+		return $this->assertCallCount($this->fileFactory, 'update', 1, array(new Snap_Equals_Expectation('dao_test_table')));
 	}
 
 	public function testInsertCount() {
 		$object = $this->dao->getById(4);
 		$object->set('string', 'Name')->save();
-		return $this->assertCallCount($this->fileFactory, 'update', 1);
+		return $this->assertCallCount($this->fileFactory, 'update', 1, array(new Snap_Equals_Expectation('dao_test_table')));
 	}
 
 	public function testIteratorLengthCount() {

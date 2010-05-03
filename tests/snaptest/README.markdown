@@ -1,18 +1,17 @@
 README - SnapTest
 =================
 
-Core Branch:
-[http://github.com/Jakobo/snaptest/tree/master](http://github.com/Jakobo/snaptest/tree/master)
+Core Branch: [http://github.com/Jakobo/snaptest/tree/master](http://github.com/Jakobo/snaptest/tree/master)
 
 Issues: [http://github.com/Jakobo/snaptest/issues](http://github.com/Jakobo/snaptest/issues)
+
+Wiki: [http://wiki.github.com/Jakobo/snaptest/](http://wiki.github.com/Jakobo/snaptest/)
 
 Introduction
 ------------
 SnapTest is a powerful unit testing framework for PHP 5+, leveraging PHP's unique runtime language to simplify the unit test process without sacrificing the agility tests provide.
 
-SnapTest is a free software project licensed under the Mozilla Public License.
-
-**NOTE** Starting with SnapTest 1.2.0, SnapTest will be licensed under the BSD License.
+SnapTest is a free software project licensed under the new BSD License.
 
 Getting Started
 ---------------
@@ -26,19 +25,19 @@ Place Snap wherever you want, and run a self test:
 When ran, you should see output like the following:
 
 <code><pre>
-User@Host ~/snaptest> ./snaptest.sh ./
-..............................................................................................................................
+user@host> ./snaptest.sh ./
+..................................................................................................................................
 ______________________________________________________________________
-Total Cases:    50
-Total Tests:    126
-Total Pass:     126
+Total Cases:    53
+Total Tests:    130
+Total Pass:     130
 Total Defects:  0
 Total Failures: 0
 Total Skips:    0
 Total Todo:     0
 </pre></code>
 
-Sanity Check: There are 50 Cases and 126 Tests
+Sanity Check: There are currently 53 Cases and 130 Tests
 
 If you don't get any failures (marked with an F followed by information about the error, you're ready to go!
 
@@ -46,6 +45,4 @@ From here, check out [http://wiki.github.com/Jakobo/snaptest/base-unit-test-clas
 
 License
 -------
-  * SnapTest < 1.2.0 is licensed under the Mozilla Public license (MPL)
-
   * SnapTest >= 1.2.0 is licensed under the new BSD License (please see LICENSE for full terms)

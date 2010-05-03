@@ -39,11 +39,11 @@ class DataObject_Int_Test extends Snap_UnitTestCase {
 		return $this->assertIdentical(DataObject::coerce(987654, Dao::INT, $allowNull = true), 987654);
 	}
 	public function testWrongIntNull() {
-		$this->willError();
+		$this->willWarn();
 		return $this->assertIdentical(DataObject::coerce("abcd", Dao::INT, $allowNull = true), null);
 	}
 	public function testWrongIntNotNull() {
-		$this->willError();
+		$this->willWarn();
 		return $this->assertIdentical(DataObject::coerce("abcd", Dao::INT, $allowNull = false), 0);
 	}
 }
@@ -64,11 +64,11 @@ class DataObject_Enum_Test extends Snap_UnitTestCase {
 		return $this->assertIdentical(DataObject::coerce('enum_b', array('enum_a', 'enum_b', 'enum_c'), $allowNull = true), 'enum_b');
 	}
 	public function testWrongEnumError() {
-		$this->willError();
+		$this->willWarn();
 		return $this->assertIdentical(DataObject::coerce('invalid enum', array('enum_a', 'enum_b', 'enum_c'), $allowNull = true), null);
 	}
 	public function testWrongEnumErrorNotNull() {
-		$this->willError();
+		$this->willWarn();
 		return $this->assertIdentical(DataObject::coerce('invalid enum', array('enum_a', 'enum_b', 'enum_c'), $allowNull = false), 'enum_a');
 	}
 }
@@ -113,11 +113,11 @@ class DataObject_Bool_Test extends Snap_UnitTestCase {
 
 
 	public function testWrongBoolNull() {
-		$this->willError();
+		$this->willWarn();
 		return $this->assertIdentical(DataObject::coerce("abcd", Dao::BOOL, $allowNull = true), null);
 	}
 	public function testWrongBoolNotNull() {
-		$this->willError();
+		$this->willWarn();
 		return $this->assertIdentical(DataObject::coerce("abcd", Dao::BOOL, $allowNull = false), true);
 	}
 }
@@ -139,11 +139,11 @@ class DataObject_Float_Test extends Snap_UnitTestCase {
 		return $this->assertIdentical(DataObject::coerce(8484.84, Dao::FLOAT, $allowNull = true), 8484.84);
 	}
 	public function testWrongNull() {
-		$this->willError();
+		$this->willWarn();
 		return $this->assertIdentical(DataObject::coerce("abcd", Dao::FLOAT, $allowNull = true), null);
 	}
 	public function testWrongNotNull() {
-		$this->willError();
+		$this->willWarn();
 		return $this->assertIdentical(DataObject::coerce("abcd", Dao::FLOAT, $allowNull = false), 0.0);
 	}
 }
@@ -166,11 +166,11 @@ class DataObject_Date_Test extends Snap_UnitTestCase {
 		return $this->assertIdentical(DataObject::coerce(123456, Dao::DATE, $allowNull = true), 123456);
 	}
 	public function testWrongNull() {
-		$this->willError();
+		$this->willWarn();
 		return $this->assertIdentical(DataObject::coerce("abcd", Dao::DATE, $allowNull = true), null);
 	}
 	public function testWrongNotNull() {
-		$this->willError();
+		$this->willWarn();
 		$time = time();
 		$default = DataObject::coerce("abcd", Dao::DATE, $allowNull = false);
 		return $this->assertTrue(($default > $time - 1) && ($default < $time + 1));

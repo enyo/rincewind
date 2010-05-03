@@ -58,6 +58,18 @@ class Snap_TodoException extends Snap_UnitTestException {
 }
 
 /**
+ * warning exception
+ * thrown when an warning is caused
+ * translates a php error into an exception that can be properly handled
+ * by the framework
+ **/
+class Snap_WarningException extends Snap_UnitTestException {
+    public function __construct($message) {
+        parent::__construct('warning', $message);
+    }
+}
+
+/**
  * Skip test exception
  * Thrown when a test method is deliberately skipped
  **/

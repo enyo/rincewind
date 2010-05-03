@@ -77,12 +77,17 @@ class Snap_FileAnalyzer {
         $methods = array();
         foreach ($classes as $class_name) {
 
-			$class = new ReflectionClass($class_name);
-			if ($class->isAbstract()) continue;
+            $class = new ReflectionClass($class_name);
+            if ($class->isAbstract()) continue;
 
             // skip classes that don't have a runTests method
             if (!method_exists($class_name, 'runTests')) {
                 continue;
+            }
+            
+            $reflectedClass = new ReflectionClass($class_name);
+            if ($reflectedClass->isAbstract()) {
+              continue;
             }
         
             $methods = get_class_methods($class_name);

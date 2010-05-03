@@ -12,21 +12,7 @@
  * @return TRUE
  */
 function SNAP_error_handler($errno, $errstr, $errfile, $errline) {
-
-    global $SNAP_Current_Reporter_Running;
-    global $SNAP_Current_Test_Running;
-    
-    if ($SNAP_Current_Test_Running->canError()) {
-        return TRUE;
-    }
-    
-    $trace = debug_backtrace();
-
-    // call a php error on the snap test object running
-    $SNAP_Current_Reporter_Running->recordPHPError($errstr, $errfile, $errline, $trace);
-    
-    // let it go through to php log
-    return TRUE;
+    throw new Snap_WarningException($errstr);
 }
 
 /**

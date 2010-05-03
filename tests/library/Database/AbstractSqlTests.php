@@ -16,8 +16,8 @@
 
 		public function testCreatingConnectionWithWrongUsername() {
 			$this->willThrow('SqlConnectionException');
-			$this->willError();
-	    	$db = $this->getDatabaseConnection('WRONG USER');
+			$this->willWarn();
+	    $db = $this->getDatabaseConnection('WRONG USER');
 		}
 
 	}
@@ -43,7 +43,7 @@
 
 		public function testWrongQuery() {
 			$this->willThrow('SqlQueryException');
-			$this->willError();
+			$this->willWarn();
 			$this->db->query("this is nonsense");	
 		}
 

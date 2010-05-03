@@ -44,16 +44,24 @@ class Snap_TestAggregator {
                 $data = 'No error output captured. Please ensure your PHP environment allows output of errors.';
             }
             
+            $fatal_allowed = (stripos($data, SNAPTEST_FATAL_ALLOWED) === FALSE) ? FALSE : TRUE;
+            
             // remove start and end tokens
-            $data = str_replace(array(SNAPTEST_TOKEN_START, SNAPTEST_TOKEN_END), '', $data);
+            $data = str_replace(array(SNAPTEST_TOKEN_START, SNAPTEST_TOKEN_END, SNAPTEST_FATAL_ALLOWED), '', $data);
             
             $report = array(
-                'type' => 'fatal',
+                'type' => ($fatal_allowed) ? 'pass' : 'fatal',
                 'message' => ($problem_output) ? $problem_output : $file . ' had a fatal error: '.$data,
                 'skip_details' => TRUE,
             );
             $this->report_list[] = $report;
-            $this->reporter->announceTestFail($report);
+            
+            if ($fatal_allowed) {
+                $this->reporter->announceTestPass($report);
+            }
+            else {
+                $this->reporter->announceTestFail($report);
+            }
         }
         else {
             if (strlen($problem_output) > 0) {

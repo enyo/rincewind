@@ -264,17 +264,29 @@ abstract class Snap_UnitTestCase implements Snap_RunnableTestCaseInterface {
     }
     
     /**
-     * specify that calling this test will cause a PHP error under normal circumstances
+     * #4 warning support
+     * specify that calling this test will cause a PHP warning under normal circumstances
      **/
-    protected function willError() {
-        $this->willError = TRUE;
+    protected function willWarn() {
+        $this->willWarn = TRUE;
     }
     
     /**
-     * returns the status if the currently running test is allowed to chuck a PHP error
+     * #4 warning support
+     * returns the status if the currently running test is allowed to chuck a PHP warning
      **/
-    public function canError() {
-        return $this->willError;
+    protected function canWarn() {
+        return $this->willWarn;
+    }
+    
+    /**
+     * specify that calling this test will cause a PHP error under normal circumstances
+     * this is different from a warning since errors will halt execution of the current
+     * test. Therefore, we need to tell the reporter an error is coming (if it is supported)
+     **/
+    protected function willError() {
+        $this->reporter->announceWillError();
+        $this->willError = TRUE;
     }
     
     /**
@@ -333,6 +345,7 @@ abstract class Snap_UnitTestCase implements Snap_RunnableTestCaseInterface {
     
         // reflect the class
         $reflected_class = new ReflectionClass($this);
+        $this->reporter = $reporter;
         
         // get the public methods
         $public_methods = array();
@@ -346,12 +359,6 @@ abstract class Snap_UnitTestCase implements Snap_RunnableTestCaseInterface {
             }
         }
         
-        // set the current test for error handling
-        global $SNAP_Current_Test_Running;
-        global $SNAP_Current_Reporter_Running;
-        $SNAP_Current_Test_Running = $this;
-        $SNAP_Current_Reporter_Running = $reporter;
-        
         $old_error_handler = set_error_handler('SNAP_error_handler');
         
         foreach ($public_methods as $method) {
@@ -362,6 +369,7 @@ abstract class Snap_UnitTestCase implements Snap_RunnableTestCaseInterface {
             
             $this->willThrow = NULL;
             $this->willError = FALSE;
+            $this->willWarn = FALSE;
             $result = FALSE;
             
             // run setup
@@ -381,7 +389,17 @@ abstract class Snap_UnitTestCase implements Snap_RunnableTestCaseInterface {
             
             // run method
             try {
-                $result = $this->$method();
+                try { // nested allowed warning exceptions
+                    $result = $this->$method();
+                }
+                catch (Snap_WarningException $e) {
+                    if ($this->canWarn()) {
+                        $result = new Snap_PassedTestAssertion();
+                    }
+                    else {
+                        throw $e;
+                    }
+                }
             }
             catch (Snap_UnitTestException $e) {
                 if ($e instanceof Snap_TodoException) {

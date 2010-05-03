@@ -3,13 +3,13 @@
   <html xmlns="http://www.w3.org/1999/xhtml">
 		<head>
 			<!-- template designed by Marco Von Ballmoos -->
-			<title>Docs for page Logger.php</title>
+			<title>Docs for page FileRetriever.php</title>
 			<link rel="stylesheet" href="../media/stylesheet.css" />
 			<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
 		</head>
 		<body>
 			<div class="page-body">			
-<h2 class="file-name"><img src="../media/images/Page_logo.png" alt="File" style="vertical-align: middle">/Logger/Logger.php</h2>
+<h2 class="file-name"><img src="../media/images/Page_logo.png" alt="File" style="vertical-align: middle">/File/FileRetriever.php</h2>
 
 <a name="sec-description"></a>
 <div class="info-box">
@@ -21,6 +21,11 @@
 												</div>
 	<div class="info-box-body">	
 		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">This file contains the basic FileRetriever class.</p>
+	<ul class="tags">
+				<li><span class="field">author:</span> Matthias Loitsch &lt;<a href="mailto:developer@ma.tthias.com">developer@ma.tthias.com</a>&gt;</li>
+				<li><span class="field">copyright:</span> Copyright (c) 2010, Matthias Loitsch</li>
+			</ul>
 		
 			</div>
 </div>
@@ -44,10 +49,21 @@
 						<img src="../media/images/Class.png"
 								 alt=" class"
 								 title=" class"/>
-						<a href="../php-library/Logger.html">Logger</a>
+						<a href="../File/FileRetrieverExceptions/FileRetrieverException.html">FileRetrieverException</a>
 					</td>
 					<td>
-											This is the base for a logger or a logger factory
+											The Exception base class for FileRetrieverExceptions.
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; vertical-align: top; white-space: nowrap">
+						<img src="../media/images/Class.png"
+								 alt=" class"
+								 title=" class"/>
+						<a href="../File/FileRetriever.html">FileRetriever</a>
+					</td>
+					<td>
+											The FileRetriever actually fetches a files, and returns the File object.
 										</td>
 				</tr>
 							</table>
@@ -63,38 +79,21 @@
 				|						<span class="disabled">Includes</span>
 														</div>
 		<div class="info-box-body">	
-			<a name="_Logger/LoggerInterface_php"><!-- --></a>
-<div class="oddrow">
-	
-	<div>
-		<img src="../media/images/Page.png" alt=" " />
-		<span class="include-title">
-			<span class="include-type">require_once</span>
-			(<span class="include-name"><a href="../php-library/_Logger---LoggerInterface.php.html">'Logger/LoggerInterface.php'</a></span>)
-			(line <span class="line-number">10</span>)
-		</span>
-	</div>
-
-	<!-- ========== Info from phpDoc block ========= -->
-	<ul class="tags">
-				<li><span class="field">author:</span> Matthias Loitsch &lt;<a href="mailto:develop@matthias.loitsch.com">develop@matthias.loitsch.com</a>&gt;</li>
-				<li><span class="field">copyright:</span> Copyright (c) 2009, Matthias Loitsch</li>
-			</ul>
-	
-</div>
-<a name="_Logger/AbstractLogger_php"><!-- --></a>
+			<a name="_File/File_php"><!-- --></a>
 <div class="evenrow">
 	
 	<div>
 		<img src="../media/images/Page.png" alt=" " />
 		<span class="include-title">
-			<span class="include-type">require_once</span>
-			(<span class="include-name"><a href="../php-library/_Logger---AbstractLogger.php.html">'Logger/AbstractLogger.php'</a></span>)
-			(line <span class="line-number">11</span>)
+			<span class="include-type">include_once</span>
+			(<span class="include-name"><a href="../File/_File---File.php.html">'File/File.php'</a></span>)
+			(line <span class="line-number">17</span>)
 		</span>
 	</div>
 
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Loading the file class.</p>
+<p class="description"><p>They are codependent so this has to be include_once to avoid an endless loop.</p></p>
 	
 </div>
 		</div>

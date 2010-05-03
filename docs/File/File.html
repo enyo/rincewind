@@ -28,21 +28,23 @@
 			</div>
 	<div class="info-box-body">
         		<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">The file class makes mostly sense in combination with a FileFactory.</p>
-<p class="description"><p>You shouldn't include this file, but rather include the FileFactory which  takes care of dependencies.  You then call:  <div class="src-code"><ol><li><div class="src-line">&nbsp;<span class="src-php">&lt;?php</span></div></li>
-<li><div class="src-line">&nbsp;&nbsp;&nbsp;<span class="src-id">FileFactory</span><span class="src-sym">::</span><span class="src-id">get</span><span class="src-sym">(</span><span class="src-var">$uri</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<p class="short-description">You get a file by calling:</p>
+<p class="description"><p><div class="src-code"><ol><li><div class="src-line">&nbsp;<span class="src-php">&lt;?php</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;<span class="src-id"><a href="../File/File.html">File</a></span><span class="src-sym">::</span><span class="src-id">create</span><span class="src-sym">(</span><span class="src-var">$uri</span><span class="src-sym">,&nbsp;</span><span class="src-id"><a href="../File/File.html">File</a></span><span class="src-sym">::</span><span class="src-id">SOURCE_LOCAL</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
 <li><div class="src-line">&nbsp;<span class="src-php">?&gt;</span></div></li>
-</ol></div></p></p>
+</ol></div></p><p>The File class extends the FileRetriever, so it supports all static  functions.</p></p>
 	<ul class="tags">
 				<li><span class="field">author:</span> Matthias Loitsch &lt;<a href="mailto:developer@ma.tthias.com">developer@ma.tthias.com</a>&gt;</li>
 				<li><span class="field">copyright:</span> Copyright (c) 2010, Matthias Loitsch</li>
 			</ul>
 		<p class="notes">
-			Located in <a class="field" href="_File---File.php.html">/File/File.php</a> (line <span class="field">38</span>)
+			Located in <a class="field" href="_File---File.php.html">/File/File.php</a> (line <span class="field">45</span>)
 		</p>
 		
 				
-		<pre></pre>
+		<pre><a href="../File/FileRetriever.html">FileRetriever</a>
+   |
+   --File</pre>
 	
 			</div>
 </div>
@@ -205,43 +207,13 @@
 		</div>
 		<div class="info-box-body">			
 			<div class="method-summary">
-																				<div class="method-definition">
-					<img src="../media/images/StaticMethod.png" alt=" "/>
-											static <span class="method-result"><a href="../File/File.html">File</a></span>
-										<a href="#create" title="details" class="method-name">create</a>
-											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$data</span>, <span class="var-type">int</span>&nbsp;<span class="var-name">$source</span>, [<span class="var-type">int</span>&nbsp;<span class="var-name">$maxFileSize</span> = <span class="var-default">10000000</span>])
-									</div>
-																<div class="method-definition">
-					<img src="../media/images/StaticMethod.png" alt=" "/>
-											static <span class="method-result"><a href="../File/File.html">File</a></span>
-										<a href="#createFromFormUpload" title="details" class="method-name">createFromFormUpload</a>
-											(<span class="var-type">array</span>&nbsp;<span class="var-name">$FILE</span>, [<span class="var-type">int</span>&nbsp;<span class="var-name">$maxFileSize</span> = <span class="var-default">100000</span>])
-									</div>
-																<div class="method-definition">
-					<img src="../media/images/StaticMethod.png" alt=" "/>
-											static <span class="method-result"><a href="../File/File.html">File</a></span>
-										<a href="#createFromHTTP" title="details" class="method-name">createFromHTTP</a>
-											(<span class="var-type">array</span>&nbsp;<span class="var-name">$url</span>, [<span class="var-type">int</span>&nbsp;<span class="var-name">$port</span> = <span class="var-default">80</span>], [<span class="var-type">int</span>&nbsp;<span class="var-name">$timeout</span> = <span class="var-default">30</span>])
-									</div>
-																<div class="method-definition">
-					<img src="../media/images/StaticMethod.png" alt=" "/>
-											static <span class="method-result"><a href="../File/File.html">File</a></span>
-										<a href="#createFromLocalFile" title="details" class="method-name">createFromLocalFile</a>
-											(<span class="var-type">array</span>&nbsp;<span class="var-name">$srcUri</span>)
-									</div>
-																																																																<div class="method-definition">
-					<img src="../media/images/StaticMethod.png" alt=" "/>
-											static <span class="method-result">void</span>
-										<a href="#process" title="details" class="method-name">process</a>
-											(<span class="var-type"><a href="../File/File.html">File</a></span>&nbsp;<span class="var-name">$file</span>)
-									</div>
-																																																																				<div class="method-definition">
+																																																																																																																								<div class="method-definition">
 					<img src="../media/images/Constructor.png" alt=" "/>
 											<span class="method-result">File</span>
 										<a href="#__construct" title="details" class="method-name">__construct</a>
 											(<span class="var-type">string</span>&nbsp;<span class="var-name">$uri</span>)
 									</div>
-																																																<div class="method-definition">
+																<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
 											<span class="method-result">mixed</span>
 										<a href="#getContent" title="details" class="method-name">getContent</a>
@@ -277,7 +249,7 @@
 										<a href="#getUri" title="details" class="method-name">getUri</a>
 										()
 									</div>
-																								<div class="method-definition">
+																<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
 											<span class="method-result">void</span>
 										<a href="#save" title="details" class="method-name">save</a>
@@ -342,7 +314,7 @@
 		<span class="var-title">
 			<span class="var-type">mixed</span>
 			<span class="var-name">$content</span>
-						(line <span class="line-number">88</span>)
+						(line <span class="line-number">95</span>)
 		</span>
 	</div>
 
@@ -366,7 +338,7 @@
 		<span class="var-title">
 			<span class="var-type">bool</span>
 			<span class="var-name">$fetchedContent</span>
-			 = <span class="var-default"> false</span>			(line <span class="line-number">95</span>)
+			 = <span class="var-default"> false</span>			(line <span class="line-number">102</span>)
 		</span>
 	</div>
 
@@ -389,7 +361,7 @@
 		<span class="var-title">
 			<span class="var-type">string</span>
 			<span class="var-name">$mimeType</span>
-						(line <span class="line-number">117</span>)
+						(line <span class="line-number">124</span>)
 		</span>
 	</div>
 
@@ -412,7 +384,7 @@
 		<span class="var-title">
 			<span class="var-type">string</span>
 			<span class="var-name">$name</span>
-						(line <span class="line-number">103</span>)
+						(line <span class="line-number">110</span>)
 		</span>
 	</div>
 
@@ -435,7 +407,7 @@
 		<span class="var-title">
 			<span class="var-type">int</span>
 			<span class="var-name">$size</span>
-						(line <span class="line-number">110</span>)
+						(line <span class="line-number">117</span>)
 		</span>
 	</div>
 
@@ -458,7 +430,7 @@
 		<span class="var-title">
 			<span class="var-type">int</span>
 			<span class="var-name">$source</span>
-						(line <span class="line-number">124</span>)
+						(line <span class="line-number">131</span>)
 		</span>
 	</div>
 
@@ -481,7 +453,7 @@
 		<span class="var-title">
 			<span class="var-type">string</span>
 			<span class="var-name">$uri</span>
-						(line <span class="line-number">75</span>)
+						(line <span class="line-number">82</span>)
 		</span>
 	</div>
 
@@ -512,188 +484,12 @@
 		</div>
 		<div class="info-box-body">
 			<A NAME='method_detail'></A>
-<a name="methodcreate" id="create"><!-- --></a>
-<div class="oddrow">
-	
-	<div class="method-header">
-		<img src="../media/images/StaticMethod.png" />
-		<span class="method-title">static create</span> (line <span class="line-number">300</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">This is the way to create a file.</p>
-	<ul class="tags">
-				<li><span class="field">access:</span> public</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result"><a href="../File/File.html">File</a></span>
-		<span class="method-name">
-			create
-		</span>
-					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$data</span>, <span class="var-type">int</span>&nbsp;<span class="var-name">$source</span>, [<span class="var-type">int</span>&nbsp;<span class="var-name">$maxFileSize</span> = <span class="var-default">10000000</span>])
-			</div>
-	
-			<ul class="parameters">
-					<li>
-				<span class="var-type">mixed</span>
-				<span class="var-name">$data</span><span class="var-description">: Is either an URL, or an array from form upload or a local path.</span>			</li>
-					<li>
-				<span class="var-type">int</span>
-				<span class="var-name">$source</span><span class="var-description">: One of File::SOURCE_XXX</span>			</li>
-					<li>
-				<span class="var-type">int</span>
-				<span class="var-name">$maxFileSize</span><span class="var-description">: in kilobytes.</span>			</li>
-				</ul>
-		
-			
-	</div>
-<a name="methodcreateFromFormUpload" id="createFromFormUpload"><!-- --></a>
-<div class="evenrow">
-	
-	<div class="method-header">
-		<img src="../media/images/StaticMethod.png" />
-		<span class="method-title">static createFromFormUpload</span> (line <span class="line-number">329</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">This static function is the way to get a file from a form upload.</p>
-	<ul class="tags">
-				<li><span class="field">deprecated:</span> use get() instead</li>
-				<li><span class="field">access:</span> public</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result"><a href="../File/File.html">File</a></span>
-		<span class="method-name">
-			createFromFormUpload
-		</span>
-					(<span class="var-type">array</span>&nbsp;<span class="var-name">$FILE</span>, [<span class="var-type">int</span>&nbsp;<span class="var-name">$maxFileSize</span> = <span class="var-default">100000</span>])
-			</div>
-	
-			<ul class="parameters">
-					<li>
-				<span class="var-type">array</span>
-				<span class="var-name">$FILE</span><span class="var-description">: the array obtained from $_FILES</span>			</li>
-					<li>
-				<span class="var-type">int</span>
-				<span class="var-name">$maxFileSize</span><span class="var-description">: in kiloBytes</span>			</li>
-				</ul>
-		
-			
-	</div>
-<a name="methodcreateFromHTTP" id="createFromHTTP"><!-- --></a>
-<div class="oddrow">
-	
-	<div class="method-header">
-		<img src="../media/images/StaticMethod.png" />
-		<span class="method-title">static createFromHTTP</span> (line <span class="line-number">388</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">This static function is the way to get a file from a http source.</p>
-	<ul class="tags">
-				<li><span class="field">deprecated:</span> Use get() instead.</li>
-				<li><span class="field">access:</span> public</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result"><a href="../File/File.html">File</a></span>
-		<span class="method-name">
-			createFromHTTP
-		</span>
-					(<span class="var-type">array</span>&nbsp;<span class="var-name">$url</span>, [<span class="var-type">int</span>&nbsp;<span class="var-name">$port</span> = <span class="var-default">80</span>], [<span class="var-type">int</span>&nbsp;<span class="var-name">$timeout</span> = <span class="var-default">30</span>])
-			</div>
-	
-			<ul class="parameters">
-					<li>
-				<span class="var-type">array</span>
-				<span class="var-name">$url</span><span class="var-description">: the location of the file</span>			</li>
-					<li>
-				<span class="var-type">int</span>
-				<span class="var-name">$port</span>			</li>
-					<li>
-				<span class="var-type">int</span>
-				<span class="var-name">$timeout</span><span class="var-description">: in seconds</span>			</li>
-				</ul>
-		
-			
-	</div>
-<a name="methodcreateFromLocalFile" id="createFromLocalFile"><!-- --></a>
-<div class="evenrow">
-	
-	<div class="method-header">
-		<img src="../media/images/StaticMethod.png" />
-		<span class="method-title">static createFromLocalFile</span> (line <span class="line-number">370</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">This static function is the way to get a file from a local file.</p>
-	<ul class="tags">
-				<li><span class="field">deprecated:</span> Use get() instead.</li>
-				<li><span class="field">access:</span> public</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result"><a href="../File/File.html">File</a></span>
-		<span class="method-name">
-			createFromLocalFile
-		</span>
-					(<span class="var-type">array</span>&nbsp;<span class="var-name">$srcUri</span>)
-			</div>
-	
-			<ul class="parameters">
-					<li>
-				<span class="var-type">array</span>
-				<span class="var-name">$srcUri</span><span class="var-description">: the location of the file</span>			</li>
-				</ul>
-		
-			
-	</div>
-<a name="methodprocess" id="process"><!-- --></a>
-<div class="oddrow">
-	
-	<div class="method-header">
-		<img src="../media/images/StaticMethod.png" />
-		<span class="method-title">static process</span> (line <span class="line-number">289</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">After a file gets created, the method creating it calls  process($file), so the file can be processed before it's returned.</p>
-<p class="description"><p>If you extend File, you can implement this function.</p></p>
-	<ul class="tags">
-				<li><span class="field">access:</span> protected</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result">void</span>
-		<span class="method-name">
-			process
-		</span>
-					(<span class="var-type"><a href="../File/File.html">File</a></span>&nbsp;<span class="var-name">$file</span>)
-			</div>
-	
-			<ul class="parameters">
-					<li>
-				<span class="var-type"><a href="../File/File.html">File</a></span>
-				<span class="var-name">$file</span>			</li>
-				</ul>
-		
-			
-			<hr class="separator" />
-		<div class="notes">Redefined in descendants as:</div>
-		<ul class="redefinitions">
-					<li>
-				<a href="../File/ImageFile.html#methodprocess">ImageFile::process()</a>
-							</li>
-				</ul>
-	</div>
 <a name="method__construct" id="__construct"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Constructor.png" />
-		<span class="method-title">Constructor __construct</span> (line <span class="line-number">132</span>)
+		<span class="method-title">Constructor __construct</span> (line <span class="line-number">139</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -720,11 +516,11 @@
 			
 	</div>
 <a name="methodgetContent" id="getContent"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">getContent</span> (line <span class="line-number">203</span>)
+		<span class="method-title">getContent</span> (line <span class="line-number">210</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -746,11 +542,11 @@
 			
 	</div>
 <a name="methodgetMimeType" id="getMimeType"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">getMimeType</span> (line <span class="line-number">235</span>)
+		<span class="method-title">getMimeType</span> (line <span class="line-number">242</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -771,11 +567,11 @@
 			
 	</div>
 <a name="methodgetName" id="getName"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">getName</span> (line <span class="line-number">217</span>)
+		<span class="method-title">getName</span> (line <span class="line-number">224</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -796,11 +592,11 @@
 			
 	</div>
 <a name="methodgetSize" id="getSize"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">getSize</span> (line <span class="line-number">226</span>)
+		<span class="method-title">getSize</span> (line <span class="line-number">233</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -821,11 +617,11 @@
 			
 	</div>
 <a name="methodgetSource" id="getSource"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">getSource</span> (line <span class="line-number">244</span>)
+		<span class="method-title">getSource</span> (line <span class="line-number">251</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -847,11 +643,11 @@
 			
 	</div>
 <a name="methodgetUri" id="getUri"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">getUri</span> (line <span class="line-number">193</span>)
+		<span class="method-title">getUri</span> (line <span class="line-number">200</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -872,11 +668,11 @@
 			
 	</div>
 <a name="methodsave" id="save"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">save</span> (line <span class="line-number">254</span>)
+		<span class="method-title">save</span> (line <span class="line-number">261</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -905,11 +701,11 @@
 			
 	</div>
 <a name="methodsetContent" id="setContent"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">setContent</span> (line <span class="line-number">153</span>)
+		<span class="method-title">setContent</span> (line <span class="line-number">160</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -935,11 +731,11 @@
 			
 	</div>
 <a name="methodsetMimeType" id="setMimeType"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">setMimeType</span> (line <span class="line-number">172</span>)
+		<span class="method-title">setMimeType</span> (line <span class="line-number">179</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -965,11 +761,11 @@
 			
 	</div>
 <a name="methodsetName" id="setName"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">setName</span> (line <span class="line-number">144</span>)
+		<span class="method-title">setName</span> (line <span class="line-number">151</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -996,11 +792,11 @@
 			
 	</div>
 <a name="methodsetSize" id="setSize"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">setSize</span> (line <span class="line-number">163</span>)
+		<span class="method-title">setSize</span> (line <span class="line-number">170</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1026,11 +822,11 @@
 			
 	</div>
 <a name="methodsetSource" id="setSource"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">setSource</span> (line <span class="line-number">181</span>)
+		<span class="method-title">setSource</span> (line <span class="line-number">188</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1055,7 +851,25 @@
 		
 			
 	</div>
-						
+							<h4>Inherited Methods</h4>
+				<a name='inherited_methods'><!-- --></a>	
+									<!-- =========== Summary =========== -->
+					<p>Inherited From <span class="classname"><a href="../File/FileRetriever.html">FileRetriever</a></span></p>
+					<blockquote>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../File/FileRetriever.html#methodcreate">FileRetriever::create()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../File/FileRetriever.html#methodcreateFromFormUpload">FileRetriever::createFromFormUpload()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../File/FileRetriever.html#methodcreateFromHTTP">FileRetriever::createFromHTTP()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../File/FileRetriever.html#methodcreateFromLocalFile">FileRetriever::createFromLocalFile()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../File/FileRetriever.html#methodgetFile">FileRetriever::getFile()</a></span><br>
+													<img src="../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../File/FileRetriever.html#methodprocess">FileRetriever::process()</a></span><br>
+											</blockquote>
+										
 		</div>
 	</div>
 
@@ -1075,14 +889,14 @@
 					</div>
 		<div class="info-box-body">
 			<a name="constSOURCE_FILE" id="SOURCE_FILE"><!-- --></A>
-<div class="oddrow">
+<div class="evenrow">
 
 	<div class="const-header">
 		<img src="../media/images/Variable.png" />
 		<span class="const-title">
 			<span class="const-name">SOURCE_FILE</span>
 			 = <span class="const-default"> 0x010001</span>
-			(line <span class="line-number">64</span>)
+			(line <span class="line-number">71</span>)
 		</span>
 	</div>
 
@@ -1092,14 +906,14 @@
 	
 </div>
 <a name="constSOURCE_FORM" id="SOURCE_FORM"><!-- --></A>
-<div class="evenrow">
+<div class="oddrow">
 
 	<div class="const-header">
 		<img src="../media/images/Variable.png" />
 		<span class="const-title">
 			<span class="const-name">SOURCE_FORM</span>
 			 = <span class="const-default"> 0x100001</span>
-			(line <span class="line-number">65</span>)
+			(line <span class="line-number">72</span>)
 		</span>
 	</div>
 
@@ -1109,14 +923,14 @@
 	
 </div>
 <a name="constSOURCE_FTP" id="SOURCE_FTP"><!-- --></A>
-<div class="oddrow">
+<div class="evenrow">
 
 	<div class="const-header">
 		<img src="../media/images/Variable.png" />
 		<span class="const-title">
 			<span class="const-name">SOURCE_FTP</span>
 			 = <span class="const-default"> 0x001010</span>
-			(line <span class="line-number">67</span>)
+			(line <span class="line-number">74</span>)
 		</span>
 	</div>
 
@@ -1126,14 +940,14 @@
 	
 </div>
 <a name="constSOURCE_HTTP" id="SOURCE_HTTP"><!-- --></A>
-<div class="evenrow">
+<div class="oddrow">
 
 	<div class="const-header">
 		<img src="../media/images/Variable.png" />
 		<span class="const-title">
 			<span class="const-name">SOURCE_HTTP</span>
 			 = <span class="const-default"> 0x001001</span>
-			(line <span class="line-number">66</span>)
+			(line <span class="line-number">73</span>)
 		</span>
 	</div>
 
@@ -1143,14 +957,14 @@
 	
 </div>
 <a name="constSOURCE_LOCAL" id="SOURCE_LOCAL"><!-- --></A>
-<div class="oddrow">
+<div class="evenrow">
 
 	<div class="const-header">
 		<img src="../media/images/Variable.png" />
 		<span class="const-title">
 			<span class="const-name">SOURCE_LOCAL</span>
 			 = <span class="const-default"> 0x010000</span>
-			(line <span class="line-number">55</span>)
+			(line <span class="line-number">62</span>)
 		</span>
 	</div>
 
@@ -1164,14 +978,14 @@
 	
 </div>
 <a name="constSOURCE_REMOTE" id="SOURCE_REMOTE"><!-- --></A>
-<div class="evenrow">
+<div class="oddrow">
 
 	<div class="const-header">
 		<img src="../media/images/Variable.png" />
 		<span class="const-title">
 			<span class="const-name">SOURCE_REMOTE</span>
 			 = <span class="const-default"> 0x001000</span>
-			(line <span class="line-number">54</span>)
+			(line <span class="line-number">61</span>)
 		</span>
 	</div>
 
@@ -1185,14 +999,14 @@
 	
 </div>
 <a name="constSOURCE_USER" id="SOURCE_USER"><!-- --></A>
-<div class="oddrow">
+<div class="evenrow">
 
 	<div class="const-header">
 		<img src="../media/images/Variable.png" />
 		<span class="const-title">
 			<span class="const-name">SOURCE_USER</span>
 			 = <span class="const-default"> 0x100000</span>
-			(line <span class="line-number">56</span>)
+			(line <span class="line-number">63</span>)
 		</span>
 	</div>
 

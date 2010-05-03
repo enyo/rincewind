@@ -14,6 +14,17 @@
  */
 if (!class_exists('File')) require('File/File.php');
 
+
+/**
+ * The Exception base class for DataSourceException.
+ *
+ * @author Matthias Loitsch <developer@ma.tthias.com>
+ * @copyright Copyright (c) 2010, Matthias Loitsch
+ * @package File
+ * @subpackage FileExceptions
+ */
+class DataSourceException extends Exception { };
+
 /**
  * The Exception base class for FileDataSourceException.
  *
@@ -22,7 +33,7 @@ if (!class_exists('File')) require('File/File.php');
  * @package File
  * @subpackage FileExceptions
  */
-class FileDataSourceException extends Exception { };
+class FileDataSourceException extends DataSourceException { };
 
 
 /**

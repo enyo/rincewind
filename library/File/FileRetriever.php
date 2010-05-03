@@ -82,11 +82,11 @@ class FileRetriever {
 				return self::createFromFormUpload($data, $maxFileSize);
 				break;
 			case File::SOURCE_HTTP:
-				return self::createFromHTTP($data);
+				return self::createFromHttp($data);
 				break;
-			case FILE::SOURCE_LOCAL:
-			case FILE::SOURCE_REMOTE:
-			case FILE::SOURCE_USER:
+			case File::SOURCE_LOCAL:
+			case File::SOURCE_REMOTE:
+			case File::SOURCE_USER:
 				throw new FileRetrieverException("Your source has to be more specific than that.");
 			default:
 				throw new FileRetrieverException("Unknown source.");
@@ -161,7 +161,7 @@ class FileRetriever {
 	 * @deprecated Use get() instead.
 	 * @return File
 	 */
-	public static function createFromHTTP($url, $port = 80, $timeout = 30) {
+	public static function createFromHttp($url, $port = 80, $timeout = 30) {
 
     $curlHandle = curl_init();
 

@@ -328,12 +328,12 @@ abstract class Dao implements DaoInterface {
 
 	
 	/**
-	 * Checks if a column name exists.
+	 * Checks if a column name exists as real or additional column.
 	 *
 	 * @param string $column
 	 */
 	protected function columnExists($column) {
-		return isset($this->columnTypes[$column]);
+		return isset($this->columnTypes[$column]) || isset($this->additionalColumnTypes[$column]);
 	}
 
 

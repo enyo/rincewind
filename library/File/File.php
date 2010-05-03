@@ -297,7 +297,7 @@ class File {
 	 * @param int $maxFileSize in kilobytes.
 	 * @return File
 	 */
-	public static function create($data, $source, $maxFileSize = 100000) {
+	public static function create($data, $source, $maxFileSize = 10000000) {
 		switch ($source) {
 			case File::SOURCE_FILE:
 				return self::createFromLocalFile($data);

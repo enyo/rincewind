@@ -30,16 +30,15 @@ class FileRetrieverException extends FileException { };
 
 
 /**
- * The file class makes mostly sense in combination with a FileFactory.
- * You shouldn't include this file, but rather include the FileFactory which
- * takes care of dependencies.
- * You then call:
- * <code>
- * <?php
- *   FileFactory::get($uri);
- * ?>
- * </code>
+ * The FileRetriever actually fetches a files, and returns the File object.
+ * It's basically a list of static functions, which the File class extends,
+ * so normally you don't call them on the FileRetriever but rather the File
+ * class itself.
+ * The FileRetriever is a class on it's own, so it can be passed to other
+ * objects, so they don't have to call the static File:: functions (which
+ * makes them rather difficult to test.)
  *
+ * @see File
  * @author Matthias Loitsch <developer@ma.tthias.com>
  * @copyright Copyright (c) 2010, Matthias Loitsch
  * @package File

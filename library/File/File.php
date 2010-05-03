@@ -35,6 +35,9 @@ class FileException extends Exception { };
  * ?>
  * </code>
  *
+ * The File class extends the FileRetriever, so it supports all static
+ * functions.
+ *
  * @author Matthias Loitsch <developer@ma.tthias.com>
  * @copyright Copyright (c) 2010, Matthias Loitsch
  * @package File

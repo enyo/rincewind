@@ -2,12 +2,20 @@
 
 
 /**
- * This file contains the basic FileFactory class.
+ * This file contains the basic FileDataSource class.
  *
  * @author Matthias Loitsch <developer@ma.tthias.com>
  * @copyright Copyright (c) 2010, Matthias Loitsch
- * @package File
+ * @package DataSource
  **/
+
+
+/**
+ * Loading the data source class
+ */
+include('DataSource/DataSource.php');
+
+
 
 /**
  * Loading the file class
@@ -15,38 +23,29 @@
 if (!class_exists('File')) require('File/File.php');
 
 
-/**
- * The Exception base class for DataSourceException.
- *
- * @author Matthias Loitsch <developer@ma.tthias.com>
- * @copyright Copyright (c) 2010, Matthias Loitsch
- * @package File
- * @subpackage FileExceptions
- */
-class DataSourceException extends Exception { };
 
 /**
  * The Exception base class for FileDataSourceException.
  *
  * @author Matthias Loitsch <developer@ma.tthias.com>
  * @copyright Copyright (c) 2010, Matthias Loitsch
- * @package File
- * @subpackage FileExceptions
+ * @package DataSource
+ * @subpackage DataSourceExceptions
  */
 class FileDataSourceException extends DataSourceException { };
 
 
 /**
- * This factory is used to get files to use for a Dao.
+ * This data source is used to get files to use for a Dao.
  * It implements basic Dao functionality like view(), list(), update(),
  * insert() and delete(), and uses the FileFactory functions to transport
  * them.
  *
  * @author Matthias Loitsch <developer@ma.tthias.com>
  * @copyright Copyright (c) 2010, Matthias Loitsch
- * @package File
+ * @package DataSource
  */
-abstract class FileDataSource {
+abstract class FileDataSource extends DataSource {
 
   /**
    * This is the object used to actually get the files.
@@ -77,53 +76,6 @@ abstract class FileDataSource {
     $this->port = $port;
   }
 
-	/**
-	 * Returns one object.
-	 *
-	 * @param string $resource
-	 * @param array $attributes Associative array
-	 * @return string The file content
-	 */
-	abstract public function view($resource, $attributes);
-
-	/**
-	 * Returns all objects found.
-	 *
-	 * @param string $resource
-	 * @param array $attributes Associative array
-	 * @param mixed $sort 
-	 * @param int $offset 
-	 * @param int $limit 
-	 * @return string The file content
-	 */
-	abstract public function viewList($resource, $attributes, $sort, $offset, $limit);
-
-	/**
-	 * Inserts the object, and returns the id.
-	 *
-	 * @param string $resource
-	 * @param string $attributes Associative array
-	 * @return int The new id
-	 */
-	abstract public function insert($resource, $attributes);
-
-	/**
-	 * Updates the object.
-	 *
-	 * @param string $resource
-	 * @param int $id
-	 * @param array $attributes Associative array
-	 * @return string The file content
-	 */
-	abstract public function update($resource, $id, $attributes);
-
-	/**
-	 * Deletes the object
-	 *
-	 * @param string $resource
-	 * @param int $id
-	 */
-	abstract public function delete($resource, $id);
 }
 
 

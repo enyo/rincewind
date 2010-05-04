@@ -19,7 +19,7 @@
  * @copyright Copyright (c) 2010, Matthias Loitsch
  * @package Storage
  */
-class GlobalStorage {
+abstract class GlobalStorage {
 
 	/**
 	 * A profiler to be used anywhere in the application.
@@ -47,10 +47,34 @@ class GlobalStorage {
 		return self::$profiler;
 	}
 
-	/**
-	 * Trying to instanciate the class aborts the script.
-	 */
-	public function __construct() { die('The storage is not ment to be instantiated.'); }
+
+  /**
+   * @var array A list of already included files.
+   * @see includeOnce()
+   */
+  protected static $includedFiles = array();
+
+  /**
+   * Since include_once and require_once are so incredibly slow, this function
+   * fills the includedFiles array with the filenames.
+   *
+   * Downside: Your include files must have the exact same path & name. (Including ../myFile.php
+   * and ./myFile.php will result in including the file twice, even though it's referencing
+   * the same file.)
+   *
+   * Upside: It's much faster than include_once()
+   *
+   * @param string $fileUri
+   * @return bool True if the file has been included, false if not.
+   */
+  public static function includeOnce($fileUri) {
+    if (!in_array($fileUri, self::$includedFiles)) {
+      include($fileUri);
+      self::$includedFiles[] = $fileUri;
+      return true;
+    }
+    return false;
+  }
 
 }
 

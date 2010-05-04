@@ -49,7 +49,7 @@ abstract class GlobalStorage {
 
 
   /**
-   * @var array A list of already included files.
+   * @var array A list of already included files. The index of the array is the fileUri
    * @see includeOnce()
    */
   protected static $includedFiles = array();
@@ -68,9 +68,10 @@ abstract class GlobalStorage {
    * @return bool True if the file has been included, false if not.
    */
   public static function includeOnce($fileUri) {
-    if (!in_array($fileUri, self::$includedFiles)) {
+    // Using isset instead of array_key_exists because the value is never null.
+    if (!isset(self::$includedFiles[$fileUri])) {
       include($fileUri);
-      self::$includedFiles[] = $fileUri;
+      self::$includedFiles[$fileUri] = true;
       return true;
     }
     return false;

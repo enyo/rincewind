@@ -39,7 +39,7 @@ class JsonDao extends FileDao {
 	/**
 	 * Intepretes the json content, and returns it.
 	 * @param string $content The file content
-	 * @return objects
+	 * @return array
 	 */
 	protected function interpretFileContent($content) {
 		$return = json_decode($content, true);

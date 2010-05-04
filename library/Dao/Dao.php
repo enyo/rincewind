@@ -290,7 +290,7 @@ abstract class Dao implements DaoInterface {
 		$trace = debug_backtrace();
 		if (strpos($method, 'Iterator')) {
 			$newMethod = str_replace('Iterator', '', $method);
-			trigger_error(sprintf('Called %s() instead of $s() from %s on line %u.', $method, $newMethod, $trace[1]['file'], $trace[1]['line']), E_USER_WARNING);
+			trigger_error(sprintf('Called %s() instead of %s() from %s on line %u.', $method, $newMethod, $trace[1]['file'], $trace[1]['line']), E_USER_WARNING);
 			return call_user_func_array(array($this, $newMethod), $param);
 		}
 		trigger_error(sprintf('Call to undefined function: %s::%s() from %s on line %u.', get_class($this), $method, $trace[1]['file'], $trace[1]['line']), E_USER_ERROR);

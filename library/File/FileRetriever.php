@@ -161,23 +161,33 @@ class FileRetriever {
 	 * This static function is the way to get a file from a http source.
 	 *
 	 * @param array $url the location of the file
+	 * @param array $getParameters A map with get parameters
 	 * @param array $postParameters A map with post parameters
 	 * @param int $port
 	 * @param int $timeout in seconds
 	 * @deprecated Use get() instead.
 	 * @return File
 	 */
-	public static function createFromHttp($url, $postParameters = null, $port = 80, $timeout = 30) {
+	public static function createFromHttp($url, $getParameters = null, $postParameters = null, $port = 80, $timeout = 30) {
 
     $curlHandle = curl_init();
 
-		curl_setopt($curlHandle, CURLOPT_URL, $url);
+    if ($getParameters) $getParameters = '?' . http_build_query($getParameters);
+    else $getParameters = '';
+
+		curl_setopt($curlHandle, CURLOPT_URL, $url . $getParameters);
     curl_setopt($curlHandle, CURLOPT_PORT, $port);
 		curl_setopt($curlHandle, CURLOPT_TIMEOUT, $timeout);
 		curl_setopt($curlHandle, CURLOPT_FAILONERROR, true);
 		curl_setopt($curlHandle, CURLOPT_FOLLOWLOCATION, true);
 		// return into a variable
 		curl_setopt($curlHandle, CURLOPT_RETURNTRANSFER, true);
+
+    if ($postParameters) {
+			curl_setopt($curlHandle, CURLOPT_POST, 1);
+			curl_setopt($curlHandle, CURLOPT_POSTFIELDS, $postParameters);
+    }
+
 
 		$result = curl_exec($curlHandle);
 

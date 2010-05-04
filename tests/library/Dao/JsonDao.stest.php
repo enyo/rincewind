@@ -90,7 +90,7 @@ class JsonDao_FileFactory_Test extends Snap_UnitTestCase {
 
 	public function testIteratorLengthCount() {
 		$iterator = $this->dao->getIterator(array('integer'=>132456));
-		return $this->assertEqual($iterator->count(), 2, 'Length should have been one.');
+		return $this->assertEqual($iterator->count(), 2, 'Length should have been two.');
 	}
 
 	public function testObject() {

@@ -68,6 +68,11 @@ class FileRetriever {
 	/**
 	 * This is the way to create a file.
 	 *
+	 * It is a shortcut for the different methods available (Form upload, http, etc...)
+	 *
+	 * If you need more control over the method, you can call the different methods
+	 * directly (eg: createFromHttp())
+	 *
 	 * @param mixed $data Is either an URL, or an array from form upload or a local path.
 	 * @param int $source One of File::SOURCE_XXX
 	 * @param int $maxFileSize in kilobytes.
@@ -156,12 +161,13 @@ class FileRetriever {
 	 * This static function is the way to get a file from a http source.
 	 *
 	 * @param array $url the location of the file
+	 * @param array $postParameters A map with post parameters
 	 * @param int $port
 	 * @param int $timeout in seconds
 	 * @deprecated Use get() instead.
 	 * @return File
 	 */
-	public static function createFromHttp($url, $port = 80, $timeout = 30) {
+	public static function createFromHttp($url, $postParameters = null, $port = 80, $timeout = 30) {
 
     $curlHandle = curl_init();
 

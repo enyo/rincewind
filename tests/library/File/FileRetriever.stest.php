@@ -25,12 +25,8 @@ class FileRetriever_File_Test extends Snap_UnitTestCase {
 	}
 
 	public function testGettingWrongLocalFile() {
-		try {
-			$this->fileRetriever->create($this->testFile . 'WRONG', File::SOURCE_FILE);
-		}
-		catch (Exception $e) {
-			return $this->assertIsA($e, 'FileRetrieverException', "Should have thrown a FileException.");
-		}
+	  $this->willThrow('FileRetrieverException');
+		$this->fileRetriever->create($this->testFile . 'WRONG', File::SOURCE_FILE);
 	}
 
 	public function testGettingLocalFile() {

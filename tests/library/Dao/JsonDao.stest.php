@@ -48,7 +48,7 @@ class JsonDao_FileFactory_Test extends Snap_UnitTestCase {
 			->listenTo('viewList', array(new Snap_Equals_Expectation('dao_test_table'), new Snap_Equals_Expectation(array('integer'=>132456))))
 			->listenTo('view', array(new Snap_Equals_Expectation('dao_test_table'), new Snap_Equals_Expectation(array('id'=>4))))
 			->listenTo('view', array(new Snap_Equals_Expectation('dao_test_table'), new Snap_Equals_Expectation(array('string'=>'TEST', 'integer'=>17))))
-			->construct();
+			->construct('x', 'x');
 		$this->dao = new JsonTestDao($this->fileFactory);
 	}
 

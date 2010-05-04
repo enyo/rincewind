@@ -48,8 +48,37 @@ class FileDataSourceException extends DataSourceException { };
  */
 abstract class FileDataSource {
 
+  /**
+   * This is the object used to actually get the files.
+   * @var FileRetriever
+   */
+  protected $fileRetriever;
+
+  /**
+   * This is the base url to connect to the backend.
+   * @var string
+   */
+  protected $baseUrl;
+
+  /**
+   * This is the port used to connect to the backend.
+   * @var int
+   */
+  protected $port;
+
+  /**
+   * @param FileRetriever $fileRetriever
+   * @param string $baseUrl
+   * @param int $port
+   */
+  public function __construct($fileRetriever, $baseUrl, $port = 80) {
+    $this->fileRetriever = $fileRetriever;
+    $this->baseUrl = $baseUrl;
+    $this->port = $port;
+  }
+
 	/**
-	 * Returns ONE object.
+	 * Returns one object.
 	 *
 	 * @param string $resource
 	 * @param array $attributes Associative array

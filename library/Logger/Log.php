@@ -56,7 +56,8 @@ abstract class Log {
    * @param string $context Only letters, numbers, underscore and dash is allowed to avoid errors.
    */
   public static function addLogger($logger, $context = self::GENERAL) {
-    $context = self::sanitizeContext();
+    if ($context !== self::GENERAL && (empty($context) || preg_replace('/[^a-z0-9\_\-]/im', '', $context) != $context)) throw new LogException("The context name '$context' is not allowed.");
+    $context = self::sanitizeContext($context);
     self::$loggers[$context] = $logger;
   }
 
@@ -68,6 +69,7 @@ abstract class Log {
    * @return Logger or null if not set for this context.
    */
   public static function getLogger($context = self::GENERAL) {
+    $context = self::sanitizeContext($context);
     if (isset(self::$loggers[$context])) return self::$loggers[$context];
     else return null;
   }
@@ -81,6 +83,7 @@ abstract class Log {
    * @return bool true on success, false if no logger specified for the context.
    */
   public static function debug($message, $context = self::GENERAL) {
+    $context = self::sanitizeContext($context);
     if ($logger = self::getLogger($context)) {
       $logger->debug($message);
       return true;
@@ -91,13 +94,12 @@ abstract class Log {
 
   /**
    * Sanitizes a context.
-   * Throws an exception if the context contains special chars.
    *
    * @param string $context
    * @return string sanitized context.
    */
   protected static function sanitizeContext($context) {
-    if ($context !== self::GENERAL && (empty($context) || preg_replace('/[^a-z0-9\_\-]/im', '', $context) != $context)) throw new LogException("The context name '$context' is not allowed.");
+    return strtolower($context);
   }
 
 

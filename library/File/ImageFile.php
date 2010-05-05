@@ -48,6 +48,19 @@ class ImageFile extends File {
   protected $destinationWidth;
   protected $destinationHeight;
 
+
+
+
+
+  /**
+   * Creates an ImageFile instead of File.
+   * @return ImageFile
+   */
+  protected static function getFile($uri) {
+    return new ImageFile($uri);
+  }
+
+
   /**
    * @param int $type One of IMAGETYPE_XXX
    */
@@ -250,8 +263,6 @@ class ImageFile extends File {
   public function __destruct() {
     if ($this->image) @imagedestroy($this->image);
   }
-
-
 
 
 

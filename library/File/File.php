@@ -142,15 +142,6 @@ class File extends FileRetriever {
   }
 
   /**
-   * Creates a file, and returns it.
-   * Always the same as the class it has been called on.
-   * @return File
-   */
-  protected static function getFile($uri) {
-    return new static($uri);
-  }
-
-  /**
    * Use this function to set a filename.
    * This is not necessary if the name is the basename of the uri passed in the constructor.
    *

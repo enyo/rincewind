@@ -19,6 +19,12 @@ include_once('File/File.php');
 
 
 /**
+ * Loading the Log class.
+ */
+if (!class_exists('Log')) include('Logger/Log.php');
+
+
+/**
  * The Exception base class for FileRetrieverExceptions.
  *
  * @author Matthias Loitsch <developer@ma.tthias.com>
@@ -175,7 +181,11 @@ class FileRetriever {
     if ($getParameters) $getParameters = '?' . http_build_query($getParameters);
     else $getParameters = '';
 
-    curl_setopt($curlHandle, CURLOPT_URL, $url . $getParameters);
+    $realUrl = $url . $getParameters;
+
+    Log::debug($realUrl, 'FileRetriever');
+
+    curl_setopt($curlHandle, CURLOPT_URL, $realUrl);
     curl_setopt($curlHandle, CURLOPT_PORT, $port);
     curl_setopt($curlHandle, CURLOPT_TIMEOUT, $timeout);
     curl_setopt($curlHandle, CURLOPT_FAILONERROR, true);

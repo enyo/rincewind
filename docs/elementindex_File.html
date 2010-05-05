@@ -15,8 +15,10 @@
 				<li><a href="elementindex_Config.html">Config</a></li>
 					<li><a href="elementindex_php-library.html">php-library</a></li>
 					<li><a href="elementindex_Dao.html">Dao</a></li>
-							<li><a href="elementindex_Database.html">Database</a></li>
+					<li><a href="elementindex_DataSource.html">DataSource</a></li>
+					<li><a href="elementindex_Database.html">Database</a></li>
 					<li><a href="elementindex_Date.html">Date</a></li>
+							<li><a href="elementindex_Logger.html">Logger</a></li>
 					<li><a href="elementindex_Storage.html">Storage</a></li>
 			</ul>
 <a href="elementindex.html">All elements</a>
@@ -35,7 +37,6 @@
 	<a class="index-letter" href="elementindex_File.html#s">s</a>
 	<a class="index-letter" href="elementindex_File.html#t">t</a>
 	<a class="index-letter" href="elementindex_File.html#u">u</a>
-	<a class="index-letter" href="elementindex_File.html#v">v</a>
 	<a class="index-letter" href="elementindex_File.html#w">w</a>
 	<a class="index-letter" href="elementindex_File.html#_">_</a>
 </div>
@@ -148,22 +149,6 @@
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="File/ImageFile.html#var$destinationWidth">ImageFile::$destinationWidth</a> in ImageFile.php</div>
 					</dd>
-			<dt class="field">
-						<img src="media/images/AbstractMethod.png" alt="Method" title="Method" />
-			<span class="method-title">delete</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="File/FileDataSource.html#methoddelete">FileDataSource::delete()</a> in FileDataSource.php</div>
-							<div class="index-item-description">Deletes the object</div>
-					</dd>
-			<dt class="field">
-						<img src="media/images/Class.png" alt="Class" title="Class" />
-			DataSourceException
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="File/FileExceptions/DataSourceException.html">DataSourceException</a> in FileDataSource.php</div>
-							<div class="index-item-description">The Exception base class for DataSourceException.</div>
-					</dd>
 		</dl>
 	<a name="f"></a>
 	<div class="index-letter-section">
@@ -179,13 +164,6 @@
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="File/File.html#var$fetchedContent">File::$fetchedContent</a> in File.php</div>
 							<div class="index-item-description">Whether the content has been fetched or not.</div>
-					</dd>
-			<dt class="field">
-						<img src="media/images/Page.png" alt="Page" title="Page" />
-			<span class="include-title">FileDataSource.php</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="File/_DataSource---FileDataSource.php.html">FileDataSource.php</a> in FileDataSource.php</div>
 					</dd>
 			<dt class="field">
 						<img src="media/images/Class.png" alt="Class" title="Class" />
@@ -210,28 +188,12 @@
 			<div class="index-item-details"><a href="File/_File---FileRetriever.php.html">FileRetriever.php</a> in FileRetriever.php</div>
 					</dd>
 			<dt class="field">
-						<img src="media/images/AbstractClass.png" alt="Class" title="Class" />
-			FileDataSource
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="File/FileDataSource.html">FileDataSource</a> in FileDataSource.php</div>
-							<div class="index-item-description">This factory is used to get files to use for a Dao.</div>
-					</dd>
-			<dt class="field">
 						<img src="media/images/Class.png" alt="Class" title="Class" />
 			FileRetriever
 					</dt>
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="File/FileRetriever.html">FileRetriever</a> in FileRetriever.php</div>
 							<div class="index-item-description">The FileRetriever actually fetches a files, and returns the File object.</div>
-					</dd>
-			<dt class="field">
-						<img src="media/images/Class.png" alt="Class" title="Class" />
-			FileDataSourceException
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="File/FileExceptions/FileDataSourceException.html">FileDataSourceException</a> in FileDataSource.php</div>
-							<div class="index-item-description">The Exception base class for FileDataSourceException.</div>
 					</dd>
 			<dt class="field">
 						<img src="media/images/Class.png" alt="Class" title="Class" />
@@ -285,6 +247,14 @@
 					</dt>
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="File/FileRetriever.html#methodgetFile">FileRetriever::getFile()</a> in FileRetriever.php</div>
+							<div class="index-item-description">Creates a file, and returns it.</div>
+					</dd>
+			<dt class="field">
+						<img src="media/images/Method.png" alt="Method" title="Method" />
+			<span class="method-title">getFile</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="File/File.html#methodgetFile">File::getFile()</a> in File.php</div>
 							<div class="index-item-description">Creates a file, and returns it.</div>
 					</dd>
 			<dt class="field">
@@ -401,14 +371,6 @@
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="File/ImageFile.html">ImageFile</a> in ImageFile.php</div>
 							<div class="index-item-description">You get an ImageFile by calling ImageFileFactory::get($uri).</div>
-					</dd>
-			<dt class="field">
-						<img src="media/images/AbstractMethod.png" alt="Method" title="Method" />
-			<span class="method-title">insert</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="File/FileDataSource.html#methodinsert">FileDataSource::insert()</a> in FileDataSource.php</div>
-							<div class="index-item-description">Inserts the object, and returns the id.</div>
 					</dd>
 			<dt class="field">
 						<img src="media/images/Class.png" alt="Class" title="Class" />
@@ -691,38 +653,6 @@
 			<div class="index-item-details"><a href="File/File.html#var$uri">File::$uri</a> in File.php</div>
 							<div class="index-item-description">The file URI.</div>
 					</dd>
-			<dt class="field">
-						<img src="media/images/AbstractMethod.png" alt="Method" title="Method" />
-			<span class="method-title">update</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="File/FileDataSource.html#methodupdate">FileDataSource::update()</a> in FileDataSource.php</div>
-							<div class="index-item-description">Updates the object.</div>
-					</dd>
-		</dl>
-	<a name="v"></a>
-	<div class="index-letter-section">
-		<div style="float: left" class="index-letter-title">v</div>
-		<div style="float: right"><a href="#top">top</a></div>
-		<div style="clear: both"></div>
-	</div>
-	<dl>
-			<dt class="field">
-						<img src="media/images/AbstractMethod.png" alt="Method" title="Method" />
-			<span class="method-title">view</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="File/FileDataSource.html#methodview">FileDataSource::view()</a> in FileDataSource.php</div>
-							<div class="index-item-description">Returns ONE object.</div>
-					</dd>
-			<dt class="field">
-						<img src="media/images/AbstractMethod.png" alt="Method" title="Method" />
-			<span class="method-title">viewList</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="File/FileDataSource.html#methodviewList">FileDataSource::viewList()</a> in FileDataSource.php</div>
-							<div class="index-item-description">Returns all objects found.</div>
-					</dd>
 		</dl>
 	<a name="w"></a>
 	<div class="index-letter-section">
@@ -754,7 +684,6 @@
 	<a class="index-letter" href="elementindex_File.html#s">s</a>
 	<a class="index-letter" href="elementindex_File.html#t">t</a>
 	<a class="index-letter" href="elementindex_File.html#u">u</a>
-	<a class="index-letter" href="elementindex_File.html#v">v</a>
 	<a class="index-letter" href="elementindex_File.html#w">w</a>
 	<a class="index-letter" href="elementindex_File.html#_">_</a>
 </div>	</body>

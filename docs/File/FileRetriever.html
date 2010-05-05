@@ -101,7 +101,7 @@
 					<img src="../media/images/StaticMethod.png" alt=" "/>
 											static <span class="method-result"><a href="../File/File.html">File</a></span>
 										<a href="#createFromHttp" title="details" class="method-name">createFromHttp</a>
-											(<span class="var-type">array</span>&nbsp;<span class="var-name">$url</span>, [<span class="var-type">int</span>&nbsp;<span class="var-name">$port</span> = <span class="var-default">80</span>], [<span class="var-type">int</span>&nbsp;<span class="var-name">$timeout</span> = <span class="var-default">30</span>])
+											(<span class="var-type">array</span>&nbsp;<span class="var-name">$url</span>, [<span class="var-type">array</span>&nbsp;<span class="var-name">$getParameters</span> = <span class="var-default">null</span>], [<span class="var-type">array</span>&nbsp;<span class="var-name">$postParameters</span> = <span class="var-default">null</span>], [<span class="var-type">int</span>&nbsp;<span class="var-name">$port</span> = <span class="var-default">80</span>], [<span class="var-type">int</span>&nbsp;<span class="var-name">$timeout</span> = <span class="var-default">30</span>])
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/StaticMethod.png" alt=" "/>
@@ -111,7 +111,7 @@
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/StaticMethod.png" alt=" "/>
-											static <span class="method-result">$File</span>
+											static <span class="method-result"><a href="../File/File.html">File</a></span>
 										<a href="#getFile" title="details" class="method-name">getFile</a>
 											(<span class="var-type"></span>&nbsp;<span class="var-name">$uri</span>)
 									</div>
@@ -142,11 +142,12 @@
 	
 	<div class="method-header">
 		<img src="../media/images/StaticMethod.png" />
-		<span class="method-title">static create</span> (line <span class="line-number">76</span>)
+		<span class="method-title">static create</span> (line <span class="line-number">81</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
 <p class="short-description">This is the way to create a file.</p>
+<p class="description"><p>It is a shortcut for the different methods available (Form upload, http, etc...)</p><p>If you need more control over the method, you can call the different methods  directly (eg: createFromHttp())</p></p>
 	<ul class="tags">
 				<li><span class="field">access:</span> public</li>
 			</ul>
@@ -178,7 +179,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/StaticMethod.png" />
-		<span class="method-title">static createFromFormUpload</span> (line <span class="line-number">105</span>)
+		<span class="method-title">static createFromFormUpload</span> (line <span class="line-number">110</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -212,7 +213,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/StaticMethod.png" />
-		<span class="method-title">static createFromHttp</span> (line <span class="line-number">164</span>)
+		<span class="method-title">static createFromHttp</span> (line <span class="line-number">171</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -227,13 +228,19 @@
 		<span class="method-name">
 			createFromHttp
 		</span>
-					(<span class="var-type">array</span>&nbsp;<span class="var-name">$url</span>, [<span class="var-type">int</span>&nbsp;<span class="var-name">$port</span> = <span class="var-default">80</span>], [<span class="var-type">int</span>&nbsp;<span class="var-name">$timeout</span> = <span class="var-default">30</span>])
+					(<span class="var-type">array</span>&nbsp;<span class="var-name">$url</span>, [<span class="var-type">array</span>&nbsp;<span class="var-name">$getParameters</span> = <span class="var-default">null</span>], [<span class="var-type">array</span>&nbsp;<span class="var-name">$postParameters</span> = <span class="var-default">null</span>], [<span class="var-type">int</span>&nbsp;<span class="var-name">$port</span> = <span class="var-default">80</span>], [<span class="var-type">int</span>&nbsp;<span class="var-name">$timeout</span> = <span class="var-default">30</span>])
 			</div>
 	
 			<ul class="parameters">
 					<li>
 				<span class="var-type">array</span>
 				<span class="var-name">$url</span><span class="var-description">: the location of the file</span>			</li>
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">$getParameters</span><span class="var-description">: A map with get parameters</span>			</li>
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">$postParameters</span><span class="var-description">: A map with post parameters</span>			</li>
 					<li>
 				<span class="var-type">int</span>
 				<span class="var-name">$port</span>			</li>
@@ -249,7 +256,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/StaticMethod.png" />
-		<span class="method-title">static createFromLocalFile</span> (line <span class="line-number">146</span>)
+		<span class="method-title">static createFromLocalFile</span> (line <span class="line-number">151</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -290,7 +297,7 @@
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">$File</span>
+		<span class="method-result"><a href="../File/File.html">File</a></span>
 		<span class="method-name">
 			getFile
 		</span>
@@ -304,6 +311,14 @@
 				</ul>
 		
 			
+			<hr class="separator" />
+		<div class="notes">Redefined in descendants as:</div>
+		<ul class="redefinitions">
+					<li>
+				<a href="../File/File.html#methodgetFile">File::getFile()</a>
+								: Creates a file, and returns it.
+							</li>
+				</ul>
 	</div>
 <a name="methodprocess" id="process"><!-- --></a>
 <div class="oddrow">

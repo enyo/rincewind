@@ -76,6 +76,18 @@
 											The JsonDao implementation of a FileDao
 										</td>
 				</tr>
+								<tr>
+					<td style="padding-right: 2em; white-space: nowrap">
+						<img src="../media/images/Class.png"
+								 alt=" class"
+								 title=" class"
+								 style="vertical-align: center"/>
+						<a href="../Dao/XmlDao.html">XmlDao</a>
+					</td>
+					<td>
+											The XmlDao implementation of a FileDao
+										</td>
+				</tr>
 							</table>
 		</div>
 	</div>
@@ -124,7 +136,7 @@
 					<img src="../media/images/Constructor.png" alt=" "/>
 											<span class="method-result">FileDao</span>
 										<a href="#__construct" title="details" class="method-name">__construct</a>
-											(<span class="var-type"><a href="../File/FileDataSource.html">FileDataSource</a></span>&nbsp;<span class="var-name">$fileDataSource</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$tableName</span> = <span class="var-default">null</span>], [<span class="var-type">array</span>&nbsp;<span class="var-name">$columnTypes</span> = <span class="var-default">null</span>], [<span class="var-type">array</span>&nbsp;<span class="var-name">$nullColumns</span> = <span class="var-default">null</span>], [<span class="var-type">array</span>&nbsp;<span class="var-name">$defaultColumns</span> = <span class="var-default">null</span>])
+											(<span class="var-type"><a href="../DataSource/FileDataSource.html">FileDataSource</a></span>&nbsp;<span class="var-name">$fileDataSource</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$tableName</span> = <span class="var-default">null</span>], [<span class="var-type">array</span>&nbsp;<span class="var-name">$columnTypes</span> = <span class="var-default">null</span>], [<span class="var-type">array</span>&nbsp;<span class="var-name">$nullColumns</span> = <span class="var-default">null</span>], [<span class="var-type">array</span>&nbsp;<span class="var-name">$defaultColumns</span> = <span class="var-default">null</span>])
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
@@ -146,7 +158,7 @@
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/AbstractMethod.png" alt=" "/>
-											<span class="method-result">FileResultIterator</span>
+											<span class="method-result"><a href="../Dao/FileResultIterator.html">FileResultIterator</a></span>
 										<a href="#createIterator" title="details" class="method-name">createIterator</a>
 											(<span class="var-type">array</span>&nbsp;<span class="var-name">$data</span>)
 									</div>
@@ -206,7 +218,7 @@
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result"><a href="../File/FileDataSource.html">FileDataSource</a></span>
+											<span class="method-result"><a href="../DataSource/FileDataSource.html">FileDataSource</a></span>
 										<a href="#getFileDataSource" title="details" class="method-name">getFileDataSource</a>
 										()
 									</div>
@@ -218,7 +230,7 @@
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result">FileResultIterator</span>
+											<span class="method-result"><a href="../Dao/FileResultIterator.html">FileResultIterator</a></span>
 										<a href="#getIteratorFromData" title="details" class="method-name">getIteratorFromData</a>
 											(<span class="var-type">string</span>&nbsp;<span class="var-name">$data</span>)
 									</div>
@@ -374,12 +386,12 @@
 		<span class="method-name">
 			__construct
 		</span>
-					(<span class="var-type"><a href="../File/FileDataSource.html">FileDataSource</a></span>&nbsp;<span class="var-name">$fileDataSource</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$tableName</span> = <span class="var-default">null</span>], [<span class="var-type">array</span>&nbsp;<span class="var-name">$columnTypes</span> = <span class="var-default">null</span>], [<span class="var-type">array</span>&nbsp;<span class="var-name">$nullColumns</span> = <span class="var-default">null</span>], [<span class="var-type">array</span>&nbsp;<span class="var-name">$defaultColumns</span> = <span class="var-default">null</span>])
+					(<span class="var-type"><a href="../DataSource/FileDataSource.html">FileDataSource</a></span>&nbsp;<span class="var-name">$fileDataSource</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$tableName</span> = <span class="var-default">null</span>], [<span class="var-type">array</span>&nbsp;<span class="var-name">$columnTypes</span> = <span class="var-default">null</span>], [<span class="var-type">array</span>&nbsp;<span class="var-name">$nullColumns</span> = <span class="var-default">null</span>], [<span class="var-type">array</span>&nbsp;<span class="var-name">$defaultColumns</span> = <span class="var-default">null</span>])
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type"><a href="../File/FileDataSource.html">FileDataSource</a></span>
+				<span class="var-type"><a href="../DataSource/FileDataSource.html">FileDataSource</a></span>
 				<span class="var-name">$fileDataSource</span><span class="var-description">: The fileDataSource is used to create the requests.</span>			</li>
 					<li>
 				<span class="var-type">string</span>
@@ -502,7 +514,7 @@
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">FileResultIterator</span>
+		<span class="method-result"><a href="../Dao/FileResultIterator.html">FileResultIterator</a></span>
 		<span class="method-name">
 			createIterator
 		</span>
@@ -523,6 +535,10 @@
 				<a href="../Dao/JsonDao.html#methodcreateIterator">JsonDao::createIterator()</a>
 								: Creates an iterator for a json data hash.
 							</li>
+					<li>
+				<a href="../Dao/XmlDao.html#methodcreateIterator">XmlDao::createIterator()</a>
+								: Creates an iterator for a Xml data hash.
+							</li>
 				</ul>
 	</div>
 <a name="methoddelete" id="delete"><!-- --></a>
@@ -530,7 +546,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">delete</span> (line <span class="line-number">205</span>)
+		<span class="method-title">delete</span> (line <span class="line-number">208</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -560,7 +576,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">escapeColumn</span> (line <span class="line-number">302</span>)
+		<span class="method-title">escapeColumn</span> (line <span class="line-number">305</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -590,7 +606,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">escapeTable</span> (line <span class="line-number">323</span>)
+		<span class="method-title">escapeTable</span> (line <span class="line-number">326</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -620,7 +636,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">exportColumn</span> (line <span class="line-number">291</span>)
+		<span class="method-title">exportColumn</span> (line <span class="line-number">294</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -657,7 +673,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">exportMap</span> (line <span class="line-number">225</span>)
+		<span class="method-title">exportMap</span> (line <span class="line-number">228</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -688,7 +704,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">exportTable</span> (line <span class="line-number">313</span>)
+		<span class="method-title">exportTable</span> (line <span class="line-number">316</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -726,7 +742,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">generateSortString</span> (line <span class="line-number">267</span>)
+		<span class="method-title">generateSortString</span> (line <span class="line-number">270</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -794,6 +810,13 @@
 				</ul>
 		
 			
+			<hr class="separator" />
+		<div class="notes">Redefined in descendants as:</div>
+		<ul class="redefinitions">
+					<li>
+				<a href="../Dao/XmlDao.html#methodget">XmlDao::get()</a>
+							</li>
+				</ul>
 	</div>
 <a name="methodgetData" id="getData"><!-- --></a>
 <div class="evenrow">
@@ -831,6 +854,14 @@
 				</ul>
 		
 			
+			<hr class="separator" />
+		<div class="notes">Redefined in descendants as:</div>
+		<ul class="redefinitions">
+					<li>
+				<a href="../Dao/XmlDao.html#methodgetData">XmlDao::getData()</a>
+								: Just calls the parent, but then returns only one element of the list
+							</li>
+				</ul>
 	</div>
 <a name="methodgetFileDataSource" id="getFileDataSource"><!-- --></a>
 <div class="oddrow">
@@ -847,7 +878,7 @@
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result"><a href="../File/FileDataSource.html">FileDataSource</a></span>
+		<span class="method-result"><a href="../DataSource/FileDataSource.html">FileDataSource</a></span>
 		<span class="method-name">
 			getFileDataSource
 		</span>
@@ -908,7 +939,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">getIteratorFromData</span> (line <span class="line-number">253</span>)
+		<span class="method-title">getIteratorFromData</span> (line <span class="line-number">256</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -918,7 +949,7 @@
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">FileResultIterator</span>
+		<span class="method-result"><a href="../Dao/FileResultIterator.html">FileResultIterator</a></span>
 		<span class="method-name">
 			getIteratorFromData
 		</span>
@@ -938,7 +969,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">getTotalCount</span> (line <span class="line-number">215</span>)
+		<span class="method-title">getTotalCount</span> (line <span class="line-number">218</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -963,7 +994,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">insert</span> (line <span class="line-number">165</span>)
+		<span class="method-title">insert</span> (line <span class="line-number">168</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1027,6 +1058,10 @@
 				<a href="../Dao/JsonDao.html#methodinterpretFileContent">JsonDao::interpretFileContent()</a>
 								: Intepretes the json content, and returns it.
 							</li>
+					<li>
+				<a href="../Dao/XmlDao.html#methodinterpretFileContent">XmlDao::interpretFileContent()</a>
+								: Intepretes the xml content, and returns it as array.
+							</li>
 				</ul>
 	</div>
 <a name="methodrollback" id="rollback"><!-- --></a>
@@ -1059,7 +1094,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">update</span> (line <span class="line-number">186</span>)
+		<span class="method-title">update</span> (line <span class="line-number">189</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->

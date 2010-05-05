@@ -1,73 +1,137 @@
 <?php
 
+/**
+ * This file contains the Logger definition.
+ *
+ * @author Matthias Loitsch <developer@ma.tthias.com>
+ * @copyright Copyright (c) 2010, Matthias Loitsch
+ * @package Logger
+ **/
+
+
+if (!class_exists('LoggerException')) include(dirname(__FILE__) . '/LoggerExceptions.php');
+
+/**
+ * Loggers have to extend this class
+ *
+ * @author Matthias Loitsch <developer@ma.tthias.com>
+ * @copyright Copyright (c) 2010, Matthias Loitsch
+ * @package Logger
+ **/
+abstract class Logger {
+
+  /**#@+
+   * The different Log levels.
+   *
+   * @var int
+   */
+  const DEBUG   = 0x00001;
+  const INFO    = 0x00011;
+  const WARNING = 0x00111;
+  const ERROR   = 0x01111;
+  const FATAL   = 0x11111;
+  /**#@-*/
+
 
   /**
-   * @author     Matthias Loitsch <develop@matthias.loitsch.com>
-   * @copyright  Copyright (c) 2009, Matthias Loitsch
+   * The minimum level a message has to have to be logged.
+   * Eg: If level is Logger::WARN then WARN, ERROR and FATAL will be logged.
+   *
+   * @var int
    */
+  protected $level = self::WARNING;
 
 
-  require_once('Logger/LoggerInterface.php');
-  require_once('Logger/AbstractLogger.php');
-
-  
-  
-  class Logger extends AbstractLogger implements LoggerInterface {
-
-    /**
-     * The resource defines what the logger is logging for.
-     * It's just a string representation.
-     *
-     * @var string
-     */
-    protected $resource;
-
-  
-    /**
-     * @param string $resource
-     * @param string $path
-     * @param string $fileName
-     * @param bool $useIncludePath
-     * @param bool $isDebugging
-     */
-    public function __construct($resource, $path = '', $fileName = '', $useIncludePath = false, $isDebugging = false) {
-      $this->resource = $resource;
-      $this->setFileUri($path, $fileName, $useIncludePath);
-      if ($isDebugging) $this->setToDebugMode();
-    }
-
-    /**
-     * Log!
-     *
-     * @param string $text
-     * @param bool $newline Whether to start a newline after
-     */
-    public function log($text, $newLine = true) {
-      if ($this->isDisabled()) return;
-
-      $logLine = date($this->dateFormat) . ' ' . $this->resource . ': ' . $text . ($newLine ? "\n" : '');
-
-      $flags = FILE_APPEND;
-      if ($this->useIncludePath) { $flags |= FILE_USE_INCLUDE_PATH; }
-
-      if (!file_put_contents($this->path . $this->fileName, $logLine, $flags)) throw new LoggerException('Unable to log.');
-    }
-  
-  
-    /**
-     * The same as log, but only logs when in debug mode, and puts <debug> in front of the text.
-     *
-     * @param string $text
-     * @param bool $newline
-     */
-    public function debug($text, $newLine = true) {
-      if ($this->isDisabled() || !$this->isDebugging()) return;
-      $this->log('<debug> ' . $text, $newLine);
-    }
-  
-  
-  
+  /**
+   * Sets the level for logging.
+   *
+   * @param int $level
+   * @see $level
+   */
+  public function setLevel($level) {
+    $this->level = (int) $level;
   }
-  
+
+  /**
+   * Returns the current level for logging.
+   *
+   * @return int
+   * @see $level
+   */
+  public function getLevel() {
+    return $this->level;
+  }
+
+  /**
+   * Checks if it's ok to log for specified level
+   *
+   * @param int $messageLevel
+   * @return bool
+   */
+  protected function shouldLog($messageLevel) {
+    return ((int) $messageLevel & $this->level) === $this->level;
+  }
+
+
+  /**
+   * Log a debug message
+   * 
+   * @param string $message
+   */
+  public function debug($message) { return $this->log($message, self::DEBUG); }
+
+  /**
+   * Log an info message
+   * 
+   * @param string $message
+   */
+  public function info($message) { return $this->log($message, self::INFO); }
+
+  /**
+   * Log a warning
+   * 
+   * @param string $message
+   */
+  public function warning($message) { return $this->log($message, self::WARNING); }
+
+  /**
+   * Log an error
+   * 
+   * @param string $message
+   */
+  public function error($message) { return $this->log($message, self::ERROR); }
+
+  /**
+   * Log a fatal error
+   * 
+   * @param string $message
+   */
+  public function fatal($message) { return $this->log($message, self::FATAL); }
+
+
+  /**
+   * The actual method that logs the message
+   *
+   * @param string $message
+   * @param int $level
+   */
+  protected function log($message, $level) {
+    if (!$this->shouldLog($level)) return false;
+    $this->doLog($message, $level);
+    return true;
+  }
+
+
+  /**
+   * The actual method that logs the message
+   *
+   * @param string $message
+   * @param int $level
+   */
+  protected abstract function doLog($message, $level);
+
+
+}
+
 
 ?>

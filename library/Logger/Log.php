@@ -62,6 +62,19 @@ abstract class Log {
   }
 
 
+  /**
+   * Returns a logger for a specific context.
+   *
+   * @param string $context
+   * @return Logger or null if not set for this context.
+   */
+  public static function getLogger($context = self::GENERAL) {
+    if (isset(self::$loggers[$context])) return self::$loggers[$context];
+    else return null;
+  }
+
+
+
 }
 
 ?>

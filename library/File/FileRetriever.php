@@ -58,7 +58,7 @@ class FileRetriever {
 
   /**
    * Creates a file, and returns it.
-   * @return $File
+   * @return File
    */
   protected static function getFile($uri) {
     return new File($uri);

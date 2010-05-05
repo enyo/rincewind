@@ -1,73 +1,74 @@
 <?php
 
+/**
+ * This file contains the Logger definition.
+ *
+ * @author Matthias Loitsch <developer@ma.tthias.com>
+ * @copyright Copyright (c) 2010, Matthias Loitsch
+ * @package Logger
+ **/
+
+
+if (!class_exists('LogException')) include(dirname(__FILE__) . '/LoggerExceptions.php');
+
+/**
+ * Loggers have to extend this class
+ *
+ * @author Matthias Loitsch <developer@ma.tthias.com>
+ * @copyright Copyright (c) 2010, Matthias Loitsch
+ * @package Logger
+ **/
+abstract class Logger {
+
+  /**#@+
+   * The different Log levels.
+   *
+   * @var int
+   */
+  const DEBUG = 0x11111;
+  const INFO  = 0x01111;
+  const WARN  = 0x00111;
+  const ERROR = 0x00011;
+  const FATAL = 0x00001;
+  /**#@-*/
 
   /**
-   * @author     Matthias Loitsch <develop@matthias.loitsch.com>
-   * @copyright  Copyright (c) 2009, Matthias Loitsch
+   * Log a debug message
+   * 
+   * @param string $message
    */
+  abstract public function debug($message);
+
+  /**
+   * Log an info message
+   * 
+   * @param string $message
+   */
+  abstract public function info($message);
+
+  /**
+   * Log a warning
+   * 
+   * @param string $message
+   */
+  abstract public function warning($message);
+
+  /**
+   * Log an error
+   * 
+   * @param string $message
+   */
+  abstract public function error($message);
+
+  /**
+   * Log a fatal error
+   * 
+   * @param string $message
+   */
+  abstract public function fatal($message);
 
 
-  require_once('Logger/LoggerInterface.php');
-  require_once('Logger/AbstractLogger.php');
+}
 
-  
-  
-  class Logger extends AbstractLogger implements LoggerInterface {
-
-    /**
-     * The resource defines what the logger is logging for.
-     * It's just a string representation.
-     *
-     * @var string
-     */
-    protected $resource;
-
-  
-    /**
-     * @param string $resource
-     * @param string $path
-     * @param string $fileName
-     * @param bool $useIncludePath
-     * @param bool $isDebugging
-     */
-    public function __construct($resource, $path = '', $fileName = '', $useIncludePath = false, $isDebugging = false) {
-      $this->resource = $resource;
-      $this->setFileUri($path, $fileName, $useIncludePath);
-      if ($isDebugging) $this->setToDebugMode();
-    }
-
-    /**
-     * Log!
-     *
-     * @param string $text
-     * @param bool $newline Whether to start a newline after
-     */
-    public function log($text, $newLine = true) {
-      if ($this->isDisabled()) return;
-
-      $logLine = date($this->dateFormat) . ' ' . $this->resource . ': ' . $text . ($newLine ? "\n" : '');
-
-      $flags = FILE_APPEND;
-      if ($this->useIncludePath) { $flags |= FILE_USE_INCLUDE_PATH; }
-
-      if (!file_put_contents($this->path . $this->fileName, $logLine, $flags)) throw new LoggerException('Unable to log.');
-    }
-  
-  
-    /**
-     * The same as log, but only logs when in debug mode, and puts <debug> in front of the text.
-     *
-     * @param string $text
-     * @param bool $newline
-     */
-    public function debug($text, $newLine = true) {
-      if ($this->isDisabled() || !$this->isDebugging()) return;
-      $this->log('<debug> ' . $text, $newLine);
-    }
-  
-  
-  
-  }
-  
 
 ?>

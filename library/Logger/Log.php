@@ -32,7 +32,6 @@ if (!class_exists('LogException')) include(dirname(__FILE__) . '/LoggerException
  * @copyright Copyright (c) 2010, Matthias Loitsch
  * @package Logger
  **/
-
 abstract class Log {
 
   /**
@@ -73,6 +72,26 @@ abstract class Log {
     else return null;
   }
 
+
+  /**
+   * Logs a debug message in the logger for the specific context
+   *
+   * @param string $message
+   * @param string $context
+   * @return bool true on success, false if no logger specified for the context.
+   */
+  public static function debug($message, $context = self::GENERAL) {
+    if ($logger = self::getLogger($context)) {
+      $logger->debug($message);
+      return true;
+    }
+    return false;
+  }
+
+
+  protected static function sanitizeContext($context) {
+    
+  }
 
 
 }

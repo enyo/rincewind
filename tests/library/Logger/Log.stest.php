@@ -64,7 +64,25 @@ class Log_Basic_Test extends Snap_UnitTestCase {
 }
 
 
+class Log_UndefinedLogger_Test extends Snap_UnitTestCase {
 
+
+	public function setUp() {
+	}
+
+	public function tearDown() {
+	}
+
+
+  public function testDebugDefault() {
+    return $this->assertFalse(Log::debug('test'));
+  }
+
+  public function testDebug() {
+    return $this->assertFalse(Log::debug('test', 'CONTEXT'));
+  }
+
+}
 
 
 ?>

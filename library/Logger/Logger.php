@@ -25,12 +25,53 @@ abstract class Logger {
    *
    * @var int
    */
-  const DEBUG = 0x11111;
-  const INFO  = 0x01111;
+  const DEBUG = 0x00001;
+  const INFO  = 0x00011;
   const WARN  = 0x00111;
-  const ERROR = 0x00011;
-  const FATAL = 0x00001;
+  const ERROR = 0x01111;
+  const FATAL = 0x11111;
   /**#@-*/
+
+
+  /**
+   * The minimum level a message has to have to be logged.
+   * Eg: If level is Logger::WARN then WARN, ERROR and FATAL will be logged.
+   *
+   * @var int
+   */
+  protected $level = self::WARN;
+
+
+  /**
+   * Sets the level for logging.
+   *
+   * @param int $level
+   * @see $level
+   */
+  public function setLevel($level) {
+    $this->level = (int) $level;
+  }
+
+  /**
+   * Returns the current level for logging.
+   *
+   * @return int
+   * @see $level
+   */
+  public function getLevel() {
+    return $this->level;
+  }
+
+  /**
+   * Checks if it's ok to log for specified level
+   *
+   * @param int $messageLevel
+   * @return bool
+   */
+  protected function shouldLog($messageLevel) {
+    return ((int) $messageLevel & $this->level) === $this->level;
+  }
+
 
   /**
    * Log a debug message

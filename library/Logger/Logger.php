@@ -9,7 +9,7 @@
  **/
 
 
-if (!class_exists('LogException')) include(dirname(__FILE__) . '/LoggerExceptions.php');
+if (!class_exists('LoggerException')) include(dirname(__FILE__) . '/LoggerExceptions.php');
 
 /**
  * Loggers have to extend this class
@@ -78,35 +78,57 @@ abstract class Logger {
    * 
    * @param string $message
    */
-  abstract public function debug($message);
+  public function debug($message) { return $this->log($message, self::DEBUG); }
 
   /**
    * Log an info message
    * 
    * @param string $message
    */
-  abstract public function info($message);
+  public function info($message) { return $this->log($message, self::INFO); }
 
   /**
    * Log a warning
    * 
    * @param string $message
    */
-  abstract public function warning($message);
+  public function warning($message) { return $this->log($message, self::WARNING); }
 
   /**
    * Log an error
    * 
    * @param string $message
    */
-  abstract public function error($message);
+  public function error($message) { return $this->log($message, self::ERROR); }
 
   /**
    * Log a fatal error
    * 
    * @param string $message
    */
-  abstract public function fatal($message);
+  public function fatal($message) { return $this->log($message, self::FATAL); }
+
+
+  /**
+   * The actual method that logs the message
+   *
+   * @param string $message
+   * @param int $level
+   */
+  protected function log($message, $level) {
+    if (!$this->shouldLog($level)) return false;
+    $this->doLog($message, $level);
+    return true;
+  }
+
+
+  /**
+   * The actual method that logs the message
+   *
+   * @param string $message
+   * @param int $level
+   */
+  protected abstract function doLog($message, $level);
 
 
 }

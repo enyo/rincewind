@@ -47,17 +47,22 @@ class Log_Basic_Test extends Snap_UnitTestCase {
 
 
   public function testGettingLoggerBack() {
-    Log::addLogger('BLABLA123', 'test');
-    return $this->assertIdentical('BLABLA123', Log::getLogger('test'));
+    Log::addLogger('BLABLA123 - LOGGER', 'test');
+    return $this->assertIdentical('BLABLA123 - LOGGER', Log::getLogger('test'));
   }
 
   public function testGettingLoggerBackForGeneral() {
-    Log::addLogger('123abc');
-    return $this->assertIdentical('123abc', Log::getLogger());
+    Log::addLogger('123abc - LOGGER');
+    return $this->assertIdentical('123abc - LOGGER', Log::getLogger());
   }
 
   public function testGettingUndefinedLogger() {
     return $this->assertNull(Log::getLogger('abc'));
+  }
+
+  public function testSanitizing() {
+    Log::addLogger('some - LOGGER', 'aBcD');
+    return $this->assertIdentical('some - LOGGER', Log::getLogger('AbCd'));
   }
 
 

@@ -148,7 +148,10 @@ abstract class FileDao extends Dao {
 	 * @return DaoResultIterator
 	 */
 	public function getIterator($map, $sort = null, $offset = null, $limit = null, $exportValues = true, $tableName = null) {
-		$data = $this->interpretFileContent($this->fileDataSource->viewList($this->exportTable($tableName ? $tableName : ($this->viewName ? $this->viewName : $this->tableName)), $exportValues ? $this->exportMap($map) : $map, $this->generateSortString($sort), $offset, $limit));
+		$content = $this->fileDataSource->viewList($this->exportTable($tableName ? $tableName : ($this->viewName ? $this->viewName : $this->tableName)), $exportValues ? $this->exportMap($map) : $map, $this->generateSortString($sort), $offset, $limit);
+
+		$data = $this->interpretFileContent($content);
+
 		return $this->getIteratorFromData($data);
 	}
 

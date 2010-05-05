@@ -188,7 +188,6 @@ class FileRetriever {
 			curl_setopt($curlHandle, CURLOPT_POSTFIELDS, $postParameters);
     }
 
-
 		$result = curl_exec($curlHandle);
 
     if ($result === false) $info = curl_getinfo($curlHandle);

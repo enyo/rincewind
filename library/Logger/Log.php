@@ -93,6 +93,74 @@ abstract class Log {
 
 
   /**
+   * Logs an info message in the logger for the specific context
+   *
+   * @param string $message
+   * @param string $context
+   * @return bool true on success, false if no logger specified for the context.
+   */
+  public static function info($message, $context = self::GENERAL) {
+    $context = self::sanitizeContext($context);
+    if ($logger = self::getLogger($context)) {
+      $logger->info($message);
+      return true;
+    }
+    return false;
+  }
+
+
+  /**
+   * Logs a warning message in the logger for the specific context
+   *
+   * @param string $message
+   * @param string $context
+   * @return bool true on success, false if no logger specified for the context.
+   */
+  public static function warning($message, $context = self::GENERAL) {
+    $context = self::sanitizeContext($context);
+    if ($logger = self::getLogger($context)) {
+      $logger->warning($message);
+      return true;
+    }
+    return false;
+  }
+
+
+  /**
+   * Logs an error message in the logger for the specific context
+   *
+   * @param string $message
+   * @param string $context
+   * @return bool true on success, false if no logger specified for the context.
+   */
+  public static function error($message, $context = self::GENERAL) {
+    $context = self::sanitizeContext($context);
+    if ($logger = self::getLogger($context)) {
+      $logger->error($message);
+      return true;
+    }
+    return false;
+  }
+
+
+  /**
+   * Logs a fatal error message in the logger for the specific context
+   *
+   * @param string $message
+   * @param string $context
+   * @return bool true on success, false if no logger specified for the context.
+   */
+  public static function fatal($message, $context = self::GENERAL) {
+    $context = self::sanitizeContext($context);
+    if ($logger = self::getLogger($context)) {
+      $logger->fatal($message);
+      return true;
+    }
+    return false;
+  }
+
+
+  /**
    * Sanitizes a context.
    *
    * @param string $context

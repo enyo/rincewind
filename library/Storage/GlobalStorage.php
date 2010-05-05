@@ -21,31 +21,31 @@
  */
 abstract class GlobalStorage {
 
-	/**
-	 * A profiler to be used anywhere in the application.
-	 *
-	 * @var Profiler $profiler
-	 */
-	static protected $profiler;
+  /**
+   * A profiler to be used anywhere in the application.
+   *
+   * @var Profiler $profiler
+   */
+  static protected $profiler;
 
-	/**
-	 * Sets the profiler
-	 *
-	 * @param Profiler $profiler
-	 */
-	public static function setProfiler($profiler) {
-		self::$profiler = $profiler;
-	}
-	
-	/**
-	 * Returns the profiler
-	 *
-	 * @return Profiler
-	 * @see setProfiler
-	 */
-	public static function getProfiler() {
-		return self::$profiler;
-	}
+  /**
+   * Sets the profiler
+   *
+   * @param Profiler $profiler
+   */
+  public static function setProfiler($profiler) {
+    self::$profiler = $profiler;
+  }
+  
+  /**
+   * Returns the profiler
+   *
+   * @return Profiler
+   * @see setProfiler
+   */
+  public static function getProfiler() {
+    return self::$profiler;
+  }
 
 
   /**

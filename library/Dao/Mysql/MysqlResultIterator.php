@@ -20,7 +20,7 @@ include dirname(dirname(__FILE__)) . '/SqlResultIterator.php';
  * @author Matthias Loitsch <developer@ma.tthias.com>
  * @copyright Copyright (c) 2010, Matthias Loitsch
  * @package Dao
- */	
+ */ 
 class MysqlResultIterator extends SqlResultIterator { }
 
 

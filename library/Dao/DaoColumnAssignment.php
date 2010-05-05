@@ -20,23 +20,23 @@
  * @package Dao
  */
 class DaoColumnAssignment {
-	protected $validOperators = array('=', '>', '<', '>=', '<=', '<>', ' like ');
-	public $column;
-	public $value;
-	public $operator;
+  protected $validOperators = array('=', '>', '<', '>=', '<=', '<>', ' like ');
+  public $column;
+  public $value;
+  public $operator;
 
-	/**
-	 * All assignment info is passed in the constructor
-	 *
-	 * @param string $column The column (eg.: 'login')
-	 * @param string $value The value (eg.: 'tom')
-	 * @param string $operator Valid operators are: '=', '>', '<', '>=', '<=', '<>', ' like '
-	 */
-	public function __construct($column, $value, $operator = '=') {
-		$this->column = $column;
-		$this->value = $value;
-		$this->operator = in_array($operator, $this->validOperators) ? $operator : '=';
-	}
+  /**
+   * All assignment info is passed in the constructor
+   *
+   * @param string $column The column (eg.: 'login')
+   * @param string $value The value (eg.: 'tom')
+   * @param string $operator Valid operators are: '=', '>', '<', '>=', '<=', '<>', ' like '
+   */
+  public function __construct($column, $value, $operator = '=') {
+    $this->column = $column;
+    $this->value = $value;
+    $this->operator = in_array($operator, $this->validOperators) ? $operator : '=';
+  }
 }
 
 /**
@@ -49,6 +49,6 @@ class DaoColumnAssignment {
  * @return DaoColumnAssignment
  */
 function DaoColumnAssignment($column, $value, $operator = '=') { return new DaoColumnAssignment($column, $value, $operator); }
-	
-	
+  
+  
 ?>

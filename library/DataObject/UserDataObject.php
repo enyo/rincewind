@@ -25,34 +25,34 @@ include_once dirname(__FILE__) . '/DataObject.php';
  **/
 class UserDataObject extends DataObject {
 
-	/**
-	 * Encrypts the password
-	 * 
-	 * @param string $password
-	 * @return string Encrypted password
-	 */
-	public function encryptPassword($password) {
-		return md5($password);
-	}
+  /**
+   * Encrypts the password
+   * 
+   * @param string $password
+   * @return string Encrypted password
+   */
+  public function encryptPassword($password) {
+    return md5($password);
+  }
 
-	/**
-	 * Checks if the passwords equal
-	 * 
-	 * @param string $password
-	 * @return bool
-	 */
-	public function passwordEquals($password) {
-		return $this->password == $this->encryptPassword($password);
-	}
+  /**
+   * Checks if the passwords equal
+   * 
+   * @param string $password
+   * @return bool
+   */
+  public function passwordEquals($password) {
+    return $this->password == $this->encryptPassword($password);
+  }
 
-	/**
-	 * Checks if the user is a guest
-	 * 
-	 * @return bool
-	 */
-	public function isGuest() {
-		return $this->username == 'guest';
-	}
+  /**
+   * Checks if the user is a guest
+   * 
+   * @return bool
+   */
+  public function isGuest() {
+    return $this->username == 'guest';
+  }
 
 }
 

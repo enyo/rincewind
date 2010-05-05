@@ -30,24 +30,24 @@ include_once dirname(__FILE__) . '/MysqlDao.php';
  **/
 class MysqlUserDao extends MysqlDao implements UserDaoInterface {
 
-	/**
-	 * Returns the user by username
-	 *
-	 * @param string $username
-	 * @return DataObject
-	 */
-	public function getByUsername($username) {
-		return $this->get(array('username'=>$username));
-	}
+  /**
+   * Returns the user by username
+   *
+   * @param string $username
+   * @return DataObject
+   */
+  public function getByUsername($username) {
+    return $this->get(array('username'=>$username));
+  }
 
-	/**
-	 * Returns a raw object with 'guest' as username
-	 *
-	 * @return DataObject
-	 */
-	public function getGuest() {
-		return $this->getRawObject()->set('username', 'guest');
-	}
+  /**
+   * Returns a raw object with 'guest' as username
+   *
+   * @return DataObject
+   */
+  public function getGuest() {
+    return $this->getRawObject()->set('username', 'guest');
+  }
 
 }
 

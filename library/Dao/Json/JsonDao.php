@@ -36,26 +36,26 @@ include dirname(__FILE__) . '/JsonResultIterator.php';
 class JsonDao extends FileDao {
 
 
-	/**
-	 * Intepretes the json content, and returns it.
-	 * @param string $content The file content
-	 * @return array
-	 */
-	protected function interpretFileContent($content) {
-		$return = json_decode($content, true);
-		if ($return === null) throw new JsonDaoException("Json could not be decoded.");
-		return $return;
-	}
+  /**
+   * Intepretes the json content, and returns it.
+   * @param string $content The file content
+   * @return array
+   */
+  protected function interpretFileContent($content) {
+    $return = json_decode($content, true);
+    if ($return === null) throw new JsonDaoException("Json could not be decoded.");
+    return $return;
+  }
 
-	/**
-	 * Creates an iterator for a json data hash.
-	 *
-	 * @param array $data
-	 * @return JsonResultIterator
-	 */
-	protected function createIterator($data) {
-		return new JsonResultIterator($data, $this);
-	}
+  /**
+   * Creates an iterator for a json data hash.
+   *
+   * @param array $data
+   * @return JsonResultIterator
+   */
+  protected function createIterator($data) {
+    return new JsonResultIterator($data, $this);
+  }
 
 
 }

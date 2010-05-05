@@ -20,36 +20,36 @@
  **/
 interface DataObjectInterface {
 
-	/**
-	 * Calls delete($this) on the dao.
-	 * Throws an exception if no id is set.
-	 *
-	 * @return void
-	 */
-	public function delete();
+  /**
+   * Calls delete($this) on the dao.
+   * Throws an exception if no id is set.
+   *
+   * @return void
+   */
+  public function delete();
 
-	/**
-	 * Depending on the state of the DataObject does dao->update($this) or dao->insert($this)
-	 *
-	 * @return DataObject Itself for chaining
-	 */
-	public function save();
+  /**
+   * Depending on the state of the DataObject does dao->update($this) or dao->insert($this)
+   *
+   * @return DataObject Itself for chaining
+   */
+  public function save();
 
 
-	/**
-	 * Returns the value of a column
-	 * @param string $column
-	 * @return mixed
-	 */
-	public function get($column);
+  /**
+   * Returns the value of a column
+   * @param string $column
+   * @return mixed
+   */
+  public function get($column);
 
-	/**
-	 * Sets the value of a column
-	 * @param string $column
-	 * @param mixed $value
-	 * @return DataObject Itself for chaining
-	 */
-	public function set($column, $value);
+  /**
+   * Sets the value of a column
+   * @param string $column
+   * @param mixed $value
+   * @return DataObject Itself for chaining
+   */
+  public function set($column, $value);
 
 
 

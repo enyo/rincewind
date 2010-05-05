@@ -31,57 +31,57 @@ include dirname(__FILE__) . '/MysqlResultIterator.php';
  **/
 class MysqlDao extends SqlDao {
 
-	/**
-	 * Takes a php column name, converts it via import/export column mapping, escapes it, and adds quotes.
-	 * This is the correct way to insert column names in a SQL query.
-	 *
-	 * @param string $column
-	 * @return string
-	 */
-	public function exportColumn($column) {
-		return '`' . $this->escapeColumn($this->applyColumnExportMapping($column)) . '`';
-	}
+  /**
+   * Takes a php column name, converts it via import/export column mapping, escapes it, and adds quotes.
+   * This is the correct way to insert column names in a SQL query.
+   *
+   * @param string $column
+   * @return string
+   */
+  public function exportColumn($column) {
+    return '`' . $this->escapeColumn($this->applyColumnExportMapping($column)) . '`';
+  }
 
-	/**
-	 * Escapes and quotes a table name.
-	 *
-	 * @param string $table
-	 * @return string The escaped and quoted table name.
-	 */
-	public function exportTable($table = null) {
-		return '`' . $this->escapeTable($table ? $table : $this->tableName) . '`';
-	}
+  /**
+   * Escapes and quotes a table name.
+   *
+   * @param string $table
+   * @return string The escaped and quoted table name.
+   */
+  public function exportTable($table = null) {
+    return '`' . $this->escapeTable($table ? $table : $this->tableName) . '`';
+  }
 
-	/**
-	 * Escapes and quotes a string.
-	 *
-	 * @param string $text
-	 * @return string The escaped and quoted string.
-	 */
-	public function exportString($text) {
-		return "'" . $this->escapeString($text) . "'";
-	}
-	
-	/**
-	 * Returns the id of the last inserted record.
-	 *
-	 * @return int
-	 */
-	protected function getLastInsertId() {
-		$id = $this->db->query("select LAST_INSERT_ID() as id");
-		$id = $id->fetchArray();
-		return $id['id'];
-	}
+  /**
+   * Escapes and quotes a string.
+   *
+   * @param string $text
+   * @return string The escaped and quoted string.
+   */
+  public function exportString($text) {
+    return "'" . $this->escapeString($text) . "'";
+  }
+  
+  /**
+   * Returns the id of the last inserted record.
+   *
+   * @return int
+   */
+  protected function getLastInsertId() {
+    $id = $this->db->query("select LAST_INSERT_ID() as id");
+    $id = $id->fetchArray();
+    return $id['id'];
+  }
 
-	/**
-	 * Creates an iterator for a mysql result.
-	 *
-	 * @param mysqli_result $result
-	 * @return MysqlResultIterator
-	 */
-	protected function createIterator($result) {
-		return new MysqlResultIterator($result, $this);
-	}
+  /**
+   * Creates an iterator for a mysql result.
+   *
+   * @param mysqli_result $result
+   * @return MysqlResultIterator
+   */
+  protected function createIterator($result) {
+    return new MysqlResultIterator($result, $this);
+  }
 
 
 }

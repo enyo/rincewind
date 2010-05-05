@@ -24,21 +24,21 @@ include_once dirname(__FILE__) . '/DaoInterface.php';
  **/
 interface UserDaoInterface extends DaoInterface {
 
-	/**
-	 * Return a user by login
-	 *
-	 * @param string $username
-	 * @return DataObject
-	 */
-	public function getByUsername($username);
+  /**
+   * Return a user by login
+   *
+   * @param string $username
+   * @return DataObject
+   */
+  public function getByUsername($username);
 
-	/**
-	 * Get a raw object with username 'guest'
-	 *
-	 * @return DataObject
-	 */
-	public function getGuest();
+  /**
+   * Get a raw object with username 'guest'
+   *
+   * @return DataObject
+   */
+  public function getGuest();
 
 }
-	
+  
 ?>

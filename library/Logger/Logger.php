@@ -25,11 +25,11 @@ abstract class Logger {
    *
    * @var int
    */
-  const DEBUG = 0x00001;
-  const INFO  = 0x00011;
-  const WARN  = 0x00111;
-  const ERROR = 0x01111;
-  const FATAL = 0x11111;
+  const DEBUG   = 0x00001;
+  const INFO    = 0x00011;
+  const WARNING = 0x00111;
+  const ERROR   = 0x01111;
+  const FATAL   = 0x11111;
   /**#@-*/
 
 
@@ -39,7 +39,7 @@ abstract class Logger {
    *
    * @var int
    */
-  protected $level = self::WARN;
+  protected $level = self::WARNING;
 
 
   /**

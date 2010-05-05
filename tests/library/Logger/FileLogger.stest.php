@@ -65,4 +65,55 @@ class FileLogger_Write_Test extends Snap_UnitTestCase {
 }
 
 
+
+
+class FileLogger_Level_Test extends Snap_UnitTestCase {
+
+  protected $logger;
+  protected $fileUri;
+
+	public function setUp() {
+	  $this->fileUri  = dirname(__FILE__) . '/test.log';
+    $this->logger = new FileLogger($this->fileUri);
+    $this->logger->setLevel(Logger::DEBUG);
+	}
+
+	public function tearDown() {
+    unlink($this->fileUri);
+	}
+
+  public function testDebug() {
+    $this->logger->debug('Test 123');
+    $fileContent = file_get_contents($this->fileUri);
+    return $this->assertTrue(strpos($fileContent, 'Test 123') !== false, 'The text should have been written to the file.');
+  }
+
+  public function testInfo() {
+    $this->logger->info('Test 123');
+    $fileContent = file_get_contents($this->fileUri);
+    return $this->assertTrue(strpos($fileContent, 'Test 123') !== false, 'The text should have been written to the file.');
+  }
+
+  public function testWarning() {
+    $this->logger->warning('Test 123');
+    $fileContent = file_get_contents($this->fileUri);
+    return $this->assertTrue(strpos($fileContent, 'Test 123') !== false, 'The text should have been written to the file.');
+  }
+
+  public function testError() {
+    $this->logger->error('Test 123');
+    $fileContent = file_get_contents($this->fileUri);
+    return $this->assertTrue(strpos($fileContent, 'Test 123') !== false, 'The text should have been written to the file.');
+  }
+
+  public function testFatal() {
+    $this->logger->error('Test 123');
+    $fileContent = file_get_contents($this->fileUri);
+    return $this->assertTrue(strpos($fileContent, 'Test 123') !== false, 'The text should have been written to the file.');
+  }
+
+
+}
+
+
 ?>

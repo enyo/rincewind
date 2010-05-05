@@ -46,6 +46,19 @@ class FileLogger extends Logger {
 
 
   /**
+   * A list of strings for the different levels, used in the log file.
+   *
+   * @var array
+   */
+  protected $levelStrings = array(
+      Logger::DEBUG  =>'DEBUG'
+    , Logger::INFO   =>'INFO '
+    , Logger::WARNING=>'WARN '
+    , Logger::ERROR  =>'ERROR'
+    , Logger::FATAL  =>'FATAL'
+    );
+
+  /**
    * @param string $fileUri Either the file, or if it doesn't exist the directory should be writable.
    */
   public function __construct($fileUri) {
@@ -77,9 +90,21 @@ class FileLogger extends Logger {
    * @param int $level
    */
   public function doLog($message, $level) {
-    return file_put_contents($this->fileUri, $message . "\n", FILE_APPEND);
+    return file_put_contents($this->fileUri, $this->formatMessage($message, $level), FILE_APPEND);
   }
 
+
+  /**
+   * Formats a message so it can be included in the file.
+   *
+   * If you overwrite it, don't forget the newline at the end.
+   *
+   * @param string $message
+   * @param int $level
+   */
+  protected function formatMessage($message, $level) {
+    return date('M d H:i:s ') . $this->levelStrings[$level] . ': ' .  $message . "\n";
+  }
 
 }
 

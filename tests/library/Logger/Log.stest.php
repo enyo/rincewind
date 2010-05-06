@@ -40,6 +40,11 @@ class Log_Basic_Test extends Snap_UnitTestCase {
     return $this->assertTrue(true);
   }
 
+  public function testCatchallContext() {
+    Log::addLogger(null, Log::CATCHALL);
+    return $this->assertTrue(true);
+  }
+
   public function testDefaultContext() {
     Log::addLogger(null);
     return $this->assertTrue(true);

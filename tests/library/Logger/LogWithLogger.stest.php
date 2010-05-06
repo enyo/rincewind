@@ -6,7 +6,7 @@ require_once(LIBRARY_ROOT_PATH . 'Logger/Log.php');
 require_once(LIBRARY_ROOT_PATH . 'Logger/Logger.php');
 
 
-class LogWithLogger_Basic_Test extends Snap_UnitTestCase {
+class LogWithLogger_CallForwarding_Test extends Snap_UnitTestCase {
 
   protected $logger;
 
@@ -82,6 +82,69 @@ class LogWithLogger_Basic_Test extends Snap_UnitTestCase {
     Log::fatal('The-message');
     return $this->assertCallCount($this->logger, 'fatal', 1, array(new Snap_Identical_Expectation('The-message')));
   }
+
+}
+
+
+
+
+class LogWithLogger_LoggerSelection_Test extends Snap_UnitTestCase {
+
+  protected $catchallLogger;
+  protected $defaultLogger;
+  protected $testLogger;
+
+	public function setUp() {
+	  $this->catchallLogger = $this->mock('Logger')
+	    ->listenTo('warning', array(new Snap_Identical_Expectation('The-message...')))
+	    ->construct();
+	  $this->defaultLogger = $this->mock('Logger')
+	    ->listenTo('warning', array(new Snap_Identical_Expectation('The-message...')))
+	    ->construct();
+	  $this->testLogger = $this->mock('Logger')
+	    ->listenTo('warning', array(new Snap_Identical_Expectation('The-message...')))
+	    ->construct();
+
+    Log::addLogger($this->catchallLogger, Log::CATCHALL);
+    Log::addLogger($this->defaultLogger);
+    Log::addLogger($this->testLogger, 'test');
+
+	}
+
+	public function tearDown() {
+	}
+
+  public function testTest() {
+    Log::warning('The-message...', 'test');
+    return $this->assertCallCount($this->testLogger, 'warning', 1, array(new Snap_Identical_Expectation('The-message...')));
+  }
+  public function testTest_defaultZero() {
+    Log::warning('The-message...', 'test');
+    return $this->assertCallCount($this->defaultLogger, 'warning', 0, array(new Snap_Identical_Expectation('The-message...')));
+  }
+  public function testTest_catchallZero() {
+    Log::warning('The-message...', 'test');
+    return $this->assertCallCount($this->catchallLogger, 'warning', 0, array(new Snap_Identical_Expectation('The-message...')));
+  }
+
+
+
+  public function testDefault() {
+    Log::warning('The-message...');
+    return $this->assertCallCount($this->defaultLogger, 'warning', 1, array(new Snap_Identical_Expectation('The-message...')));
+  }
+  public function testDefault_catchallZero() {
+    Log::warning('The-message...');
+    return $this->assertCallCount($this->catchallLogger, 'warning', 0, array(new Snap_Identical_Expectation('The-message...')));
+  }
+
+
+
+  public function testCatchall() {
+    Log::warning('The-message...', 'NONSENSE');
+    return $this->assertCallCount($this->catchallLogger, 'warning', 1, array(new Snap_Identical_Expectation('The-message...')));
+  }
+
 
 }
 

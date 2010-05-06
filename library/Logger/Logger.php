@@ -94,6 +94,15 @@ abstract class Logger {
    */
   public function warning($message) { return $this->log($message, self::WARNING); }
 
+
+  /**
+   * Alias for warning
+   * 
+   * @param string $message
+   */
+  public function warn($message) { return $this->warning($message); }
+
+
   /**
    * Log an error
    * 

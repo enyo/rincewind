@@ -88,9 +88,11 @@ class FileLogger extends Logger {
    *
    * @param string $message
    * @param int $level
+   * @param string $context Can contain a context to log for.
+   * @param array $additionalInfo An associative array with more info. Eg: array('content'=>'Some stuff')
    */
-  public function doLog($message, $level) {
-    return file_put_contents($this->fileUri, $this->formatMessage($message, $level), FILE_APPEND);
+  public function doLog($message, $level, $context, $additionalInfo) {
+    return file_put_contents($this->fileUri, $this->formatMessage($message, $level, $context, $additionalInfo), FILE_APPEND);
   }
 
 
@@ -101,9 +103,19 @@ class FileLogger extends Logger {
    *
    * @param string $message
    * @param int $level
+   * @param string $context Can contain a context to log for.
+   * @param array $additionalInfo An associative array with more info. Eg: array('content'=>'Some stuff')
    */
-  protected function formatMessage($message, $level) {
-    return date('M d H:i:s ') . $this->levelStrings[$level] . ': ' .  $message . "\n";
+  protected function formatMessage($message, $level, $context, $additionalInfo) {
+    $line = date('M d H:i:s ') . $this->levelStrings[$level] . ($context ? ' [' . $context . ']' : '') . ': ' .  $message;
+    if ($additionalInfo) {
+      $line .= ' (';
+      foreach ($additionalInfo as $key=>$value) {
+        $line .= ' [' . $key . ' => ' . print_r($value, true) . '] ';
+      }
+      $line .= ')';
+    }
+    return $line . "\n";
   }
 
 }

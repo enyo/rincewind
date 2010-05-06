@@ -43,7 +43,10 @@ class JsonDao extends FileDao {
    */
   protected function interpretFileContent($content) {
     $return = json_decode($content, true);
-    if ($return === null) throw new JsonDaoException("Json could not be decoded.");
+    if ($return === null) {
+      Log::error('Json could not be decoded.', 'JsonDao', array('content'=>$content));
+      throw new JsonDaoException("Json could not be decoded.");
+    }
     return $return;
   }
 

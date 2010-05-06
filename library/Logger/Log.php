@@ -90,12 +90,12 @@ abstract class Log {
    *
    * @param string $message
    * @param string $context
+   * @param array $additionalInfo An associative array with more info. Eg: array('content'=>'Some stuff')
    * @return bool true on success, false if no logger specified for the context or the logger below level.
    */
-  public static function debug($message, $context = self::GENERAL) {
-    $context = self::sanitizeContext($context);
+  public static function debug($message, $context = self::GENERAL, $additionalInfo = null) {
     if ($logger = self::getLogger($context)) {
-      return $logger->debug($message);
+      return $logger->debug($message, ($context === self::GENERAL || $context === self::CATCHALL) ? null : $context, $additionalInfo);
     }
     return false;
   }
@@ -106,12 +106,12 @@ abstract class Log {
    *
    * @param string $message
    * @param string $context
+   * @param array $additionalInfo An associative array with more info. Eg: array('content'=>'Some stuff')
    * @return bool true on success, false if no logger specified for the context or the logger below level.
    */
-  public static function info($message, $context = self::GENERAL) {
-    $context = self::sanitizeContext($context);
+  public static function info($message, $context = self::GENERAL, $additionalInfo = null) {
     if ($logger = self::getLogger($context)) {
-      return $logger->info($message);
+      return $logger->info($message, ($context === self::GENERAL || $context === self::CATCHALL) ? null : $context, $additionalInfo);
     }
     return false;
   }
@@ -122,12 +122,12 @@ abstract class Log {
    *
    * @param string $message
    * @param string $context
+   * @param array $additionalInfo An associative array with more info. Eg: array('content'=>'Some stuff')
    * @return bool true on success, false if no logger specified for the context or the logger below level.
    */
-  public static function warning($message, $context = self::GENERAL) {
-    $context = self::sanitizeContext($context);
+  public static function warning($message, $context = self::GENERAL, $additionalInfo = null) {
     if ($logger = self::getLogger($context)) {
-      return $logger->warning($message);
+      return $logger->warning($message, ($context === self::GENERAL || $context === self::CATCHALL) ? null : $context, $additionalInfo);
     }
     return false;
   }
@@ -138,12 +138,12 @@ abstract class Log {
    *
    * @param string $message
    * @param string $context
+   * @param array $additionalInfo An associative array with more info. Eg: array('content'=>'Some stuff')
    * @return bool true on success, false if no logger specified for the context or the logger below level.
    */
-  public static function error($message, $context = self::GENERAL) {
-    $context = self::sanitizeContext($context);
+  public static function error($message, $context = self::GENERAL, $additionalInfo = null) {
     if ($logger = self::getLogger($context)) {
-      return $logger->error($message);
+      return $logger->error($message, ($context === self::GENERAL || $context === self::CATCHALL) ? null : $context, $additionalInfo);
     }
     return false;
   }
@@ -154,12 +154,12 @@ abstract class Log {
    *
    * @param string $message
    * @param string $context
+   * @param array $additionalInfo An associative array with more info. Eg: array('content'=>'Some stuff')
    * @return bool true on success, false if no logger specified for the context or the logger below level.
    */
-  public static function fatal($message, $context = self::GENERAL) {
-    $context = self::sanitizeContext($context);
+  public static function fatal($message, $context = self::GENERAL, $additionalInfo = null) {
     if ($logger = self::getLogger($context)) {
-      return $logger->fatal($message);
+      return $logger->fatal($message, ($context === self::GENERAL || $context === self::CATCHALL) ? null : $context, $additionalInfo);
     }
     return false;
   }

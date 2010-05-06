@@ -11,6 +11,11 @@
 
 
 /**
+ * Loading the Log class.
+ */
+if (!class_exists('Log')) include('Logger/Log.php');
+
+/**
  * Loading the interface
  */
 include dirname(__FILE__) . '/DaoInterface.php';

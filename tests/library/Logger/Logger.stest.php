@@ -7,7 +7,7 @@ require_once(LIBRARY_ROOT_PATH . 'Logger/Logger.php');
 
 class TestLogger extends Logger {
   
-  public function doLog($message, $level) {
+  public function doLog($message, $level, $context, $additionalInfo) {
     // Do nothing.
   }
   

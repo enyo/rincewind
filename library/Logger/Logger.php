@@ -77,45 +77,63 @@ abstract class Logger {
    * Log a debug message
    * 
    * @param string $message
+   * @param string $context Optional context to log for.
+   * @param array $additionalInfo An associative array with more info. Eg: array('content'=>'Some stuff')
+   * @return bool true on success, false if nothing has been logged.
    */
-  public function debug($message) { return $this->log($message, self::DEBUG); }
+  public function debug($message, $context = null, $additionalInfo = null) { return $this->log($message, self::DEBUG, $context, $additionalInfo); }
 
   /**
    * Log an info message
    * 
    * @param string $message
+   * @param string $context Optional context to log for.
+   * @param array $additionalInfo An associative array with more info. Eg: array('content'=>'Some stuff')
+   * @return bool true on success, false if nothing has been logged.
    */
-  public function info($message) { return $this->log($message, self::INFO); }
+  public function info($message, $context = null, $additionalInfo = null) { return $this->log($message, self::INFO, $context, $additionalInfo); }
 
   /**
    * Log a warning
    * 
    * @param string $message
+   * @param string $context Optional context to log for.
+   * @param array $additionalInfo An associative array with more info. Eg: array('content'=>'Some stuff')
+   * @return bool true on success, false if nothing has been logged.
    */
-  public function warning($message) { return $this->log($message, self::WARNING); }
+  public function warning($message, $context = null, $additionalInfo = null) { return $this->log($message, self::WARNING, $context, $additionalInfo); }
 
 
   /**
    * Alias for warning
    * 
    * @param string $message
+   * @param string $context Optional context to log for.
+   * @param array $additionalInfo An associative array with more info. Eg: array('content'=>'Some stuff')
+   * @return bool true on success, false if nothing has been logged.
    */
-  public function warn($message) { return $this->warning($message); }
+  public function warn($message, $context = null, $additionalInfo = null) { return $this->warning($message, $context, $additionalInfo); }
 
 
   /**
    * Log an error
    * 
    * @param string $message
+   * @param string $context Optional context to log for.
+   * @param array $additionalInfo An associative array with more info. Eg: array('content'=>'Some stuff')
+   * @return bool true on success, false if nothing has been logged.
    */
-  public function error($message) { return $this->log($message, self::ERROR); }
+  public function error($message, $context = null, $additionalInfo = null) { return $this->log($message, self::ERROR, $context, $additionalInfo); }
 
   /**
    * Log a fatal error
    * 
    * @param string $message
+   * @param string $context Optional context to log for.
+   * @param array $additionalInfo An associative array with more info. Eg: array('content'=>'Some stuff')
+   * @return bool true on success, false if nothing has been logged.
    */
-  public function fatal($message) { return $this->log($message, self::FATAL); }
+  public function fatal($message, $context = null, $additionalInfo = null) { return $this->log($message, self::FATAL, $context, $additionalInfo); }
 
 
   /**
@@ -123,10 +141,14 @@ abstract class Logger {
    *
    * @param string $message
    * @param int $level
+   * @param string $context Optional context to log for.
+   * @param array $additionalInfo An associative array with more info. Eg: array('content'=>'Some stuff')
+   * @return bool true on success, false if nothing has been logged.
    */
-  protected function log($message, $level) {
+  protected function log($message, $level, $context = null, $additionalInfo = null) {
+    if ($additionalInfo && !is_array($additionalInfo)) throw new LoggerException("Additional info has to be an array.");
     if (!$this->shouldLog($level)) return false;
-    $this->doLog($message, $level);
+    $this->doLog($message, $level, $context, $additionalInfo);
     return true;
   }
 
@@ -136,8 +158,10 @@ abstract class Logger {
    *
    * @param string $message
    * @param int $level
+   * @param string $context
+   * @param array $additionalInfo An associative array with more info. Eg: array('content'=>'Some stuff')
    */
-  protected abstract function doLog($message, $level);
+  protected abstract function doLog($message, $level, $context, $additionalInfo);
 
 
 }

@@ -182,7 +182,7 @@ class FileRetriever {
 
     $realUrl = $url . $getParameters;
 
-    Log::debug($realUrl, 'FileRetriever');
+    Log::debug('Getting: ' . $realUrl, 'FileRetriever');
 
     curl_setopt($curlHandle, CURLOPT_URL, $realUrl);
     curl_setopt($curlHandle, CURLOPT_PORT, $port);

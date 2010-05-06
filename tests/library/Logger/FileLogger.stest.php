@@ -112,6 +112,18 @@ class FileLogger_Level_Test extends Snap_UnitTestCase {
     return $this->assertTrue(strpos($fileContent, 'Test 123') !== false, 'The text should have been written to the file.');
   }
 
+  public function testWarningWithContext() {
+    $this->logger->warning('Test 123', 'THE CONTEXT');
+    $fileContent = file_get_contents($this->fileUri);
+    return $this->assertTrue(strpos($fileContent, 'THE CONTEXT') !== false, 'The context should have been written to the file.');
+  }
+
+
+  public function testWarningWithAdditionalInfo() {
+    $this->logger->warning('Test 123', 'THE CONTEXT', array('a'=>'abc123def'));
+    $fileContent = file_get_contents($this->fileUri);
+    return $this->assertTrue(strpos($fileContent, 'abc123def') !== false, 'The additional info should have been written to the file.');
+  }
 
 }
 

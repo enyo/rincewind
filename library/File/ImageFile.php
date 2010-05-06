@@ -16,6 +16,13 @@ if (!class_exists('File')) require('File/File.php');
 
 
 /**
+ * Loading the file retriever class.
+ * They are codependent.
+ */
+if (!class_exists('ImageFileRetriever')) require(dirname(__FILE__) . '/ImageFileRetriever.php');
+
+
+/**
  * The Exception base class for ImageFileException.
  *
  * @author Matthias Loitsch <developer@ma.tthias.com>
@@ -266,26 +273,17 @@ class ImageFile extends File {
 
 
 
-
-
   /**
-   * @var array The allow image types this Factory can handle
+   * This is a wrapper for (new ImageFileRetriever())->create()
+   *
+   * @param mixed $data Is either an URL, or an array from form upload or a local path.
+   * @param int $source One of File::SOURCE_XXX
+   * @param int $maxFileSize in kilobytes.
+   * @return File
    */
-  static protected $allowedImageTypes = array(IMAGETYPE_GIF, IMAGETYPE_JPEG, IMAGETYPE_PNG);
-
-  /**
-   * @param File $file
-   */
-  protected static function process($file) {
-    if (!($imageInfo = @getimagesize ($file->getUri()))) {
-      throw new ImageFileException ('The uploaded file is not an image, or the file was not readable.');
-    }
-    if (!in_array($imageInfo[2], self::$allowedImageTypes)) {
-      throw new ImageFileException ('The image type you uploaded is not allowed. Allowed image types are: '.implode (', ', self::$allowedImageTypes).'.');
-    }
-    $file->setWidth($imageInfo[0]);
-    $file->setHeight($imageInfo[1]);
-    $file->setType($imageInfo[2]);
+  static public function create($data, $source, $maxFileSize = 10000000) {
+    $fileRetriever = new ImageFileRetriever();
+    return $fileRetriever->create($data, $source, $maxFileSize);
   }
 
 }

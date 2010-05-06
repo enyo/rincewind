@@ -37,9 +37,8 @@ class FileRetrieverException extends FileException { };
 
 /**
  * The FileRetriever actually fetches a files, and returns the File object.
- * It's basically a list of static functions, which the File class extends,
- * so normally you don't call them on the FileRetriever but rather the File
- * class itself.
+ * There is a static File::create() class which actually instantiates the
+ * FileRetriever and gets the file.
  * The FileRetriever is a class on it's own, so it can be passed to other
  * objects, so they don't have to call the static File:: functions (which
  * makes them rather difficult to test.)
@@ -59,14 +58,14 @@ class FileRetriever {
    *
    * @param File $file
    */
-  protected static function process($file) { }
+  protected function process($file) { }
 
 
   /**
    * Creates a file, and returns it.
    * @return File
    */
-  protected static function getFile($uri) {
+  protected function getFile($uri) {
     return new File($uri);
   }
 
@@ -84,7 +83,7 @@ class FileRetriever {
    * @param int $maxFileSize in kilobytes.
    * @return File
    */
-  public static function create($data, $source, $maxFileSize = 10000000) {
+  public function create($data, $source, $maxFileSize = 10000000) {
     switch ($source) {
       case File::SOURCE_FILE:
         return self::createFromLocalFile($data);
@@ -106,14 +105,14 @@ class FileRetriever {
 
 
   /**
-   * This static function is the way to get a file from a form upload.
+   * This method is the way to get a file from a form upload.
    *
    * @param array $FILE the array obtained from $_FILES
    * @param int $maxFileSize in kiloBytes
    * @deprecated use get() instead
    * @return File
    */
-  public static function createFromFormUpload($FILE, $maxFileSize = 100000) {
+  public function createFromFormUpload($FILE, $maxFileSize = 100000) {
     if (!is_array ($FILE) || count ($FILE) == 0) { throw new FileRetrieverException ('The FILE array from the form was not valid.'); }
 
     if (empty($FILE['tmp_name']) || empty($FILE['size'])) { throw new FileRetrieverException ('The file was probably larger than allowed by the html property MAX_FILE_SIZE.'); }
@@ -135,36 +134,36 @@ class FileRetriever {
       throw new FileRetrieverException ('The uploaded file exceeds '.($maxFileSize / 1000).'kB.');
     }
 
-    $file = static::getFile($FILE['tmp_name']);
+    $file = $this->getFile($FILE['tmp_name']);
 
     $file->setSource(File::SOURCE_FORM);
     $file->setName($FILE['name']);
     $file->setSize($FILE['size']);
     $file->setMimeType($FILE['type']);
 
-    static::process($file);
+    $this->process($file);
     
     return $file;
   }
 
   /**
-   * This static function is the way to get a file from a local file.
+   * This method is the way to get a file from a local file.
    *
    * @param array $srcUri the location of the file
    * @deprecated Use get() instead.
    * @return File
    */
-  public static function createFromLocalFile($srcUri) {
+  public function createFromLocalFile($srcUri) {
     if (!is_file($srcUri)) throw new FileRetrieverException("File '$srcUri' does not exist.");
-    $file = static::getFile($srcUri);
+    $file = $this->getFile($srcUri);
     $file->setSource(File::SOURCE_FILE);
     $file->setSize(filesize($srcUri));
-    static::process($file);
+    $this->process($file);
     return $file;
   }
 
   /**
-   * This static function is the way to get a file from a http source.
+   * This method is the way to get a file from a http source.
    *
    * @param array $url the location of the file
    * @param array $getParameters A map with get parameters
@@ -174,7 +173,7 @@ class FileRetriever {
    * @deprecated Use get() instead.
    * @return File
    */
-  public static function createFromHttp($url, $getParameters = null, $postParameters = null, $port = 80, $timeout = 30) {
+  public function createFromHttp($url, $getParameters = null, $postParameters = null, $port = 80, $timeout = 30) {
 
     $curlHandle = curl_init();
 
@@ -211,11 +210,11 @@ class FileRetriever {
       throw new FileRetrieverException('File could not be downloaded. ' . $errorCode . ' - ' . $errorTypes[floor($errorCode / 100) * 100] . '.', $errorCode);
     }
 
-    $file = static::getFile($url);
+    $file = $this->getFile($url);
     $file->setSource(File::SOURCE_HTTP);
     $file->setContent($result);
 
-    static::process($file);
+    $this->process($file);
 
     return $file;
   }

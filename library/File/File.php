@@ -42,7 +42,7 @@ class FileException extends Exception { };
  * @copyright Copyright (c) 2010, Matthias Loitsch
  * @package File
  */
-class File extends FileRetriever {
+class File {
 
   /**#@+
    * Source constants that represent all source categories for a file.
@@ -272,6 +272,22 @@ class File extends FileRetriever {
     chmod ($targetUri, $mode);
   }
 
+
+
+
+  /**
+   * This is a wrapper for (new FileRetriever())->create()
+   *
+   * @param mixed $data Is either an URL, or an array from form upload or a local path.
+   * @param int $source One of File::SOURCE_XXX
+   * @param int $maxFileSize in kilobytes.
+   * @return File
+   */
+  static public function create($data, $source, $maxFileSize = 10000000) {
+    $fileRetriever = new FileRetriever();
+    return $fileRetriever->create($data, $source, $maxFileSize);
+  }
+  
 
 
 }

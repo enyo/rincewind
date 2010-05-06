@@ -16,12 +16,12 @@ class FileRetriever_File_Test extends Snap_UnitTestCase {
 
 	public function setUp() {
 	  $this->fileRetriever = new FileRetriever();
-		$this->testFile = FILE_TEST_DIRECTORY . '/test.txt';
+		$this->testFile = tempnam(FILE_TEST_DIRECTORY, 'File');
 		file_put_contents($this->testFile, 'test123');
 	}
 
 	public function tearDown() {
-		@unlink($this->testFile);
+		unlink($this->testFile);
 	}
 
 	public function testGettingWrongLocalFile() {

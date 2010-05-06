@@ -56,12 +56,12 @@ class ResultingFile_File_Test extends Snap_UnitTestCase {
 	protected $testFile;
 
 	public function setUp() {
-		$this->testFile = FILE_TEST_DIRECTORY . '/test.txt';
+		$this->testFile = tempnam(FILE_TEST_DIRECTORY, 'File');
 		file_put_contents($this->testFile, 'test123');
 	}
 
 	public function tearDown() {
-		@unlink($this->testFile);
+		unlink($this->testFile);
 	}
 
 	public function testGettingWrongLocalFile() {
@@ -83,7 +83,7 @@ class ResultingFile_File_Test extends Snap_UnitTestCase {
 
 	public function testName() {
 		$file = File::create($this->testFile, File::SOURCE_FILE);
-		return $this->assertEqual($file->getName(), 'test.txt', 'The name of the file should be test.txt');
+		return $this->assertEqual($file->getName(), basename($this->testFile), 'The file name was incorrect');
 	}
 
 	public function testSize() {

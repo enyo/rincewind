@@ -40,7 +40,7 @@ class FileLogger_Write_Test extends Snap_UnitTestCase {
   protected $fileUri;
 
 	public function setUp() {
-	  $this->fileUri  = dirname(__FILE__) . '/test.log';
+		$this->fileUri = tempnam(dirname(__FILE__), 'LoggerWrite');
     $this->logger = new FileLogger($this->fileUri);
     $this->logger->setLevel(Logger::DEBUG);
 	}
@@ -73,7 +73,7 @@ class FileLogger_Level_Test extends Snap_UnitTestCase {
   protected $fileUri;
 
 	public function setUp() {
-	  $this->fileUri  = dirname(__FILE__) . '/test.log';
+		$this->fileUri = tempnam(dirname(__FILE__), 'LoggerLevel');
     $this->logger = new FileLogger($this->fileUri);
     $this->logger->setLevel(Logger::DEBUG);
 	}

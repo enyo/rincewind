@@ -77,7 +77,7 @@
 			<span class="var-title">$allowedImageTypes</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="File/ImageFile.html#var$allowedImageTypes">ImageFile::$allowedImageTypes</a> in ImageFile.php</div>
+			<div class="index-item-details"><a href="File/ImageFileRetriever.html#var$allowedImageTypes">ImageFileRetriever::$allowedImageTypes</a> in ImageFileRetriever.php</div>
 					</dd>
 		</dl>
 	<a name="c"></a>
@@ -105,11 +105,27 @@
 					</dd>
 			<dt class="field">
 						<img src="media/images/Method.png" alt="Method" title="Method" />
+			<span class="method-title">create</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="File/File.html#methodcreate">File::create()</a> in File.php</div>
+							<div class="index-item-description">This is a wrapper for (new FileRetriever())-&gt;create()</div>
+					</dd>
+			<dt class="field">
+						<img src="media/images/Method.png" alt="Method" title="Method" />
+			<span class="method-title">create</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="File/ImageFile.html#methodcreate">ImageFile::create()</a> in ImageFile.php</div>
+							<div class="index-item-description">This is a wrapper for (new ImageFileRetriever())-&gt;create()</div>
+					</dd>
+			<dt class="field">
+						<img src="media/images/Method.png" alt="Method" title="Method" />
 			<span class="method-title">createFromFormUpload</span>
 					</dt>
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="File/FileRetriever.html#methodcreateFromFormUpload">FileRetriever::createFromFormUpload()</a> in FileRetriever.php</div>
-							<div class="index-item-description">This static function is the way to get a file from a form upload.</div>
+							<div class="index-item-description">This method is the way to get a file from a form upload.</div>
 					</dd>
 			<dt class="field">
 						<img src="media/images/Method.png" alt="Method" title="Method" />
@@ -117,7 +133,7 @@
 					</dt>
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="File/FileRetriever.html#methodcreateFromHttp">FileRetriever::createFromHttp()</a> in FileRetriever.php</div>
-							<div class="index-item-description">This static function is the way to get a file from a http source.</div>
+							<div class="index-item-description">This method is the way to get a file from a http source.</div>
 					</dd>
 			<dt class="field">
 						<img src="media/images/Method.png" alt="Method" title="Method" />
@@ -125,7 +141,7 @@
 					</dt>
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="File/FileRetriever.html#methodcreateFromLocalFile">FileRetriever::createFromLocalFile()</a> in FileRetriever.php</div>
-							<div class="index-item-description">This static function is the way to get a file from a local file.</div>
+							<div class="index-item-description">This method is the way to get a file from a local file.</div>
 					</dd>
 		</dl>
 	<a name="d"></a>
@@ -254,7 +270,15 @@
 			<span class="method-title">getFile</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="File/File.html#methodgetFile">File::getFile()</a> in File.php</div>
+			<div class="index-item-details"><a href="File/ImageFile.html#methodgetFile">ImageFile::getFile()</a> in ImageFile.php</div>
+							<div class="index-item-description">Creates an ImageFile instead of File.</div>
+					</dd>
+			<dt class="field">
+						<img src="media/images/Method.png" alt="Method" title="Method" />
+			<span class="method-title">getFile</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="File/ImageFileRetriever.html#methodgetFile">ImageFileRetriever::getFile()</a> in ImageFileRetriever.php</div>
 							<div class="index-item-description">Creates a file, and returns it.</div>
 					</dd>
 			<dt class="field">
@@ -365,6 +389,13 @@
 			<div class="index-item-details"><a href="File/_File---ImageFile.php.html">ImageFile.php</a> in ImageFile.php</div>
 					</dd>
 			<dt class="field">
+						<img src="media/images/Page.png" alt="Page" title="Page" />
+			<span class="include-title">ImageFileRetriever.php</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="File/_File---ImageFileRetriever.php.html">ImageFileRetriever.php</a> in ImageFileRetriever.php</div>
+					</dd>
+			<dt class="field">
 						<img src="media/images/Class.png" alt="Class" title="Class" />
 			ImageFile
 					</dt>
@@ -374,11 +405,27 @@
 					</dd>
 			<dt class="field">
 						<img src="media/images/Class.png" alt="Class" title="Class" />
+			ImageFileRetriever
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="File/ImageFileRetriever.html">ImageFileRetriever</a> in ImageFileRetriever.php</div>
+							<div class="index-item-description">The ImageFileRetriever mainly does the same thing as the FileRetriever</div>
+					</dd>
+			<dt class="field">
+						<img src="media/images/Class.png" alt="Class" title="Class" />
 			ImageFileException
 					</dt>
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="File/FileExceptions/ImageFileException.html">ImageFileException</a> in ImageFile.php</div>
 							<div class="index-item-description">The Exception base class for ImageFileException.</div>
+					</dd>
+			<dt class="field">
+						<img src="media/images/Class.png" alt="Class" title="Class" />
+			ImageFileRetrieverException
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="File/FileRetrieverExceptions/ImageFileRetrieverException.html">ImageFileRetrieverException</a> in ImageFileRetriever.php</div>
+							<div class="index-item-description">The Exception base class for ImageFileRetrieverExceptions.</div>
 					</dd>
 		</dl>
 	<a name="m"></a>
@@ -425,7 +472,7 @@
 			<span class="method-title">process</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="File/ImageFile.html#methodprocess">ImageFile::process()</a> in ImageFile.php</div>
+			<div class="index-item-details"><a href="File/ImageFileRetriever.html#methodprocess">ImageFileRetriever::process()</a> in ImageFileRetriever.php</div>
 					</dd>
 			<dt class="field">
 						<img src="media/images/Method.png" alt="Method" title="Method" />

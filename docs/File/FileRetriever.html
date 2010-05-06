@@ -26,14 +26,14 @@
 	<div class="info-box-body">
         		<!-- ========== Info from phpDoc block ========= -->
 <p class="short-description">The FileRetriever actually fetches a files, and returns the File object.</p>
-<p class="description"><p>It's basically a list of static functions, which the File class extends,  so normally you don't call them on the FileRetriever but rather the File  class itself.  The FileRetriever is a class on it's own, so it can be passed to other  objects, so they don't have to call the static File:: functions (which  makes them rather difficult to test.)</p></p>
+<p class="description"><p>There is a static File::create() class which actually instantiates the  FileRetriever and gets the file.  The FileRetriever is a class on it's own, so it can be passed to other  objects, so they don't have to call the static File:: functions (which  makes them rather difficult to test.)</p></p>
 	<ul class="tags">
 				<li><span class="field">author:</span> Matthias Loitsch &lt;<a href="mailto:developer@ma.tthias.com">developer@ma.tthias.com</a>&gt;</li>
 				<li><span class="field">copyright:</span> Copyright (c) 2010, Matthias Loitsch</li>
 				<li><span class="field">see:</span> <a href="../File/File.html">File</a></li>
 			</ul>
 		<p class="notes">
-			Located in <a class="field" href="_File---FileRetriever.php.html">/File/FileRetriever.php</a> (line <span class="field">46</span>)
+			Located in <a class="field" href="_File---FileRetriever.php.html">/File/FileRetriever.php</a> (line <span class="field">51</span>)
 		</p>
 		
 				
@@ -63,10 +63,10 @@
 								 alt=" class"
 								 title=" class"
 								 style="vertical-align: center"/>
-						<a href="../File/File.html">File</a>
+						<a href="../File/ImageFileRetriever.html">ImageFileRetriever</a>
 					</td>
 					<td>
-											You get a file by calling:
+											The ImageFileRetriever mainly does the same thing as the FileRetriever
 										</td>
 				</tr>
 							</table>
@@ -85,43 +85,43 @@
 		</div>
 		<div class="info-box-body">			
 			<div class="method-summary">
-												<div class="method-definition">
-					<img src="../media/images/StaticMethod.png" alt=" "/>
-											static <span class="method-result"><a href="../File/File.html">File</a></span>
+																																																																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result"><a href="../File/File.html">File</a></span>
 										<a href="#create" title="details" class="method-name">create</a>
 											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$data</span>, <span class="var-type">int</span>&nbsp;<span class="var-name">$source</span>, [<span class="var-type">int</span>&nbsp;<span class="var-name">$maxFileSize</span> = <span class="var-default">10000000</span>])
 									</div>
 																<div class="method-definition">
-					<img src="../media/images/StaticMethod.png" alt=" "/>
-											static <span class="method-result"><a href="../File/File.html">File</a></span>
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result"><a href="../File/File.html">File</a></span>
 										<a href="#createFromFormUpload" title="details" class="method-name">createFromFormUpload</a>
 											(<span class="var-type">array</span>&nbsp;<span class="var-name">$FILE</span>, [<span class="var-type">int</span>&nbsp;<span class="var-name">$maxFileSize</span> = <span class="var-default">100000</span>])
 									</div>
 																<div class="method-definition">
-					<img src="../media/images/StaticMethod.png" alt=" "/>
-											static <span class="method-result"><a href="../File/File.html">File</a></span>
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result"><a href="../File/File.html">File</a></span>
 										<a href="#createFromHttp" title="details" class="method-name">createFromHttp</a>
 											(<span class="var-type">array</span>&nbsp;<span class="var-name">$url</span>, [<span class="var-type">array</span>&nbsp;<span class="var-name">$getParameters</span> = <span class="var-default">null</span>], [<span class="var-type">array</span>&nbsp;<span class="var-name">$postParameters</span> = <span class="var-default">null</span>], [<span class="var-type">int</span>&nbsp;<span class="var-name">$port</span> = <span class="var-default">80</span>], [<span class="var-type">int</span>&nbsp;<span class="var-name">$timeout</span> = <span class="var-default">30</span>])
 									</div>
 																<div class="method-definition">
-					<img src="../media/images/StaticMethod.png" alt=" "/>
-											static <span class="method-result"><a href="../File/File.html">File</a></span>
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result"><a href="../File/File.html">File</a></span>
 										<a href="#createFromLocalFile" title="details" class="method-name">createFromLocalFile</a>
 											(<span class="var-type">array</span>&nbsp;<span class="var-name">$srcUri</span>)
 									</div>
 																<div class="method-definition">
-					<img src="../media/images/StaticMethod.png" alt=" "/>
-											static <span class="method-result"><a href="../File/File.html">File</a></span>
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result"><a href="../File/File.html">File</a></span>
 										<a href="#getFile" title="details" class="method-name">getFile</a>
 											(<span class="var-type"></span>&nbsp;<span class="var-name">$uri</span>)
 									</div>
 																<div class="method-definition">
-					<img src="../media/images/StaticMethod.png" alt=" "/>
-											static <span class="method-result">void</span>
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">void</span>
 										<a href="#process" title="details" class="method-name">process</a>
 											(<span class="var-type"><a href="../File/File.html">File</a></span>&nbsp;<span class="var-name">$file</span>)
 									</div>
-																																																															</div>
+											</div>
 		</div>
 	</div>		
 
@@ -141,8 +141,8 @@
 <div class="evenrow">
 	
 	<div class="method-header">
-		<img src="../media/images/StaticMethod.png" />
-		<span class="method-title">static create</span> (line <span class="line-number">81</span>)
+		<img src="../media/images/Method.png" />
+		<span class="method-title">create</span> (line <span class="line-number">86</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -178,12 +178,12 @@
 <div class="oddrow">
 	
 	<div class="method-header">
-		<img src="../media/images/StaticMethod.png" />
-		<span class="method-title">static createFromFormUpload</span> (line <span class="line-number">110</span>)
+		<img src="../media/images/Method.png" />
+		<span class="method-title">createFromFormUpload</span> (line <span class="line-number">115</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">This static function is the way to get a file from a form upload.</p>
+<p class="short-description">This method is the way to get a file from a form upload.</p>
 	<ul class="tags">
 				<li><span class="field">deprecated:</span> use get() instead</li>
 				<li><span class="field">access:</span> public</li>
@@ -212,12 +212,12 @@
 <div class="evenrow">
 	
 	<div class="method-header">
-		<img src="../media/images/StaticMethod.png" />
-		<span class="method-title">static createFromHttp</span> (line <span class="line-number">171</span>)
+		<img src="../media/images/Method.png" />
+		<span class="method-title">createFromHttp</span> (line <span class="line-number">176</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">This static function is the way to get a file from a http source.</p>
+<p class="short-description">This method is the way to get a file from a http source.</p>
 	<ul class="tags">
 				<li><span class="field">deprecated:</span> Use get() instead.</li>
 				<li><span class="field">access:</span> public</li>
@@ -255,12 +255,12 @@
 <div class="oddrow">
 	
 	<div class="method-header">
-		<img src="../media/images/StaticMethod.png" />
-		<span class="method-title">static createFromLocalFile</span> (line <span class="line-number">151</span>)
+		<img src="../media/images/Method.png" />
+		<span class="method-title">createFromLocalFile</span> (line <span class="line-number">156</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">This static function is the way to get a file from a local file.</p>
+<p class="short-description">This method is the way to get a file from a local file.</p>
 	<ul class="tags">
 				<li><span class="field">deprecated:</span> Use get() instead.</li>
 				<li><span class="field">access:</span> public</li>
@@ -286,8 +286,8 @@
 <div class="evenrow">
 	
 	<div class="method-header">
-		<img src="../media/images/StaticMethod.png" />
-		<span class="method-title">static getFile</span> (line <span class="line-number">63</span>)
+		<img src="../media/images/Method.png" />
+		<span class="method-title">getFile</span> (line <span class="line-number">68</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -315,7 +315,7 @@
 		<div class="notes">Redefined in descendants as:</div>
 		<ul class="redefinitions">
 					<li>
-				<a href="../File/File.html#methodgetFile">File::getFile()</a>
+				<a href="../File/ImageFileRetriever.html#methodgetFile">ImageFileRetriever::getFile()</a>
 								: Creates a file, and returns it.
 							</li>
 				</ul>
@@ -324,8 +324,8 @@
 <div class="oddrow">
 	
 	<div class="method-header">
-		<img src="../media/images/StaticMethod.png" />
-		<span class="method-title">static process</span> (line <span class="line-number">56</span>)
+		<img src="../media/images/Method.png" />
+		<span class="method-title">process</span> (line <span class="line-number">61</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -354,7 +354,7 @@
 		<div class="notes">Redefined in descendants as:</div>
 		<ul class="redefinitions">
 					<li>
-				<a href="../File/ImageFile.html#methodprocess">ImageFile::process()</a>
+				<a href="../File/ImageFileRetriever.html#methodprocess">ImageFileRetriever::process()</a>
 							</li>
 				</ul>
 	</div>

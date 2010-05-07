@@ -13,7 +13,7 @@
 /**
  * Loading the FileDao
  */
-include dirname(dirname(__FILE__)) . '/FileDao.php';
+include dirname(dirname(__FILE__)) . '/FileSourceDao.php';
 
 
 /**
@@ -42,7 +42,7 @@ class XmlDaoException extends DaoException { }
  * @copyright Copyright (c) 2010, Matthias Loitsch
  * @package Dao
  **/
-class XmlDao extends FileDao {
+class XmlDao extends FileSourceDao {
 
 
   /**

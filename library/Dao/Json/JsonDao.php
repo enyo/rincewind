@@ -13,7 +13,7 @@
 /**
  * Loading the FileDao
  */
-include dirname(dirname(__FILE__)) . '/FileDao.php';
+include dirname(dirname(__FILE__)) . '/FileSourceDao.php';
 
 /**
  * Loading the Exceptions
@@ -27,13 +27,13 @@ include dirname(__FILE__) . '/JsonResultIterator.php';
 
 
 /**
- * The JsonDao implementation of a FileDao
+ * The JsonDao implementation of a FileSourceDao
  *
  * @author Matthias Loitsch <developer@ma.tthias.com>
  * @copyright Copyright (c) 2010, Matthias Loitsch
  * @package Dao
  **/
-class JsonDao extends FileDao {
+class JsonDao extends FileSourceDao {
 
 
   /**

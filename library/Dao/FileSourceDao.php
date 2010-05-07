@@ -17,13 +17,13 @@ if (!class_exists('Dao')) include dirname(__FILE__) . '/Dao.php';
 
 
 /**
- * The FileDao is used to get a file somewhere, interpret it and act as a normal datasource.
+ * The FileSourceDao is used to get a file somewhere, interpret it and act as a normal datasource.
  *
  * @author Matthias Loitsch <developer@ma.tthias.com>
  * @copyright Copyright (c) 2010, Matthias Loitsch
  * @package Dao
  **/
-abstract class FileDao extends Dao {
+abstract class FileSourceDao extends Dao {
 
   /**
    * @var mixed

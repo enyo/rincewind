@@ -12,7 +12,7 @@
 /**
  * Loading the DaoResultIterator
  */
-include dirname(dirname(__FILE__)) . '/FileResultIterator.php';
+include dirname(dirname(__FILE__)) . '/FileSourceResultIterator.php';
 
 /**
  * This class implements the XmlResultIterator.
@@ -21,7 +21,7 @@ include dirname(dirname(__FILE__)) . '/FileResultIterator.php';
  * @copyright Copyright (c) 2010, Matthias Loitsch
  * @package Dao
  */ 
-class XmlResultIterator extends FileResultIterator { }
+class XmlResultIterator extends FileSourceResultIterator { }
 
 
 ?>

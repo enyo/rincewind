@@ -15,13 +15,13 @@
 include dirname(__FILE__) . '/DaoResultIterator.php';
 
 /**
- * This class implements the FileResultIterator.
+ * This class implements the FileSourceResultIterator.
  *
  * @author Matthias Loitsch <developer@ma.tthias.com>
  * @copyright Copyright (c) 2010, Matthias Loitsch
  * @package Dao
  */ 
-abstract class FileResultIterator extends DaoResultIterator {
+abstract class FileSourceResultIterator extends DaoResultIterator {
 
   /**
    * @var array

@@ -11,7 +11,7 @@
 /**
  * Loading the abstract Dao Class
  */
-include dirname(__FILE__) . '/Dao.php';
+if (!class_exists('Dao')) include dirname(__FILE__) . '/Dao.php';
 
 
 /**

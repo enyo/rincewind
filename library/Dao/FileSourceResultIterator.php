@@ -12,7 +12,7 @@
 /**
  * Loading the DaoResultIterator
  */
-include dirname(__FILE__) . '/DaoResultIterator.php';
+if (!class_exists('DaoResultIterator')) include dirname(__FILE__) . '/DaoResultIterator.php';
 
 /**
  * This class implements the FileSourceResultIterator.

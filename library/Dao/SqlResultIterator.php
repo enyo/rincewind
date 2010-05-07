@@ -9,9 +9,9 @@
  **/
 
 /**
- * Loading the abstract Dao Class
+ * Loading the DaoResultIterator
  */
-include dirname(__FILE__) . '/DaoResultIterator.php';
+if (!class_exists('DaoResultIterator')) include dirname(__FILE__) . '/DaoResultIterator.php';
 
 /**
  * The SQL result iterator is the implementation of the DaoResultIterator.

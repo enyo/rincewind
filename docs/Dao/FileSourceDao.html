@@ -3,7 +3,7 @@
   <html xmlns="http://www.w3.org/1999/xhtml">
 		<head>
 			<!-- template designed by Marco Von Ballmoos -->
-			<title>Docs For Class SqlDao</title>
+			<title>Docs For Class FileSourceDao</title>
 			<link rel="stylesheet" href="../media/stylesheet.css" />
 			<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
 		</head>
@@ -12,7 +12,7 @@
 <h2 class="class-name"><img src="../media/images/AbstractClass_logo.png"
 														alt="Abstract Class"
 														title="Abstract Class"
-														style="vertical-align: middle"> SqlDao</h2>
+														style="vertical-align: middle"> FileSourceDao</h2>
 
 <a name="sec-description"></a>
 <div class="info-box">
@@ -28,20 +28,20 @@
 			</div>
 	<div class="info-box-body">
         		<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">The SqlDao has all the main functionality for SQL databases.</p>
+<p class="short-description">The FileSourceDao is used to get a file somewhere, interpret it and act as a normal datasource.</p>
 	<ul class="tags">
 				<li><span class="field">author:</span> Matthias Loitsch &lt;<a href="mailto:developer@ma.tthias.com">developer@ma.tthias.com</a>&gt;</li>
 				<li><span class="field">copyright:</span> Copyright (c) 2010, Matthias Loitsch</li>
 				<li><span class="field">abstract:</span> </li>
 			</ul>
 		<p class="notes">
-			Located in <a class="field" href="_Dao---SqlDao.php.html">/Dao/SqlDao.php</a> (line <span class="field">24</span>)
+			Located in <a class="field" href="_Dao---FileSourceDao.php.html">/Dao/FileSourceDao.php</a> (line <span class="field">26</span>)
 		</p>
 		
 				
 		<pre><a href="../Dao/Dao.html">Dao</a>
    |
-   --SqlDao</pre>
+   --FileSourceDao</pre>
 	
 			</div>
 </div>
@@ -70,10 +70,22 @@
 								 alt=" class"
 								 title=" class"
 								 style="vertical-align: center"/>
-						<a href="../Dao/MysqlDao.html">MysqlDao</a>
+						<a href="../Dao/JsonDao.html">JsonDao</a>
 					</td>
 					<td>
-											The MySqlDao implementation of a SqlDao
+											The JsonDao implementation of a FileSourceDao
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; white-space: nowrap">
+						<img src="../media/images/Class.png"
+								 alt=" class"
+								 title=" class"
+								 style="vertical-align: center"/>
+						<a href="../Dao/XmlDao.html">XmlDao</a>
+					</td>
+					<td>
+											The XmlDao implementation of a FileDao
 										</td>
 				</tr>
 							</table>
@@ -98,8 +110,8 @@
 			<div class="var-summary">
 																								<div class="var-title">
 					<img src="../media/images/Variable.png" alt=" " />
-					<span class="var-type"><a href="../Database/Database.html">Database</a></span>
-					<a href="#$db" title="details" class="var-name">$db</a>
+					<span class="var-type">mixed</span>
+					<a href="#$fileDataSource" title="details" class="var-name">$fileDataSource</a>
 				</div>
 											</div>
 		</div>
@@ -120,11 +132,11 @@
 		</div>
 		<div class="info-box-body">			
 			<div class="method-summary">
-																																																																																																																																																																																																																<div class="method-definition">
+																																																																																																																																																																																																<div class="method-definition">
 					<img src="../media/images/Constructor.png" alt=" "/>
-											<span class="method-result">SqlDao</span>
+											<span class="method-result">FileSourceDao</span>
 										<a href="#__construct" title="details" class="method-name">__construct</a>
-											(<span class="var-type"><a href="../Database/Database.html">Database</a></span>&nbsp;<span class="var-name">$db</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$tableName</span> = <span class="var-default">null</span>], [<span class="var-type">array</span>&nbsp;<span class="var-name">$columnTypes</span> = <span class="var-default">null</span>], [<span class="var-type">array</span>&nbsp;<span class="var-name">$nullColumns</span> = <span class="var-default">null</span>], [<span class="var-type">array</span>&nbsp;<span class="var-name">$defaultColumns</span> = <span class="var-default">null</span>])
+											(<span class="var-type"><a href="../DataSource/FileDataSource.html">FileDataSource</a></span>&nbsp;<span class="var-name">$fileDataSource</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$tableName</span> = <span class="var-default">null</span>], [<span class="var-type">array</span>&nbsp;<span class="var-name">$columnTypes</span> = <span class="var-default">null</span>], [<span class="var-type">array</span>&nbsp;<span class="var-name">$nullColumns</span> = <span class="var-default">null</span>], [<span class="var-type">array</span>&nbsp;<span class="var-name">$defaultColumns</span> = <span class="var-default">null</span>])
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
@@ -146,9 +158,9 @@
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/AbstractMethod.png" alt=" "/>
-											<span class="method-result"><a href="../Dao/DaoResultIterator.html">DaoResultIterator</a></span>
+											<span class="method-result">FileResultIterator</span>
 										<a href="#createIterator" title="details" class="method-name">createIterator</a>
-											(<span class="var-type">result</span>&nbsp;<span class="var-name">$result</span>)
+											(<span class="var-type">array</span>&nbsp;<span class="var-name">$data</span>)
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
@@ -165,26 +177,26 @@
 																<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
 											<span class="method-result">string</span>
-										<a href="#escapeString" title="details" class="method-name">escapeString</a>
-											(<span class="var-type">string</span>&nbsp;<span class="var-name">$string</span>)
-									</div>
-																<div class="method-definition">
-					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result">string</span>
 										<a href="#escapeTable" title="details" class="method-name">escapeTable</a>
 											([<span class="var-type">string</span>&nbsp;<span class="var-name">$table</span> = <span class="var-default">null</span>])
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
 											<span class="method-result">string</span>
-										<a href="#exportDate" title="details" class="method-name">exportDate</a>
-											(<span class="var-type"><a href="../Date/Date.html">Date</a></span>&nbsp;<span class="var-name">$date</span>, <span class="var-type">bool</span>&nbsp;<span class="var-name">$withTime</span>)
+										<a href="#exportColumn" title="details" class="method-name">exportColumn</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$column</span>)
+									</div>
+																<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">array</span>
+										<a href="#exportMap" title="details" class="method-name">exportMap</a>
+											(<span class="var-type">array</span>&nbsp;<span class="var-name">$map</span>)
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
 											<span class="method-result">string</span>
-										<a href="#generateQuery" title="details" class="method-name">generateQuery</a>
-											(<span class="var-type">array</span>&nbsp;<span class="var-name">$map</span>, [<span class="var-type">string|array</span>&nbsp;<span class="var-name">$sort</span> = <span class="var-default">null</span>], [<span class="var-type">int</span>&nbsp;<span class="var-name">$offset</span> = <span class="var-default">null</span>], [<span class="var-type">int</span>&nbsp;<span class="var-name">$limit</span> = <span class="var-default">null</span>], [<span class="var-type">bool</span>&nbsp;<span class="var-name">$exportValues</span> = <span class="var-default">true</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$tableName</span> = <span class="var-default">null</span>])
+										<a href="#exportTable" title="details" class="method-name">exportTable</a>
+											([<span class="var-type">string</span>&nbsp;<span class="var-name">$table</span> = <span class="var-default">null</span>])
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
@@ -206,15 +218,9 @@
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result"><a href="../Database/Database.html">Database</a></span>
-										<a href="#getDb" title="details" class="method-name">getDb</a>
+											<span class="method-result"><a href="../DataSource/FileDataSource.html">FileDataSource</a></span>
+										<a href="#getFileDataSource" title="details" class="method-name">getFileDataSource</a>
 										()
-									</div>
-																<div class="method-definition">
-					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result"><a href="../Dao/DataObject/DataObject.html">DataObject</a>|array</span>
-										<a href="#getFromQuery" title="details" class="method-name">getFromQuery</a>
-											(<span class="var-type">string</span>&nbsp;<span class="var-name">$query</span>, [<span class="var-type">bool</span>&nbsp;<span class="var-name">$returnData</span> = <span class="var-default">false</span>])
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
@@ -224,15 +230,9 @@
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result"><a href="../Dao/SqlResultIterator.html">SqlResultIterator</a></span>
-										<a href="#getIteratorFromQuery" title="details" class="method-name">getIteratorFromQuery</a>
-											(<span class="var-type">string</span>&nbsp;<span class="var-name">$query</span>)
-									</div>
-																<div class="method-definition">
-					<img src="../media/images/AbstractMethod.png" alt=" "/>
-											<span class="method-result">int</span>
-										<a href="#getLastInsertId" title="details" class="method-name">getLastInsertId</a>
-										()
+											<span class="method-result">FileResultIterator</span>
+										<a href="#getIteratorFromData" title="details" class="method-name">getIteratorFromData</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$data</span>)
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
@@ -247,10 +247,10 @@
 											(<span class="var-type"><a href="../Dao/DataObject/DataObject.html">DataObject</a></span>&nbsp;<span class="var-name">$object</span>)
 									</div>
 																<div class="method-definition">
-					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result">int</span>
-										<a href="#insertByQuery" title="details" class="method-name">insertByQuery</a>
-											(<span class="var-type">string</span>&nbsp;<span class="var-name">$query</span>, [<span class="var-type">int</span>&nbsp;<span class="var-name">$id</span> = <span class="var-default">null</span>])
+					<img src="../media/images/AbstractMethod.png" alt=" "/>
+											<span class="method-result">array</span>
+										<a href="#interpretFileContent" title="details" class="method-name">interpretFileContent</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$content</span>)
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
@@ -285,15 +285,15 @@
 					</div>
 		<div class="info-box-body">
 			
-<a name="var$db" id="$db"><!-- --></A>
-<div class="oddrow">
+<a name="var$fileDataSource" id="$fileDataSource"><!-- --></A>
+<div class="evenrow">
 
 	<div class="var-header">
 		<img src="../media/images/Variable.png" />
 		<span class="var-title">
-			<span class="var-type"><a href="../Database/Database.html">Database</a></span>
-			<span class="var-name">$db</span>
-						(line <span class="line-number">29</span>)
+			<span class="var-type">mixed</span>
+			<span class="var-name">$fileDataSource</span>
+						(line <span class="line-number">31</span>)
 		</span>
 	</div>
 
@@ -369,11 +369,11 @@
 		<div class="info-box-body">
 			<A NAME='method_detail'></A>
 <a name="method__construct" id="__construct"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Constructor.png" />
-		<span class="method-title">Constructor __construct</span> (line <span class="line-number">39</span>)
+		<span class="method-title">Constructor __construct</span> (line <span class="line-number">40</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -382,17 +382,17 @@
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">SqlDao</span>
+		<span class="method-result">FileSourceDao</span>
 		<span class="method-name">
 			__construct
 		</span>
-					(<span class="var-type"><a href="../Database/Database.html">Database</a></span>&nbsp;<span class="var-name">$db</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$tableName</span> = <span class="var-default">null</span>], [<span class="var-type">array</span>&nbsp;<span class="var-name">$columnTypes</span> = <span class="var-default">null</span>], [<span class="var-type">array</span>&nbsp;<span class="var-name">$nullColumns</span> = <span class="var-default">null</span>], [<span class="var-type">array</span>&nbsp;<span class="var-name">$defaultColumns</span> = <span class="var-default">null</span>])
+					(<span class="var-type"><a href="../DataSource/FileDataSource.html">FileDataSource</a></span>&nbsp;<span class="var-name">$fileDataSource</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$tableName</span> = <span class="var-default">null</span>], [<span class="var-type">array</span>&nbsp;<span class="var-name">$columnTypes</span> = <span class="var-default">null</span>], [<span class="var-type">array</span>&nbsp;<span class="var-name">$nullColumns</span> = <span class="var-default">null</span>], [<span class="var-type">array</span>&nbsp;<span class="var-name">$defaultColumns</span> = <span class="var-default">null</span>])
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type"><a href="../Database/Database.html">Database</a></span>
-				<span class="var-name">$db</span>			</li>
+				<span class="var-type"><a href="../DataSource/FileDataSource.html">FileDataSource</a></span>
+				<span class="var-name">$fileDataSource</span><span class="var-description">: The fileDataSource is used to create the requests.</span>			</li>
 					<li>
 				<span class="var-type">string</span>
 				<span class="var-name">$tableName</span><span class="var-description">: You can specify this as an attribute when writing a Dao implementation</span>			</li>
@@ -410,16 +410,15 @@
 			
 	</div>
 <a name="methodbeginTransaction" id="beginTransaction"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">beginTransaction</span> (line <span class="line-number">114</span>)
+		<span class="method-title">beginTransaction</span> (line <span class="line-number">76</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Shorthand for: Dao.getDb()-&gt;beginTransaction()</p>
-<p class="description"><p>Be careful: this starts a transaction on the database! So all Daos using the same database will be in the same transaction</p></p>
+<p class="short-description">Overwrite this if your file connection allows transaction.</p>
 	<ul class="tags">
 				<li><span class="field">access:</span> public</li>
 			</ul>
@@ -436,16 +435,15 @@
 			
 	</div>
 <a name="methodcommit" id="commit"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">commit</span> (line <span class="line-number">120</span>)
+		<span class="method-title">commit</span> (line <span class="line-number">81</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Shorthand for: Dao.getDb()-&gt;commit()</p>
-<p class="description"><p>Be careful: this starts a transaction on the database! So all Daos using the same database will be in the same transaction</p></p>
+<p class="short-description">Overwrite this if your file connection allows transaction.</p>
 	<ul class="tags">
 				<li><span class="field">access:</span> public</li>
 			</ul>
@@ -462,15 +460,15 @@
 			
 	</div>
 <a name="methodconvertRemoteValueToTimestamp" id="convertRemoteValueToTimestamp"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">convertRemoteValueToTimestamp</span> (line <span class="line-number">75</span>)
+		<span class="method-title">convertRemoteValueToTimestamp</span> (line <span class="line-number">70</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">For most SQL Database simply calling strtotime() will work.</p>
+<p class="short-description">Most file data connections will transfer time values as timestamps.</p>
 	<ul class="tags">
 				<li><span class="field">access:</span> protected</li>
 			</ul>
@@ -501,32 +499,32 @@
 			
 	</div>
 <a name="methodcreateIterator" id="createIterator"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/AbstractMethod.png" />
-		<span class="method-title">createIterator</span> (line <span class="line-number">67</span>)
+		<span class="method-title">createIterator</span> (line <span class="line-number">62</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Creates an iterator from a php result.</p>
+<p class="short-description">Creates an iterator from a data hash.</p>
 	<ul class="tags">
 				<li><span class="field">abstract:</span> </li>
 				<li><span class="field">access:</span> protected</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result"><a href="../Dao/DaoResultIterator.html">DaoResultIterator</a></span>
+		<span class="method-result">FileResultIterator</span>
 		<span class="method-name">
 			createIterator
 		</span>
-					(<span class="var-type">result</span>&nbsp;<span class="var-name">$result</span>)
+					(<span class="var-type">array</span>&nbsp;<span class="var-name">$data</span>)
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type">result</span>
-				<span class="var-name">$result</span>			</li>
+				<span class="var-type">array</span>
+				<span class="var-name">$data</span>			</li>
 				</ul>
 		
 			
@@ -534,17 +532,21 @@
 		<div class="notes">Redefined in descendants as:</div>
 		<ul class="redefinitions">
 					<li>
-				<a href="../Dao/MysqlDao.html#methodcreateIterator">MysqlDao::createIterator()</a>
-								: Creates an iterator for a mysql result.
+				<a href="../Dao/JsonDao.html#methodcreateIterator">JsonDao::createIterator()</a>
+								: Creates an iterator for a json data hash.
+							</li>
+					<li>
+				<a href="../Dao/XmlDao.html#methodcreateIterator">XmlDao::createIterator()</a>
+								: Creates an iterator for a Xml data hash.
 							</li>
 				</ul>
 	</div>
 <a name="methoddelete" id="delete"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">delete</span> (line <span class="line-number">235</span>)
+		<span class="method-title">delete</span> (line <span class="line-number">208</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -570,15 +572,15 @@
 			
 	</div>
 <a name="methodescapeColumn" id="escapeColumn"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">escapeColumn</span> (line <span class="line-number">94</span>)
+		<span class="method-title">escapeColumn</span> (line <span class="line-number">305</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Calls the internal db-&gt;escapeColumn function</p>
+<p class="short-description">By default does nothing for FileDaos.</p>
 	<ul class="tags">
 				<li><span class="field">access:</span> protected</li>
 			</ul>
@@ -599,46 +601,16 @@
 		
 			
 	</div>
-<a name="methodescapeString" id="escapeString"><!-- --></a>
-<div class="oddrow">
-	
-	<div class="method-header">
-		<img src="../media/images/Method.png" />
-		<span class="method-title">escapeString</span> (line <span class="line-number">84</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Calls the internal db-&gt;escapeString function</p>
-	<ul class="tags">
-				<li><span class="field">access:</span> protected</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result">string</span>
-		<span class="method-name">
-			escapeString
-		</span>
-					(<span class="var-type">string</span>&nbsp;<span class="var-name">$string</span>)
-			</div>
-	
-			<ul class="parameters">
-					<li>
-				<span class="var-type">string</span>
-				<span class="var-name">$string</span>			</li>
-				</ul>
-		
-			
-	</div>
 <a name="methodescapeTable" id="escapeTable"><!-- --></a>
 <div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">escapeTable</span> (line <span class="line-number">104</span>)
+		<span class="method-title">escapeTable</span> (line <span class="line-number">326</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Calls the internal db-&gt;escapeTable function</p>
+<p class="short-description">Does nothing by default.</p>
 	<ul class="tags">
 				<li><span class="field">access:</span> protected</li>
 			</ul>
@@ -659,16 +631,17 @@
 		
 			
 	</div>
-<a name="methodexportDate" id="exportDate"><!-- --></a>
+<a name="methodexportColumn" id="exportColumn"><!-- --></a>
 <div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">exportDate</span> (line <span class="line-number">389</span>)
+		<span class="method-title">exportColumn</span> (line <span class="line-number">294</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Returns a formatted date, and escaped with exportString.</p>
+<p class="short-description">Takes a php column name, converts it via import/export column mapping and calls escapeColumn.</p>
+<p class="description"><p>This is the correct way to insert column names in a map.</p></p>
 	<ul class="tags">
 				<li><span class="field">access:</span> public</li>
 			</ul>
@@ -676,78 +649,100 @@
 	<div class="method-signature">
 		<span class="method-result">string</span>
 		<span class="method-name">
-			exportDate
+			exportColumn
 		</span>
-					(<span class="var-type"><a href="../Date/Date.html">Date</a></span>&nbsp;<span class="var-name">$date</span>, <span class="var-type">bool</span>&nbsp;<span class="var-name">$withTime</span>)
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$column</span>)
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type"><a href="../Date/Date.html">Date</a></span>
-				<span class="var-name">$date</span>			</li>
-					<li>
-				<span class="var-type">bool</span>
-				<span class="var-name">$withTime</span>			</li>
+				<span class="var-type">string</span>
+				<span class="var-name">$column</span>			</li>
 				</ul>
 		
 			<hr class="separator" />
 		<div class="notes">Redefinition of:</div>
 		<dl>
-			<dt><a href="../Dao/Dao.html#methodexportDate">Dao::exportDate()</a></dt>
+			<dt><a href="../Dao/Dao.html#methodexportColumn">Dao::exportColumn()</a></dt>
+						<dd>Has to determine the correct column (with import/export mappings), escape and quote it.</dd>
 					</dl>
 			
 	</div>
-<a name="methodgenerateQuery" id="generateQuery"><!-- --></a>
+<a name="methodexportMap" id="exportMap"><!-- --></a>
 <div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">generateQuery</span> (line <span class="line-number">270</span>)
+		<span class="method-title">exportMap</span> (line <span class="line-number">228</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">This function generates the SQL query for the getters.</p>
+<p class="short-description">This function exports every values of a map</p>
 	<ul class="tags">
+				<li><span class="field">return:</span> The map with exported values.</li>
 				<li><span class="field">access:</span> protected</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">string</span>
+		<span class="method-result">array</span>
 		<span class="method-name">
-			generateQuery
+			exportMap
 		</span>
-					(<span class="var-type">array</span>&nbsp;<span class="var-name">$map</span>, [<span class="var-type">string|array</span>&nbsp;<span class="var-name">$sort</span> = <span class="var-default">null</span>], [<span class="var-type">int</span>&nbsp;<span class="var-name">$offset</span> = <span class="var-default">null</span>], [<span class="var-type">int</span>&nbsp;<span class="var-name">$limit</span> = <span class="var-default">null</span>], [<span class="var-type">bool</span>&nbsp;<span class="var-name">$exportValues</span> = <span class="var-default">true</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$tableName</span> = <span class="var-default">null</span>])
+					(<span class="var-type">array</span>&nbsp;<span class="var-name">$map</span>)
 			</div>
 	
 			<ul class="parameters">
 					<li>
 				<span class="var-type">array</span>
 				<span class="var-name">$map</span><span class="var-description">: A map containing the column assignments.</span>			</li>
-					<li>
-				<span class="var-type">string|array</span>
-				<span class="var-name">$sort</span><span class="var-description">: can be an array with ASCENDING values, or a map like                            this: array('login'=&gt;Dao::DESC), or simply a string                            containing the column. This value will be passed to                            generateSortString()</span>			</li>
-					<li>
-				<span class="var-type">int</span>
-				<span class="var-name">$offset</span>			</li>
-					<li>
-				<span class="var-type">int</span>
-				<span class="var-name">$limit</span>			</li>
-					<li>
-				<span class="var-type">bool</span>
-				<span class="var-name">$exportValues</span><span class="var-description">: When you want to have complete control over the $map                            column names, you can set exportValues to false, so                            they won't be processed.                            WARNING: Be sure to escape them yourself if you do so.</span>			</li>
-					<li>
-				<span class="var-type">string</span>
-				<span class="var-name">$tableName</span><span class="var-description">: You can pass a different table name than the default                           one. This is mostly used for views.</span>			</li>
 				</ul>
 		
 			
 	</div>
-<a name="methodgenerateSortString" id="generateSortString"><!-- --></a>
+<a name="methodexportTable" id="exportTable"><!-- --></a>
 <div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">generateSortString</span> (line <span class="line-number">366</span>)
+		<span class="method-title">exportTable</span> (line <span class="line-number">316</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Escapes a table name and potentially quotes a table name.</p>
+<p class="description"><p>By default it simply calls escapeTable</p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> The escaped and quoted table name.</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			exportTable
+		</span>
+					([<span class="var-type">string</span>&nbsp;<span class="var-name">$table</span> = <span class="var-default">null</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$table</span>			</li>
+				</ul>
+		
+			<hr class="separator" />
+		<div class="notes">Redefinition of:</div>
+		<dl>
+			<dt><a href="../Dao/Dao.html#methodexportTable">Dao::exportTable()</a></dt>
+						<dd>Escapes and quotes a table name.</dd>
+					</dl>
+			
+	</div>
+<a name="methodgenerateSortString" id="generateSortString"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">generateSortString</span> (line <span class="line-number">270</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -780,18 +775,17 @@
 			
 	</div>
 <a name="methodget" id="get"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">get</span> (line <span class="line-number">149</span>)
+		<span class="method-title">get</span> (line <span class="line-number">108</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
 <p class="short-description">This is the method to get a DataObject from the database.</p>
 <p class="description"><p>If you want to select more objects, call getIterator.  If you call get() without parameters, a &quot;raw object&quot; will be returned, containing  only default values, and null as id.</p></p>
 	<ul class="tags">
-				<li><span class="field">see:</span> <a href="../Dao/SqlDao.html#methodgenerateQuery">SqlDao::generateQuery()</a></li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
@@ -816,20 +810,26 @@
 				</ul>
 		
 			
+			<hr class="separator" />
+		<div class="notes">Redefined in descendants as:</div>
+		<ul class="redefinitions">
+					<li>
+				<a href="../Dao/XmlDao.html#methodget">XmlDao::get()</a>
+							</li>
+				</ul>
 	</div>
 <a name="methodgetData" id="getData"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">getData</span> (line <span class="line-number">164</span>)
+		<span class="method-title">getData</span> (line <span class="line-number">127</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
 <p class="short-description">Same as get() but returns an array with the data instead of an object</p>
 	<ul class="tags">
-				<li><span class="field">see:</span> <a href="../Dao/SqlDao.html#methodget">SqlDao::get()</a></li>
-				<li><span class="field">see:</span> <a href="../Dao/SqlDao.html#methodgenerateQuery">SqlDao::generateQuery()</a></li>
+				<li><span class="field">see:</span> <a href="../Dao/FileSourceDao.html#methodget">FileSourceDao::get()</a></li>
 				<li><span class="field">access:</span> protected</li>
 			</ul>
 	
@@ -854,63 +854,37 @@
 				</ul>
 		
 			
+			<hr class="separator" />
+		<div class="notes">Redefined in descendants as:</div>
+		<ul class="redefinitions">
+					<li>
+				<a href="../Dao/XmlDao.html#methodgetData">XmlDao::getData()</a>
+								: Just calls the parent, but then returns only one element of the list
+							</li>
+				</ul>
 	</div>
-<a name="methodgetDb" id="getDb"><!-- --></a>
-<div class="evenrow">
-	
-	<div class="method-header">
-		<img src="../media/images/Method.png" />
-		<span class="method-title">getDb</span> (line <span class="line-number">54</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Returns the database.</p>
-	<ul class="tags">
-				<li><span class="field">see:</span> <a href="../Database/Database.html">Database</a></li>
-				<li><span class="field">access:</span> public</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result"><a href="../Database/Database.html">Database</a></span>
-		<span class="method-name">
-			getDb
-		</span>
-				()
-			</div>
-	
-		
-			
-	</div>
-<a name="methodgetFromQuery" id="getFromQuery"><!-- --></a>
+<a name="methodgetFileDataSource" id="getFileDataSource"><!-- --></a>
 <div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">getFromQuery</span> (line <span class="line-number">319</span>)
+		<span class="method-title">getFileDataSource</span> (line <span class="line-number">54</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Returns a DataObject or data array from a query.</p>
+<p class="short-description">Returns the fileDataSource.</p>
 	<ul class="tags">
-				<li><span class="field">access:</span> protected</li>
+				<li><span class="field">access:</span> public</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result"><a href="../Dao/DataObject/DataObject.html">DataObject</a>|array</span>
+		<span class="method-result"><a href="../DataSource/FileDataSource.html">FileDataSource</a></span>
 		<span class="method-name">
-			getFromQuery
+			getFileDataSource
 		</span>
-					(<span class="var-type">string</span>&nbsp;<span class="var-name">$query</span>, [<span class="var-type">bool</span>&nbsp;<span class="var-name">$returnData</span> = <span class="var-default">false</span>])
+				()
 			</div>
 	
-			<ul class="parameters">
-					<li>
-				<span class="var-type">string</span>
-				<span class="var-name">$query</span>			</li>
-					<li>
-				<span class="var-type">bool</span>
-				<span class="var-name">$returnData</span><span class="var-description">: If set to true, only the data as array is returned, not a DataObject.</span>			</li>
-				</ul>
 		
 			
 	</div>
@@ -919,14 +893,13 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">getIterator</span> (line <span class="line-number">181</span>)
+		<span class="method-title">getIterator</span> (line <span class="line-number">150</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
 <p class="short-description">The same as get, but returns an iterator to go through all the rows.</p>
 	<ul class="tags">
-				<li><span class="field">see:</span> <a href="../Dao/SqlDao.html#methodget">SqlDao::get()</a></li>
-				<li><span class="field">see:</span> <a href="../Dao/SqlDao.html#methodgenerateQuery">SqlDao::generateQuery()</a></li>
+				<li><span class="field">see:</span> <a href="../Dao/FileSourceDao.html#methodget">FileSourceDao::get()</a></li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
@@ -961,76 +934,42 @@
 		
 			
 	</div>
-<a name="methodgetIteratorFromQuery" id="getIteratorFromQuery"><!-- --></a>
+<a name="methodgetIteratorFromData" id="getIteratorFromData"><!-- --></a>
 <div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">getIteratorFromQuery</span> (line <span class="line-number">335</span>)
+		<span class="method-title">getIteratorFromData</span> (line <span class="line-number">256</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Returns an Iterator for a query</p>
+<p class="short-description">Returns an Iterator for data</p>
 	<ul class="tags">
 				<li><span class="field">access:</span> protected</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result"><a href="../Dao/SqlResultIterator.html">SqlResultIterator</a></span>
+		<span class="method-result">FileResultIterator</span>
 		<span class="method-name">
-			getIteratorFromQuery
+			getIteratorFromData
 		</span>
-					(<span class="var-type">string</span>&nbsp;<span class="var-name">$query</span>)
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$data</span>)
 			</div>
 	
 			<ul class="parameters">
 					<li>
 				<span class="var-type">string</span>
-				<span class="var-name">$query</span>			</li>
+				<span class="var-name">$data</span>			</li>
 				</ul>
 		
 			
 	</div>
-<a name="methodgetLastInsertId" id="getLastInsertId"><!-- --></a>
+<a name="methodgetTotalCount" id="getTotalCount"><!-- --></a>
 <div class="evenrow">
 	
 	<div class="method-header">
-		<img src="../media/images/AbstractMethod.png" />
-		<span class="method-title">getLastInsertId</span> (line <span class="line-number">59</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-	<ul class="tags">
-				<li><span class="field">return:</span> The last id that has been inserted</li>
-				<li><span class="field">abstract:</span> </li>
-				<li><span class="field">access:</span> protected</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result">int</span>
-		<span class="method-name">
-			getLastInsertId
-		</span>
-				()
-			</div>
-	
-		
-			
-			<hr class="separator" />
-		<div class="notes">Redefined in descendants as:</div>
-		<ul class="redefinitions">
-					<li>
-				<a href="../Dao/MysqlDao.html#methodgetLastInsertId">MysqlDao::getLastInsertId()</a>
-								: Returns the id of the last inserted record.
-							</li>
-				</ul>
-	</div>
-<a name="methodgetTotalCount" id="getTotalCount"><!-- --></a>
-<div class="oddrow">
-	
-	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">getTotalCount</span> (line <span class="line-number">247</span>)
+		<span class="method-title">getTotalCount</span> (line <span class="line-number">218</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1051,11 +990,11 @@
 			
 	</div>
 <a name="methodinsert" id="insert"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">insert</span> (line <span class="line-number">194</span>)
+		<span class="method-title">insert</span> (line <span class="line-number">168</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1081,51 +1020,60 @@
 		
 			
 	</div>
-<a name="methodinsertByQuery" id="insertByQuery"><!-- --></a>
-<div class="oddrow">
+<a name="methodinterpretFileContent" id="interpretFileContent"><!-- --></a>
+<div class="evenrow">
 	
 	<div class="method-header">
-		<img src="../media/images/Method.png" />
-		<span class="method-title">insertByQuery</span> (line <span class="line-number">350</span>)
+		<img src="../media/images/AbstractMethod.png" />
+		<span class="method-title">interpretFileContent</span> (line <span class="line-number">136</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Inserts and returns the new id</p>
+<p class="short-description">Converts the content returned by the file factory into a usable data array.</p>
 	<ul class="tags">
-				<li><span class="field">return:</span> The id.</li>
+				<li><span class="field">return:</span> The data array</li>
+				<li><span class="field">abstract:</span> </li>
 				<li><span class="field">access:</span> protected</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">int</span>
+		<span class="method-result">array</span>
 		<span class="method-name">
-			insertByQuery
+			interpretFileContent
 		</span>
-					(<span class="var-type">string</span>&nbsp;<span class="var-name">$query</span>, [<span class="var-type">int</span>&nbsp;<span class="var-name">$id</span> = <span class="var-default">null</span>])
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$content</span>)
 			</div>
 	
 			<ul class="parameters">
 					<li>
 				<span class="var-type">string</span>
-				<span class="var-name">$query</span><span class="var-description">: The query.</span>			</li>
-					<li>
-				<span class="var-type">int</span>
-				<span class="var-name">$id</span><span class="var-description">: If an insert is done with an id, you can pass it. If not, the last insert id is used.</span>			</li>
+				<span class="var-name">$content</span>			</li>
 				</ul>
 		
 			
+			<hr class="separator" />
+		<div class="notes">Redefined in descendants as:</div>
+		<ul class="redefinitions">
+					<li>
+				<a href="../Dao/JsonDao.html#methodinterpretFileContent">JsonDao::interpretFileContent()</a>
+								: Intepretes the json content, and returns it.
+							</li>
+					<li>
+				<a href="../Dao/XmlDao.html#methodinterpretFileContent">XmlDao::interpretFileContent()</a>
+								: Intepretes the xml content, and returns it as array.
+							</li>
+				</ul>
 	</div>
 <a name="methodrollback" id="rollback"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">rollback</span> (line <span class="line-number">126</span>)
+		<span class="method-title">rollback</span> (line <span class="line-number">86</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Shorthand for: Dao.getDb()-&gt;rollback()</p>
-<p class="description"><p>Be careful: this starts a transaction on the database! So all Daos using the same database will be in the same transaction</p></p>
+<p class="short-description">Overwrite this if your file connection allows transaction.</p>
 	<ul class="tags">
 				<li><span class="field">access:</span> public</li>
 			</ul>
@@ -1142,11 +1090,11 @@
 			
 	</div>
 <a name="methodupdate" id="update"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">update</span> (line <span class="line-number">215</span>)
+		<span class="method-title">update</span> (line <span class="line-number">189</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->

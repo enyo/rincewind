@@ -29,16 +29,17 @@
         		<!-- ========== Info from phpDoc block ========= -->
 <p class="short-description">The Log class is abstract and only used with static function.</p>
 <p class="description"><p>It's used to store loggers, and select the correct one for  a specific context.</p><p>Example:</p><p><div class="src-code"><ol><li><div class="src-line">&nbsp;<span class="src-php">&lt;?php</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;<span class="src-id"><a href="../Logger/Log.html">Log</a></span><span class="src-sym">::</span><a href="../Logger/Log.html#methodaddLogger">addLogger</a><span class="src-sym">(</span><span class="src-var">$someLogger</span><span class="src-sym">,&nbsp;</span><span class="src-str">'Dao'</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
 <li><div class="src-line">&nbsp;&nbsp;&nbsp;<span class="src-id"><a href="../Logger/Log.html">Log</a></span><span class="src-sym">::</span><a href="../Logger/Log.html#methoderror">error</a><span class="src-sym">(</span><span class="src-str">'Some&nbsp;message'</span><span class="src-sym">,&nbsp;</span><span class="src-str">'Dao'</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
 <li><div class="src-line">&nbsp;<span class="src-php">?&gt;</span></div></li>
-</ol></div></p><p>If you didn't set a logger for a specific context, it will be ignored.</p><p>If you don't pass a context, the context Log::GENERAL is used.</p></p>
+</ol></div></p><p>If you didn't set a logger for a specific context, it will be ignored unless you specified a CATCHALL logger.</p><p>If you don't pass a context, the context Log::GENERAL is used.</p></p>
 	<ul class="tags">
 				<li><span class="field">author:</span> Matthias Loitsch &lt;<a href="mailto:developer@ma.tthias.com">developer@ma.tthias.com</a>&gt;</li>
 				<li><span class="field">copyright:</span> Copyright (c) 2010, Matthias Loitsch</li>
 				<li><span class="field">abstract:</span> </li>
 			</ul>
 		<p class="notes">
-			Located in <a class="field" href="_Logger---Log.php.html">/Logger/Log.php</a> (line <span class="field">35</span>)
+			Located in <a class="field" href="_Logger---Log.php.html">/Logger/Log.php</a> (line <span class="field">36</span>)
 		</p>
 		
 				
@@ -63,6 +64,11 @@
 					</div>
 		<div class="info-box-body">
 			<div class="const-summary">
+								<div class="const-title">
+					<img src="../media/images/Constant.png" alt=" " />
+					<a href="#CATCHALL" title="details" class="const-name">CATCHALL</a> = 					<span class="var-type"> ' CATCHALL '</span>
+
+				</div>
 								<div class="const-title">
 					<img src="../media/images/Constant.png" alt=" " />
 					<a href="#GENERAL" title="details" class="const-name">GENERAL</a> = 					<span class="var-type"> ' GENERAL '</span>
@@ -119,19 +125,19 @@
 					<img src="../media/images/StaticMethod.png" alt=" "/>
 											static <span class="method-result">bool</span>
 										<a href="#debug" title="details" class="method-name">debug</a>
-											(<span class="var-type">string</span>&nbsp;<span class="var-name">$message</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$context</span> = <span class="var-default">self::GENERAL</span>])
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$message</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$context</span> = <span class="var-default">self::GENERAL</span>], [<span class="var-type">array</span>&nbsp;<span class="var-name">$additionalInfo</span> = <span class="var-default">null</span>])
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/StaticMethod.png" alt=" "/>
 											static <span class="method-result">bool</span>
 										<a href="#error" title="details" class="method-name">error</a>
-											(<span class="var-type">string</span>&nbsp;<span class="var-name">$message</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$context</span> = <span class="var-default">self::GENERAL</span>])
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$message</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$context</span> = <span class="var-default">self::GENERAL</span>], [<span class="var-type">array</span>&nbsp;<span class="var-name">$additionalInfo</span> = <span class="var-default">null</span>])
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/StaticMethod.png" alt=" "/>
 											static <span class="method-result">bool</span>
 										<a href="#fatal" title="details" class="method-name">fatal</a>
-											(<span class="var-type">string</span>&nbsp;<span class="var-name">$message</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$context</span> = <span class="var-default">self::GENERAL</span>])
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$message</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$context</span> = <span class="var-default">self::GENERAL</span>], [<span class="var-type">array</span>&nbsp;<span class="var-name">$additionalInfo</span> = <span class="var-default">null</span>])
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/StaticMethod.png" alt=" "/>
@@ -143,7 +149,7 @@
 					<img src="../media/images/StaticMethod.png" alt=" "/>
 											static <span class="method-result">bool</span>
 										<a href="#info" title="details" class="method-name">info</a>
-											(<span class="var-type">string</span>&nbsp;<span class="var-name">$message</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$context</span> = <span class="var-default">self::GENERAL</span>])
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$message</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$context</span> = <span class="var-default">self::GENERAL</span>], [<span class="var-type">array</span>&nbsp;<span class="var-name">$additionalInfo</span> = <span class="var-default">null</span>])
 									</div>
 																<div class="method-definition">
 					<img src="../media/images/StaticMethod.png" alt=" "/>
@@ -155,7 +161,7 @@
 					<img src="../media/images/StaticMethod.png" alt=" "/>
 											static <span class="method-result">bool</span>
 										<a href="#warning" title="details" class="method-name">warning</a>
-											(<span class="var-type">string</span>&nbsp;<span class="var-name">$message</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$context</span> = <span class="var-default">self::GENERAL</span>])
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$message</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$context</span> = <span class="var-default">self::GENERAL</span>], [<span class="var-type">array</span>&nbsp;<span class="var-name">$additionalInfo</span> = <span class="var-default">null</span>])
 									</div>
 																																																																															</div>
 		</div>
@@ -177,14 +183,14 @@
 					</div>
 		<div class="info-box-body">
 			<a name="var$loggers" id="$loggers"><!-- --></A>
-<div class="oddrow">
+<div class="evenrow">
 
 	<div class="var-header">
 		<img src="../media/images/Variable.png" />
 		<span class="var-title">
 			static <span class="var-type">array</span>
 			<span class="var-name">$loggers</span>
-			 = <span class="var-default">array()</span>			(line <span class="line-number">49</span>)
+			 = <span class="var-default">array()</span>			(line <span class="line-number">58</span>)
 		</span>
 	</div>
 
@@ -218,11 +224,11 @@
 		<div class="info-box-body">
 			<A NAME='method_detail'></A>
 <a name="methodaddLogger" id="addLogger"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/StaticMethod.png" />
-		<span class="method-title">static addLogger</span> (line <span class="line-number">58</span>)
+		<span class="method-title">static addLogger</span> (line <span class="line-number">67</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -251,17 +257,17 @@
 			
 	</div>
 <a name="methoddebug" id="debug"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/StaticMethod.png" />
-		<span class="method-title">static debug</span> (line <span class="line-number">85</span>)
+		<span class="method-title">static debug</span> (line <span class="line-number">96</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
 <p class="short-description">Logs a debug message in the logger for the specific context</p>
 	<ul class="tags">
-				<li><span class="field">return:</span> true on success, false if no logger specified for the context.</li>
+				<li><span class="field">return:</span> true on success, false if no logger specified for the context or the logger below level.</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
@@ -270,7 +276,7 @@
 		<span class="method-name">
 			debug
 		</span>
-					(<span class="var-type">string</span>&nbsp;<span class="var-name">$message</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$context</span> = <span class="var-default">self::GENERAL</span>])
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$message</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$context</span> = <span class="var-default">self::GENERAL</span>], [<span class="var-type">array</span>&nbsp;<span class="var-name">$additionalInfo</span> = <span class="var-default">null</span>])
 			</div>
 	
 			<ul class="parameters">
@@ -280,22 +286,25 @@
 					<li>
 				<span class="var-type">string</span>
 				<span class="var-name">$context</span>			</li>
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">$additionalInfo</span><span class="var-description">: An associative array with more info. Eg: array('content'=&gt;'Some stuff')</span>			</li>
 				</ul>
 		
 			
 	</div>
 <a name="methoderror" id="error"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/StaticMethod.png" />
-		<span class="method-title">static error</span> (line <span class="line-number">136</span>)
+		<span class="method-title">static error</span> (line <span class="line-number">144</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
 <p class="short-description">Logs an error message in the logger for the specific context</p>
 	<ul class="tags">
-				<li><span class="field">return:</span> true on success, false if no logger specified for the context.</li>
+				<li><span class="field">return:</span> true on success, false if no logger specified for the context or the logger below level.</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
@@ -304,7 +313,7 @@
 		<span class="method-name">
 			error
 		</span>
-					(<span class="var-type">string</span>&nbsp;<span class="var-name">$message</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$context</span> = <span class="var-default">self::GENERAL</span>])
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$message</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$context</span> = <span class="var-default">self::GENERAL</span>], [<span class="var-type">array</span>&nbsp;<span class="var-name">$additionalInfo</span> = <span class="var-default">null</span>])
 			</div>
 	
 			<ul class="parameters">
@@ -314,22 +323,25 @@
 					<li>
 				<span class="var-type">string</span>
 				<span class="var-name">$context</span>			</li>
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">$additionalInfo</span><span class="var-description">: An associative array with more info. Eg: array('content'=&gt;'Some stuff')</span>			</li>
 				</ul>
 		
 			
 	</div>
 <a name="methodfatal" id="fatal"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/StaticMethod.png" />
-		<span class="method-title">static fatal</span> (line <span class="line-number">153</span>)
+		<span class="method-title">static fatal</span> (line <span class="line-number">160</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
 <p class="short-description">Logs a fatal error message in the logger for the specific context</p>
 	<ul class="tags">
-				<li><span class="field">return:</span> true on success, false if no logger specified for the context.</li>
+				<li><span class="field">return:</span> true on success, false if no logger specified for the context or the logger below level.</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
@@ -338,7 +350,7 @@
 		<span class="method-name">
 			fatal
 		</span>
-					(<span class="var-type">string</span>&nbsp;<span class="var-name">$message</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$context</span> = <span class="var-default">self::GENERAL</span>])
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$message</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$context</span> = <span class="var-default">self::GENERAL</span>], [<span class="var-type">array</span>&nbsp;<span class="var-name">$additionalInfo</span> = <span class="var-default">null</span>])
 			</div>
 	
 			<ul class="parameters">
@@ -348,16 +360,19 @@
 					<li>
 				<span class="var-type">string</span>
 				<span class="var-name">$context</span>			</li>
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">$additionalInfo</span><span class="var-description">: An associative array with more info. Eg: array('content'=&gt;'Some stuff')</span>			</li>
 				</ul>
 		
 			
 	</div>
 <a name="methodgetLogger" id="getLogger"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/StaticMethod.png" />
-		<span class="method-title">static getLogger</span> (line <span class="line-number">71</span>)
+		<span class="method-title">static getLogger</span> (line <span class="line-number">80</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -384,17 +399,17 @@
 			
 	</div>
 <a name="methodinfo" id="info"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/StaticMethod.png" />
-		<span class="method-title">static info</span> (line <span class="line-number">102</span>)
+		<span class="method-title">static info</span> (line <span class="line-number">112</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
 <p class="short-description">Logs an info message in the logger for the specific context</p>
 	<ul class="tags">
-				<li><span class="field">return:</span> true on success, false if no logger specified for the context.</li>
+				<li><span class="field">return:</span> true on success, false if no logger specified for the context or the logger below level.</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
@@ -403,7 +418,7 @@
 		<span class="method-name">
 			info
 		</span>
-					(<span class="var-type">string</span>&nbsp;<span class="var-name">$message</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$context</span> = <span class="var-default">self::GENERAL</span>])
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$message</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$context</span> = <span class="var-default">self::GENERAL</span>], [<span class="var-type">array</span>&nbsp;<span class="var-name">$additionalInfo</span> = <span class="var-default">null</span>])
 			</div>
 	
 			<ul class="parameters">
@@ -413,16 +428,19 @@
 					<li>
 				<span class="var-type">string</span>
 				<span class="var-name">$context</span>			</li>
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">$additionalInfo</span><span class="var-description">: An associative array with more info. Eg: array('content'=&gt;'Some stuff')</span>			</li>
 				</ul>
 		
 			
 	</div>
 <a name="methodsanitizeContext" id="sanitizeContext"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/StaticMethod.png" />
-		<span class="method-title">static sanitizeContext</span> (line <span class="line-number">169</span>)
+		<span class="method-title">static sanitizeContext</span> (line <span class="line-number">174</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -449,17 +467,17 @@
 			
 	</div>
 <a name="methodwarning" id="warning"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/StaticMethod.png" />
-		<span class="method-title">static warning</span> (line <span class="line-number">119</span>)
+		<span class="method-title">static warning</span> (line <span class="line-number">128</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
 <p class="short-description">Logs a warning message in the logger for the specific context</p>
 	<ul class="tags">
-				<li><span class="field">return:</span> true on success, false if no logger specified for the context.</li>
+				<li><span class="field">return:</span> true on success, false if no logger specified for the context or the logger below level.</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
@@ -468,7 +486,7 @@
 		<span class="method-name">
 			warning
 		</span>
-					(<span class="var-type">string</span>&nbsp;<span class="var-name">$message</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$context</span> = <span class="var-default">self::GENERAL</span>])
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$message</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$context</span> = <span class="var-default">self::GENERAL</span>], [<span class="var-type">array</span>&nbsp;<span class="var-name">$additionalInfo</span> = <span class="var-default">null</span>])
 			</div>
 	
 			<ul class="parameters">
@@ -478,6 +496,9 @@
 					<li>
 				<span class="var-type">string</span>
 				<span class="var-name">$context</span>			</li>
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">$additionalInfo</span><span class="var-description">: An associative array with more info. Eg: array('content'=&gt;'Some stuff')</span>			</li>
 				</ul>
 		
 			
@@ -500,7 +521,24 @@
 							
 					</div>
 		<div class="info-box-body">
-			<a name="constGENERAL" id="GENERAL"><!-- --></A>
+			<a name="constCATCHALL" id="CATCHALL"><!-- --></A>
+<div class="oddrow">
+
+	<div class="const-header">
+		<img src="../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">CATCHALL</span>
+			 = <span class="const-default"> ' CATCHALL '</span>
+			(line <span class="line-number">50</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">The string for the catchall logger.</p>
+	
+	
+</div>
+<a name="constGENERAL" id="GENERAL"><!-- --></A>
 <div class="evenrow">
 
 	<div class="const-header">
@@ -508,7 +546,7 @@
 		<span class="const-title">
 			<span class="const-name">GENERAL</span>
 			 = <span class="const-default"> ' GENERAL '</span>
-			(line <span class="line-number">41</span>)
+			(line <span class="line-number">43</span>)
 		</span>
 	</div>
 

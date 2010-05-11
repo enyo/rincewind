@@ -13,7 +13,7 @@
  * Loading the file retriever class.
  * They are codependent.
  */
-if (!class_exists('FileRetriever')) require('File/FileRetriever.php');
+if (!class_exists('FileRetriever', false)) require('File/FileRetriever.php');
 
 
 /**
@@ -35,8 +35,13 @@ class FileException extends Exception { };
  * ?>
  * </code>
  *
- * The File class extends the FileRetriever, so it supports all static
- * functions.
+ * When using static functions of the File class to create files, the File
+ * class creates a FileRetriever internally to actually get an instantiated
+ * File class.
+ *
+ * If you need a different FileRetriever to be used, just instantiate
+ * the FileRetriever manually.
+ * 
  *
  * @author Matthias Loitsch <developer@ma.tthias.com>
  * @copyright Copyright (c) 2010, Matthias Loitsch
@@ -52,7 +57,7 @@ class File {
    * Example:
    * <code>
    * <?php
-   *   $isRemote = $source & File::SOURCE_REMOTE;
+   *   $isRemote = !!($source & File::SOURCE_REMOTE);
    * ?>
    * </code>
    *
@@ -68,10 +73,10 @@ class File {
    *
    * @var int
    */
-  const SOURCE_FILE = 0x010001; // Local
-  const SOURCE_FORM = 0x100001; // User
   const SOURCE_HTTP = 0x001001; // Remote
   const SOURCE_FTP  = 0x001010; // Remote
+  const SOURCE_FILE = 0x010001; // Local
+  const SOURCE_FORM = 0x100001; // User
   /**#@-*/
 
   /**

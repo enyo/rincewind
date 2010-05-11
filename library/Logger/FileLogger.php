@@ -12,7 +12,7 @@
 /**
  * Include the Logger
  */
-if (!class_exists('Logger')) include(dirname(__FILE__) . '/Logger.php');
+if (!class_exists('Logger', false)) include(dirname(__FILE__) . '/Logger.php');
 
 
 /**

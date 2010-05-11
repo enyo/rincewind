@@ -12,14 +12,14 @@
 /**
  * Loading the file class
  */
-if (!class_exists('File')) require('File/File.php');
+if (!class_exists('File', false)) require('File/File.php');
 
 
 /**
  * Loading the file retriever class.
  * They are codependent.
  */
-if (!class_exists('ImageFileRetriever')) require(dirname(__FILE__) . '/ImageFileRetriever.php');
+if (!class_exists('ImageFileRetriever', false)) require(dirname(__FILE__) . '/ImageFileRetriever.php');
 
 
 /**

@@ -21,7 +21,7 @@ include_once('File/File.php');
 /**
  * Loading the Log class.
  */
-if (!class_exists('Log')) include('Logger/Log.php');
+if (!class_exists('Log', false)) include('Logger/Log.php');
 
 
 /**

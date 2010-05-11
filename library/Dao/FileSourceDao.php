@@ -12,7 +12,7 @@
  * Loading the abstract Dao Class
  * Checking for the class is actually faster then include_once
  */
-if (!class_exists('Dao')) include dirname(__FILE__) . '/Dao.php';
+if (!class_exists('Dao', false)) include dirname(__FILE__) . '/Dao.php';
 
 
 

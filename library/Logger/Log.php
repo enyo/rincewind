@@ -9,7 +9,7 @@
  **/
 
 
-if (!class_exists('LogException')) include(dirname(__FILE__) . '/LoggerExceptions.php');
+if (!class_exists('LogException', false)) include(dirname(__FILE__) . '/LoggerExceptions.php');
 
 /**
  * The Log class is abstract and only used with static function.

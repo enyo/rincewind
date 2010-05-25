@@ -1,147 +1,333 @@
-<?xml version="1.0" encoding="iso-8859-1"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-  <html xmlns="http://www.w3.org/1999/xhtml">
-		<head>
-			<!-- template designed by Marco Von Ballmoos -->
-			<title>Docs For Class JsonResultIterator</title>
-			<link rel="stylesheet" href="../media/stylesheet.css" />
-			<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
-		</head>
-		<body>
-			<div class="page-body">			
-<h2 class="class-name"><img src="../media/images/Class_logo.png"
-														alt=" Class"
-														title=" Class"
-														style="vertical-align: middle"> JsonResultIterator</h2>
+<html>
+<head>
+<title>Docs For Class JsonResultIterator</title>
+<link rel="stylesheet" type="text/css" href="../media/style.css">
+</head>
+<body>
 
-<a name="sec-description"></a>
-<div class="info-box">
-	<div class="info-box-title">Description</div>
-	<div class="nav-bar">
-					<span class="disabled">Description</span> |
-													<a href="#sec-vars">Vars</a>
-						|											<a href="#sec-methods">Methods</a>
-						
-					</div>
-	<div class="info-box-body">
-        		<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">This class implements the JsonResultIterator.</p>
-	<ul class="tags">
-				<li><span class="field">author:</span> Matthias Loitsch &lt;<a href="mailto:developer@ma.tthias.com">developer@ma.tthias.com</a>&gt;</li>
-				<li><span class="field">copyright:</span> Copyright (c) 2010, Matthias Loitsch</li>
-			</ul>
-		<p class="notes">
-			Located in <a class="field" href="_Dao---Json---JsonResultIterator.php.html">/Dao/Json/JsonResultIterator.php</a> (line <span class="field">24</span>)
-		</p>
-		
-				
-		<pre><a href="../Dao/DaoResultIterator.html">DaoResultIterator</a>
+<table border="0" cellspacing="0" cellpadding="0" height="48" width="100%">
+  <tr>
+    <td class="header_top">Dao</td>
+  </tr>
+  <tr><td class="header_line"><img src="../media/empty.png" width="1" height="1" border="0" alt=""  /></td></tr>
+  <tr>
+    <td class="header_menu">
+        
+                                                                            
+                                                                                                                                                      		  [ <a href="../classtrees_Dao.html" class="menu">class tree: Dao</a> ]
+		  [ <a href="../elementindex_Dao.html" class="menu">index: Dao</a> ]
+		  	    [ <a href="../elementindex.html" class="menu">all elements</a> ]
+    </td>
+  </tr>
+  <tr><td class="header_line"><img src="../media/empty.png" width="1" height="1" border="0" alt=""  /></td></tr>
+</table>
+
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="200" class="menu">
+	<div id="ric">
+					<p><a href="../ric_README.html">README</a></p>
+			</div>
+      <b>Packages:</b><br />
+              <a href="../li_php-library.html">php-library</a><br />
+              <a href="../li_Config.html">Config</a><br />
+              <a href="../li_Dao.html">Dao</a><br />
+              <a href="../li_Database.html">Database</a><br />
+              <a href="../li_DataSource.html">DataSource</a><br />
+              <a href="../li_Date.html">Date</a><br />
+              <a href="../li_File.html">File</a><br />
+              <a href="../li_Logger.html">Logger</a><br />
+              <a href="../li_Storage.html">Storage</a><br />
+            <br /><br />
+                        <b>Files:</b><br />
+      	  <div class="package">
+			<a href="../Dao/_Dao---Dao.php.html">		Dao.php
+		</a><br>
+			<a href="../Dao/_Dao---DaoColumnAssignment.php.html">		DaoColumnAssignment.php
+		</a><br>
+			<a href="../Dao/_Dao---DaoInterface.php.html">		DaoInterface.php
+		</a><br>
+			<a href="../Dao/_Dao---DaoResultIterator.php.html">		DaoResultIterator.php
+		</a><br>
+			<a href="../Dao/_Dao---FileSourceDao.php.html">		FileSourceDao.php
+		</a><br>
+			<a href="../Dao/_Dao---FileSourceResultIterator.php.html">		FileSourceResultIterator.php
+		</a><br>
+			<a href="../Dao/_Dao---Json---JsonDao.php.html">		JsonDao.php
+		</a><br>
+			<a href="../Dao/_Dao---Json---JsonResultIterator.php.html">		JsonResultIterator.php
+		</a><br>
+			<a href="../Dao/_Dao---Mysql---MysqlDao.php.html">		MysqlDao.php
+		</a><br>
+			<a href="../Dao/_Dao---Mysql---MysqlResultIterator.php.html">		MysqlResultIterator.php
+		</a><br>
+			<a href="../Dao/_Dao---Mysql---MysqlUserDao.php.html">		MysqlUserDao.php
+		</a><br>
+			<a href="../Dao/_Dao---Postgresql---PostgresqlDao.php.html">		PostgresqlDao.php
+		</a><br>
+			<a href="../Dao/_Dao---Postgresql---PostgresqlResultIterator.php.html">		PostgresqlResultIterator.php
+		</a><br>
+			<a href="../Dao/_Dao---Postgresql---PostgresqlUserDao.php.html">		PostgresqlUserDao.php
+		</a><br>
+			<a href="../Dao/_Dao---SqlDao.php.html">		SqlDao.php
+		</a><br>
+			<a href="../Dao/_Dao---SqlResultIterator.php.html">		SqlResultIterator.php
+		</a><br>
+			<a href="../Dao/_Dao---UserDaoInterface.php.html">		UserDaoInterface.php
+		</a><br>
+			<a href="../Dao/_Dao---Xml---XmlDao.php.html">		XmlDao.php
+		</a><br>
+			<a href="../Dao/_Dao---Xml---XmlResultIterator.php.html">		XmlResultIterator.php
+		</a><br>
+	  </div><br />
+	subpackage <b>DataObject</b><br>  <div class="package">
+			<a href="../Dao/DataObject/_DataObject---DataObject.php.html">		DataObject.php
+		</a><br>
+			<a href="../Dao/DataObject/_DataObject---DataObjectExceptions.php.html">		DataObjectExceptions.php
+		</a><br>
+			<a href="../Dao/DataObject/_DataObject---DataObjectInterface.php.html">		DataObjectInterface.php
+		</a><br>
+			<a href="../Dao/DataObject/_DataObject---UserDataObject.php.html">		UserDataObject.php
+		</a><br>
+	  </div><br />
+	subpackage <b>Exceptions</b><br>  <div class="package">
+			<a href="../Dao/Exceptions/_Dao---DaoExceptions.php.html">		DaoExceptions.php
+		</a><br>
+			<a href="../Dao/Exceptions/_Dao---Json---JsonDaoExceptions.php.html">		JsonDaoExceptions.php
+		</a><br>
+	  </div><br />
+      
+            <b>Interfaces:</b><br />
+        <div class="package">
+		    		<a href="../Dao/DaoInterface.html">DaoInterface</a><br />
+	    		<a href="../Dao/UserDaoInterface.html">UserDaoInterface</a><br />
+	  </div>
+  <div class="package">
+	DataObject<br />	    &nbsp;&nbsp;		<a href="../Dao/DataObject/DataObjectInterface.html">DataObjectInterface</a><br />
+	  </div>
+      
+            <b>Classes:</b><br />
+        <div class="package">
+		    		<a href="../Dao/Dao.html">Dao</a><br />
+	    		<a href="../Dao/DaoColumnAssignment.html">DaoColumnAssignment</a><br />
+	    		<a href="../Dao/DaoResultIterator.html">DaoResultIterator</a><br />
+	    		<a href="../Dao/FileSourceDao.html">FileSourceDao</a><br />
+	    		<a href="../Dao/FileSourceResultIterator.html">FileSourceResultIterator</a><br />
+	    		<a href="../Dao/JsonDao.html">JsonDao</a><br />
+	    		<a href="../Dao/JsonResultIterator.html">JsonResultIterator</a><br />
+	    		<a href="../Dao/MysqlDao.html">MysqlDao</a><br />
+	    		<a href="../Dao/MysqlResultIterator.html">MysqlResultIterator</a><br />
+	    		<a href="../Dao/MysqlUserDao.html">MysqlUserDao</a><br />
+	    		<a href="../Dao/PostgresqlResultIterator.html">PostgresqlResultIterator</a><br />
+	    		<a href="../Dao/PostgresqlUserDao.html">PostgresqlUserDao</a><br />
+	    		<a href="../Dao/SqlDao.html">SqlDao</a><br />
+	    		<a href="../Dao/SqlResultIterator.html">SqlResultIterator</a><br />
+	    		<a href="../Dao/XmlDao.html">XmlDao</a><br />
+	    		<a href="../Dao/XmlResultIterator.html">XmlResultIterator</a><br />
+	  </div>
+  <div class="package">
+	Exceptions<br />	    &nbsp;&nbsp;		<a href="../Dao/Exceptions/DaoException.html">DaoException</a><br />
+	    &nbsp;&nbsp;		<a href="../Dao/Exceptions/DaoNotFoundException.html">DaoNotFoundException</a><br />
+	    &nbsp;&nbsp;		<a href="../Dao/Exceptions/DaoNotSupportedException.html">DaoNotSupportedException</a><br />
+	    &nbsp;&nbsp;		<a href="../Dao/Exceptions/DaoWrongValueException.html">DaoWrongValueException</a><br />
+	    &nbsp;&nbsp;		<a href="../Dao/Exceptions/DataObjectException.html">DataObjectException</a><br />
+	    &nbsp;&nbsp;		<a href="../Dao/Exceptions/JsonDaoException.html">JsonDaoException</a><br />
+	    &nbsp;&nbsp;		<a href="../Dao/Exceptions/XmlDaoException.html">XmlDaoException</a><br />
+	  </div>
+  <div class="package">
+	DataObject<br />	    &nbsp;&nbsp;		<a href="../Dao/DataObject/DataObject.html">DataObject</a><br />
+	    &nbsp;&nbsp;		<a href="../Dao/DataObject/UserDataObject.html">UserDataObject</a><br />
+	  </div>
+                </td>
+    <td>
+      <table cellpadding="10" cellspacing="0" width="100%" border="0"><tr><td valign="top">
+
+<h1>Class: JsonResultIterator</h1>
+Source Location: /Dao/Json/JsonResultIterator.php<br /><br />
+
+
+<table width="100%" border="0">
+<tr><td valign="top">
+
+<h3><a href="#class_details">Class Overview</a></h3>
+<pre><a href="../Dao/DaoResultIterator.html">DaoResultIterator</a>
    |
    --<a href="../Dao/FileSourceResultIterator.html">FileSourceResultIterator</a>
       |
-      --JsonResultIterator</pre>
-	
-			</div>
+      --JsonResultIterator</pre><br />
+<div class="description">This class implements the JsonResultIterator.</div><br /><br />
+<h4>Author(s):</h4>
+<ul>
+          <li>Matthias Loitsch &lt;<a href="mailto:developer@ma.tthias.com">developer@ma.tthias.com</a>&gt;</li>
+            </ul>
+
+
+
+
+          
+  
+
+<h4>Copyright:</h4>
+<ul>
+  <li>Copyright (c) 2010, Matthias Loitsch</li>
+</ul>
+        
+</td>
+
+
+
+
+</tr></table>
+<hr />
+
+<table width="100%" border="0"><tr>
+
+
+
+
+<td valign="top">
+<h3>Inherited Variables</h3>
+<div class="tags">
+<h4>Class: <a href="../Dao/FileSourceResultIterator.html">FileSourceResultIterator</a></h4>
+<dl>
+<dt>
+  <a href="../Dao/FileSourceResultIterator.html#var$data">FileSourceResultIterator::$data</a>
+  </dt>
+<dd>
+   
+</dd>
+</dl>
 </div>
+<div class="tags">
+<h4>Class: <a href="../Dao/DaoResultIterator.html">DaoResultIterator</a></h4>
+<dl>
+<dt>
+  <a href="../Dao/DaoResultIterator.html#var$currentData">DaoResultIterator::$currentData</a>
+  </dt>
+<dd>
+   
+</dd>
+<dt>
+  <a href="../Dao/DaoResultIterator.html#var$currentKey">DaoResultIterator::$currentKey</a>
+  </dt>
+<dd>
+   
+</dd>
+<dt>
+  <a href="../Dao/DaoResultIterator.html#var$dao">DaoResultIterator::$dao</a>
+  </dt>
+<dd>
+   
+</dd>
+<dt>
+  <a href="../Dao/DaoResultIterator.html#var$length">DaoResultIterator::$length</a>
+  </dt>
+<dd>
+   
+</dd>
+<dt>
+  <a href="../Dao/DaoResultIterator.html#var$returnDataObjectsAsArray">DaoResultIterator::$returnDataObjectsAsArray</a>
+  </dt>
+<dd>
+   
+</dd>
+</dl>
+</div>
+</td>
+
+<td valign="top">
+<h3>Inherited Methods</h3>
+<div class="tags">
+<h4>Class: <a href="../Dao/FileSourceResultIterator.html">FileSourceResultIterator</a></h4>
+<dl>
+    <dt>
+    <a href="../Dao/FileSourceResultIterator.html#method__construct">FileSourceResultIterator::__construct()</a>
+  </dt>
+  <dd>
+    
+  </dd>
+    <dt>
+    <a href="../Dao/FileSourceResultIterator.html#methodnext">FileSourceResultIterator::next()</a>
+  </dt>
+  <dd>
+    Set the pointer to the next row, and fetches the data to return in current.
+  </dd>
+    <dt>
+    <a href="../Dao/FileSourceResultIterator.html#methodrewind">FileSourceResultIterator::rewind()</a>
+  </dt>
+  <dd>
+    Sets the pointer to entry 1.
+  </dd>
+  </dl>
+<h4>Class: <a href="../Dao/DaoResultIterator.html">DaoResultIterator</a></h4>
+<dl>
+    <dt>
+    <a href="../Dao/DaoResultIterator.html#methodasArrays">DaoResultIterator::asArrays()</a>
+  </dt>
+  <dd>
+    
+  </dd>
+    <dt>
+    <a href="../Dao/DaoResultIterator.html#methodcount">DaoResultIterator::count()</a>
+  </dt>
+  <dd>
+    Return the number of rows.
+  </dd>
+    <dt>
+    <a href="../Dao/DaoResultIterator.html#methodcurrent">DaoResultIterator::current()</a>
+  </dt>
+  <dd>
+    Return the current DataObject.
+  </dd>
+    <dt>
+    <a href="../Dao/DaoResultIterator.html#methodkey">DaoResultIterator::key()</a>
+  </dt>
+  <dd>
+    Returns the current key (row number).
+  </dd>
+    <dt>
+    <a href="../Dao/DaoResultIterator.html#methodvalid">DaoResultIterator::valid()</a>
+  </dt>
+  <dd>
+    Check if the pointer is still valid.
+  </dd>
+  </dl>
+</div>
+</td>
+
+</tr></table>
+<hr />
+
+<a name="class_details"></a>
+<h3>Class Details</h3>
+<div class="tags">
+[line 24]<br />
+This class implements the JsonResultIterator.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>author:</b>&nbsp;&nbsp;</td><td>Matthias Loitsch &lt;<a href="mailto:developer@ma.tthias.com">developer@ma.tthias.com</a>&gt;</td>
+  </tr>
+  <tr>
+    <td><b>copyright:</b>&nbsp;&nbsp;</td><td>Copyright (c) 2010, Matthias Loitsch</td>
+  </tr>
+</table>
+</div>
+</div><br /><br />
+<div class="top">[ <a href="#top">Top</a> ]</div><br />
 
 
 
 
+        <div class="credit">
+		    <hr />
+		    Documentation generated by <a href="http://www.phpdoc.org">phpDocumentor 1.4.3</a>
+	      </div>
+      </td></tr></table>
+    </td>
+  </tr>
+</table>
 
-	<a name="sec-vars"></a>
-	<div class="info-box">
-		<div class="info-box-title">Variables</div>
-		<div class="nav-bar">
-			<a href="#sec-description">Description</a> |
-										<span class="disabled">Vars</span>
-						
-			
-										| 
-									<a href="#sec-methods">Methods</a>
-							
-					</div>
-		<div class="info-box-body">
-			
-							<h4>Inherited Variables</h4>
-				<A NAME='inherited_vars'><!-- --></A>
-									<p>Inherited from <span class="classname"><a href="../Dao/FileSourceResultIterator.html">FileSourceResultIterator</a></span></p>
-					<blockquote>
-													<img src="../media/images/Variable.png" />
-							<span class="var-title">
-								<span class="var-name"><a href="../Dao/FileSourceResultIterator.html#var$data">FileSourceResultIterator::$data</a></span><br>
-							</span>
-											</blockquote> 
-									<p>Inherited from <span class="classname"><a href="../Dao/DaoResultIterator.html">DaoResultIterator</a></span></p>
-					<blockquote>
-													<img src="../media/images/Variable.png" />
-							<span class="var-title">
-								<span class="var-name"><a href="../Dao/DaoResultIterator.html#var$currentData">DaoResultIterator::$currentData</a></span><br>
-							</span>
-													<img src="../media/images/Variable.png" />
-							<span class="var-title">
-								<span class="var-name"><a href="../Dao/DaoResultIterator.html#var$currentKey">DaoResultIterator::$currentKey</a></span><br>
-							</span>
-													<img src="../media/images/Variable.png" />
-							<span class="var-title">
-								<span class="var-name"><a href="../Dao/DaoResultIterator.html#var$dao">DaoResultIterator::$dao</a></span><br>
-							</span>
-													<img src="../media/images/Variable.png" />
-							<span class="var-title">
-								<span class="var-name"><a href="../Dao/DaoResultIterator.html#var$length">DaoResultIterator::$length</a></span><br>
-							</span>
-													<img src="../media/images/Variable.png" />
-							<span class="var-title">
-								<span class="var-name"><a href="../Dao/DaoResultIterator.html#var$returnDataObjectsAsArray">DaoResultIterator::$returnDataObjectsAsArray</a></span><br>
-							</span>
-											</blockquote> 
-										
-		</div>
-	</div>
-	
-	<a name="sec-methods"></a>
-	<div class="info-box">
-		<div class="info-box-title">Methods</div>
-		<div class="nav-bar">
-			<a href="#sec-description">Description</a> |
-															<a href="#sec-vars">Vars</a>
-														<span class="disabled">Methods</span>
-						
-		</div>
-		<div class="info-box-body">
-			<A NAME='method_detail'></A>
-							<h4>Inherited Methods</h4>
-				<a name='inherited_methods'><!-- --></a>	
-									<!-- =========== Summary =========== -->
-					<p>Inherited From <span class="classname"><a href="../Dao/FileSourceResultIterator.html">FileSourceResultIterator</a></span></p>
-					<blockquote>
-													<img src="../media/images/Constructor.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/FileSourceResultIterator.html#method__construct">FileSourceResultIterator::__construct()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/FileSourceResultIterator.html#methodnext">FileSourceResultIterator::next()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/FileSourceResultIterator.html#methodrewind">FileSourceResultIterator::rewind()</a></span><br>
-											</blockquote>
-									<!-- =========== Summary =========== -->
-					<p>Inherited From <span class="classname"><a href="../Dao/DaoResultIterator.html">DaoResultIterator</a></span></p>
-					<blockquote>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/DaoResultIterator.html#methodasArrays">DaoResultIterator::asArrays()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/DaoResultIterator.html#methodcount">DaoResultIterator::count()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/DaoResultIterator.html#methodcurrent">DaoResultIterator::current()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/DaoResultIterator.html#methodkey">DaoResultIterator::key()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/DaoResultIterator.html#methodvalid">DaoResultIterator::valid()</a></span><br>
-											</blockquote>
-										
-		</div>
-	</div>
-
-	
-	<p class="notes" id="credit">
-		Documentation generated by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
-	</p>
-	</div></body>
+</body>
 </html>

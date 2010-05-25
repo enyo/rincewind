@@ -1,801 +1,796 @@
-<?xml version="1.0" encoding="iso-8859-1"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-  <html xmlns="http://www.w3.org/1999/xhtml">
-		<head>
-			<!-- template designed by Marco Von Ballmoos -->
-			<title>Docs For Class Logger</title>
-			<link rel="stylesheet" href="../media/stylesheet.css" />
-			<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
-		</head>
-		<body>
-			<div class="page-body">			
-<h2 class="class-name"><img src="../media/images/AbstractClass_logo.png"
-														alt="Abstract Class"
-														title="Abstract Class"
-														style="vertical-align: middle"> Logger</h2>
+<html>
+<head>
+<title>Docs For Class Logger</title>
+<link rel="stylesheet" type="text/css" href="../media/style.css">
+</head>
+<body>
 
-<a name="sec-description"></a>
-<div class="info-box">
-	<div class="info-box-title">Description</div>
-	<div class="nav-bar">
-					<span class="disabled">Description</span> |
-							<a href="#sec-descendents">Descendents</a>
-			|											<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
-						|											<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
-						
-											<a href="#sec-const-summary">Constants</a> (<a href="#sec-consts">details</a>)
-						
+<table border="0" cellspacing="0" cellpadding="0" height="48" width="100%">
+  <tr>
+    <td class="header_top">Logger</td>
+  </tr>
+  <tr><td class="header_line"><img src="../media/empty.png" width="1" height="1" border="0" alt=""  /></td></tr>
+  <tr>
+    <td class="header_menu">
+        
+                                                                                                                                                                                
+                                                  		  [ <a href="../classtrees_Logger.html" class="menu">class tree: Logger</a> ]
+		  [ <a href="../elementindex_Logger.html" class="menu">index: Logger</a> ]
+		  	    [ <a href="../elementindex.html" class="menu">all elements</a> ]
+    </td>
+  </tr>
+  <tr><td class="header_line"><img src="../media/empty.png" width="1" height="1" border="0" alt=""  /></td></tr>
+</table>
+
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="200" class="menu">
+	<div id="ric">
+					<p><a href="../ric_README.html">README</a></p>
 			</div>
-	<div class="info-box-body">
-        		<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Loggers have to extend this class</p>
-	<ul class="tags">
-				<li><span class="field">author:</span> Matthias Loitsch &lt;<a href="mailto:developer@ma.tthias.com">developer@ma.tthias.com</a>&gt;</li>
-				<li><span class="field">copyright:</span> Copyright (c) 2010, Matthias Loitsch</li>
-				<li><span class="field">abstract:</span> </li>
-			</ul>
-		<p class="notes">
-			Located in <a class="field" href="_Logger---Logger.php.html">/Logger/Logger.php</a> (line <span class="field">21</span>)
-		</p>
-		
-				
-		<pre></pre>
-	
-			</div>
+      <b>Packages:</b><br />
+              <a href="../li_php-library.html">php-library</a><br />
+              <a href="../li_Config.html">Config</a><br />
+              <a href="../li_Dao.html">Dao</a><br />
+              <a href="../li_Database.html">Database</a><br />
+              <a href="../li_DataSource.html">DataSource</a><br />
+              <a href="../li_Date.html">Date</a><br />
+              <a href="../li_File.html">File</a><br />
+              <a href="../li_Logger.html">Logger</a><br />
+              <a href="../li_Storage.html">Storage</a><br />
+            <br /><br />
+                        <b>Files:</b><br />
+      	  <div class="package">
+			<a href="../Logger/_Logger---FileLogger.php.html">		FileLogger.php
+		</a><br>
+			<a href="../Logger/_Logger---Log.php.html">		Log.php
+		</a><br>
+			<a href="../Logger/_Logger---Logger.php.html">		Logger.php
+		</a><br>
+	  </div><br />
+	subpackage <b>LoggerExceptions</b><br>  <div class="package">
+			<a href="../Logger/LoggerExceptions/_Logger---LoggerExceptions.php.html">		LoggerExceptions.php
+		</a><br>
+	  </div><br />
+      
+      
+            <b>Classes:</b><br />
+        <div class="package">
+		    		<a href="../Logger/FileLogger.html">FileLogger</a><br />
+	    		<a href="../Logger/Log.html">Log</a><br />
+	    		<a href="../Logger/Logger.html">Logger</a><br />
+	  </div>
+  <div class="package">
+	LoggerExceptions<br />	    &nbsp;&nbsp;		<a href="../Logger/LoggerExceptions/FileLoggerException.html">FileLoggerException</a><br />
+	    &nbsp;&nbsp;		<a href="../Logger/LoggerExceptions/LogException.html">LogException</a><br />
+	    &nbsp;&nbsp;		<a href="../Logger/LoggerExceptions/LoggerException.html">LoggerException</a><br />
+	  </div>
+                </td>
+    <td>
+      <table cellpadding="10" cellspacing="0" width="100%" border="0"><tr><td valign="top">
+
+<h1>Class: Logger</h1>
+Source Location: /Logger/Logger.php<br /><br />
+
+
+<table width="100%" border="0">
+<tr><td valign="top">
+
+<h3><a href="#class_details">Class Overview</a></h3>
+<pre></pre><br />
+<div class="description">Loggers have to extend this class</div><br /><br />
+<h4>Author(s):</h4>
+<ul>
+          <li>Matthias Loitsch &lt;<a href="mailto:developer@ma.tthias.com">developer@ma.tthias.com</a>&gt;</li>
+                  </ul>
+
+
+
+
+          
+      
+
+<h4>Copyright:</h4>
+<ul>
+  <li>Copyright (c) 2010, Matthias Loitsch</li>
+</ul>
+        
+</td>
+
+<td valign="top">
+<h3><a href="#class_vars">Variables</a></h3>
+<ul>
+    <li><a href="../Logger/Logger.html#var$level">$level</a></li>
+  </ul>
+</td>
+
+<td valign="top">
+<h3><a href="#class_consts">Constants</a></h3>
+<ul>
+    <li><a href="../Logger/Logger.html#constDEBUG">DEBUG</a></li>
+    <li><a href="../Logger/Logger.html#constERROR">ERROR</a></li>
+    <li><a href="../Logger/Logger.html#constFATAL">FATAL</a></li>
+    <li><a href="../Logger/Logger.html#constINFO">INFO</a></li>
+    <li><a href="../Logger/Logger.html#constWARNING">WARNING</a></li>
+  </ul>
+</td>
+
+<td valign="top">
+<h3><a href="#class_methods">Methods</a></h3>
+<ul>
+    <li><a href="../Logger/Logger.html#methoddebug">debug</a></li>
+    <li><a href="../Logger/Logger.html#methoddoLog">doLog</a></li>
+    <li><a href="../Logger/Logger.html#methoderror">error</a></li>
+    <li><a href="../Logger/Logger.html#methodfatal">fatal</a></li>
+    <li><a href="../Logger/Logger.html#methodgetLevel">getLevel</a></li>
+    <li><a href="../Logger/Logger.html#methodinfo">info</a></li>
+    <li><a href="../Logger/Logger.html#methodlog">log</a></li>
+    <li><a href="../Logger/Logger.html#methodsetLevel">setLevel</a></li>
+    <li><a href="../Logger/Logger.html#methodshouldLog">shouldLog</a></li>
+    <li><a href="../Logger/Logger.html#methodwarn">warn</a></li>
+    <li><a href="../Logger/Logger.html#methodwarning">warning</a></li>
+  </ul>
+</td>
+
+</tr></table>
+<hr />
+
+<table width="100%" border="0"><tr>
+
+
+<td valign="top">
+<h3>Child classes:</h3>
+<div class="tags">
+<dl>
+<dt><a href="../Logger/FileLogger.html">FileLogger</a></dt>
+	<dd>The FileLogger is the default implementation for a logger logging to files.</dd>
+</dl>
+</div>
+</td>
+
+
+
+
+</tr></table>
+<hr />
+
+<a name="class_details"></a>
+<h3>Class Details</h3>
+<div class="tags">
+[line 21]<br />
+Loggers have to extend this class<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>author:</b>&nbsp;&nbsp;</td><td>Matthias Loitsch &lt;<a href="mailto:developer@ma.tthias.com">developer@ma.tthias.com</a>&gt;</td>
+  </tr>
+  <tr>
+    <td><b>copyright:</b>&nbsp;&nbsp;</td><td>Copyright (c) 2010, Matthias Loitsch</td>
+  </tr>
+  <tr>
+    <td><b>abstract:</b>&nbsp;&nbsp;</td><td></td>
+  </tr>
+</table>
+</div>
+</div><br /><br />
+<div class="top">[ <a href="#top">Top</a> ]</div><br />
+
+<hr />
+<a name="class_vars"></a>
+<h3>Class Variables</h3>
+<div class="tags">
+	<a name="var$level"></a>
+	<p></p>
+	<h4>$level = <span class="value">&nbsp;self::WARNING</span></h4>
+	<p>[line 42]</p>
+  The minimum level a message has to have to be logged.<br /><br /><p>Eg: If level is Logger::WARN then WARN, ERROR and FATAL will be logged.</p><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
+  </tr>
+</table>
 </div>
 
-	<a name="sec-descendents"></a>
-	<div class="info-box">
-		<div class="info-box-title">Direct descendents</div>
-		<div class="nav-bar">
-			<a href="#sec-description">Description</a> |
-			<span class="disabled">Descendents</span>
-			|												<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
-								|															<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
-							
-															<a href="#sec-const-summary">Constants</a> (<a href="#sec-consts">details</a>)
-							
-					</div>
-		<div class="info-box-body">
-			<table cellpadding="2" cellspacing="0" class="class-table">
-				<tr>
-					<th class="class-table-header">Class</th>
-					<th class="class-table-header">Description</th>
-				</tr>
-								<tr>
-					<td style="padding-right: 2em; white-space: nowrap">
-						<img src="../media/images/Class.png"
-								 alt=" class"
-								 title=" class"
-								 style="vertical-align: center"/>
-						<a href="../Logger/FileLogger.html">FileLogger</a>
-					</td>
-					<td>
-											The FileLogger is the default implementation for a logger logging to files.
-										</td>
-				</tr>
-							</table>
-		</div>
-	</div>
+  <br />
+	<div class="tags">
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td><b>Type:</b>&nbsp;&nbsp;</td>
+      <td>int</td>
+    </tr>
+      </table>
+	</div><br /><br />
+	<div class="top">[ <a href="#top">Top</a> ]</div><br />
+</div><br />
 
-	<a name="sec-const-summary"></a>
-	<div class="info-box">
-		<div class="info-box-title">Class Constant Summary</span></div>
-		<div class="nav-bar">
-			<a href="#sec-description">Description</a> |
-							<a href="#sec-descendents">Descendants</a> |
-						<span class="disabled">Constants</span> (<a href="#sec-consts">details</a>)
-												<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
-				 
-				|
-										| 
-									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
-							
-					</div>
-		<div class="info-box-body">
-			<div class="const-summary">
-								<div class="const-title">
-					<img src="../media/images/Constant.png" alt=" " />
-					<a href="#DEBUG" title="details" class="const-name">DEBUG</a> = 					<span class="var-type"> 0x00001</span>
+<hr />
+<a name="class_methods"></a>
+<h3>Class Methods</h3>
+<div class="tags">
 
-				</div>
-								<div class="const-title">
-					<img src="../media/images/Constant.png" alt=" " />
-					<a href="#ERROR" title="details" class="const-name">ERROR</a> = 					<span class="var-type"> 0x01111</span>
-
-				</div>
-								<div class="const-title">
-					<img src="../media/images/Constant.png" alt=" " />
-					<a href="#FATAL" title="details" class="const-name">FATAL</a> = 					<span class="var-type"> 0x11111</span>
-
-				</div>
-								<div class="const-title">
-					<img src="../media/images/Constant.png" alt=" " />
-					<a href="#INFO" title="details" class="const-name">INFO</a> = 					<span class="var-type"> 0x00011</span>
-
-				</div>
-								<div class="const-title">
-					<img src="../media/images/Constant.png" alt=" " />
-					<a href="#WARNING" title="details" class="const-name">WARNING</a> = 					<span class="var-type"> 0x00111</span>
-
-				</div>
-							</div>
-		</div>
-	</div>
-
-	<a name="sec-var-summary"></a>
-	<div class="info-box">
-		<div class="info-box-title">Variable Summary</span></div>
-		<div class="nav-bar">
-			<a href="#sec-description">Description</a> |
-							<a href="#sec-descendents">Descendants</a> |
-						<span class="disabled">Vars</span> (<a href="#sec-vars">details</a>)
-							| 
-									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
-							
-															<a href="#sec-const-summary">Constants</a> (<a href="#sec-consts">details</a>)
-							
-					</div>
-		<div class="info-box-body">
-			<div class="var-summary">
-																								<div class="var-title">
-					<img src="../media/images/Variable.png" alt=" " />
-					<span class="var-type">int</span>
-					<a href="#$level" title="details" class="var-name">$level</a>
-				</div>
-											</div>
-		</div>
-	</div>
-
-	<a name="sec-method-summary"></a>
-	<div class="info-box">
-		<div class="info-box-title">Method Summary</span></div>
-		<div class="nav-bar">
-			<a href="#sec-description">Description</a> |
-							<a href="#sec-descendents">Descendants</a> |
-															<a href="#sec-const-summary">Constants</a> (<a href="#sec-consts">details</a>)
-							
-															<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
-				 
-				|
-						<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
-		</div>
-		<div class="info-box-body">			
-			<div class="method-summary">
-																																																																																																								<div class="method-definition">
-					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result">bool</span>
-										<a href="#debug" title="details" class="method-name">debug</a>
-											(<span class="var-type">string</span>&nbsp;<span class="var-name">$message</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$context</span> = <span class="var-default">null</span>], [<span class="var-type">array</span>&nbsp;<span class="var-name">$additionalInfo</span> = <span class="var-default">null</span>])
-									</div>
-																<div class="method-definition">
-					<img src="../media/images/AbstractMethod.png" alt=" "/>
-											<span class="method-result">void</span>
-										<a href="#doLog" title="details" class="method-name">doLog</a>
-											(<span class="var-type">string</span>&nbsp;<span class="var-name">$message</span>, <span class="var-type">int</span>&nbsp;<span class="var-name">$level</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$context</span>, <span class="var-type">array</span>&nbsp;<span class="var-name">$additionalInfo</span>)
-									</div>
-																<div class="method-definition">
-					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result">bool</span>
-										<a href="#error" title="details" class="method-name">error</a>
-											(<span class="var-type">string</span>&nbsp;<span class="var-name">$message</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$context</span> = <span class="var-default">null</span>], [<span class="var-type">array</span>&nbsp;<span class="var-name">$additionalInfo</span> = <span class="var-default">null</span>])
-									</div>
-																<div class="method-definition">
-					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result">bool</span>
-										<a href="#fatal" title="details" class="method-name">fatal</a>
-											(<span class="var-type">string</span>&nbsp;<span class="var-name">$message</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$context</span> = <span class="var-default">null</span>], [<span class="var-type">array</span>&nbsp;<span class="var-name">$additionalInfo</span> = <span class="var-default">null</span>])
-									</div>
-																<div class="method-definition">
-					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result">int</span>
-										<a href="#getLevel" title="details" class="method-name">getLevel</a>
-										()
-									</div>
-																<div class="method-definition">
-					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result">bool</span>
-										<a href="#info" title="details" class="method-name">info</a>
-											(<span class="var-type">string</span>&nbsp;<span class="var-name">$message</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$context</span> = <span class="var-default">null</span>], [<span class="var-type">array</span>&nbsp;<span class="var-name">$additionalInfo</span> = <span class="var-default">null</span>])
-									</div>
-																<div class="method-definition">
-					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result">bool</span>
-										<a href="#log" title="details" class="method-name">log</a>
-											(<span class="var-type">string</span>&nbsp;<span class="var-name">$message</span>, <span class="var-type">int</span>&nbsp;<span class="var-name">$level</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$context</span> = <span class="var-default">null</span>], [<span class="var-type">array</span>&nbsp;<span class="var-name">$additionalInfo</span> = <span class="var-default">null</span>])
-									</div>
-																<div class="method-definition">
-					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result">void</span>
-										<a href="#setLevel" title="details" class="method-name">setLevel</a>
-											(<span class="var-type">int</span>&nbsp;<span class="var-name">$level</span>)
-									</div>
-																<div class="method-definition">
-					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result">bool</span>
-										<a href="#shouldLog" title="details" class="method-name">shouldLog</a>
-											(<span class="var-type">int</span>&nbsp;<span class="var-name">$messageLevel</span>)
-									</div>
-																<div class="method-definition">
-					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result">bool</span>
-										<a href="#warn" title="details" class="method-name">warn</a>
-											(<span class="var-type">string</span>&nbsp;<span class="var-name">$message</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$context</span> = <span class="var-default">null</span>], [<span class="var-type">array</span>&nbsp;<span class="var-name">$additionalInfo</span> = <span class="var-default">null</span>])
-									</div>
-																<div class="method-definition">
-					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result">bool</span>
-										<a href="#warning" title="details" class="method-name">warning</a>
-											(<span class="var-type">string</span>&nbsp;<span class="var-name">$message</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$context</span> = <span class="var-default">null</span>], [<span class="var-type">array</span>&nbsp;<span class="var-name">$additionalInfo</span> = <span class="var-default">null</span>])
-									</div>
-											</div>
-		</div>
-	</div>		
-
-	<a name="sec-vars"></a>
-	<div class="info-box">
-		<div class="info-box-title">Variables</div>
-		<div class="nav-bar">
-			<a href="#sec-description">Description</a> |
-							<a href="#sec-descendents">Descendents</a> |
-										<a href="#sec-var-summary">Vars</a> (<span class="disabled">details</span>)
-						
-			
-												<a href="#sec-const-summary">Constants</a> (<a href="#sec-consts">details</a>)
-							
-										| 
-									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
-							
-					</div>
-		<div class="info-box-body">
-			
-<a name="var$level" id="$level"><!-- --></A>
-<div class="evenrow">
-
-	<div class="var-header">
-		<img src="../media/images/Variable.png" />
-		<span class="var-title">
-			<span class="var-type">int</span>
-			<span class="var-name">$level</span>
-			 = <span class="var-default"> self::WARNING</span>			(line <span class="line-number">42</span>)
-		</span>
-	</div>
-
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">The minimum level a message has to have to be logged.</p>
-<p class="description"><p>Eg: If level is Logger::WARN then WARN, ERROR and FATAL will be logged.</p></p>
-	<ul class="tags">
-				<li><span class="field">access:</span> protected</li>
-			</ul>
+  <hr />
+	<a name="methoddebug"></a>
+	<h3>method debug <span class="smalllinenumber">[line 84]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>bool debug(
+string
+$message, [string
+$context = null], [array
+$additionalInfo = null])</code>
+    </td></tr></table>
+    </td></tr></table><br />
 	
-	
-		
-		
-
+		Log a debug message<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>return:</b>&nbsp;&nbsp;</td><td>true on success, false if nothing has been logged.</td>
+  </tr>
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
 </div>
-						
-		</div>
-	</div>
-	
-	<a name="sec-methods"></a>
-	<div class="info-box">
-		<div class="info-box-title">Methods</div>
-		<div class="nav-bar">
-			<a href="#sec-description">Description</a> |
-							<a href="#sec-descendents">Descendents</a> |
-															<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
-														<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
-						
-		</div>
-		<div class="info-box-body">
-			<A NAME='method_detail'></A>
-<a name="methoddebug" id="debug"><!-- --></a>
-<div class="oddrow">
-	
-	<div class="method-header">
-		<img src="../media/images/Method.png" />
-		<span class="method-title">debug</span> (line <span class="line-number">84</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Log a debug message</p>
-	<ul class="tags">
-				<li><span class="field">return:</span> true on success, false if nothing has been logged.</li>
-				<li><span class="field">access:</span> public</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result">bool</span>
-		<span class="method-name">
-			debug
-		</span>
-					(<span class="var-type">string</span>&nbsp;<span class="var-name">$message</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$context</span> = <span class="var-default">null</span>], [<span class="var-type">array</span>&nbsp;<span class="var-name">$additionalInfo</span> = <span class="var-default">null</span>])
-			</div>
-	
-			<ul class="parameters">
-					<li>
-				<span class="var-type">string</span>
-				<span class="var-name">$message</span>			</li>
-					<li>
-				<span class="var-type">string</span>
-				<span class="var-name">$context</span><span class="var-description">: Optional context to log for.</span>			</li>
-					<li>
-				<span class="var-type">array</span>
-				<span class="var-name">$additionalInfo</span><span class="var-description">: An associative array with more info. Eg: array('content'=&gt;'Some stuff')</span>			</li>
-				</ul>
-		
-			
-	</div>
-<a name="methoddoLog" id="doLog"><!-- --></a>
-<div class="evenrow">
-	
-	<div class="method-header">
-		<img src="../media/images/AbstractMethod.png" />
-		<span class="method-title">doLog</span> (line <span class="line-number">164</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">The actual method that logs the message</p>
-	<ul class="tags">
-				<li><span class="field">abstract:</span> </li>
-				<li><span class="field">access:</span> protected</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result">void</span>
-		<span class="method-name">
-			doLog
-		</span>
-					(<span class="var-type">string</span>&nbsp;<span class="var-name">$message</span>, <span class="var-type">int</span>&nbsp;<span class="var-name">$level</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$context</span>, <span class="var-type">array</span>&nbsp;<span class="var-name">$additionalInfo</span>)
-			</div>
-	
-			<ul class="parameters">
-					<li>
-				<span class="var-type">string</span>
-				<span class="var-name">$message</span>			</li>
-					<li>
-				<span class="var-type">int</span>
-				<span class="var-name">$level</span>			</li>
-					<li>
-				<span class="var-type">string</span>
-				<span class="var-name">$context</span>			</li>
-					<li>
-				<span class="var-type">array</span>
-				<span class="var-name">$additionalInfo</span><span class="var-description">: An associative array with more info. Eg: array('content'=&gt;'Some stuff')</span>			</li>
-				</ul>
-		
-			
-			<hr class="separator" />
-		<div class="notes">Redefined in descendants as:</div>
-		<ul class="redefinitions">
-					<li>
-				<a href="../Logger/FileLogger.html#methoddoLog">FileLogger::doLog()</a>
-								: Logs the message to a file.
-							</li>
-				</ul>
-	</div>
-<a name="methoderror" id="error"><!-- --></a>
-<div class="oddrow">
-	
-	<div class="method-header">
-		<img src="../media/images/Method.png" />
-		<span class="method-title">error</span> (line <span class="line-number">126</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Log an error</p>
-	<ul class="tags">
-				<li><span class="field">return:</span> true on success, false if nothing has been logged.</li>
-				<li><span class="field">access:</span> public</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result">bool</span>
-		<span class="method-name">
-			error
-		</span>
-					(<span class="var-type">string</span>&nbsp;<span class="var-name">$message</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$context</span> = <span class="var-default">null</span>], [<span class="var-type">array</span>&nbsp;<span class="var-name">$additionalInfo</span> = <span class="var-default">null</span>])
-			</div>
-	
-			<ul class="parameters">
-					<li>
-				<span class="var-type">string</span>
-				<span class="var-name">$message</span>			</li>
-					<li>
-				<span class="var-type">string</span>
-				<span class="var-name">$context</span><span class="var-description">: Optional context to log for.</span>			</li>
-					<li>
-				<span class="var-type">array</span>
-				<span class="var-name">$additionalInfo</span><span class="var-description">: An associative array with more info. Eg: array('content'=&gt;'Some stuff')</span>			</li>
-				</ul>
-		
-			
-	</div>
-<a name="methodfatal" id="fatal"><!-- --></a>
-<div class="evenrow">
-	
-	<div class="method-header">
-		<img src="../media/images/Method.png" />
-		<span class="method-title">fatal</span> (line <span class="line-number">136</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Log a fatal error</p>
-	<ul class="tags">
-				<li><span class="field">return:</span> true on success, false if nothing has been logged.</li>
-				<li><span class="field">access:</span> public</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result">bool</span>
-		<span class="method-name">
-			fatal
-		</span>
-					(<span class="var-type">string</span>&nbsp;<span class="var-name">$message</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$context</span> = <span class="var-default">null</span>], [<span class="var-type">array</span>&nbsp;<span class="var-name">$additionalInfo</span> = <span class="var-default">null</span>])
-			</div>
-	
-			<ul class="parameters">
-					<li>
-				<span class="var-type">string</span>
-				<span class="var-name">$message</span>			</li>
-					<li>
-				<span class="var-type">string</span>
-				<span class="var-name">$context</span><span class="var-description">: Optional context to log for.</span>			</li>
-					<li>
-				<span class="var-type">array</span>
-				<span class="var-name">$additionalInfo</span><span class="var-description">: An associative array with more info. Eg: array('content'=&gt;'Some stuff')</span>			</li>
-				</ul>
-		
-			
-	</div>
-<a name="methodgetLevel" id="getLevel"><!-- --></a>
-<div class="oddrow">
-	
-	<div class="method-header">
-		<img src="../media/images/Method.png" />
-		<span class="method-title">getLevel</span> (line <span class="line-number">61</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Returns the current level for logging.</p>
-	<ul class="tags">
-				<li><span class="field">see:</span> <a href="../Logger/Logger.html#var$level">Logger::$level</a></li>
-				<li><span class="field">access:</span> public</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result">int</span>
-		<span class="method-name">
-			getLevel
-		</span>
-				()
-			</div>
-	
-		
-			
-	</div>
-<a name="methodinfo" id="info"><!-- --></a>
-<div class="evenrow">
-	
-	<div class="method-header">
-		<img src="../media/images/Method.png" />
-		<span class="method-title">info</span> (line <span class="line-number">94</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Log an info message</p>
-	<ul class="tags">
-				<li><span class="field">return:</span> true on success, false if nothing has been logged.</li>
-				<li><span class="field">access:</span> public</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result">bool</span>
-		<span class="method-name">
-			info
-		</span>
-					(<span class="var-type">string</span>&nbsp;<span class="var-name">$message</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$context</span> = <span class="var-default">null</span>], [<span class="var-type">array</span>&nbsp;<span class="var-name">$additionalInfo</span> = <span class="var-default">null</span>])
-			</div>
-	
-			<ul class="parameters">
-					<li>
-				<span class="var-type">string</span>
-				<span class="var-name">$message</span>			</li>
-					<li>
-				<span class="var-type">string</span>
-				<span class="var-name">$context</span><span class="var-description">: Optional context to log for.</span>			</li>
-					<li>
-				<span class="var-type">array</span>
-				<span class="var-name">$additionalInfo</span><span class="var-description">: An associative array with more info. Eg: array('content'=&gt;'Some stuff')</span>			</li>
-				</ul>
-		
-			
-	</div>
-<a name="methodlog" id="log"><!-- --></a>
-<div class="oddrow">
-	
-	<div class="method-header">
-		<img src="../media/images/Method.png" />
-		<span class="method-title">log</span> (line <span class="line-number">148</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">The actual method that logs the message</p>
-	<ul class="tags">
-				<li><span class="field">return:</span> true on success, false if nothing has been logged.</li>
-				<li><span class="field">access:</span> protected</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result">bool</span>
-		<span class="method-name">
-			log
-		</span>
-					(<span class="var-type">string</span>&nbsp;<span class="var-name">$message</span>, <span class="var-type">int</span>&nbsp;<span class="var-name">$level</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$context</span> = <span class="var-default">null</span>], [<span class="var-type">array</span>&nbsp;<span class="var-name">$additionalInfo</span> = <span class="var-default">null</span>])
-			</div>
-	
-			<ul class="parameters">
-					<li>
-				<span class="var-type">string</span>
-				<span class="var-name">$message</span>			</li>
-					<li>
-				<span class="var-type">int</span>
-				<span class="var-name">$level</span>			</li>
-					<li>
-				<span class="var-type">string</span>
-				<span class="var-name">$context</span><span class="var-description">: Optional context to log for.</span>			</li>
-					<li>
-				<span class="var-type">array</span>
-				<span class="var-name">$additionalInfo</span><span class="var-description">: An associative array with more info. Eg: array('content'=&gt;'Some stuff')</span>			</li>
-				</ul>
-		
-			
-	</div>
-<a name="methodsetLevel" id="setLevel"><!-- --></a>
-<div class="evenrow">
-	
-	<div class="method-header">
-		<img src="../media/images/Method.png" />
-		<span class="method-title">setLevel</span> (line <span class="line-number">51</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Sets the level for logging.</p>
-	<ul class="tags">
-				<li><span class="field">see:</span> <a href="../Logger/Logger.html#var$level">Logger::$level</a></li>
-				<li><span class="field">access:</span> public</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result">void</span>
-		<span class="method-name">
-			setLevel
-		</span>
-					(<span class="var-type">int</span>&nbsp;<span class="var-name">$level</span>)
-			</div>
-	
-			<ul class="parameters">
-					<li>
-				<span class="var-type">int</span>
-				<span class="var-name">$level</span>			</li>
-				</ul>
-		
-			
-	</div>
-<a name="methodshouldLog" id="shouldLog"><!-- --></a>
-<div class="oddrow">
-	
-	<div class="method-header">
-		<img src="../media/images/Method.png" />
-		<span class="method-title">shouldLog</span> (line <span class="line-number">71</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Checks if it's ok to log for specified level</p>
-	<ul class="tags">
-				<li><span class="field">access:</span> protected</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result">bool</span>
-		<span class="method-name">
-			shouldLog
-		</span>
-					(<span class="var-type">int</span>&nbsp;<span class="var-name">$messageLevel</span>)
-			</div>
-	
-			<ul class="parameters">
-					<li>
-				<span class="var-type">int</span>
-				<span class="var-name">$messageLevel</span>			</li>
-				</ul>
-		
-			
-	</div>
-<a name="methodwarn" id="warn"><!-- --></a>
-<div class="evenrow">
-	
-	<div class="method-header">
-		<img src="../media/images/Method.png" />
-		<span class="method-title">warn</span> (line <span class="line-number">115</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Alias for warning</p>
-	<ul class="tags">
-				<li><span class="field">return:</span> true on success, false if nothing has been logged.</li>
-				<li><span class="field">access:</span> public</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result">bool</span>
-		<span class="method-name">
-			warn
-		</span>
-					(<span class="var-type">string</span>&nbsp;<span class="var-name">$message</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$context</span> = <span class="var-default">null</span>], [<span class="var-type">array</span>&nbsp;<span class="var-name">$additionalInfo</span> = <span class="var-default">null</span>])
-			</div>
-	
-			<ul class="parameters">
-					<li>
-				<span class="var-type">string</span>
-				<span class="var-name">$message</span>			</li>
-					<li>
-				<span class="var-type">string</span>
-				<span class="var-name">$context</span><span class="var-description">: Optional context to log for.</span>			</li>
-					<li>
-				<span class="var-type">array</span>
-				<span class="var-name">$additionalInfo</span><span class="var-description">: An associative array with more info. Eg: array('content'=&gt;'Some stuff')</span>			</li>
-				</ul>
-		
-			
-	</div>
-<a name="methodwarning" id="warning"><!-- --></a>
-<div class="oddrow">
-	
-	<div class="method-header">
-		<img src="../media/images/Method.png" />
-		<span class="method-title">warning</span> (line <span class="line-number">104</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Log a warning</p>
-	<ul class="tags">
-				<li><span class="field">return:</span> true on success, false if nothing has been logged.</li>
-				<li><span class="field">access:</span> public</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result">bool</span>
-		<span class="method-name">
-			warning
-		</span>
-					(<span class="var-type">string</span>&nbsp;<span class="var-name">$message</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$context</span> = <span class="var-default">null</span>], [<span class="var-type">array</span>&nbsp;<span class="var-name">$additionalInfo</span> = <span class="var-default">null</span>])
-			</div>
-	
-			<ul class="parameters">
-					<li>
-				<span class="var-type">string</span>
-				<span class="var-name">$message</span>			</li>
-					<li>
-				<span class="var-type">string</span>
-				<span class="var-name">$context</span><span class="var-description">: Optional context to log for.</span>			</li>
-					<li>
-				<span class="var-type">array</span>
-				<span class="var-name">$additionalInfo</span><span class="var-description">: An associative array with more info. Eg: array('content'=&gt;'Some stuff')</span>			</li>
-				</ul>
-		
-			
-	</div>
-						
-		</div>
-	</div>
+<br /><br />
 
-	<a name="sec-consts"></a>
-	<div class="info-box">
-		<div class="info-box-title">Class Constants</div>
-		<div class="nav-bar">
-			<a href="#sec-description">Description</a> |
-							<a href="#sec-descendents">Descendants</a> |
-										<a href="#sec-var-summary">Constants</a> (<span class="disabled">details</span>)
-						
-			
-												<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
-														| 
-									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
-							
-					</div>
-		<div class="info-box-body">
-			<a name="constDEBUG" id="DEBUG"><!-- --></A>
-<div class="evenrow">
-
-	<div class="const-header">
-		<img src="../media/images/Variable.png" />
-		<span class="const-title">
-			<span class="const-name">DEBUG</span>
-			 = <span class="const-default"> 0x00001</span>
-			(line <span class="line-number">28</span>)
-		</span>
-	</div>
-
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">The different Log levels.</p>
 	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">string&nbsp;&nbsp;</td>
+        <td><b>$message</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+          <tr>
+        <td class="type">string&nbsp;&nbsp;</td>
+        <td><b>$context</b>&nbsp;&nbsp;</td>
+        <td>Optional context to log for.</td>
+      </tr>
+          <tr>
+        <td class="type">array&nbsp;&nbsp;</td>
+        <td><b>$additionalInfo</b>&nbsp;&nbsp;</td>
+        <td>An associative array with more info. Eg: array('content'=&gt;'Some stuff')</td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methoddoLog"></a>
+	<h3>method doLog <span class="smalllinenumber">[line 164]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void doLog(
+string
+$message, int
+$level, string
+$context, array
+$additionalInfo)</code>
+    </td></tr></table>
+    </td></tr></table><br />
 	
+		The actual method that logs the message<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>abstract:</b>&nbsp;&nbsp;</td><td></td>
+  </tr>
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
+  </tr>
+</table>
 </div>
-<a name="constERROR" id="ERROR"><!-- --></A>
-<div class="oddrow">
+<br /><br />
 
-	<div class="const-header">
-		<img src="../media/images/Variable.png" />
-		<span class="const-title">
-			<span class="const-name">ERROR</span>
-			 = <span class="const-default"> 0x01111</span>
-			(line <span class="line-number">31</span>)
-		</span>
-	</div>
-
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">The different Log levels.</p>
-	
-	
-</div>
-<a name="constFATAL" id="FATAL"><!-- --></A>
-<div class="evenrow">
-
-	<div class="const-header">
-		<img src="../media/images/Variable.png" />
-		<span class="const-title">
-			<span class="const-name">FATAL</span>
-			 = <span class="const-default"> 0x11111</span>
-			(line <span class="line-number">32</span>)
-		</span>
-	</div>
-
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">The different Log levels.</p>
-	
-	
-</div>
-<a name="constINFO" id="INFO"><!-- --></A>
-<div class="oddrow">
-
-	<div class="const-header">
-		<img src="../media/images/Variable.png" />
-		<span class="const-title">
-			<span class="const-name">INFO</span>
-			 = <span class="const-default"> 0x00011</span>
-			(line <span class="line-number">29</span>)
-		</span>
-	</div>
-
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">The different Log levels.</p>
-	
-	
-</div>
-<a name="constWARNING" id="WARNING"><!-- --></A>
-<div class="evenrow">
-
-	<div class="const-header">
-		<img src="../media/images/Variable.png" />
-		<span class="const-title">
-			<span class="const-name">WARNING</span>
-			 = <span class="const-default"> 0x00111</span>
-			(line <span class="line-number">30</span>)
-		</span>
-	</div>
-
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">The different Log levels.</p>
-	
-	
-</div>
-						
-		</div>
-	</div>
-	
-	<p class="notes" id="credit">
-		Documentation generated by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+	<p>Overridden in child classes as:<br />
+		<dl>
+	<dt><a href="../Logger/FileLogger.html#methoddoLog">FileLogger::doLog()</a></dt>
+		<dd>Logs the message to a file.</dd>
+	</dl>
 	</p>
-	</div></body>
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">string&nbsp;&nbsp;</td>
+        <td><b>$message</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+          <tr>
+        <td class="type">int&nbsp;&nbsp;</td>
+        <td><b>$level</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+          <tr>
+        <td class="type">string&nbsp;&nbsp;</td>
+        <td><b>$context</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+          <tr>
+        <td class="type">array&nbsp;&nbsp;</td>
+        <td><b>$additionalInfo</b>&nbsp;&nbsp;</td>
+        <td>An associative array with more info. Eg: array('content'=&gt;'Some stuff')</td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methoderror"></a>
+	<h3>method error <span class="smalllinenumber">[line 126]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>bool error(
+string
+$message, [string
+$context = null], [array
+$additionalInfo = null])</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Log an error<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>return:</b>&nbsp;&nbsp;</td><td>true on success, false if nothing has been logged.</td>
+  </tr>
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">string&nbsp;&nbsp;</td>
+        <td><b>$message</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+          <tr>
+        <td class="type">string&nbsp;&nbsp;</td>
+        <td><b>$context</b>&nbsp;&nbsp;</td>
+        <td>Optional context to log for.</td>
+      </tr>
+          <tr>
+        <td class="type">array&nbsp;&nbsp;</td>
+        <td><b>$additionalInfo</b>&nbsp;&nbsp;</td>
+        <td>An associative array with more info. Eg: array('content'=&gt;'Some stuff')</td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodfatal"></a>
+	<h3>method fatal <span class="smalllinenumber">[line 136]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>bool fatal(
+string
+$message, [string
+$context = null], [array
+$additionalInfo = null])</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Log a fatal error<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>return:</b>&nbsp;&nbsp;</td><td>true on success, false if nothing has been logged.</td>
+  </tr>
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">string&nbsp;&nbsp;</td>
+        <td><b>$message</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+          <tr>
+        <td class="type">string&nbsp;&nbsp;</td>
+        <td><b>$context</b>&nbsp;&nbsp;</td>
+        <td>Optional context to log for.</td>
+      </tr>
+          <tr>
+        <td class="type">array&nbsp;&nbsp;</td>
+        <td><b>$additionalInfo</b>&nbsp;&nbsp;</td>
+        <td>An associative array with more info. Eg: array('content'=&gt;'Some stuff')</td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodgetLevel"></a>
+	<h3>method getLevel <span class="smalllinenumber">[line 61]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>int getLevel(
+)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Returns the current level for logging.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>see:</b>&nbsp;&nbsp;</td><td><a href="../Logger/Logger.html#var$level">Logger::$level</a></td>
+  </tr>
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodinfo"></a>
+	<h3>method info <span class="smalllinenumber">[line 94]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>bool info(
+string
+$message, [string
+$context = null], [array
+$additionalInfo = null])</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Log an info message<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>return:</b>&nbsp;&nbsp;</td><td>true on success, false if nothing has been logged.</td>
+  </tr>
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">string&nbsp;&nbsp;</td>
+        <td><b>$message</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+          <tr>
+        <td class="type">string&nbsp;&nbsp;</td>
+        <td><b>$context</b>&nbsp;&nbsp;</td>
+        <td>Optional context to log for.</td>
+      </tr>
+          <tr>
+        <td class="type">array&nbsp;&nbsp;</td>
+        <td><b>$additionalInfo</b>&nbsp;&nbsp;</td>
+        <td>An associative array with more info. Eg: array('content'=&gt;'Some stuff')</td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodlog"></a>
+	<h3>method log <span class="smalllinenumber">[line 148]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>bool log(
+string
+$message, int
+$level, [string
+$context = null], [array
+$additionalInfo = null])</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		The actual method that logs the message<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>return:</b>&nbsp;&nbsp;</td><td>true on success, false if nothing has been logged.</td>
+  </tr>
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">string&nbsp;&nbsp;</td>
+        <td><b>$message</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+          <tr>
+        <td class="type">int&nbsp;&nbsp;</td>
+        <td><b>$level</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+          <tr>
+        <td class="type">string&nbsp;&nbsp;</td>
+        <td><b>$context</b>&nbsp;&nbsp;</td>
+        <td>Optional context to log for.</td>
+      </tr>
+          <tr>
+        <td class="type">array&nbsp;&nbsp;</td>
+        <td><b>$additionalInfo</b>&nbsp;&nbsp;</td>
+        <td>An associative array with more info. Eg: array('content'=&gt;'Some stuff')</td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodsetLevel"></a>
+	<h3>method setLevel <span class="smalllinenumber">[line 51]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void setLevel(
+int
+$level)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Sets the level for logging.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>see:</b>&nbsp;&nbsp;</td><td><a href="../Logger/Logger.html#var$level">Logger::$level</a></td>
+  </tr>
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">int&nbsp;&nbsp;</td>
+        <td><b>$level</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodshouldLog"></a>
+	<h3>method shouldLog <span class="smalllinenumber">[line 71]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>bool shouldLog(
+int
+$messageLevel)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Checks if it's ok to log for specified level<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">int&nbsp;&nbsp;</td>
+        <td><b>$messageLevel</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodwarn"></a>
+	<h3>method warn <span class="smalllinenumber">[line 115]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>bool warn(
+string
+$message, [string
+$context = null], [array
+$additionalInfo = null])</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Alias for warning<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>return:</b>&nbsp;&nbsp;</td><td>true on success, false if nothing has been logged.</td>
+  </tr>
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">string&nbsp;&nbsp;</td>
+        <td><b>$message</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+          <tr>
+        <td class="type">string&nbsp;&nbsp;</td>
+        <td><b>$context</b>&nbsp;&nbsp;</td>
+        <td>Optional context to log for.</td>
+      </tr>
+          <tr>
+        <td class="type">array&nbsp;&nbsp;</td>
+        <td><b>$additionalInfo</b>&nbsp;&nbsp;</td>
+        <td>An associative array with more info. Eg: array('content'=&gt;'Some stuff')</td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodwarning"></a>
+	<h3>method warning <span class="smalllinenumber">[line 104]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>bool warning(
+string
+$message, [string
+$context = null], [array
+$additionalInfo = null])</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Log a warning<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>return:</b>&nbsp;&nbsp;</td><td>true on success, false if nothing has been logged.</td>
+  </tr>
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">string&nbsp;&nbsp;</td>
+        <td><b>$message</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+          <tr>
+        <td class="type">string&nbsp;&nbsp;</td>
+        <td><b>$context</b>&nbsp;&nbsp;</td>
+        <td>Optional context to log for.</td>
+      </tr>
+          <tr>
+        <td class="type">array&nbsp;&nbsp;</td>
+        <td><b>$additionalInfo</b>&nbsp;&nbsp;</td>
+        <td>An associative array with more info. Eg: array('content'=&gt;'Some stuff')</td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+</div><br />
+
+<hr />
+<a name="class_consts"></a>
+<h3>Class Constants</h3>
+<div class="tags">
+	<a name="constDEBUG"></a>
+	<p></p>
+	<h4>DEBUG = <span class="value">&nbsp;0x00001</span></h4>
+	<p>[line 28]</p>
+  The different Log levels.<br /><br />
+  <br />
+	<div class="top">[ <a href="#top">Top</a> ]</div><br />
+	<a name="constERROR"></a>
+	<p></p>
+	<h4>ERROR = <span class="value">&nbsp;0x01111</span></h4>
+	<p>[line 31]</p>
+  The different Log levels.<br /><br />
+  <br />
+	<div class="top">[ <a href="#top">Top</a> ]</div><br />
+	<a name="constFATAL"></a>
+	<p></p>
+	<h4>FATAL = <span class="value">&nbsp;0x11111</span></h4>
+	<p>[line 32]</p>
+  The different Log levels.<br /><br />
+  <br />
+	<div class="top">[ <a href="#top">Top</a> ]</div><br />
+	<a name="constINFO"></a>
+	<p></p>
+	<h4>INFO = <span class="value">&nbsp;0x00011</span></h4>
+	<p>[line 29]</p>
+  The different Log levels.<br /><br />
+  <br />
+	<div class="top">[ <a href="#top">Top</a> ]</div><br />
+	<a name="constWARNING"></a>
+	<p></p>
+	<h4>WARNING = <span class="value">&nbsp;0x00111</span></h4>
+	<p>[line 30]</p>
+  The different Log levels.<br /><br />
+  <br />
+	<div class="top">[ <a href="#top">Top</a> ]</div><br />
+</div><br />
+
+        <div class="credit">
+		    <hr />
+		    Documentation generated by <a href="http://www.phpdoc.org">phpDocumentor 1.4.3</a>
+	      </div>
+      </td></tr></table>
+    </td>
+  </tr>
+</table>
+
+</body>
 </html>

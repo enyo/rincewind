@@ -1,502 +1,977 @@
-<?xml version="1.0" encoding="iso-8859-1"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-  <html xmlns="http://www.w3.org/1999/xhtml">
-		<head>
-			<!-- template designed by Marco Von Ballmoos -->
-			<title>Docs For Class MysqlUserDao</title>
-			<link rel="stylesheet" href="../media/stylesheet.css" />
-			<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
-		</head>
-		<body>
-			<div class="page-body">			
-<h2 class="class-name"><img src="../media/images/Class_logo.png"
-														alt=" Class"
-														title=" Class"
-														style="vertical-align: middle"> MysqlUserDao</h2>
+<html>
+<head>
+<title>Docs For Class MysqlUserDao</title>
+<link rel="stylesheet" type="text/css" href="../media/style.css">
+</head>
+<body>
 
-<a name="sec-description"></a>
-<div class="info-box">
-	<div class="info-box-title">Description</div>
-	<div class="nav-bar">
-					<span class="disabled">Description</span> |
-													<a href="#sec-vars">Vars</a>
-						|											<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
-						
-											<a href="#sec-consts">Constants</a>
-						
+<table border="0" cellspacing="0" cellpadding="0" height="48" width="100%">
+  <tr>
+    <td class="header_top">Dao</td>
+  </tr>
+  <tr><td class="header_line"><img src="../media/empty.png" width="1" height="1" border="0" alt=""  /></td></tr>
+  <tr>
+    <td class="header_menu">
+        
+                                                                            
+                                                                                                                                                      		  [ <a href="../classtrees_Dao.html" class="menu">class tree: Dao</a> ]
+		  [ <a href="../elementindex_Dao.html" class="menu">index: Dao</a> ]
+		  	    [ <a href="../elementindex.html" class="menu">all elements</a> ]
+    </td>
+  </tr>
+  <tr><td class="header_line"><img src="../media/empty.png" width="1" height="1" border="0" alt=""  /></td></tr>
+</table>
+
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="200" class="menu">
+	<div id="ric">
+					<p><a href="../ric_README.html">README</a></p>
 			</div>
-	<div class="info-box-body">
-                <p class="implements">
-            Implements interfaces:
-            <ul>
-                <li><a href="../Dao/UserDaoInterface.html">UserDaoInterface</a></li>            </ul>
-        </p>
-        		<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">The MysqlUserDao implements the UserDaoInterface.</p>
-	<ul class="tags">
-				<li><span class="field">author:</span> Matthias Loitsch &lt;<a href="mailto:developer@ma.tthias.com">developer@ma.tthias.com</a>&gt;</li>
-				<li><span class="field">copyright:</span> Copyright (c) 2010, Matthias Loitsch</li>
-			</ul>
-		<p class="notes">
-			Located in <a class="field" href="_Dao---Mysql---MysqlUserDao.php.html">/Dao/Mysql/MysqlUserDao.php</a> (line <span class="field">31</span>)
-		</p>
-		
-				
-		<pre><a href="../Dao/Dao.html">Dao</a>
+      <b>Packages:</b><br />
+              <a href="../li_php-library.html">php-library</a><br />
+              <a href="../li_Config.html">Config</a><br />
+              <a href="../li_Dao.html">Dao</a><br />
+              <a href="../li_Database.html">Database</a><br />
+              <a href="../li_DataSource.html">DataSource</a><br />
+              <a href="../li_Date.html">Date</a><br />
+              <a href="../li_File.html">File</a><br />
+              <a href="../li_Logger.html">Logger</a><br />
+              <a href="../li_Storage.html">Storage</a><br />
+            <br /><br />
+                        <b>Files:</b><br />
+      	  <div class="package">
+			<a href="../Dao/_Dao---Dao.php.html">		Dao.php
+		</a><br>
+			<a href="../Dao/_Dao---DaoColumnAssignment.php.html">		DaoColumnAssignment.php
+		</a><br>
+			<a href="../Dao/_Dao---DaoInterface.php.html">		DaoInterface.php
+		</a><br>
+			<a href="../Dao/_Dao---DaoResultIterator.php.html">		DaoResultIterator.php
+		</a><br>
+			<a href="../Dao/_Dao---FileSourceDao.php.html">		FileSourceDao.php
+		</a><br>
+			<a href="../Dao/_Dao---FileSourceResultIterator.php.html">		FileSourceResultIterator.php
+		</a><br>
+			<a href="../Dao/_Dao---Json---JsonDao.php.html">		JsonDao.php
+		</a><br>
+			<a href="../Dao/_Dao---Json---JsonResultIterator.php.html">		JsonResultIterator.php
+		</a><br>
+			<a href="../Dao/_Dao---Mysql---MysqlDao.php.html">		MysqlDao.php
+		</a><br>
+			<a href="../Dao/_Dao---Mysql---MysqlResultIterator.php.html">		MysqlResultIterator.php
+		</a><br>
+			<a href="../Dao/_Dao---Mysql---MysqlUserDao.php.html">		MysqlUserDao.php
+		</a><br>
+			<a href="../Dao/_Dao---Postgresql---PostgresqlDao.php.html">		PostgresqlDao.php
+		</a><br>
+			<a href="../Dao/_Dao---Postgresql---PostgresqlResultIterator.php.html">		PostgresqlResultIterator.php
+		</a><br>
+			<a href="../Dao/_Dao---Postgresql---PostgresqlUserDao.php.html">		PostgresqlUserDao.php
+		</a><br>
+			<a href="../Dao/_Dao---SqlDao.php.html">		SqlDao.php
+		</a><br>
+			<a href="../Dao/_Dao---SqlResultIterator.php.html">		SqlResultIterator.php
+		</a><br>
+			<a href="../Dao/_Dao---UserDaoInterface.php.html">		UserDaoInterface.php
+		</a><br>
+			<a href="../Dao/_Dao---Xml---XmlDao.php.html">		XmlDao.php
+		</a><br>
+			<a href="../Dao/_Dao---Xml---XmlResultIterator.php.html">		XmlResultIterator.php
+		</a><br>
+	  </div><br />
+	subpackage <b>DataObject</b><br>  <div class="package">
+			<a href="../Dao/DataObject/_DataObject---DataObject.php.html">		DataObject.php
+		</a><br>
+			<a href="../Dao/DataObject/_DataObject---DataObjectExceptions.php.html">		DataObjectExceptions.php
+		</a><br>
+			<a href="../Dao/DataObject/_DataObject---DataObjectInterface.php.html">		DataObjectInterface.php
+		</a><br>
+			<a href="../Dao/DataObject/_DataObject---UserDataObject.php.html">		UserDataObject.php
+		</a><br>
+	  </div><br />
+	subpackage <b>Exceptions</b><br>  <div class="package">
+			<a href="../Dao/Exceptions/_Dao---DaoExceptions.php.html">		DaoExceptions.php
+		</a><br>
+			<a href="../Dao/Exceptions/_Dao---Json---JsonDaoExceptions.php.html">		JsonDaoExceptions.php
+		</a><br>
+	  </div><br />
+      
+            <b>Interfaces:</b><br />
+        <div class="package">
+		    		<a href="../Dao/DaoInterface.html">DaoInterface</a><br />
+	    		<a href="../Dao/UserDaoInterface.html">UserDaoInterface</a><br />
+	  </div>
+  <div class="package">
+	DataObject<br />	    &nbsp;&nbsp;		<a href="../Dao/DataObject/DataObjectInterface.html">DataObjectInterface</a><br />
+	  </div>
+      
+            <b>Classes:</b><br />
+        <div class="package">
+		    		<a href="../Dao/Dao.html">Dao</a><br />
+	    		<a href="../Dao/DaoColumnAssignment.html">DaoColumnAssignment</a><br />
+	    		<a href="../Dao/DaoResultIterator.html">DaoResultIterator</a><br />
+	    		<a href="../Dao/FileSourceDao.html">FileSourceDao</a><br />
+	    		<a href="../Dao/FileSourceResultIterator.html">FileSourceResultIterator</a><br />
+	    		<a href="../Dao/JsonDao.html">JsonDao</a><br />
+	    		<a href="../Dao/JsonResultIterator.html">JsonResultIterator</a><br />
+	    		<a href="../Dao/MysqlDao.html">MysqlDao</a><br />
+	    		<a href="../Dao/MysqlResultIterator.html">MysqlResultIterator</a><br />
+	    		<a href="../Dao/MysqlUserDao.html">MysqlUserDao</a><br />
+	    		<a href="../Dao/PostgresqlResultIterator.html">PostgresqlResultIterator</a><br />
+	    		<a href="../Dao/PostgresqlUserDao.html">PostgresqlUserDao</a><br />
+	    		<a href="../Dao/SqlDao.html">SqlDao</a><br />
+	    		<a href="../Dao/SqlResultIterator.html">SqlResultIterator</a><br />
+	    		<a href="../Dao/XmlDao.html">XmlDao</a><br />
+	    		<a href="../Dao/XmlResultIterator.html">XmlResultIterator</a><br />
+	  </div>
+  <div class="package">
+	Exceptions<br />	    &nbsp;&nbsp;		<a href="../Dao/Exceptions/DaoException.html">DaoException</a><br />
+	    &nbsp;&nbsp;		<a href="../Dao/Exceptions/DaoNotFoundException.html">DaoNotFoundException</a><br />
+	    &nbsp;&nbsp;		<a href="../Dao/Exceptions/DaoNotSupportedException.html">DaoNotSupportedException</a><br />
+	    &nbsp;&nbsp;		<a href="../Dao/Exceptions/DaoWrongValueException.html">DaoWrongValueException</a><br />
+	    &nbsp;&nbsp;		<a href="../Dao/Exceptions/DataObjectException.html">DataObjectException</a><br />
+	    &nbsp;&nbsp;		<a href="../Dao/Exceptions/JsonDaoException.html">JsonDaoException</a><br />
+	    &nbsp;&nbsp;		<a href="../Dao/Exceptions/XmlDaoException.html">XmlDaoException</a><br />
+	  </div>
+  <div class="package">
+	DataObject<br />	    &nbsp;&nbsp;		<a href="../Dao/DataObject/DataObject.html">DataObject</a><br />
+	    &nbsp;&nbsp;		<a href="../Dao/DataObject/UserDataObject.html">UserDataObject</a><br />
+	  </div>
+                </td>
+    <td>
+      <table cellpadding="10" cellspacing="0" width="100%" border="0"><tr><td valign="top">
+
+<h1>Class: MysqlUserDao</h1>
+Source Location: /Dao/Mysql/MysqlUserDao.php<br /><br />
+
+
+<table width="100%" border="0">
+<tr><td valign="top">
+
+<h3><a href="#class_details">Class Overview</a></h3>
+<pre><a href="../Dao/Dao.html">Dao</a>
    |
    --<a href="../Dao/SqlDao.html">SqlDao</a>
       |
       --<a href="../Dao/MysqlDao.html">MysqlDao</a>
          |
-         --MysqlUserDao</pre>
-	
-			</div>
+         --MysqlUserDao</pre><br />
+<div class="description">The MysqlUserDao implements the UserDaoInterface.</div><br /><br />
+<h4>Author(s):</h4>
+<ul>
+          <li>Matthias Loitsch &lt;<a href="mailto:developer@ma.tthias.com">developer@ma.tthias.com</a>&gt;</li>
+            </ul>
+
+
+
+
+          
+  
+
+<h4>Copyright:</h4>
+<ul>
+  <li>Copyright (c) 2010, Matthias Loitsch</li>
+</ul>
+                <p class="implements">
+            Implements interfaces:
+            <ul>
+                <li><a href="../Dao/UserDaoInterface.html">UserDaoInterface</a></li>            </ul>
+        </p>
+        
+</td>
+
+
+
+<td valign="top">
+<h3><a href="#class_methods">Methods</a></h3>
+<ul>
+    <li><a href="../Dao/MysqlUserDao.html#methodgetByUsername">getByUsername</a></li>
+    <li><a href="../Dao/MysqlUserDao.html#methodgetGuest">getGuest</a></li>
+  </ul>
+</td>
+
+</tr></table>
+<hr />
+
+<table width="100%" border="0"><tr>
+
+
+
+<td valign="top">
+<h3>Inherited Constants</h3>
+<div class="tags">
+<h4>Class: <a href="../Dao/Dao.html">Dao</a></h4>
+<dl>
+<dt>
+  <a href="../Dao/Dao.html#constASC">Dao::ASC</a>
+</dt>
+<dd>
+   
+</dd>
+<dt>
+  <a href="../Dao/Dao.html#constBOOL">Dao::BOOL</a>
+</dt>
+<dd>
+   
+</dd>
+<dt>
+  <a href="../Dao/Dao.html#constBOOLEAN">Dao::BOOLEAN</a>
+</dt>
+<dd>
+   
+</dd>
+<dt>
+  <a href="../Dao/Dao.html#constDATE">Dao::DATE</a>
+</dt>
+<dd>
+   
+</dd>
+<dt>
+  <a href="../Dao/Dao.html#constDATE_WITH_TIME">Dao::DATE_WITH_TIME</a>
+</dt>
+<dd>
+   
+</dd>
+<dt>
+  <a href="../Dao/Dao.html#constDESC">Dao::DESC</a>
+</dt>
+<dd>
+   
+</dd>
+<dt>
+  <a href="../Dao/Dao.html#constDO_NOT_EXPORT_VALUES">Dao::DO_NOT_EXPORT_VALUES</a>
+</dt>
+<dd>
+   
+</dd>
+<dt>
+  <a href="../Dao/Dao.html#constFLOAT">Dao::FLOAT</a>
+</dt>
+<dd>
+   
+</dd>
+<dt>
+  <a href="../Dao/Dao.html#constIGNORE">Dao::IGNORE</a>
+</dt>
+<dd>
+   
+</dd>
+<dt>
+  <a href="../Dao/Dao.html#constINT">Dao::INT</a>
+</dt>
+<dd>
+   
+</dd>
+<dt>
+  <a href="../Dao/Dao.html#constINTEGER">Dao::INTEGER</a>
+</dt>
+<dd>
+   
+</dd>
+<dt>
+  <a href="../Dao/Dao.html#constSORT_ASCENDING">Dao::SORT_ASCENDING</a>
+</dt>
+<dd>
+   
+</dd>
+<dt>
+  <a href="../Dao/Dao.html#constSORT_DESCENDING">Dao::SORT_DESCENDING</a>
+</dt>
+<dd>
+   
+</dd>
+<dt>
+  <a href="../Dao/Dao.html#constSTRING">Dao::STRING</a>
+</dt>
+<dd>
+   
+</dd>
+<dt>
+  <a href="../Dao/Dao.html#constTEXT">Dao::TEXT</a>
+</dt>
+<dd>
+   
+</dd>
+<dt>
+  <a href="../Dao/Dao.html#constTIMESTAMP">Dao::TIMESTAMP</a>
+</dt>
+<dd>
+   
+</dd>
+</dl>
 </div>
+</td>
+
+<td valign="top">
+<h3>Inherited Variables</h3>
+<div class="tags">
+<h4>Class: <a href="../Dao/SqlDao.html">SqlDao</a></h4>
+<dl>
+<dt>
+  <a href="../Dao/SqlDao.html#var$db">SqlDao::$db</a>
+  </dt>
+<dd>
+   
+</dd>
+</dl>
+</div>
+<div class="tags">
+<h4>Class: <a href="../Dao/Dao.html">Dao</a></h4>
+<dl>
+<dt>
+  <a href="../Dao/Dao.html#var$additionalColumnTypes">Dao::$additionalColumnTypes</a>
+  </dt>
+<dd>
+   
+</dd>
+<dt>
+  <a href="../Dao/Dao.html#var$columnExportMapping">Dao::$columnExportMapping</a>
+  </dt>
+<dd>
+   
+</dd>
+<dt>
+  <a href="../Dao/Dao.html#var$columnImportMapping">Dao::$columnImportMapping</a>
+  </dt>
+<dd>
+   
+</dd>
+<dt>
+  <a href="../Dao/Dao.html#var$columnTypes">Dao::$columnTypes</a>
+  </dt>
+<dd>
+   
+</dd>
+<dt>
+  <a href="../Dao/Dao.html#var$defaultSort">Dao::$defaultSort</a>
+  </dt>
+<dd>
+   
+</dd>
+<dt>
+  <a href="../Dao/Dao.html#var$defaultValueColumns">Dao::$defaultValueColumns</a>
+  </dt>
+<dd>
+   
+</dd>
+<dt>
+  <a href="../Dao/Dao.html#var$logger">Dao::$logger</a>
+  </dt>
+<dd>
+   
+</dd>
+<dt>
+  <a href="../Dao/Dao.html#var$nullColumns">Dao::$nullColumns</a>
+  </dt>
+<dd>
+   
+</dd>
+<dt>
+  <a href="../Dao/Dao.html#var$tableName">Dao::$tableName</a>
+  </dt>
+<dd>
+   
+</dd>
+<dt>
+  <a href="../Dao/Dao.html#var$viewName">Dao::$viewName</a>
+  </dt>
+<dd>
+   
+</dd>
+</dl>
+</div>
+</td>
+
+<td valign="top">
+<h3>Inherited Methods</h3>
+<div class="tags">
+<h4>Class: <a href="../Dao/MysqlDao.html">MysqlDao</a></h4>
+<dl>
+    <dt>
+    <a href="../Dao/MysqlDao.html#methodcreateIterator">MysqlDao::createIterator()</a>
+  </dt>
+  <dd>
+    Creates an iterator for a mysql result.
+  </dd>
+    <dt>
+    <a href="../Dao/MysqlDao.html#methodexportColumn">MysqlDao::exportColumn()</a>
+  </dt>
+  <dd>
+    Takes a php column name, converts it via import/export column mapping, escapes it, and adds quotes.
+  </dd>
+    <dt>
+    <a href="../Dao/MysqlDao.html#methodexportString">MysqlDao::exportString()</a>
+  </dt>
+  <dd>
+    Escapes and quotes a string.
+  </dd>
+    <dt>
+    <a href="../Dao/MysqlDao.html#methodexportTable">MysqlDao::exportTable()</a>
+  </dt>
+  <dd>
+    Escapes and quotes a table name.
+  </dd>
+    <dt>
+    <a href="../Dao/MysqlDao.html#methodgetLastInsertId">MysqlDao::getLastInsertId()</a>
+  </dt>
+  <dd>
+    Returns the id of the last inserted record.
+  </dd>
+  </dl>
+<h4>Class: <a href="../Dao/SqlDao.html">SqlDao</a></h4>
+<dl>
+    <dt>
+    <a href="../Dao/SqlDao.html#method__construct">SqlDao::__construct()</a>
+  </dt>
+  <dd>
+    
+  </dd>
+    <dt>
+    <a href="../Dao/SqlDao.html#methodbeginTransaction">SqlDao::beginTransaction()</a>
+  </dt>
+  <dd>
+    Shorthand for: Dao.getDb()-&gt;beginTransaction()
+  </dd>
+    <dt>
+    <a href="../Dao/SqlDao.html#methodcommit">SqlDao::commit()</a>
+  </dt>
+  <dd>
+    Shorthand for: Dao.getDb()-&gt;commit()
+  </dd>
+    <dt>
+    <a href="../Dao/SqlDao.html#methodconvertRemoteValueToTimestamp">SqlDao::convertRemoteValueToTimestamp()</a>
+  </dt>
+  <dd>
+    For most SQL Database simply calling strtotime() will work.
+  </dd>
+    <dt>
+    <a href="../Dao/SqlDao.html#methodcreateIterator">SqlDao::createIterator()</a>
+  </dt>
+  <dd>
+    Creates an iterator from a php result.
+  </dd>
+    <dt>
+    <a href="../Dao/SqlDao.html#methoddelete">SqlDao::delete()</a>
+  </dt>
+  <dd>
+    Deletes an object in the database using the id.
+  </dd>
+    <dt>
+    <a href="../Dao/SqlDao.html#methodescapeColumn">SqlDao::escapeColumn()</a>
+  </dt>
+  <dd>
+    Calls the internal db-&gt;escapeColumn function
+  </dd>
+    <dt>
+    <a href="../Dao/SqlDao.html#methodescapeString">SqlDao::escapeString()</a>
+  </dt>
+  <dd>
+    Calls the internal db-&gt;escapeString function
+  </dd>
+    <dt>
+    <a href="../Dao/SqlDao.html#methodescapeTable">SqlDao::escapeTable()</a>
+  </dt>
+  <dd>
+    Calls the internal db-&gt;escapeTable function
+  </dd>
+    <dt>
+    <a href="../Dao/SqlDao.html#methodexportDate">SqlDao::exportDate()</a>
+  </dt>
+  <dd>
+    Returns a formatted date, and escaped with exportString.
+  </dd>
+    <dt>
+    <a href="../Dao/SqlDao.html#methodgenerateQuery">SqlDao::generateQuery()</a>
+  </dt>
+  <dd>
+    This function generates the SQL query for the getters.
+  </dd>
+    <dt>
+    <a href="../Dao/SqlDao.html#methodgenerateSortString">SqlDao::generateSortString()</a>
+  </dt>
+  <dd>
+    This method takes the $sort attribute and returns a typical 'order by ' SQL string.
+  </dd>
+    <dt>
+    <a href="../Dao/SqlDao.html#methodget">SqlDao::get()</a>
+  </dt>
+  <dd>
+    This is the method to get a DataObject from the database.
+  </dd>
+    <dt>
+    <a href="../Dao/SqlDao.html#methodgetData">SqlDao::getData()</a>
+  </dt>
+  <dd>
+    Same as get() but returns an array with the data instead of an object
+  </dd>
+    <dt>
+    <a href="../Dao/SqlDao.html#methodgetDb">SqlDao::getDb()</a>
+  </dt>
+  <dd>
+    Returns the database.
+  </dd>
+    <dt>
+    <a href="../Dao/SqlDao.html#methodgetFromQuery">SqlDao::getFromQuery()</a>
+  </dt>
+  <dd>
+    Returns a DataObject or data array from a query.
+  </dd>
+    <dt>
+    <a href="../Dao/SqlDao.html#methodgetIterator">SqlDao::getIterator()</a>
+  </dt>
+  <dd>
+    The same as get, but returns an iterator to go through all the rows.
+  </dd>
+    <dt>
+    <a href="../Dao/SqlDao.html#methodgetIteratorFromQuery">SqlDao::getIteratorFromQuery()</a>
+  </dt>
+  <dd>
+    Returns an Iterator for a query
+  </dd>
+    <dt>
+    <a href="../Dao/SqlDao.html#methodgetLastInsertId">SqlDao::getLastInsertId()</a>
+  </dt>
+  <dd>
+    
+  </dd>
+    <dt>
+    <a href="../Dao/SqlDao.html#methodgetTotalCount">SqlDao::getTotalCount()</a>
+  </dt>
+  <dd>
+    Returns the total row count in the table the Dao is assigned to.
+  </dd>
+    <dt>
+    <a href="../Dao/SqlDao.html#methodinsert">SqlDao::insert()</a>
+  </dt>
+  <dd>
+    Inserts an object in the database, and updates the object with the new data (in  case some default values of the database have been set.)
+  </dd>
+    <dt>
+    <a href="../Dao/SqlDao.html#methodinsertByQuery">SqlDao::insertByQuery()</a>
+  </dt>
+  <dd>
+    Inserts and returns the new id
+  </dd>
+    <dt>
+    <a href="../Dao/SqlDao.html#methodrollback">SqlDao::rollback()</a>
+  </dt>
+  <dd>
+    Shorthand for: Dao.getDb()-&gt;rollback()
+  </dd>
+    <dt>
+    <a href="../Dao/SqlDao.html#methodupdate">SqlDao::update()</a>
+  </dt>
+  <dd>
+    Updates an object in the database using the id.
+  </dd>
+  </dl>
+<h4>Class: <a href="../Dao/Dao.html">Dao</a></h4>
+<dl>
+    <dt>
+    <a href="../Dao/Dao.html#methodafterDelete">Dao::afterDelete()</a>
+  </dt>
+  <dd>
+    If you have to do stuff after a deletion, overwrite this function.
+  </dd>
+    <dt>
+    <a href="../Dao/Dao.html#methodafterInsert">Dao::afterInsert()</a>
+  </dt>
+  <dd>
+    If you have to do stuff after an insert, overwrite this function.
+  </dd>
+    <dt>
+    <a href="../Dao/Dao.html#methodafterUpdate">Dao::afterUpdate()</a>
+  </dt>
+  <dd>
+    If you have to do stuff after an update, overwrite this function.
+  </dd>
+    <dt>
+    <a href="../Dao/Dao.html#methodapplyColumnExportMapping">Dao::applyColumnExportMapping()</a>
+  </dt>
+  <dd>
+    Takes a column and sees if there is an import/export mapping for it.
+  </dd>
+    <dt>
+    <a href="../Dao/Dao.html#methodapplyColumnImportMapping">Dao::applyColumnImportMapping()</a>
+  </dt>
+  <dd>
+    Takes a column and sees if there is an import/export mapping for it.
+  </dd>
+    <dt>
+    <a href="../Dao/Dao.html#methodcolumnExists">Dao::columnExists()</a>
+  </dt>
+  <dd>
+    Checks if a column name exists as real or additional column.
+  </dd>
+    <dt>
+    <a href="../Dao/Dao.html#methodconvertRemoteValueToTimestamp">Dao::convertRemoteValueToTimestamp()</a>
+  </dt>
+  <dd>
+    Converts a database value to a timestamp.
+  </dd>
+    <dt>
+    <a href="../Dao/Dao.html#methoddebug">Dao::debug()</a>
+  </dt>
+  <dd>
+    
+  </dd>
+    <dt>
+    <a href="../Dao/Dao.html#methoddeleteById">Dao::deleteById()</a>
+  </dt>
+  <dd>
+    Gets the object by id and deletes it.
+  </dd>
+    <dt>
+    <a href="../Dao/Dao.html#methodexportBool">Dao::exportBool()</a>
+  </dt>
+  <dd>
+    
+  </dd>
+    <dt>
+    <a href="../Dao/Dao.html#methodexportColumn">Dao::exportColumn()</a>
+  </dt>
+  <dd>
+    Has to determine the correct column (with import/export mappings), escape and quote it.
+  </dd>
+    <dt>
+    <a href="../Dao/Dao.html#methodexportDate">Dao::exportDate()</a>
+  </dt>
+  <dd>
+    
+  </dd>
+    <dt>
+    <a href="../Dao/Dao.html#methodexportEnum">Dao::exportEnum()</a>
+  </dt>
+  <dd>
+    If the value is in the enum list, it calls exportString, and returns it.
+  </dd>
+    <dt>
+    <a href="../Dao/Dao.html#methodexportFloat">Dao::exportFloat()</a>
+  </dt>
+  <dd>
+    
+  </dd>
+    <dt>
+    <a href="../Dao/Dao.html#methodexportInteger">Dao::exportInteger()</a>
+  </dt>
+  <dd>
+    
+  </dd>
+    <dt>
+    <a href="../Dao/Dao.html#methodexportNull">Dao::exportNull()</a>
+  </dt>
+  <dd>
+    
+  </dd>
+    <dt>
+    <a href="../Dao/Dao.html#methodexportString">Dao::exportString()</a>
+  </dt>
+  <dd>
+    If your strings need quoting, do that in here.
+  </dd>
+    <dt>
+    <a href="../Dao/Dao.html#methodexportTable">Dao::exportTable()</a>
+  </dt>
+  <dd>
+    Escapes and quotes a table name.
+  </dd>
+    <dt>
+    <a href="../Dao/Dao.html#methodexportValue">Dao::exportValue()</a>
+  </dt>
+  <dd>
+    Exports a PHP value into a value understood by the Database
+  </dd>
+    <dt>
+    <a href="../Dao/Dao.html#methodgenerateInsertArrays">Dao::generateInsertArrays()</a>
+  </dt>
+  <dd>
+    Returns the arrays containing the columns, and values to perform an insert.
+  </dd>
+    <dt>
+    <a href="../Dao/Dao.html#methodgenerateSortString">Dao::generateSortString()</a>
+  </dt>
+  <dd>
+    Given the $sort parameter, it generates a sort String used in the query.
+  </dd>
+    <dt>
+    <a href="../Dao/Dao.html#methodgetAdditionalColumnTypes">Dao::getAdditionalColumnTypes()</a>
+  </dt>
+  <dd>
+    Returns the additional column types array
+  </dd>
+    <dt>
+    <a href="../Dao/Dao.html#methodgetAll">Dao::getAll()</a>
+  </dt>
+  <dd>
+    Returns all rows (but you can specify offset &amp;amp; limit)
+  </dd>
+    <dt>
+    <a href="../Dao/Dao.html#methodgetAllAsArrays">Dao::getAllAsArrays()</a>
+  </dt>
+  <dd>
+    
+  </dd>
+    <dt>
+    <a href="../Dao/Dao.html#methodgetById">Dao::getById()</a>
+  </dt>
+  <dd>
+    This is a wrapper for get() and the id as parameter.
+  </dd>
+    <dt>
+    <a href="../Dao/Dao.html#methodgetColumnTypes">Dao::getColumnTypes()</a>
+  </dt>
+  <dd>
+    Returns the column types array
+  </dd>
+    <dt>
+    <a href="../Dao/Dao.html#methodgetDefaultValueColumns">Dao::getDefaultValueColumns()</a>
+  </dt>
+  <dd>
+    Returns the default value columns
+  </dd>
+    <dt>
+    <a href="../Dao/Dao.html#methodgetNullColumns">Dao::getNullColumns()</a>
+  </dt>
+  <dd>
+    Returns the null columns
+  </dd>
+    <dt>
+    <a href="../Dao/Dao.html#methodgetObjectFromData">Dao::getObjectFromData()</a>
+  </dt>
+  <dd>
+    Prepares the data, and gets a new object.
+  </dd>
+    <dt>
+    <a href="../Dao/Dao.html#methodgetObjectFromPreparedData">Dao::getObjectFromPreparedData()</a>
+  </dt>
+  <dd>
+    Returns a data object with the data in it.
+  </dd>
+    <dt>
+    <a href="../Dao/Dao.html#methodgetRawObject">Dao::getRawObject()</a>
+  </dt>
+  <dd>
+    Returns an object with all columns defined, but only set if necessary.
+  </dd>
+    <dt>
+    <a href="../Dao/Dao.html#methodimportBool">Dao::importBool()</a>
+  </dt>
+  <dd>
+    This function tries to convert strings integers and stuff into a bool.
+  </dd>
+    <dt>
+    <a href="../Dao/Dao.html#methodimportColumn">Dao::importColumn()</a>
+  </dt>
+  <dd>
+    Converts the database column name to a valid php name.
+  </dd>
+    <dt>
+    <a href="../Dao/Dao.html#methodimportDate">Dao::importDate()</a>
+  </dt>
+  <dd>
+    Calls convertRemoteValueToTimestamp and returns a Date Object.
+  </dd>
+    <dt>
+    <a href="../Dao/Dao.html#methodimportEnum">Dao::importEnum()</a>
+  </dt>
+  <dd>
+    Checks if the value is present in the enum. Throws a DaoException if not.
+  </dd>
+    <dt>
+    <a href="../Dao/Dao.html#methodimportFloat">Dao::importFloat()</a>
+  </dt>
+  <dd>
+    Simple PHP conversion.
+  </dd>
+    <dt>
+    <a href="../Dao/Dao.html#methodimportInteger">Dao::importInteger()</a>
+  </dt>
+  <dd>
+    Simple PHP conversion.
+  </dd>
+    <dt>
+    <a href="../Dao/Dao.html#methodimportString">Dao::importString()</a>
+  </dt>
+  <dd>
+    Simple PHP conversion.
+  </dd>
+    <dt>
+    <a href="../Dao/Dao.html#methodimportValue">Dao::importValue()</a>
+  </dt>
+  <dd>
+    Imports an external value (either from database, or xml, etc...) into an expected PHP variable.
+  </dd>
+    <dt>
+    <a href="../Dao/Dao.html#methodinterpretSortVariable">Dao::interpretSortVariable()</a>
+  </dt>
+  <dd>
+    Tries to interpret a $sort parameter, which can be one of following:
+  </dd>
+    <dt>
+    <a href="../Dao/Dao.html#methodisVector">Dao::isVector()</a>
+  </dt>
+  <dd>
+    This is a helper class that defines if an array is a &quot;vector&quot; (has only integer indices starting from 0) or an associative array.
+  </dd>
+    <dt>
+    <a href="../Dao/Dao.html#methodlog">Dao::log()</a>
+  </dt>
+  <dd>
+    
+  </dd>
+    <dt>
+    <a href="../Dao/Dao.html#methodnotNull">Dao::notNull()</a>
+  </dt>
+  <dd>
+    Returns true if the column can not be null.
+  </dd>
+    <dt>
+    <a href="../Dao/Dao.html#methodprepareDataForObject">Dao::prepareDataForObject()</a>
+  </dt>
+  <dd>
+    Goes through the data array returned from the database, and converts the values that are necessary.
+  </dd>
+    <dt>
+    <a href="../Dao/Dao.html#methodsetLogger">Dao::setLogger()</a>
+  </dt>
+  <dd>
+    
+  </dd>
+    <dt>
+    <a href="../Dao/Dao.html#methodsetLoggerFactory">Dao::setLoggerFactory()</a>
+  </dt>
+  <dd>
+    
+  </dd>
+    <dt>
+    <a href="../Dao/Dao.html#methodupdateObjectWithData">Dao::updateObjectWithData()</a>
+  </dt>
+  <dd>
+    Prepares the data, and updates the object
+  </dd>
+    <dt>
+    <a href="../Dao/Dao.html#method__call">Dao::__call()</a>
+  </dt>
+  <dd>
+    Temporarly all getXXXIterator() calls get converted to getXXX().
+  </dd>
+  </dl>
+</div>
+</td>
+
+</tr></table>
+<hr />
+
+<a name="class_details"></a>
+<h3>Class Details</h3>
+<div class="tags">
+[line 31]<br />
+The MysqlUserDao implements the UserDaoInterface.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>author:</b>&nbsp;&nbsp;</td><td>Matthias Loitsch &lt;<a href="mailto:developer@ma.tthias.com">developer@ma.tthias.com</a>&gt;</td>
+  </tr>
+  <tr>
+    <td><b>copyright:</b>&nbsp;&nbsp;</td><td>Copyright (c) 2010, Matthias Loitsch</td>
+  </tr>
+</table>
+</div>
+</div><br /><br />
+<div class="top">[ <a href="#top">Top</a> ]</div><br />
 
 
+<hr />
+<a name="class_methods"></a>
+<h3>Class Methods</h3>
+<div class="tags">
 
+  <hr />
+	<a name="methodgetByUsername"></a>
+	<h3>method getByUsername <span class="smalllinenumber">[line 39]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code><a href="../Dao/DataObject/DataObject.html">DataObject</a> getByUsername(
+string
+$username)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Returns the user by username<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
 
-	<a name="sec-method-summary"></a>
-	<div class="info-box">
-		<div class="info-box-title">Method Summary</span></div>
-		<div class="nav-bar">
-			<a href="#sec-description">Description</a> |
-															<a href="#sec-consts">Constants</a>
-							
-															<a href="#sec-vars">Vars</a>
-				 
-				|
-						<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
-		</div>
-		<div class="info-box-body">			
-			<div class="method-summary">
-																																<div class="method-definition">
-					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result"><a href="../Dao/DataObject/DataObject.html">DataObject</a></span>
-										<a href="#getByUsername" title="details" class="method-name">getByUsername</a>
-											(<span class="var-type">string</span>&nbsp;<span class="var-name">$username</span>)
-									</div>
-																<div class="method-definition">
-					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result"><a href="../Dao/DataObject/DataObject.html">DataObject</a></span>
-										<a href="#getGuest" title="details" class="method-name">getGuest</a>
-										()
-									</div>
-											</div>
-		</div>
-	</div>		
-
-	<a name="sec-vars"></a>
-	<div class="info-box">
-		<div class="info-box-title">Variables</div>
-		<div class="nav-bar">
-			<a href="#sec-description">Description</a> |
-										<a href="#sec-var-summary">Vars</a> (<span class="disabled">details</span>)
-						
-			
-												<a href="#sec-consts">Constants</a>
-							
-										| 
-									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
-							
-					</div>
-		<div class="info-box-body">
-			
-							<h4>Inherited Variables</h4>
-				<A NAME='inherited_vars'><!-- --></A>
-									<p>Inherited from <span class="classname"><a href="../Dao/SqlDao.html">SqlDao</a></span></p>
-					<blockquote>
-													<img src="../media/images/Variable.png" />
-							<span class="var-title">
-								<span class="var-name"><a href="../Dao/SqlDao.html#var$db">SqlDao::$db</a></span><br>
-							</span>
-											</blockquote> 
-									<p>Inherited from <span class="classname"><a href="../Dao/Dao.html">Dao</a></span></p>
-					<blockquote>
-													<img src="../media/images/Variable.png" />
-							<span class="var-title">
-								<span class="var-name"><a href="../Dao/Dao.html#var$additionalColumnTypes">Dao::$additionalColumnTypes</a></span><br>
-							</span>
-													<img src="../media/images/Variable.png" />
-							<span class="var-title">
-								<span class="var-name"><a href="../Dao/Dao.html#var$columnExportMapping">Dao::$columnExportMapping</a></span><br>
-							</span>
-													<img src="../media/images/Variable.png" />
-							<span class="var-title">
-								<span class="var-name"><a href="../Dao/Dao.html#var$columnImportMapping">Dao::$columnImportMapping</a></span><br>
-							</span>
-													<img src="../media/images/Variable.png" />
-							<span class="var-title">
-								<span class="var-name"><a href="../Dao/Dao.html#var$columnTypes">Dao::$columnTypes</a></span><br>
-							</span>
-													<img src="../media/images/Variable.png" />
-							<span class="var-title">
-								<span class="var-name"><a href="../Dao/Dao.html#var$defaultSort">Dao::$defaultSort</a></span><br>
-							</span>
-													<img src="../media/images/Variable.png" />
-							<span class="var-title">
-								<span class="var-name"><a href="../Dao/Dao.html#var$defaultValueColumns">Dao::$defaultValueColumns</a></span><br>
-							</span>
-													<img src="../media/images/Variable.png" />
-							<span class="var-title">
-								<span class="var-name"><a href="../Dao/Dao.html#var$logger">Dao::$logger</a></span><br>
-							</span>
-													<img src="../media/images/Variable.png" />
-							<span class="var-title">
-								<span class="var-name"><a href="../Dao/Dao.html#var$nullColumns">Dao::$nullColumns</a></span><br>
-							</span>
-													<img src="../media/images/Variable.png" />
-							<span class="var-title">
-								<span class="var-name"><a href="../Dao/Dao.html#var$tableName">Dao::$tableName</a></span><br>
-							</span>
-													<img src="../media/images/Variable.png" />
-							<span class="var-title">
-								<span class="var-name"><a href="../Dao/Dao.html#var$viewName">Dao::$viewName</a></span><br>
-							</span>
-											</blockquote> 
-										
-		</div>
-	</div>
-	
-	<a name="sec-methods"></a>
-	<div class="info-box">
-		<div class="info-box-title">Methods</div>
-		<div class="nav-bar">
-			<a href="#sec-description">Description</a> |
-															<a href="#sec-vars">Vars</a>
-														<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
-						
-		</div>
-		<div class="info-box-body">
-			<A NAME='method_detail'></A>
-<a name="methodgetByUsername" id="getByUsername"><!-- --></a>
-<div class="evenrow">
-	
-	<div class="method-header">
-		<img src="../media/images/Method.png" />
-		<span class="method-title">getByUsername</span> (line <span class="line-number">39</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Returns the user by username</p>
-	<ul class="tags">
-				<li><span class="field">access:</span> public</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result"><a href="../Dao/DataObject/DataObject.html">DataObject</a></span>
-		<span class="method-name">
-			getByUsername
-		</span>
-					(<span class="var-type">string</span>&nbsp;<span class="var-name">$username</span>)
-			</div>
-	
-			<ul class="parameters">
-					<li>
-				<span class="var-type">string</span>
-				<span class="var-name">$username</span>			</li>
-				</ul>
-		
-				<hr class="separator" />
+			<hr class="separator" />
 		<div class="notes">Implementation of:</div>
 			<dl>
 			<dt><a href="../Dao/UserDaoInterface.html#methodgetByUsername">UserDaoInterface::getByUsername()</a></dt>
 						<dd>Return a user by login</dd>
 					</dl>
-			
-	</div>
-<a name="methodgetGuest" id="getGuest"><!-- --></a>
-<div class="oddrow">
-	
-	<div class="method-header">
-		<img src="../media/images/Method.png" />
-		<span class="method-title">getGuest</span> (line <span class="line-number">48</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Returns a raw object with 'guest' as username</p>
-	<ul class="tags">
-				<li><span class="field">access:</span> public</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result"><a href="../Dao/DataObject/DataObject.html">DataObject</a></span>
-		<span class="method-name">
-			getGuest
-		</span>
-				()
-			</div>
-	
 		
-				<hr class="separator" />
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">string&nbsp;&nbsp;</td>
+        <td><b>$username</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodgetGuest"></a>
+	<h3>method getGuest <span class="smalllinenumber">[line 48]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code><a href="../Dao/DataObject/DataObject.html">DataObject</a> getGuest(
+)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Returns a raw object with 'guest' as username<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+			<hr class="separator" />
 		<div class="notes">Implementation of:</div>
 			<dl>
 			<dt><a href="../Dao/UserDaoInterface.html#methodgetGuest">UserDaoInterface::getGuest()</a></dt>
 						<dd>Get a raw object with username 'guest'</dd>
 					</dl>
-			
-	</div>
-							<h4>Inherited Methods</h4>
-				<a name='inherited_methods'><!-- --></a>	
-									<!-- =========== Summary =========== -->
-					<p>Inherited From <span class="classname"><a href="../Dao/MysqlDao.html">MysqlDao</a></span></p>
-					<blockquote>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/MysqlDao.html#methodcreateIterator">MysqlDao::createIterator()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/MysqlDao.html#methodexportColumn">MysqlDao::exportColumn()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/MysqlDao.html#methodexportString">MysqlDao::exportString()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/MysqlDao.html#methodexportTable">MysqlDao::exportTable()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/MysqlDao.html#methodgetLastInsertId">MysqlDao::getLastInsertId()</a></span><br>
-											</blockquote>
-									<!-- =========== Summary =========== -->
-					<p>Inherited From <span class="classname"><a href="../Dao/SqlDao.html">SqlDao</a></span></p>
-					<blockquote>
-													<img src="../media/images/Constructor.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/SqlDao.html#method__construct">SqlDao::__construct()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/SqlDao.html#methodbeginTransaction">SqlDao::beginTransaction()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/SqlDao.html#methodcommit">SqlDao::commit()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/SqlDao.html#methodconvertRemoteValueToTimestamp">SqlDao::convertRemoteValueToTimestamp()</a></span><br>
-													<img src="../media/images/AbstractMethod.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/SqlDao.html#methodcreateIterator">SqlDao::createIterator()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/SqlDao.html#methoddelete">SqlDao::delete()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/SqlDao.html#methodescapeColumn">SqlDao::escapeColumn()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/SqlDao.html#methodescapeString">SqlDao::escapeString()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/SqlDao.html#methodescapeTable">SqlDao::escapeTable()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/SqlDao.html#methodexportDate">SqlDao::exportDate()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/SqlDao.html#methodgenerateQuery">SqlDao::generateQuery()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/SqlDao.html#methodgenerateSortString">SqlDao::generateSortString()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/SqlDao.html#methodget">SqlDao::get()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/SqlDao.html#methodgetData">SqlDao::getData()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/SqlDao.html#methodgetDb">SqlDao::getDb()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/SqlDao.html#methodgetFromQuery">SqlDao::getFromQuery()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/SqlDao.html#methodgetIterator">SqlDao::getIterator()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/SqlDao.html#methodgetIteratorFromQuery">SqlDao::getIteratorFromQuery()</a></span><br>
-													<img src="../media/images/AbstractMethod.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/SqlDao.html#methodgetLastInsertId">SqlDao::getLastInsertId()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/SqlDao.html#methodgetTotalCount">SqlDao::getTotalCount()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/SqlDao.html#methodinsert">SqlDao::insert()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/SqlDao.html#methodinsertByQuery">SqlDao::insertByQuery()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/SqlDao.html#methodrollback">SqlDao::rollback()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/SqlDao.html#methodupdate">SqlDao::update()</a></span><br>
-											</blockquote>
-									<!-- =========== Summary =========== -->
-					<p>Inherited From <span class="classname"><a href="../Dao/Dao.html">Dao</a></span></p>
-					<blockquote>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/Dao.html#methodafterDelete">Dao::afterDelete()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/Dao.html#methodafterInsert">Dao::afterInsert()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/Dao.html#methodafterUpdate">Dao::afterUpdate()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/Dao.html#methodapplyColumnExportMapping">Dao::applyColumnExportMapping()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/Dao.html#methodapplyColumnImportMapping">Dao::applyColumnImportMapping()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/Dao.html#methodcolumnExists">Dao::columnExists()</a></span><br>
-													<img src="../media/images/AbstractMethod.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/Dao.html#methodconvertRemoteValueToTimestamp">Dao::convertRemoteValueToTimestamp()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/Dao.html#methoddebug">Dao::debug()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/Dao.html#methoddeleteById">Dao::deleteById()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/Dao.html#methodexportBool">Dao::exportBool()</a></span><br>
-													<img src="../media/images/AbstractMethod.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/Dao.html#methodexportColumn">Dao::exportColumn()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/Dao.html#methodexportDate">Dao::exportDate()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/Dao.html#methodexportEnum">Dao::exportEnum()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/Dao.html#methodexportFloat">Dao::exportFloat()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/Dao.html#methodexportInteger">Dao::exportInteger()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/Dao.html#methodexportNull">Dao::exportNull()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/Dao.html#methodexportString">Dao::exportString()</a></span><br>
-													<img src="../media/images/AbstractMethod.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/Dao.html#methodexportTable">Dao::exportTable()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/Dao.html#methodexportValue">Dao::exportValue()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/Dao.html#methodgenerateInsertArrays">Dao::generateInsertArrays()</a></span><br>
-													<img src="../media/images/AbstractMethod.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/Dao.html#methodgenerateSortString">Dao::generateSortString()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/Dao.html#methodgetAdditionalColumnTypes">Dao::getAdditionalColumnTypes()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/Dao.html#methodgetAll">Dao::getAll()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/Dao.html#methodgetAllAsArrays">Dao::getAllAsArrays()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/Dao.html#methodgetById">Dao::getById()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/Dao.html#methodgetColumnTypes">Dao::getColumnTypes()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/Dao.html#methodgetDefaultValueColumns">Dao::getDefaultValueColumns()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/Dao.html#methodgetNullColumns">Dao::getNullColumns()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/Dao.html#methodgetObjectFromData">Dao::getObjectFromData()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/Dao.html#methodgetObjectFromPreparedData">Dao::getObjectFromPreparedData()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/Dao.html#methodgetRawObject">Dao::getRawObject()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/Dao.html#methodimportBool">Dao::importBool()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/Dao.html#methodimportColumn">Dao::importColumn()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/Dao.html#methodimportDate">Dao::importDate()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/Dao.html#methodimportEnum">Dao::importEnum()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/Dao.html#methodimportFloat">Dao::importFloat()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/Dao.html#methodimportInteger">Dao::importInteger()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/Dao.html#methodimportString">Dao::importString()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/Dao.html#methodimportValue">Dao::importValue()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/Dao.html#methodinterpretSortVariable">Dao::interpretSortVariable()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/Dao.html#methodisVector">Dao::isVector()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/Dao.html#methodlog">Dao::log()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/Dao.html#methodnotNull">Dao::notNull()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/Dao.html#methodprepareDataForObject">Dao::prepareDataForObject()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/Dao.html#methodsetLogger">Dao::setLogger()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/Dao.html#methodsetLoggerFactory">Dao::setLoggerFactory()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/Dao.html#methodupdateObjectWithData">Dao::updateObjectWithData()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/Dao.html#method__call">Dao::__call()</a></span><br>
-											</blockquote>
-										
-		</div>
-	</div>
+		
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+</div><br />
 
-	<a name="sec-consts"></a>
-	<div class="info-box">
-		<div class="info-box-title">Class Constants</div>
-		<div class="nav-bar">
-			<a href="#sec-description">Description</a> |
-										<a href="#sec-var-summary">Constants</a> (<span class="disabled">details</span>)
-						
-			
-												<a href="#sec-vars">Vars</a>
-														| 
-									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
-							
-					</div>
-		<div class="info-box-body">
-										<h4>Inherited Constants</h4>
-				<A NAME='inherited_consts'><!-- --></A>
-									<p>Inherited from <span class="classname"><a href="../Dao/Dao.html">Dao</a></span></p>
-					<blockquote>
-													<img src="../media/images/Variable.png" />
-							<span class="const-title">
-								<span class="const-name"><a href="../Dao/Dao.html#constASC">Dao::ASC</a></span><br>
-							</span>
-													<img src="../media/images/Variable.png" />
-							<span class="const-title">
-								<span class="const-name"><a href="../Dao/Dao.html#constBOOL">Dao::BOOL</a></span><br>
-							</span>
-													<img src="../media/images/Variable.png" />
-							<span class="const-title">
-								<span class="const-name"><a href="../Dao/Dao.html#constBOOLEAN">Dao::BOOLEAN</a></span><br>
-							</span>
-													<img src="../media/images/Variable.png" />
-							<span class="const-title">
-								<span class="const-name"><a href="../Dao/Dao.html#constDATE">Dao::DATE</a></span><br>
-							</span>
-													<img src="../media/images/Variable.png" />
-							<span class="const-title">
-								<span class="const-name"><a href="../Dao/Dao.html#constDATE_WITH_TIME">Dao::DATE_WITH_TIME</a></span><br>
-							</span>
-													<img src="../media/images/Variable.png" />
-							<span class="const-title">
-								<span class="const-name"><a href="../Dao/Dao.html#constDESC">Dao::DESC</a></span><br>
-							</span>
-													<img src="../media/images/Variable.png" />
-							<span class="const-title">
-								<span class="const-name"><a href="../Dao/Dao.html#constDO_NOT_EXPORT_VALUES">Dao::DO_NOT_EXPORT_VALUES</a></span><br>
-							</span>
-													<img src="../media/images/Variable.png" />
-							<span class="const-title">
-								<span class="const-name"><a href="../Dao/Dao.html#constFLOAT">Dao::FLOAT</a></span><br>
-							</span>
-													<img src="../media/images/Variable.png" />
-							<span class="const-title">
-								<span class="const-name"><a href="../Dao/Dao.html#constIGNORE">Dao::IGNORE</a></span><br>
-							</span>
-													<img src="../media/images/Variable.png" />
-							<span class="const-title">
-								<span class="const-name"><a href="../Dao/Dao.html#constINT">Dao::INT</a></span><br>
-							</span>
-													<img src="../media/images/Variable.png" />
-							<span class="const-title">
-								<span class="const-name"><a href="../Dao/Dao.html#constINTEGER">Dao::INTEGER</a></span><br>
-							</span>
-													<img src="../media/images/Variable.png" />
-							<span class="const-title">
-								<span class="const-name"><a href="../Dao/Dao.html#constSORT_ASCENDING">Dao::SORT_ASCENDING</a></span><br>
-							</span>
-													<img src="../media/images/Variable.png" />
-							<span class="const-title">
-								<span class="const-name"><a href="../Dao/Dao.html#constSORT_DESCENDING">Dao::SORT_DESCENDING</a></span><br>
-							</span>
-													<img src="../media/images/Variable.png" />
-							<span class="const-title">
-								<span class="const-name"><a href="../Dao/Dao.html#constSTRING">Dao::STRING</a></span><br>
-							</span>
-													<img src="../media/images/Variable.png" />
-							<span class="const-title">
-								<span class="const-name"><a href="../Dao/Dao.html#constTEXT">Dao::TEXT</a></span><br>
-							</span>
-													<img src="../media/images/Variable.png" />
-							<span class="const-title">
-								<span class="const-name"><a href="../Dao/Dao.html#constTIMESTAMP">Dao::TIMESTAMP</a></span><br>
-							</span>
-											</blockquote> 
-										
-		</div>
-	</div>
-	
-	<p class="notes" id="credit">
-		Documentation generated by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
-	</p>
-	</div></body>
+
+        <div class="credit">
+		    <hr />
+		    Documentation generated by <a href="http://www.phpdoc.org">phpDocumentor 1.4.3</a>
+	      </div>
+      </td></tr></table>
+    </td>
+  </tr>
+</table>
+
+</body>
 </html>

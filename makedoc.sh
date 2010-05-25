@@ -70,7 +70,7 @@ OUTPUTFORMAT=HTML
 #  *
 #  * @var               string CONVERTER
 #  */
-CONVERTER=frames
+CONVERTER=Smarty
 
 #/**
 #  * template to use
@@ -79,7 +79,7 @@ CONVERTER=frames
 #  *
 #  * @var               string TEMPLATE
 #  */
-TEMPLATE=earthli
+TEMPLATE=php
 
 #/**
 #  * parse elements marked as private

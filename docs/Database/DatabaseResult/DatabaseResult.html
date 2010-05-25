@@ -1,336 +1,380 @@
-<?xml version="1.0" encoding="iso-8859-1"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-  <html xmlns="http://www.w3.org/1999/xhtml">
-		<head>
-			<!-- template designed by Marco Von Ballmoos -->
-			<title>Docs For Class DatabaseResult</title>
-			<link rel="stylesheet" href="../../media/stylesheet.css" />
-			<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
-		</head>
-		<body>
-			<div class="page-body">			
-<h2 class="class-name"><img src="../../media/images/AbstractClass_logo.png"
-														alt="Abstract Class"
-														title="Abstract Class"
-														style="vertical-align: middle"> DatabaseResult</h2>
+<html>
+<head>
+<title>Docs For Class DatabaseResult</title>
+<link rel="stylesheet" type="text/css" href="../../media/style.css">
+</head>
+<body>
 
-<a name="sec-description"></a>
-<div class="info-box">
-	<div class="info-box-title">Description</div>
-	<div class="nav-bar">
-					<span class="disabled">Description</span> |
-							<a href="#sec-descendents">Descendents</a>
-			|											<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
-						|											<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
-						
-					</div>
-	<div class="info-box-body">
+<table border="0" cellspacing="0" cellpadding="0" height="48" width="100%">
+  <tr>
+    <td class="header_top">Database</td>
+  </tr>
+  <tr><td class="header_line"><img src="../../media/empty.png" width="1" height="1" border="0" alt=""  /></td></tr>
+  <tr>
+    <td class="header_menu">
+        
+                                                                                                
+                                                                                                                                  		  [ <a href="../../classtrees_Database.html" class="menu">class tree: Database</a> ]
+		  [ <a href="../../elementindex_Database.html" class="menu">index: Database</a> ]
+		  	    [ <a href="../../elementindex.html" class="menu">all elements</a> ]
+    </td>
+  </tr>
+  <tr><td class="header_line"><img src="../../media/empty.png" width="1" height="1" border="0" alt=""  /></td></tr>
+</table>
+
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="200" class="menu">
+	<div id="ric">
+					<p><a href="../../ric_README.html">README</a></p>
+			</div>
+      <b>Packages:</b><br />
+              <a href="../../li_php-library.html">php-library</a><br />
+              <a href="../../li_Config.html">Config</a><br />
+              <a href="../../li_Dao.html">Dao</a><br />
+              <a href="../../li_Database.html">Database</a><br />
+              <a href="../../li_DataSource.html">DataSource</a><br />
+              <a href="../../li_Date.html">Date</a><br />
+              <a href="../../li_File.html">File</a><br />
+              <a href="../../li_Logger.html">Logger</a><br />
+              <a href="../../li_Storage.html">Storage</a><br />
+            <br /><br />
+                        <b>Files:</b><br />
+      	  <div class="package">
+			<a href="../../Database/_Database---Database.php.html">		Database.php
+		</a><br>
+			<a href="../../Database/_Database---DatabaseInterface.php.html">		DatabaseInterface.php
+		</a><br>
+			<a href="../../Database/_Database---Mysql.php.html">		Mysql.php
+		</a><br>
+			<a href="../../Database/_Database---Postgresql.php.html">		Postgresql.php
+		</a><br>
+	  </div><br />
+	subpackage <b>DatabaseResult</b><br>  <div class="package">
+			<a href="../../Database/DatabaseResult/_DatabaseResult---DatabaseResult.php.html">		DatabaseResult.php
+		</a><br>
+			<a href="../../Database/DatabaseResult/_DatabaseResult---DatabaseResultInterface.php.html">		DatabaseResultInterface.php
+		</a><br>
+			<a href="../../Database/DatabaseResult/_DatabaseResult---MysqlResult.php.html">		MysqlResult.php
+		</a><br>
+			<a href="../../Database/DatabaseResult/_DatabaseResult---PostgresqlResult.php.html">		PostgresqlResult.php
+		</a><br>
+	  </div><br />
+	subpackage <b>Exceptions</b><br>  <div class="package">
+			<a href="../../Database/Exceptions/_Database---DatabaseExceptions.php.html">		DatabaseExceptions.php
+		</a><br>
+	  </div><br />
+      
+            <b>Interfaces:</b><br />
+        <div class="package">
+		    		<a href="../../Database/DatabaseInterface.html">DatabaseInterface</a><br />
+	  </div>
+  <div class="package">
+	DatabaseResult<br />	    &nbsp;&nbsp;		<a href="../../Database/DatabaseResult/DatabaseResultInterface.html">DatabaseResultInterface</a><br />
+	  </div>
+      
+            <b>Classes:</b><br />
+        <div class="package">
+		    		<a href="../../Database/Database.html">Database</a><br />
+	    		<a href="../../Database/Mysql.html">Mysql</a><br />
+	  </div>
+  <div class="package">
+	Exceptions<br />	    &nbsp;&nbsp;		<a href="../../Database/Exceptions/SqlConnectionException.html">SqlConnectionException</a><br />
+	    &nbsp;&nbsp;		<a href="../../Database/Exceptions/SqlException.html">SqlException</a><br />
+	    &nbsp;&nbsp;		<a href="../../Database/Exceptions/SqlQueryException.html">SqlQueryException</a><br />
+	  </div>
+  <div class="package">
+	DatabaseResult<br />	    &nbsp;&nbsp;		<a href="../../Database/DatabaseResult/DatabaseResult.html">DatabaseResult</a><br />
+	    &nbsp;&nbsp;		<a href="../../Database/DatabaseResult/MysqlResult.html">MysqlResult</a><br />
+	  </div>
+                </td>
+    <td>
+      <table cellpadding="10" cellspacing="0" width="100%" border="0"><tr><td valign="top">
+
+<h1>Class: DatabaseResult</h1>
+Source Location: /DatabaseResult/DatabaseResult.php<br /><br />
+
+
+<table width="100%" border="0">
+<tr><td valign="top">
+
+<h3><a href="#class_details">Class Overview</a></h3>
+<pre></pre><br />
+<div class="description">If you implement a DatabaseResult (eg: for mysql) extend this class.</div><br /><br />
+<h4>Author(s):</h4>
+<ul>
+          <li>Matthias Loitsch &lt;<a href="mailto:developer@ma.tthias.com">developer@ma.tthias.com</a>&gt;</li>
+                  </ul>
+
+
+
+
+          
+      
+
+<h4>Copyright:</h4>
+<ul>
+  <li>Copyright (c) 2010, Matthias Loitsch</li>
+</ul>
                 <p class="implements">
             Implements interfaces:
             <ul>
                 <li><a href="../../Database/DatabaseResult/DatabaseResultInterface.html">DatabaseResultInterface</a></li>            </ul>
         </p>
-        		<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">If you implement a DatabaseResult (eg: for mysql) extend this class.</p>
-	<ul class="tags">
-				<li><span class="field">author:</span> Matthias Loitsch &lt;<a href="mailto:developer@ma.tthias.com">developer@ma.tthias.com</a>&gt;</li>
-				<li><span class="field">copyright:</span> Copyright (c) 2010, Matthias Loitsch</li>
-				<li><span class="field">abstract:</span> </li>
-			</ul>
-		<p class="notes">
-			Located in <a class="field" href="_DatabaseResult---DatabaseResult.php.html">/DatabaseResult/DatabaseResult.php</a> (line <span class="field">27</span>)
-		</p>
-		
-				
-		<pre></pre>
-	
-			</div>
+        
+</td>
+
+<td valign="top">
+<h3><a href="#class_vars">Variables</a></h3>
+<ul>
+    <li><a href="../../Database/DatabaseResult/DatabaseResult.html#var$result">$result</a></li>
+  </ul>
+</td>
+
+
+<td valign="top">
+<h3><a href="#class_methods">Methods</a></h3>
+<ul>
+    <li><a href="../../Database/DatabaseResult/DatabaseResult.html#method__construct">__construct</a></li>
+    <li><a href="../../Database/DatabaseResult/DatabaseResult.html#methodfetch">fetch</a></li>
+    <li><a href="../../Database/DatabaseResult/DatabaseResult.html#methodgetResult">getResult</a></li>
+    <li><a href="../../Database/DatabaseResult/DatabaseResult.html#methodreset">reset</a></li>
+  </ul>
+</td>
+
+</tr></table>
+<hr />
+
+<table width="100%" border="0"><tr>
+
+
+<td valign="top">
+<h3>Child classes:</h3>
+<div class="tags">
+<dl>
+<dt><a href="../../Database/DatabaseResult/MysqlResult.html">MysqlResult</a></dt>
+	<dd>The Mysql DatabaseResult implementation.</dd>
+</dl>
+</div>
+</td>
+
+
+
+
+</tr></table>
+<hr />
+
+<a name="class_details"></a>
+<h3>Class Details</h3>
+<div class="tags">
+[line 27]<br />
+If you implement a DatabaseResult (eg: for mysql) extend this class.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>author:</b>&nbsp;&nbsp;</td><td>Matthias Loitsch &lt;<a href="mailto:developer@ma.tthias.com">developer@ma.tthias.com</a>&gt;</td>
+  </tr>
+  <tr>
+    <td><b>copyright:</b>&nbsp;&nbsp;</td><td>Copyright (c) 2010, Matthias Loitsch</td>
+  </tr>
+  <tr>
+    <td><b>abstract:</b>&nbsp;&nbsp;</td><td></td>
+  </tr>
+</table>
+</div>
+</div><br /><br />
+<div class="top">[ <a href="#top">Top</a> ]</div><br />
+
+<hr />
+<a name="class_vars"></a>
+<h3>Class Variables</h3>
+<div class="tags">
+	<a name="var$result"></a>
+	<p></p>
+	<h4>$result = <span class="value">&nbsp;false</span></h4>
+	<p>[line 32]</p>
+  <br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>var:</b>&nbsp;&nbsp;</td><td>The result from the query (eg: pg_query)</td>
+  </tr>
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
+  </tr>
+</table>
 </div>
 
-	<a name="sec-descendents"></a>
-	<div class="info-box">
-		<div class="info-box-title">Direct descendents</div>
-		<div class="nav-bar">
-			<a href="#sec-description">Description</a> |
-			<span class="disabled">Descendents</span>
-			|												<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
-								|															<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
-							
-								</div>
-		<div class="info-box-body">
-			<table cellpadding="2" cellspacing="0" class="class-table">
-				<tr>
-					<th class="class-table-header">Class</th>
-					<th class="class-table-header">Description</th>
-				</tr>
-								<tr>
-					<td style="padding-right: 2em; white-space: nowrap">
-						<img src="../../media/images/Class.png"
-								 alt=" class"
-								 title=" class"
-								 style="vertical-align: center"/>
-						<a href="../../Database/DatabaseResult/MysqlResult.html">MysqlResult</a>
-					</td>
-					<td>
-											The Mysql DatabaseResult implementation.
-										</td>
-				</tr>
-							</table>
-		</div>
-	</div>
+  <br />
+	<div class="tags">
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td><b>Type:</b>&nbsp;&nbsp;</td>
+      <td>mixed</td>
+    </tr>
+      </table>
+	</div><br /><br />
+	<div class="top">[ <a href="#top">Top</a> ]</div><br />
+</div><br />
 
+<hr />
+<a name="class_methods"></a>
+<h3>Class Methods</h3>
+<div class="tags">
 
-	<a name="sec-var-summary"></a>
-	<div class="info-box">
-		<div class="info-box-title">Variable Summary</span></div>
-		<div class="nav-bar">
-			<a href="#sec-description">Description</a> |
-							<a href="#sec-descendents">Descendants</a> |
-						<span class="disabled">Vars</span> (<a href="#sec-vars">details</a>)
-							| 
-									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
-							
-								</div>
-		<div class="info-box-body">
-			<div class="var-summary">
-																								<div class="var-title">
-					<img src="../../media/images/Variable.png" alt=" " />
-					<span class="var-type">mixed</span>
-					<a href="#$result" title="details" class="var-name">$result</a>
-				</div>
-											</div>
-		</div>
-	</div>
-
-	<a name="sec-method-summary"></a>
-	<div class="info-box">
-		<div class="info-box-title">Method Summary</span></div>
-		<div class="nav-bar">
-			<a href="#sec-description">Description</a> |
-							<a href="#sec-descendents">Descendants</a> |
-																		<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
-				 
-				|
-						<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
-		</div>
-		<div class="info-box-body">			
-			<div class="method-summary">
-																																																<div class="method-definition">
-					<img src="../../media/images/Constructor.png" alt=" "/>
-											<span class="method-result">DatabaseResult</span>
-										<a href="#__construct" title="details" class="method-name">__construct</a>
-											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$result</span>)
-									</div>
-																<div class="method-definition">
-					<img src="../../media/images/Method.png" alt=" "/>
-											<span class="method-result">void</span>
-										<a href="#fetch" title="details" class="method-name">fetch</a>
-											([<span class="var-type">string</span>&nbsp;<span class="var-name">$field</span> = <span class="var-default">null</span>])
-									</div>
-																<div class="method-definition">
-					<img src="../../media/images/Method.png" alt=" "/>
-											<span class="method-result">result</span>
-										<a href="#getResult" title="details" class="method-name">getResult</a>
-										()
-									</div>
-																<div class="method-definition">
-					<img src="../../media/images/Method.png" alt=" "/>
-											<span class="method-result">void</span>
-										<a href="#reset" title="details" class="method-name">reset</a>
-										()
-									</div>
-											</div>
-		</div>
-	</div>		
-
-	<a name="sec-vars"></a>
-	<div class="info-box">
-		<div class="info-box-title">Variables</div>
-		<div class="nav-bar">
-			<a href="#sec-description">Description</a> |
-							<a href="#sec-descendents">Descendents</a> |
-										<a href="#sec-var-summary">Vars</a> (<span class="disabled">details</span>)
-						
-			
-										| 
-									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
-							
-					</div>
-		<div class="info-box-body">
-			
-<a name="var$result" id="$result"><!-- --></A>
-<div class="evenrow">
-
-	<div class="var-header">
-		<img src="../../media/images/Variable.png" />
-		<span class="var-title">
-			<span class="var-type">mixed</span>
-			<span class="var-name">$result</span>
-			 = <span class="var-default"> false</span>			(line <span class="line-number">32</span>)
-		</span>
-	</div>
-
-	<!-- ========== Info from phpDoc block ========= -->
-	<ul class="tags">
-				<li><span class="field">var:</span> The result from the query (eg: pg_query)</li>
-				<li><span class="field">access:</span> protected</li>
-			</ul>
+  <hr />
+	<a name="method__construct"></a>
+	<h3>constructor __construct <span class="smalllinenumber">[line 39]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>DatabaseResult __construct(
+mixed
+$result)</code>
+    </td></tr></table>
+    </td></tr></table><br />
 	
-	
-		
-		
-
+		The php result from a query is passed in the constructor<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
 </div>
-						
-		</div>
-	</div>
+<br /><br />
+
 	
-	<a name="sec-methods"></a>
-	<div class="info-box">
-		<div class="info-box-title">Methods</div>
-		<div class="nav-bar">
-			<a href="#sec-description">Description</a> |
-							<a href="#sec-descendents">Descendents</a> |
-															<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
-														<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
-						
-		</div>
-		<div class="info-box-body">
-			<A NAME='method_detail'></A>
-<a name="method__construct" id="__construct"><!-- --></a>
-<div class="oddrow">
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">mixed&nbsp;&nbsp;</td>
+        <td><b>$result</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodfetch"></a>
+	<h3>method fetch <span class="smalllinenumber">[line 57]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void fetch(
+[string
+$field = null])</code>
+    </td></tr></table>
+    </td></tr></table><br />
 	
-	<div class="method-header">
-		<img src="../../media/images/Constructor.png" />
-		<span class="method-title">Constructor __construct</span> (line <span class="line-number">39</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">The php result from a query is passed in the constructor</p>
-	<ul class="tags">
-				<li><span class="field">access:</span> public</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result">DatabaseResult</span>
-		<span class="method-name">
-			__construct
-		</span>
-					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$result</span>)
-			</div>
-	
-			<ul class="parameters">
-					<li>
-				<span class="var-type">mixed</span>
-				<span class="var-name">$result</span>			</li>
-				</ul>
-		
-			
-	</div>
-<a name="methodfetch" id="fetch"><!-- --></a>
-<div class="evenrow">
-	
-	<div class="method-header">
-		<img src="../../media/images/Method.png" />
-		<span class="method-title">fetch</span> (line <span class="line-number">57</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">This is a shortcut for fetchArray or fetchResult.</p>
-	<ul class="tags">
-				<li><span class="field">access:</span> public</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result">void</span>
-		<span class="method-name">
-			fetch
-		</span>
-					([<span class="var-type">string</span>&nbsp;<span class="var-name">$field</span> = <span class="var-default">null</span>])
-			</div>
-	
-			<ul class="parameters">
-					<li>
-				<span class="var-type">string</span>
-				<span class="var-name">$field</span><span class="var-description">: If null, fetchArray is called, if passed fetchResult.</span>			</li>
-				</ul>
-		
-				<hr class="separator" />
+		This is a shortcut for fetchArray or fetchResult.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+			<hr class="separator" />
 		<div class="notes">Implementation of:</div>
 			<dl>
 			<dt><a href="../../Database/DatabaseResult/DatabaseResultInterface.html#methodfetch">DatabaseResultInterface::fetch()</a></dt>
 						<dd>If $field is given, fetchResult is used.</dd>
 					</dl>
-			
-	</div>
-<a name="methodgetResult" id="getResult"><!-- --></a>
-<div class="oddrow">
-	
-	<div class="method-header">
-		<img src="../../media/images/Method.png" />
-		<span class="method-title">getResult</span> (line <span class="line-number">47</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-	<ul class="tags">
-				<li><span class="field">access:</span> public</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result">result</span>
-		<span class="method-name">
-			getResult
-		</span>
-				()
-			</div>
-	
 		
-				<hr class="separator" />
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">string&nbsp;&nbsp;</td>
+        <td><b>$field</b>&nbsp;&nbsp;</td>
+        <td>If null, fetchArray is called, if passed fetchResult.</td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodgetResult"></a>
+	<h3>method getResult <span class="smalllinenumber">[line 47]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>result getResult(
+)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		<br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+			<hr class="separator" />
 		<div class="notes">Implementation of:</div>
 			<dl>
 			<dt><a href="../../Database/DatabaseResult/DatabaseResultInterface.html#methodgetResult">DatabaseResultInterface::getResult()</a></dt>
 						<dd>Returns the result stored from the actual php command.</dd>
 					</dl>
-			
-	</div>
-<a name="methodreset" id="reset"><!-- --></a>
-<div class="evenrow">
-	
-	<div class="method-header">
-		<img src="../../media/images/Method.png" />
-		<span class="method-title">reset</span> (line <span class="line-number">64</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Sets the internal row pointer to row 0</p>
-	<ul class="tags">
-				<li><span class="field">access:</span> public</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result">void</span>
-		<span class="method-name">
-			reset
-		</span>
-				()
-			</div>
-	
 		
-				<hr class="separator" />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodreset"></a>
+	<h3>method reset <span class="smalllinenumber">[line 64]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void reset(
+)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Sets the internal row pointer to row 0<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+			<hr class="separator" />
 		<div class="notes">Implementation of:</div>
 			<dl>
 			<dt><a href="../../Database/DatabaseResult/DatabaseResultInterface.html#methodreset">DatabaseResultInterface::reset()</a></dt>
 						<dd>Resets the pointer to 0</dd>
 					</dl>
-			
-	</div>
-						
-		</div>
-	</div>
+		
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+</div><br />
 
-	
-	<p class="notes" id="credit">
-		Documentation generated by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
-	</p>
-	</div></body>
+
+        <div class="credit">
+		    <hr />
+		    Documentation generated by <a href="http://www.phpdoc.org">phpDocumentor 1.4.3</a>
+	      </div>
+      </td></tr></table>
+    </td>
+  </tr>
+</table>
+
+</body>
 </html>

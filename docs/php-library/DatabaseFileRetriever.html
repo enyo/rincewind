@@ -1,286 +1,385 @@
-<?xml version="1.0" encoding="iso-8859-1"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-  <html xmlns="http://www.w3.org/1999/xhtml">
-		<head>
-			<!-- template designed by Marco Von Ballmoos -->
-			<title>Docs For Class DatabaseFileRetriever</title>
-			<link rel="stylesheet" href="../media/stylesheet.css" />
-			<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
-		</head>
-		<body>
-			<div class="page-body">			
-<h2 class="class-name"><img src="../media/images/Class_logo.png"
-														alt=" Class"
-														title=" Class"
-														style="vertical-align: middle"> DatabaseFileRetriever</h2>
+<html>
+<head>
+<title>Docs For Class DatabaseFileRetriever</title>
+<link rel="stylesheet" type="text/css" href="../media/style.css">
+</head>
+<body>
 
-<a name="sec-description"></a>
-<div class="info-box">
-	<div class="info-box-title">Description</div>
-	<div class="nav-bar">
-					<span class="disabled">Description</span> |
-													<a href="#sec-vars">Vars</a>
-						|											<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
-						
-					</div>
-	<div class="info-box-body">
-        		<!-- ========== Info from phpDoc block ========= -->
-	<ul class="tags">
-				<li><span class="field">author:</span> Matthias Loitsch &lt;<a href="mailto:develop@matthias.loitsch.com">develop@matthias.loitsch.com</a>&gt;</li>
-				<li><span class="field">copyright:</span> <p>Copyright (c) 2009, Matthias Loitsch</p><p>The DatabaseFileRetriever is a SignedFileRetriever, with a view additional functions, to  handle typical insert/update/delete and select commands.  The form in which the data is returned (XML, JSON, plain text) has nothing to do with  the retriever, and should be handled by the Dao.</p></li>
-			</ul>
-		<p class="notes">
-			Located in <a class="field" href="_FileRetriever_DEPRECATED---DatabaseFileRetriever.php.html">/FileRetriever_DEPRECATED/DatabaseFileRetriever.php</a> (line <span class="field">15</span>)
-		</p>
-		
-				
-		<pre>FileRetriever
+<table border="0" cellspacing="0" cellpadding="0" height="48" width="100%">
+  <tr>
+    <td class="header_top">php-library</td>
+  </tr>
+  <tr><td class="header_line"><img src="../media/empty.png" width="1" height="1" border="0" alt=""  /></td></tr>
+  <tr>
+    <td class="header_menu">
+        
+                                    
+                                                                                                                                                                                              		  [ <a href="../classtrees_php-library.html" class="menu">class tree: php-library</a> ]
+		  [ <a href="../elementindex_php-library.html" class="menu">index: php-library</a> ]
+		  	    [ <a href="../elementindex.html" class="menu">all elements</a> ]
+    </td>
+  </tr>
+  <tr><td class="header_line"><img src="../media/empty.png" width="1" height="1" border="0" alt=""  /></td></tr>
+</table>
+
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="200" class="menu">
+	<div id="ric">
+					<p><a href="../ric_README.html">README</a></p>
+			</div>
+      <b>Packages:</b><br />
+              <a href="../li_php-library.html">php-library</a><br />
+              <a href="../li_Config.html">Config</a><br />
+              <a href="../li_Dao.html">Dao</a><br />
+              <a href="../li_Database.html">Database</a><br />
+              <a href="../li_DataSource.html">DataSource</a><br />
+              <a href="../li_Date.html">Date</a><br />
+              <a href="../li_File.html">File</a><br />
+              <a href="../li_Logger.html">Logger</a><br />
+              <a href="../li_Storage.html">Storage</a><br />
+            <br /><br />
+                        <b>Files:</b><br />
+      	  <div class="package">
+			<a href="../php-library/_FileRetriever_DEPRECATED---DatabaseFileRetriever.php.html">		DatabaseFileRetriever.php
+		</a><br>
+			<a href="../php-library/_FileRetriever_DEPRECATED---FileRetriever.php.html">		FileRetriever.php
+		</a><br>
+			<a href="../php-library/_FileRetriever_DEPRECATED---FileRetrieverInterface.php.html">		FileRetrieverInterface.php
+		</a><br>
+			<a href="../php-library/_FileRetriever_DEPRECATED---SignedFileRetriever.php.html">		SignedFileRetriever.php
+		</a><br>
+	  </div><br />
+      
+            <b>Interfaces:</b><br />
+        <div class="package">
+		    		<a href="../php-library/FileRetrieverInterface.html">FileRetrieverInterface</a><br />
+	  </div>
+      
+            <b>Classes:</b><br />
+        <div class="package">
+		    		<a href="../php-library/DatabaseFileRetriever.html">DatabaseFileRetriever</a><br />
+	    		<a href="../php-library/FileRetriever.html">FileRetriever</a><br />
+	    		<a href="../php-library/FileRetrieverException.html">FileRetrieverException</a><br />
+	    		<a href="../php-library/SignedFileRetriever.html">SignedFileRetriever</a><br />
+	  </div>
+                </td>
+    <td>
+      <table cellpadding="10" cellspacing="0" width="100%" border="0"><tr><td valign="top">
+
+<h1>Class: DatabaseFileRetriever</h1>
+Source Location: /FileRetriever_DEPRECATED/DatabaseFileRetriever.php<br /><br />
+
+
+<table width="100%" border="0">
+<tr><td valign="top">
+
+<h3><a href="#class_details">Class Overview</a></h3>
+<pre>FileRetriever
    |
    --<a href="../php-library/SignedFileRetriever.html">SignedFileRetriever</a>
       |
-      --DatabaseFileRetriever</pre>
-	
-			</div>
+      --DatabaseFileRetriever</pre><br />
+<div class="description"></div><br /><br />
+<h4>Author(s):</h4>
+<ul>
+          <li>Matthias Loitsch &lt;<a href="mailto:develop@matthias.loitsch.com">develop@matthias.loitsch.com</a>&gt;</li>
+            </ul>
+
+
+
+
+          
+  
+
+<h4>Copyright:</h4>
+<ul>
+  <li><p>Copyright (c) 2009, Matthias Loitsch</p><p>The DatabaseFileRetriever is a SignedFileRetriever, with a view additional functions, to  handle typical insert/update/delete and select commands.  The form in which the data is returned (XML, JSON, plain text) has nothing to do with  the retriever, and should be handled by the Dao.</p></li>
+</ul>
+        
+</td>
+
+
+
+<td valign="top">
+<h3><a href="#class_methods">Methods</a></h3>
+<ul>
+    <li><a href="../php-library/DatabaseFileRetriever.html#methoddelete">delete</a></li>
+    <li><a href="../php-library/DatabaseFileRetriever.html#methodinsert">insert</a></li>
+    <li><a href="../php-library/DatabaseFileRetriever.html#methodselect">select</a></li>
+    <li><a href="../php-library/DatabaseFileRetriever.html#methodupdate">update</a></li>
+  </ul>
+</td>
+
+</tr></table>
+<hr />
+
+<table width="100%" border="0"><tr>
+
+
+
+
+<td valign="top">
+<h3>Inherited Variables</h3>
+<div class="tags">
+<h4>Class: <a href="../php-library/SignedFileRetriever.html">SignedFileRetriever</a></h4>
+<dl>
+<dt>
+  <a href="../php-library/SignedFileRetriever.html#var$seed">SignedFileRetriever::$seed</a>
+  </dt>
+<dd>
+   
+</dd>
+</dl>
 </div>
+</td>
+
+<td valign="top">
+<h3>Inherited Methods</h3>
+<div class="tags">
+<h4>Class: <a href="../php-library/SignedFileRetriever.html">SignedFileRetriever</a></h4>
+<dl>
+    <dt>
+    <a href="../php-library/SignedFileRetriever.html#methodgenerateVariableString">SignedFileRetriever::generateVariableString()</a>
+  </dt>
+  <dd>
+    This function signs the data.
+  </dd>
+    <dt>
+    <a href="../php-library/SignedFileRetriever.html#methodsetSeed">SignedFileRetriever::setSeed()</a>
+  </dt>
+  <dd>
+    Sets the seed. This is necessary! If you don't seed the seed, the FileRetriever will fail.
+  </dd>
+  </dl>
+</div>
+</td>
+
+</tr></table>
+<hr />
+
+<a name="class_details"></a>
+<h3>Class Details</h3>
+<div class="tags">
+[line 15]<br />
+<br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>author:</b>&nbsp;&nbsp;</td><td>Matthias Loitsch &lt;<a href="mailto:develop@matthias.loitsch.com">develop@matthias.loitsch.com</a>&gt;</td>
+  </tr>
+  <tr>
+    <td><b>copyright:</b>&nbsp;&nbsp;</td><td><p>Copyright (c) 2009, Matthias Loitsch</p><p>The DatabaseFileRetriever is a SignedFileRetriever, with a view additional functions, to  handle typical insert/update/delete and select commands.  The form in which the data is returned (XML, JSON, plain text) has nothing to do with  the retriever, and should be handled by the Dao.</p></td>
+  </tr>
+</table>
+</div>
+</div><br /><br />
+<div class="top">[ <a href="#top">Top</a> ]</div><br />
 
 
+<hr />
+<a name="class_methods"></a>
+<h3>Class Methods</h3>
+<div class="tags">
 
+  <hr />
+	<a name="methoddelete"></a>
+	<h3>method delete <span class="smalllinenumber">[line 54]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void delete(
 
-	<a name="sec-method-summary"></a>
-	<div class="info-box">
-		<div class="info-box-title">Method Summary</span></div>
-		<div class="nav-bar">
-			<a href="#sec-description">Description</a> |
-																		<a href="#sec-vars">Vars</a>
-				 
-				|
-						<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
-		</div>
-		<div class="info-box-body">			
-			<div class="method-summary">
-																																																<div class="method-definition">
-					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result">void</span>
-										<a href="#delete" title="details" class="method-name">delete</a>
-											(<span class="var-type"></span>&nbsp;<span class="var-name">$table</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$values</span>)
-									</div>
-																<div class="method-definition">
-					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result">void</span>
-										<a href="#insert" title="details" class="method-name">insert</a>
-											(<span class="var-type"></span>&nbsp;<span class="var-name">$table</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$values</span>)
-									</div>
-																<div class="method-definition">
-					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result">void</span>
-										<a href="#select" title="details" class="method-name">select</a>
-											(<span class="var-type">string</span>&nbsp;<span class="var-name">$table</span>, <span class="var-type">array</span>&nbsp;<span class="var-name">$values</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$sort</span> = <span class="var-default">array()</span>], [<span class="var-type">int</span>&nbsp;<span class="var-name">$offset</span> = <span class="var-default">0</span>], [<span class="var-type">int</span>&nbsp;<span class="var-name">$limit</span> = <span class="var-default">0</span>])
-									</div>
-																<div class="method-definition">
-					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result">void</span>
-										<a href="#update" title="details" class="method-name">update</a>
-											(<span class="var-type"></span>&nbsp;<span class="var-name">$table</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$values</span>)
-									</div>
-											</div>
-		</div>
-	</div>		
-
-	<a name="sec-vars"></a>
-	<div class="info-box">
-		<div class="info-box-title">Variables</div>
-		<div class="nav-bar">
-			<a href="#sec-description">Description</a> |
-										<a href="#sec-var-summary">Vars</a> (<span class="disabled">details</span>)
-						
-			
-										| 
-									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
-							
-					</div>
-		<div class="info-box-body">
-			
-							<h4>Inherited Variables</h4>
-				<A NAME='inherited_vars'><!-- --></A>
-									<p>Inherited from <span class="classname"><a href="../php-library/SignedFileRetriever.html">SignedFileRetriever</a></span></p>
-					<blockquote>
-													<img src="../media/images/Variable.png" />
-							<span class="var-title">
-								<span class="var-name"><a href="../php-library/SignedFileRetriever.html#var$seed">SignedFileRetriever::$seed</a></span><br>
-							</span>
-											</blockquote> 
-										
-		</div>
-	</div>
+$table, 
+$values)</code>
+    </td></tr></table>
+    </td></tr></table><br />
 	
-	<a name="sec-methods"></a>
-	<div class="info-box">
-		<div class="info-box-title">Methods</div>
-		<div class="nav-bar">
-			<a href="#sec-description">Description</a> |
-															<a href="#sec-vars">Vars</a>
-														<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
-						
-		</div>
-		<div class="info-box-body">
-			<A NAME='method_detail'></A>
-<a name="methoddelete" id="delete"><!-- --></a>
-<div class="oddrow">
-	
-	<div class="method-header">
-		<img src="../media/images/Method.png" />
-		<span class="method-title">delete</span> (line <span class="line-number">54</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">See select()</p>
-	<ul class="tags">
-				<li><span class="field">access:</span> public</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result">void</span>
-		<span class="method-name">
-			delete
-		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$table</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$values</span>)
-			</div>
-	
-			<ul class="parameters">
-					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$table</span>			</li>
-					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$values</span>			</li>
-				</ul>
-		
-			
-	</div>
-<a name="methodinsert" id="insert"><!-- --></a>
-<div class="evenrow">
-	
-	<div class="method-header">
-		<img src="../media/images/Method.png" />
-		<span class="method-title">insert</span> (line <span class="line-number">33</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">See select()</p>
-	<ul class="tags">
-				<li><span class="field">access:</span> public</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result">void</span>
-		<span class="method-name">
-			insert
-		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$table</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$values</span>)
-			</div>
-	
-			<ul class="parameters">
-					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$table</span>			</li>
-					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$values</span>			</li>
-				</ul>
-		
-			
-	</div>
-<a name="methodselect" id="select"><!-- --></a>
-<div class="oddrow">
-	
-	<div class="method-header">
-		<img src="../media/images/Method.png" />
-		<span class="method-title">select</span> (line <span class="line-number">24</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-	<ul class="tags">
-				<li><span class="field">access:</span> public</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result">void</span>
-		<span class="method-name">
-			select
-		</span>
-					(<span class="var-type">string</span>&nbsp;<span class="var-name">$table</span>, <span class="var-type">array</span>&nbsp;<span class="var-name">$values</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$sort</span> = <span class="var-default">array()</span>], [<span class="var-type">int</span>&nbsp;<span class="var-name">$offset</span> = <span class="var-default">0</span>], [<span class="var-type">int</span>&nbsp;<span class="var-name">$limit</span> = <span class="var-default">0</span>])
-			</div>
-	
-			<ul class="parameters">
-					<li>
-				<span class="var-type">string</span>
-				<span class="var-name">$table</span><span class="var-description">: The table name</span>			</li>
-					<li>
-				<span class="var-type">array</span>
-				<span class="var-name">$values</span><span class="var-description">: An associative array containing the values to create the select query</span>			</li>
-					<li>
-				<span class="var-type">int</span>
-				<span class="var-name">$offset</span>			</li>
-					<li>
-				<span class="var-type">int</span>
-				<span class="var-name">$limit</span>			</li>
-					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$sort</span>			</li>
-				</ul>
-		
-			
-	</div>
-<a name="methodupdate" id="update"><!-- --></a>
-<div class="evenrow">
-	
-	<div class="method-header">
-		<img src="../media/images/Method.png" />
-		<span class="method-title">update</span> (line <span class="line-number">44</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">See select()</p>
-	<ul class="tags">
-				<li><span class="field">access:</span> public</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result">void</span>
-		<span class="method-name">
-			update
-		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$table</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$values</span>)
-			</div>
-	
-			<ul class="parameters">
-					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$table</span>			</li>
-					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$values</span>			</li>
-				</ul>
-		
-			
-	</div>
-							<h4>Inherited Methods</h4>
-				<a name='inherited_methods'><!-- --></a>	
-									<!-- =========== Summary =========== -->
-					<p>Inherited From <span class="classname"><a href="../php-library/SignedFileRetriever.html">SignedFileRetriever</a></span></p>
-					<blockquote>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../php-library/SignedFileRetriever.html#methodgenerateVariableString">SignedFileRetriever::generateVariableString()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../php-library/SignedFileRetriever.html#methodsetSeed">SignedFileRetriever::setSeed()</a></span><br>
-											</blockquote>
-										
-		</div>
-	</div>
+		See select()<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
 
 	
-	<p class="notes" id="credit">
-		Documentation generated by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
-	</p>
-	</div></body>
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>$table</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>$values</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodinsert"></a>
+	<h3>method insert <span class="smalllinenumber">[line 33]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void insert(
+
+$table, 
+$values)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		See select()<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>$table</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>$values</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodselect"></a>
+	<h3>method select <span class="smalllinenumber">[line 24]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void select(
+string
+$table, array
+$values, [
+$sort = array()], [int
+$offset = 0], [int
+$limit = 0])</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		<br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">string&nbsp;&nbsp;</td>
+        <td><b>$table</b>&nbsp;&nbsp;</td>
+        <td>The table name</td>
+      </tr>
+          <tr>
+        <td class="type">array&nbsp;&nbsp;</td>
+        <td><b>$values</b>&nbsp;&nbsp;</td>
+        <td>An associative array containing the values to create the select query</td>
+      </tr>
+          <tr>
+        <td class="type">int&nbsp;&nbsp;</td>
+        <td><b>$offset</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+          <tr>
+        <td class="type">int&nbsp;&nbsp;</td>
+        <td><b>$limit</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>$sort</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodupdate"></a>
+	<h3>method update <span class="smalllinenumber">[line 44]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void update(
+
+$table, 
+$values)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		See select()<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>$table</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>$values</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+</div><br />
+
+
+        <div class="credit">
+		    <hr />
+		    Documentation generated by <a href="http://www.phpdoc.org">phpDocumentor 1.4.3</a>
+	      </div>
+      </td></tr></table>
+    </td>
+  </tr>
+</table>
+
+</body>
 </html>

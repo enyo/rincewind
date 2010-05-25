@@ -32,13 +32,13 @@
 <p class="description"><p><div class="src-code"><ol><li><div class="src-line">&nbsp;<span class="src-php">&lt;?php</span></div></li>
 <li><div class="src-line">&nbsp;&nbsp;&nbsp;<span class="src-id"><a href="../File/File.html">File</a></span><span class="src-sym">::</span><a href="../File/File.html#methodcreate">create</a><span class="src-sym">(</span><span class="src-var">$uri</span><span class="src-sym">,&nbsp;</span><span class="src-id"><a href="../File/File.html">File</a></span><span class="src-sym">::</span><span class="src-id">SOURCE_LOCAL</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
 <li><div class="src-line">&nbsp;<span class="src-php">?&gt;</span></div></li>
-</ol></div></p><p>The File class extends the FileRetriever, so it supports all static  functions.</p></p>
+</ol></div></p><p>When using static functions of the File class to create files, the File  class creates a FileRetriever internally to actually get an instantiated  File class.</p><p>If you need a different FileRetriever to be used, just instantiate  the FileRetriever manually.</p></p>
 	<ul class="tags">
 				<li><span class="field">author:</span> Matthias Loitsch &lt;<a href="mailto:developer@ma.tthias.com">developer@ma.tthias.com</a>&gt;</li>
 				<li><span class="field">copyright:</span> Copyright (c) 2010, Matthias Loitsch</li>
 			</ul>
 		<p class="notes">
-			Located in <a class="field" href="_File---File.php.html">/File/File.php</a> (line <span class="field">45</span>)
+			Located in <a class="field" href="_File---File.php.html">/File/File.php</a> (line <span class="field">50</span>)
 		</p>
 		
 				
@@ -318,7 +318,7 @@
 		<span class="var-title">
 			<span class="var-type">mixed</span>
 			<span class="var-name">$content</span>
-						(line <span class="line-number">95</span>)
+						(line <span class="line-number">100</span>)
 		</span>
 	</div>
 
@@ -342,7 +342,7 @@
 		<span class="var-title">
 			<span class="var-type">bool</span>
 			<span class="var-name">$fetchedContent</span>
-			 = <span class="var-default"> false</span>			(line <span class="line-number">102</span>)
+			 = <span class="var-default"> false</span>			(line <span class="line-number">107</span>)
 		</span>
 	</div>
 
@@ -365,7 +365,7 @@
 		<span class="var-title">
 			<span class="var-type">string</span>
 			<span class="var-name">$mimeType</span>
-						(line <span class="line-number">124</span>)
+						(line <span class="line-number">129</span>)
 		</span>
 	</div>
 
@@ -388,7 +388,7 @@
 		<span class="var-title">
 			<span class="var-type">string</span>
 			<span class="var-name">$name</span>
-						(line <span class="line-number">110</span>)
+						(line <span class="line-number">115</span>)
 		</span>
 	</div>
 
@@ -411,7 +411,7 @@
 		<span class="var-title">
 			<span class="var-type">int</span>
 			<span class="var-name">$size</span>
-						(line <span class="line-number">117</span>)
+						(line <span class="line-number">122</span>)
 		</span>
 	</div>
 
@@ -434,7 +434,7 @@
 		<span class="var-title">
 			<span class="var-type">int</span>
 			<span class="var-name">$source</span>
-						(line <span class="line-number">131</span>)
+						(line <span class="line-number">136</span>)
 		</span>
 	</div>
 
@@ -457,7 +457,7 @@
 		<span class="var-title">
 			<span class="var-type">string</span>
 			<span class="var-name">$uri</span>
-						(line <span class="line-number">82</span>)
+						(line <span class="line-number">87</span>)
 		</span>
 	</div>
 
@@ -493,7 +493,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/StaticMethod.png" />
-		<span class="method-title">static create</span> (line <span class="line-number">286</span>)
+		<span class="method-title">static create</span> (line <span class="line-number">291</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -537,7 +537,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Constructor.png" />
-		<span class="method-title">Constructor __construct</span> (line <span class="line-number">139</span>)
+		<span class="method-title">Constructor __construct</span> (line <span class="line-number">144</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -568,7 +568,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">getContent</span> (line <span class="line-number">209</span>)
+		<span class="method-title">getContent</span> (line <span class="line-number">214</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -594,7 +594,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">getMimeType</span> (line <span class="line-number">241</span>)
+		<span class="method-title">getMimeType</span> (line <span class="line-number">246</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -619,7 +619,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">getName</span> (line <span class="line-number">223</span>)
+		<span class="method-title">getName</span> (line <span class="line-number">228</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -644,7 +644,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">getSize</span> (line <span class="line-number">232</span>)
+		<span class="method-title">getSize</span> (line <span class="line-number">237</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -669,7 +669,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">getSource</span> (line <span class="line-number">250</span>)
+		<span class="method-title">getSource</span> (line <span class="line-number">255</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -695,7 +695,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">getUri</span> (line <span class="line-number">199</span>)
+		<span class="method-title">getUri</span> (line <span class="line-number">204</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -720,7 +720,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">save</span> (line <span class="line-number">260</span>)
+		<span class="method-title">save</span> (line <span class="line-number">265</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -753,7 +753,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">setContent</span> (line <span class="line-number">159</span>)
+		<span class="method-title">setContent</span> (line <span class="line-number">164</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -783,7 +783,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">setMimeType</span> (line <span class="line-number">178</span>)
+		<span class="method-title">setMimeType</span> (line <span class="line-number">183</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -813,7 +813,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">setName</span> (line <span class="line-number">150</span>)
+		<span class="method-title">setName</span> (line <span class="line-number">155</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -844,7 +844,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">setSize</span> (line <span class="line-number">169</span>)
+		<span class="method-title">setSize</span> (line <span class="line-number">174</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -874,7 +874,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">setSource</span> (line <span class="line-number">187</span>)
+		<span class="method-title">setSource</span> (line <span class="line-number">192</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -926,7 +926,7 @@
 		<span class="const-title">
 			<span class="const-name">SOURCE_FILE</span>
 			 = <span class="const-default"> 0x010001</span>
-			(line <span class="line-number">71</span>)
+			(line <span class="line-number">78</span>)
 		</span>
 	</div>
 
@@ -943,7 +943,7 @@
 		<span class="const-title">
 			<span class="const-name">SOURCE_FORM</span>
 			 = <span class="const-default"> 0x100001</span>
-			(line <span class="line-number">72</span>)
+			(line <span class="line-number">79</span>)
 		</span>
 	</div>
 
@@ -960,7 +960,7 @@
 		<span class="const-title">
 			<span class="const-name">SOURCE_FTP</span>
 			 = <span class="const-default"> 0x001010</span>
-			(line <span class="line-number">74</span>)
+			(line <span class="line-number">77</span>)
 		</span>
 	</div>
 
@@ -977,7 +977,7 @@
 		<span class="const-title">
 			<span class="const-name">SOURCE_HTTP</span>
 			 = <span class="const-default"> 0x001001</span>
-			(line <span class="line-number">73</span>)
+			(line <span class="line-number">76</span>)
 		</span>
 	</div>
 
@@ -994,14 +994,14 @@
 		<span class="const-title">
 			<span class="const-name">SOURCE_LOCAL</span>
 			 = <span class="const-default"> 0x010000</span>
-			(line <span class="line-number">62</span>)
+			(line <span class="line-number">67</span>)
 		</span>
 	</div>
 
 	<!-- ========== Info from phpDoc block ========= -->
 <p class="short-description">Source constants that represent all source categories for a file.</p>
 <p class="description"><p>They are not set directly, but are used to group the real sources  together.  Test if a source is remote, local or user by using the bit operator &amp;.  Example:  <div class="src-code"><ol><li><div class="src-line">&nbsp;<span class="src-php">&lt;?php</span></div></li>
-<li><div class="src-line">&nbsp;&nbsp;&nbsp;<span class="src-var">$isRemote&nbsp;</span>=&nbsp;<span class="src-var">$source&nbsp;</span><span class="src-sym">&amp;&nbsp;</span><span class="src-id"><a href="../File/File.html">File</a></span><span class="src-sym">::</span><span class="src-id">SOURCE_REMOTE</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;<span class="src-var">$isRemote&nbsp;</span>=&nbsp;<span class="src-sym">!!</span><span class="src-sym">(</span><span class="src-var">$source&nbsp;</span><span class="src-sym">&amp;&nbsp;</span><span class="src-id"><a href="../File/File.html">File</a></span><span class="src-sym">::</span><span class="src-id">SOURCE_REMOTE</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
 <li><div class="src-line">&nbsp;<span class="src-php">?&gt;</span></div></li>
 </ol></div></p></p>
 	
@@ -1015,14 +1015,14 @@
 		<span class="const-title">
 			<span class="const-name">SOURCE_REMOTE</span>
 			 = <span class="const-default"> 0x001000</span>
-			(line <span class="line-number">61</span>)
+			(line <span class="line-number">66</span>)
 		</span>
 	</div>
 
 	<!-- ========== Info from phpDoc block ========= -->
 <p class="short-description">Source constants that represent all source categories for a file.</p>
 <p class="description"><p>They are not set directly, but are used to group the real sources  together.  Test if a source is remote, local or user by using the bit operator &amp;.  Example:  <div class="src-code"><ol><li><div class="src-line">&nbsp;<span class="src-php">&lt;?php</span></div></li>
-<li><div class="src-line">&nbsp;&nbsp;&nbsp;<span class="src-var">$isRemote&nbsp;</span>=&nbsp;<span class="src-var">$source&nbsp;</span><span class="src-sym">&amp;&nbsp;</span><span class="src-id"><a href="../File/File.html">File</a></span><span class="src-sym">::</span><span class="src-id">SOURCE_REMOTE</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;<span class="src-var">$isRemote&nbsp;</span>=&nbsp;<span class="src-sym">!!</span><span class="src-sym">(</span><span class="src-var">$source&nbsp;</span><span class="src-sym">&amp;&nbsp;</span><span class="src-id"><a href="../File/File.html">File</a></span><span class="src-sym">::</span><span class="src-id">SOURCE_REMOTE</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
 <li><div class="src-line">&nbsp;<span class="src-php">?&gt;</span></div></li>
 </ol></div></p></p>
 	
@@ -1036,14 +1036,14 @@
 		<span class="const-title">
 			<span class="const-name">SOURCE_USER</span>
 			 = <span class="const-default"> 0x100000</span>
-			(line <span class="line-number">63</span>)
+			(line <span class="line-number">68</span>)
 		</span>
 	</div>
 
 	<!-- ========== Info from phpDoc block ========= -->
 <p class="short-description">Source constants that represent all source categories for a file.</p>
 <p class="description"><p>They are not set directly, but are used to group the real sources  together.  Test if a source is remote, local or user by using the bit operator &amp;.  Example:  <div class="src-code"><ol><li><div class="src-line">&nbsp;<span class="src-php">&lt;?php</span></div></li>
-<li><div class="src-line">&nbsp;&nbsp;&nbsp;<span class="src-var">$isRemote&nbsp;</span>=&nbsp;<span class="src-var">$source&nbsp;</span><span class="src-sym">&amp;&nbsp;</span><span class="src-id"><a href="../File/File.html">File</a></span><span class="src-sym">::</span><span class="src-id">SOURCE_REMOTE</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;<span class="src-var">$isRemote&nbsp;</span>=&nbsp;<span class="src-sym">!!</span><span class="src-sym">(</span><span class="src-var">$source&nbsp;</span><span class="src-sym">&amp;&nbsp;</span><span class="src-id"><a href="../File/File.html">File</a></span><span class="src-sym">::</span><span class="src-id">SOURCE_REMOTE</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
 <li><div class="src-line">&nbsp;<span class="src-php">?&gt;</span></div></li>
 </ol></div></p></p>
 	

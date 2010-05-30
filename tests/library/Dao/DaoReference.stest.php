@@ -1,0 +1,34 @@
+<?php
+
+require_once(dirname(dirname(__FILE__)) . '/setup.php');
+
+require_once(LIBRARY_ROOT_PATH . 'Dao/DaoReference.php');
+
+
+
+class DaoReference_Getters_Test extends Snap_UnitTestCase {
+
+  protected $r;
+
+  public function setUp() {
+    $this->r = new DaoReference('DAO', 'LOCALKEY', 'FOREIGNKEY');
+  }
+
+  public function tearDown() {}
+
+
+  public function testDao() {
+    return $this->assertIdentical($this->r->getReferenceDao(), 'DAO');
+  }
+
+  public function testLocalKey() {
+    return $this->assertIdentical($this->r->getLocalKey(), 'LOCALKEY');
+  }
+
+  public function testForeignKey() {
+    return $this->assertIdentical($this->r->getForeignKey(), 'FOREIGNKEY');
+  }
+
+}
+
+?>

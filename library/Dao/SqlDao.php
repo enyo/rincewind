@@ -37,11 +37,8 @@ abstract class SqlDao extends Dao {
    * @param array $defaultColumns You can specify this as an attribute when writing a Dao implementation
    */
   public function __construct($db, $tableName = null, $columnTypes = null, $nullColumns = null, $defaultColumns = null) {
+    parent::__construct($tableName, $columnTypes, $nullColumns, $defaultColumns);
     $this->db = $db;
-    if ($tableName) $this->tableName = $tableName;
-    if ($columnTypes) $this->columnTypes = $columnTypes;
-    if ($nullColumns) $this->nullColumns = $nullColumns;
-    if ($defaultColumns) $this->defaultColumns = $defaultColumns;
   }
 
 

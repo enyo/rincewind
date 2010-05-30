@@ -48,10 +48,10 @@
 class DaoReference {
 
   /**
-   * The dao used to get the referenced foreign DataObject.
-   * @var Dao
+   * The dao class name used to get the referenced foreign DataObject.
+   * @var string
    */
-  protected $referenceDao;
+  protected $daoClassName;
 
   /**
    * The local key. eg: address_id
@@ -67,25 +67,34 @@ class DaoReference {
 
 
   /**
-   * @param Dao $referenceDao
+   * @param string $daoClassName
    * @param string $localKey
    * @param string $foreignKey
    */
-  public function __construct($referenceDao, $localKey, $foreignKey) {
-    $this->referenceDao = $referenceDao;
+  public function __construct($daoClassName, $localKey, $foreignKey) {
+    $this->daoClassName = $daoClassName;
     $this->localKey = $localKey;
     $this->foreignKey = $foreignKey;
   }
 
 
-  public function getReferenceDao() {
-    return $this->referenceDao;
+  /**
+   * @return string
+   */
+  public function getDaoClassName() {
+    return $this->daoClassName;
   }
 
+  /**
+   * @return string
+   */
   public function getForeignKey() {
     return $this->foreignKey;
   }
 
+  /**
+   * @return string
+   */
   public function getLocalKey() {
     return $this->localKey;
   }

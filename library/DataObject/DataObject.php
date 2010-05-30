@@ -128,6 +128,9 @@ class DataObject implements DataObjectInterface {
     elseif (array_key_exists($column, $this->dao->getAdditionalColumnTypes())) {
       $value = array_key_exists($column, $this->data) ? $this->data[$column] : null;
     }
+    elseif (array_key_exists($column, $this->dao->getReferences())) {
+      return $this->dao->getReference($this, $column);
+    }
     else {
       $this->triggerUndefinedPropertyError($column);
       return null;
@@ -141,7 +144,7 @@ class DataObject implements DataObjectInterface {
    **/
   public function getValue($column) { return $this->get($column); }
 
-  
+
   /**
    * Sets the value in the $data array after calling coerce() on the value.
    *

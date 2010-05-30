@@ -33,8 +33,12 @@ include dirname(dirname(__FILE__)) . '/DataObject/DataObject.php';
 /**
  * Loading the Exceptions
  */
-include_once dirname(__FILE__) . '/DaoExceptions.php';
+include dirname(__FILE__) . '/DaoExceptions.php';
 
+/**
+ * Loading the DaoReference
+ */
+include dirname(__FILE__) . '/DaoReference.php';
 
 /**
  * Loading the Date Class
@@ -136,6 +140,24 @@ abstract class Dao implements DaoInterface {
   const DO_NOT_EXPORT_VALUES = false;
 
 
+
+  /**
+   * Has to be called from any extended Dao to make sure everything gets setup properly
+   * @param string $tableName You can specify this as an attribute when writing a Dao implementation
+   * @param array $columnTypes You can specify this as an attribute when writing a Dao implementation
+   * @param array $nullColumns You can specify this as an attribute when writing a Dao implementation
+   * @param array $defaultColumns You can specify this as an attribute when writing a Dao implementation
+   */
+  public function __construct($tableName = null, $columnTypes = null, $nullColumns = null, $defaultColumns = null) {
+    if ($tableName) $this->tableName = $tableName;
+    if ($columnTypes) $this->columnTypes = $columnTypes;
+    if ($nullColumns) $this->nullColumns = $nullColumns;
+    if ($defaultColumns) $this->defaultColumns = $defaultColumns;
+    $this->setupReferences();
+  }
+
+
+
   /**
    * @see Logger
    * @var Logger
@@ -183,6 +205,76 @@ abstract class Dao implements DaoInterface {
    * @var array
    */
   protected $additionalColumnTypes = array();
+
+
+
+  /**
+   * The references array contains a list of DaoReference instances to map certain columns to other tables.
+   * You set them in the setupReferences method, that gets called in the constructor.
+   *
+   * This array would look like this then:
+   * <code>
+   * <?php
+   *   $references == array(
+   *     'address'=>new DaoReference('AddressDao', 'address_id', 'id')
+   *   );
+   * ?>
+   * </code>
+   *
+   * @var array
+   * @see DaoReference
+   * @see setupReferences()
+   * @see addReference()
+   */
+  protected $references = array();
+
+
+  /**
+   * Overwrite this in a specific Dao implementation to setup the references.
+   * Setting the references directly to the member variables is not possible since a references is an object.
+   * This function gets called from the constructor.
+   * You should call addReference() inside this function.
+   *
+   * @see addReference()
+   */
+  protected function setupReferences() { }
+
+  /**
+   * Adds a reference definition
+   *
+   * @param string $accessor The name of the accessor (eg.: address)
+   * @param string $daoClassName Eg.: AddressDao
+   * @param string $localKey Eg.: address_id
+   * @param string $foreignKey Eg.: id
+   * @see DaoReference
+   */
+  protected function addReference($accessor, $daoClassName, $localKey, $foreignKey = 'id') {
+    $this->references[$accessor] = new DaoReference($daoClassName, $localKey, $foreignKey);
+  }
+
+  /**
+   * Returns the DataObject for a specific reference.
+   *
+   * @return DataObject
+   */
+  public function getReference($dataObject, $column) {
+    if (!isset($this->references[$column])) throw new DaoWrongValueException("The column `$column` is not specified in references.");
+    $reference = $this->references[$column];
+    $dao = $this->getReferenceDao($reference);
+    $localValue = $dataObject->get($reference->getLocalKey());
+    return $dao->get(array($reference->getForeignKey()=>$localValue));
+  }
+
+  /**
+   * Returns the Dao for a DaoReference.
+   * You probably want to overwrite this method in your daos to use your implementation of instantiating Daos.
+   *
+   * @param DaoReference $reference
+   * @return Dao
+   */
+  protected function getReferenceDao($reference) {
+    return new $reference->daoClassName();
+  }
 
 
   /**
@@ -260,17 +352,21 @@ abstract class Dao implements DaoInterface {
 
   /**
    * Returns the column types array
-   *
    * @return array
    */   
   public function getColumnTypes() { return $this->columnTypes; }
 
   /**
    * Returns the additional column types array
-   *
    * @return array
    */   
   public function getAdditionalColumnTypes() { return $this->additionalColumnTypes; }
+
+  /**
+   * @return array
+   * @see $references
+   */
+  public function getReferences() { return $this->references; }
 
   /**
    * Returns the null columns
@@ -483,6 +579,9 @@ abstract class Dao implements DaoInterface {
   /**
    * Returns a data object with the data in it.
    * Override this function if you want a specific DataObject, not the default one.
+   * Using your own DataObject is sometimes useful if your datasource has a strange
+   * naming convention and you have to do different name conversion than the default
+   * one.
    *
    * @param array $data
    * @return DataObject

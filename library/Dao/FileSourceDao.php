@@ -38,11 +38,8 @@ abstract class FileSourceDao extends Dao {
    * @param array $defaultColumns You can specify this as an attribute when writing a Dao implementation
    */
   public function __construct($fileDataSource, $tableName = null, $columnTypes = null, $nullColumns = null, $defaultColumns = null) {
+    parent::__construct($tableName, $columnTypes, $nullColumns, $defaultColumns);
     $this->fileDataSource = $fileDataSource;
-    if ($tableName) $this->tableName = $tableName;
-    if ($columnTypes) $this->columnTypes = $columnTypes;
-    if ($nullColumns) $this->nullColumns = $nullColumns;
-    if ($defaultColumns) $this->defaultColumns = $defaultColumns;
   }
 
 

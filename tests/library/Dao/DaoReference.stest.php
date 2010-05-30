@@ -16,9 +16,8 @@ class DaoReference_Getters_Test extends Snap_UnitTestCase {
 
   public function tearDown() {}
 
-
   public function testDao() {
-    return $this->assertIdentical($this->r->getReferenceDao(), 'DAO');
+    return $this->assertIdentical($this->r->getDaoClassName(), 'DAO');
   }
 
   public function testLocalKey() {

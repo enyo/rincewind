@@ -1,1030 +1,1165 @@
-<?xml version="1.0" encoding="iso-8859-1"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-  <html xmlns="http://www.w3.org/1999/xhtml">
-		<head>
-			<!-- template designed by Marco Von Ballmoos -->
-			<title>Docs For Class ImageFile</title>
-			<link rel="stylesheet" href="../media/stylesheet.css" />
-			<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
-		</head>
-		<body>
-			<div class="page-body">			
-<h2 class="class-name"><img src="../media/images/Class_logo.png"
-														alt=" Class"
-														title=" Class"
-														style="vertical-align: middle"> ImageFile</h2>
+<html>
+<head>
+<title>Docs For Class ImageFile</title>
+<link rel="stylesheet" type="text/css" href="../media/style.css">
+</head>
+<body>
 
-<a name="sec-description"></a>
-<div class="info-box">
-	<div class="info-box-title">Description</div>
-	<div class="nav-bar">
-					<span class="disabled">Description</span> |
-													<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
-						|											<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
-						
-											<a href="#sec-consts">Constants</a>
-						
+<table border="0" cellspacing="0" cellpadding="0" height="48" width="100%">
+  <tr>
+    <td class="header_top">File</td>
+  </tr>
+  <tr><td class="header_line"><img src="../media/empty.png" width="1" height="1" border="0" alt=""  /></td></tr>
+  <tr>
+    <td class="header_menu">
+        
+                                                                                                                                                            
+                                                                      		  [ <a href="../classtrees_File.html" class="menu">class tree: File</a> ]
+		  [ <a href="../elementindex_File.html" class="menu">index: File</a> ]
+		  	    [ <a href="../elementindex.html" class="menu">all elements</a> ]
+    </td>
+  </tr>
+  <tr><td class="header_line"><img src="../media/empty.png" width="1" height="1" border="0" alt=""  /></td></tr>
+</table>
+
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="200" class="menu">
+	<div id="ric">
+					<p><a href="../ric_README.html">README</a></p>
 			</div>
-	<div class="info-box-body">
-        		<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">You get an ImageFile by calling ImageFileFactory::get($uri).</p>
-<p class="description"><p>The documentation of this class is not yet finished. Sorry about that.</p></p>
-	<ul class="tags">
-				<li><span class="field">author:</span> Matthias Loitsch &lt;<a href="mailto:developer@ma.tthias.com">developer@ma.tthias.com</a>&gt;</li>
-				<li><span class="field">copyright:</span> Copyright (c) 2010, Matthias Loitsch</li>
-				<li><span class="field">see:</span> ImageFileFactory</li>
-			</ul>
-		<p class="notes">
-			Located in <a class="field" href="_File---ImageFile.php.html">/File/ImageFile.php</a> (line <span class="field">48</span>)
-		</p>
-		
-				
-		<pre><a href="../File/File.html">File</a>
+      <b>Packages:</b><br />
+              <a href="../li_php-library.html">php-library</a><br />
+              <a href="../li_Config.html">Config</a><br />
+              <a href="../li_Dao.html">Dao</a><br />
+              <a href="../li_Database.html">Database</a><br />
+              <a href="../li_DataSource.html">DataSource</a><br />
+              <a href="../li_Date.html">Date</a><br />
+              <a href="../li_File.html">File</a><br />
+              <a href="../li_Logger.html">Logger</a><br />
+              <a href="../li_Storage.html">Storage</a><br />
+            <br /><br />
+                        <b>Files:</b><br />
+      	  <div class="package">
+			<a href="../File/_File---File.php.html">		File.php
+		</a><br>
+			<a href="../File/_File---FileRetriever.php.html">		FileRetriever.php
+		</a><br>
+			<a href="../File/_File---ImageFile.php.html">		ImageFile.php
+		</a><br>
+			<a href="../File/_File---ImageFileRetriever.php.html">		ImageFileRetriever.php
+		</a><br>
+	  </div><br />
+      
+      
+            <b>Classes:</b><br />
+        <div class="package">
+		    		<a href="../File/File.html">File</a><br />
+	    		<a href="../File/FileRetriever.html">FileRetriever</a><br />
+	    		<a href="../File/ImageFile.html">ImageFile</a><br />
+	    		<a href="../File/ImageFileRetriever.html">ImageFileRetriever</a><br />
+	  </div>
+  <div class="package">
+	FileExceptions<br />	    &nbsp;&nbsp;		<a href="../File/FileExceptions/FileException.html">FileException</a><br />
+	    &nbsp;&nbsp;		<a href="../File/FileExceptions/ImageFileException.html">ImageFileException</a><br />
+	  </div>
+  <div class="package">
+	FileRetrieverExceptions<br />	    &nbsp;&nbsp;		<a href="../File/FileRetrieverExceptions/FileRetrieverException.html">FileRetrieverException</a><br />
+	    &nbsp;&nbsp;		<a href="../File/FileRetrieverExceptions/ImageFileRetrieverException.html">ImageFileRetrieverException</a><br />
+	  </div>
+                </td>
+    <td>
+      <table cellpadding="10" cellspacing="0" width="100%" border="0"><tr><td valign="top">
+
+<h1>Class: ImageFile</h1>
+Source Location: /File/ImageFile.php<br /><br />
+
+
+<table width="100%" border="0">
+<tr><td valign="top">
+
+<h3><a href="#class_details">Class Overview</a></h3>
+<pre><a href="../File/File.html">File</a>
    |
-   --ImageFile</pre>
-	
-			</div>
+   --ImageFile</pre><br />
+<div class="description">You get an ImageFile by calling ImageFileFactory::get($uri).</div><br /><br />
+<h4>Author(s):</h4>
+<ul>
+          <li>Matthias Loitsch &lt;<a href="mailto:developer@ma.tthias.com">developer@ma.tthias.com</a>&gt;</li>
+                  </ul>
+
+
+
+
+          
+      
+
+<h4>Copyright:</h4>
+<ul>
+  <li>Copyright (c) 2010, Matthias Loitsch</li>
+</ul>
+        
+</td>
+
+<td valign="top">
+<h3><a href="#class_vars">Variables</a></h3>
+<ul>
+    <li><a href="../File/ImageFile.html#var$destinationHeight">$destinationHeight</a></li>
+    <li><a href="../File/ImageFile.html#var$destinationWidth">$destinationWidth</a></li>
+    <li><a href="../File/ImageFile.html#var$height">$height</a></li>
+    <li><a href="../File/ImageFile.html#var$image">$image</a></li>
+    <li><a href="../File/ImageFile.html#var$type">$type</a></li>
+    <li><a href="../File/ImageFile.html#var$width">$width</a></li>
+  </ul>
+</td>
+
+
+<td valign="top">
+<h3><a href="#class_methods">Methods</a></h3>
+<ul>
+    <li><a href="../File/ImageFile.html#method__destruct">__destruct</a></li>
+    <li><a href="../File/ImageFile.html#methodcreate">create</a></li>
+    <li><a href="../File/ImageFile.html#methodgetDestinationHeight">getDestinationHeight</a></li>
+    <li><a href="../File/ImageFile.html#methodgetDestinationWidth">getDestinationWidth</a></li>
+    <li><a href="../File/ImageFile.html#methodgetFile">getFile</a></li>
+    <li><a href="../File/ImageFile.html#methodgetHeight">getHeight</a></li>
+    <li><a href="../File/ImageFile.html#methodgetImage">getImage</a></li>
+    <li><a href="../File/ImageFile.html#methodgetResized">getResized</a></li>
+    <li><a href="../File/ImageFile.html#methodgetWidth">getWidth</a></li>
+    <li><a href="../File/ImageFile.html#methodsaveImage">saveImage</a></li>
+    <li><a href="../File/ImageFile.html#methodsaveOriginal">saveOriginal</a></li>
+    <li><a href="../File/ImageFile.html#methodsaveResized">saveResized</a></li>
+    <li><a href="../File/ImageFile.html#methodsetDestinationHeight">setDestinationHeight</a></li>
+    <li><a href="../File/ImageFile.html#methodsetDestinationWidth">setDestinationWidth</a></li>
+    <li><a href="../File/ImageFile.html#methodsetHeight">setHeight</a></li>
+    <li><a href="../File/ImageFile.html#methodsetType">setType</a></li>
+    <li><a href="../File/ImageFile.html#methodsetWidth">setWidth</a></li>
+  </ul>
+</td>
+
+</tr></table>
+<hr />
+
+<table width="100%" border="0"><tr>
+
+
+
+<td valign="top">
+<h3>Inherited Constants</h3>
+<div class="tags">
+<h4>Class: <a href="../File/File.html">File</a></h4>
+<dl>
+<dt>
+  <a href="../File/File.html#constSOURCE_FILE">File::SOURCE_FILE</a>
+</dt>
+<dd>
+   
+</dd>
+<dt>
+  <a href="../File/File.html#constSOURCE_FORM">File::SOURCE_FORM</a>
+</dt>
+<dd>
+   
+</dd>
+<dt>
+  <a href="../File/File.html#constSOURCE_FTP">File::SOURCE_FTP</a>
+</dt>
+<dd>
+   
+</dd>
+<dt>
+  <a href="../File/File.html#constSOURCE_HTTP">File::SOURCE_HTTP</a>
+</dt>
+<dd>
+   
+</dd>
+<dt>
+  <a href="../File/File.html#constSOURCE_LOCAL">File::SOURCE_LOCAL</a>
+</dt>
+<dd>
+   
+</dd>
+<dt>
+  <a href="../File/File.html#constSOURCE_REMOTE">File::SOURCE_REMOTE</a>
+</dt>
+<dd>
+   
+</dd>
+<dt>
+  <a href="../File/File.html#constSOURCE_USER">File::SOURCE_USER</a>
+</dt>
+<dd>
+   
+</dd>
+</dl>
+</div>
+</td>
+
+<td valign="top">
+<h3>Inherited Variables</h3>
+<div class="tags">
+<h4>Class: <a href="../File/File.html">File</a></h4>
+<dl>
+<dt>
+  <a href="../File/File.html#var$content">File::$content</a>
+  </dt>
+<dd>
+   
+</dd>
+<dt>
+  <a href="../File/File.html#var$fetchedContent">File::$fetchedContent</a>
+  </dt>
+<dd>
+   
+</dd>
+<dt>
+  <a href="../File/File.html#var$mimeType">File::$mimeType</a>
+  </dt>
+<dd>
+   
+</dd>
+<dt>
+  <a href="../File/File.html#var$name">File::$name</a>
+  </dt>
+<dd>
+   
+</dd>
+<dt>
+  <a href="../File/File.html#var$size">File::$size</a>
+  </dt>
+<dd>
+   
+</dd>
+<dt>
+  <a href="../File/File.html#var$source">File::$source</a>
+  </dt>
+<dd>
+   
+</dd>
+<dt>
+  <a href="../File/File.html#var$uri">File::$uri</a>
+  </dt>
+<dd>
+   
+</dd>
+</dl>
+</div>
+</td>
+
+<td valign="top">
+<h3>Inherited Methods</h3>
+<div class="tags">
+<h4>Class: <a href="../File/File.html">File</a></h4>
+<dl>
+    <dt>
+    <a href="../File/File.html#method__construct">File::__construct()</a>
+  </dt>
+  <dd>
+    The constructor sets the uri and the name (generated from the uri).
+  </dd>
+    <dt>
+    <a href="../File/File.html#methodcreate">File::create()</a>
+  </dt>
+  <dd>
+    This is a wrapper for (new FileRetriever())-&gt;create()
+  </dd>
+    <dt>
+    <a href="../File/File.html#methodgetContent">File::getContent()</a>
+  </dt>
+  <dd>
+    Get the content of the file.
+  </dd>
+    <dt>
+    <a href="../File/File.html#methodgetMimeType">File::getMimeType()</a>
+  </dt>
+  <dd>
+    Get the mime type set in the constructor.
+  </dd>
+    <dt>
+    <a href="../File/File.html#methodgetName">File::getName()</a>
+  </dt>
+  <dd>
+    Get the file name.
+  </dd>
+    <dt>
+    <a href="../File/File.html#methodgetSize">File::getSize()</a>
+  </dt>
+  <dd>
+    Get the file size.
+  </dd>
+    <dt>
+    <a href="../File/File.html#methodgetSource">File::getSource()</a>
+  </dt>
+  <dd>
+    Get source
+  </dd>
+    <dt>
+    <a href="../File/File.html#methodgetUri">File::getUri()</a>
+  </dt>
+  <dd>
+    Get the file uri set in the constructor.
+  </dd>
+    <dt>
+    <a href="../File/File.html#methodsave">File::save()</a>
+  </dt>
+  <dd>
+    Saves the file to antoher location.
+  </dd>
+    <dt>
+    <a href="../File/File.html#methodsetContent">File::setContent()</a>
+  </dt>
+  <dd>
+    Sets the content of the file
+  </dd>
+    <dt>
+    <a href="../File/File.html#methodsetMimeType">File::setMimeType()</a>
+  </dt>
+  <dd>
+    Set the mime type of a file.
+  </dd>
+    <dt>
+    <a href="../File/File.html#methodsetName">File::setName()</a>
+  </dt>
+  <dd>
+    Use this function to set a filename.
+  </dd>
+    <dt>
+    <a href="../File/File.html#methodsetSize">File::setSize()</a>
+  </dt>
+  <dd>
+    Set the size of the file.
+  </dd>
+    <dt>
+    <a href="../File/File.html#methodsetSource">File::setSource()</a>
+  </dt>
+  <dd>
+    Sets the source of the file.
+  </dd>
+  </dl>
+</div>
+</td>
+
+</tr></table>
+<hr />
+
+<a name="class_details"></a>
+<h3>Class Details</h3>
+<div class="tags">
+[line 48]<br />
+You get an ImageFile by calling ImageFileFactory::get($uri).<br /><br /><p>The documentation of this class is not yet finished. Sorry about that.</p><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>author:</b>&nbsp;&nbsp;</td><td>Matthias Loitsch &lt;<a href="mailto:developer@ma.tthias.com">developer@ma.tthias.com</a>&gt;</td>
+  </tr>
+  <tr>
+    <td><b>copyright:</b>&nbsp;&nbsp;</td><td>Copyright (c) 2010, Matthias Loitsch</td>
+  </tr>
+  <tr>
+    <td><b>see:</b>&nbsp;&nbsp;</td><td>ImageFileFactory</td>
+  </tr>
+</table>
+</div>
+</div><br /><br />
+<div class="top">[ <a href="#top">Top</a> ]</div><br />
+
+<hr />
+<a name="class_vars"></a>
+<h3>Class Variables</h3>
+<div class="tags">
+	<a name="var$destinationHeight"></a>
+	<p></p>
+	<h4>$destinationHeight = <span class="value"></span></h4>
+	<p>[line 56]</p>
+  <br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
+  </tr>
+</table>
 </div>
 
-
-
-	<a name="sec-var-summary"></a>
-	<div class="info-box">
-		<div class="info-box-title">Variable Summary</span></div>
-		<div class="nav-bar">
-			<a href="#sec-description">Description</a> |
-						<span class="disabled">Vars</span> (<a href="#sec-vars">details</a>)
-							| 
-									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
-							
-															<a href="#sec-consts">Constants</a>
-							
-					</div>
-		<div class="info-box-body">
-			<div class="var-summary">
-																																																																<div class="var-title">
-					<img src="../media/images/Variable.png" alt=" " />
-					<span class="var-type">mixed</span>
-					<a href="#$destinationHeight" title="details" class="var-name">$destinationHeight</a>
-				</div>
-																<div class="var-title">
-					<img src="../media/images/Variable.png" alt=" " />
-					<span class="var-type">mixed</span>
-					<a href="#$destinationWidth" title="details" class="var-name">$destinationWidth</a>
-				</div>
-																<div class="var-title">
-					<img src="../media/images/Variable.png" alt=" " />
-					<span class="var-type">mixed</span>
-					<a href="#$height" title="details" class="var-name">$height</a>
-				</div>
-																<div class="var-title">
-					<img src="../media/images/Variable.png" alt=" " />
-					<span class="var-type">mixed</span>
-					<a href="#$image" title="details" class="var-name">$image</a>
-				</div>
-																<div class="var-title">
-					<img src="../media/images/Variable.png" alt=" " />
-					<span class="var-type">mixed</span>
-					<a href="#$type" title="details" class="var-name">$type</a>
-				</div>
-																<div class="var-title">
-					<img src="../media/images/Variable.png" alt=" " />
-					<span class="var-type">mixed</span>
-					<a href="#$width" title="details" class="var-name">$width</a>
-				</div>
-											</div>
-		</div>
-	</div>
-
-	<a name="sec-method-summary"></a>
-	<div class="info-box">
-		<div class="info-box-title">Method Summary</span></div>
-		<div class="nav-bar">
-			<a href="#sec-description">Description</a> |
-															<a href="#sec-consts">Constants</a>
-							
-															<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
-				 
-				|
-						<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
-		</div>
-		<div class="info-box-body">			
-			<div class="method-summary">
-																				<div class="method-definition">
-					<img src="../media/images/StaticMethod.png" alt=" "/>
-											static <span class="method-result"><a href="../File/File.html">File</a></span>
-										<a href="#create" title="details" class="method-name">create</a>
-											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$data</span>, <span class="var-type">int</span>&nbsp;<span class="var-name">$source</span>, [<span class="var-type">int</span>&nbsp;<span class="var-name">$maxFileSize</span> = <span class="var-default">10000000</span>])
-									</div>
-																																<div class="method-definition">
-					<img src="../media/images/StaticMethod.png" alt=" "/>
-											static <span class="method-result"><a href="../File/ImageFile.html">ImageFile</a></span>
-										<a href="#getFile" title="details" class="method-name">getFile</a>
-											(<span class="var-type"></span>&nbsp;<span class="var-name">$uri</span>)
-									</div>
-																																																																																																																				<div class="method-definition">
-					<img src="../media/images/Destructor.png" alt=" "/>
-											<span class="method-result">void</span>
-										<a href="#__destruct" title="details" class="method-name">__destruct</a>
-										()
-									</div>
-																								<div class="method-definition">
-					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result">void</span>
-										<a href="#getDestinationHeight" title="details" class="method-name">getDestinationHeight</a>
-										()
-									</div>
-																<div class="method-definition">
-					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result">void</span>
-										<a href="#getDestinationWidth" title="details" class="method-name">getDestinationWidth</a>
-										()
-									</div>
-																								<div class="method-definition">
-					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result">void</span>
-										<a href="#getHeight" title="details" class="method-name">getHeight</a>
-										()
-									</div>
-																<div class="method-definition">
-					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result">void</span>
-										<a href="#getImage" title="details" class="method-name">getImage</a>
-										()
-									</div>
-																<div class="method-definition">
-					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result">void</span>
-										<a href="#getResized" title="details" class="method-name">getResized</a>
-											(<span class="var-type">array</span>&nbsp;<span class="var-name">$proportions</span>, <span class="var-type">bool</span>&nbsp;<span class="var-name">$crop</span>, <span class="var-type">bool</span>&nbsp;<span class="var-name">$dontDistort</span>, <span class="var-type">array</span>&nbsp;<span class="var-name">$cropOffsets</span>, <span class="var-type">int</span>&nbsp;<span class="var-name">$mode</span>)
-									</div>
-																<div class="method-definition">
-					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result">void</span>
-										<a href="#getWidth" title="details" class="method-name">getWidth</a>
-										()
-									</div>
-																<div class="method-definition">
-					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result">void</span>
-										<a href="#saveImage" title="details" class="method-name">saveImage</a>
-											(<span class="var-type">string</span>&nbsp;<span class="var-name">$trgUri</span>, [<span class="var-type">int</span>&nbsp;<span class="var-name">$mode</span> = <span class="var-default">0644</span>], [<span class="var-type">resource</span>&nbsp;<span class="var-name">$image</span> = <span class="var-default">null</span>])
-									</div>
-																<div class="method-definition">
-					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result">void</span>
-										<a href="#saveOriginal" title="details" class="method-name">saveOriginal</a>
-											(<span class="var-type"></span>&nbsp;<span class="var-name">$trgUri</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$mode</span> = <span class="var-default">0644</span>])
-									</div>
-																<div class="method-definition">
-					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result">void</span>
-										<a href="#saveResized" title="details" class="method-name">saveResized</a>
-											(<span class="var-type">string</span>&nbsp;<span class="var-name">$trgUri</span>, <span class="var-type">array</span>&nbsp;<span class="var-name">$proportions</span>, [<span class="var-type">bool</span>&nbsp;<span class="var-name">$crop</span> = <span class="var-default">false</span>], [<span class="var-type">bool</span>&nbsp;<span class="var-name">$dontDistort</span> = <span class="var-default">true</span>], [<span class="var-type">array</span>&nbsp;<span class="var-name">$cropOffsets</span> = <span class="var-default">array(50.0, 20.0)</span>], [<span class="var-type">int</span>&nbsp;<span class="var-name">$mode</span> = <span class="var-default">0644</span>])
-									</div>
-																<div class="method-definition">
-					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result">void</span>
-										<a href="#setDestinationHeight" title="details" class="method-name">setDestinationHeight</a>
-											(<span class="var-type"></span>&nbsp;<span class="var-name">$height</span>)
-									</div>
-																<div class="method-definition">
-					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result">void</span>
-										<a href="#setDestinationWidth" title="details" class="method-name">setDestinationWidth</a>
-											(<span class="var-type"></span>&nbsp;<span class="var-name">$width</span>)
-									</div>
-																<div class="method-definition">
-					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result">void</span>
-										<a href="#setHeight" title="details" class="method-name">setHeight</a>
-											(<span class="var-type"></span>&nbsp;<span class="var-name">$height</span>)
-									</div>
-																<div class="method-definition">
-					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result">void</span>
-										<a href="#setType" title="details" class="method-name">setType</a>
-											(<span class="var-type">int</span>&nbsp;<span class="var-name">$type</span>)
-									</div>
-																<div class="method-definition">
-					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result">void</span>
-										<a href="#setWidth" title="details" class="method-name">setWidth</a>
-											(<span class="var-type"></span>&nbsp;<span class="var-name">$width</span>)
-									</div>
-											</div>
-		</div>
-	</div>		
-
-	<a name="sec-vars"></a>
-	<div class="info-box">
-		<div class="info-box-title">Variables</div>
-		<div class="nav-bar">
-			<a href="#sec-description">Description</a> |
-										<a href="#sec-var-summary">Vars</a> (<span class="disabled">details</span>)
-						
-			
-												<a href="#sec-consts">Constants</a>
-							
-										| 
-									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
-							
-					</div>
-		<div class="info-box-body">
-			
-<a name="var$destinationHeight" id="$destinationHeight"><!-- --></A>
-<div class="evenrow">
-
-	<div class="var-header">
-		<img src="../media/images/Variable.png" />
-		<span class="var-title">
-			<span class="var-type">mixed</span>
-			<span class="var-name">$destinationHeight</span>
-						(line <span class="line-number">56</span>)
-		</span>
-	</div>
-
-	<!-- ========== Info from phpDoc block ========= -->
-	<ul class="tags">
-				<li><span class="field">access:</span> protected</li>
-			</ul>
-	
-	
-		
-		
-
+  <br />
+	<div class="tags">
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td><b>Type:</b>&nbsp;&nbsp;</td>
+      <td>mixed</td>
+    </tr>
+      </table>
+	</div><br /><br />
+	<div class="top">[ <a href="#top">Top</a> ]</div><br />
+	<a name="var$destinationWidth"></a>
+	<p></p>
+	<h4>$destinationWidth = <span class="value"></span></h4>
+	<p>[line 55]</p>
+  <br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
+  </tr>
+</table>
 </div>
-<a name="var$destinationWidth" id="$destinationWidth"><!-- --></A>
-<div class="oddrow">
 
-	<div class="var-header">
-		<img src="../media/images/Variable.png" />
-		<span class="var-title">
-			<span class="var-type">mixed</span>
-			<span class="var-name">$destinationWidth</span>
-						(line <span class="line-number">55</span>)
-		</span>
-	</div>
-
-	<!-- ========== Info from phpDoc block ========= -->
-	<ul class="tags">
-				<li><span class="field">access:</span> protected</li>
-			</ul>
-	
-	
-		
-		
-
+  <br />
+	<div class="tags">
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td><b>Type:</b>&nbsp;&nbsp;</td>
+      <td>mixed</td>
+    </tr>
+      </table>
+	</div><br /><br />
+	<div class="top">[ <a href="#top">Top</a> ]</div><br />
+	<a name="var$height"></a>
+	<p></p>
+	<h4>$height = <span class="value"></span></h4>
+	<p>[line 51]</p>
+  <br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
+  </tr>
+</table>
 </div>
-<a name="var$height" id="$height"><!-- --></A>
-<div class="evenrow">
 
-	<div class="var-header">
-		<img src="../media/images/Variable.png" />
-		<span class="var-title">
-			<span class="var-type">mixed</span>
-			<span class="var-name">$height</span>
-						(line <span class="line-number">51</span>)
-		</span>
-	</div>
-
-	<!-- ========== Info from phpDoc block ========= -->
-	<ul class="tags">
-				<li><span class="field">access:</span> protected</li>
-			</ul>
-	
-	
-		
-		
-
+  <br />
+	<div class="tags">
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td><b>Type:</b>&nbsp;&nbsp;</td>
+      <td>mixed</td>
+    </tr>
+      </table>
+	</div><br /><br />
+	<div class="top">[ <a href="#top">Top</a> ]</div><br />
+	<a name="var$image"></a>
+	<p></p>
+	<h4>$image = <span class="value"></span></h4>
+	<p>[line 53]</p>
+  <br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
+  </tr>
+</table>
 </div>
-<a name="var$image" id="$image"><!-- --></A>
-<div class="oddrow">
 
-	<div class="var-header">
-		<img src="../media/images/Variable.png" />
-		<span class="var-title">
-			<span class="var-type">mixed</span>
-			<span class="var-name">$image</span>
-						(line <span class="line-number">53</span>)
-		</span>
-	</div>
-
-	<!-- ========== Info from phpDoc block ========= -->
-	<ul class="tags">
-				<li><span class="field">access:</span> protected</li>
-			</ul>
-	
-	
-		
-		
-
+  <br />
+	<div class="tags">
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td><b>Type:</b>&nbsp;&nbsp;</td>
+      <td>mixed</td>
+    </tr>
+      </table>
+	</div><br /><br />
+	<div class="top">[ <a href="#top">Top</a> ]</div><br />
+	<a name="var$type"></a>
+	<p></p>
+	<h4>$type = <span class="value"></span></h4>
+	<p>[line 52]</p>
+  <br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
+  </tr>
+</table>
 </div>
-<a name="var$type" id="$type"><!-- --></A>
-<div class="evenrow">
 
-	<div class="var-header">
-		<img src="../media/images/Variable.png" />
-		<span class="var-title">
-			<span class="var-type">mixed</span>
-			<span class="var-name">$type</span>
-						(line <span class="line-number">52</span>)
-		</span>
-	</div>
-
-	<!-- ========== Info from phpDoc block ========= -->
-	<ul class="tags">
-				<li><span class="field">access:</span> protected</li>
-			</ul>
-	
-	
-		
-		
-
+  <br />
+	<div class="tags">
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td><b>Type:</b>&nbsp;&nbsp;</td>
+      <td>mixed</td>
+    </tr>
+      </table>
+	</div><br /><br />
+	<div class="top">[ <a href="#top">Top</a> ]</div><br />
+	<a name="var$width"></a>
+	<p></p>
+	<h4>$width = <span class="value"></span></h4>
+	<p>[line 50]</p>
+  <br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
+  </tr>
+</table>
 </div>
-<a name="var$width" id="$width"><!-- --></A>
-<div class="oddrow">
 
-	<div class="var-header">
-		<img src="../media/images/Variable.png" />
-		<span class="var-title">
-			<span class="var-type">mixed</span>
-			<span class="var-name">$width</span>
-						(line <span class="line-number">50</span>)
-		</span>
-	</div>
+  <br />
+	<div class="tags">
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td><b>Type:</b>&nbsp;&nbsp;</td>
+      <td>mixed</td>
+    </tr>
+      </table>
+	</div><br /><br />
+	<div class="top">[ <a href="#top">Top</a> ]</div><br />
+</div><br />
 
-	<!-- ========== Info from phpDoc block ========= -->
-	<ul class="tags">
-				<li><span class="field">access:</span> protected</li>
-			</ul>
+<hr />
+<a name="class_methods"></a>
+<h3>Class Methods</h3>
+<div class="tags">
+  <hr />
+	<a name="methodcreate"></a>
+	<h3>static method create <span class="smalllinenumber">[line 284]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>static <a href="../File/File.html">File</a> create(
+mixed
+$data, int
+$source, [int
+$maxFileSize = 10000000])</code>
+    </td></tr></table>
+    </td></tr></table><br />
 	
-	
-		
-		
-
+		This is a wrapper for (new ImageFileRetriever())-&gt;create()<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
 </div>
-							<h4>Inherited Variables</h4>
-				<A NAME='inherited_vars'><!-- --></A>
-									<p>Inherited from <span class="classname"><a href="../File/File.html">File</a></span></p>
-					<blockquote>
-													<img src="../media/images/Variable.png" />
-							<span class="var-title">
-								<span class="var-name"><a href="../File/File.html#var$content">File::$content</a></span><br>
-							</span>
-													<img src="../media/images/Variable.png" />
-							<span class="var-title">
-								<span class="var-name"><a href="../File/File.html#var$fetchedContent">File::$fetchedContent</a></span><br>
-							</span>
-													<img src="../media/images/Variable.png" />
-							<span class="var-title">
-								<span class="var-name"><a href="../File/File.html#var$mimeType">File::$mimeType</a></span><br>
-							</span>
-													<img src="../media/images/Variable.png" />
-							<span class="var-title">
-								<span class="var-name"><a href="../File/File.html#var$name">File::$name</a></span><br>
-							</span>
-													<img src="../media/images/Variable.png" />
-							<span class="var-title">
-								<span class="var-name"><a href="../File/File.html#var$size">File::$size</a></span><br>
-							</span>
-													<img src="../media/images/Variable.png" />
-							<span class="var-title">
-								<span class="var-name"><a href="../File/File.html#var$source">File::$source</a></span><br>
-							</span>
-													<img src="../media/images/Variable.png" />
-							<span class="var-title">
-								<span class="var-name"><a href="../File/File.html#var$uri">File::$uri</a></span><br>
-							</span>
-											</blockquote> 
-										
-		</div>
-	</div>
-	
-	<a name="sec-methods"></a>
-	<div class="info-box">
-		<div class="info-box-title">Methods</div>
-		<div class="nav-bar">
-			<a href="#sec-description">Description</a> |
-															<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
-														<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
-						
-		</div>
-		<div class="info-box-body">
-			<A NAME='method_detail'></A>
-<a name="methodcreate" id="create"><!-- --></a>
-<div class="evenrow">
-	
-	<div class="method-header">
-		<img src="../media/images/StaticMethod.png" />
-		<span class="method-title">static create</span> (line <span class="line-number">284</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">This is a wrapper for (new ImageFileRetriever())-&gt;create()</p>
-	<ul class="tags">
-				<li><span class="field">access:</span> public</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result"><a href="../File/File.html">File</a></span>
-		<span class="method-name">
-			create
-		</span>
-					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$data</span>, <span class="var-type">int</span>&nbsp;<span class="var-name">$source</span>, [<span class="var-type">int</span>&nbsp;<span class="var-name">$maxFileSize</span> = <span class="var-default">10000000</span>])
-			</div>
-	
-			<ul class="parameters">
-					<li>
-				<span class="var-type">mixed</span>
-				<span class="var-name">$data</span><span class="var-description">: Is either an URL, or an array from form upload or a local path.</span>			</li>
-					<li>
-				<span class="var-type">int</span>
-				<span class="var-name">$source</span><span class="var-description">: One of File::SOURCE_XXX</span>			</li>
-					<li>
-				<span class="var-type">int</span>
-				<span class="var-name">$maxFileSize</span><span class="var-description">: in kilobytes.</span>			</li>
-				</ul>
-		
-			<hr class="separator" />
-		<div class="notes">Redefinition of:</div>
-		<dl>
-			<dt><a href="../File/File.html#methodcreate">File::create()</a></dt>
-						<dd>This is a wrapper for (new FileRetriever())-&gt;create()</dd>
-					</dl>
-			
-	</div>
-<a name="methodgetFile" id="getFile"><!-- --></a>
-<div class="oddrow">
-	
-	<div class="method-header">
-		<img src="../media/images/StaticMethod.png" />
-		<span class="method-title">static getFile</span> (line <span class="line-number">66</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Creates an ImageFile instead of File.</p>
-	<ul class="tags">
-				<li><span class="field">access:</span> protected</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result"><a href="../File/ImageFile.html">ImageFile</a></span>
-		<span class="method-name">
-			getFile
-		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$uri</span>)
-			</div>
-	
-			<ul class="parameters">
-					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$uri</span>			</li>
-				</ul>
-		
-			
-	</div>
-<a name="method__destruct" id="__destruct"><!-- --></a>
-<div class="evenrow">
-	
-	<div class="method-header">
-		<img src="../media/images/Destructor.png" />
-		<span class="method-title">Destructor __destruct</span> (line <span class="line-number">270</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Destroys the image if it has been created</p>
-	<ul class="tags">
-				<li><span class="field">access:</span> public</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result">void</span>
-		<span class="method-name">
-			__destruct
-		</span>
-				()
-			</div>
-	
-		
-			
-	</div>
-<a name="methodgetDestinationHeight" id="getDestinationHeight"><!-- --></a>
-<div class="oddrow">
-	
-	<div class="method-header">
-		<img src="../media/images/Method.png" />
-		<span class="method-title">getDestinationHeight</span> (line <span class="line-number">87</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-	<ul class="tags">
-				<li><span class="field">access:</span> public</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result">void</span>
-		<span class="method-name">
-			getDestinationHeight
-		</span>
-				()
-			</div>
-	
-		
-			
-	</div>
-<a name="methodgetDestinationWidth" id="getDestinationWidth"><!-- --></a>
-<div class="evenrow">
-	
-	<div class="method-header">
-		<img src="../media/images/Method.png" />
-		<span class="method-title">getDestinationWidth</span> (line <span class="line-number">86</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-	<ul class="tags">
-				<li><span class="field">access:</span> public</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result">void</span>
-		<span class="method-name">
-			getDestinationWidth
-		</span>
-				()
-			</div>
-	
-		
-			
-	</div>
-<a name="methodgetHeight" id="getHeight"><!-- --></a>
-<div class="oddrow">
-	
-	<div class="method-header">
-		<img src="../media/images/Method.png" />
-		<span class="method-title">getHeight</span> (line <span class="line-number">84</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-	<ul class="tags">
-				<li><span class="field">access:</span> public</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result">void</span>
-		<span class="method-name">
-			getHeight
-		</span>
-				()
-			</div>
-	
-		
-			
-	</div>
-<a name="methodgetImage" id="getImage"><!-- --></a>
-<div class="evenrow">
-	
-	<div class="method-header">
-		<img src="../media/images/Method.png" />
-		<span class="method-title">getImage</span> (line <span class="line-number">96</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Returns the image created with imagecreatefromXXX.</p>
-<p class="description"><p>This method caches the image, so don't be afraid to call it several times.</p></p>
-	<ul class="tags">
-				<li><span class="field">access:</span> public</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result">void</span>
-		<span class="method-name">
-			getImage
-		</span>
-				()
-			</div>
-	
-		
-			
-	</div>
-<a name="methodgetResized" id="getResized"><!-- --></a>
-<div class="oddrow">
-	
-	<div class="method-header">
-		<img src="../media/images/Method.png" />
-		<span class="method-title">getResized</span> (line <span class="line-number">199</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Resizes the original image, and returns it.</p>
-<p class="description"><p>See saveResized() for a detailed parameter list.</p></p>
-	<ul class="tags">
-				<li><span class="field">access:</span> protected</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result">void</span>
-		<span class="method-name">
-			getResized
-		</span>
-					(<span class="var-type">array</span>&nbsp;<span class="var-name">$proportions</span>, <span class="var-type">bool</span>&nbsp;<span class="var-name">$crop</span>, <span class="var-type">bool</span>&nbsp;<span class="var-name">$dontDistort</span>, <span class="var-type">array</span>&nbsp;<span class="var-name">$cropOffsets</span>, <span class="var-type">int</span>&nbsp;<span class="var-name">$mode</span>)
-			</div>
-	
-			<ul class="parameters">
-					<li>
-				<span class="var-type">array</span>
-				<span class="var-name">$proportions</span>			</li>
-					<li>
-				<span class="var-type">bool</span>
-				<span class="var-name">$crop</span>			</li>
-					<li>
-				<span class="var-type">bool</span>
-				<span class="var-name">$dontDistort</span>			</li>
-					<li>
-				<span class="var-type">array</span>
-				<span class="var-name">$cropOffsets</span>			</li>
-					<li>
-				<span class="var-type">int</span>
-				<span class="var-name">$mode</span>			</li>
-				</ul>
-		
-			
-	</div>
-<a name="methodgetWidth" id="getWidth"><!-- --></a>
-<div class="evenrow">
-	
-	<div class="method-header">
-		<img src="../media/images/Method.png" />
-		<span class="method-title">getWidth</span> (line <span class="line-number">83</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-	<ul class="tags">
-				<li><span class="field">access:</span> public</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result">void</span>
-		<span class="method-name">
-			getWidth
-		</span>
-				()
-			</div>
-	
-		
-			
-	</div>
-<a name="methodsaveImage" id="saveImage"><!-- --></a>
-<div class="oddrow">
-	
-	<div class="method-header">
-		<img src="../media/images/Method.png" />
-		<span class="method-title">saveImage</span> (line <span class="line-number">156</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Saves the image.</p>
-	<ul class="tags">
-				<li><span class="field">access:</span> protected</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result">void</span>
-		<span class="method-name">
-			saveImage
-		</span>
-					(<span class="var-type">string</span>&nbsp;<span class="var-name">$trgUri</span>, [<span class="var-type">int</span>&nbsp;<span class="var-name">$mode</span> = <span class="var-default">0644</span>], [<span class="var-type">resource</span>&nbsp;<span class="var-name">$image</span> = <span class="var-default">null</span>])
-			</div>
-	
-			<ul class="parameters">
-					<li>
-				<span class="var-type">string</span>
-				<span class="var-name">$trgUri</span><span class="var-description">: The URI to save the file to.</span>			</li>
-					<li>
-				<span class="var-type">int</span>
-				<span class="var-name">$mode</span><span class="var-description">: The file mode.</span>			</li>
-					<li>
-				<span class="var-type">resource</span>
-				<span class="var-name">$image</span><span class="var-description">: The image generated with getResized for example. If this is null, and the image types are the same, then this will just copy the original file.</span>			</li>
-				</ul>
-		
-			
-	</div>
-<a name="methodsaveOriginal" id="saveOriginal"><!-- --></a>
-<div class="evenrow">
-	
-	<div class="method-header">
-		<img src="../media/images/Method.png" />
-		<span class="method-title">saveOriginal</span> (line <span class="line-number">121</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">This is the same as File::save() except that it converts the image to another image format if the suffix is another one.</p>
-	<ul class="tags">
-				<li><span class="field">access:</span> public</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result">void</span>
-		<span class="method-name">
-			saveOriginal
-		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$trgUri</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$mode</span> = <span class="var-default">0644</span>])
-			</div>
-	
-			<ul class="parameters">
-					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$trgUri</span>			</li>
-					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$mode</span>			</li>
-				</ul>
-		
-			
-	</div>
-<a name="methodsaveResized" id="saveResized"><!-- --></a>
-<div class="oddrow">
-	
-	<div class="method-header">
-		<img src="../media/images/Method.png" />
-		<span class="method-title">saveResized</span> (line <span class="line-number">143</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Resizes an image and saves it.</p>
-<p class="description"><p>The proportions are always the maximum size of the image.  If crop is set, the image is cropped to have the exact proportions (The viewport is calculated with $cropOffsets).  If crop is not set, the image will just be distorted and resized to the new proportions if dontDistort is not set. If it is set,  the image will be scaled so it fits into the new proportions. Thus the resulting image does not have to have the same  proportions as specified in the $proportions array.  If one of the values in the proportions array is not given, there is no restriction on this length, so it will be caluclated  according to the original image proportions. In this case, $crop is always false, and $dontDistort always true.  If $proportions is bigger than the original proportions, the file is returned as is.</p></p>
-	<ul class="tags">
-				<li><span class="field">access:</span> public</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result">void</span>
-		<span class="method-name">
-			saveResized
-		</span>
-					(<span class="var-type">string</span>&nbsp;<span class="var-name">$trgUri</span>, <span class="var-type">array</span>&nbsp;<span class="var-name">$proportions</span>, [<span class="var-type">bool</span>&nbsp;<span class="var-name">$crop</span> = <span class="var-default">false</span>], [<span class="var-type">bool</span>&nbsp;<span class="var-name">$dontDistort</span> = <span class="var-default">true</span>], [<span class="var-type">array</span>&nbsp;<span class="var-name">$cropOffsets</span> = <span class="var-default">array(50.0, 20.0)</span>], [<span class="var-type">int</span>&nbsp;<span class="var-name">$mode</span> = <span class="var-default">0644</span>])
-			</div>
-	
-			<ul class="parameters">
-					<li>
-				<span class="var-type">string</span>
-				<span class="var-name">$trgUri</span><span class="var-description">: The target URI.</span>			</li>
-					<li>
-				<span class="var-type">array</span>
-				<span class="var-name">$proportions</span><span class="var-description">: An array containing the width and height. eg.: array(120, 80) = 120px width and 80px height.</span>			</li>
-					<li>
-				<span class="var-type">bool</span>
-				<span class="var-name">$crop</span><span class="var-description">: Whether to crop the image or not.</span>			</li>
-					<li>
-				<span class="var-type">bool</span>
-				<span class="var-name">$dontDistort</span><span class="var-description">: If this is true, the resulting image will not be distorted but rather proportinally scaled to fit in the new proportions.</span>			</li>
-					<li>
-				<span class="var-type">array</span>
-				<span class="var-name">$cropOffsets</span><span class="var-description">: An array containing the crop offsets. If they are floats, they are interpreted as percentages. 0.0 means from the most left/top position possible, 100.0 means from the most right/bottom position possible. array(50.0, 50.0) crops from the center of the image.</span>			</li>
-					<li>
-				<span class="var-type">int</span>
-				<span class="var-name">$mode</span><span class="var-description">: The chmod of the saved file.</span>			</li>
-				</ul>
-		
-			
-	</div>
-<a name="methodsetDestinationHeight" id="setDestinationHeight"><!-- --></a>
-<div class="evenrow">
-	
-	<div class="method-header">
-		<img src="../media/images/Method.png" />
-		<span class="method-title">setDestinationHeight</span> (line <span class="line-number">80</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-	<ul class="tags">
-				<li><span class="field">access:</span> public</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result">void</span>
-		<span class="method-name">
-			setDestinationHeight
-		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$height</span>)
-			</div>
-	
-			<ul class="parameters">
-					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$height</span>			</li>
-				</ul>
-		
-			
-	</div>
-<a name="methodsetDestinationWidth" id="setDestinationWidth"><!-- --></a>
-<div class="oddrow">
-	
-	<div class="method-header">
-		<img src="../media/images/Method.png" />
-		<span class="method-title">setDestinationWidth</span> (line <span class="line-number">79</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-	<ul class="tags">
-				<li><span class="field">access:</span> public</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result">void</span>
-		<span class="method-name">
-			setDestinationWidth
-		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$width</span>)
-			</div>
-	
-			<ul class="parameters">
-					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$width</span>			</li>
-				</ul>
-		
-			
-	</div>
-<a name="methodsetHeight" id="setHeight"><!-- --></a>
-<div class="evenrow">
-	
-	<div class="method-header">
-		<img src="../media/images/Method.png" />
-		<span class="method-title">setHeight</span> (line <span class="line-number">77</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-	<ul class="tags">
-				<li><span class="field">access:</span> public</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result">void</span>
-		<span class="method-name">
-			setHeight
-		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$height</span>)
-			</div>
-	
-			<ul class="parameters">
-					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$height</span>			</li>
-				</ul>
-		
-			
-	</div>
-<a name="methodsetType" id="setType"><!-- --></a>
-<div class="oddrow">
-	
-	<div class="method-header">
-		<img src="../media/images/Method.png" />
-		<span class="method-title">setType</span> (line <span class="line-number">74</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-	<ul class="tags">
-				<li><span class="field">access:</span> public</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result">void</span>
-		<span class="method-name">
-			setType
-		</span>
-					(<span class="var-type">int</span>&nbsp;<span class="var-name">$type</span>)
-			</div>
-	
-			<ul class="parameters">
-					<li>
-				<span class="var-type">int</span>
-				<span class="var-name">$type</span><span class="var-description">: One of IMAGETYPE_XXX</span>			</li>
-				</ul>
-		
-			
-	</div>
-<a name="methodsetWidth" id="setWidth"><!-- --></a>
-<div class="evenrow">
-	
-	<div class="method-header">
-		<img src="../media/images/Method.png" />
-		<span class="method-title">setWidth</span> (line <span class="line-number">76</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-	<ul class="tags">
-				<li><span class="field">access:</span> public</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result">void</span>
-		<span class="method-name">
-			setWidth
-		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$width</span>)
-			</div>
-	
-			<ul class="parameters">
-					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$width</span>			</li>
-				</ul>
-		
-			
-	</div>
-							<h4>Inherited Methods</h4>
-				<a name='inherited_methods'><!-- --></a>	
-									<!-- =========== Summary =========== -->
-					<p>Inherited From <span class="classname"><a href="../File/File.html">File</a></span></p>
-					<blockquote>
-													<img src="../media/images/Constructor.png" alt=" "/>
-							<span class="method-name"><a href="../File/File.html#method__construct">File::__construct()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../File/File.html#methodcreate">File::create()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../File/File.html#methodgetContent">File::getContent()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../File/File.html#methodgetMimeType">File::getMimeType()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../File/File.html#methodgetName">File::getName()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../File/File.html#methodgetSize">File::getSize()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../File/File.html#methodgetSource">File::getSource()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../File/File.html#methodgetUri">File::getUri()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../File/File.html#methodsave">File::save()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../File/File.html#methodsetContent">File::setContent()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../File/File.html#methodsetMimeType">File::setMimeType()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../File/File.html#methodsetName">File::setName()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../File/File.html#methodsetSize">File::setSize()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../File/File.html#methodsetSource">File::setSource()</a></span><br>
-											</blockquote>
-										
-		</div>
-	</div>
+<br /><br />
 
-	<a name="sec-consts"></a>
-	<div class="info-box">
-		<div class="info-box-title">Class Constants</div>
-		<div class="nav-bar">
-			<a href="#sec-description">Description</a> |
-										<a href="#sec-var-summary">Constants</a> (<span class="disabled">details</span>)
-						
-			
-												<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
-														| 
-									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
-							
-					</div>
-		<div class="info-box-body">
-										<h4>Inherited Constants</h4>
-				<A NAME='inherited_consts'><!-- --></A>
-									<p>Inherited from <span class="classname"><a href="../File/File.html">File</a></span></p>
-					<blockquote>
-													<img src="../media/images/Variable.png" />
-							<span class="const-title">
-								<span class="const-name"><a href="../File/File.html#constSOURCE_FILE">File::SOURCE_FILE</a></span><br>
-							</span>
-													<img src="../media/images/Variable.png" />
-							<span class="const-title">
-								<span class="const-name"><a href="../File/File.html#constSOURCE_FORM">File::SOURCE_FORM</a></span><br>
-							</span>
-													<img src="../media/images/Variable.png" />
-							<span class="const-title">
-								<span class="const-name"><a href="../File/File.html#constSOURCE_FTP">File::SOURCE_FTP</a></span><br>
-							</span>
-													<img src="../media/images/Variable.png" />
-							<span class="const-title">
-								<span class="const-name"><a href="../File/File.html#constSOURCE_HTTP">File::SOURCE_HTTP</a></span><br>
-							</span>
-													<img src="../media/images/Variable.png" />
-							<span class="const-title">
-								<span class="const-name"><a href="../File/File.html#constSOURCE_LOCAL">File::SOURCE_LOCAL</a></span><br>
-							</span>
-													<img src="../media/images/Variable.png" />
-							<span class="const-title">
-								<span class="const-name"><a href="../File/File.html#constSOURCE_REMOTE">File::SOURCE_REMOTE</a></span><br>
-							</span>
-													<img src="../media/images/Variable.png" />
-							<span class="const-title">
-								<span class="const-name"><a href="../File/File.html#constSOURCE_USER">File::SOURCE_USER</a></span><br>
-							</span>
-											</blockquote> 
-										
-		</div>
-	</div>
+	Overrides <a href="../File/File.html#methodcreate">File::create()</a> (This is a wrapper for (new FileRetriever())-&gt;create())<br /><br />
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">mixed&nbsp;&nbsp;</td>
+        <td><b>$data</b>&nbsp;&nbsp;</td>
+        <td>Is either an URL, or an array from form upload or a local path.</td>
+      </tr>
+          <tr>
+        <td class="type">int&nbsp;&nbsp;</td>
+        <td><b>$source</b>&nbsp;&nbsp;</td>
+        <td>One of File::SOURCE_XXX</td>
+      </tr>
+          <tr>
+        <td class="type">int&nbsp;&nbsp;</td>
+        <td><b>$maxFileSize</b>&nbsp;&nbsp;</td>
+        <td>in kilobytes.</td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodgetFile"></a>
+	<h3>static method getFile <span class="smalllinenumber">[line 66]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>static <a href="../File/ImageFile.html">ImageFile</a> getFile(
+
+$uri)</code>
+    </td></tr></table>
+    </td></tr></table><br />
 	
-	<p class="notes" id="credit">
-		Documentation generated by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
-	</p>
-	</div></body>
+		Creates an ImageFile instead of File.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>$uri</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+
+  <hr />
+	<a name="method__destruct"></a>
+	<h3>destructor __destruct <span class="smalllinenumber">[line 270]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void __destruct(
+)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Destroys the image if it has been created<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodgetDestinationHeight"></a>
+	<h3>method getDestinationHeight <span class="smalllinenumber">[line 87]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void getDestinationHeight(
+)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		<br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodgetDestinationWidth"></a>
+	<h3>method getDestinationWidth <span class="smalllinenumber">[line 86]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void getDestinationWidth(
+)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		<br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodgetHeight"></a>
+	<h3>method getHeight <span class="smalllinenumber">[line 84]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void getHeight(
+)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		<br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodgetImage"></a>
+	<h3>method getImage <span class="smalllinenumber">[line 96]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void getImage(
+)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Returns the image created with imagecreatefromXXX.<br /><br /><p>This method caches the image, so don't be afraid to call it several times.</p><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodgetResized"></a>
+	<h3>method getResized <span class="smalllinenumber">[line 199]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void getResized(
+array
+$proportions, bool
+$crop, bool
+$dontDistort, array
+$cropOffsets, int
+$mode)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Resizes the original image, and returns it.<br /><br /><p>See saveResized() for a detailed parameter list.</p><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">array&nbsp;&nbsp;</td>
+        <td><b>$proportions</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+          <tr>
+        <td class="type">bool&nbsp;&nbsp;</td>
+        <td><b>$crop</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+          <tr>
+        <td class="type">bool&nbsp;&nbsp;</td>
+        <td><b>$dontDistort</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+          <tr>
+        <td class="type">array&nbsp;&nbsp;</td>
+        <td><b>$cropOffsets</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+          <tr>
+        <td class="type">int&nbsp;&nbsp;</td>
+        <td><b>$mode</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodgetWidth"></a>
+	<h3>method getWidth <span class="smalllinenumber">[line 83]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void getWidth(
+)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		<br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodsaveImage"></a>
+	<h3>method saveImage <span class="smalllinenumber">[line 156]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void saveImage(
+string
+$trgUri, [int
+$mode = 0644], [resource
+$image = null])</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Saves the image.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">string&nbsp;&nbsp;</td>
+        <td><b>$trgUri</b>&nbsp;&nbsp;</td>
+        <td>The URI to save the file to.</td>
+      </tr>
+          <tr>
+        <td class="type">int&nbsp;&nbsp;</td>
+        <td><b>$mode</b>&nbsp;&nbsp;</td>
+        <td>The file mode.</td>
+      </tr>
+          <tr>
+        <td class="type">resource&nbsp;&nbsp;</td>
+        <td><b>$image</b>&nbsp;&nbsp;</td>
+        <td>The image generated with getResized for example. If this is null, and the image types are the same, then this will just copy the original file.</td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodsaveOriginal"></a>
+	<h3>method saveOriginal <span class="smalllinenumber">[line 121]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void saveOriginal(
+
+$trgUri, [
+$mode = 0644])</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		This is the same as File::save() except that it converts the image to another image format if the suffix is another one.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>$trgUri</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>$mode</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodsaveResized"></a>
+	<h3>method saveResized <span class="smalllinenumber">[line 143]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void saveResized(
+string
+$trgUri, array
+$proportions, [bool
+$crop = false], [bool
+$dontDistort = true], [array
+$cropOffsets = array(50.0, 20.0)], [int
+$mode = 0644])</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Resizes an image and saves it.<br /><br /><p>The proportions are always the maximum size of the image.  If crop is set, the image is cropped to have the exact proportions (The viewport is calculated with $cropOffsets).  If crop is not set, the image will just be distorted and resized to the new proportions if dontDistort is not set. If it is set,  the image will be scaled so it fits into the new proportions. Thus the resulting image does not have to have the same  proportions as specified in the $proportions array.  If one of the values in the proportions array is not given, there is no restriction on this length, so it will be caluclated  according to the original image proportions. In this case, $crop is always false, and $dontDistort always true.  If $proportions is bigger than the original proportions, the file is returned as is.</p><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">string&nbsp;&nbsp;</td>
+        <td><b>$trgUri</b>&nbsp;&nbsp;</td>
+        <td>The target URI.</td>
+      </tr>
+          <tr>
+        <td class="type">array&nbsp;&nbsp;</td>
+        <td><b>$proportions</b>&nbsp;&nbsp;</td>
+        <td>An array containing the width and height. eg.: array(120, 80) = 120px width and 80px height.</td>
+      </tr>
+          <tr>
+        <td class="type">bool&nbsp;&nbsp;</td>
+        <td><b>$crop</b>&nbsp;&nbsp;</td>
+        <td>Whether to crop the image or not.</td>
+      </tr>
+          <tr>
+        <td class="type">bool&nbsp;&nbsp;</td>
+        <td><b>$dontDistort</b>&nbsp;&nbsp;</td>
+        <td>If this is true, the resulting image will not be distorted but rather proportinally scaled to fit in the new proportions.</td>
+      </tr>
+          <tr>
+        <td class="type">array&nbsp;&nbsp;</td>
+        <td><b>$cropOffsets</b>&nbsp;&nbsp;</td>
+        <td>An array containing the crop offsets. If they are floats, they are interpreted as percentages. 0.0 means from the most left/top position possible, 100.0 means from the most right/bottom position possible. array(50.0, 50.0) crops from the center of the image.</td>
+      </tr>
+          <tr>
+        <td class="type">int&nbsp;&nbsp;</td>
+        <td><b>$mode</b>&nbsp;&nbsp;</td>
+        <td>The chmod of the saved file.</td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodsetDestinationHeight"></a>
+	<h3>method setDestinationHeight <span class="smalllinenumber">[line 80]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void setDestinationHeight(
+
+$height)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		<br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>$height</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodsetDestinationWidth"></a>
+	<h3>method setDestinationWidth <span class="smalllinenumber">[line 79]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void setDestinationWidth(
+
+$width)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		<br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>$width</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodsetHeight"></a>
+	<h3>method setHeight <span class="smalllinenumber">[line 77]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void setHeight(
+
+$height)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		<br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>$height</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodsetType"></a>
+	<h3>method setType <span class="smalllinenumber">[line 74]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void setType(
+int
+$type)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		<br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">int&nbsp;&nbsp;</td>
+        <td><b>$type</b>&nbsp;&nbsp;</td>
+        <td>One of IMAGETYPE_XXX</td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodsetWidth"></a>
+	<h3>method setWidth <span class="smalllinenumber">[line 76]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void setWidth(
+
+$width)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		<br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>$width</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+</div><br />
+
+
+        <div class="credit">
+		    <hr />
+		    Documentation generated by <a href="http://www.phpdoc.org">phpDocumentor 1.4.3</a>
+	      </div>
+      </td></tr></table>
+    </td>
+  </tr>
+</table>
+
+</body>
 </html>

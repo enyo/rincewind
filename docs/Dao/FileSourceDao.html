@@ -1,1321 +1,1655 @@
-<?xml version="1.0" encoding="iso-8859-1"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-  <html xmlns="http://www.w3.org/1999/xhtml">
-		<head>
-			<!-- template designed by Marco Von Ballmoos -->
-			<title>Docs For Class FileSourceDao</title>
-			<link rel="stylesheet" href="../media/stylesheet.css" />
-			<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
-		</head>
-		<body>
-			<div class="page-body">			
-<h2 class="class-name"><img src="../media/images/AbstractClass_logo.png"
-														alt="Abstract Class"
-														title="Abstract Class"
-														style="vertical-align: middle"> FileSourceDao</h2>
+<html>
+<head>
+<title>Docs For Class FileSourceDao</title>
+<link rel="stylesheet" type="text/css" href="../media/style.css">
+</head>
+<body>
 
-<a name="sec-description"></a>
-<div class="info-box">
-	<div class="info-box-title">Description</div>
-	<div class="nav-bar">
-					<span class="disabled">Description</span> |
-							<a href="#sec-descendents">Descendents</a>
-			|											<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
-						|											<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
-						
-											<a href="#sec-consts">Constants</a>
-						
+<table border="0" cellspacing="0" cellpadding="0" height="48" width="100%">
+  <tr>
+    <td class="header_top">Dao</td>
+  </tr>
+  <tr><td class="header_line"><img src="../media/empty.png" width="1" height="1" border="0" alt=""  /></td></tr>
+  <tr>
+    <td class="header_menu">
+        
+                                                                            
+                                                                                                                                                      		  [ <a href="../classtrees_Dao.html" class="menu">class tree: Dao</a> ]
+		  [ <a href="../elementindex_Dao.html" class="menu">index: Dao</a> ]
+		  	    [ <a href="../elementindex.html" class="menu">all elements</a> ]
+    </td>
+  </tr>
+  <tr><td class="header_line"><img src="../media/empty.png" width="1" height="1" border="0" alt=""  /></td></tr>
+</table>
+
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="200" class="menu">
+	<div id="ric">
+					<p><a href="../ric_README.html">README</a></p>
 			</div>
-	<div class="info-box-body">
-        		<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">The FileSourceDao is used to get a file somewhere, interpret it and act as a normal datasource.</p>
-	<ul class="tags">
-				<li><span class="field">author:</span> Matthias Loitsch &lt;<a href="mailto:developer@ma.tthias.com">developer@ma.tthias.com</a>&gt;</li>
-				<li><span class="field">copyright:</span> Copyright (c) 2010, Matthias Loitsch</li>
-				<li><span class="field">abstract:</span> </li>
-			</ul>
-		<p class="notes">
-			Located in <a class="field" href="_Dao---FileSourceDao.php.html">/Dao/FileSourceDao.php</a> (line <span class="field">26</span>)
-		</p>
-		
-				
-		<pre><a href="../Dao/Dao.html">Dao</a>
+      <b>Packages:</b><br />
+              <a href="../li_php-library.html">php-library</a><br />
+              <a href="../li_Config.html">Config</a><br />
+              <a href="../li_Dao.html">Dao</a><br />
+              <a href="../li_Database.html">Database</a><br />
+              <a href="../li_DataSource.html">DataSource</a><br />
+              <a href="../li_Date.html">Date</a><br />
+              <a href="../li_File.html">File</a><br />
+              <a href="../li_Logger.html">Logger</a><br />
+              <a href="../li_Storage.html">Storage</a><br />
+            <br /><br />
+                        <b>Files:</b><br />
+      	  <div class="package">
+			<a href="../Dao/_Dao---Dao.php.html">		Dao.php
+		</a><br>
+			<a href="../Dao/_Dao---DaoColumnAssignment.php.html">		DaoColumnAssignment.php
+		</a><br>
+			<a href="../Dao/_Dao---DaoInterface.php.html">		DaoInterface.php
+		</a><br>
+			<a href="../Dao/_Dao---DaoResultIterator.php.html">		DaoResultIterator.php
+		</a><br>
+			<a href="../Dao/_Dao---FileSourceDao.php.html">		FileSourceDao.php
+		</a><br>
+			<a href="../Dao/_Dao---FileSourceResultIterator.php.html">		FileSourceResultIterator.php
+		</a><br>
+			<a href="../Dao/_Dao---Json---JsonDao.php.html">		JsonDao.php
+		</a><br>
+			<a href="../Dao/_Dao---Json---JsonResultIterator.php.html">		JsonResultIterator.php
+		</a><br>
+			<a href="../Dao/_Dao---Mysql---MysqlDao.php.html">		MysqlDao.php
+		</a><br>
+			<a href="../Dao/_Dao---Mysql---MysqlResultIterator.php.html">		MysqlResultIterator.php
+		</a><br>
+			<a href="../Dao/_Dao---Mysql---MysqlUserDao.php.html">		MysqlUserDao.php
+		</a><br>
+			<a href="../Dao/_Dao---Postgresql---PostgresqlDao.php.html">		PostgresqlDao.php
+		</a><br>
+			<a href="../Dao/_Dao---Postgresql---PostgresqlResultIterator.php.html">		PostgresqlResultIterator.php
+		</a><br>
+			<a href="../Dao/_Dao---Postgresql---PostgresqlUserDao.php.html">		PostgresqlUserDao.php
+		</a><br>
+			<a href="../Dao/_Dao---SqlDao.php.html">		SqlDao.php
+		</a><br>
+			<a href="../Dao/_Dao---SqlResultIterator.php.html">		SqlResultIterator.php
+		</a><br>
+			<a href="../Dao/_Dao---UserDaoInterface.php.html">		UserDaoInterface.php
+		</a><br>
+			<a href="../Dao/_Dao---Xml---XmlDao.php.html">		XmlDao.php
+		</a><br>
+			<a href="../Dao/_Dao---Xml---XmlResultIterator.php.html">		XmlResultIterator.php
+		</a><br>
+	  </div><br />
+	subpackage <b>DataObject</b><br>  <div class="package">
+			<a href="../Dao/DataObject/_DataObject---DataObject.php.html">		DataObject.php
+		</a><br>
+			<a href="../Dao/DataObject/_DataObject---DataObjectExceptions.php.html">		DataObjectExceptions.php
+		</a><br>
+			<a href="../Dao/DataObject/_DataObject---DataObjectInterface.php.html">		DataObjectInterface.php
+		</a><br>
+			<a href="../Dao/DataObject/_DataObject---UserDataObject.php.html">		UserDataObject.php
+		</a><br>
+	  </div><br />
+	subpackage <b>Exceptions</b><br>  <div class="package">
+			<a href="../Dao/Exceptions/_Dao---DaoExceptions.php.html">		DaoExceptions.php
+		</a><br>
+			<a href="../Dao/Exceptions/_Dao---Json---JsonDaoExceptions.php.html">		JsonDaoExceptions.php
+		</a><br>
+	  </div><br />
+      
+            <b>Interfaces:</b><br />
+        <div class="package">
+		    		<a href="../Dao/DaoInterface.html">DaoInterface</a><br />
+	    		<a href="../Dao/UserDaoInterface.html">UserDaoInterface</a><br />
+	  </div>
+  <div class="package">
+	DataObject<br />	    &nbsp;&nbsp;		<a href="../Dao/DataObject/DataObjectInterface.html">DataObjectInterface</a><br />
+	  </div>
+      
+            <b>Classes:</b><br />
+        <div class="package">
+		    		<a href="../Dao/Dao.html">Dao</a><br />
+	    		<a href="../Dao/DaoColumnAssignment.html">DaoColumnAssignment</a><br />
+	    		<a href="../Dao/DaoResultIterator.html">DaoResultIterator</a><br />
+	    		<a href="../Dao/FileSourceDao.html">FileSourceDao</a><br />
+	    		<a href="../Dao/FileSourceResultIterator.html">FileSourceResultIterator</a><br />
+	    		<a href="../Dao/JsonDao.html">JsonDao</a><br />
+	    		<a href="../Dao/JsonResultIterator.html">JsonResultIterator</a><br />
+	    		<a href="../Dao/MysqlDao.html">MysqlDao</a><br />
+	    		<a href="../Dao/MysqlResultIterator.html">MysqlResultIterator</a><br />
+	    		<a href="../Dao/MysqlUserDao.html">MysqlUserDao</a><br />
+	    		<a href="../Dao/PostgresqlResultIterator.html">PostgresqlResultIterator</a><br />
+	    		<a href="../Dao/PostgresqlUserDao.html">PostgresqlUserDao</a><br />
+	    		<a href="../Dao/SqlDao.html">SqlDao</a><br />
+	    		<a href="../Dao/SqlResultIterator.html">SqlResultIterator</a><br />
+	    		<a href="../Dao/XmlDao.html">XmlDao</a><br />
+	    		<a href="../Dao/XmlResultIterator.html">XmlResultIterator</a><br />
+	  </div>
+  <div class="package">
+	Exceptions<br />	    &nbsp;&nbsp;		<a href="../Dao/Exceptions/DaoException.html">DaoException</a><br />
+	    &nbsp;&nbsp;		<a href="../Dao/Exceptions/DaoNotFoundException.html">DaoNotFoundException</a><br />
+	    &nbsp;&nbsp;		<a href="../Dao/Exceptions/DaoNotSupportedException.html">DaoNotSupportedException</a><br />
+	    &nbsp;&nbsp;		<a href="../Dao/Exceptions/DaoWrongValueException.html">DaoWrongValueException</a><br />
+	    &nbsp;&nbsp;		<a href="../Dao/Exceptions/DataObjectException.html">DataObjectException</a><br />
+	    &nbsp;&nbsp;		<a href="../Dao/Exceptions/JsonDaoException.html">JsonDaoException</a><br />
+	    &nbsp;&nbsp;		<a href="../Dao/Exceptions/XmlDaoException.html">XmlDaoException</a><br />
+	  </div>
+  <div class="package">
+	DataObject<br />	    &nbsp;&nbsp;		<a href="../Dao/DataObject/DataObject.html">DataObject</a><br />
+	    &nbsp;&nbsp;		<a href="../Dao/DataObject/UserDataObject.html">UserDataObject</a><br />
+	  </div>
+                </td>
+    <td>
+      <table cellpadding="10" cellspacing="0" width="100%" border="0"><tr><td valign="top">
+
+<h1>Class: FileSourceDao</h1>
+Source Location: /Dao/FileSourceDao.php<br /><br />
+
+
+<table width="100%" border="0">
+<tr><td valign="top">
+
+<h3><a href="#class_details">Class Overview</a></h3>
+<pre><a href="../Dao/Dao.html">Dao</a>
    |
-   --FileSourceDao</pre>
-	
-			</div>
+   --FileSourceDao</pre><br />
+<div class="description">The FileSourceDao is used to get a file somewhere, interpret it and act as a normal datasource.</div><br /><br />
+<h4>Author(s):</h4>
+<ul>
+          <li>Matthias Loitsch &lt;<a href="mailto:developer@ma.tthias.com">developer@ma.tthias.com</a>&gt;</li>
+                  </ul>
+
+
+
+
+          
+      
+
+<h4>Copyright:</h4>
+<ul>
+  <li>Copyright (c) 2010, Matthias Loitsch</li>
+</ul>
+        
+</td>
+
+<td valign="top">
+<h3><a href="#class_vars">Variables</a></h3>
+<ul>
+    <li><a href="../Dao/FileSourceDao.html#var$fileDataSource">$fileDataSource</a></li>
+  </ul>
+</td>
+
+
+<td valign="top">
+<h3><a href="#class_methods">Methods</a></h3>
+<ul>
+    <li><a href="../Dao/FileSourceDao.html#method__construct">__construct</a></li>
+    <li><a href="../Dao/FileSourceDao.html#methodbeginTransaction">beginTransaction</a></li>
+    <li><a href="../Dao/FileSourceDao.html#methodcommit">commit</a></li>
+    <li><a href="../Dao/FileSourceDao.html#methodconvertRemoteValueToTimestamp">convertRemoteValueToTimestamp</a></li>
+    <li><a href="../Dao/FileSourceDao.html#methodcreateIterator">createIterator</a></li>
+    <li><a href="../Dao/FileSourceDao.html#methoddelete">delete</a></li>
+    <li><a href="../Dao/FileSourceDao.html#methodescapeColumn">escapeColumn</a></li>
+    <li><a href="../Dao/FileSourceDao.html#methodescapeTable">escapeTable</a></li>
+    <li><a href="../Dao/FileSourceDao.html#methodexportColumn">exportColumn</a></li>
+    <li><a href="../Dao/FileSourceDao.html#methodexportMap">exportMap</a></li>
+    <li><a href="../Dao/FileSourceDao.html#methodexportTable">exportTable</a></li>
+    <li><a href="../Dao/FileSourceDao.html#methodgenerateSortString">generateSortString</a></li>
+    <li><a href="../Dao/FileSourceDao.html#methodget">get</a></li>
+    <li><a href="../Dao/FileSourceDao.html#methodgetData">getData</a></li>
+    <li><a href="../Dao/FileSourceDao.html#methodgetFileDataSource">getFileDataSource</a></li>
+    <li><a href="../Dao/FileSourceDao.html#methodgetIterator">getIterator</a></li>
+    <li><a href="../Dao/FileSourceDao.html#methodgetIteratorFromData">getIteratorFromData</a></li>
+    <li><a href="../Dao/FileSourceDao.html#methodgetTotalCount">getTotalCount</a></li>
+    <li><a href="../Dao/FileSourceDao.html#methodinsert">insert</a></li>
+    <li><a href="../Dao/FileSourceDao.html#methodinterpretFileContent">interpretFileContent</a></li>
+    <li><a href="../Dao/FileSourceDao.html#methodrollback">rollback</a></li>
+    <li><a href="../Dao/FileSourceDao.html#methodupdate">update</a></li>
+  </ul>
+</td>
+
+</tr></table>
+<hr />
+
+<table width="100%" border="0"><tr>
+
+
+<td valign="top">
+<h3>Child classes:</h3>
+<div class="tags">
+<dl>
+<dt><a href="../Dao/JsonDao.html">JsonDao</a></dt>
+	<dd>The JsonDao implementation of a FileSourceDao</dd>
+</dl>
+<dl>
+<dt><a href="../Dao/XmlDao.html">XmlDao</a></dt>
+	<dd>The XmlDao implementation of a FileDao</dd>
+</dl>
+</div>
+</td>
+
+<td valign="top">
+<h3>Inherited Constants</h3>
+<div class="tags">
+<h4>Class: <a href="../Dao/Dao.html">Dao</a></h4>
+<dl>
+<dt>
+  <a href="../Dao/Dao.html#constASC">Dao::ASC</a>
+</dt>
+<dd>
+   
+</dd>
+<dt>
+  <a href="../Dao/Dao.html#constBOOL">Dao::BOOL</a>
+</dt>
+<dd>
+   
+</dd>
+<dt>
+  <a href="../Dao/Dao.html#constBOOLEAN">Dao::BOOLEAN</a>
+</dt>
+<dd>
+   
+</dd>
+<dt>
+  <a href="../Dao/Dao.html#constDATE">Dao::DATE</a>
+</dt>
+<dd>
+   
+</dd>
+<dt>
+  <a href="../Dao/Dao.html#constDATE_WITH_TIME">Dao::DATE_WITH_TIME</a>
+</dt>
+<dd>
+   
+</dd>
+<dt>
+  <a href="../Dao/Dao.html#constDESC">Dao::DESC</a>
+</dt>
+<dd>
+   
+</dd>
+<dt>
+  <a href="../Dao/Dao.html#constDO_NOT_EXPORT_VALUES">Dao::DO_NOT_EXPORT_VALUES</a>
+</dt>
+<dd>
+   
+</dd>
+<dt>
+  <a href="../Dao/Dao.html#constFLOAT">Dao::FLOAT</a>
+</dt>
+<dd>
+   
+</dd>
+<dt>
+  <a href="../Dao/Dao.html#constIGNORE">Dao::IGNORE</a>
+</dt>
+<dd>
+   
+</dd>
+<dt>
+  <a href="../Dao/Dao.html#constINT">Dao::INT</a>
+</dt>
+<dd>
+   
+</dd>
+<dt>
+  <a href="../Dao/Dao.html#constINTEGER">Dao::INTEGER</a>
+</dt>
+<dd>
+   
+</dd>
+<dt>
+  <a href="../Dao/Dao.html#constSORT_ASCENDING">Dao::SORT_ASCENDING</a>
+</dt>
+<dd>
+   
+</dd>
+<dt>
+  <a href="../Dao/Dao.html#constSORT_DESCENDING">Dao::SORT_DESCENDING</a>
+</dt>
+<dd>
+   
+</dd>
+<dt>
+  <a href="../Dao/Dao.html#constSTRING">Dao::STRING</a>
+</dt>
+<dd>
+   
+</dd>
+<dt>
+  <a href="../Dao/Dao.html#constTEXT">Dao::TEXT</a>
+</dt>
+<dd>
+   
+</dd>
+<dt>
+  <a href="../Dao/Dao.html#constTIMESTAMP">Dao::TIMESTAMP</a>
+</dt>
+<dd>
+   
+</dd>
+</dl>
+</div>
+</td>
+
+<td valign="top">
+<h3>Inherited Variables</h3>
+<div class="tags">
+<h4>Class: <a href="../Dao/Dao.html">Dao</a></h4>
+<dl>
+<dt>
+  <a href="../Dao/Dao.html#var$additionalColumnTypes">Dao::$additionalColumnTypes</a>
+  </dt>
+<dd>
+   
+</dd>
+<dt>
+  <a href="../Dao/Dao.html#var$columnExportMapping">Dao::$columnExportMapping</a>
+  </dt>
+<dd>
+   
+</dd>
+<dt>
+  <a href="../Dao/Dao.html#var$columnImportMapping">Dao::$columnImportMapping</a>
+  </dt>
+<dd>
+   
+</dd>
+<dt>
+  <a href="../Dao/Dao.html#var$columnTypes">Dao::$columnTypes</a>
+  </dt>
+<dd>
+   
+</dd>
+<dt>
+  <a href="../Dao/Dao.html#var$defaultSort">Dao::$defaultSort</a>
+  </dt>
+<dd>
+   
+</dd>
+<dt>
+  <a href="../Dao/Dao.html#var$defaultValueColumns">Dao::$defaultValueColumns</a>
+  </dt>
+<dd>
+   
+</dd>
+<dt>
+  <a href="../Dao/Dao.html#var$logger">Dao::$logger</a>
+  </dt>
+<dd>
+   
+</dd>
+<dt>
+  <a href="../Dao/Dao.html#var$nullColumns">Dao::$nullColumns</a>
+  </dt>
+<dd>
+   
+</dd>
+<dt>
+  <a href="../Dao/Dao.html#var$tableName">Dao::$tableName</a>
+  </dt>
+<dd>
+   
+</dd>
+<dt>
+  <a href="../Dao/Dao.html#var$viewName">Dao::$viewName</a>
+  </dt>
+<dd>
+   
+</dd>
+</dl>
+</div>
+</td>
+
+<td valign="top">
+<h3>Inherited Methods</h3>
+<div class="tags">
+<h4>Class: <a href="../Dao/Dao.html">Dao</a></h4>
+<dl>
+    <dt>
+    <a href="../Dao/Dao.html#methodafterDelete">Dao::afterDelete()</a>
+  </dt>
+  <dd>
+    If you have to do stuff after a deletion, overwrite this function.
+  </dd>
+    <dt>
+    <a href="../Dao/Dao.html#methodafterInsert">Dao::afterInsert()</a>
+  </dt>
+  <dd>
+    If you have to do stuff after an insert, overwrite this function.
+  </dd>
+    <dt>
+    <a href="../Dao/Dao.html#methodafterUpdate">Dao::afterUpdate()</a>
+  </dt>
+  <dd>
+    If you have to do stuff after an update, overwrite this function.
+  </dd>
+    <dt>
+    <a href="../Dao/Dao.html#methodapplyColumnExportMapping">Dao::applyColumnExportMapping()</a>
+  </dt>
+  <dd>
+    Takes a column and sees if there is an import/export mapping for it.
+  </dd>
+    <dt>
+    <a href="../Dao/Dao.html#methodapplyColumnImportMapping">Dao::applyColumnImportMapping()</a>
+  </dt>
+  <dd>
+    Takes a column and sees if there is an import/export mapping for it.
+  </dd>
+    <dt>
+    <a href="../Dao/Dao.html#methodcolumnExists">Dao::columnExists()</a>
+  </dt>
+  <dd>
+    Checks if a column name exists as real or additional column.
+  </dd>
+    <dt>
+    <a href="../Dao/Dao.html#methodconvertRemoteValueToTimestamp">Dao::convertRemoteValueToTimestamp()</a>
+  </dt>
+  <dd>
+    Converts a database value to a timestamp.
+  </dd>
+    <dt>
+    <a href="../Dao/Dao.html#methoddebug">Dao::debug()</a>
+  </dt>
+  <dd>
+    
+  </dd>
+    <dt>
+    <a href="../Dao/Dao.html#methoddeleteById">Dao::deleteById()</a>
+  </dt>
+  <dd>
+    Gets the object by id and deletes it.
+  </dd>
+    <dt>
+    <a href="../Dao/Dao.html#methodexportBool">Dao::exportBool()</a>
+  </dt>
+  <dd>
+    
+  </dd>
+    <dt>
+    <a href="../Dao/Dao.html#methodexportColumn">Dao::exportColumn()</a>
+  </dt>
+  <dd>
+    Has to determine the correct column (with import/export mappings), escape and quote it.
+  </dd>
+    <dt>
+    <a href="../Dao/Dao.html#methodexportDate">Dao::exportDate()</a>
+  </dt>
+  <dd>
+    
+  </dd>
+    <dt>
+    <a href="../Dao/Dao.html#methodexportEnum">Dao::exportEnum()</a>
+  </dt>
+  <dd>
+    If the value is in the enum list, it calls exportString, and returns it.
+  </dd>
+    <dt>
+    <a href="../Dao/Dao.html#methodexportFloat">Dao::exportFloat()</a>
+  </dt>
+  <dd>
+    
+  </dd>
+    <dt>
+    <a href="../Dao/Dao.html#methodexportInteger">Dao::exportInteger()</a>
+  </dt>
+  <dd>
+    
+  </dd>
+    <dt>
+    <a href="../Dao/Dao.html#methodexportNull">Dao::exportNull()</a>
+  </dt>
+  <dd>
+    
+  </dd>
+    <dt>
+    <a href="../Dao/Dao.html#methodexportString">Dao::exportString()</a>
+  </dt>
+  <dd>
+    If your strings need quoting, do that in here.
+  </dd>
+    <dt>
+    <a href="../Dao/Dao.html#methodexportTable">Dao::exportTable()</a>
+  </dt>
+  <dd>
+    Escapes and quotes a table name.
+  </dd>
+    <dt>
+    <a href="../Dao/Dao.html#methodexportValue">Dao::exportValue()</a>
+  </dt>
+  <dd>
+    Exports a PHP value into a value understood by the Database
+  </dd>
+    <dt>
+    <a href="../Dao/Dao.html#methodgenerateInsertArrays">Dao::generateInsertArrays()</a>
+  </dt>
+  <dd>
+    Returns the arrays containing the columns, and values to perform an insert.
+  </dd>
+    <dt>
+    <a href="../Dao/Dao.html#methodgenerateSortString">Dao::generateSortString()</a>
+  </dt>
+  <dd>
+    Given the $sort parameter, it generates a sort String used in the query.
+  </dd>
+    <dt>
+    <a href="../Dao/Dao.html#methodgetAdditionalColumnTypes">Dao::getAdditionalColumnTypes()</a>
+  </dt>
+  <dd>
+    Returns the additional column types array
+  </dd>
+    <dt>
+    <a href="../Dao/Dao.html#methodgetAll">Dao::getAll()</a>
+  </dt>
+  <dd>
+    Returns all rows (but you can specify offset &amp;amp; limit)
+  </dd>
+    <dt>
+    <a href="../Dao/Dao.html#methodgetAllAsArrays">Dao::getAllAsArrays()</a>
+  </dt>
+  <dd>
+    
+  </dd>
+    <dt>
+    <a href="../Dao/Dao.html#methodgetById">Dao::getById()</a>
+  </dt>
+  <dd>
+    This is a wrapper for get() and the id as parameter.
+  </dd>
+    <dt>
+    <a href="../Dao/Dao.html#methodgetColumnTypes">Dao::getColumnTypes()</a>
+  </dt>
+  <dd>
+    Returns the column types array
+  </dd>
+    <dt>
+    <a href="../Dao/Dao.html#methodgetDefaultValueColumns">Dao::getDefaultValueColumns()</a>
+  </dt>
+  <dd>
+    Returns the default value columns
+  </dd>
+    <dt>
+    <a href="../Dao/Dao.html#methodgetNullColumns">Dao::getNullColumns()</a>
+  </dt>
+  <dd>
+    Returns the null columns
+  </dd>
+    <dt>
+    <a href="../Dao/Dao.html#methodgetObjectFromData">Dao::getObjectFromData()</a>
+  </dt>
+  <dd>
+    Prepares the data, and gets a new object.
+  </dd>
+    <dt>
+    <a href="../Dao/Dao.html#methodgetObjectFromPreparedData">Dao::getObjectFromPreparedData()</a>
+  </dt>
+  <dd>
+    Returns a data object with the data in it.
+  </dd>
+    <dt>
+    <a href="../Dao/Dao.html#methodgetRawObject">Dao::getRawObject()</a>
+  </dt>
+  <dd>
+    Returns an object with all columns defined, but only set if necessary.
+  </dd>
+    <dt>
+    <a href="../Dao/Dao.html#methodimportBool">Dao::importBool()</a>
+  </dt>
+  <dd>
+    This function tries to convert strings integers and stuff into a bool.
+  </dd>
+    <dt>
+    <a href="../Dao/Dao.html#methodimportColumn">Dao::importColumn()</a>
+  </dt>
+  <dd>
+    Converts the database column name to a valid php name.
+  </dd>
+    <dt>
+    <a href="../Dao/Dao.html#methodimportDate">Dao::importDate()</a>
+  </dt>
+  <dd>
+    Calls convertRemoteValueToTimestamp and returns a Date Object.
+  </dd>
+    <dt>
+    <a href="../Dao/Dao.html#methodimportEnum">Dao::importEnum()</a>
+  </dt>
+  <dd>
+    Checks if the value is present in the enum. Throws a DaoException if not.
+  </dd>
+    <dt>
+    <a href="../Dao/Dao.html#methodimportFloat">Dao::importFloat()</a>
+  </dt>
+  <dd>
+    Simple PHP conversion.
+  </dd>
+    <dt>
+    <a href="../Dao/Dao.html#methodimportInteger">Dao::importInteger()</a>
+  </dt>
+  <dd>
+    Simple PHP conversion.
+  </dd>
+    <dt>
+    <a href="../Dao/Dao.html#methodimportString">Dao::importString()</a>
+  </dt>
+  <dd>
+    Simple PHP conversion.
+  </dd>
+    <dt>
+    <a href="../Dao/Dao.html#methodimportValue">Dao::importValue()</a>
+  </dt>
+  <dd>
+    Imports an external value (either from database, or xml, etc...) into an expected PHP variable.
+  </dd>
+    <dt>
+    <a href="../Dao/Dao.html#methodinterpretSortVariable">Dao::interpretSortVariable()</a>
+  </dt>
+  <dd>
+    Tries to interpret a $sort parameter, which can be one of following:
+  </dd>
+    <dt>
+    <a href="../Dao/Dao.html#methodisVector">Dao::isVector()</a>
+  </dt>
+  <dd>
+    This is a helper class that defines if an array is a &quot;vector&quot; (has only integer indices starting from 0) or an associative array.
+  </dd>
+    <dt>
+    <a href="../Dao/Dao.html#methodlog">Dao::log()</a>
+  </dt>
+  <dd>
+    
+  </dd>
+    <dt>
+    <a href="../Dao/Dao.html#methodnotNull">Dao::notNull()</a>
+  </dt>
+  <dd>
+    Returns true if the column can not be null.
+  </dd>
+    <dt>
+    <a href="../Dao/Dao.html#methodprepareDataForObject">Dao::prepareDataForObject()</a>
+  </dt>
+  <dd>
+    Goes through the data array returned from the database, and converts the values that are necessary.
+  </dd>
+    <dt>
+    <a href="../Dao/Dao.html#methodsetLogger">Dao::setLogger()</a>
+  </dt>
+  <dd>
+    
+  </dd>
+    <dt>
+    <a href="../Dao/Dao.html#methodsetLoggerFactory">Dao::setLoggerFactory()</a>
+  </dt>
+  <dd>
+    
+  </dd>
+    <dt>
+    <a href="../Dao/Dao.html#methodupdateObjectWithData">Dao::updateObjectWithData()</a>
+  </dt>
+  <dd>
+    Prepares the data, and updates the object
+  </dd>
+    <dt>
+    <a href="../Dao/Dao.html#method__call">Dao::__call()</a>
+  </dt>
+  <dd>
+    Temporarly all getXXXIterator() calls get converted to getXXX().
+  </dd>
+  </dl>
+</div>
+</td>
+
+</tr></table>
+<hr />
+
+<a name="class_details"></a>
+<h3>Class Details</h3>
+<div class="tags">
+[line 26]<br />
+The FileSourceDao is used to get a file somewhere, interpret it and act as a normal datasource.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>author:</b>&nbsp;&nbsp;</td><td>Matthias Loitsch &lt;<a href="mailto:developer@ma.tthias.com">developer@ma.tthias.com</a>&gt;</td>
+  </tr>
+  <tr>
+    <td><b>copyright:</b>&nbsp;&nbsp;</td><td>Copyright (c) 2010, Matthias Loitsch</td>
+  </tr>
+  <tr>
+    <td><b>abstract:</b>&nbsp;&nbsp;</td><td></td>
+  </tr>
+</table>
+</div>
+</div><br /><br />
+<div class="top">[ <a href="#top">Top</a> ]</div><br />
+
+<hr />
+<a name="class_vars"></a>
+<h3>Class Variables</h3>
+<div class="tags">
+	<a name="var$fileDataSource"></a>
+	<p></p>
+	<h4>$fileDataSource = <span class="value"></span></h4>
+	<p>[line 31]</p>
+  <br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
+  </tr>
+</table>
 </div>
 
-	<a name="sec-descendents"></a>
-	<div class="info-box">
-		<div class="info-box-title">Direct descendents</div>
-		<div class="nav-bar">
-			<a href="#sec-description">Description</a> |
-			<span class="disabled">Descendents</span>
-			|												<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
-								|															<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
-							
-															<a href="#sec-consts">Constants</a>
-							
-					</div>
-		<div class="info-box-body">
-			<table cellpadding="2" cellspacing="0" class="class-table">
-				<tr>
-					<th class="class-table-header">Class</th>
-					<th class="class-table-header">Description</th>
-				</tr>
-								<tr>
-					<td style="padding-right: 2em; white-space: nowrap">
-						<img src="../media/images/Class.png"
-								 alt=" class"
-								 title=" class"
-								 style="vertical-align: center"/>
-						<a href="../Dao/JsonDao.html">JsonDao</a>
-					</td>
-					<td>
-											The JsonDao implementation of a FileSourceDao
-										</td>
-				</tr>
-								<tr>
-					<td style="padding-right: 2em; white-space: nowrap">
-						<img src="../media/images/Class.png"
-								 alt=" class"
-								 title=" class"
-								 style="vertical-align: center"/>
-						<a href="../Dao/XmlDao.html">XmlDao</a>
-					</td>
-					<td>
-											The XmlDao implementation of a FileDao
-										</td>
-				</tr>
-							</table>
-		</div>
-	</div>
+  <br />
+	<div class="tags">
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td><b>Type:</b>&nbsp;&nbsp;</td>
+      <td>mixed</td>
+    </tr>
+      </table>
+	</div><br /><br />
+	<div class="top">[ <a href="#top">Top</a> ]</div><br />
+</div><br />
 
+<hr />
+<a name="class_methods"></a>
+<h3>Class Methods</h3>
+<div class="tags">
 
-	<a name="sec-var-summary"></a>
-	<div class="info-box">
-		<div class="info-box-title">Variable Summary</span></div>
-		<div class="nav-bar">
-			<a href="#sec-description">Description</a> |
-							<a href="#sec-descendents">Descendants</a> |
-						<span class="disabled">Vars</span> (<a href="#sec-vars">details</a>)
-							| 
-									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
-							
-															<a href="#sec-consts">Constants</a>
-							
-					</div>
-		<div class="info-box-body">
-			<div class="var-summary">
-																								<div class="var-title">
-					<img src="../media/images/Variable.png" alt=" " />
-					<span class="var-type">mixed</span>
-					<a href="#$fileDataSource" title="details" class="var-name">$fileDataSource</a>
-				</div>
-											</div>
-		</div>
-	</div>
-
-	<a name="sec-method-summary"></a>
-	<div class="info-box">
-		<div class="info-box-title">Method Summary</span></div>
-		<div class="nav-bar">
-			<a href="#sec-description">Description</a> |
-							<a href="#sec-descendents">Descendants</a> |
-															<a href="#sec-consts">Constants</a>
-							
-															<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
-				 
-				|
-						<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
-		</div>
-		<div class="info-box-body">			
-			<div class="method-summary">
-																																																																																																																																																																																																<div class="method-definition">
-					<img src="../media/images/Constructor.png" alt=" "/>
-											<span class="method-result">FileSourceDao</span>
-										<a href="#__construct" title="details" class="method-name">__construct</a>
-											(<span class="var-type"><a href="../DataSource/FileDataSource.html">FileDataSource</a></span>&nbsp;<span class="var-name">$fileDataSource</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$tableName</span> = <span class="var-default">null</span>], [<span class="var-type">array</span>&nbsp;<span class="var-name">$columnTypes</span> = <span class="var-default">null</span>], [<span class="var-type">array</span>&nbsp;<span class="var-name">$nullColumns</span> = <span class="var-default">null</span>], [<span class="var-type">array</span>&nbsp;<span class="var-name">$defaultColumns</span> = <span class="var-default">null</span>])
-									</div>
-																<div class="method-definition">
-					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result">void</span>
-										<a href="#beginTransaction" title="details" class="method-name">beginTransaction</a>
-										()
-									</div>
-																<div class="method-definition">
-					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result">void</span>
-										<a href="#commit" title="details" class="method-name">commit</a>
-										()
-									</div>
-																<div class="method-definition">
-					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result">void</span>
-										<a href="#convertRemoteValueToTimestamp" title="details" class="method-name">convertRemoteValueToTimestamp</a>
-											(<span class="var-type">string</span>&nbsp;<span class="var-name">$databaseValue</span>, <span class="var-type">bool</span>&nbsp;<span class="var-name">$withTime</span>)
-									</div>
-																<div class="method-definition">
-					<img src="../media/images/AbstractMethod.png" alt=" "/>
-											<span class="method-result">FileResultIterator</span>
-										<a href="#createIterator" title="details" class="method-name">createIterator</a>
-											(<span class="var-type">array</span>&nbsp;<span class="var-name">$data</span>)
-									</div>
-																<div class="method-definition">
-					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result">void</span>
-										<a href="#delete" title="details" class="method-name">delete</a>
-											(<span class="var-type"><a href="../Dao/DataObject/DataObject.html">DataObject</a></span>&nbsp;<span class="var-name">$object</span>)
-									</div>
-																<div class="method-definition">
-					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result">string</span>
-										<a href="#escapeColumn" title="details" class="method-name">escapeColumn</a>
-											(<span class="var-type">string</span>&nbsp;<span class="var-name">$column</span>)
-									</div>
-																<div class="method-definition">
-					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result">string</span>
-										<a href="#escapeTable" title="details" class="method-name">escapeTable</a>
-											([<span class="var-type">string</span>&nbsp;<span class="var-name">$table</span> = <span class="var-default">null</span>])
-									</div>
-																<div class="method-definition">
-					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result">string</span>
-										<a href="#exportColumn" title="details" class="method-name">exportColumn</a>
-											(<span class="var-type">string</span>&nbsp;<span class="var-name">$column</span>)
-									</div>
-																<div class="method-definition">
-					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result">array</span>
-										<a href="#exportMap" title="details" class="method-name">exportMap</a>
-											(<span class="var-type">array</span>&nbsp;<span class="var-name">$map</span>)
-									</div>
-																<div class="method-definition">
-					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result">string</span>
-										<a href="#exportTable" title="details" class="method-name">exportTable</a>
-											([<span class="var-type">string</span>&nbsp;<span class="var-name">$table</span> = <span class="var-default">null</span>])
-									</div>
-																<div class="method-definition">
-					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result">void</span>
-										<a href="#generateSortString" title="details" class="method-name">generateSortString</a>
-											(<span class="var-type">string|array</span>&nbsp;<span class="var-name">$sort</span>)
-									</div>
-																<div class="method-definition">
-					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result"><a href="../Dao/DataObject/DataObject.html">DataObject</a></span>
-										<a href="#get" title="details" class="method-name">get</a>
-											([<span class="var-type">array</span>&nbsp;<span class="var-name">$map</span> = <span class="var-default">null</span>], [<span class="var-type">bool</span>&nbsp;<span class="var-name">$exportValues</span> = <span class="var-default">true</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$tableName</span> = <span class="var-default">null</span>])
-									</div>
-																<div class="method-definition">
-					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result">array</span>
-										<a href="#getData" title="details" class="method-name">getData</a>
-											(<span class="var-type">array</span>&nbsp;<span class="var-name">$map</span>, [<span class="var-type">bool</span>&nbsp;<span class="var-name">$exportValues</span> = <span class="var-default">true</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$tableName</span> = <span class="var-default">null</span>])
-									</div>
-																<div class="method-definition">
-					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result"><a href="../DataSource/FileDataSource.html">FileDataSource</a></span>
-										<a href="#getFileDataSource" title="details" class="method-name">getFileDataSource</a>
-										()
-									</div>
-																<div class="method-definition">
-					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result"><a href="../Dao/DaoResultIterator.html">DaoResultIterator</a></span>
-										<a href="#getIterator" title="details" class="method-name">getIterator</a>
-											(<span class="var-type">array</span>&nbsp;<span class="var-name">$map</span>, [<span class="var-type">string|array</span>&nbsp;<span class="var-name">$sort</span> = <span class="var-default">null</span>], [<span class="var-type">int</span>&nbsp;<span class="var-name">$offset</span> = <span class="var-default">null</span>], [<span class="var-type">int</span>&nbsp;<span class="var-name">$limit</span> = <span class="var-default">null</span>], [<span class="var-type">bool</span>&nbsp;<span class="var-name">$exportValues</span> = <span class="var-default">true</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$tableName</span> = <span class="var-default">null</span>])
-									</div>
-																<div class="method-definition">
-					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result">FileResultIterator</span>
-										<a href="#getIteratorFromData" title="details" class="method-name">getIteratorFromData</a>
-											(<span class="var-type">string</span>&nbsp;<span class="var-name">$data</span>)
-									</div>
-																<div class="method-definition">
-					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result">int</span>
-										<a href="#getTotalCount" title="details" class="method-name">getTotalCount</a>
-										()
-									</div>
-																<div class="method-definition">
-					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result"><a href="../Dao/DataObject/DataObject.html">DataObject</a></span>
-										<a href="#insert" title="details" class="method-name">insert</a>
-											(<span class="var-type"><a href="../Dao/DataObject/DataObject.html">DataObject</a></span>&nbsp;<span class="var-name">$object</span>)
-									</div>
-																<div class="method-definition">
-					<img src="../media/images/AbstractMethod.png" alt=" "/>
-											<span class="method-result">array</span>
-										<a href="#interpretFileContent" title="details" class="method-name">interpretFileContent</a>
-											(<span class="var-type">string</span>&nbsp;<span class="var-name">$content</span>)
-									</div>
-																<div class="method-definition">
-					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result">void</span>
-										<a href="#rollback" title="details" class="method-name">rollback</a>
-										()
-									</div>
-																<div class="method-definition">
-					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result"><a href="../Dao/DataObject/DataObject.html">DataObject</a></span>
-										<a href="#update" title="details" class="method-name">update</a>
-											(<span class="var-type"><a href="../Dao/DataObject/DataObject.html">DataObject</a></span>&nbsp;<span class="var-name">$object</span>)
-									</div>
-											</div>
-		</div>
-	</div>		
-
-	<a name="sec-vars"></a>
-	<div class="info-box">
-		<div class="info-box-title">Variables</div>
-		<div class="nav-bar">
-			<a href="#sec-description">Description</a> |
-							<a href="#sec-descendents">Descendents</a> |
-										<a href="#sec-var-summary">Vars</a> (<span class="disabled">details</span>)
-						
-			
-												<a href="#sec-consts">Constants</a>
-							
-										| 
-									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
-							
-					</div>
-		<div class="info-box-body">
-			
-<a name="var$fileDataSource" id="$fileDataSource"><!-- --></A>
-<div class="evenrow">
-
-	<div class="var-header">
-		<img src="../media/images/Variable.png" />
-		<span class="var-title">
-			<span class="var-type">mixed</span>
-			<span class="var-name">$fileDataSource</span>
-						(line <span class="line-number">31</span>)
-		</span>
-	</div>
-
-	<!-- ========== Info from phpDoc block ========= -->
-	<ul class="tags">
-				<li><span class="field">access:</span> protected</li>
-			</ul>
+  <hr />
+	<a name="method__construct"></a>
+	<h3>constructor __construct <span class="smalllinenumber">[line 40]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>FileSourceDao __construct(
+<a href="../DataSource/FileDataSource.html">FileDataSource</a>
+$fileDataSource, [string
+$tableName = null], [array
+$columnTypes = null], [array
+$nullColumns = null], [array
+$defaultColumns = null])</code>
+    </td></tr></table>
+    </td></tr></table><br />
 	
-	
-		
-		
-
+		<br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
 </div>
-							<h4>Inherited Variables</h4>
-				<A NAME='inherited_vars'><!-- --></A>
-									<p>Inherited from <span class="classname"><a href="../Dao/Dao.html">Dao</a></span></p>
-					<blockquote>
-													<img src="../media/images/Variable.png" />
-							<span class="var-title">
-								<span class="var-name"><a href="../Dao/Dao.html#var$additionalColumnTypes">Dao::$additionalColumnTypes</a></span><br>
-							</span>
-													<img src="../media/images/Variable.png" />
-							<span class="var-title">
-								<span class="var-name"><a href="../Dao/Dao.html#var$columnExportMapping">Dao::$columnExportMapping</a></span><br>
-							</span>
-													<img src="../media/images/Variable.png" />
-							<span class="var-title">
-								<span class="var-name"><a href="../Dao/Dao.html#var$columnImportMapping">Dao::$columnImportMapping</a></span><br>
-							</span>
-													<img src="../media/images/Variable.png" />
-							<span class="var-title">
-								<span class="var-name"><a href="../Dao/Dao.html#var$columnTypes">Dao::$columnTypes</a></span><br>
-							</span>
-													<img src="../media/images/Variable.png" />
-							<span class="var-title">
-								<span class="var-name"><a href="../Dao/Dao.html#var$defaultSort">Dao::$defaultSort</a></span><br>
-							</span>
-													<img src="../media/images/Variable.png" />
-							<span class="var-title">
-								<span class="var-name"><a href="../Dao/Dao.html#var$defaultValueColumns">Dao::$defaultValueColumns</a></span><br>
-							</span>
-													<img src="../media/images/Variable.png" />
-							<span class="var-title">
-								<span class="var-name"><a href="../Dao/Dao.html#var$logger">Dao::$logger</a></span><br>
-							</span>
-													<img src="../media/images/Variable.png" />
-							<span class="var-title">
-								<span class="var-name"><a href="../Dao/Dao.html#var$nullColumns">Dao::$nullColumns</a></span><br>
-							</span>
-													<img src="../media/images/Variable.png" />
-							<span class="var-title">
-								<span class="var-name"><a href="../Dao/Dao.html#var$tableName">Dao::$tableName</a></span><br>
-							</span>
-													<img src="../media/images/Variable.png" />
-							<span class="var-title">
-								<span class="var-name"><a href="../Dao/Dao.html#var$viewName">Dao::$viewName</a></span><br>
-							</span>
-											</blockquote> 
-										
-		</div>
-	</div>
-	
-	<a name="sec-methods"></a>
-	<div class="info-box">
-		<div class="info-box-title">Methods</div>
-		<div class="nav-bar">
-			<a href="#sec-description">Description</a> |
-							<a href="#sec-descendents">Descendents</a> |
-															<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
-														<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
-						
-		</div>
-		<div class="info-box-body">
-			<A NAME='method_detail'></A>
-<a name="method__construct" id="__construct"><!-- --></a>
-<div class="oddrow">
-	
-	<div class="method-header">
-		<img src="../media/images/Constructor.png" />
-		<span class="method-title">Constructor __construct</span> (line <span class="line-number">40</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-	<ul class="tags">
-				<li><span class="field">access:</span> public</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result">FileSourceDao</span>
-		<span class="method-name">
-			__construct
-		</span>
-					(<span class="var-type"><a href="../DataSource/FileDataSource.html">FileDataSource</a></span>&nbsp;<span class="var-name">$fileDataSource</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$tableName</span> = <span class="var-default">null</span>], [<span class="var-type">array</span>&nbsp;<span class="var-name">$columnTypes</span> = <span class="var-default">null</span>], [<span class="var-type">array</span>&nbsp;<span class="var-name">$nullColumns</span> = <span class="var-default">null</span>], [<span class="var-type">array</span>&nbsp;<span class="var-name">$defaultColumns</span> = <span class="var-default">null</span>])
-			</div>
-	
-			<ul class="parameters">
-					<li>
-				<span class="var-type"><a href="../DataSource/FileDataSource.html">FileDataSource</a></span>
-				<span class="var-name">$fileDataSource</span><span class="var-description">: The fileDataSource is used to create the requests.</span>			</li>
-					<li>
-				<span class="var-type">string</span>
-				<span class="var-name">$tableName</span><span class="var-description">: You can specify this as an attribute when writing a Dao implementation</span>			</li>
-					<li>
-				<span class="var-type">array</span>
-				<span class="var-name">$columnTypes</span><span class="var-description">: You can specify this as an attribute when writing a Dao implementation</span>			</li>
-					<li>
-				<span class="var-type">array</span>
-				<span class="var-name">$nullColumns</span><span class="var-description">: You can specify this as an attribute when writing a Dao implementation</span>			</li>
-					<li>
-				<span class="var-type">array</span>
-				<span class="var-name">$defaultColumns</span><span class="var-description">: You can specify this as an attribute when writing a Dao implementation</span>			</li>
-				</ul>
-		
-			
-	</div>
-<a name="methodbeginTransaction" id="beginTransaction"><!-- --></a>
-<div class="evenrow">
-	
-	<div class="method-header">
-		<img src="../media/images/Method.png" />
-		<span class="method-title">beginTransaction</span> (line <span class="line-number">76</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Overwrite this if your file connection allows transaction.</p>
-	<ul class="tags">
-				<li><span class="field">access:</span> public</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result">void</span>
-		<span class="method-name">
-			beginTransaction
-		</span>
-				()
-			</div>
-	
-		
-			
-	</div>
-<a name="methodcommit" id="commit"><!-- --></a>
-<div class="oddrow">
-	
-	<div class="method-header">
-		<img src="../media/images/Method.png" />
-		<span class="method-title">commit</span> (line <span class="line-number">81</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Overwrite this if your file connection allows transaction.</p>
-	<ul class="tags">
-				<li><span class="field">access:</span> public</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result">void</span>
-		<span class="method-name">
-			commit
-		</span>
-				()
-			</div>
-	
-		
-			
-	</div>
-<a name="methodconvertRemoteValueToTimestamp" id="convertRemoteValueToTimestamp"><!-- --></a>
-<div class="evenrow">
-	
-	<div class="method-header">
-		<img src="../media/images/Method.png" />
-		<span class="method-title">convertRemoteValueToTimestamp</span> (line <span class="line-number">70</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Most file data connections will transfer time values as timestamps.</p>
-	<ul class="tags">
-				<li><span class="field">access:</span> protected</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result">void</span>
-		<span class="method-name">
-			convertRemoteValueToTimestamp
-		</span>
-					(<span class="var-type">string</span>&nbsp;<span class="var-name">$databaseValue</span>, <span class="var-type">bool</span>&nbsp;<span class="var-name">$withTime</span>)
-			</div>
-	
-			<ul class="parameters">
-					<li>
-				<span class="var-type">string</span>
-				<span class="var-name">$databaseValue</span>			</li>
-					<li>
-				<span class="var-type">bool</span>
-				<span class="var-name">$withTime</span>			</li>
-				</ul>
-		
-			<hr class="separator" />
-		<div class="notes">Redefinition of:</div>
-		<dl>
-			<dt><a href="../Dao/Dao.html#methodconvertRemoteValueToTimestamp">Dao::convertRemoteValueToTimestamp()</a></dt>
-						<dd>Converts a database value to a timestamp.</dd>
-					</dl>
-			
-	</div>
-<a name="methodcreateIterator" id="createIterator"><!-- --></a>
-<div class="oddrow">
-	
-	<div class="method-header">
-		<img src="../media/images/AbstractMethod.png" />
-		<span class="method-title">createIterator</span> (line <span class="line-number">62</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Creates an iterator from a data hash.</p>
-	<ul class="tags">
-				<li><span class="field">abstract:</span> </li>
-				<li><span class="field">access:</span> protected</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result">FileResultIterator</span>
-		<span class="method-name">
-			createIterator
-		</span>
-					(<span class="var-type">array</span>&nbsp;<span class="var-name">$data</span>)
-			</div>
-	
-			<ul class="parameters">
-					<li>
-				<span class="var-type">array</span>
-				<span class="var-name">$data</span>			</li>
-				</ul>
-		
-			
-			<hr class="separator" />
-		<div class="notes">Redefined in descendants as:</div>
-		<ul class="redefinitions">
-					<li>
-				<a href="../Dao/JsonDao.html#methodcreateIterator">JsonDao::createIterator()</a>
-								: Creates an iterator for a json data hash.
-							</li>
-					<li>
-				<a href="../Dao/XmlDao.html#methodcreateIterator">XmlDao::createIterator()</a>
-								: Creates an iterator for a Xml data hash.
-							</li>
-				</ul>
-	</div>
-<a name="methoddelete" id="delete"><!-- --></a>
-<div class="evenrow">
-	
-	<div class="method-header">
-		<img src="../media/images/Method.png" />
-		<span class="method-title">delete</span> (line <span class="line-number">208</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Deletes an object in the database using the id.</p>
-	<ul class="tags">
-				<li><span class="field">access:</span> public</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result">void</span>
-		<span class="method-name">
-			delete
-		</span>
-					(<span class="var-type"><a href="../Dao/DataObject/DataObject.html">DataObject</a></span>&nbsp;<span class="var-name">$object</span>)
-			</div>
-	
-			<ul class="parameters">
-					<li>
-				<span class="var-type"><a href="../Dao/DataObject/DataObject.html">DataObject</a></span>
-				<span class="var-name">$object</span>			</li>
-				</ul>
-		
-			
-	</div>
-<a name="methodescapeColumn" id="escapeColumn"><!-- --></a>
-<div class="oddrow">
-	
-	<div class="method-header">
-		<img src="../media/images/Method.png" />
-		<span class="method-title">escapeColumn</span> (line <span class="line-number">305</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">By default does nothing for FileDaos.</p>
-	<ul class="tags">
-				<li><span class="field">access:</span> protected</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result">string</span>
-		<span class="method-name">
-			escapeColumn
-		</span>
-					(<span class="var-type">string</span>&nbsp;<span class="var-name">$column</span>)
-			</div>
-	
-			<ul class="parameters">
-					<li>
-				<span class="var-type">string</span>
-				<span class="var-name">$column</span>			</li>
-				</ul>
-		
-			
-	</div>
-<a name="methodescapeTable" id="escapeTable"><!-- --></a>
-<div class="evenrow">
-	
-	<div class="method-header">
-		<img src="../media/images/Method.png" />
-		<span class="method-title">escapeTable</span> (line <span class="line-number">326</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Does nothing by default.</p>
-	<ul class="tags">
-				<li><span class="field">access:</span> protected</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result">string</span>
-		<span class="method-name">
-			escapeTable
-		</span>
-					([<span class="var-type">string</span>&nbsp;<span class="var-name">$table</span> = <span class="var-default">null</span>])
-			</div>
-	
-			<ul class="parameters">
-					<li>
-				<span class="var-type">string</span>
-				<span class="var-name">$table</span>			</li>
-				</ul>
-		
-			
-	</div>
-<a name="methodexportColumn" id="exportColumn"><!-- --></a>
-<div class="oddrow">
-	
-	<div class="method-header">
-		<img src="../media/images/Method.png" />
-		<span class="method-title">exportColumn</span> (line <span class="line-number">294</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Takes a php column name, converts it via import/export column mapping and calls escapeColumn.</p>
-<p class="description"><p>This is the correct way to insert column names in a map.</p></p>
-	<ul class="tags">
-				<li><span class="field">access:</span> public</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result">string</span>
-		<span class="method-name">
-			exportColumn
-		</span>
-					(<span class="var-type">string</span>&nbsp;<span class="var-name">$column</span>)
-			</div>
-	
-			<ul class="parameters">
-					<li>
-				<span class="var-type">string</span>
-				<span class="var-name">$column</span>			</li>
-				</ul>
-		
-			<hr class="separator" />
-		<div class="notes">Redefinition of:</div>
-		<dl>
-			<dt><a href="../Dao/Dao.html#methodexportColumn">Dao::exportColumn()</a></dt>
-						<dd>Has to determine the correct column (with import/export mappings), escape and quote it.</dd>
-					</dl>
-			
-	</div>
-<a name="methodexportMap" id="exportMap"><!-- --></a>
-<div class="evenrow">
-	
-	<div class="method-header">
-		<img src="../media/images/Method.png" />
-		<span class="method-title">exportMap</span> (line <span class="line-number">228</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">This function exports every values of a map</p>
-	<ul class="tags">
-				<li><span class="field">return:</span> The map with exported values.</li>
-				<li><span class="field">access:</span> protected</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result">array</span>
-		<span class="method-name">
-			exportMap
-		</span>
-					(<span class="var-type">array</span>&nbsp;<span class="var-name">$map</span>)
-			</div>
-	
-			<ul class="parameters">
-					<li>
-				<span class="var-type">array</span>
-				<span class="var-name">$map</span><span class="var-description">: A map containing the column assignments.</span>			</li>
-				</ul>
-		
-			
-	</div>
-<a name="methodexportTable" id="exportTable"><!-- --></a>
-<div class="oddrow">
-	
-	<div class="method-header">
-		<img src="../media/images/Method.png" />
-		<span class="method-title">exportTable</span> (line <span class="line-number">316</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Escapes a table name and potentially quotes a table name.</p>
-<p class="description"><p>By default it simply calls escapeTable</p></p>
-	<ul class="tags">
-				<li><span class="field">return:</span> The escaped and quoted table name.</li>
-				<li><span class="field">access:</span> public</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result">string</span>
-		<span class="method-name">
-			exportTable
-		</span>
-					([<span class="var-type">string</span>&nbsp;<span class="var-name">$table</span> = <span class="var-default">null</span>])
-			</div>
-	
-			<ul class="parameters">
-					<li>
-				<span class="var-type">string</span>
-				<span class="var-name">$table</span>			</li>
-				</ul>
-		
-			<hr class="separator" />
-		<div class="notes">Redefinition of:</div>
-		<dl>
-			<dt><a href="../Dao/Dao.html#methodexportTable">Dao::exportTable()</a></dt>
-						<dd>Escapes and quotes a table name.</dd>
-					</dl>
-			
-	</div>
-<a name="methodgenerateSortString" id="generateSortString"><!-- --></a>
-<div class="evenrow">
-	
-	<div class="method-header">
-		<img src="../media/images/Method.png" />
-		<span class="method-title">generateSortString</span> (line <span class="line-number">270</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">This method takes the $sort attribute and returns a typical 'order by ' SQL string.</p>
-<p class="description"><p>If $sort is false then the $this-&gt;defaultSort is used if it exists.  The sort is passed to interpretSortVariable to get a valid column list.</p></p>
-	<ul class="tags">
-				<li><span class="field">access:</span> public</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result">void</span>
-		<span class="method-name">
-			generateSortString
-		</span>
-					(<span class="var-type">string|array</span>&nbsp;<span class="var-name">$sort</span>)
-			</div>
-	
-			<ul class="parameters">
-					<li>
-				<span class="var-type">string|array</span>
-				<span class="var-name">$sort</span>			</li>
-				</ul>
-		
-			<hr class="separator" />
-		<div class="notes">Redefinition of:</div>
-		<dl>
-			<dt><a href="../Dao/Dao.html#methodgenerateSortString">Dao::generateSortString()</a></dt>
-						<dd>Given the $sort parameter, it generates a sort String used in the query.</dd>
-					</dl>
-			
-	</div>
-<a name="methodget" id="get"><!-- --></a>
-<div class="oddrow">
-	
-	<div class="method-header">
-		<img src="../media/images/Method.png" />
-		<span class="method-title">get</span> (line <span class="line-number">108</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">This is the method to get a DataObject from the database.</p>
-<p class="description"><p>If you want to select more objects, call getIterator.  If you call get() without parameters, a &quot;raw object&quot; will be returned, containing  only default values, and null as id.</p></p>
-	<ul class="tags">
-				<li><span class="field">access:</span> public</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result"><a href="../Dao/DataObject/DataObject.html">DataObject</a></span>
-		<span class="method-name">
-			get
-		</span>
-					([<span class="var-type">array</span>&nbsp;<span class="var-name">$map</span> = <span class="var-default">null</span>], [<span class="var-type">bool</span>&nbsp;<span class="var-name">$exportValues</span> = <span class="var-default">true</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$tableName</span> = <span class="var-default">null</span>])
-			</div>
-	
-			<ul class="parameters">
-					<li>
-				<span class="var-type">array</span>
-				<span class="var-name">$map</span><span class="var-description">: A map containing the column assignments.</span>			</li>
-					<li>
-				<span class="var-type">bool</span>
-				<span class="var-name">$exportValues</span><span class="var-description">: When you want to have complete control over the $map                            column names, you can set exportValues to false, so they                            won't be processed.                            WARNING: Be sure to escape them yourself if you do so.</span>			</li>
-					<li>
-				<span class="var-type">string</span>
-				<span class="var-name">$tableName</span><span class="var-description">: You can specify a different table (most probably a view)                           to get data from.                           If not set, $this-&gt;viewName will be used if present; if not                           $this-&gt;tableName is used.</span>			</li>
-				</ul>
-		
-			
-			<hr class="separator" />
-		<div class="notes">Redefined in descendants as:</div>
-		<ul class="redefinitions">
-					<li>
-				<a href="../Dao/XmlDao.html#methodget">XmlDao::get()</a>
-							</li>
-				</ul>
-	</div>
-<a name="methodgetData" id="getData"><!-- --></a>
-<div class="evenrow">
-	
-	<div class="method-header">
-		<img src="../media/images/Method.png" />
-		<span class="method-title">getData</span> (line <span class="line-number">127</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Same as get() but returns an array with the data instead of an object</p>
-	<ul class="tags">
-				<li><span class="field">see:</span> <a href="../Dao/FileSourceDao.html#methodget">FileSourceDao::get()</a></li>
-				<li><span class="field">access:</span> protected</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result">array</span>
-		<span class="method-name">
-			getData
-		</span>
-					(<span class="var-type">array</span>&nbsp;<span class="var-name">$map</span>, [<span class="var-type">bool</span>&nbsp;<span class="var-name">$exportValues</span> = <span class="var-default">true</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$tableName</span> = <span class="var-default">null</span>])
-			</div>
-	
-			<ul class="parameters">
-					<li>
-				<span class="var-type">array</span>
-				<span class="var-name">$map</span>			</li>
-					<li>
-				<span class="var-type">bool</span>
-				<span class="var-name">$exportValues</span>			</li>
-					<li>
-				<span class="var-type">string</span>
-				<span class="var-name">$tableName</span>			</li>
-				</ul>
-		
-			
-			<hr class="separator" />
-		<div class="notes">Redefined in descendants as:</div>
-		<ul class="redefinitions">
-					<li>
-				<a href="../Dao/XmlDao.html#methodgetData">XmlDao::getData()</a>
-								: Just calls the parent, but then returns only one element of the list
-							</li>
-				</ul>
-	</div>
-<a name="methodgetFileDataSource" id="getFileDataSource"><!-- --></a>
-<div class="oddrow">
-	
-	<div class="method-header">
-		<img src="../media/images/Method.png" />
-		<span class="method-title">getFileDataSource</span> (line <span class="line-number">54</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Returns the fileDataSource.</p>
-	<ul class="tags">
-				<li><span class="field">access:</span> public</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result"><a href="../DataSource/FileDataSource.html">FileDataSource</a></span>
-		<span class="method-name">
-			getFileDataSource
-		</span>
-				()
-			</div>
-	
-		
-			
-	</div>
-<a name="methodgetIterator" id="getIterator"><!-- --></a>
-<div class="evenrow">
-	
-	<div class="method-header">
-		<img src="../media/images/Method.png" />
-		<span class="method-title">getIterator</span> (line <span class="line-number">150</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">The same as get, but returns an iterator to go through all the rows.</p>
-	<ul class="tags">
-				<li><span class="field">see:</span> <a href="../Dao/FileSourceDao.html#methodget">FileSourceDao::get()</a></li>
-				<li><span class="field">access:</span> public</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result"><a href="../Dao/DaoResultIterator.html">DaoResultIterator</a></span>
-		<span class="method-name">
-			getIterator
-		</span>
-					(<span class="var-type">array</span>&nbsp;<span class="var-name">$map</span>, [<span class="var-type">string|array</span>&nbsp;<span class="var-name">$sort</span> = <span class="var-default">null</span>], [<span class="var-type">int</span>&nbsp;<span class="var-name">$offset</span> = <span class="var-default">null</span>], [<span class="var-type">int</span>&nbsp;<span class="var-name">$limit</span> = <span class="var-default">null</span>], [<span class="var-type">bool</span>&nbsp;<span class="var-name">$exportValues</span> = <span class="var-default">true</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$tableName</span> = <span class="var-default">null</span>])
-			</div>
-	
-			<ul class="parameters">
-					<li>
-				<span class="var-type">array</span>
-				<span class="var-name">$map</span>			</li>
-					<li>
-				<span class="var-type">string|array</span>
-				<span class="var-name">$sort</span>			</li>
-					<li>
-				<span class="var-type">int</span>
-				<span class="var-name">$offset</span>			</li>
-					<li>
-				<span class="var-type">int</span>
-				<span class="var-name">$limit</span>			</li>
-					<li>
-				<span class="var-type">bool</span>
-				<span class="var-name">$exportValues</span>			</li>
-					<li>
-				<span class="var-type">string</span>
-				<span class="var-name">$tableName</span>			</li>
-				</ul>
-		
-			
-	</div>
-<a name="methodgetIteratorFromData" id="getIteratorFromData"><!-- --></a>
-<div class="oddrow">
-	
-	<div class="method-header">
-		<img src="../media/images/Method.png" />
-		<span class="method-title">getIteratorFromData</span> (line <span class="line-number">256</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Returns an Iterator for data</p>
-	<ul class="tags">
-				<li><span class="field">access:</span> protected</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result">FileResultIterator</span>
-		<span class="method-name">
-			getIteratorFromData
-		</span>
-					(<span class="var-type">string</span>&nbsp;<span class="var-name">$data</span>)
-			</div>
-	
-			<ul class="parameters">
-					<li>
-				<span class="var-type">string</span>
-				<span class="var-name">$data</span>			</li>
-				</ul>
-		
-			
-	</div>
-<a name="methodgetTotalCount" id="getTotalCount"><!-- --></a>
-<div class="evenrow">
-	
-	<div class="method-header">
-		<img src="../media/images/Method.png" />
-		<span class="method-title">getTotalCount</span> (line <span class="line-number">218</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Returns the total row count in the table the Dao is assigned to.</p>
-	<ul class="tags">
-				<li><span class="field">access:</span> public</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result">int</span>
-		<span class="method-name">
-			getTotalCount
-		</span>
-				()
-			</div>
-	
-		
-			
-	</div>
-<a name="methodinsert" id="insert"><!-- --></a>
-<div class="oddrow">
-	
-	<div class="method-header">
-		<img src="../media/images/Method.png" />
-		<span class="method-title">insert</span> (line <span class="line-number">168</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Inserts an object in the database, and updates the object with the new data (in  case some default values of the database have been set.)</p>
-	<ul class="tags">
-				<li><span class="field">return:</span> The updated object.</li>
-				<li><span class="field">access:</span> public</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result"><a href="../Dao/DataObject/DataObject.html">DataObject</a></span>
-		<span class="method-name">
-			insert
-		</span>
-					(<span class="var-type"><a href="../Dao/DataObject/DataObject.html">DataObject</a></span>&nbsp;<span class="var-name">$object</span>)
-			</div>
-	
-			<ul class="parameters">
-					<li>
-				<span class="var-type"><a href="../Dao/DataObject/DataObject.html">DataObject</a></span>
-				<span class="var-name">$object</span>			</li>
-				</ul>
-		
-			
-	</div>
-<a name="methodinterpretFileContent" id="interpretFileContent"><!-- --></a>
-<div class="evenrow">
-	
-	<div class="method-header">
-		<img src="../media/images/AbstractMethod.png" />
-		<span class="method-title">interpretFileContent</span> (line <span class="line-number">136</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Converts the content returned by the file factory into a usable data array.</p>
-	<ul class="tags">
-				<li><span class="field">return:</span> The data array</li>
-				<li><span class="field">abstract:</span> </li>
-				<li><span class="field">access:</span> protected</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result">array</span>
-		<span class="method-name">
-			interpretFileContent
-		</span>
-					(<span class="var-type">string</span>&nbsp;<span class="var-name">$content</span>)
-			</div>
-	
-			<ul class="parameters">
-					<li>
-				<span class="var-type">string</span>
-				<span class="var-name">$content</span>			</li>
-				</ul>
-		
-			
-			<hr class="separator" />
-		<div class="notes">Redefined in descendants as:</div>
-		<ul class="redefinitions">
-					<li>
-				<a href="../Dao/JsonDao.html#methodinterpretFileContent">JsonDao::interpretFileContent()</a>
-								: Intepretes the json content, and returns it.
-							</li>
-					<li>
-				<a href="../Dao/XmlDao.html#methodinterpretFileContent">XmlDao::interpretFileContent()</a>
-								: Intepretes the xml content, and returns it as array.
-							</li>
-				</ul>
-	</div>
-<a name="methodrollback" id="rollback"><!-- --></a>
-<div class="oddrow">
-	
-	<div class="method-header">
-		<img src="../media/images/Method.png" />
-		<span class="method-title">rollback</span> (line <span class="line-number">86</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Overwrite this if your file connection allows transaction.</p>
-	<ul class="tags">
-				<li><span class="field">access:</span> public</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result">void</span>
-		<span class="method-name">
-			rollback
-		</span>
-				()
-			</div>
-	
-		
-			
-	</div>
-<a name="methodupdate" id="update"><!-- --></a>
-<div class="evenrow">
-	
-	<div class="method-header">
-		<img src="../media/images/Method.png" />
-		<span class="method-title">update</span> (line <span class="line-number">189</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Updates an object in the database using the id.</p>
-	<ul class="tags">
-				<li><span class="field">return:</span> The updated object.</li>
-				<li><span class="field">access:</span> public</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result"><a href="../Dao/DataObject/DataObject.html">DataObject</a></span>
-		<span class="method-name">
-			update
-		</span>
-					(<span class="var-type"><a href="../Dao/DataObject/DataObject.html">DataObject</a></span>&nbsp;<span class="var-name">$object</span>)
-			</div>
-	
-			<ul class="parameters">
-					<li>
-				<span class="var-type"><a href="../Dao/DataObject/DataObject.html">DataObject</a></span>
-				<span class="var-name">$object</span>			</li>
-				</ul>
-		
-			
-	</div>
-							<h4>Inherited Methods</h4>
-				<a name='inherited_methods'><!-- --></a>	
-									<!-- =========== Summary =========== -->
-					<p>Inherited From <span class="classname"><a href="../Dao/Dao.html">Dao</a></span></p>
-					<blockquote>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/Dao.html#methodafterDelete">Dao::afterDelete()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/Dao.html#methodafterInsert">Dao::afterInsert()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/Dao.html#methodafterUpdate">Dao::afterUpdate()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/Dao.html#methodapplyColumnExportMapping">Dao::applyColumnExportMapping()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/Dao.html#methodapplyColumnImportMapping">Dao::applyColumnImportMapping()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/Dao.html#methodcolumnExists">Dao::columnExists()</a></span><br>
-													<img src="../media/images/AbstractMethod.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/Dao.html#methodconvertRemoteValueToTimestamp">Dao::convertRemoteValueToTimestamp()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/Dao.html#methoddebug">Dao::debug()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/Dao.html#methoddeleteById">Dao::deleteById()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/Dao.html#methodexportBool">Dao::exportBool()</a></span><br>
-													<img src="../media/images/AbstractMethod.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/Dao.html#methodexportColumn">Dao::exportColumn()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/Dao.html#methodexportDate">Dao::exportDate()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/Dao.html#methodexportEnum">Dao::exportEnum()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/Dao.html#methodexportFloat">Dao::exportFloat()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/Dao.html#methodexportInteger">Dao::exportInteger()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/Dao.html#methodexportNull">Dao::exportNull()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/Dao.html#methodexportString">Dao::exportString()</a></span><br>
-													<img src="../media/images/AbstractMethod.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/Dao.html#methodexportTable">Dao::exportTable()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/Dao.html#methodexportValue">Dao::exportValue()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/Dao.html#methodgenerateInsertArrays">Dao::generateInsertArrays()</a></span><br>
-													<img src="../media/images/AbstractMethod.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/Dao.html#methodgenerateSortString">Dao::generateSortString()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/Dao.html#methodgetAdditionalColumnTypes">Dao::getAdditionalColumnTypes()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/Dao.html#methodgetAll">Dao::getAll()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/Dao.html#methodgetAllAsArrays">Dao::getAllAsArrays()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/Dao.html#methodgetById">Dao::getById()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/Dao.html#methodgetColumnTypes">Dao::getColumnTypes()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/Dao.html#methodgetDefaultValueColumns">Dao::getDefaultValueColumns()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/Dao.html#methodgetNullColumns">Dao::getNullColumns()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/Dao.html#methodgetObjectFromData">Dao::getObjectFromData()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/Dao.html#methodgetObjectFromPreparedData">Dao::getObjectFromPreparedData()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/Dao.html#methodgetRawObject">Dao::getRawObject()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/Dao.html#methodimportBool">Dao::importBool()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/Dao.html#methodimportColumn">Dao::importColumn()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/Dao.html#methodimportDate">Dao::importDate()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/Dao.html#methodimportEnum">Dao::importEnum()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/Dao.html#methodimportFloat">Dao::importFloat()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/Dao.html#methodimportInteger">Dao::importInteger()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/Dao.html#methodimportString">Dao::importString()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/Dao.html#methodimportValue">Dao::importValue()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/Dao.html#methodinterpretSortVariable">Dao::interpretSortVariable()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/Dao.html#methodisVector">Dao::isVector()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/Dao.html#methodlog">Dao::log()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/Dao.html#methodnotNull">Dao::notNull()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/Dao.html#methodprepareDataForObject">Dao::prepareDataForObject()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/Dao.html#methodsetLogger">Dao::setLogger()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/Dao.html#methodsetLoggerFactory">Dao::setLoggerFactory()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/Dao.html#methodupdateObjectWithData">Dao::updateObjectWithData()</a></span><br>
-													<img src="../media/images/Method.png" alt=" "/>
-							<span class="method-name"><a href="../Dao/Dao.html#method__call">Dao::__call()</a></span><br>
-											</blockquote>
-										
-		</div>
-	</div>
+<br /><br />
 
-	<a name="sec-consts"></a>
-	<div class="info-box">
-		<div class="info-box-title">Class Constants</div>
-		<div class="nav-bar">
-			<a href="#sec-description">Description</a> |
-							<a href="#sec-descendents">Descendants</a> |
-										<a href="#sec-var-summary">Constants</a> (<span class="disabled">details</span>)
-						
-			
-												<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
-														| 
-									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
-							
-					</div>
-		<div class="info-box-body">
-										<h4>Inherited Constants</h4>
-				<A NAME='inherited_consts'><!-- --></A>
-									<p>Inherited from <span class="classname"><a href="../Dao/Dao.html">Dao</a></span></p>
-					<blockquote>
-													<img src="../media/images/Variable.png" />
-							<span class="const-title">
-								<span class="const-name"><a href="../Dao/Dao.html#constASC">Dao::ASC</a></span><br>
-							</span>
-													<img src="../media/images/Variable.png" />
-							<span class="const-title">
-								<span class="const-name"><a href="../Dao/Dao.html#constBOOL">Dao::BOOL</a></span><br>
-							</span>
-													<img src="../media/images/Variable.png" />
-							<span class="const-title">
-								<span class="const-name"><a href="../Dao/Dao.html#constBOOLEAN">Dao::BOOLEAN</a></span><br>
-							</span>
-													<img src="../media/images/Variable.png" />
-							<span class="const-title">
-								<span class="const-name"><a href="../Dao/Dao.html#constDATE">Dao::DATE</a></span><br>
-							</span>
-													<img src="../media/images/Variable.png" />
-							<span class="const-title">
-								<span class="const-name"><a href="../Dao/Dao.html#constDATE_WITH_TIME">Dao::DATE_WITH_TIME</a></span><br>
-							</span>
-													<img src="../media/images/Variable.png" />
-							<span class="const-title">
-								<span class="const-name"><a href="../Dao/Dao.html#constDESC">Dao::DESC</a></span><br>
-							</span>
-													<img src="../media/images/Variable.png" />
-							<span class="const-title">
-								<span class="const-name"><a href="../Dao/Dao.html#constDO_NOT_EXPORT_VALUES">Dao::DO_NOT_EXPORT_VALUES</a></span><br>
-							</span>
-													<img src="../media/images/Variable.png" />
-							<span class="const-title">
-								<span class="const-name"><a href="../Dao/Dao.html#constFLOAT">Dao::FLOAT</a></span><br>
-							</span>
-													<img src="../media/images/Variable.png" />
-							<span class="const-title">
-								<span class="const-name"><a href="../Dao/Dao.html#constIGNORE">Dao::IGNORE</a></span><br>
-							</span>
-													<img src="../media/images/Variable.png" />
-							<span class="const-title">
-								<span class="const-name"><a href="../Dao/Dao.html#constINT">Dao::INT</a></span><br>
-							</span>
-													<img src="../media/images/Variable.png" />
-							<span class="const-title">
-								<span class="const-name"><a href="../Dao/Dao.html#constINTEGER">Dao::INTEGER</a></span><br>
-							</span>
-													<img src="../media/images/Variable.png" />
-							<span class="const-title">
-								<span class="const-name"><a href="../Dao/Dao.html#constSORT_ASCENDING">Dao::SORT_ASCENDING</a></span><br>
-							</span>
-													<img src="../media/images/Variable.png" />
-							<span class="const-title">
-								<span class="const-name"><a href="../Dao/Dao.html#constSORT_DESCENDING">Dao::SORT_DESCENDING</a></span><br>
-							</span>
-													<img src="../media/images/Variable.png" />
-							<span class="const-title">
-								<span class="const-name"><a href="../Dao/Dao.html#constSTRING">Dao::STRING</a></span><br>
-							</span>
-													<img src="../media/images/Variable.png" />
-							<span class="const-title">
-								<span class="const-name"><a href="../Dao/Dao.html#constTEXT">Dao::TEXT</a></span><br>
-							</span>
-													<img src="../media/images/Variable.png" />
-							<span class="const-title">
-								<span class="const-name"><a href="../Dao/Dao.html#constTIMESTAMP">Dao::TIMESTAMP</a></span><br>
-							</span>
-											</blockquote> 
-										
-		</div>
-	</div>
 	
-	<p class="notes" id="credit">
-		Documentation generated by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type"><a href="../DataSource/FileDataSource.html">FileDataSource</a>&nbsp;&nbsp;</td>
+        <td><b>$fileDataSource</b>&nbsp;&nbsp;</td>
+        <td>The fileDataSource is used to create the requests.</td>
+      </tr>
+          <tr>
+        <td class="type">string&nbsp;&nbsp;</td>
+        <td><b>$tableName</b>&nbsp;&nbsp;</td>
+        <td>You can specify this as an attribute when writing a Dao implementation</td>
+      </tr>
+          <tr>
+        <td class="type">array&nbsp;&nbsp;</td>
+        <td><b>$columnTypes</b>&nbsp;&nbsp;</td>
+        <td>You can specify this as an attribute when writing a Dao implementation</td>
+      </tr>
+          <tr>
+        <td class="type">array&nbsp;&nbsp;</td>
+        <td><b>$nullColumns</b>&nbsp;&nbsp;</td>
+        <td>You can specify this as an attribute when writing a Dao implementation</td>
+      </tr>
+          <tr>
+        <td class="type">array&nbsp;&nbsp;</td>
+        <td><b>$defaultColumns</b>&nbsp;&nbsp;</td>
+        <td>You can specify this as an attribute when writing a Dao implementation</td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodbeginTransaction"></a>
+	<h3>method beginTransaction <span class="smalllinenumber">[line 76]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void beginTransaction(
+)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Overwrite this if your file connection allows transaction.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodcommit"></a>
+	<h3>method commit <span class="smalllinenumber">[line 81]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void commit(
+)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Overwrite this if your file connection allows transaction.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodconvertRemoteValueToTimestamp"></a>
+	<h3>method convertRemoteValueToTimestamp <span class="smalllinenumber">[line 70]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void convertRemoteValueToTimestamp(
+string
+$databaseValue, bool
+$withTime)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Most file data connections will transfer time values as timestamps.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	Overrides <a href="../Dao/Dao.html#methodconvertRemoteValueToTimestamp">Dao::convertRemoteValueToTimestamp()</a> (Converts a database value to a timestamp.)<br /><br />
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">string&nbsp;&nbsp;</td>
+        <td><b>$databaseValue</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+          <tr>
+        <td class="type">bool&nbsp;&nbsp;</td>
+        <td><b>$withTime</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodcreateIterator"></a>
+	<h3>method createIterator <span class="smalllinenumber">[line 62]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>FileResultIterator createIterator(
+array
+$data)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Creates an iterator from a data hash.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>abstract:</b>&nbsp;&nbsp;</td><td></td>
+  </tr>
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	<p>Overridden in child classes as:<br />
+		<dl>
+	<dt><a href="../Dao/JsonDao.html#methodcreateIterator">JsonDao::createIterator()</a></dt>
+		<dd>Creates an iterator for a json data hash.</dd>
+	</dl>
+		<dl>
+	<dt><a href="../Dao/XmlDao.html#methodcreateIterator">XmlDao::createIterator()</a></dt>
+		<dd>Creates an iterator for a Xml data hash.</dd>
+	</dl>
 	</p>
-	</div></body>
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">array&nbsp;&nbsp;</td>
+        <td><b>$data</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methoddelete"></a>
+	<h3>method delete <span class="smalllinenumber">[line 208]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void delete(
+<a href="../Dao/DataObject/DataObject.html">DataObject</a>
+$object)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Deletes an object in the database using the id.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type"><a href="../Dao/DataObject/DataObject.html">DataObject</a>&nbsp;&nbsp;</td>
+        <td><b>$object</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodescapeColumn"></a>
+	<h3>method escapeColumn <span class="smalllinenumber">[line 305]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>string escapeColumn(
+string
+$column)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		By default does nothing for FileDaos.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">string&nbsp;&nbsp;</td>
+        <td><b>$column</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodescapeTable"></a>
+	<h3>method escapeTable <span class="smalllinenumber">[line 326]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>string escapeTable(
+[string
+$table = null])</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Does nothing by default.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">string&nbsp;&nbsp;</td>
+        <td><b>$table</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodexportColumn"></a>
+	<h3>method exportColumn <span class="smalllinenumber">[line 294]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>string exportColumn(
+string
+$column)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Takes a php column name, converts it via import/export column mapping and calls escapeColumn.<br /><br /><p>This is the correct way to insert column names in a map.</p><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	Overrides <a href="../Dao/Dao.html#methodexportColumn">Dao::exportColumn()</a> (Has to determine the correct column (with import/export mappings), escape and quote it.)<br /><br />
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">string&nbsp;&nbsp;</td>
+        <td><b>$column</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodexportMap"></a>
+	<h3>method exportMap <span class="smalllinenumber">[line 228]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>array exportMap(
+array
+$map)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		This function exports every values of a map<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>return:</b>&nbsp;&nbsp;</td><td>The map with exported values.</td>
+  </tr>
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">array&nbsp;&nbsp;</td>
+        <td><b>$map</b>&nbsp;&nbsp;</td>
+        <td>A map containing the column assignments.</td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodexportTable"></a>
+	<h3>method exportTable <span class="smalllinenumber">[line 316]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>string exportTable(
+[string
+$table = null])</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Escapes a table name and potentially quotes a table name.<br /><br /><p>By default it simply calls escapeTable</p><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>return:</b>&nbsp;&nbsp;</td><td>The escaped and quoted table name.</td>
+  </tr>
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	Overrides <a href="../Dao/Dao.html#methodexportTable">Dao::exportTable()</a> (Escapes and quotes a table name.)<br /><br />
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">string&nbsp;&nbsp;</td>
+        <td><b>$table</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodgenerateSortString"></a>
+	<h3>method generateSortString <span class="smalllinenumber">[line 270]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void generateSortString(
+string|array
+$sort)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		This method takes the $sort attribute and returns a typical 'order by ' SQL string.<br /><br /><p>If $sort is false then the $this-&gt;defaultSort is used if it exists.  The sort is passed to interpretSortVariable to get a valid column list.</p><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	Overrides <a href="../Dao/Dao.html#methodgenerateSortString">Dao::generateSortString()</a> (Given the $sort parameter, it generates a sort String used in the query.)<br /><br />
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">string|array&nbsp;&nbsp;</td>
+        <td><b>$sort</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodget"></a>
+	<h3>method get <span class="smalllinenumber">[line 108]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code><a href="../Dao/DataObject/DataObject.html">DataObject</a> get(
+[array
+$map = null], [bool
+$exportValues = true], [string
+$tableName = null])</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		This is the method to get a DataObject from the database.<br /><br /><p>If you want to select more objects, call getIterator.  If you call get() without parameters, a &quot;raw object&quot; will be returned, containing  only default values, and null as id.</p><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	<p>Overridden in child classes as:<br />
+		<dl>
+	<dt><a href="../Dao/XmlDao.html#methodget">XmlDao::get()</a></dt>
+		<dd></dd>
+	</dl>
+	</p>
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">array&nbsp;&nbsp;</td>
+        <td><b>$map</b>&nbsp;&nbsp;</td>
+        <td>A map containing the column assignments.</td>
+      </tr>
+          <tr>
+        <td class="type">bool&nbsp;&nbsp;</td>
+        <td><b>$exportValues</b>&nbsp;&nbsp;</td>
+        <td>When you want to have complete control over the $map                            column names, you can set exportValues to false, so they                            won't be processed.                            WARNING: Be sure to escape them yourself if you do so.</td>
+      </tr>
+          <tr>
+        <td class="type">string&nbsp;&nbsp;</td>
+        <td><b>$tableName</b>&nbsp;&nbsp;</td>
+        <td>You can specify a different table (most probably a view)                           to get data from.                           If not set, $this-&gt;viewName will be used if present; if not                           $this-&gt;tableName is used.</td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodgetData"></a>
+	<h3>method getData <span class="smalllinenumber">[line 127]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>array getData(
+array
+$map, [bool
+$exportValues = true], [string
+$tableName = null])</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Same as get() but returns an array with the data instead of an object<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>see:</b>&nbsp;&nbsp;</td><td><a href="../Dao/FileSourceDao.html#methodget">FileSourceDao::get()</a></td>
+  </tr>
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	<p>Overridden in child classes as:<br />
+		<dl>
+	<dt><a href="../Dao/XmlDao.html#methodgetData">XmlDao::getData()</a></dt>
+		<dd>Just calls the parent, but then returns only one element of the list</dd>
+	</dl>
+	</p>
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">array&nbsp;&nbsp;</td>
+        <td><b>$map</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+          <tr>
+        <td class="type">bool&nbsp;&nbsp;</td>
+        <td><b>$exportValues</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+          <tr>
+        <td class="type">string&nbsp;&nbsp;</td>
+        <td><b>$tableName</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodgetFileDataSource"></a>
+	<h3>method getFileDataSource <span class="smalllinenumber">[line 54]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code><a href="../DataSource/FileDataSource.html">FileDataSource</a> getFileDataSource(
+)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Returns the fileDataSource.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodgetIterator"></a>
+	<h3>method getIterator <span class="smalllinenumber">[line 150]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code><a href="../Dao/DaoResultIterator.html">DaoResultIterator</a> getIterator(
+array
+$map, [string|array
+$sort = null], [int
+$offset = null], [int
+$limit = null], [bool
+$exportValues = true], [string
+$tableName = null])</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		The same as get, but returns an iterator to go through all the rows.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>see:</b>&nbsp;&nbsp;</td><td><a href="../Dao/FileSourceDao.html#methodget">FileSourceDao::get()</a></td>
+  </tr>
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">array&nbsp;&nbsp;</td>
+        <td><b>$map</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+          <tr>
+        <td class="type">string|array&nbsp;&nbsp;</td>
+        <td><b>$sort</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+          <tr>
+        <td class="type">int&nbsp;&nbsp;</td>
+        <td><b>$offset</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+          <tr>
+        <td class="type">int&nbsp;&nbsp;</td>
+        <td><b>$limit</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+          <tr>
+        <td class="type">bool&nbsp;&nbsp;</td>
+        <td><b>$exportValues</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+          <tr>
+        <td class="type">string&nbsp;&nbsp;</td>
+        <td><b>$tableName</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodgetIteratorFromData"></a>
+	<h3>method getIteratorFromData <span class="smalllinenumber">[line 256]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>FileResultIterator getIteratorFromData(
+string
+$data)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Returns an Iterator for data<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">string&nbsp;&nbsp;</td>
+        <td><b>$data</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodgetTotalCount"></a>
+	<h3>method getTotalCount <span class="smalllinenumber">[line 218]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>int getTotalCount(
+)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Returns the total row count in the table the Dao is assigned to.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodinsert"></a>
+	<h3>method insert <span class="smalllinenumber">[line 168]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code><a href="../Dao/DataObject/DataObject.html">DataObject</a> insert(
+<a href="../Dao/DataObject/DataObject.html">DataObject</a>
+$object)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Inserts an object in the database, and updates the object with the new data (in  case some default values of the database have been set.)<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>return:</b>&nbsp;&nbsp;</td><td>The updated object.</td>
+  </tr>
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type"><a href="../Dao/DataObject/DataObject.html">DataObject</a>&nbsp;&nbsp;</td>
+        <td><b>$object</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodinterpretFileContent"></a>
+	<h3>method interpretFileContent <span class="smalllinenumber">[line 136]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>array interpretFileContent(
+string
+$content)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Converts the content returned by the file factory into a usable data array.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>return:</b>&nbsp;&nbsp;</td><td>The data array</td>
+  </tr>
+  <tr>
+    <td><b>abstract:</b>&nbsp;&nbsp;</td><td></td>
+  </tr>
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	<p>Overridden in child classes as:<br />
+		<dl>
+	<dt><a href="../Dao/JsonDao.html#methodinterpretFileContent">JsonDao::interpretFileContent()</a></dt>
+		<dd>Intepretes the json content, and returns it.</dd>
+	</dl>
+		<dl>
+	<dt><a href="../Dao/XmlDao.html#methodinterpretFileContent">XmlDao::interpretFileContent()</a></dt>
+		<dd>Intepretes the xml content, and returns it as array.</dd>
+	</dl>
+	</p>
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">string&nbsp;&nbsp;</td>
+        <td><b>$content</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodrollback"></a>
+	<h3>method rollback <span class="smalllinenumber">[line 86]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void rollback(
+)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Overwrite this if your file connection allows transaction.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodupdate"></a>
+	<h3>method update <span class="smalllinenumber">[line 189]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code><a href="../Dao/DataObject/DataObject.html">DataObject</a> update(
+<a href="../Dao/DataObject/DataObject.html">DataObject</a>
+$object)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Updates an object in the database using the id.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>return:</b>&nbsp;&nbsp;</td><td>The updated object.</td>
+  </tr>
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type"><a href="../Dao/DataObject/DataObject.html">DataObject</a>&nbsp;&nbsp;</td>
+        <td><b>$object</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+</div><br />
+
+
+        <div class="credit">
+		    <hr />
+		    Documentation generated by <a href="http://www.phpdoc.org">phpDocumentor 1.4.3</a>
+	      </div>
+      </td></tr></table>
+    </td>
+  </tr>
+</table>
+
+</body>
 </html>

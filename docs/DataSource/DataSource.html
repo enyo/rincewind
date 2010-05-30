@@ -1,327 +1,429 @@
-<?xml version="1.0" encoding="iso-8859-1"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-  <html xmlns="http://www.w3.org/1999/xhtml">
-		<head>
-			<!-- template designed by Marco Von Ballmoos -->
-			<title>Docs For Class DataSource</title>
-			<link rel="stylesheet" href="../media/stylesheet.css" />
-			<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
-		</head>
-		<body>
-			<div class="page-body">			
-<h2 class="class-name"><img src="../media/images/AbstractClass_logo.png"
-														alt="Abstract Class"
-														title="Abstract Class"
-														style="vertical-align: middle"> DataSource</h2>
+<html>
+<head>
+<title>Docs For Class DataSource</title>
+<link rel="stylesheet" type="text/css" href="../media/style.css">
+</head>
+<body>
 
-<a name="sec-description"></a>
-<div class="info-box">
-	<div class="info-box-title">Description</div>
-	<div class="nav-bar">
-					<span class="disabled">Description</span> |
-							<a href="#sec-descendents">Descendents</a>
-			|													<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
-						
-					</div>
-	<div class="info-box-body">
-        		<!-- ========== Info from phpDoc block ========= -->
-	<ul class="tags">
-				<li><span class="field">author:</span> Matthias Loitsch &lt;<a href="mailto:developer@ma.tthias.com">developer@ma.tthias.com</a>&gt;</li>
-				<li><span class="field">copyright:</span> Copyright (c) 2010, Matthias Loitsch</li>
-				<li><span class="field">abstract:</span> </li>
-			</ul>
-		<p class="notes">
-			Located in <a class="field" href="_DataSource---DataSource.php.html">/DataSource/DataSource.php</a> (line <span class="field">28</span>)
-		</p>
-		
-				
-		<pre></pre>
-	
+<table border="0" cellspacing="0" cellpadding="0" height="48" width="100%">
+  <tr>
+    <td class="header_top">DataSource</td>
+  </tr>
+  <tr><td class="header_line"><img src="../media/empty.png" width="1" height="1" border="0" alt=""  /></td></tr>
+  <tr>
+    <td class="header_menu">
+        
+                                                                                                                    
+                                                                                                              		  [ <a href="../classtrees_DataSource.html" class="menu">class tree: DataSource</a> ]
+		  [ <a href="../elementindex_DataSource.html" class="menu">index: DataSource</a> ]
+		  	    [ <a href="../elementindex.html" class="menu">all elements</a> ]
+    </td>
+  </tr>
+  <tr><td class="header_line"><img src="../media/empty.png" width="1" height="1" border="0" alt=""  /></td></tr>
+</table>
+
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="200" class="menu">
+	<div id="ric">
+					<p><a href="../ric_README.html">README</a></p>
 			</div>
+      <b>Packages:</b><br />
+              <a href="../li_php-library.html">php-library</a><br />
+              <a href="../li_Config.html">Config</a><br />
+              <a href="../li_Dao.html">Dao</a><br />
+              <a href="../li_Database.html">Database</a><br />
+              <a href="../li_DataSource.html">DataSource</a><br />
+              <a href="../li_Date.html">Date</a><br />
+              <a href="../li_File.html">File</a><br />
+              <a href="../li_Logger.html">Logger</a><br />
+              <a href="../li_Storage.html">Storage</a><br />
+            <br /><br />
+                        <b>Files:</b><br />
+      	  <div class="package">
+			<a href="../DataSource/_DataSource---DataSource.php.html">		DataSource.php
+		</a><br>
+			<a href="../DataSource/_DataSource---FileDataSource.php.html">		FileDataSource.php
+		</a><br>
+	  </div><br />
+      
+      
+            <b>Classes:</b><br />
+        <div class="package">
+		    		<a href="../DataSource/DataSource.html">DataSource</a><br />
+	    		<a href="../DataSource/FileDataSource.html">FileDataSource</a><br />
+	  </div>
+  <div class="package">
+	DataSourceExceptions<br />	    &nbsp;&nbsp;		<a href="../DataSource/DataSourceExceptions/DataSourceException.html">DataSourceException</a><br />
+	    &nbsp;&nbsp;		<a href="../DataSource/DataSourceExceptions/FileDataSourceException.html">FileDataSourceException</a><br />
+	  </div>
+                </td>
+    <td>
+      <table cellpadding="10" cellspacing="0" width="100%" border="0"><tr><td valign="top">
+
+<h1>Class: DataSource</h1>
+Source Location: /DataSource/DataSource.php<br /><br />
+
+
+<table width="100%" border="0">
+<tr><td valign="top">
+
+<h3><a href="#class_details">Class Overview</a></h3>
+<pre></pre><br />
+<div class="description"></div><br /><br />
+<h4>Author(s):</h4>
+<ul>
+          <li>Matthias Loitsch &lt;<a href="mailto:developer@ma.tthias.com">developer@ma.tthias.com</a>&gt;</li>
+                  </ul>
+
+
+
+
+          
+      
+
+<h4>Copyright:</h4>
+<ul>
+  <li>Copyright (c) 2010, Matthias Loitsch</li>
+</ul>
+        
+</td>
+
+
+
+<td valign="top">
+<h3><a href="#class_methods">Methods</a></h3>
+<ul>
+    <li><a href="../DataSource/DataSource.html#methoddelete">delete</a></li>
+    <li><a href="../DataSource/DataSource.html#methodinsert">insert</a></li>
+    <li><a href="../DataSource/DataSource.html#methodupdate">update</a></li>
+    <li><a href="../DataSource/DataSource.html#methodview">view</a></li>
+    <li><a href="../DataSource/DataSource.html#methodviewList">viewList</a></li>
+  </ul>
+</td>
+
+</tr></table>
+<hr />
+
+<table width="100%" border="0"><tr>
+
+
+<td valign="top">
+<h3>Child classes:</h3>
+<div class="tags">
+<dl>
+<dt><a href="../DataSource/FileDataSource.html">FileDataSource</a></dt>
+	<dd>This data source is used to get files to use for a Dao.</dd>
+</dl>
 </div>
-
-	<a name="sec-descendents"></a>
-	<div class="info-box">
-		<div class="info-box-title">Direct descendents</div>
-		<div class="nav-bar">
-			<a href="#sec-description">Description</a> |
-			<span class="disabled">Descendents</span>
-			|															<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
-							
-								</div>
-		<div class="info-box-body">
-			<table cellpadding="2" cellspacing="0" class="class-table">
-				<tr>
-					<th class="class-table-header">Class</th>
-					<th class="class-table-header">Description</th>
-				</tr>
-								<tr>
-					<td style="padding-right: 2em; white-space: nowrap">
-						<img src="../media/images/AbstractClass.png"
-								 alt="Abstract class"
-								 title="Abstract class"
-								 style="vertical-align: center"/>
-						<a href="../DataSource/FileDataSource.html">FileDataSource</a>
-					</td>
-					<td>
-											This data source is used to get files to use for a Dao.
-										</td>
-				</tr>
-							</table>
-		</div>
-	</div>
+</td>
 
 
 
-	<a name="sec-method-summary"></a>
-	<div class="info-box">
-		<div class="info-box-title">Method Summary</span></div>
-		<div class="nav-bar">
-			<a href="#sec-description">Description</a> |
-							<a href="#sec-descendents">Descendants</a> |
-												<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
-		</div>
-		<div class="info-box-body">			
-			<div class="method-summary">
-																																																								<div class="method-definition">
-					<img src="../media/images/AbstractMethod.png" alt=" "/>
-											<span class="method-result">void</span>
-										<a href="#delete" title="details" class="method-name">delete</a>
-											(<span class="var-type">string</span>&nbsp;<span class="var-name">$resource</span>, <span class="var-type">int</span>&nbsp;<span class="var-name">$id</span>)
-									</div>
-																<div class="method-definition">
-					<img src="../media/images/AbstractMethod.png" alt=" "/>
-											<span class="method-result">int</span>
-										<a href="#insert" title="details" class="method-name">insert</a>
-											(<span class="var-type">string</span>&nbsp;<span class="var-name">$resource</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$attributes</span>)
-									</div>
-																<div class="method-definition">
-					<img src="../media/images/AbstractMethod.png" alt=" "/>
-											<span class="method-result">string</span>
-										<a href="#update" title="details" class="method-name">update</a>
-											(<span class="var-type">string</span>&nbsp;<span class="var-name">$resource</span>, <span class="var-type">int</span>&nbsp;<span class="var-name">$id</span>, <span class="var-type">array</span>&nbsp;<span class="var-name">$attributes</span>)
-									</div>
-																<div class="method-definition">
-					<img src="../media/images/AbstractMethod.png" alt=" "/>
-											<span class="method-result">string</span>
-										<a href="#view" title="details" class="method-name">view</a>
-											(<span class="var-type">string</span>&nbsp;<span class="var-name">$resource</span>, <span class="var-type">array</span>&nbsp;<span class="var-name">$attributes</span>)
-									</div>
-																<div class="method-definition">
-					<img src="../media/images/AbstractMethod.png" alt=" "/>
-											<span class="method-result">string</span>
-										<a href="#viewList" title="details" class="method-name">viewList</a>
-											(<span class="var-type">string</span>&nbsp;<span class="var-name">$resource</span>, <span class="var-type">array</span>&nbsp;<span class="var-name">$attributes</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$sort</span>, <span class="var-type">int</span>&nbsp;<span class="var-name">$offset</span>, <span class="var-type">int</span>&nbsp;<span class="var-name">$limit</span>)
-									</div>
-											</div>
-		</div>
-	</div>		
+
+</tr></table>
+<hr />
+
+<a name="class_details"></a>
+<h3>Class Details</h3>
+<div class="tags">
+[line 28]<br />
+<br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>author:</b>&nbsp;&nbsp;</td><td>Matthias Loitsch &lt;<a href="mailto:developer@ma.tthias.com">developer@ma.tthias.com</a>&gt;</td>
+  </tr>
+  <tr>
+    <td><b>copyright:</b>&nbsp;&nbsp;</td><td>Copyright (c) 2010, Matthias Loitsch</td>
+  </tr>
+  <tr>
+    <td><b>abstract:</b>&nbsp;&nbsp;</td><td></td>
+  </tr>
+</table>
+</div>
+</div><br /><br />
+<div class="top">[ <a href="#top">Top</a> ]</div><br />
+
+
+<hr />
+<a name="class_methods"></a>
+<h3>Class Methods</h3>
+<div class="tags">
+
+  <hr />
+	<a name="methoddelete"></a>
+	<h3>method delete <span class="smalllinenumber">[line 77]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void delete(
+string
+$resource, int
+$id)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Deletes the object<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>abstract:</b>&nbsp;&nbsp;</td><td></td>
+  </tr>
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
 
 	
-	<a name="sec-methods"></a>
-	<div class="info-box">
-		<div class="info-box-title">Methods</div>
-		<div class="nav-bar">
-			<a href="#sec-description">Description</a> |
-							<a href="#sec-descendents">Descendents</a> |
-													<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
-						
-		</div>
-		<div class="info-box-body">
-			<A NAME='method_detail'></A>
-<a name="methoddelete" id="delete"><!-- --></a>
-<div class="evenrow">
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">string&nbsp;&nbsp;</td>
+        <td><b>$resource</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+          <tr>
+        <td class="type">int&nbsp;&nbsp;</td>
+        <td><b>$id</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodinsert"></a>
+	<h3>method insert <span class="smalllinenumber">[line 59]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>int insert(
+string
+$resource, string
+$attributes)</code>
+    </td></tr></table>
+    </td></tr></table><br />
 	
-	<div class="method-header">
-		<img src="../media/images/AbstractMethod.png" />
-		<span class="method-title">delete</span> (line <span class="line-number">77</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Deletes the object</p>
-	<ul class="tags">
-				<li><span class="field">abstract:</span> </li>
-				<li><span class="field">access:</span> public</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result">void</span>
-		<span class="method-name">
-			delete
-		</span>
-					(<span class="var-type">string</span>&nbsp;<span class="var-name">$resource</span>, <span class="var-type">int</span>&nbsp;<span class="var-name">$id</span>)
-			</div>
-	
-			<ul class="parameters">
-					<li>
-				<span class="var-type">string</span>
-				<span class="var-name">$resource</span>			</li>
-					<li>
-				<span class="var-type">int</span>
-				<span class="var-name">$id</span>			</li>
-				</ul>
-		
-			
-	</div>
-<a name="methodinsert" id="insert"><!-- --></a>
-<div class="oddrow">
-	
-	<div class="method-header">
-		<img src="../media/images/AbstractMethod.png" />
-		<span class="method-title">insert</span> (line <span class="line-number">59</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Inserts the object, and returns the id.</p>
-	<ul class="tags">
-				<li><span class="field">return:</span> The new id</li>
-				<li><span class="field">abstract:</span> </li>
-				<li><span class="field">access:</span> public</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result">int</span>
-		<span class="method-name">
-			insert
-		</span>
-					(<span class="var-type">string</span>&nbsp;<span class="var-name">$resource</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$attributes</span>)
-			</div>
-	
-			<ul class="parameters">
-					<li>
-				<span class="var-type">string</span>
-				<span class="var-name">$resource</span>			</li>
-					<li>
-				<span class="var-type">string</span>
-				<span class="var-name">$attributes</span><span class="var-description">: Associative array</span>			</li>
-				</ul>
-		
-			
-	</div>
-<a name="methodupdate" id="update"><!-- --></a>
-<div class="evenrow">
-	
-	<div class="method-header">
-		<img src="../media/images/AbstractMethod.png" />
-		<span class="method-title">update</span> (line <span class="line-number">69</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Updates the object.</p>
-	<ul class="tags">
-				<li><span class="field">return:</span> The file content</li>
-				<li><span class="field">abstract:</span> </li>
-				<li><span class="field">access:</span> public</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result">string</span>
-		<span class="method-name">
-			update
-		</span>
-					(<span class="var-type">string</span>&nbsp;<span class="var-name">$resource</span>, <span class="var-type">int</span>&nbsp;<span class="var-name">$id</span>, <span class="var-type">array</span>&nbsp;<span class="var-name">$attributes</span>)
-			</div>
-	
-			<ul class="parameters">
-					<li>
-				<span class="var-type">string</span>
-				<span class="var-name">$resource</span>			</li>
-					<li>
-				<span class="var-type">int</span>
-				<span class="var-name">$id</span>			</li>
-					<li>
-				<span class="var-type">array</span>
-				<span class="var-name">$attributes</span><span class="var-description">: Associative array</span>			</li>
-				</ul>
-		
-			
-	</div>
-<a name="methodview" id="view"><!-- --></a>
-<div class="oddrow">
-	
-	<div class="method-header">
-		<img src="../media/images/AbstractMethod.png" />
-		<span class="method-title">view</span> (line <span class="line-number">38</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Returns one object.</p>
-	<ul class="tags">
-				<li><span class="field">return:</span> The file content</li>
-				<li><span class="field">abstract:</span> </li>
-				<li><span class="field">access:</span> public</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result">string</span>
-		<span class="method-name">
-			view
-		</span>
-					(<span class="var-type">string</span>&nbsp;<span class="var-name">$resource</span>, <span class="var-type">array</span>&nbsp;<span class="var-name">$attributes</span>)
-			</div>
-	
-			<ul class="parameters">
-					<li>
-				<span class="var-type">string</span>
-				<span class="var-name">$resource</span>			</li>
-					<li>
-				<span class="var-type">array</span>
-				<span class="var-name">$attributes</span><span class="var-description">: Associative array</span>			</li>
-				</ul>
-		
-			
-	</div>
-<a name="methodviewList" id="viewList"><!-- --></a>
-<div class="evenrow">
-	
-	<div class="method-header">
-		<img src="../media/images/AbstractMethod.png" />
-		<span class="method-title">viewList</span> (line <span class="line-number">50</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Returns all objects found.</p>
-	<ul class="tags">
-				<li><span class="field">return:</span> The file content</li>
-				<li><span class="field">abstract:</span> </li>
-				<li><span class="field">access:</span> public</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result">string</span>
-		<span class="method-name">
-			viewList
-		</span>
-					(<span class="var-type">string</span>&nbsp;<span class="var-name">$resource</span>, <span class="var-type">array</span>&nbsp;<span class="var-name">$attributes</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$sort</span>, <span class="var-type">int</span>&nbsp;<span class="var-name">$offset</span>, <span class="var-type">int</span>&nbsp;<span class="var-name">$limit</span>)
-			</div>
-	
-			<ul class="parameters">
-					<li>
-				<span class="var-type">string</span>
-				<span class="var-name">$resource</span>			</li>
-					<li>
-				<span class="var-type">array</span>
-				<span class="var-name">$attributes</span><span class="var-description">: Associative array</span>			</li>
-					<li>
-				<span class="var-type">mixed</span>
-				<span class="var-name">$sort</span>			</li>
-					<li>
-				<span class="var-type">int</span>
-				<span class="var-name">$offset</span>			</li>
-					<li>
-				<span class="var-type">int</span>
-				<span class="var-name">$limit</span>			</li>
-				</ul>
-		
-			
-	</div>
-						
-		</div>
-	</div>
+		Inserts the object, and returns the id.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>return:</b>&nbsp;&nbsp;</td><td>The new id</td>
+  </tr>
+  <tr>
+    <td><b>abstract:</b>&nbsp;&nbsp;</td><td></td>
+  </tr>
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
 
 	
-	<p class="notes" id="credit">
-		Documentation generated by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
-	</p>
-	</div></body>
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">string&nbsp;&nbsp;</td>
+        <td><b>$resource</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+          <tr>
+        <td class="type">string&nbsp;&nbsp;</td>
+        <td><b>$attributes</b>&nbsp;&nbsp;</td>
+        <td>Associative array</td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodupdate"></a>
+	<h3>method update <span class="smalllinenumber">[line 69]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>string update(
+string
+$resource, int
+$id, array
+$attributes)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Updates the object.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>return:</b>&nbsp;&nbsp;</td><td>The file content</td>
+  </tr>
+  <tr>
+    <td><b>abstract:</b>&nbsp;&nbsp;</td><td></td>
+  </tr>
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">string&nbsp;&nbsp;</td>
+        <td><b>$resource</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+          <tr>
+        <td class="type">int&nbsp;&nbsp;</td>
+        <td><b>$id</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+          <tr>
+        <td class="type">array&nbsp;&nbsp;</td>
+        <td><b>$attributes</b>&nbsp;&nbsp;</td>
+        <td>Associative array</td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodview"></a>
+	<h3>method view <span class="smalllinenumber">[line 38]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>string view(
+string
+$resource, array
+$attributes)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Returns one object.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>return:</b>&nbsp;&nbsp;</td><td>The file content</td>
+  </tr>
+  <tr>
+    <td><b>abstract:</b>&nbsp;&nbsp;</td><td></td>
+  </tr>
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">string&nbsp;&nbsp;</td>
+        <td><b>$resource</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+          <tr>
+        <td class="type">array&nbsp;&nbsp;</td>
+        <td><b>$attributes</b>&nbsp;&nbsp;</td>
+        <td>Associative array</td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodviewList"></a>
+	<h3>method viewList <span class="smalllinenumber">[line 50]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>string viewList(
+string
+$resource, array
+$attributes, mixed
+$sort, int
+$offset, int
+$limit)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Returns all objects found.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>return:</b>&nbsp;&nbsp;</td><td>The file content</td>
+  </tr>
+  <tr>
+    <td><b>abstract:</b>&nbsp;&nbsp;</td><td></td>
+  </tr>
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">string&nbsp;&nbsp;</td>
+        <td><b>$resource</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+          <tr>
+        <td class="type">array&nbsp;&nbsp;</td>
+        <td><b>$attributes</b>&nbsp;&nbsp;</td>
+        <td>Associative array</td>
+      </tr>
+          <tr>
+        <td class="type">mixed&nbsp;&nbsp;</td>
+        <td><b>$sort</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+          <tr>
+        <td class="type">int&nbsp;&nbsp;</td>
+        <td><b>$offset</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+          <tr>
+        <td class="type">int&nbsp;&nbsp;</td>
+        <td><b>$limit</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+</div><br />
+
+
+        <div class="credit">
+		    <hr />
+		    Documentation generated by <a href="http://www.phpdoc.org">phpDocumentor 1.4.3</a>
+	      </div>
+      </td></tr></table>
+    </td>
+  </tr>
+</table>
+
+</body>
 </html>

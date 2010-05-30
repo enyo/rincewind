@@ -100,7 +100,7 @@ class DataObject implements DataObjectInterface {
   /**
    * Returns an associative array with the values.
    *
-   * @param bool $phpNames If true the indices will be camelized, if false, the indices will be like the database names.
+   * @param bool $phpNames If true the indices will be converted to php names, if false, the indices will be like the database names.
    * @return array
    */
   public function getArray($phpNames = true) {
@@ -144,6 +144,18 @@ class DataObject implements DataObjectInterface {
    **/
   public function getValue($column) { return $this->get($column); }
 
+  /**
+   * You should NEVER use this function your app.
+   * This is only a helper function for Daos to access the data directly.
+   *
+   * @param string $column
+   * @param mixed $value
+   */
+  public function getDirectly($column) {
+    $column = $this->convertPhpNameToDbColumn($column);
+    return isset($this->data[$column]) ? $this->data[$column] : null;
+  }
+  
 
   /**
    * Sets the value in the $data array after calling coerce() on the value.
@@ -166,11 +178,39 @@ class DataObject implements DataObjectInterface {
   /**
    * @deprecated Use set() instead
    **/
-  function setValue($column, $value) { return $this->set($column, $value); }
+  public function setValue($column, $value) { return $this->set($column, $value); }
 
+  /**
+   * You should NEVER use this function in your app.
+   * This is only a helper function for Daos to access the data directly.
+   *
+   * @param string $column
+   * @param mixed $value
+   */
+  public function setDirectly($column, $value) {
+    $this->data[$this->convertPhpNameToDbColumn($column)] = $value;
+  }
+  
 
+  /**
+   * Converts a php column name to the db name.
+   * Per default this simply transforms theColumn to the_column.
+   * If you data source handles names differently, overwrite this methods, and change your Daos to use your
+   * own implementation of DataObjects.
+   *
+   * @param string $column
+   * @return string 
+   */
   protected function convertPhpNameToDbColumn($column) { return preg_replace('/([A-Z])/e', 'strtolower("_$1");', $column); }
+  /**
+   * Converts a db column name to the php name.
+   * Per default this simply transforms the_column to theColumn.
+   *
+   * @param string $column
+   * @return string 
+   */
   protected function convertDbColumnToPhpName($column) { return preg_replace('/_([a-z])/e', 'strtoupper("$1");', $column); }
+
   protected function convertGetMethodToPhpColumn($method) {
     $method = substr($method, 3);
     return strtolower(substr($method, 0, 1)) . substr($method, 1);

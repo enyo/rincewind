@@ -144,6 +144,19 @@
 			return $this->assertCallCount($this->dao, 'delete', 1);
 		}
 
+
+    public function testDirectSetter() {
+			$name = 'Some new name 123';
+			$this->dataObject->setDirectly('name', $name);
+			return $this->assertIdentical($this->dataObject->name, $name);
+    }
+
+    public function testDirectGetter() {
+			$name = 'Some new name 123456';
+			$this->dataObject->set('name', $name);
+			return $this->assertIdentical($this->dataObject->getDirectly('name'), $name);
+    }
+
 	}
 
 

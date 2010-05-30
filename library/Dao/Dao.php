@@ -254,15 +254,30 @@ abstract class Dao implements DaoInterface {
 
   /**
    * Returns the DataObject for a specific reference.
+   * It then sets the hash in the DataObject so it can be retrieved next time.
+   * If it is accessed after that, the already fetched DataHash is used.
+   * A DataSource can directly return the DataHash, so it doesn't have to be fetched.
    *
    * @return DataObject
    */
   public function getReference($dataObject, $column) {
     if (!isset($this->references[$column])) throw new DaoWrongValueException("The column `$column` is not specified in references.");
+
     $reference = $this->references[$column];
     $dao = $this->getReferenceDao($reference);
-    $localValue = $dataObject->get($reference->getLocalKey());
-    return $dao->get(array($reference->getForeignKey()=>$localValue));
+
+    if ($data = $dataObject->getDirectly($column)) {
+      // If the data hash exists already, just return the DataObject with it.
+      return $dao->getObjectFromData($data);
+    }
+    else {
+      // Otherwise: get the data hash, store it in the DataObject that's referencing it, and
+      // return the DataObject.
+      $localValue = $dataObject->get($reference->getLocalKey());
+      $return = $dao->get(array($reference->getForeignKey()=>$localValue));
+      $dataObject->setDirectly($column, $return->getArray());
+      return $return;
+    }
   }
 
   /**
@@ -273,7 +288,9 @@ abstract class Dao implements DaoInterface {
    * @return Dao
    */
   protected function getReferenceDao($reference) {
-    return new $reference->daoClassName();
+    $dao = $reference->getDaoClassName();
+    if (is_string($dao)) return new $dao;
+    else return $dao;
   }
 
 

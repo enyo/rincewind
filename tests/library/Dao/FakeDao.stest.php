@@ -5,7 +5,17 @@ require_once(dirname(dirname(__FILE__)) . '/setup.php');
 require_once(LIBRARY_ROOT_PATH . 'Dao/Dao.php');
 
 
+
 class FakeDao extends Dao {
+
+  protected $mockDao;
+  protected $dataObject;
+  
+  public function __construct($mockDao, $dataObject) {
+    $this->mockDao = $mockDao;
+    $this->dataObject = $dataObject;
+    parent::__construct();
+  }
   
   
   protected $columnTypes = array('address_id'=>Dao::INT);
@@ -29,15 +39,9 @@ class FakeDao extends Dao {
 
 
   protected function setupReferences() {
-    $this->addReference('address', 'AddressDao', 'address_id', 'THEFOREIGNKEY');
+    $this->addReference('address', $this->mockDao, 'address_id', 'THEFOREIGNKEY');
   }
 
-  protected function getReferenceDao($daoReference) {
-    $dao = new Snap_MockObject('Dao');
-		$dao->setReturnValue('get', 'DAO:'.$daoReference->getDaoClassName())
-  		->listenTo('get', array(new Snap_Equals_Expectation(array('THEFOREIGNKEY'=>123))));
-    return $dao->construct();
-  }
 }
 
 
@@ -48,16 +52,50 @@ class FakeDao extends Dao {
 class FakeDao_Reference_Test extends Snap_UnitTestCase {
 
   protected $dao;
+  protected $dataObject;
+  protected $mockDao;
 
   public function setUp() {
-    $this->dao = new FakeDao();
+    $this->dataObject = new DataObject(array('SOMEDATAHASH'=>987), null);
+
+    $this->mockDao = $this->mock('Dao')
+      ->setReturnValue('get', $this->dataObject)
+      ->setReturnValue('getObjectFromData', $this->dataObject)
+    	->listenTo('get', array(new Snap_Equals_Expectation(array('THEFOREIGNKEY'=>123))))
+      ->listenTo('getObjectFromData', array(new Snap_Equals_Expectation(array('SOMEDATAHASH'=>987))))
+      ->construct();
+
+    $this->dao = new FakeDao($this->mockDao, $this->dataObject);
   }
 
   public function tearDown() {}
 
   public function testReference() {
     $do = $this->dao->get();
-    return $this->assertIdentical($do->address, 'DAO:AddressDao');
+    return $this->assertIdentical($do->address, $this->dataObject);
+  }
+
+  public function testForeignDaoGetsCalled() {
+    $do = $this->dao->get();
+    $do->address; // Getting the address so it gets remote fetched.
+		return $this->assertCallCount($this->mockDao, 'get', 1, array(new Snap_Equals_Expectation(array('THEFOREIGNKEY'=>123))));
+  }
+
+  public function testHashGetsCached() {
+    $do = $this->dao->get();
+    $do->address; // Getting the address so it gets remote fetched.
+    $do->address; // Getting the address twice
+		return $this->assertCallCount($this->mockDao, 'get', 1, array(new Snap_Equals_Expectation(array('THEFOREIGNKEY'=>123))));
+  }
+
+  public function testHashGetsCachedAndReturned() {
+    $do = $this->dao->get();
+    // Getting the address so it gets remote fetched.
+    // This should store the hash of the foreign DataObject in the local DataObject, to be reused next time.
+    // So the new DataObject returned, should have the same data hash as the test DataObject in the constructor.
+    $do->address; 
+    $do->address; // Getting the address twice
+		return $this->assertCallCount($this->mockDao, 'getObjectFromData', 1, array(new Snap_Equals_Expectation(array('SOMEDATAHASH'=>987))));
   }
 
 }

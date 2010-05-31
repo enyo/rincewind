@@ -28,6 +28,9 @@
 	<div id="ric">
 					<p><a href="../ric_README.html">README</a></p>
 			</div>
+	<div id="todolist">
+			<p><a href="../todolist.html">Todo List</a></p>
+	</div>
       <b>Packages:</b><br />
               <a href="../li_php-library.html">php-library</a><br />
               <a href="../li_Config.html">Config</a><br />
@@ -45,9 +48,17 @@
 		</a><br>
 			<a href="../Dao/_Dao---DaoColumnAssignment.php.html">		DaoColumnAssignment.php
 		</a><br>
+			<a href="../Dao/_Dao---DaoHashListIterator.php.html">		DaoHashListIterator.php
+		</a><br>
 			<a href="../Dao/_Dao---DaoInterface.php.html">		DaoInterface.php
 		</a><br>
+			<a href="../Dao/_Dao---DaoKeyListIterator.php.html">		DaoKeyListIterator.php
+		</a><br>
+			<a href="../Dao/_Dao---DaoReference.php.html">		DaoReference.php
+		</a><br>
 			<a href="../Dao/_Dao---DaoResultIterator.php.html">		DaoResultIterator.php
+		</a><br>
+			<a href="../Dao/_Dao---DaoToManyReference.php.html">		DaoToManyReference.php
 		</a><br>
 			<a href="../Dao/_Dao---FileSourceDao.php.html">		FileSourceDao.php
 		</a><br>
@@ -110,7 +121,11 @@
         <div class="package">
 		    		<a href="../Dao/Dao.html">Dao</a><br />
 	    		<a href="../Dao/DaoColumnAssignment.html">DaoColumnAssignment</a><br />
+	    		<a href="../Dao/DaoHashListIterator.html">DaoHashListIterator</a><br />
+	    		<a href="../Dao/DaoKeyListIterator.html">DaoKeyListIterator</a><br />
+	    		<a href="../Dao/DaoReference.html">DaoReference</a><br />
 	    		<a href="../Dao/DaoResultIterator.html">DaoResultIterator</a><br />
+	    		<a href="../Dao/DaoToManyReference.html">DaoToManyReference</a><br />
 	    		<a href="../Dao/FileSourceDao.html">FileSourceDao</a><br />
 	    		<a href="../Dao/FileSourceResultIterator.html">FileSourceResultIterator</a><br />
 	    		<a href="../Dao/JsonDao.html">JsonDao</a><br />
@@ -186,6 +201,7 @@ Source Location: /Dao/Dao.php<br /><br />
     <li><a href="../Dao/Dao.html#var$defaultValueColumns">$defaultValueColumns</a></li>
     <li><a href="../Dao/Dao.html#var$logger">$logger</a></li>
     <li><a href="../Dao/Dao.html#var$nullColumns">$nullColumns</a></li>
+    <li><a href="../Dao/Dao.html#var$references">$references</a></li>
     <li><a href="../Dao/Dao.html#var$tableName">$tableName</a></li>
     <li><a href="../Dao/Dao.html#var$viewName">$viewName</a></li>
   </ul>
@@ -205,6 +221,8 @@ Source Location: /Dao/Dao.php<br /><br />
     <li><a href="../Dao/Dao.html#constIGNORE">IGNORE</a></li>
     <li><a href="../Dao/Dao.html#constINT">INT</a></li>
     <li><a href="../Dao/Dao.html#constINTEGER">INTEGER</a></li>
+    <li><a href="../Dao/Dao.html#constSEQ">SEQ</a></li>
+    <li><a href="../Dao/Dao.html#constSEQUENCE">SEQUENCE</a></li>
     <li><a href="../Dao/Dao.html#constSORT_ASCENDING">SORT_ASCENDING</a></li>
     <li><a href="../Dao/Dao.html#constSORT_DESCENDING">SORT_DESCENDING</a></li>
     <li><a href="../Dao/Dao.html#constSTRING">STRING</a></li>
@@ -216,6 +234,8 @@ Source Location: /Dao/Dao.php<br /><br />
 <td valign="top">
 <h3><a href="#class_methods">Methods</a></h3>
 <ul>
+    <li><a href="../Dao/Dao.html#methodaddReference">addReference</a></li>
+    <li><a href="../Dao/Dao.html#methodaddToManyReference">addToManyReference</a></li>
     <li><a href="../Dao/Dao.html#methodafterDelete">afterDelete</a></li>
     <li><a href="../Dao/Dao.html#methodafterInsert">afterInsert</a></li>
     <li><a href="../Dao/Dao.html#methodafterUpdate">afterUpdate</a></li>
@@ -225,6 +245,7 @@ Source Location: /Dao/Dao.php<br /><br />
     <li><a href="../Dao/Dao.html#methodconvertRemoteValueToTimestamp">convertRemoteValueToTimestamp</a></li>
     <li><a href="../Dao/Dao.html#methoddebug">debug</a></li>
     <li><a href="../Dao/Dao.html#methoddeleteById">deleteById</a></li>
+    <li><a href="../Dao/Dao.html#method__construct">__construct</a></li>
     <li><a href="../Dao/Dao.html#methodexportBool">exportBool</a></li>
     <li><a href="../Dao/Dao.html#methodexportColumn">exportColumn</a></li>
     <li><a href="../Dao/Dao.html#methodexportDate">exportDate</a></li>
@@ -247,6 +268,9 @@ Source Location: /Dao/Dao.php<br /><br />
     <li><a href="../Dao/Dao.html#methodgetObjectFromData">getObjectFromData</a></li>
     <li><a href="../Dao/Dao.html#methodgetObjectFromPreparedData">getObjectFromPreparedData</a></li>
     <li><a href="../Dao/Dao.html#methodgetRawObject">getRawObject</a></li>
+    <li><a href="../Dao/Dao.html#methodgetReference">getReference</a></li>
+    <li><a href="../Dao/Dao.html#methodgetReferenceDao">getReferenceDao</a></li>
+    <li><a href="../Dao/Dao.html#methodgetReferences">getReferences</a></li>
     <li><a href="../Dao/Dao.html#methodimportBool">importBool</a></li>
     <li><a href="../Dao/Dao.html#methodimportColumn">importColumn</a></li>
     <li><a href="../Dao/Dao.html#methodimportDate">importDate</a></li>
@@ -262,6 +286,7 @@ Source Location: /Dao/Dao.php<br /><br />
     <li><a href="../Dao/Dao.html#methodprepareDataForObject">prepareDataForObject</a></li>
     <li><a href="../Dao/Dao.html#methodsetLogger">setLogger</a></li>
     <li><a href="../Dao/Dao.html#methodsetLoggerFactory">setLoggerFactory</a></li>
+    <li><a href="../Dao/Dao.html#methodsetupReferences">setupReferences</a></li>
     <li><a href="../Dao/Dao.html#methodupdateObjectWithData">updateObjectWithData</a></li>
     <li><a href="../Dao/Dao.html#method__call">__call</a></li>
   </ul>
@@ -296,7 +321,7 @@ Source Location: /Dao/Dao.php<br /><br />
 <a name="class_details"></a>
 <h3>Class Details</h3>
 <div class="tags">
-[line 99]<br />
+[line 113]<br />
 This abstract base class for all Daos.<br /><br /><p>IMPORTANT NOTE: The Dao (and DataObject for that matter) depend on the table  having a primary `id` column!  If your table layout does not provide this column, the framework will not work.</p><p>The typical usage of the Dao is as follows:  <ol><li><div class="src-line">&nbsp;<span class="src-php">&lt;?php</span></div></li>
 <li><div class="src-line">&nbsp;&nbsp;&nbsp;<span class="src-var">$userDao&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id">UserDao</span><span class="src-sym">(</span><span class="src-var">$database</span><span class="src-sym">)</span><span class="src-sym">;&nbsp;</span><span class="src-comm">//&nbsp;UserDao&nbsp;extends&nbsp;MysqlDao&nbsp;for&nbsp;example</span></div></li>
 <li><div class="src-line">&nbsp;&nbsp;&nbsp;<span class="src-var">$userDao</span><span class="src-sym">-&gt;</span><span class="src-id">get</span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">-&gt;</span><span class="src-id">set</span><span class="src-sym">(</span><span class="src-str">'username'</span><span class="src-sym">,&nbsp;</span><span class="src-str">'user2000'</span><span class="src-sym">)</span><span class="src-sym">-&gt;</span><span class="src-id">save</span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;&nbsp;</span><span class="src-comm">//&nbsp;Insert&nbsp;new&nbsp;user</span></div></li>
@@ -356,7 +381,7 @@ This abstract base class for all Daos.<br /><br /><p>IMPORTANT NOTE: The Dao (an
 	<a name="var$additionalColumnTypes"></a>
 	<p></p>
 	<h4>$additionalColumnTypes = <span class="value">array()</span></h4>
-	<p>[line 185]</p>
+	<p>[line 219]</p>
   This works exactly the same as the column types, except that it only defines columns, that may additionally be returned by the  database (for example in joins).<br /><br /><p>Those values can *not* be set in the DataObjects afterwards, but are checked for their types when retrieved.  When trying to get an additional column out of a DataObject, that has not been retrieved from the database, the DataObject should  just return null and not error.  When trying to set an additional column the DataObject should trigger an error.</p><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
@@ -380,7 +405,7 @@ This abstract base class for all Daos.<br /><br /><p>IMPORTANT NOTE: The Dao (an
 	<a name="var$columnExportMapping"></a>
 	<p></p>
 	<h4>$columnExportMapping = <span class="value">array()</span></h4>
-	<p>[line 205]</p>
+	<p>[line 385]</p>
   The same as columnImportMapping but the other way around.<br /><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
@@ -404,7 +429,7 @@ This abstract base class for all Daos.<br /><br /><p>IMPORTANT NOTE: The Dao (an
 	<a name="var$columnImportMapping"></a>
 	<p></p>
 	<h4>$columnImportMapping = <span class="value">array()</span></h4>
-	<p>[line 198]</p>
+	<p>[line 378]</p>
   If your database holds different column names than you want in you DataObjects, you can specify export &amp; import mappings.<br /><br /><p>(Don't confuse this with your php values. Meaning: if the database value is 'strangely_named', but you want to access your object  like this: $object-&gt;perfectName, then you have to map it from strangely_named to perfect_name (not perfectName).)  If no mapping is found in the imports, than a reverse lookup is done in exports, and vice versa, so for a normal conversion  only the columnImportMapping (or columnExportMapping if you prefer) has to be set.  E.g.: array('what_the_database_value_actually_is'=&gt;'what_you_would_want_it_to_be');</p><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
@@ -428,7 +453,7 @@ This abstract base class for all Daos.<br /><br /><p>IMPORTANT NOTE: The Dao (an
 	<a name="var$columnTypes"></a>
 	<p></p>
 	<h4>$columnTypes = <span class="value">array()</span></h4>
-	<p>[line 172]</p>
+	<p>[line 206]</p>
   This array/map must contain all column types. eg: array('id'=&gt;Dao::INT)<br /><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
@@ -452,7 +477,7 @@ This abstract base class for all Daos.<br /><br /><p>IMPORTANT NOTE: The Dao (an
 	<a name="var$defaultSort"></a>
 	<p></p>
 	<h4>$defaultSort = <span class="value">&nbsp;'sort'</span></h4>
-	<p>[line 164]</p>
+	<p>[line 198]</p>
   If no sort attribute is passed to a query method, this will be used.<br /><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
@@ -479,7 +504,7 @@ This abstract base class for all Daos.<br /><br /><p>IMPORTANT NOTE: The Dao (an
 	<a name="var$defaultValueColumns"></a>
 	<p></p>
 	<h4>$defaultValueColumns = <span class="value">array('id')</span></h4>
-	<p>[line 224]</p>
+	<p>[line 404]</p>
   This is a list of columns that have default values in the database.<br /><br /><p>This means that, if the values are NULL, and the entry is inserted in the database, they will not be  passed, so that the database can automatically set the values.  So when you call getRawObject() those values will be null.  Per default the id is given.</p><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
@@ -503,7 +528,7 @@ This abstract base class for all Daos.<br /><br /><p>IMPORTANT NOTE: The Dao (an
 	<a name="var$logger"></a>
 	<p></p>
 	<h4>$logger = <span class="value">&nbsp;null</span></h4>
-	<p>[line 143]</p>
+	<p>[line 177]</p>
   <br /><br />
 <h4>Tags:</h4>
 <div class="tags">
@@ -530,7 +555,7 @@ This abstract base class for all Daos.<br /><br /><p>IMPORTANT NOTE: The Dao (an
 	<a name="var$nullColumns"></a>
 	<p></p>
 	<h4>$nullColumns = <span class="value">array()</span></h4>
-	<p>[line 212]</p>
+	<p>[line 392]</p>
   This is an array containing all columns that can be null. eg: $nullColumns = array('email', 'name');<br /><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
@@ -551,10 +576,48 @@ This abstract base class for all Daos.<br /><br /><p>IMPORTANT NOTE: The Dao (an
       </table>
 	</div><br /><br />
 	<div class="top">[ <a href="#top">Top</a> ]</div><br />
+	<a name="var$references"></a>
+	<p></p>
+	<h4>$references = <span class="value">array()</span></h4>
+	<p>[line 241]</p>
+  The references array contains a list of DaoReference instances to map certain columns to other tables.<br /><br /><p>You set them in the setupReferences method, that gets called in the constructor.</p><p>This array would look like this then:  <ol><li><div class="src-line">&nbsp;<span class="src-php">&lt;?php</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;<span class="src-var">$references&nbsp;</span>==&nbsp;<span class="src-key">array</span><span class="src-sym">(</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'address'</span>=&gt;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../Dao/DaoReference.html">DaoReference</a></span><span class="src-sym">(</span><span class="src-str">'AddressDao'</span><span class="src-sym">,&nbsp;</span><span class="src-str">'address_id'</span><span class="src-sym">,&nbsp;</span><span class="src-str">'id'</span><span class="src-sym">)</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;<span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-php">?&gt;</span></div></li>
+</ol></p><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>see:</b>&nbsp;&nbsp;</td><td><a href="../Dao/Dao.html#methodaddReference">Dao::addReference()</a></td>
+  </tr>
+  <tr>
+    <td><b>see:</b>&nbsp;&nbsp;</td><td><a href="../Dao/Dao.html#methodsetupReferences">Dao::setupReferences()</a></td>
+  </tr>
+  <tr>
+    <td><b>see:</b>&nbsp;&nbsp;</td><td><a href="../Dao/DaoReference.html">DaoReference</a></td>
+  </tr>
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
+  </tr>
+</table>
+</div>
+
+  <br />
+	<div class="tags">
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td><b>Type:</b>&nbsp;&nbsp;</td>
+      <td>array</td>
+    </tr>
+      </table>
+	</div><br /><br />
+	<div class="top">[ <a href="#top">Top</a> ]</div><br />
 	<a name="var$tableName"></a>
 	<p></p>
 	<h4>$tableName = <span class="value">&nbsp;null</span></h4>
-	<p>[line 149]</p>
+	<p>[line 183]</p>
   This is the table name this Dao works with.<br /><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
@@ -578,7 +641,7 @@ This abstract base class for all Daos.<br /><br /><p>IMPORTANT NOTE: The Dao (an
 	<a name="var$viewName"></a>
 	<p></p>
 	<h4>$viewName = <span class="value">&nbsp;null</span></h4>
-	<p>[line 156]</p>
+	<p>[line 190]</p>
   This viewName will be used in every get() (and getIterator) instead of the tableName.<br /><br /><p>For updating and inserts tableName is still used.</p><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
@@ -607,7 +670,7 @@ This abstract base class for all Daos.<br /><br /><p>IMPORTANT NOTE: The Dao (an
 <div class="tags">
   <hr />
 	<a name="methodisVector"></a>
-	<h3>static method isVector <span class="smalllinenumber">[line 454]</span></h3>
+	<h3>static method isVector <span class="smalllinenumber">[line 638]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -634,8 +697,122 @@ $var)</code>
   </div>
 
   <hr />
+	<a name="methodaddReference"></a>
+	<h3>method addReference <span class="smalllinenumber">[line 263]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void addReference(
+string
+$identifier, string|<a href="../Dao/Dao.html">Dao</a>
+$daoClassName, [string
+$localKey = null], [string
+$foreignKey = 'id'])</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Adds a reference definition<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>see:</b>&nbsp;&nbsp;</td><td><a href="../Dao/DaoReference.html">DaoReference</a></td>
+  </tr>
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">string&nbsp;&nbsp;</td>
+        <td><b>$identifier</b>&nbsp;&nbsp;</td>
+        <td>The name of the identifier (eg.: address)</td>
+      </tr>
+          <tr>
+        <td class="type">string|<a href="../Dao/Dao.html">Dao</a>&nbsp;&nbsp;</td>
+        <td><b>$daoClassName</b>&nbsp;&nbsp;</td>
+        <td>Eg.: 'AddressDao' or the dao directly</td>
+      </tr>
+          <tr>
+        <td class="type">string&nbsp;&nbsp;</td>
+        <td><b>$localKey</b>&nbsp;&nbsp;</td>
+        <td>Eg.: address_id</td>
+      </tr>
+          <tr>
+        <td class="type">string&nbsp;&nbsp;</td>
+        <td><b>$foreignKey</b>&nbsp;&nbsp;</td>
+        <td>Eg.: id</td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodaddToManyReference"></a>
+	<h3>method addToManyReference <span class="smalllinenumber">[line 279]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void addToManyReference(
+string
+$identifier, string|<a href="../Dao/Dao.html">Dao</a>
+$daoClassName, [string
+$localKey = null], [string
+$foreignKey = 'id'])</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Adds a toMany reference definition<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>see:</b>&nbsp;&nbsp;</td><td><a href="../Dao/Dao.html#methodaddReference">Dao::addReference()</a></td>
+  </tr>
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">string&nbsp;&nbsp;</td>
+        <td><b>$identifier</b>&nbsp;&nbsp;</td>
+        <td>The name of the identifier (eg.: addresses)</td>
+      </tr>
+          <tr>
+        <td class="type">string|<a href="../Dao/Dao.html">Dao</a>&nbsp;&nbsp;</td>
+        <td><b>$daoClassName</b>&nbsp;&nbsp;</td>
+        <td>Eg.: AddressDao</td>
+      </tr>
+          <tr>
+        <td class="type">string&nbsp;&nbsp;</td>
+        <td><b>$localKey</b>&nbsp;&nbsp;</td>
+        <td>Eg.: address_ids</td>
+      </tr>
+          <tr>
+        <td class="type">string&nbsp;&nbsp;</td>
+        <td><b>$foreignKey</b>&nbsp;&nbsp;</td>
+        <td>Eg.: id</td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
 	<a name="methodafterDelete"></a>
-	<h3>method afterDelete <span class="smalllinenumber">[line 331]</span></h3>
+	<h3>method afterDelete <span class="smalllinenumber">[line 515]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -674,7 +851,7 @@ $object)</code>
   </div>
   <hr />
 	<a name="methodafterInsert"></a>
-	<h3>method afterInsert <span class="smalllinenumber">[line 313]</span></h3>
+	<h3>method afterInsert <span class="smalllinenumber">[line 497]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -713,7 +890,7 @@ $object)</code>
   </div>
   <hr />
 	<a name="methodafterUpdate"></a>
-	<h3>method afterUpdate <span class="smalllinenumber">[line 322]</span></h3>
+	<h3>method afterUpdate <span class="smalllinenumber">[line 506]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -752,7 +929,7 @@ $object)</code>
   </div>
   <hr />
 	<a name="methodapplyColumnExportMapping"></a>
-	<h3>method applyColumnExportMapping <span class="smalllinenumber">[line 417]</span></h3>
+	<h3>method applyColumnExportMapping <span class="smalllinenumber">[line 601]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -794,7 +971,7 @@ $column)</code>
   </div>
   <hr />
 	<a name="methodapplyColumnImportMapping"></a>
-	<h3>method applyColumnImportMapping <span class="smalllinenumber">[line 402]</span></h3>
+	<h3>method applyColumnImportMapping <span class="smalllinenumber">[line 586]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -836,7 +1013,7 @@ $column)</code>
   </div>
   <hr />
 	<a name="methodcolumnExists"></a>
-	<h3>method columnExists <span class="smalllinenumber">[line 340]</span></h3>
+	<h3>method columnExists <span class="smalllinenumber">[line 524]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -872,7 +1049,7 @@ $column)</code>
   </div>
   <hr />
 	<a name="methodconvertRemoteValueToTimestamp"></a>
-	<h3>method convertRemoteValueToTimestamp <span class="smalllinenumber">[line 637]</span></h3>
+	<h3>method convertRemoteValueToTimestamp <span class="smalllinenumber">[line 824]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -927,7 +1104,7 @@ $withTime)</code>
   </div>
   <hr />
 	<a name="methoddebug"></a>
-	<h3>method debug <span class="smalllinenumber">[line 257]</span></h3>
+	<h3>method debug <span class="smalllinenumber">[line 437]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -963,7 +1140,7 @@ $message)</code>
   </div>
   <hr />
 	<a name="methoddeleteById"></a>
-	<h3>method deleteById <span class="smalllinenumber">[line 360]</span></h3>
+	<h3>method deleteById <span class="smalllinenumber">[line 544]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1004,8 +1181,72 @@ $id)</code>
         <div class="top">[ <a href="#top">Top</a> ]</div>
   </div>
   <hr />
+	<a name="method__construct"></a>
+	<h3>constructor __construct <span class="smalllinenumber">[line 163]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>Dao __construct(
+[string
+$tableName = null], [array
+$columnTypes = null], [array
+$nullColumns = null], [array
+$defaultColumns = null])</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Has to be called from any extended Dao to make sure everything gets setup properly<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	<p>Overridden in child classes as:<br />
+		<dl>
+	<dt><a href="../Dao/FileSourceDao.html#method__construct">FileSourceDao::__construct()</a></dt>
+		<dd></dd>
+	</dl>
+		<dl>
+	<dt><a href="../Dao/SqlDao.html#method__construct">SqlDao::__construct()</a></dt>
+		<dd></dd>
+	</dl>
+	</p>
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">string&nbsp;&nbsp;</td>
+        <td><b>$tableName</b>&nbsp;&nbsp;</td>
+        <td>You can specify this as an attribute when writing a Dao implementation</td>
+      </tr>
+          <tr>
+        <td class="type">array&nbsp;&nbsp;</td>
+        <td><b>$columnTypes</b>&nbsp;&nbsp;</td>
+        <td>You can specify this as an attribute when writing a Dao implementation</td>
+      </tr>
+          <tr>
+        <td class="type">array&nbsp;&nbsp;</td>
+        <td><b>$nullColumns</b>&nbsp;&nbsp;</td>
+        <td>You can specify this as an attribute when writing a Dao implementation</td>
+      </tr>
+          <tr>
+        <td class="type">array&nbsp;&nbsp;</td>
+        <td><b>$defaultColumns</b>&nbsp;&nbsp;</td>
+        <td>You can specify this as an attribute when writing a Dao implementation</td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
 	<a name="methodexportBool"></a>
-	<h3>method exportBool <span class="smalllinenumber">[line 790]</span></h3>
+	<h3>method exportBool <span class="smalllinenumber">[line 977]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1041,7 +1282,7 @@ $bool)</code>
   </div>
   <hr />
 	<a name="methodexportColumn"></a>
-	<h3>method exportColumn <span class="smalllinenumber">[line 754]</span></h3>
+	<h3>method exportColumn <span class="smalllinenumber">[line 941]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1090,7 +1331,7 @@ $column)</code>
   </div>
   <hr />
 	<a name="methodexportDate"></a>
-	<h3>method exportDate <span class="smalllinenumber">[line 815]</span></h3>
+	<h3>method exportDate <span class="smalllinenumber">[line 1002]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1141,7 +1382,7 @@ $withTime)</code>
   </div>
   <hr />
 	<a name="methodexportEnum"></a>
-	<h3>method exportEnum <span class="smalllinenumber">[line 826]</span></h3>
+	<h3>method exportEnum <span class="smalllinenumber">[line 1013]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1183,7 +1424,7 @@ $list)</code>
   </div>
   <hr />
 	<a name="methodexportFloat"></a>
-	<h3>method exportFloat <span class="smalllinenumber">[line 806]</span></h3>
+	<h3>method exportFloat <span class="smalllinenumber">[line 993]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1219,7 +1460,7 @@ $float)</code>
   </div>
   <hr />
 	<a name="methodexportInteger"></a>
-	<h3>method exportInteger <span class="smalllinenumber">[line 798]</span></h3>
+	<h3>method exportInteger <span class="smalllinenumber">[line 985]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1255,7 +1496,7 @@ $int)</code>
   </div>
   <hr />
 	<a name="methodexportNull"></a>
-	<h3>method exportNull <span class="smalllinenumber">[line 782]</span></h3>
+	<h3>method exportNull <span class="smalllinenumber">[line 969]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1280,7 +1521,7 @@ $int)</code>
   </div>
   <hr />
 	<a name="methodexportString"></a>
-	<h3>method exportString <span class="smalllinenumber">[line 775]</span></h3>
+	<h3>method exportString <span class="smalllinenumber">[line 962]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1322,7 +1563,7 @@ $string)</code>
   </div>
   <hr />
 	<a name="methodexportTable"></a>
-	<h3>method exportTable <span class="smalllinenumber">[line 765]</span></h3>
+	<h3>method exportTable <span class="smalllinenumber">[line 952]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1380,7 +1621,7 @@ $string)</code>
   </div>
   <hr />
 	<a name="methodexportValue"></a>
-	<h3>method exportValue <span class="smalllinenumber">[line 726]</span></h3>
+	<h3>method exportValue <span class="smalllinenumber">[line 913]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1428,7 +1669,7 @@ $notNull = true])</code>
   </div>
   <hr />
 	<a name="methodgenerateInsertArrays"></a>
-	<h3>method generateInsertArrays <span class="smalllinenumber">[line 467]</span></h3>
+	<h3>method generateInsertArrays <span class="smalllinenumber">[line 651]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1467,7 +1708,7 @@ $object)</code>
   </div>
   <hr />
 	<a name="methodgenerateSortString"></a>
-	<h3>method generateSortString <span class="smalllinenumber">[line 235]</span></h3>
+	<h3>method generateSortString <span class="smalllinenumber">[line 415]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1519,7 +1760,7 @@ $sort)</code>
   </div>
   <hr />
 	<a name="methodgetAdditionalColumnTypes"></a>
-	<h3>method getAdditionalColumnTypes <span class="smalllinenumber">[line 273]</span></h3>
+	<h3>method getAdditionalColumnTypes <span class="smalllinenumber">[line 451]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1550,7 +1791,7 @@ $sort)</code>
   </div>
   <hr />
 	<a name="methodgetAll"></a>
-	<h3>method getAll <span class="smalllinenumber">[line 375]</span></h3>
+	<h3>method getAll <span class="smalllinenumber">[line 559]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1607,7 +1848,7 @@ $limit = null])</code>
   </div>
   <hr />
 	<a name="methodgetAllAsArrays"></a>
-	<h3>method getAllAsArrays <span class="smalllinenumber">[line 387]</span></h3>
+	<h3>method getAllAsArrays <span class="smalllinenumber">[line 571]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1636,7 +1877,7 @@ $limit = null])</code>
   </div>
   <hr />
 	<a name="methodgetById"></a>
-	<h3>method getById <span class="smalllinenumber">[line 351]</span></h3>
+	<h3>method getById <span class="smalllinenumber">[line 535]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1680,7 +1921,7 @@ $id)</code>
   </div>
   <hr />
 	<a name="methodgetColumnTypes"></a>
-	<h3>method getColumnTypes <span class="smalllinenumber">[line 266]</span></h3>
+	<h3>method getColumnTypes <span class="smalllinenumber">[line 445]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1711,7 +1952,7 @@ $id)</code>
   </div>
   <hr />
 	<a name="methodgetDefaultValueColumns"></a>
-	<h3>method getDefaultValueColumns <span class="smalllinenumber">[line 286]</span></h3>
+	<h3>method getDefaultValueColumns <span class="smalllinenumber">[line 470]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1736,7 +1977,7 @@ $id)</code>
   </div>
   <hr />
 	<a name="methodgetNullColumns"></a>
-	<h3>method getNullColumns <span class="smalllinenumber">[line 279]</span></h3>
+	<h3>method getNullColumns <span class="smalllinenumber">[line 463]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1767,7 +2008,7 @@ $id)</code>
   </div>
   <hr />
 	<a name="methodgetObjectFromData"></a>
-	<h3>method getObjectFromData <span class="smalllinenumber">[line 503]</span></h3>
+	<h3>method getObjectFromData <span class="smalllinenumber">[line 690]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1815,7 +2056,7 @@ $data)</code>
   </div>
   <hr />
 	<a name="methodgetObjectFromPreparedData"></a>
-	<h3>method getObjectFromPreparedData <span class="smalllinenumber">[line 490]</span></h3>
+	<h3>method getObjectFromPreparedData <span class="smalllinenumber">[line 677]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1825,7 +2066,7 @@ $data)</code>
     </td></tr></table>
     </td></tr></table><br />
 	
-		Returns a data object with the data in it.<br /><br /><p>Override this function if you want a specific DataObject, not the default one.</p><br /><br /><br />
+		Returns a data object with the data in it.<br /><br /><p>Override this function if you want a specific DataObject, not the default one.  Using your own DataObject is sometimes useful if your datasource has a strange  naming convention and you have to do different name conversion than the default  one.</p><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
@@ -1851,7 +2092,7 @@ $data)</code>
   </div>
   <hr />
 	<a name="methodgetRawObject"></a>
-	<h3>method getRawObject <span class="smalllinenumber">[line 580]</span></h3>
+	<h3>method getRawObject <span class="smalllinenumber">[line 767]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1890,8 +2131,114 @@ $data)</code>
         <div class="top">[ <a href="#top">Top</a> ]</div>
   </div>
   <hr />
+	<a name="methodgetReference"></a>
+	<h3>method getReference <span class="smalllinenumber">[line 294]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code><a href="../Dao/DataObject/DataObject.html">DataObject</a> getReference(
+
+$dataObject, 
+$column)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Returns the DataObject for a specific reference.<br /><br /><p>It then sets the hash in the DataObject so it can be retrieved next time.  If it is accessed after that, the already fetched DataHash is used.  A DataSource can directly return the DataHash, so it doesn't have to be fetched.</p><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>$dataObject</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>$column</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodgetReferenceDao"></a>
+	<h3>method getReferenceDao <span class="smalllinenumber">[line 361]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code><a href="../Dao/Dao.html">Dao</a> getReferenceDao(
+<a href="../Dao/DaoReference.html">DaoReference</a>
+$reference)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Returns the Dao for a DaoReference.<br /><br /><p>You probably want to overwrite this method in your daos to use your implementation of instantiating Daos.</p><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type"><a href="../Dao/DaoReference.html">DaoReference</a>&nbsp;&nbsp;</td>
+        <td><b>$reference</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodgetReferences"></a>
+	<h3>method getReferences <span class="smalllinenumber">[line 457]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>array getReferences(
+)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		<br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>see:</b>&nbsp;&nbsp;</td><td><a href="../Dao/Dao.html#var$references">Dao::$references</a></td>
+  </tr>
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
 	<a name="methodimportBool"></a>
-	<h3>method importBool <span class="smalllinenumber">[line 703]</span></h3>
+	<h3>method importBool <span class="smalllinenumber">[line 890]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1927,7 +2274,7 @@ $value)</code>
   </div>
   <hr />
 	<a name="methodimportColumn"></a>
-	<h3>method importColumn <span class="smalllinenumber">[line 431]</span></h3>
+	<h3>method importColumn <span class="smalllinenumber">[line 615]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1966,7 +2313,7 @@ $column)</code>
   </div>
   <hr />
 	<a name="methodimportDate"></a>
-	<h3>method importDate <span class="smalllinenumber">[line 647]</span></h3>
+	<h3>method importDate <span class="smalllinenumber">[line 834]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -2008,7 +2355,7 @@ $withTime)</code>
   </div>
   <hr />
 	<a name="methodimportEnum"></a>
-	<h3>method importEnum <span class="smalllinenumber">[line 692]</span></h3>
+	<h3>method importEnum <span class="smalllinenumber">[line 879]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -2050,7 +2397,7 @@ $list)</code>
   </div>
   <hr />
 	<a name="methodimportFloat"></a>
-	<h3>method importFloat <span class="smalllinenumber">[line 669]</span></h3>
+	<h3>method importFloat <span class="smalllinenumber">[line 856]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -2086,7 +2433,7 @@ $value)</code>
   </div>
   <hr />
 	<a name="methodimportInteger"></a>
-	<h3>method importInteger <span class="smalllinenumber">[line 658]</span></h3>
+	<h3>method importInteger <span class="smalllinenumber">[line 845]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -2122,7 +2469,7 @@ $value)</code>
   </div>
   <hr />
 	<a name="methodimportString"></a>
-	<h3>method importString <span class="smalllinenumber">[line 680]</span></h3>
+	<h3>method importString <span class="smalllinenumber">[line 867]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -2158,7 +2505,7 @@ $value)</code>
   </div>
   <hr />
 	<a name="methodimportValue"></a>
-	<h3>method importValue <span class="smalllinenumber">[line 606]</span></h3>
+	<h3>method importValue <span class="smalllinenumber">[line 793]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -2206,7 +2553,7 @@ $notNull = true])</code>
   </div>
   <hr />
 	<a name="methodinterpretSortVariable"></a>
-	<h3>method interpretSortVariable <span class="smalllinenumber">[line 843]</span></h3>
+	<h3>method interpretSortVariable <span class="smalllinenumber">[line 1030]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -2245,7 +2592,7 @@ $sort)</code>
   </div>
   <hr />
 	<a name="methodlog"></a>
-	<h3>method log <span class="smalllinenumber">[line 252]</span></h3>
+	<h3>method log <span class="smalllinenumber">[line 432]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -2281,7 +2628,7 @@ $message)</code>
   </div>
   <hr />
 	<a name="methodnotNull"></a>
-	<h3>method notNull <span class="smalllinenumber">[line 443]</span></h3>
+	<h3>method notNull <span class="smalllinenumber">[line 627]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -2317,7 +2664,7 @@ $column)</code>
   </div>
   <hr />
 	<a name="methodprepareDataForObject"></a>
-	<h3>method prepareDataForObject <span class="smalllinenumber">[line 529]</span></h3>
+	<h3>method prepareDataForObject <span class="smalllinenumber">[line 716]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -2353,7 +2700,7 @@ $data)</code>
   </div>
   <hr />
 	<a name="methodsetLogger"></a>
-	<h3>method setLogger <span class="smalllinenumber">[line 247]</span></h3>
+	<h3>method setLogger <span class="smalllinenumber">[line 427]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -2389,7 +2736,7 @@ $logger)</code>
   </div>
   <hr />
 	<a name="methodsetLoggerFactory"></a>
-	<h3>method setLoggerFactory <span class="smalllinenumber">[line 242]</span></h3>
+	<h3>method setLoggerFactory <span class="smalllinenumber">[line 422]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -2424,8 +2771,36 @@ $loggerFactory)</code>
         <div class="top">[ <a href="#top">Top</a> ]</div>
   </div>
   <hr />
+	<a name="methodsetupReferences"></a>
+	<h3>method setupReferences <span class="smalllinenumber">[line 252]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void setupReferences(
+)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Overwrite this in a specific Dao implementation to setup the references.<br /><br /><p>Setting the references directly to the member variables is not possible since a references is an object.  This function gets called from the constructor.  You should call addReference() inside this function.</p><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>see:</b>&nbsp;&nbsp;</td><td><a href="../Dao/Dao.html#methodaddReference">Dao::addReference()</a></td>
+  </tr>
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
 	<a name="methodupdateObjectWithData"></a>
-	<h3>method updateObjectWithData <span class="smalllinenumber">[line 515]</span></h3>
+	<h3>method updateObjectWithData <span class="smalllinenumber">[line 702]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -2470,7 +2845,7 @@ $object)</code>
   </div>
   <hr />
 	<a name="method__call"></a>
-	<h3>method __call <span class="smalllinenumber">[line 294]</span></h3>
+	<h3>method __call <span class="smalllinenumber">[line 478]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -2519,112 +2894,126 @@ $param)</code>
 	<a name="constASC"></a>
 	<p></p>
 	<h4>ASC = <span class="value">&nbsp;self::SORT_ASCENDING</span></h4>
-	<p>[line 128]</p>
+	<p>[line 144]</p>
   Sort types<br /><br />
   <br />
 	<div class="top">[ <a href="#top">Top</a> ]</div><br />
 	<a name="constBOOL"></a>
 	<p></p>
 	<h4>BOOL = <span class="value">&nbsp;3</span></h4>
-	<p>[line 110]</p>
+	<p>[line 124]</p>
   Data types<br /><br />
   <br />
 	<div class="top">[ <a href="#top">Top</a> ]</div><br />
 	<a name="constBOOLEAN"></a>
 	<p></p>
 	<h4>BOOLEAN = <span class="value">&nbsp;self::BOOL</span></h4>
-	<p>[line 111]</p>
+	<p>[line 125]</p>
   Data types<br /><br />
   <br />
 	<div class="top">[ <a href="#top">Top</a> ]</div><br />
 	<a name="constDATE"></a>
 	<p></p>
 	<h4>DATE = <span class="value">&nbsp;5</span></h4>
-	<p>[line 114]</p>
+	<p>[line 128]</p>
   Data types<br /><br />
   <br />
 	<div class="top">[ <a href="#top">Top</a> ]</div><br />
 	<a name="constDATE_WITH_TIME"></a>
 	<p></p>
 	<h4>DATE_WITH_TIME = <span class="value">&nbsp;self::TIMESTAMP</span></h4>
-	<p>[line 113]</p>
+	<p>[line 127]</p>
   Data types<br /><br />
   <br />
 	<div class="top">[ <a href="#top">Top</a> ]</div><br />
 	<a name="constDESC"></a>
 	<p></p>
 	<h4>DESC = <span class="value">&nbsp;self::SORT_DESCENDING</span></h4>
-	<p>[line 129]</p>
+	<p>[line 145]</p>
   Sort types<br /><br />
   <br />
 	<div class="top">[ <a href="#top">Top</a> ]</div><br />
 	<a name="constDO_NOT_EXPORT_VALUES"></a>
 	<p></p>
 	<h4>DO_NOT_EXPORT_VALUES = <span class="value">&nbsp;false</span></h4>
-	<p>[line 136]</p>
+	<p>[line 152]</p>
   
   <br />
 	<div class="top">[ <a href="#top">Top</a> ]</div><br />
 	<a name="constFLOAT"></a>
 	<p></p>
 	<h4>FLOAT = <span class="value">&nbsp;2</span></h4>
-	<p>[line 109]</p>
+	<p>[line 123]</p>
   Data types<br /><br />
   <br />
 	<div class="top">[ <a href="#top">Top</a> ]</div><br />
 	<a name="constIGNORE"></a>
 	<p></p>
 	<h4>IGNORE = <span class="value">&nbsp;-1</span></h4>
-	<p>[line 117]</p>
+	<p>[line 133]</p>
   Data types<br /><br />
   <br />
 	<div class="top">[ <a href="#top">Top</a> ]</div><br />
 	<a name="constINT"></a>
 	<p></p>
 	<h4>INT = <span class="value">&nbsp;1</span></h4>
-	<p>[line 107]</p>
+	<p>[line 121]</p>
   Data types<br /><br />
   <br />
 	<div class="top">[ <a href="#top">Top</a> ]</div><br />
 	<a name="constINTEGER"></a>
 	<p></p>
 	<h4>INTEGER = <span class="value">&nbsp;self::INT</span></h4>
-	<p>[line 108]</p>
+	<p>[line 122]</p>
+  Data types<br /><br />
+  <br />
+	<div class="top">[ <a href="#top">Top</a> ]</div><br />
+	<a name="constSEQ"></a>
+	<p></p>
+	<h4>SEQ = <span class="value">&nbsp;self::SEQUENCE</span></h4>
+	<p>[line 132]</p>
+  Data types<br /><br />
+  <br />
+	<div class="top">[ <a href="#top">Top</a> ]</div><br />
+	<a name="constSEQUENCE"></a>
+	<p></p>
+	<h4>SEQUENCE = <span class="value">&nbsp;7</span></h4>
+	<p>[line 131]</p>
   Data types<br /><br />
   <br />
 	<div class="top">[ <a href="#top">Top</a> ]</div><br />
 	<a name="constSORT_ASCENDING"></a>
 	<p></p>
 	<h4>SORT_ASCENDING = <span class="value">&nbsp;0</span></h4>
-	<p>[line 126]</p>
+	<p>[line 142]</p>
   Sort types<br /><br />
   <br />
 	<div class="top">[ <a href="#top">Top</a> ]</div><br />
 	<a name="constSORT_DESCENDING"></a>
 	<p></p>
 	<h4>SORT_DESCENDING = <span class="value">&nbsp;1</span></h4>
-	<p>[line 127]</p>
+	<p>[line 143]</p>
   Sort types<br /><br />
   <br />
 	<div class="top">[ <a href="#top">Top</a> ]</div><br />
 	<a name="constSTRING"></a>
 	<p></p>
 	<h4>STRING = <span class="value">&nbsp;self::TEXT</span></h4>
-	<p>[line 116]</p>
+	<p>[line 130]</p>
   Data types<br /><br />
   <br />
 	<div class="top">[ <a href="#top">Top</a> ]</div><br />
 	<a name="constTEXT"></a>
 	<p></p>
 	<h4>TEXT = <span class="value">&nbsp;6</span></h4>
-	<p>[line 115]</p>
+	<p>[line 129]</p>
   Data types<br /><br />
   <br />
 	<div class="top">[ <a href="#top">Top</a> ]</div><br />
 	<a name="constTIMESTAMP"></a>
 	<p></p>
 	<h4>TIMESTAMP = <span class="value">&nbsp;4</span></h4>
-	<p>[line 112]</p>
+	<p>[line 126]</p>
   Data types<br /><br />
   <br />
 	<div class="top">[ <a href="#top">Top</a> ]</div><br />

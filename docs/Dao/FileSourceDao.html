@@ -28,6 +28,9 @@
 	<div id="ric">
 					<p><a href="../ric_README.html">README</a></p>
 			</div>
+	<div id="todolist">
+			<p><a href="../todolist.html">Todo List</a></p>
+	</div>
       <b>Packages:</b><br />
               <a href="../li_php-library.html">php-library</a><br />
               <a href="../li_Config.html">Config</a><br />
@@ -45,9 +48,17 @@
 		</a><br>
 			<a href="../Dao/_Dao---DaoColumnAssignment.php.html">		DaoColumnAssignment.php
 		</a><br>
+			<a href="../Dao/_Dao---DaoHashListIterator.php.html">		DaoHashListIterator.php
+		</a><br>
 			<a href="../Dao/_Dao---DaoInterface.php.html">		DaoInterface.php
 		</a><br>
+			<a href="../Dao/_Dao---DaoKeyListIterator.php.html">		DaoKeyListIterator.php
+		</a><br>
+			<a href="../Dao/_Dao---DaoReference.php.html">		DaoReference.php
+		</a><br>
 			<a href="../Dao/_Dao---DaoResultIterator.php.html">		DaoResultIterator.php
+		</a><br>
+			<a href="../Dao/_Dao---DaoToManyReference.php.html">		DaoToManyReference.php
 		</a><br>
 			<a href="../Dao/_Dao---FileSourceDao.php.html">		FileSourceDao.php
 		</a><br>
@@ -110,7 +121,11 @@
         <div class="package">
 		    		<a href="../Dao/Dao.html">Dao</a><br />
 	    		<a href="../Dao/DaoColumnAssignment.html">DaoColumnAssignment</a><br />
+	    		<a href="../Dao/DaoHashListIterator.html">DaoHashListIterator</a><br />
+	    		<a href="../Dao/DaoKeyListIterator.html">DaoKeyListIterator</a><br />
+	    		<a href="../Dao/DaoReference.html">DaoReference</a><br />
 	    		<a href="../Dao/DaoResultIterator.html">DaoResultIterator</a><br />
+	    		<a href="../Dao/DaoToManyReference.html">DaoToManyReference</a><br />
 	    		<a href="../Dao/FileSourceDao.html">FileSourceDao</a><br />
 	    		<a href="../Dao/FileSourceResultIterator.html">FileSourceResultIterator</a><br />
 	    		<a href="../Dao/JsonDao.html">JsonDao</a><br />
@@ -300,6 +315,18 @@ Source Location: /Dao/FileSourceDao.php<br /><br />
    
 </dd>
 <dt>
+  <a href="../Dao/Dao.html#constSEQ">Dao::SEQ</a>
+</dt>
+<dd>
+   
+</dd>
+<dt>
+  <a href="../Dao/Dao.html#constSEQUENCE">Dao::SEQUENCE</a>
+</dt>
+<dd>
+   
+</dd>
+<dt>
   <a href="../Dao/Dao.html#constSORT_ASCENDING">Dao::SORT_ASCENDING</a>
 </dt>
 <dd>
@@ -387,6 +414,12 @@ Source Location: /Dao/FileSourceDao.php<br /><br />
    
 </dd>
 <dt>
+  <a href="../Dao/Dao.html#var$references">Dao::$references</a>
+  </dt>
+<dd>
+   
+</dd>
+<dt>
   <a href="../Dao/Dao.html#var$tableName">Dao::$tableName</a>
   </dt>
 <dd>
@@ -407,6 +440,24 @@ Source Location: /Dao/FileSourceDao.php<br /><br />
 <div class="tags">
 <h4>Class: <a href="../Dao/Dao.html">Dao</a></h4>
 <dl>
+    <dt>
+    <a href="../Dao/Dao.html#method__construct">Dao::__construct()</a>
+  </dt>
+  <dd>
+    Has to be called from any extended Dao to make sure everything gets setup properly
+  </dd>
+    <dt>
+    <a href="../Dao/Dao.html#methodaddReference">Dao::addReference()</a>
+  </dt>
+  <dd>
+    Adds a reference definition
+  </dd>
+    <dt>
+    <a href="../Dao/Dao.html#methodaddToManyReference">Dao::addToManyReference()</a>
+  </dt>
+  <dd>
+    Adds a toMany reference definition
+  </dd>
     <dt>
     <a href="../Dao/Dao.html#methodafterDelete">Dao::afterDelete()</a>
   </dt>
@@ -594,6 +645,24 @@ Source Location: /Dao/FileSourceDao.php<br /><br />
     Returns an object with all columns defined, but only set if necessary.
   </dd>
     <dt>
+    <a href="../Dao/Dao.html#methodgetReference">Dao::getReference()</a>
+  </dt>
+  <dd>
+    Returns the DataObject for a specific reference.
+  </dd>
+    <dt>
+    <a href="../Dao/Dao.html#methodgetReferenceDao">Dao::getReferenceDao()</a>
+  </dt>
+  <dd>
+    Returns the Dao for a DaoReference.
+  </dd>
+    <dt>
+    <a href="../Dao/Dao.html#methodgetReferences">Dao::getReferences()</a>
+  </dt>
+  <dd>
+    
+  </dd>
+    <dt>
     <a href="../Dao/Dao.html#methodimportBool">Dao::importBool()</a>
   </dt>
   <dd>
@@ -682,6 +751,12 @@ Source Location: /Dao/FileSourceDao.php<br /><br />
   </dt>
   <dd>
     
+  </dd>
+    <dt>
+    <a href="../Dao/Dao.html#methodsetupReferences">Dao::setupReferences()</a>
+  </dt>
+  <dd>
+    Overwrite this in a specific Dao implementation to setup the references.
   </dd>
     <dt>
     <a href="../Dao/Dao.html#methodupdateObjectWithData">Dao::updateObjectWithData()</a>
@@ -786,7 +861,7 @@ $defaultColumns = null])</code>
 </div>
 <br /><br />
 
-	
+	Overrides <a href="../Dao/Dao.html#method__construct">Dao::__construct()</a> (Has to be called from any extended Dao to make sure everything gets setup properly)<br /><br />
         <h4>Parameters:</h4>
     <div class="tags">
     <table border="0" cellspacing="0" cellpadding="0">
@@ -821,7 +896,7 @@ $defaultColumns = null])</code>
   </div>
   <hr />
 	<a name="methodbeginTransaction"></a>
-	<h3>method beginTransaction <span class="smalllinenumber">[line 76]</span></h3>
+	<h3>method beginTransaction <span class="smalllinenumber">[line 73]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -846,7 +921,7 @@ $defaultColumns = null])</code>
   </div>
   <hr />
 	<a name="methodcommit"></a>
-	<h3>method commit <span class="smalllinenumber">[line 81]</span></h3>
+	<h3>method commit <span class="smalllinenumber">[line 78]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -871,7 +946,7 @@ $defaultColumns = null])</code>
   </div>
   <hr />
 	<a name="methodconvertRemoteValueToTimestamp"></a>
-	<h3>method convertRemoteValueToTimestamp <span class="smalllinenumber">[line 70]</span></h3>
+	<h3>method convertRemoteValueToTimestamp <span class="smalllinenumber">[line 67]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -913,7 +988,7 @@ $withTime)</code>
   </div>
   <hr />
 	<a name="methodcreateIterator"></a>
-	<h3>method createIterator <span class="smalllinenumber">[line 62]</span></h3>
+	<h3>method createIterator <span class="smalllinenumber">[line 59]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -962,7 +1037,7 @@ $data)</code>
   </div>
   <hr />
 	<a name="methoddelete"></a>
-	<h3>method delete <span class="smalllinenumber">[line 208]</span></h3>
+	<h3>method delete <span class="smalllinenumber">[line 205]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -998,7 +1073,7 @@ $object)</code>
   </div>
   <hr />
 	<a name="methodescapeColumn"></a>
-	<h3>method escapeColumn <span class="smalllinenumber">[line 305]</span></h3>
+	<h3>method escapeColumn <span class="smalllinenumber">[line 302]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1034,7 +1109,7 @@ $column)</code>
   </div>
   <hr />
 	<a name="methodescapeTable"></a>
-	<h3>method escapeTable <span class="smalllinenumber">[line 326]</span></h3>
+	<h3>method escapeTable <span class="smalllinenumber">[line 323]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1070,7 +1145,7 @@ $table = null])</code>
   </div>
   <hr />
 	<a name="methodexportColumn"></a>
-	<h3>method exportColumn <span class="smalllinenumber">[line 294]</span></h3>
+	<h3>method exportColumn <span class="smalllinenumber">[line 291]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1106,7 +1181,7 @@ $column)</code>
   </div>
   <hr />
 	<a name="methodexportMap"></a>
-	<h3>method exportMap <span class="smalllinenumber">[line 228]</span></h3>
+	<h3>method exportMap <span class="smalllinenumber">[line 225]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1145,7 +1220,7 @@ $map)</code>
   </div>
   <hr />
 	<a name="methodexportTable"></a>
-	<h3>method exportTable <span class="smalllinenumber">[line 316]</span></h3>
+	<h3>method exportTable <span class="smalllinenumber">[line 313]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1184,7 +1259,7 @@ $table = null])</code>
   </div>
   <hr />
 	<a name="methodgenerateSortString"></a>
-	<h3>method generateSortString <span class="smalllinenumber">[line 270]</span></h3>
+	<h3>method generateSortString <span class="smalllinenumber">[line 267]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1220,7 +1295,7 @@ $sort)</code>
   </div>
   <hr />
 	<a name="methodget"></a>
-	<h3>method get <span class="smalllinenumber">[line 108]</span></h3>
+	<h3>method get <span class="smalllinenumber">[line 105]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1274,7 +1349,7 @@ $tableName = null])</code>
   </div>
   <hr />
 	<a name="methodgetData"></a>
-	<h3>method getData <span class="smalllinenumber">[line 127]</span></h3>
+	<h3>method getData <span class="smalllinenumber">[line 124]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1294,7 +1369,7 @@ $tableName = null])</code>
     <td><b>see:</b>&nbsp;&nbsp;</td><td><a href="../Dao/FileSourceDao.html#methodget">FileSourceDao::get()</a></td>
   </tr>
   <tr>
-    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
   </tr>
 </table>
 </div>
@@ -1331,7 +1406,7 @@ $tableName = null])</code>
   </div>
   <hr />
 	<a name="methodgetFileDataSource"></a>
-	<h3>method getFileDataSource <span class="smalllinenumber">[line 54]</span></h3>
+	<h3>method getFileDataSource <span class="smalllinenumber">[line 51]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1356,7 +1431,7 @@ $tableName = null])</code>
   </div>
   <hr />
 	<a name="methodgetIterator"></a>
-	<h3>method getIterator <span class="smalllinenumber">[line 150]</span></h3>
+	<h3>method getIterator <span class="smalllinenumber">[line 147]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1425,7 +1500,7 @@ $tableName = null])</code>
   </div>
   <hr />
 	<a name="methodgetIteratorFromData"></a>
-	<h3>method getIteratorFromData <span class="smalllinenumber">[line 256]</span></h3>
+	<h3>method getIteratorFromData <span class="smalllinenumber">[line 253]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1461,7 +1536,7 @@ $data)</code>
   </div>
   <hr />
 	<a name="methodgetTotalCount"></a>
-	<h3>method getTotalCount <span class="smalllinenumber">[line 218]</span></h3>
+	<h3>method getTotalCount <span class="smalllinenumber">[line 215]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1486,7 +1561,7 @@ $data)</code>
   </div>
   <hr />
 	<a name="methodinsert"></a>
-	<h3>method insert <span class="smalllinenumber">[line 168]</span></h3>
+	<h3>method insert <span class="smalllinenumber">[line 165]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1525,7 +1600,7 @@ $object)</code>
   </div>
   <hr />
 	<a name="methodinterpretFileContent"></a>
-	<h3>method interpretFileContent <span class="smalllinenumber">[line 136]</span></h3>
+	<h3>method interpretFileContent <span class="smalllinenumber">[line 133]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1577,7 +1652,7 @@ $content)</code>
   </div>
   <hr />
 	<a name="methodrollback"></a>
-	<h3>method rollback <span class="smalllinenumber">[line 86]</span></h3>
+	<h3>method rollback <span class="smalllinenumber">[line 83]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1602,7 +1677,7 @@ $content)</code>
   </div>
   <hr />
 	<a name="methodupdate"></a>
-	<h3>method update <span class="smalllinenumber">[line 189]</span></h3>
+	<h3>method update <span class="smalllinenumber">[line 186]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">

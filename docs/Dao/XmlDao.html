@@ -28,6 +28,9 @@
 	<div id="ric">
 					<p><a href="../ric_README.html">README</a></p>
 			</div>
+	<div id="todolist">
+			<p><a href="../todolist.html">Todo List</a></p>
+	</div>
       <b>Packages:</b><br />
               <a href="../li_php-library.html">php-library</a><br />
               <a href="../li_Config.html">Config</a><br />
@@ -45,9 +48,17 @@
 		</a><br>
 			<a href="../Dao/_Dao---DaoColumnAssignment.php.html">		DaoColumnAssignment.php
 		</a><br>
+			<a href="../Dao/_Dao---DaoHashListIterator.php.html">		DaoHashListIterator.php
+		</a><br>
 			<a href="../Dao/_Dao---DaoInterface.php.html">		DaoInterface.php
 		</a><br>
+			<a href="../Dao/_Dao---DaoKeyListIterator.php.html">		DaoKeyListIterator.php
+		</a><br>
+			<a href="../Dao/_Dao---DaoReference.php.html">		DaoReference.php
+		</a><br>
 			<a href="../Dao/_Dao---DaoResultIterator.php.html">		DaoResultIterator.php
+		</a><br>
+			<a href="../Dao/_Dao---DaoToManyReference.php.html">		DaoToManyReference.php
 		</a><br>
 			<a href="../Dao/_Dao---FileSourceDao.php.html">		FileSourceDao.php
 		</a><br>
@@ -110,7 +121,11 @@
         <div class="package">
 		    		<a href="../Dao/Dao.html">Dao</a><br />
 	    		<a href="../Dao/DaoColumnAssignment.html">DaoColumnAssignment</a><br />
+	    		<a href="../Dao/DaoHashListIterator.html">DaoHashListIterator</a><br />
+	    		<a href="../Dao/DaoKeyListIterator.html">DaoKeyListIterator</a><br />
+	    		<a href="../Dao/DaoReference.html">DaoReference</a><br />
 	    		<a href="../Dao/DaoResultIterator.html">DaoResultIterator</a><br />
+	    		<a href="../Dao/DaoToManyReference.html">DaoToManyReference</a><br />
 	    		<a href="../Dao/FileSourceDao.html">FileSourceDao</a><br />
 	    		<a href="../Dao/FileSourceResultIterator.html">FileSourceResultIterator</a><br />
 	    		<a href="../Dao/JsonDao.html">JsonDao</a><br />
@@ -265,6 +280,18 @@ Source Location: /Dao/Xml/XmlDao.php<br /><br />
    
 </dd>
 <dt>
+  <a href="../Dao/Dao.html#constSEQ">Dao::SEQ</a>
+</dt>
+<dd>
+   
+</dd>
+<dt>
+  <a href="../Dao/Dao.html#constSEQUENCE">Dao::SEQUENCE</a>
+</dt>
+<dd>
+   
+</dd>
+<dt>
   <a href="../Dao/Dao.html#constSORT_ASCENDING">Dao::SORT_ASCENDING</a>
 </dt>
 <dd>
@@ -358,6 +385,12 @@ Source Location: /Dao/Xml/XmlDao.php<br /><br />
 </dd>
 <dt>
   <a href="../Dao/Dao.html#var$nullColumns">Dao::$nullColumns</a>
+  </dt>
+<dd>
+   
+</dd>
+<dt>
+  <a href="../Dao/Dao.html#var$references">Dao::$references</a>
   </dt>
 <dd>
    
@@ -518,6 +551,24 @@ Source Location: /Dao/Xml/XmlDao.php<br /><br />
   </dl>
 <h4>Class: <a href="../Dao/Dao.html">Dao</a></h4>
 <dl>
+    <dt>
+    <a href="../Dao/Dao.html#method__construct">Dao::__construct()</a>
+  </dt>
+  <dd>
+    Has to be called from any extended Dao to make sure everything gets setup properly
+  </dd>
+    <dt>
+    <a href="../Dao/Dao.html#methodaddReference">Dao::addReference()</a>
+  </dt>
+  <dd>
+    Adds a reference definition
+  </dd>
+    <dt>
+    <a href="../Dao/Dao.html#methodaddToManyReference">Dao::addToManyReference()</a>
+  </dt>
+  <dd>
+    Adds a toMany reference definition
+  </dd>
     <dt>
     <a href="../Dao/Dao.html#methodafterDelete">Dao::afterDelete()</a>
   </dt>
@@ -705,6 +756,24 @@ Source Location: /Dao/Xml/XmlDao.php<br /><br />
     Returns an object with all columns defined, but only set if necessary.
   </dd>
     <dt>
+    <a href="../Dao/Dao.html#methodgetReference">Dao::getReference()</a>
+  </dt>
+  <dd>
+    Returns the DataObject for a specific reference.
+  </dd>
+    <dt>
+    <a href="../Dao/Dao.html#methodgetReferenceDao">Dao::getReferenceDao()</a>
+  </dt>
+  <dd>
+    Returns the Dao for a DaoReference.
+  </dd>
+    <dt>
+    <a href="../Dao/Dao.html#methodgetReferences">Dao::getReferences()</a>
+  </dt>
+  <dd>
+    
+  </dd>
+    <dt>
     <a href="../Dao/Dao.html#methodimportBool">Dao::importBool()</a>
   </dt>
   <dd>
@@ -793,6 +862,12 @@ Source Location: /Dao/Xml/XmlDao.php<br /><br />
   </dt>
   <dd>
     
+  </dd>
+    <dt>
+    <a href="../Dao/Dao.html#methodsetupReferences">Dao::setupReferences()</a>
+  </dt>
+  <dd>
+    Overwrite this in a specific Dao implementation to setup the references.
   </dd>
     <dt>
     <a href="../Dao/Dao.html#methodupdateObjectWithData">Dao::updateObjectWithData()</a>
@@ -941,7 +1016,7 @@ $tableName = null])</code>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
   <tr>
-    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
   </tr>
 </table>
 </div>

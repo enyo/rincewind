@@ -28,6 +28,9 @@
 	<div id="ric">
 					<p><a href="../../ric_README.html">README</a></p>
 			</div>
+	<div id="todolist">
+			<p><a href="../../todolist.html">Todo List</a></p>
+	</div>
       <b>Packages:</b><br />
               <a href="../../li_php-library.html">php-library</a><br />
               <a href="../../li_Config.html">Config</a><br />
@@ -45,9 +48,17 @@
 		</a><br>
 			<a href="../../Dao/_Dao---DaoColumnAssignment.php.html">		DaoColumnAssignment.php
 		</a><br>
+			<a href="../../Dao/_Dao---DaoHashListIterator.php.html">		DaoHashListIterator.php
+		</a><br>
 			<a href="../../Dao/_Dao---DaoInterface.php.html">		DaoInterface.php
 		</a><br>
+			<a href="../../Dao/_Dao---DaoKeyListIterator.php.html">		DaoKeyListIterator.php
+		</a><br>
+			<a href="../../Dao/_Dao---DaoReference.php.html">		DaoReference.php
+		</a><br>
 			<a href="../../Dao/_Dao---DaoResultIterator.php.html">		DaoResultIterator.php
+		</a><br>
+			<a href="../../Dao/_Dao---DaoToManyReference.php.html">		DaoToManyReference.php
 		</a><br>
 			<a href="../../Dao/_Dao---FileSourceDao.php.html">		FileSourceDao.php
 		</a><br>
@@ -110,7 +121,11 @@
         <div class="package">
 		    		<a href="../../Dao/Dao.html">Dao</a><br />
 	    		<a href="../../Dao/DaoColumnAssignment.html">DaoColumnAssignment</a><br />
+	    		<a href="../../Dao/DaoHashListIterator.html">DaoHashListIterator</a><br />
+	    		<a href="../../Dao/DaoKeyListIterator.html">DaoKeyListIterator</a><br />
+	    		<a href="../../Dao/DaoReference.html">DaoReference</a><br />
 	    		<a href="../../Dao/DaoResultIterator.html">DaoResultIterator</a><br />
+	    		<a href="../../Dao/DaoToManyReference.html">DaoToManyReference</a><br />
 	    		<a href="../../Dao/FileSourceDao.html">FileSourceDao</a><br />
 	    		<a href="../../Dao/FileSourceResultIterator.html">FileSourceResultIterator</a><br />
 	    		<a href="../../Dao/JsonDao.html">JsonDao</a><br />
@@ -198,10 +213,12 @@ Source Location: /DataObject/DataObject.php<br /><br />
     <li><a href="../../Dao/DataObject/DataObject.html#methodgetArray">getArray</a></li>
     <li><a href="../../Dao/DataObject/DataObject.html#methodgetColumnType">getColumnType</a></li>
     <li><a href="../../Dao/DataObject/DataObject.html#methodgetDao">getDao</a></li>
+    <li><a href="../../Dao/DataObject/DataObject.html#methodgetDirectly">getDirectly</a></li>
     <li><a href="../../Dao/DataObject/DataObject.html#methodgetValue">getValue</a></li>
     <li><a href="../../Dao/DataObject/DataObject.html#methodsave">save</a></li>
     <li><a href="../../Dao/DataObject/DataObject.html#methodset">set</a></li>
     <li><a href="../../Dao/DataObject/DataObject.html#methodsetData">setData</a></li>
+    <li><a href="../../Dao/DataObject/DataObject.html#methodsetDirectly">setDirectly</a></li>
     <li><a href="../../Dao/DataObject/DataObject.html#methodsetValue">setValue</a></li>
     <li><a href="../../Dao/DataObject/DataObject.html#method__call">__call</a></li>
     <li><a href="../../Dao/DataObject/DataObject.html#method__get">__get</a></li>
@@ -311,7 +328,7 @@ The DataObject is the data representation of one row from a Database request don
 <div class="tags">
   <hr />
 	<a name="methodcoerce"></a>
-	<h3>static method coerce <span class="smalllinenumber">[line 237]</span></h3>
+	<h3>static method coerce <span class="smalllinenumber">[line 280]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -399,17 +416,17 @@ $dao)</code>
   </div>
   <hr />
 	<a name="methodconvertDbColumnToPhpName"></a>
-	<h3>method convertDbColumnToPhpName <span class="smalllinenumber">[line 170]</span></h3>
+	<h3>method convertDbColumnToPhpName <span class="smalllinenumber">[line 212]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
-		<code>void convertDbColumnToPhpName(
-
+		<code>string convertDbColumnToPhpName(
+string
 $column)</code>
     </td></tr></table>
     </td></tr></table><br />
 	
-		<br /><br />
+		Converts a db column name to the php name.<br /><br /><p>Per default this simply transforms the_column to theColumn.</p><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
@@ -425,7 +442,7 @@ $column)</code>
     <div class="tags">
     <table border="0" cellspacing="0" cellpadding="0">
           <tr>
-        <td class="type">&nbsp;&nbsp;</td>
+        <td class="type">string&nbsp;&nbsp;</td>
         <td><b>$column</b>&nbsp;&nbsp;</td>
         <td></td>
       </tr>
@@ -435,7 +452,7 @@ $column)</code>
   </div>
   <hr />
 	<a name="methodconvertGetMethodToPhpColumn"></a>
-	<h3>method convertGetMethodToPhpColumn <span class="smalllinenumber">[line 171]</span></h3>
+	<h3>method convertGetMethodToPhpColumn <span class="smalllinenumber">[line 214]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -471,17 +488,17 @@ $method)</code>
   </div>
   <hr />
 	<a name="methodconvertPhpNameToDbColumn"></a>
-	<h3>method convertPhpNameToDbColumn <span class="smalllinenumber">[line 169]</span></h3>
+	<h3>method convertPhpNameToDbColumn <span class="smalllinenumber">[line 204]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
-		<code>void convertPhpNameToDbColumn(
-
+		<code>string convertPhpNameToDbColumn(
+string
 $column)</code>
     </td></tr></table>
     </td></tr></table><br />
 	
-		<br /><br />
+		Converts a php column name to the db name.<br /><br /><p>Per default this simply transforms theColumn to the_column.  If you data source handles names differently, overwrite this methods, and change your Daos to use your  own implementation of DataObjects.</p><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
@@ -497,7 +514,7 @@ $column)</code>
     <div class="tags">
     <table border="0" cellspacing="0" cellpadding="0">
           <tr>
-        <td class="type">&nbsp;&nbsp;</td>
+        <td class="type">string&nbsp;&nbsp;</td>
         <td><b>$column</b>&nbsp;&nbsp;</td>
         <td></td>
       </tr>
@@ -507,7 +524,7 @@ $column)</code>
   </div>
   <hr />
 	<a name="methodconvertSetMethodToPhpColumn"></a>
-	<h3>method convertSetMethodToPhpColumn <span class="smalllinenumber">[line 175]</span></h3>
+	<h3>method convertSetMethodToPhpColumn <span class="smalllinenumber">[line 218]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -644,7 +661,7 @@ $phpNames = true])</code>
           <tr>
         <td class="type">bool&nbsp;&nbsp;</td>
         <td><b>$phpNames</b>&nbsp;&nbsp;</td>
-        <td>If true the indices will be camelized, if false, the indices will be like the database names.</td>
+        <td>If true the indices will be converted to php names, if false, the indices will be like the database names.</td>
       </tr>
         </table>
     </div><br />
@@ -652,7 +669,7 @@ $phpNames = true])</code>
   </div>
   <hr />
 	<a name="methodgetColumnType"></a>
-	<h3>method getColumnType <span class="smalllinenumber">[line 221]</span></h3>
+	<h3>method getColumnType <span class="smalllinenumber">[line 264]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -712,8 +729,50 @@ $column)</code>
         <div class="top">[ <a href="#top">Top</a> ]</div>
   </div>
   <hr />
+	<a name="methodgetDirectly"></a>
+	<h3>method getDirectly <span class="smalllinenumber">[line 154]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void getDirectly(
+string
+$column, mixed
+$value)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		You should NEVER use this function your app.<br /><br /><p>This is only a helper function for Daos to access the data directly.</p><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">string&nbsp;&nbsp;</td>
+        <td><b>$column</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+          <tr>
+        <td class="type">mixed&nbsp;&nbsp;</td>
+        <td><b>$value</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
 	<a name="methodgetValue"></a>
-	<h3>method getValue <span class="smalllinenumber">[line 142]</span></h3>
+	<h3>method getValue <span class="smalllinenumber">[line 145]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -786,7 +845,7 @@ $column)</code>
   </div>
   <hr />
 	<a name="methodset"></a>
-	<h3>method set <span class="smalllinenumber">[line 152]</span></h3>
+	<h3>method set <span class="smalllinenumber">[line 167]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -872,8 +931,50 @@ $data)</code>
         <div class="top">[ <a href="#top">Top</a> ]</div>
   </div>
   <hr />
+	<a name="methodsetDirectly"></a>
+	<h3>method setDirectly <span class="smalllinenumber">[line 190]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void setDirectly(
+string
+$column, mixed
+$value)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		You should NEVER use this function in your app.<br /><br /><p>This is only a helper function for Daos to access the data directly.</p><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">string&nbsp;&nbsp;</td>
+        <td><b>$column</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+          <tr>
+        <td class="type">mixed&nbsp;&nbsp;</td>
+        <td><b>$value</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
 	<a name="methodsetValue"></a>
-	<h3>method setValue <span class="smalllinenumber">[line 166]</span></h3>
+	<h3>method setValue <span class="smalllinenumber">[line 181]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -890,6 +991,9 @@ $value)</code>
 <table border="0" cellspacing="0" cellpadding="0">
   <tr>
     <td><b>deprecated:</b>&nbsp;&nbsp;</td><td>Use set() instead</td>
+  </tr>
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
   </tr>
 </table>
 </div>
@@ -915,7 +1019,7 @@ $value)</code>
   </div>
   <hr />
 	<a name="method__call"></a>
-	<h3>method __call <span class="smalllinenumber">[line 195]</span></h3>
+	<h3>method __call <span class="smalllinenumber">[line 238]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -948,7 +1052,7 @@ $param)</code>
   </div>
   <hr />
 	<a name="method__get"></a>
-	<h3>method __get <span class="smalllinenumber">[line 191]</span></h3>
+	<h3>method __get <span class="smalllinenumber">[line 234]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -984,7 +1088,7 @@ $phpColumn)</code>
   </div>
   <hr />
 	<a name="method__isset"></a>
-	<h3>method __isset <span class="smalllinenumber">[line 185]</span></h3>
+	<h3>method __isset <span class="smalllinenumber">[line 228]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1020,7 +1124,7 @@ $column)</code>
   </div>
   <hr />
 	<a name="method__set"></a>
-	<h3>method __set <span class="smalllinenumber">[line 187]</span></h3>
+	<h3>method __set <span class="smalllinenumber">[line 230]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">

@@ -64,7 +64,7 @@ class MysqlDao_Basic_Test extends Snap_UnitTestCase {
 
 
   public function testExportColumn() {
-    return $this->assertIdentical($this->dao->exportColumn('some_column'), "'ESCAPED_COLUMN'");
+    return $this->assertIdentical($this->dao->exportColumn('some_column'), "`ESCAPED_COLUMN`");
   }
 
   public function testDatabaseEscapesColumn() {

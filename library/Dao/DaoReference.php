@@ -16,15 +16,21 @@
  *
  * Lets say you have a user, that points to an address id.
  * You can setup the $userDao, so it understands, that when you access $user->address
- * it should use the $addressDao, and get the address with $user->addressId.
+ * it should use the $addressDao, and get the address with $user->addressId as id.
  *
- * The DaoReference is setup in the dao, in the references array, where the index is
+ * The DaoReference is setup in the dao, in the $references array, where the index is
  * the access key (eg.: address). The Dao to be used to instantiate the referenced object,
- * and the local (eg.: address_id) and foreign key (eg.: id) are stored in the DaoReference.
+ * the local key (eg.: address_id) and foreign key (eg.: id) are stored in the DaoReference.
  * 
- * The resulting code is then much easier.
+ * Sometimes your data source returns the data hash of a reference directly to avoid
+ * traffic overhead (this makes especially sense with FileSourceDaos like the JsonDao).
+ * In that case you only need to specify the $daoClassName since the Dao does not have
+ * to link / fetch the data hash itself, but only to instantiate a DataObject with the
+ * given hash.
+ * 
+ * 
  *
- * Before:
+ * Before setting up a DaoReference:
  * <code>
  * <?php
  *   $user = $userDao->getById(2);
@@ -71,7 +77,7 @@ class DaoReference {
    * @param string $localKey
    * @param string $foreignKey
    */
-  public function __construct($daoClassName, $localKey, $foreignKey) {
+  public function __construct($daoClassName, $localKey = null, $foreignKey = 'id') {
     $this->daoClassName = $daoClassName;
     $this->localKey = $localKey;
     $this->foreignKey = $foreignKey;

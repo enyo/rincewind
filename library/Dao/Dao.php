@@ -248,7 +248,7 @@ abstract class Dao implements DaoInterface {
    * @param string $foreignKey Eg.: id
    * @see DaoReference
    */
-  protected function addReference($accessor, $daoClassName, $localKey, $foreignKey = 'id') {
+  protected function addReference($accessor, $daoClassName, $localKey = null, $foreignKey = 'id') {
     $this->references[$accessor] = new DaoReference($daoClassName, $localKey, $foreignKey);
   }
 
@@ -266,17 +266,32 @@ abstract class Dao implements DaoInterface {
     $reference = $this->references[$column];
     $dao = $this->getReferenceDao($reference);
 
+
     if ($data = $dataObject->getDirectly($column)) {
-      // If the data hash exists already, just return the DataObject with it.
-      return $dao->getObjectFromData($data);
+      if (is_array($data)) {
+        // If the data hash exists already, just return the DataObject with it.
+        return $dao->getObjectFromData($data);
+      }
+      else {
+        trigger_error(sprintf('The data hash for `%s` was set but incorrect.', $column), E_USER_WARNING);
+        return null;
+      }
     }
     else {
       // Otherwise: get the data hash, store it in the DataObject that's referencing it, and
       // return the DataObject.
-      $localValue = $dataObject->get($reference->getLocalKey());
-      $return = $dao->get(array($reference->getForeignKey()=>$localValue));
-      $dataObject->setDirectly($column, $return->getArray());
-      return $return;
+      $localKey = $reference->getLocalKey();
+      $foreignKey = $reference->getForeignKey();
+
+      if ($localKey && $foreignKey) {
+        $localValue = $dataObject->get($localKey);
+        $return = $dao->get(array($foreignKey=>$localValue));
+        $dataObject->setDirectly($column, $return->getArray());
+        return $return;
+      }
+      else {
+        return null;
+      }
     }
   }
 

@@ -43,12 +43,12 @@ include dirname(__FILE__) . '/DaoReference.php';
 /**
  * Loading the DaoIdListIterator Class
  */
-include dirname(dirname(__FILE__)) . '/DaoIdListIterator.php';
+include dirname(__FILE__) . '/DaoIdListIterator.php';
 
 /**
  * Loading the DaoHashListIterator Class
  */
-include dirname(dirname(__FILE__)) . '/DaoHashListIterator.php';
+include dirname(__FILE__) . '/DaoHashListIterator.php';
 
 /**
  * Loading the Date Class
@@ -289,7 +289,7 @@ abstract class Dao implements DaoInterface {
     $reference = $this->references[$column];
     $dao = $this->getReferenceDao($reference);
 
-    if ($reference typeof DaoToManyReference) {
+    if ($reference instanceof DaoToManyReference) {
       // toMany reference
       if ($data = $dataObject->getDirectly($column)) {
         if (is_array($data)) {

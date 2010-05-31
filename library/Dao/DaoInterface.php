@@ -38,6 +38,19 @@ interface DaoInterface {
    */
   public function get($map = null, $exportValues = true, $tableName = null);
 
+
+  /**
+   * The same as get(), but returns an array with the data.
+   *
+   * @param array $map
+   * @param bool $exportValues
+   * @param string $tableName
+   * @return array
+   * @see get()
+   */
+  public function getData($map, $exportValues = true, $tableName = null);
+
+
   /**
    * The same as get, but returns an iterator to go through all the rows.
    *

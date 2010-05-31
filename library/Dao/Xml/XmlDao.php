@@ -158,7 +158,7 @@ class XmlDao extends FileSourceDao {
   /**
    * Just calls the parent, but then returns only one element of the list
    */
-  protected function getData($map, $exportValues = true, $tableName = null) {
+  public function getData($map, $exportValues = true, $tableName = null) {
     $data = parent::getData($map, $exportValues, $tableName);
     return $data[0];
   }

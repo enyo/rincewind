@@ -121,7 +121,7 @@ abstract class FileSourceDao extends Dao {
    * @see get()
    * @return array
    */
-  protected function getData($map, $exportValues = true, $tableName = null) {
+  public function getData($map, $exportValues = true, $tableName = null) {
     return $this->interpretFileContent($this->fileDataSource->view($this->exportTable($tableName ? $tableName : ($this->viewName ? $this->viewName : $this->tableName)), $exportValues ? $this->exportMap($map) : $map));
   }
 

@@ -158,7 +158,7 @@ abstract class SqlDao extends Dao {
    * @see generateQuery()
    * @return array
    */
-  protected function getData($map, $exportValues = true, $tableName = null) {
+  public function getData($map, $exportValues = true, $tableName = null) {
     return $this->getFromQuery($this->generateQuery($map, $sort = null, $offset = null, $limit = 1, $exportValues, $tableName ? $tableName : ($this->viewName ? $this->viewName : $this->tableName)), $returnData = true);
   }
 

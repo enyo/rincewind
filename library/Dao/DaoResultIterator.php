@@ -83,6 +83,7 @@ abstract class DaoResultIterator implements Iterator {
    * @return DataObject|array
    */
   public function current() {
+    if (!$this->valid()) return null;
     $dataObject = $this->dao->getObjectFromData($this->currentData);
     return $this->returnDataObjectsAsArray ? $dataObject->getArray() : $dataObject;
   }

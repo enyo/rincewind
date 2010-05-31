@@ -41,9 +41,19 @@ include dirname(__FILE__) . '/DaoExceptions.php';
 include dirname(__FILE__) . '/DaoReference.php';
 
 /**
+ * Loading the DaoIdListIterator Class
+ */
+include dirname(dirname(__FILE__)) . '/DaoIdListIterator.php';
+
+/**
+ * Loading the DaoHashListIterator Class
+ */
+include dirname(dirname(__FILE__)) . '/DaoHashListIterator.php';
+
+/**
  * Loading the Date Class
  */
-include_once dirname(dirname(__FILE__)) . '/Date/Date.php';
+if (!class_exists('Date', false)) include dirname(dirname(__FILE__)) . '/Date/Date.php';
 
 
 
@@ -242,14 +252,27 @@ abstract class Dao implements DaoInterface {
   /**
    * Adds a reference definition
    *
-   * @param string $accessor The name of the accessor (eg.: address)
+   * @param string $identifier The name of the identifier (eg.: address)
    * @param string $daoClassName Eg.: AddressDao
    * @param string $localKey Eg.: address_id
    * @param string $foreignKey Eg.: id
    * @see DaoReference
    */
-  protected function addReference($accessor, $daoClassName, $localKey = null, $foreignKey = 'id') {
-    $this->references[$accessor] = new DaoReference($daoClassName, $localKey, $foreignKey);
+  protected function addReference($identifier, $daoClassName, $localKey = null, $foreignKey = 'id') {
+    $this->references[$identifier] = new DaoReference($daoClassName, $localKey, $foreignKey);
+  }
+
+  /**
+   * Adds a toMany reference definition
+   *
+   * @param string $identifier The name of the identifier (eg.: addresses)
+   * @param string $daoClassName Eg.: AddressDao
+   * @param string $localKey Eg.: address_ids
+   * @param string $foreignKey Eg.: id
+   * @see addReference
+   */
+  protected function addToManyReference($identifier, $daoClassName, $localKey = null, $foreignKey = 'id') {
+    $this->references[$identifier] = new DaoReference($daoClassName, $localKey, $foreignKey);
   }
 
   /**
@@ -266,31 +289,46 @@ abstract class Dao implements DaoInterface {
     $reference = $this->references[$column];
     $dao = $this->getReferenceDao($reference);
 
-
-    if ($data = $dataObject->getDirectly($column)) {
-      if (is_array($data)) {
-        // If the data hash exists already, just return the DataObject with it.
-        return $dao->getObjectFromData($data);
-      }
-      else {
-        trigger_error(sprintf('The data hash for `%s` was set but incorrect.', $column), E_USER_WARNING);
-        return null;
+    if ($reference typeof DaoToManyReference) {
+      // toMany reference
+      if ($data = $dataObject->getDirectly($column)) {
+        if (is_array($data)) {
+          // If the data hash exists already, just return the DataObject with it.
+          return $dao->getObjectFromData($data);
+        }
+        else {
+          trigger_error(sprintf('The data hash for `%s` was set but incorrect.', $column), E_USER_WARNING);
+          return null;
+        }
       }
     }
     else {
-      // Otherwise: get the data hash, store it in the DataObject that's referencing it, and
-      // return the DataObject.
-      $localKey = $reference->getLocalKey();
-      $foreignKey = $reference->getForeignKey();
-
-      if ($localKey && $foreignKey) {
-        $localValue = $dataObject->get($localKey);
-        $return = $dao->get(array($foreignKey=>$localValue));
-        $dataObject->setDirectly($column, $return->getArray());
-        return $return;
+      // toOne reference
+      if ($data = $dataObject->getDirectly($column)) {
+        if (is_array($data)) {
+          // If the data hash exists already, just return the DataObject with it.
+          return $dao->getObjectFromData($data);
+        }
+        else {
+          trigger_error(sprintf('The data hash for `%s` was set but incorrect.', $column), E_USER_WARNING);
+          return null;
+        }
       }
       else {
-        return null;
+        // Otherwise: get the data hash, store it in the DataObject that's referencing it, and
+        // return the DataObject.
+        $localKey = $reference->getLocalKey();
+        $foreignKey = $reference->getForeignKey();
+
+        if ($localKey && $foreignKey) {
+          $localValue = $dataObject->get($localKey);
+          $return = $dao->get(array($foreignKey=>$localValue));
+          $dataObject->setDirectly($column, $return->getArray());
+          return $return;
+        }
+        else {
+          return null;
+        }
       }
     }
   }

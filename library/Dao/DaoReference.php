@@ -10,7 +10,6 @@
  **/
 
 
-
 /**
  * A DaoReference describes references between two resources.
  *
@@ -107,5 +106,10 @@ class DaoReference {
 
 }
 
+
+/**
+ * Loading the DaoToManyReference
+ */
+include dirname(__FILE__) . '/DaoToManyReference.php';
 
 ?>

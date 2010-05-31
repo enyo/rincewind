@@ -20,6 +20,7 @@ if (!class_exists('DaoResultIterator', false)) include dirname(__FILE__) . '/Dao
  * @author Matthias Loitsch <developer@ma.tthias.com>
  * @copyright Copyright (c) 2010, Matthias Loitsch
  * @package Dao
+ * @todo The Iterator should not fetch the rows in advance, but rather on demand.
  **/
 class SqlResultIterator extends DaoResultIterator {
 

@@ -41,9 +41,9 @@ include dirname(__FILE__) . '/DaoExceptions.php';
 include dirname(__FILE__) . '/DaoReference.php';
 
 /**
- * Loading the DaoIdListIterator Class
+ * Loading the DaoKeyListIterator Class
  */
-include dirname(__FILE__) . '/DaoIdListIterator.php';
+include dirname(__FILE__) . '/DaoKeyListIterator.php';
 
 /**
  * Loading the DaoHashListIterator Class
@@ -128,6 +128,8 @@ abstract class Dao implements DaoInterface {
   const DATE           = 5;
   const TEXT           = 6;
   const STRING         = self::TEXT;
+  const SEQUENCE       = 7;
+  const SEQ            = self::SEQUENCE;
   const IGNORE         = -1;
   /**#@-*/
 
@@ -253,12 +255,15 @@ abstract class Dao implements DaoInterface {
    * Adds a reference definition
    *
    * @param string $identifier The name of the identifier (eg.: address)
-   * @param string $daoClassName Eg.: AddressDao
+   * @param string|Dao $daoClassName Eg.: 'AddressDao' or the dao directly
    * @param string $localKey Eg.: address_id
    * @param string $foreignKey Eg.: id
    * @see DaoReference
    */
   protected function addReference($identifier, $daoClassName, $localKey = null, $foreignKey = 'id') {
+    if ($localKey && !$this->columnExists($localKey)) {
+      trigger_error(sprintf('Local key `%s` does not exist in the %s Dao.', $localKey, $this->tableName), E_USER_ERROR);
+    }
     $this->references[$identifier] = new DaoReference($daoClassName, $localKey, $foreignKey);
   }
 
@@ -266,13 +271,16 @@ abstract class Dao implements DaoInterface {
    * Adds a toMany reference definition
    *
    * @param string $identifier The name of the identifier (eg.: addresses)
-   * @param string $daoClassName Eg.: AddressDao
+   * @param string|Dao $daoClassName Eg.: AddressDao
    * @param string $localKey Eg.: address_ids
    * @param string $foreignKey Eg.: id
    * @see addReference
    */
   protected function addToManyReference($identifier, $daoClassName, $localKey = null, $foreignKey = 'id') {
-    $this->references[$identifier] = new DaoReference($daoClassName, $localKey, $foreignKey);
+    if ($localKey && (!$this->columnExists($localKey) || $this->columnTypes[$localKey] != Dao::SEQUENCE)) {
+      trigger_error(sprintf('Local key `%s` does not exist or is not a Dao::SEQUENCE in the %s Dao.', $localKey, $this->tableName), E_USER_ERROR);
+    }
+    $this->references[$identifier] = new DaoToManyReference($daoClassName, $localKey, $foreignKey);
   }
 
   /**
@@ -293,13 +301,23 @@ abstract class Dao implements DaoInterface {
       // toMany reference
       if ($data = $dataObject->getDirectly($column)) {
         if (is_array($data)) {
-          // If the data hash exists already, just return the DataObject with it.
-          return $dao->getObjectFromData($data);
+          // The sequence of data hashes has been set already
+          return new DaoHashListIterator($dataObject->getDirectly($column), $this);
         }
-        else {
-          trigger_error(sprintf('The data hash for `%s` was set but incorrect.', $column), E_USER_WARNING);
-          return null;
+        trigger_error(sprintf('The data hash for `%s` was set but incorrect.', $column), E_USER_WARNING);
+        return new DaoHashListIterator(array(), $this);
+      }
+      else {
+        // Get the list of ids
+        $localKey = $reference->getLocalKey();
+        $foreignKey = $reference->getForeignKey();
+
+        if ($localKey && $foreignKey) {
+          $localValue = $dataObject->get($localKey);
+
+          return new DaoKeyListIterator($localValue, $this, $foreignKey);
         }
+        return new DaoKeyListIterator(array(), $this, $foreignKey);
       }
     }
     else {

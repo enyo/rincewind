@@ -72,7 +72,7 @@ class DaoReference {
 
 
   /**
-   * @param string $daoClassName
+   * @param string|Dao $daoClassName
    * @param string $localKey
    * @param string $foreignKey
    */
@@ -84,7 +84,7 @@ class DaoReference {
 
 
   /**
-   * @return string
+   * @return string|Dao
    */
   public function getDaoClassName() {
     return $this->daoClassName;

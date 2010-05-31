@@ -325,7 +325,16 @@ class DataObject implements DataObjectInterface {
         }
         break;
       case Dao::STRING:
-        return (string) $value;
+        if (is_string($value) || is_numeric($value)) return (string) $value;
+        else {
+          return $allowNull ? null : '';
+        }
+        break;
+      case Dao::SEQUENCE:
+        if (is_array($value)) return $value;
+        else {
+          return $allowNull ? null : array();
+        }
         break;
       default: trigger_error('Unknown type in ' . $trace[0]['file'] . ' on line ' . $trace[0]['line'], E_USER_ERROR);
     }

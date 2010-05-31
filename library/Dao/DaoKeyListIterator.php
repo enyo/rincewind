@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file contains the Id list iterator definition.
+ * This file contains the Key list iterator definition.
  *
  * @author Matthias Loitsch <developer@ma.tthias.com>
  * @copyright Copyright (c) 2010, Matthias Loitsch
@@ -14,7 +14,7 @@
 if (!class_exists('DaoResultIterator', false)) include dirname(__FILE__) . '/DaoResultIterator.php';
 
 /**
- * The IdListIterator takes an array of ids, and lets you iterate over it, returning the corresponding
+ * The DaoKeyListIterator takes an array of keys, and lets you iterate over it, returning the corresponding
  * DataObjects by calling the dao, and getting it.
  *
  * @author Matthias Loitsch <developer@ma.tthias.com>
@@ -22,20 +22,27 @@ if (!class_exists('DaoResultIterator', false)) include dirname(__FILE__) . '/Dao
  * @package Dao
  * @todo The Iterator should not fetch the objects in advance, but rather on demand.
  **/
-class DaoIdListIterator extends DaoResultIterator {
+class DaoKeyListIterator extends DaoResultIterator {
 
   /**
-   * @var result
+   * @var array
    */
-  private $idList = false;
+  private $keyList = false;
 
   /**
-   * @param result $result
+   * @var string
+   */
+  private $key;
+
+  /**
+   * @param array $keyList
    * @param Dao $dao
+   * @param string $key
    */
-  public function __construct($idList, $dao) {
-    $this->idList = $idList;
-    $this->length = count($idList);
+  public function __construct($keyList, $dao, $key = 'id') {
+    $this->keyList = $keyList;
+    $this->key = $key;
+    $this->length = count($keyList);
     $this->dao = $dao;
     $this->next();
   }
@@ -59,7 +66,7 @@ class DaoIdListIterator extends DaoResultIterator {
    */
   public function next() {
     $this->currentKey ++;
-    $this->currentData = $this->currentKey > $this->length ? null : $this->dao->getData(array('id'=>$this->idList[$this->currentKey - 1]));
+    $this->currentData = $this->currentKey > $this->length ? null : $this->dao->getData(array($this->key=>$this->keyList[$this->currentKey - 1]));
     return $this;
   }
 

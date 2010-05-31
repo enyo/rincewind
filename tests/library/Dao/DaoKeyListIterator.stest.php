@@ -7,7 +7,7 @@ require_once(LIBRARY_ROOT_PATH . 'Dao/Dao.php');
 
 
 
-class DaoIdListIterator_Basic_Test extends Snap_UnitTestCase {
+class DaoKeyListIterator_Basic_Test extends Snap_UnitTestCase {
 
   protected $dao;
 
@@ -16,12 +16,12 @@ class DaoIdListIterator_Basic_Test extends Snap_UnitTestCase {
       ->setReturnValue('getData', array('some'=>'hash'))
       ->setReturnValue('getObjectFromData', 'THE_OBJECT')
       ->listenTo('getData')
-      ->listenTo('getData', array(new Snap_Equals_Expectation(array('id'=>1))))
-      ->listenTo('getData', array(new Snap_Equals_Expectation(array('id'=>3))))
-      ->listenTo('getData', array(new Snap_Equals_Expectation(array('id'=>5))))
+      ->listenTo('getData', array(new Snap_Equals_Expectation(array('key'=>1))))
+      ->listenTo('getData', array(new Snap_Equals_Expectation(array('key'=>3))))
+      ->listenTo('getData', array(new Snap_Equals_Expectation(array('key'=>5))))
       ->listenTo('getObjectFromData', array(new Snap_Equals_Expectation(array('some'=>'hash'))))
       ->construct(null);
-    $this->it = new DaoIdListIterator(array(1, 3, 5), $this->dao);
+    $this->it = new DaoKeyListIterator(array(1, 3, 5), $this->dao, 'key');
   }
 
   public function tearDown() { }
@@ -32,7 +32,7 @@ class DaoIdListIterator_Basic_Test extends Snap_UnitTestCase {
 
   public function testGetIsCalled() {
     $ob = $this->it->current();
-    return $this->assertCallCount($this->dao, 'getData', 1, array(new Snap_Equals_Expectation(array('id'=>1))));
+    return $this->assertCallCount($this->dao, 'getData', 1, array(new Snap_Equals_Expectation(array('key'=>1))));
   }
 
   public function testRightObjectIsInstantiated() {
@@ -44,7 +44,7 @@ class DaoIdListIterator_Basic_Test extends Snap_UnitTestCase {
     $ob = $this->it->current();
     $this->it->next();
     $ob = $this->it->current();
-    return $this->assertCallCount($this->dao, 'getData', 1, array(new Snap_Equals_Expectation(array('id'=>3))));
+    return $this->assertCallCount($this->dao, 'getData', 1, array(new Snap_Equals_Expectation(array('key'=>3))));
   }
 
   public function testGetIsCalledThrice() {
@@ -53,7 +53,7 @@ class DaoIdListIterator_Basic_Test extends Snap_UnitTestCase {
     $ob = $this->it->current();
     $this->it->next();
     $ob = $this->it->current();
-    return $this->assertCallCount($this->dao, 'getData', 1, array(new Snap_Equals_Expectation(array('id'=>5))));
+    return $this->assertCallCount($this->dao, 'getData', 1, array(new Snap_Equals_Expectation(array('key'=>5))));
   }
 
   public function testGetIsCalledThriceAndReturned() {

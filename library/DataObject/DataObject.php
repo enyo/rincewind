@@ -39,6 +39,15 @@ class DataObject implements DataObjectInterface {
    */
   protected $data;
 
+
+  /**
+   * Contains a list of changed columns (when set() is called)
+   * Indices are the column names.
+   * @var array
+   */
+  protected $changedColumns;
+
+
   /**
    * @var Dao
    */
@@ -113,6 +122,14 @@ class DataObject implements DataObjectInterface {
   }
 
   /**
+   * Returns an array of all columns that have been explicitly set. The indices are the column names
+   * @return array
+   */
+  public function getChangedColumns() {
+    return $this->changedColumns;
+  }
+
+  /**
    * Gets the value of the $data array and returns it.
    * If the value is a DATE or DATE_WITH_TIME type, it returns a Date Object.
    *
@@ -173,6 +190,7 @@ class DataObject implements DataObjectInterface {
     }
     $value = self::coerce($value, $this->getColumnType($column), in_array($column, $this->dao->getNullColumns()));
     $this->data[$column] = $value;
+    $this->changedColumns[$column] = true;
     return $this;
   }
   /**

@@ -31,10 +31,10 @@ abstract class SqlDao extends Dao {
 
   /**
    * @param Database $db
-   * @param string $tableName You can specify this as an attribute when writing a Dao implementation
-   * @param array $columnTypes You can specify this as an attribute when writing a Dao implementation
-   * @param array $nullColumns You can specify this as an attribute when writing a Dao implementation
-   * @param array $defaultColumns You can specify this as an attribute when writing a Dao implementation
+   * @param string $tableName You should specify this as an attribute when writing a Dao implementation
+   * @param array $columnTypes You should specify this as an attribute when writing a Dao implementation
+   * @param array $nullColumns You should specify this as an attribute when writing a Dao implementation
+   * @param array $defaultColumns You should specify this as an attribute when writing a Dao implementation
    */
   public function __construct($db, $tableName = null, $columnTypes = null, $nullColumns = null, $defaultColumns = null) {
     parent::__construct($tableName, $columnTypes, $nullColumns, $defaultColumns);
@@ -49,6 +49,17 @@ abstract class SqlDao extends Dao {
    * @return Database
    */
   public function getDb() { return $this->db; }
+
+  /**
+   * Creates a Dao.
+   * You probably want to overwrite this method in your daos to use your implementation of instantiating Daos.
+   *
+   * @param string $daoClassName
+   * @return SqlDao
+   */
+  protected function createDao($daoClassName) {
+    return new $daoClassName($this->getDb());
+  }
 
   /**
    * @return int The last id that has been inserted

@@ -50,6 +50,19 @@ abstract class FileSourceDao extends Dao {
    */
   public function getFileDataSource() { return $this->fileDataSource; }
 
+
+  /**
+   * Creates a Dao.
+   * You probably want to overwrite this method in your daos to use your implementation of instantiating Daos.
+   *
+   * @param string $daoClassName
+   * @return FileSourceDao
+   */
+  protected function createDao($daoClassName) {
+    return new $daoClassName($this->getFileDataSource());
+  }
+
+
   /**
    * Creates an iterator from a data hash.
    *

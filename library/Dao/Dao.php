@@ -155,10 +155,15 @@ abstract class Dao implements DaoInterface {
 
   /**
    * Has to be called from any extended Dao to make sure everything gets setup properly
-   * @param string $tableName You can specify this as an attribute when writing a Dao implementation
-   * @param array $columnTypes You can specify this as an attribute when writing a Dao implementation
-   * @param array $nullColumns You can specify this as an attribute when writing a Dao implementation
-   * @param array $defaultColumns You can specify this as an attribute when writing a Dao implementation
+   *
+   * Configuring your Dao in the constructor is only to be able to test them.
+   *
+   * You should configure them as member variables when defining your Daos.
+   *
+   * @param string $tableName You should specify this as an attribute when writing a Dao implementation
+   * @param array $columnTypes You should specify this as an attribute when writing a Dao implementation
+   * @param array $nullColumns You should specify this as an attribute when writing a Dao implementation
+   * @param array $defaultColumns You should specify this as an attribute when writing a Dao implementation
    */
   public function __construct($tableName = null, $columnTypes = null, $nullColumns = null, $defaultColumns = null) {
     if ($tableName) $this->tableName = $tableName;
@@ -295,7 +300,9 @@ abstract class Dao implements DaoInterface {
     if (!isset($this->references[$column])) throw new DaoWrongValueException("The column `$column` is not specified in references.");
 
     $reference = $this->references[$column];
-    $dao = $this->getReferenceDao($reference);
+
+    $dao = $reference->getDaoClassName();
+    if (is_string($dao)) $dao = $this->createDao($dao);
 
     if ($reference instanceof DaoToManyReference) {
       // toMany reference
@@ -352,16 +359,14 @@ abstract class Dao implements DaoInterface {
   }
 
   /**
-   * Returns the Dao for a DaoReference.
+   * Creates a Dao.
    * You probably want to overwrite this method in your daos to use your implementation of instantiating Daos.
    *
-   * @param DaoReference $reference
+   * @param string $daoClassName
    * @return Dao
    */
-  protected function getReferenceDao($reference) {
-    $dao = $reference->getDaoClassName();
-    if (is_string($dao)) return new $dao;
-    else return $dao;
+  protected function createDao($daoClassName) {
+    return new $daoClassName();
   }
 
 
@@ -752,8 +757,7 @@ abstract class Dao implements DaoInterface {
    */
   protected function prepareDataForObject($data) {
     $neededValues = $this->columnTypes;
-    foreach ($data as $column=>$value)
-    {
+    foreach ($data as $column=>$value) {
       $column = $this->importColumn($column);
       if (array_key_exists($column, $this->columnTypes)) {
         unset($neededValues[$column]);
@@ -765,6 +769,14 @@ abstract class Dao implements DaoInterface {
         if ($this->additionalColumnTypes[$column] != Dao::IGNORE) {
           $data[$column] = $this->importValue($value, $this->additionalColumnTypes[$column], $this->notNull($column));
         }
+      }
+      elseif (isset($this->references[$column])) {
+        if (!is_array($value)) {
+          $trace = debug_backtrace();
+          trigger_error('The value for column ' . $column . ' ('.$this->tableName.') was not correct in ' . $trace[0]['file'] . ' on line ' . $trace[0]['line'], E_USER_WARNING);
+          unset($data[$column]);
+        }
+        // Just let it untouched.
       }
       else {
         $trace = debug_backtrace();
@@ -840,7 +852,8 @@ abstract class Dao implements DaoInterface {
         case Dao::FLOAT: return $this->importFloat($externalValue); break;
         case Dao::TEXT:  return $this->importString($externalValue); break;
         case Dao::DATE_WITH_TIME: $dateWithTime = true; // No break
-        case Dao::DATE: return $this->importDate($externalValue, $dateWithTime); break;
+        case Dao::DATE:     return $this->importDate($externalValue, $dateWithTime); break;
+        case Dao::SEQUENCE: return $this->importSequence($externalValue); break;
         default: throw new DaoException('Unknown type when importing a value.'); break;
       }
     }
@@ -935,7 +948,15 @@ abstract class Dao implements DaoInterface {
     }
   }
 
-
+  /**
+   * This makes sure the sequence is an array
+   *
+   * @param mixed $value
+   * @return array
+   */
+  public function importSequence($value) {
+    return is_array($value) ? $value : array();
+  }
 
 
   /**

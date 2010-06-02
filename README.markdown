@@ -74,6 +74,7 @@ Supported types are:
 - TIMESTAMP
 - BOOL
 - ENUM (You can specify the values allowed in an enum so php will check for it)
+- SEQUENCE (Only used for ID lists)
 
 
 There are currently 4 Dao Implementations

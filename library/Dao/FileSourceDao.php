@@ -91,7 +91,7 @@ abstract class FileSourceDao extends Dao {
    * If you call get() without parameters, a "raw object" will be returned, containing
    * only default values, and null as id.
    *
-   * @param array $map A map containing the column assignments.
+   * @param array|DataObject $map A map containing the column assignments.
    * @param bool $exportValues When you want to have complete control over the $map
    *                           column names, you can set exportValues to false, so they
    *                           won't be processed.
@@ -115,14 +115,15 @@ abstract class FileSourceDao extends Dao {
   /**
    * Same as get() but returns an array with the data instead of an object
    *
-   * @param array $map
+   * @param array|DataObject $map
    * @param bool $exportValues
    * @param string $tableName
    * @see get()
    * @return array
    */
   public function getData($map, $exportValues = true, $tableName = null) {
-    return $this->interpretFileContent($this->fileDataSource->view($this->exportTable($tableName ? $tableName : ($this->viewName ? $this->viewName : $this->tableName)), $exportValues ? $this->exportMap($map) : $map));
+    $data = $this->interpretFileContent($this->fileDataSource->view($this->exportTable($tableName ? $tableName : ($this->viewName ? $this->viewName : $this->tableName)), $exportValues ? $this->exportMap($map) : $map));
+    return $this->prepareDataForObject($data);
   }
 
   /**
@@ -135,7 +136,7 @@ abstract class FileSourceDao extends Dao {
   /**
    * The same as get, but returns an iterator to go through all the rows.
    *
-   * @param array $map
+   * @param array|DataObject $map
    * @param string|array $sort
    * @param int $offset 
    * @param int $limit 
@@ -219,10 +220,12 @@ abstract class FileSourceDao extends Dao {
   /**
    * This function exports every values of a map
    *
-   * @param array $map A map containing the column assignments.
+   * @param array|DataObject $map A map or DataObject containing the column assignments.
    * @return array The map with exported values.
    */
   protected function exportMap($map) {
+
+    $map = $this->interpretMap($map);
 
     $assignments = array();
 

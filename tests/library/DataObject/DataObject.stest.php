@@ -282,6 +282,68 @@ class DataObject_ChangedColumns_Test extends Snap_UnitTestCase {
   }
 
 
+  public function testWithValues() {
+    $this->dataObject->a = 321;
+    $this->dataObject->b = 'abc';
+    return $this->assertEqual($this->dataObject->getChangedValues(), array('a'=>321, 'b'=>'abc'));
+  }
+
+  public function testWithValueOverwrites() {
+    $this->dataObject->a = 321;
+    $this->dataObject->a = 654;
+    $this->dataObject->c = true;
+    $this->dataObject->c = false;
+    return $this->assertEqual($this->dataObject->getChangedValues(), array('a'=>654, 'c'=>false));
+  }
+
+
+
+
+}
+
+
+
+class DataObject_Load_Test extends Snap_UnitTestCase {
+
+
+  public function setUp() {
+      $this->dao = $this->mock('DaoInterface')
+        ->setReturnValue('getColumnTypes',       array('a'=>Dao::INT, 'b'=>Dao::STRING, 'c'=>Dao::BOOL))
+        ->setReturnValue('getNullColumns',       array())
+        ->setReturnValue('getAdditionalColumnTypes', array())
+        ->setReturnValue('getData',       array('a'=>321, 'b'=>'test2', 'c'=>false))
+        ->listenTo('getData', array(new Snap_Object_Expectation('DataObject')))
+        ->construct();
+      $this->dataObject = new DataObject(array('a'=>0, 'b'=>'', 'c'=>false), $this->dao);
+  }
+
+  public function tearDown() {
+    unset($this->dataObject);
+  }
+
+  public function testLoadingObjectCallsDao() {
+    $this->dataObject->a = 7;
+    $this->dataObject->load();
+    return $this->assertCallCount($this->dao, 'getData', 1, array(new Snap_Object_Expectation('DataObject')));
+  }
+
+  public function testLoadedValuesA() {
+    $this->dataObject->set('a', 321)->load();
+    return $this->assertIdentical($this->dataObject->a, 321);
+  }
+
+  public function testLoadedValuesB() {
+    $this->dataObject->set('a', 321)->load();
+    return $this->assertIdentical($this->dataObject->b, 'test2');
+  }
+
+  public function testLoadedValuesC() {
+    $this->dataObject->set('a', 321)->load();
+    return $this->assertIdentical($this->dataObject->c, false);
+  }
+
+
+
 }
 
 

@@ -75,11 +75,12 @@ class DataObject implements DataObjectInterface {
 
 
   /**
-   * Sets a new data array
+   * Sets a new data array, and resets the changedColumns array.
    *
    * @param array $data
    */
   public function setData($data) {
+    $this->changedColumns = array();
     $this->data = $data;  
   }
 
@@ -107,6 +108,20 @@ class DataObject implements DataObjectInterface {
 
 
   /**
+   * Uses the changed values (the values that have explicitly been set with set()) to updated
+   * the data hash.
+   * This method actually calls the dao->getData() function, and passes itself. It then updates
+   * its own hash with the one returned.
+   *
+   * @return DataObject Returns itself for chaining.
+   */
+  public function load() {
+    $this->setData($this->dao->getData($this));
+    return $this;
+  }
+
+
+  /**
    * Returns an associative array with the values.
    *
    * @param bool $phpNames If true the indices will be converted to php names, if false, the indices will be like the database names.
@@ -127,6 +142,18 @@ class DataObject implements DataObjectInterface {
    */
   public function getChangedColumns() {
     return $this->changedColumns;
+  }
+
+  /**
+   * Returns an array of all values that have been explicitly set. The indices are the column names.
+   * @return array
+   */
+  public function getChangedValues() {
+    $values = array();
+    foreach ($this->changedColumns as $column=>$t) {
+      $values[$column] = $this->get($column);
+    }
+    return $values;
   }
 
   /**

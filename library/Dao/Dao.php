@@ -415,6 +415,18 @@ abstract class Dao implements DaoInterface {
   abstract protected function generateSortString($sort);
 
 
+  /**
+   * If the passed parameter is not an array, but a DataObject, then it gets the changed values out of it.
+   *
+   * @param array|DataObject $mapOrObject
+   * @return array
+   */
+  protected function interpretMap($mapOrObject) {
+    if (is_array($mapOrObject)) return $mapOrObject;
+    if ($mapOrObject instanceof DataObject) return $mapOrObject->getChangedValues();
+    throw new DaoWrongValueException("The passed map is neither an array nor a DataObject.");
+  }
+
 
   /**
    * @param LoggerFactory $loggerFactory

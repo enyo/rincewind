@@ -131,7 +131,7 @@ abstract class SqlDao extends Dao {
    * If you call get() without parameters, a "raw object" will be returned, containing
    * only default values, and null as id.
    *
-   * @param array $map A map containing the column assignments.
+   * @param array|DataObject $map A map or dataObject containing the column assignments.
    * @param bool $exportValues When you want to have complete control over the $map
    *                           column names, you can set exportValues to false, so they
    *                           won't be processed.
@@ -151,7 +151,7 @@ abstract class SqlDao extends Dao {
   /**
    * Same as get() but returns an array with the data instead of an object
    *
-   * @param array $map
+   * @param array|DataObject $map
    * @param bool $exportValues
    * @param string $tableName
    * @see get()
@@ -159,13 +159,14 @@ abstract class SqlDao extends Dao {
    * @return array
    */
   public function getData($map, $exportValues = true, $tableName = null) {
-    return $this->getFromQuery($this->generateQuery($map, $sort = null, $offset = null, $limit = 1, $exportValues, $tableName ? $tableName : ($this->viewName ? $this->viewName : $this->tableName)), $returnData = true);
+    $data = $this->getFromQuery($this->generateQuery($map, $sort = null, $offset = null, $limit = 1, $exportValues, $tableName ? $tableName : ($this->viewName ? $this->viewName : $this->tableName)), $returnData = true);
+    return $this->prepareDataForObject($data);
   }
 
   /**
    * The same as get, but returns an iterator to go through all the rows.
    *
-   * @param array $map
+   * @param array|DataObject $map
    * @param string|array $sort
    * @param int $offset 
    * @param int $limit 
@@ -249,7 +250,7 @@ abstract class SqlDao extends Dao {
   /**
    * This function generates the SQL query for the getters.
    *
-   * @param array $map A map containing the column assignments.
+   * @param array|DataObject $map A map or dataObject containing the column assignments.
    * @param string|array $sort can be an array with ASCENDING values, or a map like
    *                           this: array('login'=>Dao::DESC), or simply a string
    *                           containing the column. This value will be passed to
@@ -271,6 +272,8 @@ abstract class SqlDao extends Dao {
       $trace = debug_backtrace();
       trigger_error('Wrong parameters in ' . $trace[0]['file'] . ' on line ' . $trace[0]['line'], E_USER_ERROR);
     }
+
+    $map = $this->interpretMap($map);
 
     $assignments = array();
 

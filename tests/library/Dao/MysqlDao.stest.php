@@ -13,12 +13,10 @@ require_once(LIBRARY_ROOT_PATH . 'Database/Mysql.php');
  */
 class MysqlTestDao extends MysqlDao {
   protected $tableName = 'test_table_name';
+  protected $columnTypes = array('id'=>Dao::INT, 'name'=>Dao::STRING, 'is_admin'=>Dao::BOOL);
 }
 
 
-/**
- * There should be tests without the database
- */
 class MysqlDao_Basic_Test extends Snap_UnitTestCase {
 
   protected $dao;
@@ -73,5 +71,8 @@ class MysqlDao_Basic_Test extends Snap_UnitTestCase {
   }
 
 }
+
+
+
 
 ?>

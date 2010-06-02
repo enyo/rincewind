@@ -102,12 +102,12 @@ abstract class FileSourceDao extends Dao {
    *                          $this->tableName is used.
    * @return DataObject
    */
-  public function get($map = null, $exportValues = true, $tableName = null) {
-    if (!$map) return $this->getRawObject();
-
+  public function find($map = null, $exportValues = true, $tableName = null) {
     $content = $this->fileDataSource->view($this->exportTable($tableName ? $tableName : ($this->viewName ? $this->viewName : $this->tableName)), $exportValues ? $this->exportMap($map) : $map);
 
     $data = $this->interpretFileContent($content);
+
+    if (!$data || !is_array($data)) return null;
 
     return $this->getObjectFromData($data);
   }
@@ -123,6 +123,7 @@ abstract class FileSourceDao extends Dao {
    */
   public function getData($map, $exportValues = true, $tableName = null) {
     $data = $this->interpretFileContent($this->fileDataSource->view($this->exportTable($tableName ? $tableName : ($this->viewName ? $this->viewName : $this->tableName)), $exportValues ? $this->exportMap($map) : $map));
+    if (!$data || !is_array($data)) throw new DaoNotFoundException("The query did not return any results.");
     return $this->prepareDataForObject($data);
   }
 
@@ -174,7 +175,9 @@ abstract class FileSourceDao extends Dao {
     $this->updateObjectWithData($this->getData(array('id'=>$newId)), $object);
     
     $this->afterInsert($object);
-    
+
+    $object->setExistsInDatabase();
+
     return $object;
   }
 

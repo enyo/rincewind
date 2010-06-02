@@ -128,8 +128,9 @@ abstract class SqlDao extends Dao {
   /**
    * This is the method to get a DataObject from the database.
    * If you want to select more objects, call getIterator.
-   * If you call get() without parameters, a "raw object" will be returned, containing
-   * only default values, and null as id.
+   * This function returns null if nothing has been found. If you want it to throw an exception (for
+   * chaining) you can call get(), which is mostly a wrapper for find().
+   * 
    *
    * @param array|DataObject $map A map or dataObject containing the column assignments.
    * @param bool $exportValues When you want to have complete control over the $map
@@ -141,10 +142,10 @@ abstract class SqlDao extends Dao {
    *                          If not set, $this->viewName will be used if present; if not
    *                          $this->tableName is used.
    * @see generateQuery()
+   * @see get()
    * @return DataObject
    */
-  public function get($map = null, $exportValues = true, $tableName = null) {
-    if (!$map) return $this->getRawObject();
+  public function find($map = null, $exportValues = true, $tableName = null) {
     return $this->getFromQuery($this->generateQuery($map, $sort = null, $offset = null, $limit = 1, $exportValues, $tableName ? $tableName : ($this->viewName ? $this->viewName : $this->tableName)));
   }
 
@@ -160,6 +161,7 @@ abstract class SqlDao extends Dao {
    */
   public function getData($map, $exportValues = true, $tableName = null) {
     $data = $this->getFromQuery($this->generateQuery($map, $sort = null, $offset = null, $limit = 1, $exportValues, $tableName ? $tableName : ($this->viewName ? $this->viewName : $this->tableName)), $returnData = true);
+    if (!$data) throw new DaoNotFoundException("The query did not return any results.");
     return $this->prepareDataForObject($data);
   }
 
@@ -200,7 +202,9 @@ abstract class SqlDao extends Dao {
     $this->updateObjectWithData($this->getData(array('id'=>$newId)), $object);
     
     $this->afterInsert($object);
-    
+
+    $object->setExistsInDatabase();
+
     return $object;
   }
 
@@ -311,6 +315,7 @@ abstract class SqlDao extends Dao {
 
   /**
    * Returns a DataObject or data array from a query.
+   * Returns null if nothing found.
    *
    * @param string $query
    * @param bool $returnData If set to true, only the data as array is returned, not a DataObject.
@@ -318,7 +323,7 @@ abstract class SqlDao extends Dao {
    */
   protected function getFromQuery($query, $returnData = false) {
     $result = $this->db->query($query);
-    if ($result->numRows() == 0) { throw new DaoNotFoundException("The query ($query) did not return any results."); }
+    if ($result->numRows() == 0) return null;
 
     if ($returnData) return $result->fetchArray();
 

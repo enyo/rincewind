@@ -406,6 +406,30 @@ abstract class Dao implements DaoInterface {
 
 
   /**
+   * Calls find() and throws an error if null is returned, otherwise it just passes the DataObject
+   * If you call get() without parameters, a "raw object" will be returned, containing
+   * only default values, and null as id.
+   *
+   * @param array|DataObject $map A map or dataObject containing the column assignments.
+   * @param bool $exportValues When you want to have complete control over the $map
+   *                           column names, you can set exportValues to false, so they
+   *                           won't be processed.
+   *                           WARNING: Be sure to escape them yourself if you do so.
+   * @param string $tableName You can specify a different table (most probably a view)
+   *                          to get data from.
+   *                          If not set, $this->viewName will be used if present; if not
+   *                          $this->tableName is used.
+   * @return DataObject
+   */
+  public function get($map = null, $exportValues = true, $tableName = null) {
+    if (!$map) return $this->getRawObject();
+    $dataObject = $this->find($map, $exportValues, $tableName);
+    if (!$dataObject) throw new DaoNotFoundException('Did not find any object.');
+    return $dataObject;
+  }
+
+
+  /**
    * Given the $sort parameter, it generates a sort String used in the query.
    * If $sort is not provied, $defaultSort is used.
    *
@@ -684,10 +708,11 @@ abstract class Dao implements DaoInterface {
    * one.
    *
    * @param array $data
+   * @param bool $existsInDatabase
    * @return DataObject
    */
-  protected function getObjectFromPreparedData($data) {
-    return new DataObject($data, $this);
+  protected function getObjectFromPreparedData($data, $existsInDatabase = true) {
+    return new DataObject($data, $this, $existsInDatabase);
   }
 
   /**
@@ -782,7 +807,7 @@ abstract class Dao implements DaoInterface {
       if (in_array($column, $this->nullColumns) || in_array($column, $this->defaultValueColumns)) { $data[$column] = null; }
       elseif ($type != Dao::IGNORE) $data[$column] = DataObject::coerce(null, $type, $allowNull = false, $quiet = true);
     }
-    return $this->getObjectFromPreparedData($data);
+    return $this->getObjectFromPreparedData($data, $existsInDatabase = false);
   }
 
 

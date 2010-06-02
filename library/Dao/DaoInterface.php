@@ -24,8 +24,9 @@ interface DaoInterface {
    * If you want to select more objects, call getIterator.
    * If you call get() without parameters, a "raw object" will be returned, containing
    * only default values, and null as id.
+   * If the entry is not found, an exception is thrown.
    *
-   * @param array $map A map containing the column assignments.
+   * @param array|DataObject $map A map or DataObject containing the column assignments.
    * @param bool $exportValues When you want to have complete control over the $map
    *                           column names, you can set exportValues to false, so they
    *                           won't be processed.
@@ -35,14 +36,27 @@ interface DaoInterface {
    *                          If not set, $this->viewName will be used if present; if not
    *                          $this->tableName is used.
    * @return DataObject
+   * @see find()
    */
   public function get($map = null, $exportValues = true, $tableName = null);
 
 
   /**
+   * This function does the same as get(), but returns null if the data is not found.
+   *
+   * @param array|DataObject $map
+   * @param bool $exportValues
+   * @param string $tableName
+   * @return DataObject
+   * @see get()
+   */
+  public function find($map = null, $exportValues = true, $tableName = null);
+
+
+  /**
    * The same as get(), but returns an array with the data.
    *
-   * @param array $map
+   * @param array|DataObject $map
    * @param bool $exportValues
    * @param string $tableName
    * @return array

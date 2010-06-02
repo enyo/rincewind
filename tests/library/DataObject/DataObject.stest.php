@@ -342,6 +342,11 @@ class DataObject_Load_Test extends Snap_UnitTestCase {
     return $this->assertIdentical($this->dataObject->c, false);
   }
 
+  public function testChangedValuesAreResetAfterLoading() {
+    $this->dataObject->set('a', 321)->load();
+    return $this->assertEqual($this->dataObject->getChangedValues(), array());
+  }
+
 
 
 }

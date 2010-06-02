@@ -55,14 +55,22 @@ class DataObject implements DataObjectInterface {
 
 
   /**
+   * Whether the Data exists in database or not. (RawObjects don't)
+   * @var bool
+   */
+  protected $existsInDatabase;
+
+
+  /**
    * Every data object holds a reference to it's dao.
    *
    * @param array $data The complete data in an associative array.
    * @param Dao $dao The dao that created this object.
    */
-  public function __construct($data, $dao) {
+  public function __construct($data, $dao, $existsInDatabase = true) {
     $this->setData($data);
     $this->dao = $dao;
+    $this->existsInDatabase = !!$existsInDatabase;
   }
 
 
@@ -72,6 +80,14 @@ class DataObject implements DataObjectInterface {
    * @return Dao
    */
   public function getDao() { return $this->dao; }
+
+
+  /**
+   * @param bool $existsInDatabase
+   */
+  public function setExistsInDatabase($existsInDatabase = true) {
+    $this->existsInDatabase = !!$existsInDatabase;
+  }
 
 
   /**
@@ -92,8 +108,8 @@ class DataObject implements DataObjectInterface {
    * @return DataObject itself for chaining.
    */
   public function save() {
-    if (!$this->id) { $this->getDao()->insert($this); }
-    else            { $this->getDao()->update($this); } 
+    if (!$this->existsInDatabase) { $this->getDao()->insert($this); }
+    else                          { $this->getDao()->update($this); } 
     return $this;
   }
 

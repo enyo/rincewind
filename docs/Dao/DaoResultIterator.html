@@ -193,7 +193,6 @@ Source Location: /Dao/DaoResultIterator.php<br /><br />
 <td valign="top">
 <h3><a href="#class_vars">Variables</a></h3>
 <ul>
-    <li><a href="../Dao/DaoResultIterator.html#var$currentData">$currentData</a></li>
     <li><a href="../Dao/DaoResultIterator.html#var$currentKey">$currentKey</a></li>
     <li><a href="../Dao/DaoResultIterator.html#var$dao">$dao</a></li>
     <li><a href="../Dao/DaoResultIterator.html#var$length">$length</a></li>
@@ -208,6 +207,7 @@ Source Location: /Dao/DaoResultIterator.php<br /><br />
     <li><a href="../Dao/DaoResultIterator.html#methodasArrays">asArrays</a></li>
     <li><a href="../Dao/DaoResultIterator.html#methodcount">count</a></li>
     <li><a href="../Dao/DaoResultIterator.html#methodcurrent">current</a></li>
+    <li><a href="../Dao/DaoResultIterator.html#methodgetCurrentData">getCurrentData</a></li>
     <li><a href="../Dao/DaoResultIterator.html#methodkey">key</a></li>
     <li><a href="../Dao/DaoResultIterator.html#methodvalid">valid</a></li>
   </ul>
@@ -280,34 +280,10 @@ The Dao Result iterator is returned whenever a query returns more than one row.<
 <a name="class_vars"></a>
 <h3>Class Variables</h3>
 <div class="tags">
-	<a name="var$currentData"></a>
-	<p></p>
-	<h4>$currentData = <span class="value"></span></h4>
-	<p>[line 44]</p>
-  Contains the data of the current set.<br /><br /><br /><br />
-<h4>Tags:</h4>
-<div class="tags">
-<table border="0" cellspacing="0" cellpadding="0">
-  <tr>
-    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
-  </tr>
-</table>
-</div>
-
-  <br />
-	<div class="tags">
-  <table border="0" cellspacing="0" cellpadding="0">
-    <tr>
-      <td><b>Type:</b>&nbsp;&nbsp;</td>
-      <td>array</td>
-    </tr>
-      </table>
-	</div><br /><br />
-	<div class="top">[ <a href="#top">Top</a> ]</div><br />
 	<a name="var$currentKey"></a>
 	<p></p>
 	<h4>$currentKey = <span class="value">&nbsp;0</span></h4>
-	<p>[line 58]</p>
+	<p>[line 49]</p>
   Stores the current key (in this case: row number) of the iterator.<br /><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
@@ -355,7 +331,7 @@ The Dao Result iterator is returned whenever a query returns more than one row.<
 	<a name="var$length"></a>
 	<p></p>
 	<h4>$length = <span class="value">&nbsp;0</span></h4>
-	<p>[line 52]</p>
+	<p>[line 43]</p>
   The number of rows<br /><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
@@ -379,7 +355,7 @@ The Dao Result iterator is returned whenever a query returns more than one row.<
 	<a name="var$returnDataObjectsAsArray"></a>
 	<p></p>
 	<h4>$returnDataObjectsAsArray = <span class="value">&nbsp;false</span></h4>
-	<p>[line 66]</p>
+	<p>[line 57]</p>
   If set to true, instead of returning the DataObject, DataObject-&gt;getArray() is returned.<br /><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
@@ -412,7 +388,7 @@ The Dao Result iterator is returned whenever a query returns more than one row.<
 
   <hr />
 	<a name="methodasArrays"></a>
-	<h3>method asArrays <span class="smalllinenumber">[line 97]</span></h3>
+	<h3>method asArrays <span class="smalllinenumber">[line 94]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -454,7 +430,7 @@ $returnDataObjectsAsArray = true])</code>
   </div>
   <hr />
 	<a name="methodcount"></a>
-	<h3>method count <span class="smalllinenumber">[line 117]</span></h3>
+	<h3>method count <span class="smalllinenumber">[line 114]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -479,7 +455,7 @@ $returnDataObjectsAsArray = true])</code>
   </div>
   <hr />
 	<a name="methodcurrent"></a>
-	<h3>method current <span class="smalllinenumber">[line 85]</span></h3>
+	<h3>method current <span class="smalllinenumber">[line 76]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -508,8 +484,54 @@ $returnDataObjectsAsArray = true])</code>
         <div class="top">[ <a href="#top">Top</a> ]</div>
   </div>
   <hr />
+	<a name="methodgetCurrentData"></a>
+	<h3>method getCurrentData <span class="smalllinenumber">[line 86]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>array getCurrentData(
+)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Returns the data of the current iteration<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>abstract:</b>&nbsp;&nbsp;</td><td></td>
+  </tr>
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	<p>Overridden in child classes as:<br />
+		<dl>
+	<dt><a href="../Dao/DaoHashListIterator.html#methodgetCurrentData">DaoHashListIterator::getCurrentData()</a></dt>
+		<dd>Fetches the current data.</dd>
+	</dl>
+		<dl>
+	<dt><a href="../Dao/DaoKeyListIterator.html#methodgetCurrentData">DaoKeyListIterator::getCurrentData()</a></dt>
+		<dd>Fetches the current data.</dd>
+	</dl>
+		<dl>
+	<dt><a href="../Dao/FileSourceResultIterator.html#methodgetCurrentData">FileSourceResultIterator::getCurrentData()</a></dt>
+		<dd>Fetches the current data.</dd>
+	</dl>
+		<dl>
+	<dt><a href="../Dao/SqlResultIterator.html#methodgetCurrentData">SqlResultIterator::getCurrentData()</a></dt>
+		<dd>Fetches the current data.</dd>
+	</dl>
+	</p>
+	
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
 	<a name="methodkey"></a>
-	<h3>method key <span class="smalllinenumber">[line 73]</span></h3>
+	<h3>method key <span class="smalllinenumber">[line 64]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -539,7 +561,7 @@ $returnDataObjectsAsArray = true])</code>
   </div>
   <hr />
 	<a name="methodvalid"></a>
-	<h3>method valid <span class="smalllinenumber">[line 108]</span></h3>
+	<h3>method valid <span class="smalllinenumber">[line 105]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">

@@ -223,42 +223,17 @@ The Mysql DatabaseResult implementation.<br /><br /><br /><br />
 
   <hr />
 	<a name="methodfetchArray"></a>
-	<h3>method fetchArray <span class="smalllinenumber">[line 34]</span></h3>
+	<h3>method fetchArray <span class="smalllinenumber">[line 39]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
-		<code>void fetchArray(
-)</code>
+		<code>array fetchArray(
+[int
+$rowNumber = null])</code>
     </td></tr></table>
     </td></tr></table><br />
 	
-		<br /><br />
-<h4>Tags:</h4>
-<div class="tags">
-<table border="0" cellspacing="0" cellpadding="0">
-  <tr>
-    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
-  </tr>
-</table>
-</div>
-<br /><br />
-
-	
-        <div class="top">[ <a href="#top">Top</a> ]</div>
-  </div>
-  <hr />
-	<a name="methodfetchResult"></a>
-	<h3>method fetchResult <span class="smalllinenumber">[line 39]</span></h3>
-	<div class="function">
-    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
-    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
-		<code>void fetchResult(
-
-$field)</code>
-    </td></tr></table>
-    </td></tr></table><br />
-	
-		<br /><br />
+		If you pass a row number, seek() is called.<br /><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
@@ -274,7 +249,43 @@ $field)</code>
     <div class="tags">
     <table border="0" cellspacing="0" cellpadding="0">
           <tr>
-        <td class="type">&nbsp;&nbsp;</td>
+        <td class="type">int&nbsp;&nbsp;</td>
+        <td><b>$rowNumber</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodfetchResult"></a>
+	<h3>method fetchResult <span class="smalllinenumber">[line 50]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>mixed fetchResult(
+string
+$field)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Returns a specific field of the result set.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">string&nbsp;&nbsp;</td>
         <td><b>$field</b>&nbsp;&nbsp;</td>
         <td></td>
       </tr>
@@ -284,7 +295,7 @@ $field)</code>
   </div>
   <hr />
 	<a name="methodfree"></a>
-	<h3>method free <span class="smalllinenumber">[line 54]</span></h3>
+	<h3>method free <span class="smalllinenumber">[line 72]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -309,11 +320,11 @@ $field)</code>
   </div>
   <hr />
 	<a name="methodnumRows"></a>
-	<h3>method numRows <span class="smalllinenumber">[line 45]</span></h3>
+	<h3>method numRows <span class="smalllinenumber">[line 59]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
-		<code>void numRows(
+		<code>int numRows(
 )</code>
     </td></tr></table>
     </td></tr></table><br />
@@ -334,12 +345,12 @@ $field)</code>
   </div>
   <hr />
 	<a name="methodseek"></a>
-	<h3>method seek <span class="smalllinenumber">[line 49]</span></h3>
+	<h3>method seek <span class="smalllinenumber">[line 66]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
 		<code>void seek(
-
+int
 $rowNumber)</code>
     </td></tr></table>
     </td></tr></table><br />
@@ -360,7 +371,7 @@ $rowNumber)</code>
     <div class="tags">
     <table border="0" cellspacing="0" cellpadding="0">
           <tr>
-        <td class="type">&nbsp;&nbsp;</td>
+        <td class="type">int&nbsp;&nbsp;</td>
         <td><b>$rowNumber</b>&nbsp;&nbsp;</td>
         <td></td>
       </tr>

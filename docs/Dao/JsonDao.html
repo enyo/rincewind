@@ -481,16 +481,16 @@ Source Location: /Dao/Json/JsonDao.php<br /><br />
     Escapes a table name and potentially quotes a table name.
   </dd>
     <dt>
+    <a href="../Dao/FileSourceDao.html#methodfind">FileSourceDao::find()</a>
+  </dt>
+  <dd>
+    This is the method to get a DataObject from the database.
+  </dd>
+    <dt>
     <a href="../Dao/FileSourceDao.html#methodgenerateSortString">FileSourceDao::generateSortString()</a>
   </dt>
   <dd>
     This method takes the $sort attribute and returns a typical 'order by ' SQL string.
-  </dd>
-    <dt>
-    <a href="../Dao/FileSourceDao.html#methodget">FileSourceDao::get()</a>
-  </dt>
-  <dd>
-    This is the method to get a DataObject from the database.
   </dd>
     <dt>
     <a href="../Dao/FileSourceDao.html#methodgetData">FileSourceDao::getData()</a>
@@ -694,6 +694,12 @@ Source Location: /Dao/Json/JsonDao.php<br /><br />
     Given the $sort parameter, it generates a sort String used in the query.
   </dd>
     <dt>
+    <a href="../Dao/Dao.html#methodget">Dao::get()</a>
+  </dt>
+  <dd>
+    Calls find() and throws an error if null is returned, otherwise it just passes the DataObject  If you call get() without parameters, a &quot;raw object&quot; will be returned, containing  only default values, and null as id.
+  </dd>
+    <dt>
     <a href="../Dao/Dao.html#methodgetAdditionalColumnTypes">Dao::getAdditionalColumnTypes()</a>
   </dt>
   <dd>
@@ -818,6 +824,12 @@ Source Location: /Dao/Json/JsonDao.php<br /><br />
   </dt>
   <dd>
     Imports an external value (either from database, or xml, etc...) into an expected PHP variable.
+  </dd>
+    <dt>
+    <a href="../Dao/Dao.html#methodinterpretMap">Dao::interpretMap()</a>
+  </dt>
+  <dd>
+    If the passed parameter is not an array, but a DataObject, then it gets the changed values out of it.
   </dd>
     <dt>
     <a href="../Dao/Dao.html#methodinterpretSortVariable">Dao::interpretSortVariable()</a>

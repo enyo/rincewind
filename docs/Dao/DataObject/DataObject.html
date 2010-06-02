@@ -193,8 +193,10 @@ Source Location: /DataObject/DataObject.php<br /><br />
 <td valign="top">
 <h3><a href="#class_vars">Variables</a></h3>
 <ul>
+    <li><a href="../../Dao/DataObject/DataObject.html#var$changedColumns">$changedColumns</a></li>
     <li><a href="../../Dao/DataObject/DataObject.html#var$dao">$dao</a></li>
     <li><a href="../../Dao/DataObject/DataObject.html#var$data">$data</a></li>
+    <li><a href="../../Dao/DataObject/DataObject.html#var$existsInDatabase">$existsInDatabase</a></li>
   </ul>
 </td>
 
@@ -211,14 +213,18 @@ Source Location: /DataObject/DataObject.php<br /><br />
     <li><a href="../../Dao/DataObject/DataObject.html#methoddelete">delete</a></li>
     <li><a href="../../Dao/DataObject/DataObject.html#methodget">get</a></li>
     <li><a href="../../Dao/DataObject/DataObject.html#methodgetArray">getArray</a></li>
+    <li><a href="../../Dao/DataObject/DataObject.html#methodgetChangedColumns">getChangedColumns</a></li>
+    <li><a href="../../Dao/DataObject/DataObject.html#methodgetChangedValues">getChangedValues</a></li>
     <li><a href="../../Dao/DataObject/DataObject.html#methodgetColumnType">getColumnType</a></li>
     <li><a href="../../Dao/DataObject/DataObject.html#methodgetDao">getDao</a></li>
     <li><a href="../../Dao/DataObject/DataObject.html#methodgetDirectly">getDirectly</a></li>
     <li><a href="../../Dao/DataObject/DataObject.html#methodgetValue">getValue</a></li>
+    <li><a href="../../Dao/DataObject/DataObject.html#methodload">load</a></li>
     <li><a href="../../Dao/DataObject/DataObject.html#methodsave">save</a></li>
     <li><a href="../../Dao/DataObject/DataObject.html#methodset">set</a></li>
     <li><a href="../../Dao/DataObject/DataObject.html#methodsetData">setData</a></li>
     <li><a href="../../Dao/DataObject/DataObject.html#methodsetDirectly">setDirectly</a></li>
+    <li><a href="../../Dao/DataObject/DataObject.html#methodsetExistsInDatabase">setExistsInDatabase</a></li>
     <li><a href="../../Dao/DataObject/DataObject.html#methodsetValue">setValue</a></li>
     <li><a href="../../Dao/DataObject/DataObject.html#method__call">__call</a></li>
     <li><a href="../../Dao/DataObject/DataObject.html#method__get">__get</a></li>
@@ -272,10 +278,34 @@ The DataObject is the data representation of one row from a Database request don
 <a name="class_vars"></a>
 <h3>Class Variables</h3>
 <div class="tags">
+	<a name="var$changedColumns"></a>
+	<p></p>
+	<h4>$changedColumns = <span class="value"></span></h4>
+	<p>[line 48]</p>
+  Contains a list of changed columns (when set() is called)  Indices are the column names.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
+  </tr>
+</table>
+</div>
+
+  <br />
+	<div class="tags">
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td><b>Type:</b>&nbsp;&nbsp;</td>
+      <td>array</td>
+    </tr>
+      </table>
+	</div><br /><br />
+	<div class="top">[ <a href="#top">Top</a> ]</div><br />
 	<a name="var$dao"></a>
 	<p></p>
 	<h4>$dao = <span class="value"></span></h4>
-	<p>[line 45]</p>
+	<p>[line 54]</p>
   <br /><br />
 <h4>Tags:</h4>
 <div class="tags">
@@ -320,6 +350,30 @@ The DataObject is the data representation of one row from a Database request don
       </table>
 	</div><br /><br />
 	<div class="top">[ <a href="#top">Top</a> ]</div><br />
+	<a name="var$existsInDatabase"></a>
+	<p></p>
+	<h4>$existsInDatabase = <span class="value"></span></h4>
+	<p>[line 61]</p>
+  Whether the Data exists in database or not. (RawObjects don't)<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
+  </tr>
+</table>
+</div>
+
+  <br />
+	<div class="tags">
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td><b>Type:</b>&nbsp;&nbsp;</td>
+      <td>bool</td>
+    </tr>
+      </table>
+	</div><br /><br />
+	<div class="top">[ <a href="#top">Top</a> ]</div><br />
 </div><br />
 
 <hr />
@@ -328,7 +382,7 @@ The DataObject is the data representation of one row from a Database request don
 <div class="tags">
   <hr />
 	<a name="methodcoerce"></a>
-	<h3>static method coerce <span class="smalllinenumber">[line 280]</span></h3>
+	<h3>static method coerce <span class="smalllinenumber">[line 341]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -374,14 +428,15 @@ $quiet = false])</code>
 
   <hr />
 	<a name="method__construct"></a>
-	<h3>constructor __construct <span class="smalllinenumber">[line 54]</span></h3>
+	<h3>constructor __construct <span class="smalllinenumber">[line 70]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
 		<code>DataObject __construct(
 array
 $data, <a href="../../Dao/Dao.html">Dao</a>
-$dao)</code>
+$dao, [
+$existsInDatabase = false])</code>
     </td></tr></table>
     </td></tr></table><br />
 	
@@ -410,13 +465,18 @@ $dao)</code>
         <td><b>$dao</b>&nbsp;&nbsp;</td>
         <td>The dao that created this object.</td>
       </tr>
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>$existsInDatabase</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
         </table>
     </div><br />
         <div class="top">[ <a href="#top">Top</a> ]</div>
   </div>
   <hr />
 	<a name="methodconvertDbColumnToPhpName"></a>
-	<h3>method convertDbColumnToPhpName <span class="smalllinenumber">[line 212]</span></h3>
+	<h3>method convertDbColumnToPhpName <span class="smalllinenumber">[line 273]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -452,7 +512,7 @@ $column)</code>
   </div>
   <hr />
 	<a name="methodconvertGetMethodToPhpColumn"></a>
-	<h3>method convertGetMethodToPhpColumn <span class="smalllinenumber">[line 214]</span></h3>
+	<h3>method convertGetMethodToPhpColumn <span class="smalllinenumber">[line 275]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -488,7 +548,7 @@ $method)</code>
   </div>
   <hr />
 	<a name="methodconvertPhpNameToDbColumn"></a>
-	<h3>method convertPhpNameToDbColumn <span class="smalllinenumber">[line 204]</span></h3>
+	<h3>method convertPhpNameToDbColumn <span class="smalllinenumber">[line 265]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -524,7 +584,7 @@ $column)</code>
   </div>
   <hr />
 	<a name="methodconvertSetMethodToPhpColumn"></a>
-	<h3>method convertSetMethodToPhpColumn <span class="smalllinenumber">[line 218]</span></h3>
+	<h3>method convertSetMethodToPhpColumn <span class="smalllinenumber">[line 279]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -560,7 +620,7 @@ $method)</code>
   </div>
   <hr />
 	<a name="methoddelete"></a>
-	<h3>method delete <span class="smalllinenumber">[line 94]</span></h3>
+	<h3>method delete <span class="smalllinenumber">[line 120]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -591,7 +651,7 @@ $method)</code>
   </div>
   <hr />
 	<a name="methodget"></a>
-	<h3>method get <span class="smalllinenumber">[line 122]</span></h3>
+	<h3>method get <span class="smalllinenumber">[line 182]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -633,7 +693,7 @@ $column)</code>
   </div>
   <hr />
 	<a name="methodgetArray"></a>
-	<h3>method getArray <span class="smalllinenumber">[line 106]</span></h3>
+	<h3>method getArray <span class="smalllinenumber">[line 146]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -668,8 +728,58 @@ $phpNames = true])</code>
         <div class="top">[ <a href="#top">Top</a> ]</div>
   </div>
   <hr />
+	<a name="methodgetChangedColumns"></a>
+	<h3>method getChangedColumns <span class="smalllinenumber">[line 159]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>array getChangedColumns(
+)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Returns an array of all columns that have been explicitly set. The indices are the column names<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodgetChangedValues"></a>
+	<h3>method getChangedValues <span class="smalllinenumber">[line 167]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>array getChangedValues(
+)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Returns an array of all values that have been explicitly set. The indices are the column names.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
 	<a name="methodgetColumnType"></a>
-	<h3>method getColumnType <span class="smalllinenumber">[line 264]</span></h3>
+	<h3>method getColumnType <span class="smalllinenumber">[line 325]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -705,7 +815,7 @@ $column)</code>
   </div>
   <hr />
 	<a name="methodgetDao"></a>
-	<h3>method getDao <span class="smalllinenumber">[line 65]</span></h3>
+	<h3>method getDao <span class="smalllinenumber">[line 82]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -730,7 +840,7 @@ $column)</code>
   </div>
   <hr />
 	<a name="methodgetDirectly"></a>
-	<h3>method getDirectly <span class="smalllinenumber">[line 154]</span></h3>
+	<h3>method getDirectly <span class="smalllinenumber">[line 214]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -772,7 +882,7 @@ $value)</code>
   </div>
   <hr />
 	<a name="methodgetValue"></a>
-	<h3>method getValue <span class="smalllinenumber">[line 145]</span></h3>
+	<h3>method getValue <span class="smalllinenumber">[line 205]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -810,8 +920,36 @@ $column)</code>
         <div class="top">[ <a href="#top">Top</a> ]</div>
   </div>
   <hr />
+	<a name="methodload"></a>
+	<h3>method load <span class="smalllinenumber">[line 134]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code><a href="../../Dao/DataObject/DataObject.html">DataObject</a> load(
+)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Uses the changed values (the values that have explicitly been set with set()) to updated  the data hash.<br /><br /><p>This method actually calls the dao-&gt;getData() function, and passes itself. It then updates  its own hash with the one returned.</p><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>return:</b>&nbsp;&nbsp;</td><td>Returns itself for chaining.</td>
+  </tr>
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
 	<a name="methodsave"></a>
-	<h3>method save <span class="smalllinenumber">[line 84]</span></h3>
+	<h3>method save <span class="smalllinenumber">[line 110]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -845,7 +983,7 @@ $column)</code>
   </div>
   <hr />
 	<a name="methodset"></a>
-	<h3>method set <span class="smalllinenumber">[line 167]</span></h3>
+	<h3>method set <span class="smalllinenumber">[line 227]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -896,7 +1034,7 @@ $value)</code>
   </div>
   <hr />
 	<a name="methodsetData"></a>
-	<h3>method setData <span class="smalllinenumber">[line 73]</span></h3>
+	<h3>method setData <span class="smalllinenumber">[line 98]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -906,7 +1044,7 @@ $data)</code>
     </td></tr></table>
     </td></tr></table><br />
 	
-		Sets a new data array<br /><br /><br /><br />
+		Sets a new data array, and resets the changedColumns array.<br /><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
@@ -932,7 +1070,7 @@ $data)</code>
   </div>
   <hr />
 	<a name="methodsetDirectly"></a>
-	<h3>method setDirectly <span class="smalllinenumber">[line 190]</span></h3>
+	<h3>method setDirectly <span class="smalllinenumber">[line 251]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -973,8 +1111,44 @@ $value)</code>
         <div class="top">[ <a href="#top">Top</a> ]</div>
   </div>
   <hr />
+	<a name="methodsetExistsInDatabase"></a>
+	<h3>method setExistsInDatabase <span class="smalllinenumber">[line 88]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void setExistsInDatabase(
+[bool
+$existsInDatabase = true])</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		<br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">bool&nbsp;&nbsp;</td>
+        <td><b>$existsInDatabase</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
 	<a name="methodsetValue"></a>
-	<h3>method setValue <span class="smalllinenumber">[line 181]</span></h3>
+	<h3>method setValue <span class="smalllinenumber">[line 242]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1019,7 +1193,7 @@ $value)</code>
   </div>
   <hr />
 	<a name="method__call"></a>
-	<h3>method __call <span class="smalllinenumber">[line 238]</span></h3>
+	<h3>method __call <span class="smalllinenumber">[line 299]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1052,7 +1226,7 @@ $param)</code>
   </div>
   <hr />
 	<a name="method__get"></a>
-	<h3>method __get <span class="smalllinenumber">[line 234]</span></h3>
+	<h3>method __get <span class="smalllinenumber">[line 295]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1088,7 +1262,7 @@ $phpColumn)</code>
   </div>
   <hr />
 	<a name="method__isset"></a>
-	<h3>method __isset <span class="smalllinenumber">[line 228]</span></h3>
+	<h3>method __isset <span class="smalllinenumber">[line 289]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1124,7 +1298,7 @@ $column)</code>
   </div>
   <hr />
 	<a name="method__set"></a>
-	<h3>method __set <span class="smalllinenumber">[line 230]</span></h3>
+	<h3>method __set <span class="smalllinenumber">[line 291]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">

@@ -193,6 +193,7 @@ Source Location: /Dao/DaoHashListIterator.php<br /><br />
 <h3><a href="#class_methods">Methods</a></h3>
 <ul>
     <li><a href="../Dao/DaoHashListIterator.html#method__construct">__construct</a></li>
+    <li><a href="../Dao/DaoHashListIterator.html#methodgetCurrentData">getCurrentData</a></li>
     <li><a href="../Dao/DaoHashListIterator.html#methodnext">next</a></li>
     <li><a href="../Dao/DaoHashListIterator.html#methodrewind">rewind</a></li>
   </ul>
@@ -211,12 +212,6 @@ Source Location: /Dao/DaoHashListIterator.php<br /><br />
 <div class="tags">
 <h4>Class: <a href="../Dao/DaoResultIterator.html">DaoResultIterator</a></h4>
 <dl>
-<dt>
-  <a href="../Dao/DaoResultIterator.html#var$currentData">DaoResultIterator::$currentData</a>
-  </dt>
-<dd>
-   
-</dd>
 <dt>
   <a href="../Dao/DaoResultIterator.html#var$currentKey">DaoResultIterator::$currentKey</a>
   </dt>
@@ -267,6 +262,12 @@ Source Location: /Dao/DaoHashListIterator.php<br /><br />
   </dt>
   <dd>
     Return the current DataObject.
+  </dd>
+    <dt>
+    <a href="../Dao/DaoResultIterator.html#methodgetCurrentData">DaoResultIterator::getCurrentData()</a>
+  </dt>
+  <dd>
+    Returns the data of the current iteration
   </dd>
     <dt>
     <a href="../Dao/DaoResultIterator.html#methodkey">DaoResultIterator::key()</a>
@@ -364,6 +365,31 @@ $result)</code>
         <div class="top">[ <a href="#top">Top</a> ]</div>
   </div>
   <hr />
+	<a name="methodgetCurrentData"></a>
+	<h3>method getCurrentData <span class="smalllinenumber">[line 69]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>array getCurrentData(
+)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Fetches the current data.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	Overrides <a href="../Dao/DaoResultIterator.html#methodgetCurrentData">DaoResultIterator::getCurrentData()</a> (Returns the data of the current iteration)<br /><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
 	<a name="methodnext"></a>
 	<h3>method next <span class="smalllinenumber">[line 60]</span></h3>
 	<div class="function">
@@ -374,7 +400,7 @@ $result)</code>
     </td></tr></table>
     </td></tr></table><br />
 	
-		Set the pointer to the next row, and fetches the data to return in current.<br /><br /><br /><br />
+		Set the pointer to the next row.<br /><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">

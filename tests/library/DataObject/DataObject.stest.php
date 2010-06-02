@@ -22,7 +22,7 @@ class DataObject_WithId_Test extends Snap_UnitTestCase {
       ->listenTo('update')
       ->listenTo('delete')
       ->construct();
-    $this->dataObject = new DataObject(array('id'=>$this->testId, 'integer'=>$this->testInteger, 'time'=>$this->testTime, 'name'=>'matthias', 'null_column'=>null, 'additional_column_string'=>'ADDCOLUMNSTTT', 'enum'=>'b'), $this->dao);
+    $this->dataObject = new DataObject(array('id'=>$this->testId, 'integer'=>$this->testInteger, 'time'=>$this->testTime, 'name'=>'matthias', 'null_column'=>null, 'additional_column_string'=>'ADDCOLUMNSTTT', 'enum'=>'b'), $this->dao, $existsInDatabase = true);
   }
 
   public function tearDown() {
@@ -164,30 +164,43 @@ class DataObject_WithId_Test extends Snap_UnitTestCase {
 class DataObject_WithoutId_Test extends Snap_UnitTestCase {
 
   protected $dao;
-  protected $dataObject;
+  protected $dataHash;
 
   protected $testId = 18;
   protected $testInteger = 78;
   protected $testTime = 123124;
 
-    public function setUp() {
-      $this->dao = $this->mock('DaoInterface')
-        ->setReturnValue('getColumnTypes', array('id'=>Dao::INT, 'integer'=>Dao::INT, 'time'=>Dao::TIMESTAMP, 'name'=>Dao::STRING, 'null_column'=>Dao::STRING))
-        ->setReturnValue('getNullColumns', array('null_column'))
+  public function setUp() {
+    $this->dao = $this->mock('DaoInterface')
+      ->setReturnValue('getColumnTypes', array('id'=>Dao::INT, 'integer'=>Dao::INT, 'time'=>Dao::TIMESTAMP, 'name'=>Dao::STRING, 'null_column'=>Dao::STRING))
+      ->setReturnValue('getNullColumns', array('null_column'))
       ->listenTo('insert')
       ->listenTo('update')
-        ->construct();
+      ->construct();
 
-      $this->dataObject = new DataObject(array('id'=>null, 'integer'=>$this->testInteger, 'time'=>$this->testTime, 'name'=>'matthias', 'null_column'=>null), $this->dao);
-    }
+    $this->dataHash = array('id'=>null, 'integer'=>$this->testInteger, 'time'=>$this->testTime, 'name'=>'matthias', 'null_column'=>null);
+  }
 
-    public function tearDown() {
-      unset($this->dataObject);
-    }
+  public function tearDown() {
+    unset($this->dataObject);
+  }
 
-  public function testInsert() {
-    $this->dataObject->save();
+  public function testInsertThatDoesntExistInDatabase() {
+    $dataObject = new DataObject($this->dataHash, $this->dao, $existsInDatabase = false);
+    $dataObject->save();
     return $this->assertCallCount($this->dao, 'insert', 1);
+  }
+
+  public function testInsertThatDoesExistInDatabase() {
+    $dataObject = new DataObject($this->dataHash, $this->dao, $existsInDatabase = true);
+    $dataObject->save();
+    return $this->assertCallCount($this->dao, 'update', 1);
+  }
+
+  public function testInsertDefault() {
+    $dataObject = new DataObject($this->dataHash, $this->dao);
+    $dataObject->save();
+    return $this->assertCallCount($this->dao, 'insert', 1, array(), 'Per default DataObjects should not exist in database.');
   }
 
 }

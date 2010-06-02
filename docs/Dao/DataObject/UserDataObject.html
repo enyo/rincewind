@@ -212,6 +212,12 @@ Source Location: /DataObject/UserDataObject.php<br /><br />
 <h4>Class: <a href="../../Dao/DataObject/DataObject.html">DataObject</a></h4>
 <dl>
 <dt>
+  <a href="../../Dao/DataObject/DataObject.html#var$changedColumns">DataObject::$changedColumns</a>
+  </dt>
+<dd>
+   
+</dd>
+<dt>
   <a href="../../Dao/DataObject/DataObject.html#var$dao">DataObject::$dao</a>
   </dt>
 <dd>
@@ -219,6 +225,12 @@ Source Location: /DataObject/UserDataObject.php<br /><br />
 </dd>
 <dt>
   <a href="../../Dao/DataObject/DataObject.html#var$data">DataObject::$data</a>
+  </dt>
+<dd>
+   
+</dd>
+<dt>
+  <a href="../../Dao/DataObject/DataObject.html#var$existsInDatabase">DataObject::$existsInDatabase</a>
   </dt>
 <dd>
    
@@ -287,6 +299,18 @@ Source Location: /DataObject/UserDataObject.php<br /><br />
     Returns an associative array with the values.
   </dd>
     <dt>
+    <a href="../../Dao/DataObject/DataObject.html#methodgetChangedColumns">DataObject::getChangedColumns()</a>
+  </dt>
+  <dd>
+    Returns an array of all columns that have been explicitly set. The indices are the column names
+  </dd>
+    <dt>
+    <a href="../../Dao/DataObject/DataObject.html#methodgetChangedValues">DataObject::getChangedValues()</a>
+  </dt>
+  <dd>
+    Returns an array of all values that have been explicitly set. The indices are the column names.
+  </dd>
+    <dt>
     <a href="../../Dao/DataObject/DataObject.html#methodgetColumnType">DataObject::getColumnType()</a>
   </dt>
   <dd>
@@ -311,6 +335,12 @@ Source Location: /DataObject/UserDataObject.php<br /><br />
     
   </dd>
     <dt>
+    <a href="../../Dao/DataObject/DataObject.html#methodload">DataObject::load()</a>
+  </dt>
+  <dd>
+    Uses the changed values (the values that have explicitly been set with set()) to updated  the data hash.
+  </dd>
+    <dt>
     <a href="../../Dao/DataObject/DataObject.html#methodsave">DataObject::save()</a>
   </dt>
   <dd>
@@ -326,13 +356,19 @@ Source Location: /DataObject/UserDataObject.php<br /><br />
     <a href="../../Dao/DataObject/DataObject.html#methodsetData">DataObject::setData()</a>
   </dt>
   <dd>
-    Sets a new data array
+    Sets a new data array, and resets the changedColumns array.
   </dd>
     <dt>
     <a href="../../Dao/DataObject/DataObject.html#methodsetDirectly">DataObject::setDirectly()</a>
   </dt>
   <dd>
     You should NEVER use this function in your app.
+  </dd>
+    <dt>
+    <a href="../../Dao/DataObject/DataObject.html#methodsetExistsInDatabase">DataObject::setExistsInDatabase()</a>
+  </dt>
+  <dd>
+    
   </dd>
     <dt>
     <a href="../../Dao/DataObject/DataObject.html#methodsetValue">DataObject::setValue()</a>

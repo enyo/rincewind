@@ -67,7 +67,7 @@ class DataObject implements DataObjectInterface {
    * @param array $data The complete data in an associative array.
    * @param Dao $dao The dao that created this object.
    */
-  public function __construct($data, $dao, $existsInDatabase = true) {
+  public function __construct($data, $dao, $existsInDatabase = false) {
     $this->setData($data);
     $this->dao = $dao;
     $this->existsInDatabase = !!$existsInDatabase;

@@ -194,6 +194,7 @@ Source Location: /Dao/DaoInterface.php<br /><br />
     <li><a href="../Dao/DaoInterface.html#methodcommit">commit</a></li>
     <li><a href="../Dao/DaoInterface.html#methoddelete">delete</a></li>
     <li><a href="../Dao/DaoInterface.html#methoddeleteById">deleteById</a></li>
+    <li><a href="../Dao/DaoInterface.html#methodfind">find</a></li>
     <li><a href="../Dao/DaoInterface.html#methodget">get</a></li>
     <li><a href="../Dao/DaoInterface.html#methodgetAdditionalColumnTypes">getAdditionalColumnTypes</a></li>
     <li><a href="../Dao/DaoInterface.html#methodgetAll">getAll</a></li>
@@ -262,7 +263,7 @@ The DaoInterface<br /><br /><br /><br />
 
   <hr />
 	<a name="methodbeginTransaction"></a>
-	<h3>method beginTransaction <span class="smalllinenumber">[line 115]</span></h3>
+	<h3>method beginTransaction <span class="smalllinenumber">[line 129]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -287,7 +288,7 @@ The DaoInterface<br /><br /><br /><br />
   </div>
   <hr />
 	<a name="methodcommit"></a>
-	<h3>method commit <span class="smalllinenumber">[line 120]</span></h3>
+	<h3>method commit <span class="smalllinenumber">[line 134]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -312,7 +313,7 @@ The DaoInterface<br /><br /><br /><br />
   </div>
   <hr />
 	<a name="methoddelete"></a>
-	<h3>method delete <span class="smalllinenumber">[line 103]</span></h3>
+	<h3>method delete <span class="smalllinenumber">[line 117]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -351,7 +352,7 @@ $object)</code>
   </div>
   <hr />
 	<a name="methoddeleteById"></a>
-	<h3>method deleteById <span class="smalllinenumber">[line 109]</span></h3>
+	<h3>method deleteById <span class="smalllinenumber">[line 123]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -386,23 +387,26 @@ $id)</code>
         <div class="top">[ <a href="#top">Top</a> ]</div>
   </div>
   <hr />
-	<a name="methodget"></a>
-	<h3>method get <span class="smalllinenumber">[line 39]</span></h3>
+	<a name="methodfind"></a>
+	<h3>method find <span class="smalllinenumber">[line 53]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
-		<code><a href="../Dao/DataObject/DataObject.html">DataObject</a> get(
-[array
+		<code><a href="../Dao/DataObject/DataObject.html">DataObject</a> find(
+[array|<a href="../Dao/DataObject/DataObject.html">DataObject</a>
 $map = null], [bool
 $exportValues = true], [string
 $tableName = null])</code>
     </td></tr></table>
     </td></tr></table><br />
 	
-		This is the method to get a DataObject from the database.<br /><br /><p>If you want to select more objects, call getIterator.  If you call get() without parameters, a &quot;raw object&quot; will be returned, containing  only default values, and null as id.</p><br /><br /><br />
+		This function does the same as get(), but returns null if the data is not found.<br /><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>see:</b>&nbsp;&nbsp;</td><td><a href="../Dao/DaoInterface.html#methodget">DaoInterface::get()</a></td>
+  </tr>
   <tr>
     <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
   </tr>
@@ -415,9 +419,60 @@ $tableName = null])</code>
     <div class="tags">
     <table border="0" cellspacing="0" cellpadding="0">
           <tr>
-        <td class="type">array&nbsp;&nbsp;</td>
+        <td class="type">array|<a href="../Dao/DataObject/DataObject.html">DataObject</a>&nbsp;&nbsp;</td>
         <td><b>$map</b>&nbsp;&nbsp;</td>
-        <td>A map containing the column assignments.</td>
+        <td></td>
+      </tr>
+          <tr>
+        <td class="type">bool&nbsp;&nbsp;</td>
+        <td><b>$exportValues</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+          <tr>
+        <td class="type">string&nbsp;&nbsp;</td>
+        <td><b>$tableName</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodget"></a>
+	<h3>method get <span class="smalllinenumber">[line 41]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code><a href="../Dao/DataObject/DataObject.html">DataObject</a> get(
+[array|<a href="../Dao/DataObject/DataObject.html">DataObject</a>
+$map = null], [bool
+$exportValues = true], [string
+$tableName = null])</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		This is the method to get a DataObject from the database.<br /><br /><p>If you want to select more objects, call getIterator.  If you call get() without parameters, a &quot;raw object&quot; will be returned, containing  only default values, and null as id.  If the entry is not found, an exception is thrown.</p><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>see:</b>&nbsp;&nbsp;</td><td><a href="../Dao/DaoInterface.html#methodfind">DaoInterface::find()</a></td>
+  </tr>
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">array|<a href="../Dao/DataObject/DataObject.html">DataObject</a>&nbsp;&nbsp;</td>
+        <td><b>$map</b>&nbsp;&nbsp;</td>
+        <td>A map or DataObject containing the column assignments.</td>
       </tr>
           <tr>
         <td class="type">bool&nbsp;&nbsp;</td>
@@ -435,7 +490,7 @@ $tableName = null])</code>
   </div>
   <hr />
 	<a name="methodgetAdditionalColumnTypes"></a>
-	<h3>method getAdditionalColumnTypes <span class="smalllinenumber">[line 141]</span></h3>
+	<h3>method getAdditionalColumnTypes <span class="smalllinenumber">[line 155]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -460,7 +515,7 @@ $tableName = null])</code>
   </div>
   <hr />
 	<a name="methodgetAll"></a>
-	<h3>method getAll <span class="smalllinenumber">[line 81]</span></h3>
+	<h3>method getAll <span class="smalllinenumber">[line 95]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -485,7 +540,7 @@ $tableName = null])</code>
   </div>
   <hr />
 	<a name="methodgetById"></a>
-	<h3>method getById <span class="smalllinenumber">[line 75]</span></h3>
+	<h3>method getById <span class="smalllinenumber">[line 89]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -521,7 +576,7 @@ $id)</code>
   </div>
   <hr />
 	<a name="methodgetColumnTypes"></a>
-	<h3>method getColumnTypes <span class="smalllinenumber">[line 133]</span></h3>
+	<h3>method getColumnTypes <span class="smalllinenumber">[line 147]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -546,12 +601,12 @@ $id)</code>
   </div>
   <hr />
 	<a name="methodgetData"></a>
-	<h3>method getData <span class="smalllinenumber">[line 51]</span></h3>
+	<h3>method getData <span class="smalllinenumber">[line 65]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
 		<code>array getData(
-array
+array|<a href="../Dao/DataObject/DataObject.html">DataObject</a>
 $map, [bool
 $exportValues = true], [string
 $tableName = null])</code>
@@ -577,7 +632,7 @@ $tableName = null])</code>
     <div class="tags">
     <table border="0" cellspacing="0" cellpadding="0">
           <tr>
-        <td class="type">array&nbsp;&nbsp;</td>
+        <td class="type">array|<a href="../Dao/DataObject/DataObject.html">DataObject</a>&nbsp;&nbsp;</td>
         <td><b>$map</b>&nbsp;&nbsp;</td>
         <td></td>
       </tr>
@@ -597,7 +652,7 @@ $tableName = null])</code>
   </div>
   <hr />
 	<a name="methodgetIterator"></a>
-	<h3>method getIterator <span class="smalllinenumber">[line 69]</span></h3>
+	<h3>method getIterator <span class="smalllinenumber">[line 83]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -666,7 +721,7 @@ $tableName = null])</code>
   </div>
   <hr />
 	<a name="methodgetNullColumns"></a>
-	<h3>method getNullColumns <span class="smalllinenumber">[line 149]</span></h3>
+	<h3>method getNullColumns <span class="smalllinenumber">[line 163]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -691,7 +746,7 @@ $tableName = null])</code>
   </div>
   <hr />
 	<a name="methodgetObjectFromData"></a>
-	<h3>method getObjectFromData <span class="smalllinenumber">[line 167]</span></h3>
+	<h3>method getObjectFromData <span class="smalllinenumber">[line 181]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -727,7 +782,7 @@ $data)</code>
   </div>
   <hr />
 	<a name="methodgetTotalCount"></a>
-	<h3>method getTotalCount <span class="smalllinenumber">[line 158]</span></h3>
+	<h3>method getTotalCount <span class="smalllinenumber">[line 172]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -752,7 +807,7 @@ $data)</code>
   </div>
   <hr />
 	<a name="methodinsert"></a>
-	<h3>method insert <span class="smalllinenumber">[line 88]</span></h3>
+	<h3>method insert <span class="smalllinenumber">[line 102]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -791,7 +846,7 @@ $object)</code>
   </div>
   <hr />
 	<a name="methodrollback"></a>
-	<h3>method rollback <span class="smalllinenumber">[line 125]</span></h3>
+	<h3>method rollback <span class="smalllinenumber">[line 139]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -816,7 +871,7 @@ $object)</code>
   </div>
   <hr />
 	<a name="methodupdate"></a>
-	<h3>method update <span class="smalllinenumber">[line 96]</span></h3>
+	<h3>method update <span class="smalllinenumber">[line 110]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">

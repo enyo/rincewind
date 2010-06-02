@@ -208,9 +208,9 @@ Source Location: /Dao/SqlDao.php<br /><br />
     <li><a href="../Dao/SqlDao.html#methodescapeString">escapeString</a></li>
     <li><a href="../Dao/SqlDao.html#methodescapeTable">escapeTable</a></li>
     <li><a href="../Dao/SqlDao.html#methodexportDate">exportDate</a></li>
+    <li><a href="../Dao/SqlDao.html#methodfind">find</a></li>
     <li><a href="../Dao/SqlDao.html#methodgenerateQuery">generateQuery</a></li>
     <li><a href="../Dao/SqlDao.html#methodgenerateSortString">generateSortString</a></li>
-    <li><a href="../Dao/SqlDao.html#methodget">get</a></li>
     <li><a href="../Dao/SqlDao.html#methodgetData">getData</a></li>
     <li><a href="../Dao/SqlDao.html#methodgetDb">getDb</a></li>
     <li><a href="../Dao/SqlDao.html#methodgetFromQuery">getFromQuery</a></li>
@@ -583,6 +583,12 @@ Source Location: /Dao/SqlDao.php<br /><br />
     Given the $sort parameter, it generates a sort String used in the query.
   </dd>
     <dt>
+    <a href="../Dao/Dao.html#methodget">Dao::get()</a>
+  </dt>
+  <dd>
+    Calls find() and throws an error if null is returned, otherwise it just passes the DataObject  If you call get() without parameters, a &quot;raw object&quot; will be returned, containing  only default values, and null as id.
+  </dd>
+    <dt>
     <a href="../Dao/Dao.html#methodgetAdditionalColumnTypes">Dao::getAdditionalColumnTypes()</a>
   </dt>
   <dd>
@@ -707,6 +713,12 @@ Source Location: /Dao/SqlDao.php<br /><br />
   </dt>
   <dd>
     Imports an external value (either from database, or xml, etc...) into an expected PHP variable.
+  </dd>
+    <dt>
+    <a href="../Dao/Dao.html#methodinterpretMap">Dao::interpretMap()</a>
+  </dt>
+  <dd>
+    If the passed parameter is not an array, but a DataObject, then it gets the changed values out of it.
   </dd>
     <dt>
     <a href="../Dao/Dao.html#methodinterpretSortVariable">Dao::interpretSortVariable()</a>
@@ -1031,7 +1043,7 @@ $result)</code>
   </div>
   <hr />
 	<a name="methoddelete"></a>
-	<h3>method delete <span class="smalllinenumber">[line 232]</span></h3>
+	<h3>method delete <span class="smalllinenumber">[line 237]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1175,7 +1187,7 @@ $table = null])</code>
   </div>
   <hr />
 	<a name="methodexportDate"></a>
-	<h3>method exportDate <span class="smalllinenumber">[line 386]</span></h3>
+	<h3>method exportDate <span class="smalllinenumber">[line 394]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1216,13 +1228,67 @@ $withTime)</code>
         <div class="top">[ <a href="#top">Top</a> ]</div>
   </div>
   <hr />
+	<a name="methodfind"></a>
+	<h3>method find <span class="smalllinenumber">[line 148]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code><a href="../Dao/DataObject/DataObject.html">DataObject</a> find(
+[array|<a href="../Dao/DataObject/DataObject.html">DataObject</a>
+$map = null], [bool
+$exportValues = true], [string
+$tableName = null])</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		This is the method to get a DataObject from the database.<br /><br /><p>If you want to select more objects, call getIterator.  This function returns null if nothing has been found. If you want it to throw an exception (for  chaining) you can call get(), which is mostly a wrapper for find().</p><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>see:</b>&nbsp;&nbsp;</td><td><a href="../Dao/SqlDao.html#methodgenerateQuery">SqlDao::generateQuery()</a></td>
+  </tr>
+  <tr>
+    <td><b>see:</b>&nbsp;&nbsp;</td><td><a href="../Dao/Dao.html#methodget">Dao::get()</a></td>
+  </tr>
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">array|<a href="../Dao/DataObject/DataObject.html">DataObject</a>&nbsp;&nbsp;</td>
+        <td><b>$map</b>&nbsp;&nbsp;</td>
+        <td>A map or dataObject containing the column assignments.</td>
+      </tr>
+          <tr>
+        <td class="type">bool&nbsp;&nbsp;</td>
+        <td><b>$exportValues</b>&nbsp;&nbsp;</td>
+        <td>When you want to have complete control over the $map                            column names, you can set exportValues to false, so they                            won't be processed.                            WARNING: Be sure to escape them yourself if you do so.</td>
+      </tr>
+          <tr>
+        <td class="type">string&nbsp;&nbsp;</td>
+        <td><b>$tableName</b>&nbsp;&nbsp;</td>
+        <td>You can specify a different table (most probably a view)                           to get data from.                           If not set, $this-&gt;viewName will be used if present; if not                           $this-&gt;tableName is used.</td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
 	<a name="methodgenerateQuery"></a>
-	<h3>method generateQuery <span class="smalllinenumber">[line 267]</span></h3>
+	<h3>method generateQuery <span class="smalllinenumber">[line 272]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
 		<code>string generateQuery(
-array
+array|<a href="../Dao/DataObject/DataObject.html">DataObject</a>
 $map, [string|array
 $sort = null], [int
 $offset = null], [int
@@ -1248,9 +1314,9 @@ $tableName = null])</code>
     <div class="tags">
     <table border="0" cellspacing="0" cellpadding="0">
           <tr>
-        <td class="type">array&nbsp;&nbsp;</td>
+        <td class="type">array|<a href="../Dao/DataObject/DataObject.html">DataObject</a>&nbsp;&nbsp;</td>
         <td><b>$map</b>&nbsp;&nbsp;</td>
-        <td>A map containing the column assignments.</td>
+        <td>A map or dataObject containing the column assignments.</td>
       </tr>
           <tr>
         <td class="type">string|array&nbsp;&nbsp;</td>
@@ -1283,7 +1349,7 @@ $tableName = null])</code>
   </div>
   <hr />
 	<a name="methodgenerateSortString"></a>
-	<h3>method generateSortString <span class="smalllinenumber">[line 363]</span></h3>
+	<h3>method generateSortString <span class="smalllinenumber">[line 371]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1318,64 +1384,13 @@ $sort)</code>
         <div class="top">[ <a href="#top">Top</a> ]</div>
   </div>
   <hr />
-	<a name="methodget"></a>
-	<h3>method get <span class="smalllinenumber">[line 146]</span></h3>
-	<div class="function">
-    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
-    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
-		<code><a href="../Dao/DataObject/DataObject.html">DataObject</a> get(
-[array
-$map = null], [bool
-$exportValues = true], [string
-$tableName = null])</code>
-    </td></tr></table>
-    </td></tr></table><br />
-	
-		This is the method to get a DataObject from the database.<br /><br /><p>If you want to select more objects, call getIterator.  If you call get() without parameters, a &quot;raw object&quot; will be returned, containing  only default values, and null as id.</p><br /><br /><br />
-<h4>Tags:</h4>
-<div class="tags">
-<table border="0" cellspacing="0" cellpadding="0">
-  <tr>
-    <td><b>see:</b>&nbsp;&nbsp;</td><td><a href="../Dao/SqlDao.html#methodgenerateQuery">SqlDao::generateQuery()</a></td>
-  </tr>
-  <tr>
-    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
-  </tr>
-</table>
-</div>
-<br /><br />
-
-	
-        <h4>Parameters:</h4>
-    <div class="tags">
-    <table border="0" cellspacing="0" cellpadding="0">
-          <tr>
-        <td class="type">array&nbsp;&nbsp;</td>
-        <td><b>$map</b>&nbsp;&nbsp;</td>
-        <td>A map containing the column assignments.</td>
-      </tr>
-          <tr>
-        <td class="type">bool&nbsp;&nbsp;</td>
-        <td><b>$exportValues</b>&nbsp;&nbsp;</td>
-        <td>When you want to have complete control over the $map                            column names, you can set exportValues to false, so they                            won't be processed.                            WARNING: Be sure to escape them yourself if you do so.</td>
-      </tr>
-          <tr>
-        <td class="type">string&nbsp;&nbsp;</td>
-        <td><b>$tableName</b>&nbsp;&nbsp;</td>
-        <td>You can specify a different table (most probably a view)                           to get data from.                           If not set, $this-&gt;viewName will be used if present; if not                           $this-&gt;tableName is used.</td>
-      </tr>
-        </table>
-    </div><br />
-        <div class="top">[ <a href="#top">Top</a> ]</div>
-  </div>
-  <hr />
 	<a name="methodgetData"></a>
-	<h3>method getData <span class="smalllinenumber">[line 161]</span></h3>
+	<h3>method getData <span class="smalllinenumber">[line 162]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
 		<code>array getData(
-array
+array|<a href="../Dao/DataObject/DataObject.html">DataObject</a>
 $map, [bool
 $exportValues = true], [string
 $tableName = null])</code>
@@ -1387,7 +1402,7 @@ $tableName = null])</code>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
   <tr>
-    <td><b>see:</b>&nbsp;&nbsp;</td><td><a href="../Dao/SqlDao.html#methodget">SqlDao::get()</a></td>
+    <td><b>see:</b>&nbsp;&nbsp;</td><td><a href="../Dao/Dao.html#methodget">Dao::get()</a></td>
   </tr>
   <tr>
     <td><b>see:</b>&nbsp;&nbsp;</td><td><a href="../Dao/SqlDao.html#methodgenerateQuery">SqlDao::generateQuery()</a></td>
@@ -1404,7 +1419,7 @@ $tableName = null])</code>
     <div class="tags">
     <table border="0" cellspacing="0" cellpadding="0">
           <tr>
-        <td class="type">array&nbsp;&nbsp;</td>
+        <td class="type">array|<a href="../Dao/DataObject/DataObject.html">DataObject</a>&nbsp;&nbsp;</td>
         <td><b>$map</b>&nbsp;&nbsp;</td>
         <td></td>
       </tr>
@@ -1452,7 +1467,7 @@ $tableName = null])</code>
   </div>
   <hr />
 	<a name="methodgetFromQuery"></a>
-	<h3>method getFromQuery <span class="smalllinenumber">[line 316]</span></h3>
+	<h3>method getFromQuery <span class="smalllinenumber">[line 324]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1463,7 +1478,7 @@ $returnData = false])</code>
     </td></tr></table>
     </td></tr></table><br />
 	
-		Returns a DataObject or data array from a query.<br /><br /><br /><br />
+		Returns a DataObject or data array from a query.<br /><br /><p>Returns null if nothing found.</p><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
@@ -1494,12 +1509,12 @@ $returnData = false])</code>
   </div>
   <hr />
 	<a name="methodgetIterator"></a>
-	<h3>method getIterator <span class="smalllinenumber">[line 178]</span></h3>
+	<h3>method getIterator <span class="smalllinenumber">[line 181]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
 		<code><a href="../Dao/DaoResultIterator.html">DaoResultIterator</a> getIterator(
-array
+array|<a href="../Dao/DataObject/DataObject.html">DataObject</a>
 $map, [string|array
 $sort = null], [int
 $offset = null], [int
@@ -1514,7 +1529,7 @@ $tableName = null])</code>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
   <tr>
-    <td><b>see:</b>&nbsp;&nbsp;</td><td><a href="../Dao/SqlDao.html#methodget">SqlDao::get()</a></td>
+    <td><b>see:</b>&nbsp;&nbsp;</td><td><a href="../Dao/Dao.html#methodget">Dao::get()</a></td>
   </tr>
   <tr>
     <td><b>see:</b>&nbsp;&nbsp;</td><td><a href="../Dao/SqlDao.html#methodgenerateQuery">SqlDao::generateQuery()</a></td>
@@ -1531,7 +1546,7 @@ $tableName = null])</code>
     <div class="tags">
     <table border="0" cellspacing="0" cellpadding="0">
           <tr>
-        <td class="type">array&nbsp;&nbsp;</td>
+        <td class="type">array|<a href="../Dao/DataObject/DataObject.html">DataObject</a>&nbsp;&nbsp;</td>
         <td><b>$map</b>&nbsp;&nbsp;</td>
         <td></td>
       </tr>
@@ -1566,7 +1581,7 @@ $tableName = null])</code>
   </div>
   <hr />
 	<a name="methodgetIteratorFromQuery"></a>
-	<h3>method getIteratorFromQuery <span class="smalllinenumber">[line 332]</span></h3>
+	<h3>method getIteratorFromQuery <span class="smalllinenumber">[line 340]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1639,7 +1654,7 @@ $query)</code>
   </div>
   <hr />
 	<a name="methodgetTotalCount"></a>
-	<h3>method getTotalCount <span class="smalllinenumber">[line 244]</span></h3>
+	<h3>method getTotalCount <span class="smalllinenumber">[line 249]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1664,7 +1679,7 @@ $query)</code>
   </div>
   <hr />
 	<a name="methodinsert"></a>
-	<h3>method insert <span class="smalllinenumber">[line 191]</span></h3>
+	<h3>method insert <span class="smalllinenumber">[line 194]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1703,7 +1718,7 @@ $object)</code>
   </div>
   <hr />
 	<a name="methodinsertByQuery"></a>
-	<h3>method insertByQuery <span class="smalllinenumber">[line 347]</span></h3>
+	<h3>method insertByQuery <span class="smalllinenumber">[line 355]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1773,7 +1788,7 @@ $id = null])</code>
   </div>
   <hr />
 	<a name="methodupdate"></a>
-	<h3>method update <span class="smalllinenumber">[line 212]</span></h3>
+	<h3>method update <span class="smalllinenumber">[line 217]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">

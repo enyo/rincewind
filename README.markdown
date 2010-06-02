@@ -15,7 +15,7 @@ The biggest and probably most used part of the library is the Dao.
 Once your Dao is configured (simply define the types of columns you have in your database table), you access your database like this:
 
     <?php
-    $user = $userDao->getById(4);
+    $user = $userDao->getById($id);
     $user->set('firstName', 'John');
     $user->lastName = 'Doe'; // Is the same as $user->set('lastName', 'Doe');
     $user->save();
@@ -29,6 +29,39 @@ You can also chain calls like this:
       ->set('lastName', 'Doe')
       ->save(); // Inserts the object in the database.
     ?>
+
+One thing that's really cool with Daos are references.
+Eg.: You can specify that the column `address_id` points to the foreign key `id` on the AddressDao, and that you can access that object on the `address` property.
+This means that you can then simply access the address like this:
+
+    <?php
+    $user = $userDao->getById($id);
+    $address = $user->address; // Instead of: $address = $addressDao->getById($user->addressId)
+    ?>
+
+This also works with toMany references, and the iterator only fetches the data when accessed.
+
+Json:
+
+    { "id": 4, "username": "Joe", "address_ids": [ 3, 6, 8, 9 ] }}
+
+Your application:
+
+    <?php
+    $user = $userDao->getById($id);
+    foreach ($user->addresses as $address) {
+      // Your code here
+    }
+    ?>
+
+Even better: for data sources that support it (eg: Json) you can specify the referenced data directly, so it doesn't have to be fetched, and create the unwanted overhead of a new request.
+Those two possibilities can be mixed without any problem, and it's the servers choice then to submit the data directly, or just give the id.
+
+The submitted data could look like this:
+
+    { "id": 4, "username": "Joe", "address_id": 3, "address": { "id": 3, "street": "Somethinglane 3" }}
+
+
 
 Daos support import/export definitions (so you can rename table columns the way you like them in your php script), escape all values correctly, and check for the correct values when setting them.
 

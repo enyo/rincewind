@@ -40,8 +40,8 @@ abstract class FileSourceResultIterator extends DaoResultIterator {
     $this->next();
   }
 
-  
-  
+
+
   /**
    * Sets the pointer to entry 1.
    * @return FileResultIterator Returns itself for chaining.
@@ -56,17 +56,21 @@ abstract class FileSourceResultIterator extends DaoResultIterator {
 
 
   /**
-   * Set the pointer to the next row, and fetches the data to return in current.
+   * Set the pointer to the next row.
    * @return FileResultIterator Returns itself for chaining.
    */
   public function next() {
     $this->currentKey ++;
-    $idx = $this->currentKey - 1;
-    if (!isset($this->data[$idx])) $this->currentData = null;
-    else $this->currentData = $this->data[$idx];
     return $this;
   }
 
+  /**
+   * Fetches the current data.
+   * @return array
+   */
+  protected function getCurrentData() {
+    return $this->key() > $this->count() ? null : $this->data[$this->key() - 1];
+  }
 
 }
 

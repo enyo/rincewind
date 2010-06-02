@@ -55,14 +55,23 @@ class SqlResultIterator extends DaoResultIterator {
 
 
   /**
-   * Set the pointer to the next row, and fetches the data to return in current.
+   * Set the pointer to the next row.
    * @return SqlResultIterator Returns itself for chaining.
    */
   public function next() {
     $this->currentKey ++;
-    $this->currentData = $this->result->fetchArray();
     return $this;
   }
+
+
+  /**
+   * Fetches the current data.
+   * @return array
+   */
+  protected function getCurrentData() {
+    return $this->key() > $this->count() ? null : $this->result->fetchArray($this->key());
+  }
+
 
 }
 

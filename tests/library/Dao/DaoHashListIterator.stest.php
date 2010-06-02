@@ -69,12 +69,9 @@ class DaoHashListIterator_Basic_Test extends Snap_UnitTestCase {
     return $this->assertIdentical($i, 3);
   }
 
-  // This test should not fail!
-  // It's not an error though... it's just that the iterators should only fetch the data when necessary.
   public function testCorrectCallCount() {
-    $this->todo();
     foreach ($this->it as $ob) {}
-    return $this->assertCallCount($this->dao, 'getData', 3);
+    return $this->assertCallCount($this->dao, 'getObjectFromData', 3);
   }
 
 

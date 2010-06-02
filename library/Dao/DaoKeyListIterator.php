@@ -32,16 +32,16 @@ class DaoKeyListIterator extends DaoResultIterator {
   /**
    * @var string
    */
-  private $key;
+  private $keyName;
 
   /**
    * @param array $keyList
    * @param Dao $dao
    * @param string $key
    */
-  public function __construct($keyList, $dao, $key = 'id') {
+  public function __construct($keyList, $dao, $keyName = 'id') {
     $this->keyList = $keyList;
-    $this->key = $key;
+    $this->keyName = $keyName;
     $this->length = count($keyList);
     $this->dao = $dao;
     $this->next();
@@ -61,13 +61,20 @@ class DaoKeyListIterator extends DaoResultIterator {
 
 
   /**
-   * Set the pointer to the next row, and fetches the data to return in current.
+   * Set the pointer to the next row.
    * @return SqlResultIterator Returns itself for chaining.
    */
   public function next() {
     $this->currentKey ++;
-    $this->currentData = $this->currentKey > $this->length ? null : $this->dao->getData(array($this->key=>$this->keyList[$this->currentKey - 1]));
     return $this;
+  }
+
+  /**
+   * Fetches the current data.
+   * @return array
+   */
+  protected function getCurrentData() {
+    return $this->key() > $this->count() ? null : $this->dao->getData(array($this->keyName=>$this->keyList[$this->key() - 1]));
   }
 
 }

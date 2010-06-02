@@ -35,15 +35,6 @@ abstract class DaoResultIterator implements Iterator {
    */
   protected $dao = false;
 
-
-  /**
-   * Contains the data of the current set.
-   *
-   * @var array
-   */
-  protected $currentData;
-
-
   /**
    * The number of rows
    *
@@ -84,9 +75,15 @@ abstract class DaoResultIterator implements Iterator {
    */
   public function current() {
     if (!$this->valid()) return null;
-    $dataObject = $this->dao->getObjectFromData($this->currentData);
+    $dataObject = $this->dao->getObjectFromData($this->getCurrentData());
     return $this->returnDataObjectsAsArray ? $dataObject->getArray() : $dataObject;
   }
+
+  /**
+   * Returns the data of the current iteration
+   * @return array
+   */
+  abstract protected function getCurrentData();
 
 
   /**
@@ -106,7 +103,7 @@ abstract class DaoResultIterator implements Iterator {
    * @return bool
    */
   public function valid() {
-    return ($this->currentData != false);
+    return $this->key() <= $this->count();
   }
 
   /**

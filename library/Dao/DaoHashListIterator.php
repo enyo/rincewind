@@ -54,13 +54,20 @@ class DaoHashListIterator extends DaoResultIterator {
 
 
   /**
-   * Set the pointer to the next row, and fetches the data to return in current.
+   * Set the pointer to the next row.
    * @return SqlResultIterator Returns itself for chaining.
    */
   public function next() {
     $this->currentKey ++;
-    $this->currentData = $this->currentKey > $this->length ? null : $this->hashList[$this->currentKey - 1];
     return $this;
+  }
+
+  /**
+   * Fetches the current data.
+   * @return array
+   */
+  protected function getCurrentData() {
+    return $this->key() > $this->count() ? null : $this->hashList[$this->key() - 1];
   }
 
 }

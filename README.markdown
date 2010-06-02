@@ -61,6 +61,18 @@ The submitted data could look like this:
 
     { "id": 4, "username": "Joe", "address_id": 3, "address": { "id": 3, "street": "Somethinglane 3" }}
 
+This works for chained references too of course!
+This would be the most direct way to access the country name of the user with username 'Billy' if you had 4 tables: users, addresses, cities and countries, and they were all joined:
+
+    <?php
+    $countryName = $userDao->get()->set('username', 'Billy')
+      ->load() // Actually loads the entry from the database. (Throws an exception if it's not found)
+      ->address // Makes the join between users.address_id and the addresses.id
+      ->city // Makes the join between addresses.city_id and cities.id
+      ->country // Makes the join between cities.country_id and countries.id
+      ->name; // Reads the name attribute of country.
+    ?>
+
 
 
 Daos support import/export definitions (so you can rename table columns the way you like them in your php script), escape all values correctly, and check for the correct values when setting them.

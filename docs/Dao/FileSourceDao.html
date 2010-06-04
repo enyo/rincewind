@@ -46,7 +46,7 @@
       	  <div class="package">
 			<a href="../Dao/_Dao---Dao.php.html">		Dao.php
 		</a><br>
-			<a href="../Dao/_Dao---DaoColumnAssignment.php.html">		DaoColumnAssignment.php
+			<a href="../Dao/_Dao---DaoAttributeAssignment.php.html">		DaoAttributeAssignment.php
 		</a><br>
 			<a href="../Dao/_Dao---DaoHashListIterator.php.html">		DaoHashListIterator.php
 		</a><br>
@@ -120,7 +120,7 @@
             <b>Classes:</b><br />
         <div class="package">
 		    		<a href="../Dao/Dao.html">Dao</a><br />
-	    		<a href="../Dao/DaoColumnAssignment.html">DaoColumnAssignment</a><br />
+	    		<a href="../Dao/DaoAttributeAssignment.html">DaoAttributeAssignment</a><br />
 	    		<a href="../Dao/DaoHashListIterator.html">DaoHashListIterator</a><br />
 	    		<a href="../Dao/DaoKeyListIterator.html">DaoKeyListIterator</a><br />
 	    		<a href="../Dao/DaoReference.html">DaoReference</a><br />
@@ -202,13 +202,14 @@ Source Location: /Dao/FileSourceDao.php<br /><br />
     <li><a href="../Dao/FileSourceDao.html#methodbeginTransaction">beginTransaction</a></li>
     <li><a href="../Dao/FileSourceDao.html#methodcommit">commit</a></li>
     <li><a href="../Dao/FileSourceDao.html#methodconvertRemoteValueToTimestamp">convertRemoteValueToTimestamp</a></li>
+    <li><a href="../Dao/FileSourceDao.html#methodcreateDao">createDao</a></li>
     <li><a href="../Dao/FileSourceDao.html#methodcreateIterator">createIterator</a></li>
     <li><a href="../Dao/FileSourceDao.html#methoddelete">delete</a></li>
-    <li><a href="../Dao/FileSourceDao.html#methodescapeColumn">escapeColumn</a></li>
-    <li><a href="../Dao/FileSourceDao.html#methodescapeTable">escapeTable</a></li>
-    <li><a href="../Dao/FileSourceDao.html#methodexportColumn">exportColumn</a></li>
+    <li><a href="../Dao/FileSourceDao.html#methodescapeAttributeName">escapeAttributeName</a></li>
+    <li><a href="../Dao/FileSourceDao.html#methodescapeResourceName">escapeResourceName</a></li>
+    <li><a href="../Dao/FileSourceDao.html#methodexportAttributeName">exportAttributeName</a></li>
     <li><a href="../Dao/FileSourceDao.html#methodexportMap">exportMap</a></li>
-    <li><a href="../Dao/FileSourceDao.html#methodexportTable">exportTable</a></li>
+    <li><a href="../Dao/FileSourceDao.html#methodexportResourceName">exportResourceName</a></li>
     <li><a href="../Dao/FileSourceDao.html#methodfind">find</a></li>
     <li><a href="../Dao/FileSourceDao.html#methodgenerateSortString">generateSortString</a></li>
     <li><a href="../Dao/FileSourceDao.html#methodgetData">getData</a></li>
@@ -366,25 +367,25 @@ Source Location: /Dao/FileSourceDao.php<br /><br />
 <h4>Class: <a href="../Dao/Dao.html">Dao</a></h4>
 <dl>
 <dt>
-  <a href="../Dao/Dao.html#var$additionalColumnTypes">Dao::$additionalColumnTypes</a>
+  <a href="../Dao/Dao.html#var$additionalAttributes">Dao::$additionalAttributes</a>
   </dt>
 <dd>
    
 </dd>
 <dt>
-  <a href="../Dao/Dao.html#var$columnExportMapping">Dao::$columnExportMapping</a>
+  <a href="../Dao/Dao.html#var$attributeExportMapping">Dao::$attributeExportMapping</a>
   </dt>
 <dd>
    
 </dd>
 <dt>
-  <a href="../Dao/Dao.html#var$columnImportMapping">Dao::$columnImportMapping</a>
+  <a href="../Dao/Dao.html#var$attributeImportMapping">Dao::$attributeImportMapping</a>
   </dt>
 <dd>
    
 </dd>
 <dt>
-  <a href="../Dao/Dao.html#var$columnTypes">Dao::$columnTypes</a>
+  <a href="../Dao/Dao.html#var$attributes">Dao::$attributes</a>
   </dt>
 <dd>
    
@@ -396,7 +397,7 @@ Source Location: /Dao/FileSourceDao.php<br /><br />
    
 </dd>
 <dt>
-  <a href="../Dao/Dao.html#var$defaultValueColumns">Dao::$defaultValueColumns</a>
+  <a href="../Dao/Dao.html#var$defaultValueAttributes">Dao::$defaultValueAttributes</a>
   </dt>
 <dd>
    
@@ -408,7 +409,7 @@ Source Location: /Dao/FileSourceDao.php<br /><br />
    
 </dd>
 <dt>
-  <a href="../Dao/Dao.html#var$nullColumns">Dao::$nullColumns</a>
+  <a href="../Dao/Dao.html#var$nullAttributes">Dao::$nullAttributes</a>
   </dt>
 <dd>
    
@@ -420,7 +421,7 @@ Source Location: /Dao/FileSourceDao.php<br /><br />
    
 </dd>
 <dt>
-  <a href="../Dao/Dao.html#var$tableName">Dao::$tableName</a>
+  <a href="../Dao/Dao.html#var$resourceName">Dao::$resourceName</a>
   </dt>
 <dd>
    
@@ -477,28 +478,34 @@ Source Location: /Dao/FileSourceDao.php<br /><br />
     If you have to do stuff after an update, overwrite this function.
   </dd>
     <dt>
-    <a href="../Dao/Dao.html#methodapplyColumnExportMapping">Dao::applyColumnExportMapping()</a>
+    <a href="../Dao/Dao.html#methodapplyAttributeExportMapping">Dao::applyAttributeExportMapping()</a>
   </dt>
   <dd>
-    Takes a column and sees if there is an import/export mapping for it.
+    Takes an attributeName and sees if there is an import/export mapping for it.
   </dd>
     <dt>
-    <a href="../Dao/Dao.html#methodapplyColumnImportMapping">Dao::applyColumnImportMapping()</a>
+    <a href="../Dao/Dao.html#methodapplyAttributeImportMapping">Dao::applyAttributeImportMapping()</a>
   </dt>
   <dd>
-    Takes a column and sees if there is an import/export mapping for it.
+    Takes an attributeName and sees if there is an import/export mapping for it.
   </dd>
     <dt>
-    <a href="../Dao/Dao.html#methodcolumnExists">Dao::columnExists()</a>
+    <a href="../Dao/Dao.html#methodattributeExists">Dao::attributeExists()</a>
   </dt>
   <dd>
-    Checks if a column name exists as real or additional column.
+    Checks if a attribute name exists as real or additional attribute.
   </dd>
     <dt>
     <a href="../Dao/Dao.html#methodconvertRemoteValueToTimestamp">Dao::convertRemoteValueToTimestamp()</a>
   </dt>
   <dd>
-    Converts a database value to a timestamp.
+    Converts a datasource value to a timestamp.
+  </dd>
+    <dt>
+    <a href="../Dao/Dao.html#methodcreateDao">Dao::createDao()</a>
+  </dt>
+  <dd>
+    Creates a Dao.
   </dd>
     <dt>
     <a href="../Dao/Dao.html#methoddebug">Dao::debug()</a>
@@ -513,16 +520,16 @@ Source Location: /Dao/FileSourceDao.php<br /><br />
     Gets the object by id and deletes it.
   </dd>
     <dt>
+    <a href="../Dao/Dao.html#methodexportAttributeName">Dao::exportAttributeName()</a>
+  </dt>
+  <dd>
+    Has to determine the correct attributeName (with import/export mappings), escape and quote it.
+  </dd>
+    <dt>
     <a href="../Dao/Dao.html#methodexportBool">Dao::exportBool()</a>
   </dt>
   <dd>
     
-  </dd>
-    <dt>
-    <a href="../Dao/Dao.html#methodexportColumn">Dao::exportColumn()</a>
-  </dt>
-  <dd>
-    Has to determine the correct column (with import/export mappings), escape and quote it.
   </dd>
     <dt>
     <a href="../Dao/Dao.html#methodexportDate">Dao::exportDate()</a>
@@ -555,16 +562,16 @@ Source Location: /Dao/FileSourceDao.php<br /><br />
     
   </dd>
     <dt>
+    <a href="../Dao/Dao.html#methodexportResourceName">Dao::exportResourceName()</a>
+  </dt>
+  <dd>
+    Escapes and quotes a resource name.
+  </dd>
+    <dt>
     <a href="../Dao/Dao.html#methodexportString">Dao::exportString()</a>
   </dt>
   <dd>
     If your strings need quoting, do that in here.
-  </dd>
-    <dt>
-    <a href="../Dao/Dao.html#methodexportTable">Dao::exportTable()</a>
-  </dt>
-  <dd>
-    Escapes and quotes a table name.
   </dd>
     <dt>
     <a href="../Dao/Dao.html#methodexportValue">Dao::exportValue()</a>
@@ -576,7 +583,7 @@ Source Location: /Dao/FileSourceDao.php<br /><br />
     <a href="../Dao/Dao.html#methodgenerateInsertArrays">Dao::generateInsertArrays()</a>
   </dt>
   <dd>
-    Returns the arrays containing the columns, and values to perform an insert.
+    Returns the arrays containing the attributes, and values to perform an insert.
   </dd>
     <dt>
     <a href="../Dao/Dao.html#methodgenerateSortString">Dao::generateSortString()</a>
@@ -591,10 +598,10 @@ Source Location: /Dao/FileSourceDao.php<br /><br />
     Calls find() and throws an error if null is returned, otherwise it just passes the DataObject  If you call get() without parameters, a &quot;raw object&quot; will be returned, containing  only default values, and null as id.
   </dd>
     <dt>
-    <a href="../Dao/Dao.html#methodgetAdditionalColumnTypes">Dao::getAdditionalColumnTypes()</a>
+    <a href="../Dao/Dao.html#methodgetAdditionalAttributes">Dao::getAdditionalAttributes()</a>
   </dt>
   <dd>
-    Returns the additional column types array
+    Returns the additional attribute types array
   </dd>
     <dt>
     <a href="../Dao/Dao.html#methodgetAll">Dao::getAll()</a>
@@ -609,28 +616,28 @@ Source Location: /Dao/FileSourceDao.php<br /><br />
     
   </dd>
     <dt>
+    <a href="../Dao/Dao.html#methodgetAttributes">Dao::getAttributes()</a>
+  </dt>
+  <dd>
+    Returns the attributes array
+  </dd>
+    <dt>
     <a href="../Dao/Dao.html#methodgetById">Dao::getById()</a>
   </dt>
   <dd>
     This is a wrapper for get() and the id as parameter.
   </dd>
     <dt>
-    <a href="../Dao/Dao.html#methodgetColumnTypes">Dao::getColumnTypes()</a>
+    <a href="../Dao/Dao.html#methodgetDefaultValueAttributes">Dao::getDefaultValueAttributes()</a>
   </dt>
   <dd>
-    Returns the column types array
+    Returns the default value attributes
   </dd>
     <dt>
-    <a href="../Dao/Dao.html#methodgetDefaultValueColumns">Dao::getDefaultValueColumns()</a>
+    <a href="../Dao/Dao.html#methodgetNullAttributes">Dao::getNullAttributes()</a>
   </dt>
   <dd>
-    Returns the default value columns
-  </dd>
-    <dt>
-    <a href="../Dao/Dao.html#methodgetNullColumns">Dao::getNullColumns()</a>
-  </dt>
-  <dd>
-    Returns the null columns
+    Returns the null attributes
   </dd>
     <dt>
     <a href="../Dao/Dao.html#methodgetObjectFromData">Dao::getObjectFromData()</a>
@@ -648,7 +655,7 @@ Source Location: /Dao/FileSourceDao.php<br /><br />
     <a href="../Dao/Dao.html#methodgetRawObject">Dao::getRawObject()</a>
   </dt>
   <dd>
-    Returns an object with all columns defined, but only set if necessary.
+    Returns an object with all attributes defined, but only set if necessary.
   </dd>
     <dt>
     <a href="../Dao/Dao.html#methodgetReference">Dao::getReference()</a>
@@ -657,28 +664,22 @@ Source Location: /Dao/FileSourceDao.php<br /><br />
     Returns the DataObject for a specific reference.
   </dd>
     <dt>
-    <a href="../Dao/Dao.html#methodgetReferenceDao">Dao::getReferenceDao()</a>
-  </dt>
-  <dd>
-    Returns the Dao for a DaoReference.
-  </dd>
-    <dt>
     <a href="../Dao/Dao.html#methodgetReferences">Dao::getReferences()</a>
   </dt>
   <dd>
     
   </dd>
     <dt>
+    <a href="../Dao/Dao.html#methodimportAttributeName">Dao::importAttributeName()</a>
+  </dt>
+  <dd>
+    Converts the datasource attributeName name to a valid php name.
+  </dd>
+    <dt>
     <a href="../Dao/Dao.html#methodimportBool">Dao::importBool()</a>
   </dt>
   <dd>
     This function tries to convert strings integers and stuff into a bool.
-  </dd>
-    <dt>
-    <a href="../Dao/Dao.html#methodimportColumn">Dao::importColumn()</a>
-  </dt>
-  <dd>
-    Converts the database column name to a valid php name.
   </dd>
     <dt>
     <a href="../Dao/Dao.html#methodimportDate">Dao::importDate()</a>
@@ -705,6 +706,12 @@ Source Location: /Dao/FileSourceDao.php<br /><br />
     Simple PHP conversion.
   </dd>
     <dt>
+    <a href="../Dao/Dao.html#methodimportSequence">Dao::importSequence()</a>
+  </dt>
+  <dd>
+    This makes sure the sequence is an array
+  </dd>
+    <dt>
     <a href="../Dao/Dao.html#methodimportString">Dao::importString()</a>
   </dt>
   <dd>
@@ -714,7 +721,7 @@ Source Location: /Dao/FileSourceDao.php<br /><br />
     <a href="../Dao/Dao.html#methodimportValue">Dao::importValue()</a>
   </dt>
   <dd>
-    Imports an external value (either from database, or xml, etc...) into an expected PHP variable.
+    Imports an external value (either from datasource, or xml, etc...) into an expected PHP variable.
   </dd>
     <dt>
     <a href="../Dao/Dao.html#methodinterpretMap">Dao::interpretMap()</a>
@@ -744,13 +751,13 @@ Source Location: /Dao/FileSourceDao.php<br /><br />
     <a href="../Dao/Dao.html#methodnotNull">Dao::notNull()</a>
   </dt>
   <dd>
-    Returns true if the column can not be null.
+    Returns true if the attribute can not be null.
   </dd>
     <dt>
     <a href="../Dao/Dao.html#methodprepareDataForObject">Dao::prepareDataForObject()</a>
   </dt>
   <dd>
-    Goes through the data array returned from the database, and converts the values that are necessary.
+    Goes through the data array returned from the datasource, and converts the values that are necessary.
   </dd>
     <dt>
     <a href="../Dao/Dao.html#methodsetLogger">Dao::setLogger()</a>
@@ -855,10 +862,10 @@ The FileSourceDao is used to get a file somewhere, interpret it and act as a nor
 		<code>FileSourceDao __construct(
 <a href="../DataSource/FileDataSource.html">FileDataSource</a>
 $fileDataSource, [string
-$tableName = null], [array
-$columnTypes = null], [array
-$nullColumns = null], [array
-$defaultColumns = null])</code>
+$resourceName = null], [array
+$attributes = null], [array
+$nullAttributes = null], [array
+$defaultValueAttributes = null])</code>
     </td></tr></table>
     </td></tr></table><br />
 	
@@ -884,22 +891,22 @@ $defaultColumns = null])</code>
       </tr>
           <tr>
         <td class="type">string&nbsp;&nbsp;</td>
-        <td><b>$tableName</b>&nbsp;&nbsp;</td>
+        <td><b>$resourceName</b>&nbsp;&nbsp;</td>
         <td>You can specify this as an attribute when writing a Dao implementation</td>
       </tr>
           <tr>
         <td class="type">array&nbsp;&nbsp;</td>
-        <td><b>$columnTypes</b>&nbsp;&nbsp;</td>
+        <td><b>$attributes</b>&nbsp;&nbsp;</td>
         <td>You can specify this as an attribute when writing a Dao implementation</td>
       </tr>
           <tr>
         <td class="type">array&nbsp;&nbsp;</td>
-        <td><b>$nullColumns</b>&nbsp;&nbsp;</td>
+        <td><b>$nullAttributes</b>&nbsp;&nbsp;</td>
         <td>You can specify this as an attribute when writing a Dao implementation</td>
       </tr>
           <tr>
         <td class="type">array&nbsp;&nbsp;</td>
-        <td><b>$defaultColumns</b>&nbsp;&nbsp;</td>
+        <td><b>$defaultValueAttributes</b>&nbsp;&nbsp;</td>
         <td>You can specify this as an attribute when writing a Dao implementation</td>
       </tr>
         </table>
@@ -908,7 +915,7 @@ $defaultColumns = null])</code>
   </div>
   <hr />
 	<a name="methodbeginTransaction"></a>
-	<h3>method beginTransaction <span class="smalllinenumber">[line 73]</span></h3>
+	<h3>method beginTransaction <span class="smalllinenumber">[line 86]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -933,7 +940,7 @@ $defaultColumns = null])</code>
   </div>
   <hr />
 	<a name="methodcommit"></a>
-	<h3>method commit <span class="smalllinenumber">[line 78]</span></h3>
+	<h3>method commit <span class="smalllinenumber">[line 91]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -958,7 +965,7 @@ $defaultColumns = null])</code>
   </div>
   <hr />
 	<a name="methodconvertRemoteValueToTimestamp"></a>
-	<h3>method convertRemoteValueToTimestamp <span class="smalllinenumber">[line 67]</span></h3>
+	<h3>method convertRemoteValueToTimestamp <span class="smalllinenumber">[line 80]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -980,7 +987,7 @@ $withTime)</code>
 </div>
 <br /><br />
 
-	Overrides <a href="../Dao/Dao.html#methodconvertRemoteValueToTimestamp">Dao::convertRemoteValueToTimestamp()</a> (Converts a database value to a timestamp.)<br /><br />
+	Overrides <a href="../Dao/Dao.html#methodconvertRemoteValueToTimestamp">Dao::convertRemoteValueToTimestamp()</a> (Converts a datasource value to a timestamp.)<br /><br />
         <h4>Parameters:</h4>
     <div class="tags">
     <table border="0" cellspacing="0" cellpadding="0">
@@ -999,8 +1006,44 @@ $withTime)</code>
         <div class="top">[ <a href="#top">Top</a> ]</div>
   </div>
   <hr />
+	<a name="methodcreateDao"></a>
+	<h3>method createDao <span class="smalllinenumber">[line 61]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code><a href="../Dao/FileSourceDao.html">FileSourceDao</a> createDao(
+string
+$daoClassName)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Creates a Dao.<br /><br /><p>You probably want to overwrite this method in your daos to use your implementation of instantiating Daos.</p><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	Overrides <a href="../Dao/Dao.html#methodcreateDao">Dao::createDao()</a> (Creates a Dao.)<br /><br />
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">string&nbsp;&nbsp;</td>
+        <td><b>$daoClassName</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
 	<a name="methodcreateIterator"></a>
-	<h3>method createIterator <span class="smalllinenumber">[line 59]</span></h3>
+	<h3>method createIterator <span class="smalllinenumber">[line 72]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1049,7 +1092,7 @@ $data)</code>
   </div>
   <hr />
 	<a name="methoddelete"></a>
-	<h3>method delete <span class="smalllinenumber">[line 209]</span></h3>
+	<h3>method delete <span class="smalllinenumber">[line 222]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1084,14 +1127,14 @@ $object)</code>
         <div class="top">[ <a href="#top">Top</a> ]</div>
   </div>
   <hr />
-	<a name="methodescapeColumn"></a>
-	<h3>method escapeColumn <span class="smalllinenumber">[line 308]</span></h3>
+	<a name="methodescapeAttributeName"></a>
+	<h3>method escapeAttributeName <span class="smalllinenumber">[line 319]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
-		<code>string escapeColumn(
+		<code>string escapeAttributeName(
 string
-$column)</code>
+$attributeName)</code>
     </td></tr></table>
     </td></tr></table><br />
 	
@@ -1112,7 +1155,7 @@ $column)</code>
     <table border="0" cellspacing="0" cellpadding="0">
           <tr>
         <td class="type">string&nbsp;&nbsp;</td>
-        <td><b>$column</b>&nbsp;&nbsp;</td>
+        <td><b>$attributeName</b>&nbsp;&nbsp;</td>
         <td></td>
       </tr>
         </table>
@@ -1120,14 +1163,14 @@ $column)</code>
         <div class="top">[ <a href="#top">Top</a> ]</div>
   </div>
   <hr />
-	<a name="methodescapeTable"></a>
-	<h3>method escapeTable <span class="smalllinenumber">[line 329]</span></h3>
+	<a name="methodescapeResourceName"></a>
+	<h3>method escapeResourceName <span class="smalllinenumber">[line 340]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
-		<code>string escapeTable(
+		<code>string escapeResourceName(
 [string
-$table = null])</code>
+$resourceName = null])</code>
     </td></tr></table>
     </td></tr></table><br />
 	
@@ -1148,7 +1191,7 @@ $table = null])</code>
     <table border="0" cellspacing="0" cellpadding="0">
           <tr>
         <td class="type">string&nbsp;&nbsp;</td>
-        <td><b>$table</b>&nbsp;&nbsp;</td>
+        <td><b>$resourceName</b>&nbsp;&nbsp;</td>
         <td></td>
       </tr>
         </table>
@@ -1156,18 +1199,18 @@ $table = null])</code>
         <div class="top">[ <a href="#top">Top</a> ]</div>
   </div>
   <hr />
-	<a name="methodexportColumn"></a>
-	<h3>method exportColumn <span class="smalllinenumber">[line 297]</span></h3>
+	<a name="methodexportAttributeName"></a>
+	<h3>method exportAttributeName <span class="smalllinenumber">[line 308]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
-		<code>string exportColumn(
+		<code>string exportAttributeName(
 string
-$column)</code>
+$attributeName)</code>
     </td></tr></table>
     </td></tr></table><br />
 	
-		Takes a php column name, converts it via import/export column mapping and calls escapeColumn.<br /><br /><p>This is the correct way to insert column names in a map.</p><br /><br /><br />
+		Takes a php attribute name, converts it via import/export attribute mapping and calls escapeAttributeName.<br /><br /><p>This is the correct way to insert attribute names in a map.</p><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
@@ -1178,13 +1221,13 @@ $column)</code>
 </div>
 <br /><br />
 
-	Overrides <a href="../Dao/Dao.html#methodexportColumn">Dao::exportColumn()</a> (Has to determine the correct column (with import/export mappings), escape and quote it.)<br /><br />
+	Overrides <a href="../Dao/Dao.html#methodexportAttributeName">Dao::exportAttributeName()</a> (Has to determine the correct attributeName (with import/export mappings), escape and quote it.)<br /><br />
         <h4>Parameters:</h4>
     <div class="tags">
     <table border="0" cellspacing="0" cellpadding="0">
           <tr>
         <td class="type">string&nbsp;&nbsp;</td>
-        <td><b>$column</b>&nbsp;&nbsp;</td>
+        <td><b>$attributeName</b>&nbsp;&nbsp;</td>
         <td></td>
       </tr>
         </table>
@@ -1193,7 +1236,7 @@ $column)</code>
   </div>
   <hr />
 	<a name="methodexportMap"></a>
-	<h3>method exportMap <span class="smalllinenumber">[line 229]</span></h3>
+	<h3>method exportMap <span class="smalllinenumber">[line 242]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1224,30 +1267,30 @@ $map)</code>
           <tr>
         <td class="type">array|<a href="../Dao/DataObject/DataObject.html">DataObject</a>&nbsp;&nbsp;</td>
         <td><b>$map</b>&nbsp;&nbsp;</td>
-        <td>A map or DataObject containing the column assignments.</td>
+        <td>A map or DataObject containing the attributes.</td>
       </tr>
         </table>
     </div><br />
         <div class="top">[ <a href="#top">Top</a> ]</div>
   </div>
   <hr />
-	<a name="methodexportTable"></a>
-	<h3>method exportTable <span class="smalllinenumber">[line 319]</span></h3>
+	<a name="methodexportResourceName"></a>
+	<h3>method exportResourceName <span class="smalllinenumber">[line 330]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
-		<code>string exportTable(
+		<code>string exportResourceName(
 [string
-$table = null])</code>
+$resourceName = null])</code>
     </td></tr></table>
     </td></tr></table><br />
 	
-		Escapes a table name and potentially quotes a table name.<br /><br /><p>By default it simply calls escapeTable</p><br /><br /><br />
+		Escapes a resource name and potentially quotes a resource name.<br /><br /><p>By default it simply calls escapeResourceName</p><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
   <tr>
-    <td><b>return:</b>&nbsp;&nbsp;</td><td>The escaped and quoted table name.</td>
+    <td><b>return:</b>&nbsp;&nbsp;</td><td>The escaped and quoted resource name.</td>
   </tr>
   <tr>
     <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
@@ -1256,13 +1299,13 @@ $table = null])</code>
 </div>
 <br /><br />
 
-	Overrides <a href="../Dao/Dao.html#methodexportTable">Dao::exportTable()</a> (Escapes and quotes a table name.)<br /><br />
+	Overrides <a href="../Dao/Dao.html#methodexportResourceName">Dao::exportResourceName()</a> (Escapes and quotes a resource name.)<br /><br />
         <h4>Parameters:</h4>
     <div class="tags">
     <table border="0" cellspacing="0" cellpadding="0">
           <tr>
         <td class="type">string&nbsp;&nbsp;</td>
-        <td><b>$table</b>&nbsp;&nbsp;</td>
+        <td><b>$resourceName</b>&nbsp;&nbsp;</td>
         <td></td>
       </tr>
         </table>
@@ -1271,7 +1314,7 @@ $table = null])</code>
   </div>
   <hr />
 	<a name="methodfind"></a>
-	<h3>method find <span class="smalllinenumber">[line 105]</span></h3>
+	<h3>method find <span class="smalllinenumber">[line 118]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1279,7 +1322,7 @@ $table = null])</code>
 [array|<a href="../Dao/DataObject/DataObject.html">DataObject</a>
 $map = null], [bool
 $exportValues = true], [string
-$tableName = null])</code>
+$resourceName = null])</code>
     </td></tr></table>
     </td></tr></table><br />
 	
@@ -1301,17 +1344,17 @@ $tableName = null])</code>
           <tr>
         <td class="type">array|<a href="../Dao/DataObject/DataObject.html">DataObject</a>&nbsp;&nbsp;</td>
         <td><b>$map</b>&nbsp;&nbsp;</td>
-        <td>A map containing the column assignments.</td>
+        <td>A map containing the attributes.</td>
       </tr>
           <tr>
         <td class="type">bool&nbsp;&nbsp;</td>
         <td><b>$exportValues</b>&nbsp;&nbsp;</td>
-        <td>When you want to have complete control over the $map                            column names, you can set exportValues to false, so they                            won't be processed.                            WARNING: Be sure to escape them yourself if you do so.</td>
+        <td>When you want to have complete control over the $map                            attributes, you can set exportValues to false, so they                            won't be processed.                            WARNING: Be sure to escape them yourself if you do so.</td>
       </tr>
           <tr>
         <td class="type">string&nbsp;&nbsp;</td>
-        <td><b>$tableName</b>&nbsp;&nbsp;</td>
-        <td>You can specify a different table (most probably a view)                           to get data from.                           If not set, $this-&gt;viewName will be used if present; if not                           $this-&gt;tableName is used.</td>
+        <td><b>$resourceName</b>&nbsp;&nbsp;</td>
+        <td>You can specify a different resource (most probably a view)                           to get data from.                           If not set, $this-&gt;viewName will be used if present; if not                           $this-&gt;resourceName is used.</td>
       </tr>
         </table>
     </div><br />
@@ -1319,7 +1362,7 @@ $tableName = null])</code>
   </div>
   <hr />
 	<a name="methodgenerateSortString"></a>
-	<h3>method generateSortString <span class="smalllinenumber">[line 273]</span></h3>
+	<h3>method generateSortString <span class="smalllinenumber">[line 286]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1329,7 +1372,7 @@ $sort)</code>
     </td></tr></table>
     </td></tr></table><br />
 	
-		This method takes the $sort attribute and returns a typical 'order by ' SQL string.<br /><br /><p>If $sort is false then the $this-&gt;defaultSort is used if it exists.  The sort is passed to interpretSortVariable to get a valid column list.</p><br /><br /><br />
+		This method takes the $sort attribute and returns a typical 'order by ' SQL string.<br /><br /><p>If $sort is false then the $this-&gt;defaultSort is used if it exists.  The sort is passed to interpretSortVariable to get a valid attributes list.</p><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
@@ -1355,7 +1398,7 @@ $sort)</code>
   </div>
   <hr />
 	<a name="methodgetData"></a>
-	<h3>method getData <span class="smalllinenumber">[line 124]</span></h3>
+	<h3>method getData <span class="smalllinenumber">[line 137]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1363,7 +1406,7 @@ $sort)</code>
 array|<a href="../Dao/DataObject/DataObject.html">DataObject</a>
 $map, [bool
 $exportValues = true], [string
-$tableName = null])</code>
+$resourceName = null])</code>
     </td></tr></table>
     </td></tr></table><br />
 	
@@ -1403,7 +1446,7 @@ $tableName = null])</code>
       </tr>
           <tr>
         <td class="type">string&nbsp;&nbsp;</td>
-        <td><b>$tableName</b>&nbsp;&nbsp;</td>
+        <td><b>$resourceName</b>&nbsp;&nbsp;</td>
         <td></td>
       </tr>
         </table>
@@ -1437,7 +1480,7 @@ $tableName = null])</code>
   </div>
   <hr />
 	<a name="methodgetIterator"></a>
-	<h3>method getIterator <span class="smalllinenumber">[line 149]</span></h3>
+	<h3>method getIterator <span class="smalllinenumber">[line 162]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1448,7 +1491,7 @@ $sort = null], [int
 $offset = null], [int
 $limit = null], [bool
 $exportValues = true], [string
-$tableName = null])</code>
+$resourceName = null])</code>
     </td></tr></table>
     </td></tr></table><br />
 	
@@ -1497,7 +1540,7 @@ $tableName = null])</code>
       </tr>
           <tr>
         <td class="type">string&nbsp;&nbsp;</td>
-        <td><b>$tableName</b>&nbsp;&nbsp;</td>
+        <td><b>$resourceName</b>&nbsp;&nbsp;</td>
         <td></td>
       </tr>
         </table>
@@ -1506,7 +1549,7 @@ $tableName = null])</code>
   </div>
   <hr />
 	<a name="methodgetIteratorFromData"></a>
-	<h3>method getIteratorFromData <span class="smalllinenumber">[line 259]</span></h3>
+	<h3>method getIteratorFromData <span class="smalllinenumber">[line 272]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1542,7 +1585,7 @@ $data)</code>
   </div>
   <hr />
 	<a name="methodgetTotalCount"></a>
-	<h3>method getTotalCount <span class="smalllinenumber">[line 219]</span></h3>
+	<h3>method getTotalCount <span class="smalllinenumber">[line 232]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1551,7 +1594,7 @@ $data)</code>
     </td></tr></table>
     </td></tr></table><br />
 	
-		Returns the total row count in the table the Dao is assigned to.<br /><br /><br /><br />
+		Returns the total row count in the resource the Dao is assigned to.<br /><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
@@ -1567,7 +1610,7 @@ $data)</code>
   </div>
   <hr />
 	<a name="methodinsert"></a>
-	<h3>method insert <span class="smalllinenumber">[line 167]</span></h3>
+	<h3>method insert <span class="smalllinenumber">[line 180]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1606,7 +1649,7 @@ $object)</code>
   </div>
   <hr />
 	<a name="methodinterpretFileContent"></a>
-	<h3>method interpretFileContent <span class="smalllinenumber">[line 135]</span></h3>
+	<h3>method interpretFileContent <span class="smalllinenumber">[line 148]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1658,7 +1701,7 @@ $content)</code>
   </div>
   <hr />
 	<a name="methodrollback"></a>
-	<h3>method rollback <span class="smalllinenumber">[line 83]</span></h3>
+	<h3>method rollback <span class="smalllinenumber">[line 96]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1683,7 +1726,7 @@ $content)</code>
   </div>
   <hr />
 	<a name="methodupdate"></a>
-	<h3>method update <span class="smalllinenumber">[line 190]</span></h3>
+	<h3>method update <span class="smalllinenumber">[line 203]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">

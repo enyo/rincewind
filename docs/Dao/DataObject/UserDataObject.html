@@ -46,7 +46,7 @@
       	  <div class="package">
 			<a href="../../Dao/_Dao---Dao.php.html">		Dao.php
 		</a><br>
-			<a href="../../Dao/_Dao---DaoColumnAssignment.php.html">		DaoColumnAssignment.php
+			<a href="../../Dao/_Dao---DaoAttributeAssignment.php.html">		DaoAttributeAssignment.php
 		</a><br>
 			<a href="../../Dao/_Dao---DaoHashListIterator.php.html">		DaoHashListIterator.php
 		</a><br>
@@ -120,7 +120,7 @@
             <b>Classes:</b><br />
         <div class="package">
 		    		<a href="../../Dao/Dao.html">Dao</a><br />
-	    		<a href="../../Dao/DaoColumnAssignment.html">DaoColumnAssignment</a><br />
+	    		<a href="../../Dao/DaoAttributeAssignment.html">DaoAttributeAssignment</a><br />
 	    		<a href="../../Dao/DaoHashListIterator.html">DaoHashListIterator</a><br />
 	    		<a href="../../Dao/DaoKeyListIterator.html">DaoKeyListIterator</a><br />
 	    		<a href="../../Dao/DaoReference.html">DaoReference</a><br />
@@ -212,7 +212,7 @@ Source Location: /DataObject/UserDataObject.php<br /><br />
 <h4>Class: <a href="../../Dao/DataObject/DataObject.html">DataObject</a></h4>
 <dl>
 <dt>
-  <a href="../../Dao/DataObject/DataObject.html#var$changedColumns">DataObject::$changedColumns</a>
+  <a href="../../Dao/DataObject/DataObject.html#var$changedAttributes">DataObject::$changedAttributes</a>
   </dt>
 <dd>
    
@@ -257,22 +257,22 @@ Source Location: /DataObject/UserDataObject.php<br /><br />
     
   </dd>
     <dt>
-    <a href="../../Dao/DataObject/DataObject.html#methodconvertDbColumnToPhpName">DataObject::convertDbColumnToPhpName()</a>
+    <a href="../../Dao/DataObject/DataObject.html#methodconvertAttributeNameToDatasourceName">DataObject::convertAttributeNameToDatasourceName()</a>
   </dt>
   <dd>
-    Converts a db column name to the php name.
+    Converts a php attribute name to the datasource name.
+  </dd>
+    <dt>
+    <a href="../../Dao/DataObject/DataObject.html#methodconvertAttributeNameToPhpName">DataObject::convertAttributeNameToPhpName()</a>
+  </dt>
+  <dd>
+    Converts a datasource attribute name to the php name.
   </dd>
     <dt>
     <a href="../../Dao/DataObject/DataObject.html#methodconvertGetMethodToPhpColumn">DataObject::convertGetMethodToPhpColumn()</a>
   </dt>
   <dd>
     
-  </dd>
-    <dt>
-    <a href="../../Dao/DataObject/DataObject.html#methodconvertPhpNameToDbColumn">DataObject::convertPhpNameToDbColumn()</a>
-  </dt>
-  <dd>
-    Converts a php column name to the db name.
   </dd>
     <dt>
     <a href="../../Dao/DataObject/DataObject.html#methodconvertSetMethodToPhpColumn">DataObject::convertSetMethodToPhpColumn()</a>
@@ -299,22 +299,22 @@ Source Location: /DataObject/UserDataObject.php<br /><br />
     Returns an associative array with the values.
   </dd>
     <dt>
-    <a href="../../Dao/DataObject/DataObject.html#methodgetChangedColumns">DataObject::getChangedColumns()</a>
+    <a href="../../Dao/DataObject/DataObject.html#methodgetAttributeType">DataObject::getAttributeType()</a>
   </dt>
   <dd>
-    Returns an array of all columns that have been explicitly set. The indices are the column names
+    Returns the type of the attribute defined in the Dao.
+  </dd>
+    <dt>
+    <a href="../../Dao/DataObject/DataObject.html#methodgetChangedAttributes">DataObject::getChangedAttributes()</a>
+  </dt>
+  <dd>
+    Returns an array of all attributes that have been explicitly set. The indices are the attribute names
   </dd>
     <dt>
     <a href="../../Dao/DataObject/DataObject.html#methodgetChangedValues">DataObject::getChangedValues()</a>
   </dt>
   <dd>
-    Returns an array of all values that have been explicitly set. The indices are the column names.
-  </dd>
-    <dt>
-    <a href="../../Dao/DataObject/DataObject.html#methodgetColumnType">DataObject::getColumnType()</a>
-  </dt>
-  <dd>
-    Returns the type of the column defined in the Dao.
+    Returns an array of all values that have been explicitly set. The indices are the attribute names.
   </dd>
     <dt>
     <a href="../../Dao/DataObject/DataObject.html#methodgetDao">DataObject::getDao()</a>
@@ -327,12 +327,6 @@ Source Location: /DataObject/UserDataObject.php<br /><br />
   </dt>
   <dd>
     You should NEVER use this function your app.
-  </dd>
-    <dt>
-    <a href="../../Dao/DataObject/DataObject.html#methodgetValue">DataObject::getValue()</a>
-  </dt>
-  <dd>
-    
   </dd>
     <dt>
     <a href="../../Dao/DataObject/DataObject.html#methodload">DataObject::load()</a>
@@ -356,7 +350,7 @@ Source Location: /DataObject/UserDataObject.php<br /><br />
     <a href="../../Dao/DataObject/DataObject.html#methodsetData">DataObject::setData()</a>
   </dt>
   <dd>
-    Sets a new data array, and resets the changedColumns array.
+    Sets a new data array, and resets the changedAttributes array.
   </dd>
     <dt>
     <a href="../../Dao/DataObject/DataObject.html#methodsetDirectly">DataObject::setDirectly()</a>
@@ -366,12 +360,6 @@ Source Location: /DataObject/UserDataObject.php<br /><br />
   </dd>
     <dt>
     <a href="../../Dao/DataObject/DataObject.html#methodsetExistsInDatabase">DataObject::setExistsInDatabase()</a>
-  </dt>
-  <dd>
-    
-  </dd>
-    <dt>
-    <a href="../../Dao/DataObject/DataObject.html#methodsetValue">DataObject::setValue()</a>
   </dt>
   <dd>
     

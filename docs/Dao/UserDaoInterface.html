@@ -46,7 +46,7 @@
       	  <div class="package">
 			<a href="../Dao/_Dao---Dao.php.html">		Dao.php
 		</a><br>
-			<a href="../Dao/_Dao---DaoColumnAssignment.php.html">		DaoColumnAssignment.php
+			<a href="../Dao/_Dao---DaoAttributeAssignment.php.html">		DaoAttributeAssignment.php
 		</a><br>
 			<a href="../Dao/_Dao---DaoHashListIterator.php.html">		DaoHashListIterator.php
 		</a><br>
@@ -120,7 +120,7 @@
             <b>Classes:</b><br />
         <div class="package">
 		    		<a href="../Dao/Dao.html">Dao</a><br />
-	    		<a href="../Dao/DaoColumnAssignment.html">DaoColumnAssignment</a><br />
+	    		<a href="../Dao/DaoAttributeAssignment.html">DaoAttributeAssignment</a><br />
 	    		<a href="../Dao/DaoHashListIterator.html">DaoHashListIterator</a><br />
 	    		<a href="../Dao/DaoKeyListIterator.html">DaoKeyListIterator</a><br />
 	    		<a href="../Dao/DaoReference.html">DaoReference</a><br />
@@ -227,13 +227,13 @@ Source Location: /Dao/UserDaoInterface.php<br /><br />
     <a href="../Dao/DaoInterface.html#methoddelete">DaoInterface::delete()</a>
   </dt>
   <dd>
-    Takes a DataObject and delets it in the database. (Again the id is used)
+    Takes a DataObject and delets it in the datasource. (Again the id is used)
   </dd>
     <dt>
     <a href="../Dao/DaoInterface.html#methoddeleteById">DaoInterface::deleteById()</a>
   </dt>
   <dd>
-    Takes an id and deletes it in the database.
+    Takes an id and deletes it in the datasource.
   </dd>
     <dt>
     <a href="../Dao/DaoInterface.html#methodfind">DaoInterface::find()</a>
@@ -245,13 +245,13 @@ Source Location: /Dao/UserDaoInterface.php<br /><br />
     <a href="../Dao/DaoInterface.html#methodget">DaoInterface::get()</a>
   </dt>
   <dd>
-    This is the method to get a DataObject from the database.
+    This is the method to get a DataObject from the datasource.
   </dd>
     <dt>
-    <a href="../Dao/DaoInterface.html#methodgetAdditionalColumnTypes">DaoInterface::getAdditionalColumnTypes()</a>
+    <a href="../Dao/DaoInterface.html#methodgetAdditionalAttributes">DaoInterface::getAdditionalAttributes()</a>
   </dt>
   <dd>
-    Returns all the additional column types.
+    Returns all the additional attributes.
   </dd>
     <dt>
     <a href="../Dao/DaoInterface.html#methodgetAll">DaoInterface::getAll()</a>
@@ -260,16 +260,16 @@ Source Location: /Dao/UserDaoInterface.php<br /><br />
     Retrieves all rows
   </dd>
     <dt>
+    <a href="../Dao/DaoInterface.html#methodgetAttributes">DaoInterface::getAttributes()</a>
+  </dt>
+  <dd>
+    Returns all the attribute.
+  </dd>
+    <dt>
     <a href="../Dao/DaoInterface.html#methodgetById">DaoInterface::getById()</a>
   </dt>
   <dd>
     
-  </dd>
-    <dt>
-    <a href="../Dao/DaoInterface.html#methodgetColumnTypes">DaoInterface::getColumnTypes()</a>
-  </dt>
-  <dd>
-    Returns all the column types.
   </dd>
     <dt>
     <a href="../Dao/DaoInterface.html#methodgetData">DaoInterface::getData()</a>
@@ -284,16 +284,16 @@ Source Location: /Dao/UserDaoInterface.php<br /><br />
     The same as get, but returns an iterator to go through all the rows.
   </dd>
     <dt>
-    <a href="../Dao/DaoInterface.html#methodgetNullColumns">DaoInterface::getNullColumns()</a>
+    <a href="../Dao/DaoInterface.html#methodgetNullAttributes">DaoInterface::getNullAttributes()</a>
   </dt>
   <dd>
-    Returns all the column that can be null.
+    Returns all the attributes that can be null.
   </dd>
     <dt>
     <a href="../Dao/DaoInterface.html#methodgetObjectFromData">DaoInterface::getObjectFromData()</a>
   </dt>
   <dd>
-    Returns an object filled with an array of database values.
+    Returns an object filled with an array of datasource values.
   </dd>
     <dt>
     <a href="../Dao/DaoInterface.html#methodgetTotalCount">DaoInterface::getTotalCount()</a>
@@ -305,7 +305,7 @@ Source Location: /Dao/UserDaoInterface.php<br /><br />
     <a href="../Dao/DaoInterface.html#methodinsert">DaoInterface::insert()</a>
   </dt>
   <dd>
-    Takes a DataObject and inserts it in the database.
+    Takes a DataObject and inserts it in the datasource.
   </dd>
     <dt>
     <a href="../Dao/DaoInterface.html#methodrollback">DaoInterface::rollback()</a>
@@ -317,7 +317,7 @@ Source Location: /Dao/UserDaoInterface.php<br /><br />
     <a href="../Dao/DaoInterface.html#methodupdate">DaoInterface::update()</a>
   </dt>
   <dd>
-    Takes a DataObject and updates it in the database.
+    Takes a DataObject and updates it in the datasource.
   </dd>
   </dl>
 </div>

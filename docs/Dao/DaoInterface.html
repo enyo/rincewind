@@ -46,7 +46,7 @@
       	  <div class="package">
 			<a href="../Dao/_Dao---Dao.php.html">		Dao.php
 		</a><br>
-			<a href="../Dao/_Dao---DaoColumnAssignment.php.html">		DaoColumnAssignment.php
+			<a href="../Dao/_Dao---DaoAttributeAssignment.php.html">		DaoAttributeAssignment.php
 		</a><br>
 			<a href="../Dao/_Dao---DaoHashListIterator.php.html">		DaoHashListIterator.php
 		</a><br>
@@ -120,7 +120,7 @@
             <b>Classes:</b><br />
         <div class="package">
 		    		<a href="../Dao/Dao.html">Dao</a><br />
-	    		<a href="../Dao/DaoColumnAssignment.html">DaoColumnAssignment</a><br />
+	    		<a href="../Dao/DaoAttributeAssignment.html">DaoAttributeAssignment</a><br />
 	    		<a href="../Dao/DaoHashListIterator.html">DaoHashListIterator</a><br />
 	    		<a href="../Dao/DaoKeyListIterator.html">DaoKeyListIterator</a><br />
 	    		<a href="../Dao/DaoReference.html">DaoReference</a><br />
@@ -196,13 +196,13 @@ Source Location: /Dao/DaoInterface.php<br /><br />
     <li><a href="../Dao/DaoInterface.html#methoddeleteById">deleteById</a></li>
     <li><a href="../Dao/DaoInterface.html#methodfind">find</a></li>
     <li><a href="../Dao/DaoInterface.html#methodget">get</a></li>
-    <li><a href="../Dao/DaoInterface.html#methodgetAdditionalColumnTypes">getAdditionalColumnTypes</a></li>
+    <li><a href="../Dao/DaoInterface.html#methodgetAdditionalAttributes">getAdditionalAttributes</a></li>
     <li><a href="../Dao/DaoInterface.html#methodgetAll">getAll</a></li>
+    <li><a href="../Dao/DaoInterface.html#methodgetAttributes">getAttributes</a></li>
     <li><a href="../Dao/DaoInterface.html#methodgetById">getById</a></li>
-    <li><a href="../Dao/DaoInterface.html#methodgetColumnTypes">getColumnTypes</a></li>
     <li><a href="../Dao/DaoInterface.html#methodgetData">getData</a></li>
     <li><a href="../Dao/DaoInterface.html#methodgetIterator">getIterator</a></li>
-    <li><a href="../Dao/DaoInterface.html#methodgetNullColumns">getNullColumns</a></li>
+    <li><a href="../Dao/DaoInterface.html#methodgetNullAttributes">getNullAttributes</a></li>
     <li><a href="../Dao/DaoInterface.html#methodgetObjectFromData">getObjectFromData</a></li>
     <li><a href="../Dao/DaoInterface.html#methodgetTotalCount">getTotalCount</a></li>
     <li><a href="../Dao/DaoInterface.html#methodinsert">insert</a></li>
@@ -323,7 +323,7 @@ $object)</code>
     </td></tr></table>
     </td></tr></table><br />
 	
-		Takes a DataObject and delets it in the database. (Again the id is used)<br /><br /><br /><br />
+		Takes a DataObject and delets it in the datasource. (Again the id is used)<br /><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
@@ -362,7 +362,7 @@ $id)</code>
     </td></tr></table>
     </td></tr></table><br />
 	
-		Takes an id and deletes it in the database.<br /><br /><br /><br />
+		Takes an id and deletes it in the datasource.<br /><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
@@ -396,7 +396,7 @@ $id)</code>
 [array|<a href="../Dao/DataObject/DataObject.html">DataObject</a>
 $map = null], [bool
 $exportValues = true], [string
-$tableName = null])</code>
+$resourceName = null])</code>
     </td></tr></table>
     </td></tr></table><br />
 	
@@ -430,7 +430,7 @@ $tableName = null])</code>
       </tr>
           <tr>
         <td class="type">string&nbsp;&nbsp;</td>
-        <td><b>$tableName</b>&nbsp;&nbsp;</td>
+        <td><b>$resourceName</b>&nbsp;&nbsp;</td>
         <td></td>
       </tr>
         </table>
@@ -447,11 +447,11 @@ $tableName = null])</code>
 [array|<a href="../Dao/DataObject/DataObject.html">DataObject</a>
 $map = null], [bool
 $exportValues = true], [string
-$tableName = null])</code>
+$resourceName = null])</code>
     </td></tr></table>
     </td></tr></table><br />
 	
-		This is the method to get a DataObject from the database.<br /><br /><p>If you want to select more objects, call getIterator.  If you call get() without parameters, a &quot;raw object&quot; will be returned, containing  only default values, and null as id.  If the entry is not found, an exception is thrown.</p><br /><br /><br />
+		This is the method to get a DataObject from the datasource.<br /><br /><p>If you want to select more objects, call getIterator.  If you call get() without parameters, a &quot;raw object&quot; will be returned, containing  only default values, and null as id.  If the entry is not found, an exception is thrown.</p><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
@@ -472,34 +472,34 @@ $tableName = null])</code>
           <tr>
         <td class="type">array|<a href="../Dao/DataObject/DataObject.html">DataObject</a>&nbsp;&nbsp;</td>
         <td><b>$map</b>&nbsp;&nbsp;</td>
-        <td>A map or DataObject containing the column assignments.</td>
+        <td>A map or DataObject containing the attributes.</td>
       </tr>
           <tr>
         <td class="type">bool&nbsp;&nbsp;</td>
         <td><b>$exportValues</b>&nbsp;&nbsp;</td>
-        <td>When you want to have complete control over the $map                            column names, you can set exportValues to false, so they                            won't be processed.                            WARNING: Be sure to escape them yourself if you do so.</td>
+        <td>When you want to have complete control over the $map                            attributes, you can set exportValues to false, so they                            won't be processed.                            WARNING: Be sure to escape them yourself if you do so.</td>
       </tr>
           <tr>
         <td class="type">string&nbsp;&nbsp;</td>
-        <td><b>$tableName</b>&nbsp;&nbsp;</td>
-        <td>You can specify a different table (most probably a view)                           to get data from.                           If not set, $this-&gt;viewName will be used if present; if not                           $this-&gt;tableName is used.</td>
+        <td><b>$resourceName</b>&nbsp;&nbsp;</td>
+        <td>You can specify a different resource (most probably a view)                           to get data from.                           If not set, $this-&gt;viewName will be used if present; if not                           $this-&gt;resourceName is used.</td>
       </tr>
         </table>
     </div><br />
         <div class="top">[ <a href="#top">Top</a> ]</div>
   </div>
   <hr />
-	<a name="methodgetAdditionalColumnTypes"></a>
-	<h3>method getAdditionalColumnTypes <span class="smalllinenumber">[line 155]</span></h3>
+	<a name="methodgetAdditionalAttributes"></a>
+	<h3>method getAdditionalAttributes <span class="smalllinenumber">[line 155]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
-		<code>array getAdditionalColumnTypes(
+		<code>array getAdditionalAttributes(
 )</code>
     </td></tr></table>
     </td></tr></table><br />
 	
-		Returns all the additional column types.<br /><br /><p>columnTypes is an associative array. Eg: array('parent_name'=&gt;Dao::STRING)</p><br /><br /><br />
+		Returns all the additional attributes.<br /><br /><p>additionalAttributes is an associative array. Eg: array('parent_name'=&gt;Dao::STRING)</p><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
@@ -525,6 +525,31 @@ $tableName = null])</code>
     </td></tr></table><br />
 	
 		Retrieves all rows<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodgetAttributes"></a>
+	<h3>method getAttributes <span class="smalllinenumber">[line 147]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>array getAttributes(
+)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Returns all the attribute.<br /><br /><p>attributes is an associative array. Eg: array('id'=&gt;Dao::INT)</p><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
@@ -575,31 +600,6 @@ $id)</code>
         <div class="top">[ <a href="#top">Top</a> ]</div>
   </div>
   <hr />
-	<a name="methodgetColumnTypes"></a>
-	<h3>method getColumnTypes <span class="smalllinenumber">[line 147]</span></h3>
-	<div class="function">
-    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
-    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
-		<code>array getColumnTypes(
-)</code>
-    </td></tr></table>
-    </td></tr></table><br />
-	
-		Returns all the column types.<br /><br /><p>columnTypes is an associative array. Eg: array('id'=&gt;Dao::INT)</p><br /><br /><br />
-<h4>Tags:</h4>
-<div class="tags">
-<table border="0" cellspacing="0" cellpadding="0">
-  <tr>
-    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
-  </tr>
-</table>
-</div>
-<br /><br />
-
-	
-        <div class="top">[ <a href="#top">Top</a> ]</div>
-  </div>
-  <hr />
 	<a name="methodgetData"></a>
 	<h3>method getData <span class="smalllinenumber">[line 65]</span></h3>
 	<div class="function">
@@ -609,7 +609,7 @@ $id)</code>
 array|<a href="../Dao/DataObject/DataObject.html">DataObject</a>
 $map, [bool
 $exportValues = true], [string
-$tableName = null])</code>
+$resourceName = null])</code>
     </td></tr></table>
     </td></tr></table><br />
 	
@@ -643,7 +643,7 @@ $tableName = null])</code>
       </tr>
           <tr>
         <td class="type">string&nbsp;&nbsp;</td>
-        <td><b>$tableName</b>&nbsp;&nbsp;</td>
+        <td><b>$resourceName</b>&nbsp;&nbsp;</td>
         <td></td>
       </tr>
         </table>
@@ -663,7 +663,7 @@ $sort = null], [int
 $offset = null], [int
 $limit = null], [bool
 $exportValues = true], [string
-$tableName = null])</code>
+$resourceName = null])</code>
     </td></tr></table>
     </td></tr></table><br />
 	
@@ -693,7 +693,7 @@ $tableName = null])</code>
           <tr>
         <td class="type">string|array&nbsp;&nbsp;</td>
         <td><b>$sort</b>&nbsp;&nbsp;</td>
-        <td>can be an array with ASCENDING values, or a map like                            this: array('login'=&gt;Dao::DESC), or simply a string                            containing the column. This value will be passed to                            generateSortString()</td>
+        <td>can be an array with ASCENDING values, or a map like                            this: array('login'=&gt;Dao::DESC), or simply a string                            containing the attributeName. This value will be passed to                            generateSortString()</td>
       </tr>
           <tr>
         <td class="type">int&nbsp;&nbsp;</td>
@@ -712,7 +712,7 @@ $tableName = null])</code>
       </tr>
           <tr>
         <td class="type">string&nbsp;&nbsp;</td>
-        <td><b>$tableName</b>&nbsp;&nbsp;</td>
+        <td><b>$resourceName</b>&nbsp;&nbsp;</td>
         <td></td>
       </tr>
         </table>
@@ -720,17 +720,17 @@ $tableName = null])</code>
         <div class="top">[ <a href="#top">Top</a> ]</div>
   </div>
   <hr />
-	<a name="methodgetNullColumns"></a>
-	<h3>method getNullColumns <span class="smalllinenumber">[line 163]</span></h3>
+	<a name="methodgetNullAttributes"></a>
+	<h3>method getNullAttributes <span class="smalllinenumber">[line 163]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
-		<code>array getNullColumns(
+		<code>array getNullAttributes(
 )</code>
     </td></tr></table>
     </td></tr></table><br />
 	
-		Returns all the column that can be null.<br /><br /><p>nullColumns is an associative array. Eg: array('id'=&gt;Dao::INT)</p><br /><br /><br />
+		Returns all the attributes that can be null.<br /><br /><p>nullAttributes is an array. Eg: array('email', 'title')</p><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
@@ -756,7 +756,7 @@ $data)</code>
     </td></tr></table>
     </td></tr></table><br />
 	
-		Returns an object filled with an array of database values.<br /><br /><p>(Typically this array comes from DatabaseResult::fetchArray())</p><br /><br /><br />
+		Returns an object filled with an array of datasource values.<br /><br /><p>(Typically this array comes from DatabaseResult::fetchArray())</p><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
@@ -817,7 +817,7 @@ $object)</code>
     </td></tr></table>
     </td></tr></table><br />
 	
-		Takes a DataObject and inserts it in the database.<br /><br /><br /><br />
+		Takes a DataObject and inserts it in the datasource.<br /><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
@@ -881,7 +881,7 @@ $object)</code>
     </td></tr></table>
     </td></tr></table><br />
 	
-		Takes a DataObject and updates it in the database.<br /><br /><p>Daos always take the id column to find the right row.</p><br /><br /><br />
+		Takes a DataObject and updates it in the datasource.<br /><br /><p>Daos always take the id attribute to find the right row.</p><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">

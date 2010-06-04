@@ -129,3 +129,4 @@ A simple example:
 `$myDao->getById(1)->set('name', 'Matthias')->save();`
 
 This would not be possible if getById() returned null.
+If you don't need chaining, but simply want to test if a row exists, use find() instead, which does the same as get, but returns null if nothing's found.

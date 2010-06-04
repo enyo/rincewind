@@ -103,7 +103,7 @@ But it's very easy to add implementations.
 
 This library is well tested.
 
-It contains over 40 test cases and over 200 tests.
+It contains over 50 test cases and over 300 tests.
 
 I'm using [snaptest](http://github.com/Jakobo/snaptest) for testing.
 

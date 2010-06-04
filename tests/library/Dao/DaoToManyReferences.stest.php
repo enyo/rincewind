@@ -16,7 +16,7 @@ class FakeDao extends NonAbstractDao {
     parent::__construct();
   }
 
-  protected $columnTypes = array('address_ids'=>Dao::SEQUENCE);
+  protected $attributes = array('address_ids'=>Dao::SEQUENCE);
 
   protected function setupReferences() {
     $this->addToManyReference('addresses', $this->mockDao, 'address_ids', 'THEFOREIGNKEY');
@@ -69,7 +69,7 @@ class FakeDaoWithHash extends NonAbstractDao {
     parent::__construct();
   }
 
-  protected $columnTypes = array('address_ids'=>Dao::SEQUENCE);
+  protected $attributes = array('address_ids'=>Dao::SEQUENCE);
 
   protected function setupReferences() {
     $this->addToManyReference('addresses', $this->mockDao);

@@ -26,9 +26,9 @@ interface DaoInterface {
    * only default values, and null as id.
    * If the entry is not found, an exception is thrown.
    *
-   * @param array|DataObject $map A map or DataObject containing the column assignments.
+   * @param array|DataObject $map A map or DataObject containing the attributes.
    * @param bool $exportValues When you want to have complete control over the $map
-   *                           column names, you can set exportValues to false, so they
+   *                           attributes, you can set exportValues to false, so they
    *                           won't be processed.
    *                           WARNING: Be sure to escape them yourself if you do so.
    * @param string $resourceName You can specify a different resource (most probably a view)
@@ -71,7 +71,7 @@ interface DaoInterface {
    * @param array $map
    * @param string|array $sort can be an array with ASCENDING values, or a map like
    *                           this: array('login'=>Dao::DESC), or simply a string 
-   *                           containing the column. This value will be passed to
+   *                           containing the attributeName. This value will be passed to
    *                           generateSortString()
    * @param int $offset 
    * @param int $limit 
@@ -103,7 +103,7 @@ interface DaoInterface {
 
   /**
    * Takes a DataObject and updates it in the datasource.
-   * Daos always take the id column to find the right row.
+   * Daos always take the id attribute to find the right row.
    * @see DataObject
    * @param DataObject
    */
@@ -139,28 +139,28 @@ interface DaoInterface {
   public function rollback();
 
   /**
-   * Returns all the column types.
-   * columnTypes is an associative array. Eg: array('id'=>Dao::INT)
+   * Returns all the attribute.
+   * attributes is an associative array. Eg: array('id'=>Dao::INT)
    *
    * @return array
    */
-  public function getColumnTypes();
+  public function getAttributes();
 
   /**
-   * Returns all the additional column types.
-   * columnTypes is an associative array. Eg: array('parent_name'=>Dao::STRING)
+   * Returns all the additional attributes.
+   * additionalAttributes is an associative array. Eg: array('parent_name'=>Dao::STRING)
    *
    * @return array
    */
-  public function getAdditionalColumnTypes();
+  public function getAdditionalAttributes();
 
   /**
-   * Returns all the column that can be null.
-   * nullColumns is an associative array. Eg: array('id'=>Dao::INT)
+   * Returns all the attributes that can be null.
+   * nullAttributes is an array. Eg: array('email', 'title')
    *
    * @return array
    */
-  public function getNullColumns();
+  public function getNullAttributes();
 
 
 

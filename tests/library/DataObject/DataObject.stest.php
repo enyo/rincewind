@@ -16,13 +16,13 @@ class DataObject_WithId_Test extends Snap_UnitTestCase {
 
   public function setUp() {
       $this->dao = $this->mock('DaoInterface')
-      ->setReturnValue('getColumnTypes', array('id'=>Dao::INT, 'integer'=>Dao::INT, 'time'=>Dao::TIMESTAMP, 'name'=>Dao::STRING, 'null_column'=>Dao::STRING, 'enum'=>array('a', 'b', 'c')))
-      ->setReturnValue('getNullColumns', array('null_column'))
+      ->setReturnValue('getAttributes', array('id'=>Dao::INT, 'integer'=>Dao::INT, 'time'=>Dao::TIMESTAMP, 'name'=>Dao::STRING, 'null_attribute'=>Dao::STRING, 'enum'=>array('a', 'b', 'c')))
+      ->setReturnValue('getNullAttributes', array('null_attribute'))
       ->listenTo('insert')
       ->listenTo('update')
       ->listenTo('delete')
       ->construct();
-    $this->dataObject = new DataObject(array('id'=>$this->testId, 'integer'=>$this->testInteger, 'time'=>$this->testTime, 'name'=>'matthias', 'null_column'=>null, 'additional_column_string'=>'ADDCOLUMNSTTT', 'enum'=>'b'), $this->dao, $existsInDatabase = true);
+    $this->dataObject = new DataObject(array('id'=>$this->testId, 'integer'=>$this->testInteger, 'time'=>$this->testTime, 'name'=>'matthias', 'null_attribute'=>null, 'additional_attribute_string'=>'ADDCOLUMNSTTT', 'enum'=>'b'), $this->dao, $existsInDatabase = true);
   }
 
   public function tearDown() {
@@ -49,8 +49,8 @@ class DataObject_WithId_Test extends Snap_UnitTestCase {
     return $this->assertEqual($this->dataObject->name, 'matthias');
   }
 
-  public function testDataObjectNullColumn() {
-    return $this->assertNull($this->dataObject->nullColumn);
+  public function testDataObjectNullAttribute() {
+    return $this->assertNull($this->dataObject->nullAttribute);
   }
 
   public function testDataObjectEnum() {
@@ -101,19 +101,19 @@ class DataObject_WithId_Test extends Snap_UnitTestCase {
 
 
   public function testSettingNull() {
-    $this->dataObject->nullColumn = null;
-    return $this->assertNull($this->dataObject->nullColumn);
+    $this->dataObject->nullAttribute = null;
+    return $this->assertNull($this->dataObject->nullAttribute);
   }
 
   public function testSettingNullAfterValueWasAssigned() {
-    $this->dataObject->nullColumn = 'test';
-    $this->dataObject->nullColumn = null;
-    return $this->assertNull($this->dataObject->nullColumn);
+    $this->dataObject->nullAttribute = 'test';
+    $this->dataObject->nullAttribute = null;
+    return $this->assertNull($this->dataObject->nullAttribute);
   }
   public function testSettingNullToValue() {
     $string = 'Some Random String';
-    $this->dataObject->nullColumn = $string;
-    return $this->assertIdentical($this->dataObject->nullColumn, $string);
+    $this->dataObject->nullAttribute = $string;
+    return $this->assertIdentical($this->dataObject->nullAttribute, $string);
   }
 
 
@@ -172,13 +172,13 @@ class DataObject_WithoutId_Test extends Snap_UnitTestCase {
 
   public function setUp() {
     $this->dao = $this->mock('DaoInterface')
-      ->setReturnValue('getColumnTypes', array('id'=>Dao::INT, 'integer'=>Dao::INT, 'time'=>Dao::TIMESTAMP, 'name'=>Dao::STRING, 'null_column'=>Dao::STRING))
-      ->setReturnValue('getNullColumns', array('null_column'))
+      ->setReturnValue('getAttributes', array('id'=>Dao::INT, 'integer'=>Dao::INT, 'time'=>Dao::TIMESTAMP, 'name'=>Dao::STRING, 'null_attribute'=>Dao::STRING))
+      ->setReturnValue('getNullAttributes', array('null_attribute'))
       ->listenTo('insert')
       ->listenTo('update')
       ->construct();
 
-    $this->dataHash = array('id'=>null, 'integer'=>$this->testInteger, 'time'=>$this->testTime, 'name'=>'matthias', 'null_column'=>null);
+    $this->dataHash = array('id'=>null, 'integer'=>$this->testInteger, 'time'=>$this->testTime, 'name'=>'matthias', 'null_attribute'=>null);
   }
 
   public function tearDown() {
@@ -213,13 +213,13 @@ class DataObject_WithAdditionalValues_Test extends Snap_UnitTestCase {
 
   public function setUp() {
       $this->dao = $this->mock('DaoInterface')
-        ->setReturnValue('getColumnTypes',       array('id'=>Dao::INT))
-        ->setReturnValue('getNullColumns',       array())
-        ->setReturnValue('getAdditionalColumnTypes', array('additional_column_string'=>Dao::STRING, 'additional_column_int'=>Dao::INT))
+        ->setReturnValue('getAttributes',       array('id'=>Dao::INT))
+        ->setReturnValue('getNullAttributes',       array())
+        ->setReturnValue('getAdditionalAttributes', array('additional_attribute_string'=>Dao::STRING, 'additional_attribute_int'=>Dao::INT))
       ->listenTo('insert')
       ->listenTo('update')
         ->construct();
-      $this->dataObject = new DataObject(array('id'=>null, 'additional_column_string'=>$this->additionalValue), $this->dao);
+      $this->dataObject = new DataObject(array('id'=>null, 'additional_attribute_string'=>$this->additionalValue), $this->dao);
   }
 
   public function tearDown() {
@@ -227,33 +227,33 @@ class DataObject_WithAdditionalValues_Test extends Snap_UnitTestCase {
   }
 
   public function testGettingAdditionalValue() {
-    return $this->assertEqual($this->dataObject->additionalColumnString, $this->additionalValue);
+    return $this->assertEqual($this->dataObject->additionalAttributeString, $this->additionalValue);
   }
 
   public function testGettingUnsetAdditionalValueIsNull() {
-    return $this->assertNull($this->dataObject->additionalColumnInt);
+    return $this->assertNull($this->dataObject->additionalAttributeInt);
   }
 
   public function testGettingAdditionalValueWithGetter() {
-    return $this->assertEqual($this->dataObject->get('additionalColumnString'), $this->additionalValue);
+    return $this->assertEqual($this->dataObject->get('additionalAttributeString'), $this->additionalValue);
   }
 
   public function testSettingAdditionalValueFailsButChains() {
     $this->willWarn();
-    return $this->assertEqual($this->dataObject->set('additionalColumnString', 'test'), $this->dataObject);
+    return $this->assertEqual($this->dataObject->set('additionalAttributeString', 'test'), $this->dataObject);
   }
 
 }
 
 
-class DataObject_ChangedColumns_Test extends Snap_UnitTestCase {
+class DataObject_ChangedAttributes_Test extends Snap_UnitTestCase {
 
 
   public function setUp() {
       $this->dao = $this->mock('DaoInterface')
-        ->setReturnValue('getColumnTypes',       array('a'=>Dao::INT, 'b'=>Dao::STRING, 'c'=>Dao::BOOL))
-        ->setReturnValue('getNullColumns',       array())
-        ->setReturnValue('getAdditionalColumnTypes', array())
+        ->setReturnValue('getAttributes',       array('a'=>Dao::INT, 'b'=>Dao::STRING, 'c'=>Dao::BOOL))
+        ->setReturnValue('getNullAttributes',       array())
+        ->setReturnValue('getAdditionalAttributes', array())
         ->construct();
       $this->dataObject = new DataObject(array('a'=>123, 'b'=>'test', 'c'=>true), $this->dao);
   }
@@ -263,18 +263,18 @@ class DataObject_ChangedColumns_Test extends Snap_UnitTestCase {
   }
 
   public function testSettingNone() {
-    return $this->assertEqual($this->dataObject->getChangedColumns(), array());
+    return $this->assertEqual($this->dataObject->getChangedAttributes(), array());
   }
 
   public function testSettingOne() {
     $this->dataObject->a = 321;
-    return $this->assertEqual($this->dataObject->getChangedColumns(), array('a'=>true));
+    return $this->assertEqual($this->dataObject->getChangedAttributes(), array('a'=>true));
   }
 
   public function testSettingTwo() {
     $this->dataObject->a = 321;
     $this->dataObject->b = 'abc';
-    return $this->assertEqual($this->dataObject->getChangedColumns(), array('a'=>true, 'b'=>true));
+    return $this->assertEqual($this->dataObject->getChangedAttributes(), array('a'=>true, 'b'=>true));
   }
 
   public function testSettingMultipleTimes() {
@@ -286,12 +286,12 @@ class DataObject_ChangedColumns_Test extends Snap_UnitTestCase {
     $this->dataObject->c = true;
     $this->dataObject->c = false;
     $this->dataObject->c = true;
-    return $this->assertEqual($this->dataObject->getChangedColumns(), array('a'=>true, 'b'=>true, 'c'=>true));
+    return $this->assertEqual($this->dataObject->getChangedAttributes(), array('a'=>true, 'b'=>true, 'c'=>true));
   }
 
   public function testSettingSameValue() {
     $this->dataObject->a = 123;
-    return $this->assertEqual($this->dataObject->getChangedColumns(), array('a'=>true), 'Even though the value didnt change, it should be in the changedColumns since it has been set.');
+    return $this->assertEqual($this->dataObject->getChangedAttributes(), array('a'=>true), 'Even though the value didnt change, it should be in the changedAttributes since it has been set.');
   }
 
 
@@ -321,9 +321,9 @@ class DataObject_Load_Test extends Snap_UnitTestCase {
 
   public function setUp() {
       $this->dao = $this->mock('DaoInterface')
-        ->setReturnValue('getColumnTypes',       array('a'=>Dao::INT, 'b'=>Dao::STRING, 'c'=>Dao::BOOL))
-        ->setReturnValue('getNullColumns',       array())
-        ->setReturnValue('getAdditionalColumnTypes', array())
+        ->setReturnValue('getAttributes',       array('a'=>Dao::INT, 'b'=>Dao::STRING, 'c'=>Dao::BOOL))
+        ->setReturnValue('getNullAttributes',       array())
+        ->setReturnValue('getAdditionalAttributes', array())
         ->setReturnValue('getData',       array('a'=>321, 'b'=>'test2', 'c'=>false))
         ->listenTo('getData', array(new Snap_Object_Expectation('DataObject')))
         ->construct();

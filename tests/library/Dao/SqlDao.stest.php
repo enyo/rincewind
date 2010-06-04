@@ -12,21 +12,21 @@ class RawTestDataObject {
 }
 
 class RawTestDao extends SqlDao {
-  protected $columnTypes = array(
+  protected $attributes = array(
     'id'=>Dao::INT,
     'possibly_null'=>Dao::STRING,
     'string_not_null'=>Dao::STRING,
     'enum'=>array('enum_a', 'enum_b', 'enum_c')
   );
-  protected $additionalColumnTypes = array(
-    'additional_column'=>Dao::STRING,
+  protected $additionalAttributes = array(
+    'additional_attribute'=>Dao::STRING,
   );
 
-  protected $nullColumns = array('possibly_null');
+  protected $nullAttributes = array('possibly_null');
   protected function getObjectFromPreparedData($data) {
     return new RawTestDataObject($data);
   }
-  public function exportColumn($column) {  }
+  public function exportAttributeName($attribute) {  }
   public function exportResourceName($resource = null) {  }
   public function exportString($text) {  }
   protected function getLastInsertId() {  }
@@ -80,16 +80,16 @@ class SqlDao_Getters_Test extends Snap_UnitTestCase {
     unset($this->dao);
     }
 
-  public function testGetColumnTypes() {
-    return $this->assertEqual($this->dao->getColumnTypes(), array('id'=>Dao::INT, 'possibly_null'=>Dao::STRING, 'string_not_null'=>Dao::STRING, 'enum'=>array('enum_a', 'enum_b', 'enum_c')));
+  public function testGetAttributes() {
+    return $this->assertEqual($this->dao->getAttributes(), array('id'=>Dao::INT, 'possibly_null'=>Dao::STRING, 'string_not_null'=>Dao::STRING, 'enum'=>array('enum_a', 'enum_b', 'enum_c')));
   }
 
-  public function testGetNullColumns() {
-    return $this->assertEqual($this->dao->getNullColumns(), array('possibly_null'));
+  public function testGetNullAttributes() {
+    return $this->assertEqual($this->dao->getNullAttributes(), array('possibly_null'));
   }
 
-  public function testGetAdditionalColumnTypes() {
-    return $this->assertEqual($this->dao->getAdditionalColumnTypes(), array('additional_column'=>Dao::STRING));
+  public function testGetAdditionalAttributes() {
+    return $this->assertEqual($this->dao->getAdditionalAttributes(), array('additional_attribute'=>Dao::STRING));
   }
 }
 
@@ -123,7 +123,7 @@ require_once(LIBRARY_ROOT_PATH . 'DatabaseResult/DatabaseResultInterface.php');
 
 class RawTestDao2 extends SqlDao {
   protected $resourceName = 'test_resource_name';
-  protected $columnTypes = array(
+  protected $attributes = array(
     'id'=>Dao::INT,
     'name'=>Dao::STRING,
     'is_admin'=>Dao::BOOL
@@ -131,7 +131,7 @@ class RawTestDao2 extends SqlDao {
   protected function getObjectFromPreparedData($data) {
     return new RawTestDataObject($data);
   }
-  public function exportColumn($column) { return $column; }
+  public function exportAttributeName($attributeName) { return $attributeName; }
   public function exportResourceName($resource = null) { return $resource; }
   public function exportString($text) { return $text; }
   protected function getLastInsertId() {  }
@@ -167,14 +167,14 @@ class SqlDao_Queries_Test extends Snap_UnitTestCase {
     return $this->assertCallCount($this->db, 'query', 1, array(new Snap_Identical_Expectation('select * from test_resource_name where id=4  limit 1')));
   }
 
-  public function testQueryWithDataObjectAsColumn() {
+  public function testQueryWithDataObjectAsAttribute() {
     $dataObject = new DataObject(array(), $this->dao);
     $dataObject->id = 7;
     $this->dao->get($dataObject);
     return $this->assertCallCount($this->db, 'query', 1, array(new Snap_Identical_Expectation('select * from test_resource_name where id=7  limit 1')));
   }
 
-  public function testQueryWithDataObjectAsColumns() {
+  public function testQueryWithDataObjectAsAttributes() {
     $dataObject = new DataObject(array(), $this->dao);
     $dataObject->id = 11;
     $dataObject->name = 'TEST';

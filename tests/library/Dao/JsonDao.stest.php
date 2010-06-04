@@ -8,12 +8,12 @@ require_once(LIBRARY_ROOT_PATH . 'DataSource/FileDataSource.php');
 
 
 /**
- * The test dao with all column types to be tested.
+ * The test dao with all attributes to be tested.
  */
 class JsonTestDao extends JsonDao {
   protected $resourceName = 'dao_test_resource';
   
-  protected $columnTypes = array(
+  protected $attributes = array(
     'id'=>Dao::INTEGER,
     'integer'=>Dao::INTEGER,
     'string'=>Dao::STRING,
@@ -23,9 +23,9 @@ class JsonTestDao extends JsonDao {
     'default_value'=>Dao::INT
   );
 
-  protected $nullColumns = array('null_value');
+  protected $nullAttributes = array('null_value');
 
-  protected $defaultValueColumns = array('default_value');
+  protected $defaultValueAttributes = array('default_value');
 
 }
 
@@ -37,8 +37,6 @@ class JsonDao_FileFactory_Test extends Snap_UnitTestCase {
 
   public function setUp() {
       $this->fileFactory = $this->mock('FileDataSource')
-      // ->setReturnValue('getColumnTypes', array('id'=>Dao::INT, 'integer'=>Dao::INT, 'time'=>Dao::TIMESTAMP, 'name'=>Dao::STRING, 'null_column'=>Dao::STRING, 'enum'=>array('a', 'b', 'c')))
-      // ->setReturnValue('getNullColumns', array('null_column'))
       ->setReturnValue('insert', 4)
       ->setReturnValue('view', '{"id":4,"integer":5,"string":"STRING TO TEST","timestamp":23423423,"float":23.23,"null_value":null,"default_value":1234}')
       ->setReturnValue('viewList', '[{"id":4,"integer":5,"string":"bla","timestamp":23423423,"float":23.23,"null_value":null,"default_value":1234},{"id":5,"integer":5,"string":"bla","timestamp":23423423,"float":23.23,"null_value":null,"default_value":1234}]')
@@ -105,7 +103,7 @@ class JsonDao_FileFactory_Test extends Snap_UnitTestCase {
 class AddressDao extends JsonDao {
   protected $resourceName = 'dao_address_resource';
   
-  protected $columnTypes = array(
+  protected $attributes = array(
     'id'=>Dao::INTEGER,
     'city_id'=>Dao::INTEGER
   );
@@ -116,7 +114,7 @@ class AddressDao extends JsonDao {
 class CityDao extends JsonDao {
   protected $resourceName = 'dao_city_resource';
   
-  protected $columnTypes = array(
+  protected $attributes = array(
     'id'=>Dao::INTEGER,
     'name'=>Dao::STRING
   );
@@ -125,7 +123,7 @@ class CityDao extends JsonDao {
 class JsonReferencesDao extends JsonDao {
   protected $resourceName = 'dao_user_resource';
   
-  protected $columnTypes = array(
+  protected $attributes = array(
     'id'=>Dao::INTEGER,
     'address_id'=>Dao::INTEGER,
     'address_ids'=>Dao::SEQUENCE

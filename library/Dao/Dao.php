@@ -21,9 +21,9 @@ if (!class_exists('Log', false)) include('Logger/Log.php');
 include dirname(__FILE__) . '/DaoInterface.php';
 
 /**
- * Loading the DaoColumnAssignment Class
+ * Loading the DaoAttributeAssignment Class
  */
-include dirname(__FILE__) . '/DaoColumnAssignment.php';
+include dirname(__FILE__) . '/DaoAttributeAssignment.php';
 
 /**
  * Loading the DataObject Class
@@ -61,8 +61,8 @@ if (!class_exists('Date', false)) include dirname(dirname(__FILE__)) . '/Date/Da
 /**
  * This abstract base class for all Daos.
  * IMPORTANT NOTE: The Dao (and DataObject for that matter) depend on the resource
- * having a primary `id` column!
- * If your resource layout does not provide this column, the framework will not work.
+ * having a primary `id` attribute!
+ * If your resource layout does not provide this attribute, the framework will not work.
  *
  * The typical usage of the Dao is as follows:
  * <code>
@@ -84,7 +84,7 @@ if (!class_exists('Date', false)) include dirname(dirname(__FILE__)) . '/Date/Da
  *
  *     protected $resourceName = 'users';
  *
- *     protected $columnTypes = array(
+ *     protected $attributes = array(
  *       'id'=>Dao::INT,
  *       'username'=>Dao::STRING,
  *       'status'=>array('online', 'offline'), // This is an enum.
@@ -92,13 +92,13 @@ if (!class_exists('Date', false)) include dirname(dirname(__FILE__)) . '/Date/Da
  *       'creation_time'=>Dao::TIMESTAMP
  *     );
  *
- *     protected $nullColumns = array('comment');
+ *     protected $nullAttributes = array('comment');
  *
  *     protected $defaultSort = array('creation_time'=>Dao::DESC, 'username'=>Dao::ASC);
  *
  *     public function getByUsername($username) {
  *       // No checking for SQL Injections has to be done here, since get() will do all of
- *       // that (including checking the type of the column username)
+ *       // that (including checking the type of the attribute username)
  *       return $this->get(array('username'=>$username));
  *     }
  *   }
@@ -161,15 +161,15 @@ abstract class Dao implements DaoInterface {
    * You should configure them as member variables when defining your Daos.
    *
    * @param string $resourceName You should specify this as an attribute when writing a Dao implementation
-   * @param array $columnTypes You should specify this as an attribute when writing a Dao implementation
-   * @param array $nullColumns You should specify this as an attribute when writing a Dao implementation
-   * @param array $defaultColumns You should specify this as an attribute when writing a Dao implementation
+   * @param array $attributes You should specify this as an attribute when writing a Dao implementation
+   * @param array $nullAttributes You should specify this as an attribute when writing a Dao implementation
+   * @param array $defaultValueAttributes You should specify this as an attribute when writing a Dao implementation
    */
-  public function __construct($resourceName = null, $columnTypes = null, $nullColumns = null, $defaultColumns = null) {
+  public function __construct($resourceName = null, $attributes = null, $nullAttributes = null, $defaultValueAttributes = null) {
     if ($resourceName) $this->resourceName = $resourceName;
-    if ($columnTypes) $this->columnTypes = $columnTypes;
-    if ($nullColumns) $this->nullColumns = $nullColumns;
-    if ($defaultColumns) $this->defaultColumns = $defaultColumns;
+    if ($attributes) $this->attributes = $attributes;
+    if ($nullAttributes) $this->nullAttributes = $nullAttributes;
+    if ($defaultValueAttributes) $this->defaultValueAttributes = $defaultValueAttributes;
     $this->setupReferences();
   }
 
@@ -204,29 +204,29 @@ abstract class Dao implements DaoInterface {
 
 
   /**
-   * This array/map must contain all column types. eg: array('id'=>Dao::INT)
+   * This array/map must contain all attribute types. eg: array('id'=>Dao::INT)
    *
    * @var array
    */
-  protected $columnTypes = array();
+  protected $attributes = array();
 
 
   /**
-   * This works exactly the same as the column types, except that it only defines columns, that may additionally be returned by the
+   * This works exactly the same as the attributes, except that it only defines attributes, that may additionally be returned by the
    * datasource (for example in joins).
    * Those values can *not* be set in the DataObjects afterwards, but are checked for their types when retrieved.
-   * When trying to get an additional column out of a DataObject, that has not been retrieved from the datasource, the DataObject should
+   * When trying to get an additional attribute out of a DataObject, that has not been retrieved from the datasource, the DataObject should
    * just return null and not error.
-   * When trying to set an additional column the DataObject should trigger an error.
+   * When trying to set an additional attribute the DataObject should trigger an error.
    *
    * @var array
    */
-  protected $additionalColumnTypes = array();
+  protected $additionalAttributes = array();
 
 
 
   /**
-   * The references array contains a list of DaoReference instances to map certain columns to other resources.
+   * The references array contains a list of DaoReference instances to map certain attributes to other resources.
    * You set them in the setupReferences method, that gets called in the constructor.
    *
    * This array would look like this then:
@@ -266,7 +266,7 @@ abstract class Dao implements DaoInterface {
    * @see DaoReference
    */
   protected function addReference($identifier, $daoClassName, $localKey = null, $foreignKey = 'id') {
-    if ($localKey && !$this->columnExists($localKey)) {
+    if ($localKey && !$this->attributeExists($localKey)) {
       trigger_error(sprintf('Local key `%s` does not exist in the %s Dao.', $localKey, $this->resourceName), E_USER_ERROR);
     }
     $this->references[$identifier] = new DaoReference($daoClassName, $localKey, $foreignKey);
@@ -282,7 +282,7 @@ abstract class Dao implements DaoInterface {
    * @see addReference
    */
   protected function addToManyReference($identifier, $daoClassName, $localKey = null, $foreignKey = 'id') {
-    if ($localKey && (!$this->columnExists($localKey) || $this->columnTypes[$localKey] != Dao::SEQUENCE)) {
+    if ($localKey && (!$this->attributeExists($localKey) || $this->attributes[$localKey] != Dao::SEQUENCE)) {
       trigger_error(sprintf('Local key `%s` does not exist or is not a Dao::SEQUENCE in the %s Dao.', $localKey, $this->resourceName), E_USER_ERROR);
     }
     $this->references[$identifier] = new DaoToManyReference($daoClassName, $localKey, $foreignKey);
@@ -296,22 +296,22 @@ abstract class Dao implements DaoInterface {
    *
    * @return DataObject
    */
-  public function getReference($dataObject, $column) {
-    if (!isset($this->references[$column])) throw new DaoWrongValueException("The column `$column` is not specified in references.");
+  public function getReference($dataObject, $attribute) {
+    if (!isset($this->references[$attribute])) throw new DaoWrongValueException("The attribute `$attribute` is not specified in references.");
 
-    $reference = $this->references[$column];
+    $reference = $this->references[$attribute];
 
     $dao = $reference->getDaoClassName();
     if (is_string($dao)) $dao = $this->createDao($dao);
 
     if ($reference instanceof DaoToManyReference) {
       // toMany reference
-      if ($data = $dataObject->getDirectly($column)) {
+      if ($data = $dataObject->getDirectly($attribute)) {
         if (is_array($data)) {
           // The sequence of data hashes has been set already
-          return new DaoHashListIterator($dataObject->getDirectly($column), $this);
+          return new DaoHashListIterator($dataObject->getDirectly($attribute), $this);
         }
-        trigger_error(sprintf('The data hash for `%s` was set but incorrect.', $column), E_USER_WARNING);
+        trigger_error(sprintf('The data hash for `%s` was set but incorrect.', $attribute), E_USER_WARNING);
         return new DaoHashListIterator(array(), $this);
       }
       else {
@@ -329,13 +329,13 @@ abstract class Dao implements DaoInterface {
     }
     else {
       // toOne reference
-      if ($data = $dataObject->getDirectly($column)) {
+      if ($data = $dataObject->getDirectly($attribute)) {
         if (is_array($data)) {
           // If the data hash exists already, just return the DataObject with it.
           return $dao->getObjectFromData($data);
         }
         else {
-          trigger_error(sprintf('The data hash for `%s` was set but incorrect.', $column), E_USER_WARNING);
+          trigger_error(sprintf('The data hash for `%s` was set but incorrect.', $attribute), E_USER_WARNING);
           return null;
         }
       }
@@ -349,7 +349,7 @@ abstract class Dao implements DaoInterface {
           $localValue = $dataObject->get($localKey);
           if ($localValue === null) return null;
           $return = $dao->get(array($foreignKey=>$localValue));
-          $dataObject->setDirectly($column, $return->getArray());
+          $dataObject->setDirectly($attribute, $return->getArray());
           return $return;
         }
         else {
@@ -372,34 +372,34 @@ abstract class Dao implements DaoInterface {
 
 
   /**
-   * If your datasource holds different column names than you want in you DataObjects, you can specify export & import mappings.
+   * If your datasource holds different attribute names than you want in you DataObjects, you can specify export & import mappings.
    * (Don't confuse this with your php values. Meaning: if the datasource value is 'strangely_named', but you want to access your object
    * like this: $object->perfectName, then you have to map it from strangely_named to perfect_name (not perfectName).)
    * If no mapping is found in the imports, than a reverse lookup is done in exports, and vice versa, so for a normal conversion
-   * only the columnImportMapping (or columnExportMapping if you prefer) has to be set.
+   * only the attributeImportMapping (or attributeExportMapping if you prefer) has to be set.
    * E.g.: array('what_the_datasource_value_actually_is'=>'what_you_would_want_it_to_be');
    *
    * @var array
    */
-  protected $columnImportMapping = array();
+  protected $attributeImportMapping = array();
 
   /**
-   * The same as columnImportMapping but the other way around.
+   * The same as attributeImportMapping but the other way around.
    *
    * @var array
    */
-  protected $columnExportMapping = array();
+  protected $attributeExportMapping = array();
 
   /**
-   * This is an array containing all columns that can be null. eg: $nullColumns = array('email', 'name');
+   * This is an array containing all attributes that can be null. eg: $nullAttributes = array('email', 'name');
    *
    * @var array
    */
-  protected $nullColumns = array();
+  protected $nullAttributes = array();
 
 
   /**
-   * This is a list of columns that have default values in the datasource.
+   * This is a list of attributes that have default values in the datasource.
    * This means that, if the values are NULL, and the entry is inserted in the datasource, they will not be
    * passed, so that the datasource can automatically set the values.
    * So when you call getRawObject() those values will be null.
@@ -407,7 +407,7 @@ abstract class Dao implements DaoInterface {
    *
    * @var array
    */
-  protected $defaultValueColumns = array('id');
+  protected $defaultValueAttributes = array('id');
 
 
 
@@ -416,9 +416,9 @@ abstract class Dao implements DaoInterface {
    * If you call get() without parameters, a "raw object" will be returned, containing
    * only default values, and null as id.
    *
-   * @param array|DataObject $map A map or dataObject containing the column assignments.
+   * @param array|DataObject $map A map or dataObject containing the attribute assignments.
    * @param bool $exportValues When you want to have complete control over the $map
-   *                           column names, you can set exportValues to false, so they
+   *                           attribute names, you can set exportValues to false, so they
    *                           won't be processed.
    *                           WARNING: Be sure to escape them yourself if you do so.
    * @param string $resourceName You can specify a different resource (most probably a view)
@@ -481,16 +481,16 @@ abstract class Dao implements DaoInterface {
 
 
   /**
-   * Returns the column types array
+   * Returns the attributes array
    * @return array
    */   
-  public function getColumnTypes() { return $this->columnTypes; }
+  public function getAttributes() { return $this->attributes; }
 
   /**
-   * Returns the additional column types array
+   * Returns the additional attribute types array
    * @return array
    */   
-  public function getAdditionalColumnTypes() { return $this->additionalColumnTypes; }
+  public function getAdditionalAttributes() { return $this->additionalAttributes; }
 
   /**
    * @return array
@@ -499,17 +499,17 @@ abstract class Dao implements DaoInterface {
   public function getReferences() { return $this->references; }
 
   /**
-   * Returns the null columns
+   * Returns the null attributes
    * @return array
    */   
-  public function getNullColumns() { return $this->nullColumns; }
+  public function getNullAttributes() { return $this->nullAttributes; }
 
   /**
-   * Returns the default value columns
+   * Returns the default value attributes
    *
    * @return array
    */   
-  public function getDefaultValueColumns() { return $this->defaultValueColumns; }
+  public function getDefaultValueAttributes() { return $this->defaultValueAttributes; }
 
 
   /**
@@ -559,12 +559,12 @@ abstract class Dao implements DaoInterface {
 
   
   /**
-   * Checks if a column name exists as real or additional column.
+   * Checks if a attribute name exists as real or additional attribute.
    *
-   * @param string $column
+   * @param string $attributeName
    */
-  protected function columnExists($column) {
-    return isset($this->columnTypes[$column]) || isset($this->additionalColumnTypes[$column]);
+  protected function attributeExists($attributeName) {
+    return isset($this->attributes[$attributeName]) || isset($this->additionalAttributes[$attributeName]);
   }
 
 
@@ -617,57 +617,57 @@ abstract class Dao implements DaoInterface {
 
 
   /**
-   * Takes a column and sees if there is an import/export mapping for it.
-   * It then returns the correct column name, unescaped.
+   * Takes an attributeName and sees if there is an import/export mapping for it.
+   * It then returns the correct attribute name, unescaped.
    *
-   * @param string $column
+   * @param string $attributeName
    * @return string
-   * @see $columnImportMapping
-   * @see $columnExportMapping
+   * @see $attributeImportMapping
+   * @see $attributeExportMapping
    */
-  protected function applyColumnImportMapping($column) {
-    if (isset($this->columnImportMapping[$column]))        { return $this->columnImportMapping[$column]; }
-    elseif (in_array($column, $this->columnExportMapping)) { return array_search($column, $this->columnExportMapping); }
-    return $column;
+  protected function applyAttributeImportMapping($attributeName) {
+    if (isset($this->attributeImportMapping[$attributeName]))        { return $this->attributeImportMapping[$attributeName]; }
+    elseif (in_array($attributeName, $this->attributeExportMapping)) { return array_search($attributeName, $this->attributeExportMapping); }
+    return $attributeName;
   }
 
   /**
-   * Takes a column and sees if there is an import/export mapping for it.
-   * It then returns the correct column name, unescaped.
+   * Takes an attributeName and sees if there is an import/export mapping for it.
+   * It then returns the correct attributeName, unescaped.
    *
-   * @param string $column
+   * @param string $attributeName
    * @return string
-   * @see $columnImportMapping
-   * @see $columnExportMapping
+   * @see $attributeImportMapping
+   * @see $attributeExportMapping
    */
-  protected function applyColumnExportMapping($column) {
-    if (isset($this->columnExportMapping[$column]))        { return $this->columnExportMapping[$column]; }
-    elseif (in_array($column, $this->columnImportMapping)) { return array_search($column, $this->columnImportMapping); }
-    return $column;
+  protected function applyAttributeExportMapping($attributeName) {
+    if (isset($this->attributeExportMapping[$attributeName]))        { return $this->attributeExportMapping[$attributeName]; }
+    elseif (in_array($attributeName, $this->attributeImportMapping)) { return array_search($attributeName, $this->attributeImportMapping); }
+    return $attributeName;
   }
 
   /**
-   * Converts the datasource column name to a valid php name.
-   * This is done with applyColumnImportMapping()
+   * Converts the datasource attributeName name to a valid php name.
+   * This is done with applyAttributeImportMapping()
    *
-   * @param string $column
+   * @param string $attributeName
    * @return string
-   * @see applyColumnImportMapping
+   * @see applyAttributeImportMapping
    */
-  public function importColumn($column) {
-    return $this->applyColumnImportMapping($column);
+  public function importAttributeName($attributeName) {
+    return $this->applyAttributeImportMapping($attributeName);
   }
 
 
 
 
   /**
-   * Returns true if the column can not be null.
+   * Returns true if the attribute can not be null.
    *
    * @return bool
    */
-  protected function notNull($column) {
-    return !in_array($column, $this->nullColumns);
+  protected function notNull($attributeName) {
+    return !in_array($attributeName, $this->nullAttributes);
   }
 
 
@@ -684,24 +684,24 @@ abstract class Dao implements DaoInterface {
 
 
   /**
-   * Returns the arrays containing the columns, and values to perform an insert.
+   * Returns the arrays containing the attributes, and values to perform an insert.
    * Values that are null are simply left out. So are Dao::IGNORE types.
    *
    * @param DataObject $object
-   * @return array With $columns and $values as 0 and 1st index respectively.
+   * @return array With $attributes and $values as 0 and 1st index respectively.
    */
   protected function generateInsertArrays($object) {
     $values = array();
-    $columns = array();
+    $attributeNames = array();
     $id = null;
-    foreach ($this->columnTypes as $column=>$type) {
-      $value = $object->getValue($column);
+    foreach ($this->attributes as $attributeName=>$type) {
+      $value = $object->getValue($attributeName);
       if ($value !== null && $type != Dao::IGNORE) {
-        $columns[] = $this->exportColumn($column);
-        $values[]  = $this->exportValue($value, $type, $this->notNull($column));
+        $attributeNames[] = $this->exportAttributeName($attributeName);
+        $values[]  = $this->exportValue($value, $type, $this->notNull($attributeName));
       }
     }
-    return array($columns, $values);
+    return array($attributeNames, $values);
   }
 
 
@@ -751,48 +751,48 @@ abstract class Dao implements DaoInterface {
   /**
    * Goes through the data array returned from the datasource, and converts the values that are necessary.
    * Meaning: if some values are null, check if they are allowed to be null.
-   * This function also checks if every column in the columnTypes array has been transmitted
+   * This function also checks if every attribute in the attributes array has been transmitted
    *
    * @param array $data
    * @return array
    */
   protected function prepareDataForObject($data) {
-    $neededValues = $this->columnTypes;
-    foreach ($data as $column=>$value) {
-      $column = $this->importColumn($column);
-      if (array_key_exists($column, $this->columnTypes)) {
-        unset($neededValues[$column]);
-        if ($this->columnTypes[$column] != Dao::IGNORE) {
-          $data[$column] = $this->importValue($value, $this->columnTypes[$column], $this->notNull($column));
+    $neededValues = $this->attributes;
+    foreach ($data as $attributeName=>$value) {
+      $attributeName = $this->importAttributeName($attributeName);
+      if (array_key_exists($attributeName, $this->attributes)) {
+        unset($neededValues[$attributeName]);
+        if ($this->attributes[$attributeName] != Dao::IGNORE) {
+          $data[$attributeName] = $this->importValue($value, $this->attributes[$attributeName], $this->notNull($attributeName));
         }
       }
-      elseif (array_key_exists($column, $this->additionalColumnTypes)) {
-        if ($this->additionalColumnTypes[$column] != Dao::IGNORE) {
-          $data[$column] = $this->importValue($value, $this->additionalColumnTypes[$column], $this->notNull($column));
+      elseif (array_key_exists($attributeName, $this->additionalAttributes)) {
+        if ($this->additionalAttributes[$attributeName] != Dao::IGNORE) {
+          $data[$attributeName] = $this->importValue($value, $this->additionalAttributes[$attributeName], $this->notNull($attributeName));
         }
       }
-      elseif (isset($this->references[$column])) {
+      elseif (isset($this->references[$attributeName])) {
         if (!is_array($value)) {
           $trace = debug_backtrace();
-          trigger_error('The value for column ' . $column . ' ('.$this->resourceName.') was not correct in ' . $trace[0]['file'] . ' on line ' . $trace[0]['line'], E_USER_WARNING);
-          unset($data[$column]);
+          trigger_error('The value for attribute ' . $attributeName . ' ('.$this->resourceName.') was not correct in ' . $trace[0]['file'] . ' on line ' . $trace[0]['line'], E_USER_WARNING);
+          unset($data[$attributeName]);
         }
         // Just let it untouched.
       }
       else {
         $trace = debug_backtrace();
-        trigger_error('The type for column ' . $column . ' ('.$this->resourceName.') is not defined in ' . $trace[0]['file'] . ' on line ' . $trace[0]['line'], E_USER_WARNING);
-        unset($data[$column]);
+        trigger_error('The type for attribute ' . $attributeName . ' ('.$this->resourceName.') is not defined in ' . $trace[0]['file'] . ' on line ' . $trace[0]['line'], E_USER_WARNING);
+        unset($data[$attributeName]);
       }
     }
-    foreach ($neededValues as $column=>$type) {
+    foreach ($neededValues as $attributeName=>$type) {
       if ($type != Dao::IGNORE) {
-        if ($this->notNull($column)) {
+        if ($this->notNull($attributeName)) {
           $trace = debug_backtrace();
-          trigger_error('The column ' . $column . ' ('.$this->resourceName.') was not transmitted from data source in ' . $trace[0]['file'] . ' on line ' . $trace[0]['line'], E_USER_WARNING);
-          $data[$column] = DataObject::coerce(null, $type, false, $quiet = true);
+          trigger_error('The attribute ' . $attributeName . ' ('.$this->resourceName.') was not transmitted from data source in ' . $trace[0]['file'] . ' on line ' . $trace[0]['line'], E_USER_WARNING);
+          $data[$attributeName] = DataObject::coerce(null, $type, false, $quiet = true);
         } else {
-          $data[$column] = null;
+          $data[$attributeName] = null;
         }
       }
     }
@@ -801,24 +801,24 @@ abstract class Dao implements DaoInterface {
 
 
   /**
-   * Returns an object with all columns defined, but only set if necessary.
-   * nullColumns will be null as well as defaultValueColumns. All other columns will have a default value set with coerce().
+   * Returns an object with all attributes defined, but only set if necessary.
+   * nullAttributes will be null as well as defaultValueAttributes. All other attributes will have a default value set with coerce().
    * Be careful! This function will soon be protected, and should not be called anymore! Use get() (without map) instead (which will call
    * getRawObject() for you).
    * You can not depend on this function... it is subject to change.
    *
-   * @see $nullColumns
-   * @see defaultValueColumns
-   * @see $columnTypes
+   * @see $nullAttributes
+   * @see defaultValueAttributes
+   * @see $attributes
    * @see coerce()
    * @see get()
    * @return DataObject
    */
   public function getRawObject() {
     $data = array();
-    foreach ($this->columnTypes as $column=>$type) {
-      if (in_array($column, $this->nullColumns) || in_array($column, $this->defaultValueColumns)) { $data[$column] = null; }
-      elseif ($type != Dao::IGNORE) $data[$column] = DataObject::coerce(null, $type, $allowNull = false, $quiet = true);
+    foreach ($this->attributes as $attributeName=>$type) {
+      if (in_array($attributeName, $this->nullAttributes) || in_array($attributeName, $this->defaultValueAttributes)) { $data[$attributeName] = null; }
+      elseif ($type != Dao::IGNORE) $data[$attributeName] = DataObject::coerce(null, $type, $allowNull = false, $quiet = true);
     }
     return $this->getObjectFromPreparedData($data, $existsInDatabase = false);
   }
@@ -833,7 +833,7 @@ abstract class Dao implements DaoInterface {
 
   /**
    * Imports an external value (either from datasource, or xml, etc...) into an expected PHP variable.
-   * If the column can be null, null will be returned.
+   * If the attribute can be null, null will be returned.
    *
    * @param mixed $externalValue The value to be imported
    * @param int $type The type (selected from Dao)
@@ -991,13 +991,13 @@ abstract class Dao implements DaoInterface {
 
 
   /**
-   * Has to determine the correct column (with import/export mappings), escape and quote it.
+   * Has to determine the correct attributeName (with import/export mappings), escape and quote it.
    * (eg.: user'name becomes `user\'name`)
    *
-   * @param string $column
+   * @param string $attributeName
    * @return string
    */
-  abstract public function exportColumn($column);
+  abstract public function exportAttributeName($attributeName);
 
 
   /**
@@ -1079,33 +1079,33 @@ abstract class Dao implements DaoInterface {
   /**
    * Tries to interpret a $sort parameter, which can be one of following:
    *
-   * - A string: It will be interpreted as one ascending column.
-   * - An array containing strings: It will be cycled through and every string is interpreted as ascending column
-   * - A map (associative array): It will be interpreted as columnName=>sortType. E.g: array('name'=>Dao::DESC, 'age'=>Dao::ASC)
+   * - A string: It will be interpreted as one ascending attribute.
+   * - An array containing strings: It will be cycled through and every string is interpreted as ascending attribute
+   * - A map (associative array): It will be interpreted as attributeName=>sortType. E.g: array('name'=>Dao::DESC, 'age'=>Dao::ASC)
    *
    * @param string|array $sort
-   * @return array An array containing all columns to sort by, escaped, and ASC or DESC appended. E.g.: array('name DESC', 'age');
+   * @return array An array containing all attributes to sort by, escaped, and ASC or DESC appended. E.g.: array('name DESC', 'age');
    */
   protected function interpretSortVariable($sort) {
     if (!is_array($sort)) {
-      return $this->columnExists($sort) ? array($this->exportColumn($sort)) : null;
+      return $this->attributeExists($sort) ? array($this->exportAttributeName($sort)) : null;
     }
 
     if (count($sort) == 0) return null;
 
-    $columnArray = array();
+    $attributeArray = array();
     if (self::isVector($sort)) {
-      foreach ($sort as $column) {
-        if ($this->columnExists($column)) $columnArray[] = $this->exportColumn($column);
+      foreach ($sort as $attributeName) {
+        if ($this->attributeExists($attributeName)) $attributeArray[] = $this->exportAttributeName($attributeName);
       }
     }
     else {
-      foreach ($sort as $column=>$sort) {
-        if ($this->columnExists($column)) $columnArray[] = $this->exportColumn($column) . ($sort == Dao::DESC ? ' desc' : '');
+      foreach ($sort as $attributeName=>$sort) {
+        if ($this->attributeExists($attributeName)) $attributeArray[] = $this->exportAttributeName($attributeName) . ($sort == Dao::DESC ? ' desc' : '');
       }
     }
 
-    return $columnArray;
+    return $attributeArray;
   }
 
 

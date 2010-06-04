@@ -45,7 +45,7 @@ class DataObject implements DataObjectInterface {
    * Indices are the column names.
    * @var array
    */
-  protected $changedColumns;
+  protected $changedAttributes;
 
 
   /**
@@ -91,12 +91,12 @@ class DataObject implements DataObjectInterface {
 
 
   /**
-   * Sets a new data array, and resets the changedColumns array.
+   * Sets a new data array, and resets the changedAttributes array.
    *
    * @param array $data
    */
   public function setData($data) {
-    $this->changedColumns = array();
+    $this->changedAttributes = array();
     $this->data = $data;  
   }
 
@@ -156,8 +156,8 @@ class DataObject implements DataObjectInterface {
    * Returns an array of all columns that have been explicitly set. The indices are the column names
    * @return array
    */
-  public function getChangedColumns() {
-    return $this->changedColumns;
+  public function getChangedAttributes() {
+    return $this->changedAttributes;
   }
 
   /**
@@ -166,7 +166,7 @@ class DataObject implements DataObjectInterface {
    */
   public function getChangedValues() {
     $values = array();
-    foreach ($this->changedColumns as $column=>$t) {
+    foreach ($this->changedAttributes as $column=>$t) {
       $values[$column] = $this->get($column);
     }
     return $values;
@@ -182,10 +182,10 @@ class DataObject implements DataObjectInterface {
   public function get($column) {
     $column = $this->convertPhpNameToDbColumn($column);
 
-    if (array_key_exists($column, $this->dao->getColumnTypes())) {
+    if (array_key_exists($column, $this->dao->getAttributes())) {
       $value = $this->data[$column];
     }
-    elseif (array_key_exists($column, $this->dao->getAdditionalColumnTypes())) {
+    elseif (array_key_exists($column, $this->dao->getAdditionalAttributes())) {
       $value = array_key_exists($column, $this->data) ? $this->data[$column] : null;
     }
     elseif (array_key_exists($column, $this->dao->getReferences())) {
@@ -227,13 +227,13 @@ class DataObject implements DataObjectInterface {
   public function set($column, $value) {
     $column = $this->convertPhpNameToDbColumn($column);
 
-    if (!array_key_exists($column, $this->dao->getColumnTypes())) {
+    if (!array_key_exists($column, $this->dao->getAttributes())) {
       $this->triggerUndefinedPropertyError($column);
       return $this;
     }
-    $value = self::coerce($value, $this->getColumnType($column), in_array($column, $this->dao->getNullColumns()));
+    $value = self::coerce($value, $this->getColumnType($column), in_array($column, $this->dao->getNullAttributes()));
     $this->data[$column] = $value;
-    $this->changedColumns[$column] = true;
+    $this->changedAttributes[$column] = true;
     return $this;
   }
   /**
@@ -317,17 +317,17 @@ class DataObject implements DataObjectInterface {
 
   /**
    * Returns the type of the column defined in the Dao.
-   * If getColumnTypes() does not return the correct type, getAdditionalColumnTypes is tried.
+   * If getAttributes() does not return the correct type, getAdditionalAttributes is tried.
    *
    * @param string $column The column name
    * @return INT
    */
   protected function getColumnType($column) {
-    if (array_key_exists($column, $this->dao->getColumnTypes())) {
-      $columnTypes = $this->dao->getColumnTypes();
+    if (array_key_exists($column, $this->dao->getAttributes())) {
+      $columnTypes = $this->dao->getAttributes();
     }
-    elseif (array_key_exists($column, $this->dao->getAdditionalColumnTypes())) {
-      $columnTypes = $this->dao->getAdditionalColumnTypes();
+    elseif (array_key_exists($column, $this->dao->getAdditionalAttributes())) {
+      $columnTypes = $this->dao->getAdditionalAttributes();
     }
     else {
       $trace = debug_backtrace();

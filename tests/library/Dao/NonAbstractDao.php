@@ -8,7 +8,7 @@ class NonAbstractDao extends Dao {
 
   protected function generateSortString($sort)                         { return null; }
   protected function convertRemoteValueToTimestamp($string, $withTime) { return null; }
-  public function exportColumn($column)                                { return null; }
+  public function exportAttributeName($attributeName)                                { return null; }
   public function exportResourceName($resource = null)                           { return null; }
 
   public function get($map = null, $exportValues = true, $resourceName = null) { }

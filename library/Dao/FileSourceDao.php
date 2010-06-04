@@ -33,12 +33,12 @@ abstract class FileSourceDao extends Dao {
   /**
    * @param FileDataSource $fileDataSource The fileDataSource is used to create the requests.
    * @param string $resourceName You can specify this as an attribute when writing a Dao implementation
-   * @param array $columnTypes You can specify this as an attribute when writing a Dao implementation
-   * @param array $nullColumns You can specify this as an attribute when writing a Dao implementation
-   * @param array $defaultColumns You can specify this as an attribute when writing a Dao implementation
+   * @param array $attributes You can specify this as an attribute when writing a Dao implementation
+   * @param array $nullAttributes You can specify this as an attribute when writing a Dao implementation
+   * @param array $defaultValueAttributes You can specify this as an attribute when writing a Dao implementation
    */
-  public function __construct($fileDataSource, $resourceName = null, $columnTypes = null, $nullColumns = null, $defaultColumns = null) {
-    parent::__construct($resourceName, $columnTypes, $nullColumns, $defaultColumns);
+  public function __construct($fileDataSource, $resourceName = null, $attributes = null, $nullAttributes = null, $defaultValueAttributes = null) {
+    parent::__construct($resourceName, $attributes, $nullAttributes, $defaultValueAttributes);
     $this->fileDataSource = $fileDataSource;
   }
 
@@ -104,9 +104,9 @@ abstract class FileSourceDao extends Dao {
    * If you call get() without parameters, a "raw object" will be returned, containing
    * only default values, and null as id.
    *
-   * @param array|DataObject $map A map containing the column assignments.
+   * @param array|DataObject $map A map containing the attributes.
    * @param bool $exportValues When you want to have complete control over the $map
-   *                           column names, you can set exportValues to false, so they
+   *                           attributes, you can set exportValues to false, so they
    *                           won't be processed.
    *                           WARNING: Be sure to escape them yourself if you do so.
    * @param string $resourceName You can specify a different resource (most probably a view)
@@ -179,9 +179,9 @@ abstract class FileSourceDao extends Dao {
    */
   public function insert($object) {
 
-    list ($columns, $values) = $this->generateInsertArrays($object);
+    list ($attributeNames, $values) = $this->generateInsertArrays($object);
 
-    $attibutes = array_combine($columns, $values);
+    $attibutes = array_combine($attributeNames, $values);
 
     $id = $this->fileDataSource->insert($this->resourceName, $attributes);
 
@@ -203,8 +203,8 @@ abstract class FileSourceDao extends Dao {
   public function update($object) {
     $attributes = array();
 
-    foreach ($this->columnTypes as $column=>$type) {
-      if ($column != 'id' && $type != Dao::IGNORE) $attributes[$column] = $this->exportValue($object->getValue($column), $type, $this->notNull($column));
+    foreach ($this->attributes as $attributeName=>$type) {
+      if ($attributeName != 'id' && $type != Dao::IGNORE) $attributes[$attributeName] = $this->exportValue($object->getValue($attributeName), $type, $this->notNull($attributeName));
     }
 
     $this->fileDataSource->update($this->resourceName, $object->id, $attributes);
@@ -236,7 +236,7 @@ abstract class FileSourceDao extends Dao {
   /**
    * This function exports every values of a map
    *
-   * @param array|DataObject $map A map or DataObject containing the column assignments.
+   * @param array|DataObject $map A map or DataObject containing the attributes.
    * @return array The map with exported values.
    */
   protected function exportMap($map) {
@@ -245,18 +245,18 @@ abstract class FileSourceDao extends Dao {
 
     $assignments = array();
 
-    foreach($map as $column=>$value) {
-      if ($value instanceof DAOColumnAssignment) {
-        throw new DaoNotSupportedException("DAOColumnAssignments don't work yet for FileDaos.");
+    foreach($map as $attributeName=>$value) {
+      if ($value instanceof DaoAttributeAssignment) {
+        throw new DaoNotSupportedException("DaoAttributeAssignments don't work yet for FileDaos.");
       }
 
-      if (!isset($this->columnTypes[$column])) {
+      if (!isset($this->attributes[$attributeName])) {
         $trace = debug_backtrace();
-        trigger_error('The type for column ' . $column . ' was not found in ' . $trace[0]['file'] . ' on line ' . $trace[0]['line'], E_USER_ERROR);
+        trigger_error('The type for attribute ' . $attributeName . ' was not found in ' . $trace[0]['file'] . ' on line ' . $trace[0]['line'], E_USER_ERROR);
       }
 
-      $type = $this->columnTypes[$column];
-      $map[$this->exportColumn($column)] = $this->exportValue($value, $type, $this->notNull($column));
+      $type = $this->attributes[$attributeName];
+      $map[$this->exportAttributeName($attributeName)] = $this->exportValue($value, $type, $this->notNull($attributeName));
     }
 
     return $map;
@@ -279,47 +279,45 @@ abstract class FileSourceDao extends Dao {
   /**
    * This method takes the $sort attribute and returns a typical 'order by ' SQL string.
    * If $sort is false then the $this->defaultSort is used if it exists.
-   * The sort is passed to interpretSortVariable to get a valid column list.
+   * The sort is passed to interpretSortVariable to get a valid attributes list.
    *
    * @param string|array $sort
    */
   public function generateSortString($sort) {
     if (!$sort) {
-      /* Legacy... */
-      if (isset($this->defaultOrderByColumn)) { $sort = $this->defaultOrderByColumn; }
-      else { $sort = $this->defaultSort; }
+      $sort = $this->defaultSort;
     }
     
     if ($sort) {
-      $columnArray = $this->interpretSortVariable($sort);
+      $attributesArray = $this->interpretSortVariable($sort);
     }
 
-    if (!$columnArray) return '';
+    if (!$attributesArray) return '';
 
-    return implode(' ', $columnArray);
+    return implode(' ', $attributesArray);
   }
 
 
   /**
-   * Takes a php column name, converts it via import/export column mapping and calls escapeColumn.
-   * This is the correct way to insert column names in a map.
+   * Takes a php attribute name, converts it via import/export attribute mapping and calls escapeAttributeName.
+   * This is the correct way to insert attribute names in a map.
    *
-   * @param string $column
+   * @param string $attributeName
    * @return string
    */
-  public function exportColumn($column) {
-    return $this->escapeColumn($this->applyColumnExportMapping($column));
+  public function exportAttributeName($attributeName) {
+    return $this->escapeAttributeName($this->applyAttributeExportMapping($attributeName));
   }
 
 
   /**
    * By default does nothing for FileDaos.
    * 
-   * @param string $column
+   * @param string $attributeName
    * @return string
    */
-  protected function escapeColumn($column) {
-    return $column;
+  protected function escapeAttributeName($attributeName) {
+    return $attributeName;
   }
 
   /**

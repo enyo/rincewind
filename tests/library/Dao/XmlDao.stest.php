@@ -8,12 +8,12 @@ require_once(LIBRARY_ROOT_PATH . 'DataSource/FileDataSource.php');
 
 
 /**
- * The test dao with all column types to be tested.
+ * The test dao with all attributes to be tested.
  */
 class XmlTestDao extends XmlDao {
   protected $resourceName = 'products';
   
-  protected $columnTypes = array(
+  protected $attributes = array(
     'id'=>Dao::INTEGER,
     'integer'=>Dao::INTEGER,
     'string'=>Dao::STRING,
@@ -23,9 +23,9 @@ class XmlTestDao extends XmlDao {
     'default_value'=>Dao::INT
   );
 
-  protected $nullColumns = array('null_value');
+  protected $nullAttributes = array('null_value');
 
-  protected $defaultValueColumns = array('default_value');
+  protected $defaultValueAttributes = array('default_value');
 
 }
 
@@ -37,8 +37,6 @@ class XmlDao_FileFactory_Test extends Snap_UnitTestCase {
 
   public function setUp() {
       $this->fileFactory = $this->mock('FileDataSource')
-      // ->setReturnValue('getColumnTypes', array('id'=>Dao::INT, 'integer'=>Dao::INT, 'time'=>Dao::TIMESTAMP, 'name'=>Dao::STRING, 'null_column'=>Dao::STRING, 'enum'=>array('a', 'b', 'c')))
-      // ->setReturnValue('getNullColumns', array('null_column'))
       ->setReturnValue('insert', 4)
       ->setReturnValue('view', '<entries><productsEntry><id>4</id><integer>123123</integer><string>Some string</string><timestamp>999888</timestamp><float>34.4</float><default_value>111</default_value></productsEntry></entries>')
       ->setReturnValue('viewList', '<entries><productsEntry><id>4</id><integer>123123</integer><string>Some string</string><timestamp>999888</timestamp><float>34.4</float><default_value>111</default_value></productsEntry><productsEntry><id>5</id><integer>321321</integer><string>Some other string</string><timestamp>999888</timestamp><float>34.4</float><default_value>111</default_value></productsEntry></entries>')

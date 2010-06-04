@@ -16,7 +16,7 @@ class FakeDao extends NonAbstractDao {
     parent::__construct();
   }
 
-  protected $columnTypes = array('address_id'=>Dao::INT);
+  protected $attributes = array('address_id'=>Dao::INT);
 
   protected function setupReferences() {
     $this->addReference('address', $this->mockDao, 'address_id', 'THEFOREIGNKEY');

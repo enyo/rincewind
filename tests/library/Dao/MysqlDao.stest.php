@@ -9,11 +9,11 @@ require_once(LIBRARY_ROOT_PATH . 'Database/Mysql.php');
 
 
 /**
- * The test dao with all column types to be tested.
+ * The test dao with all attributes to be tested.
  */
 class MysqlTestDao extends MysqlDao {
   protected $resourceName = 'test_resource_name';
-  protected $columnTypes = array('id'=>Dao::INT, 'name'=>Dao::STRING, 'is_admin'=>Dao::BOOL);
+  protected $attributes = array('id'=>Dao::INT, 'name'=>Dao::STRING, 'is_admin'=>Dao::BOOL);
 }
 
 
@@ -61,12 +61,12 @@ class MysqlDao_Basic_Test extends Snap_UnitTestCase {
   }
 
 
-  public function testExportColumn() {
-    return $this->assertIdentical($this->dao->exportColumn('some_column'), "`ESCAPED_COLUMN`");
+  public function testExportAttribute() {
+    return $this->assertIdentical($this->dao->exportAttributeName('some_column'), "`ESCAPED_COLUMN`");
   }
 
-  public function testDatabaseEscapesColumn() {
-    $this->dao->exportColumn('some_column');
+  public function testDatabaseEscapesAttribute() {
+    $this->dao->exportAttributeName('some_column');
     return $this->assertCallCount($this->db, 'escapeColumn', 1, array(new Snap_Identical_Expectation('some_column')));
   }
 

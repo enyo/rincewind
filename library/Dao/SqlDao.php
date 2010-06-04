@@ -32,12 +32,12 @@ abstract class SqlDao extends Dao {
   /**
    * @param Database $db
    * @param string $resourceName You should specify this as an attribute when writing a Dao implementation
-   * @param array $columnTypes You should specify this as an attribute when writing a Dao implementation
-   * @param array $nullColumns You should specify this as an attribute when writing a Dao implementation
-   * @param array $defaultColumns You should specify this as an attribute when writing a Dao implementation
+   * @param array $attributes You should specify this as an attribute when writing a Dao implementation
+   * @param array $nullAttributes You should specify this as an attribute when writing a Dao implementation
+   * @param array $defaultValueAttributes You should specify this as an attribute when writing a Dao implementation
    */
-  public function __construct($db, $resourceName = null, $columnTypes = null, $nullColumns = null, $defaultColumns = null) {
-    parent::__construct($resourceName, $columnTypes, $nullColumns, $defaultColumns);
+  public function __construct($db, $resourceName = null, $attributes = null, $nullAttributes = null, $defaultValueAttributes = null) {
+    parent::__construct($resourceName, $attributes, $nullAttributes, $defaultValueAttributes);
     $this->db = $db;
   }
 
@@ -96,11 +96,11 @@ abstract class SqlDao extends Dao {
   /**
    * Calls the internal db->escapeColumn function
    * 
-   * @param string $column
+   * @param string $attributeName
    * @return string
    */
-  protected function escapeColumn($column) {
-    return $this->db->escapeColumn($column);
+  protected function escapeAttributeName($attributeName) {
+    return $this->db->escapeColumn($attributeName);
   }
   
   /**
@@ -143,9 +143,9 @@ abstract class SqlDao extends Dao {
    * chaining) you can call get(), which is mostly a wrapper for find().
    * 
    *
-   * @param array|DataObject $map A map or dataObject containing the column assignments.
+   * @param array|DataObject $map A map or dataObject containing the attributes.
    * @param bool $exportValues When you want to have complete control over the $map
-   *                           column names, you can set exportValues to false, so they
+   *                           attributes, you can set exportValues to false, so they
    *                           won't be processed.
    *                           WARNING: Be sure to escape them yourself if you do so.
    * @param string $resourceName You can specify a different resource (most probably a view)
@@ -227,8 +227,8 @@ abstract class SqlDao extends Dao {
    */
   public function update($object) {
     $values = array();
-    foreach ($this->columnTypes as $column=>$type) {
-      if ($column != 'id' && $type != Dao::IGNORE) $values[] = $this->exportColumn($column) . '=' . $this->exportValue($object->getValue($column), $type, $this->notNull($column));
+    foreach ($this->attributes as $column=>$type) {
+      if ($column != 'id' && $type != Dao::IGNORE) $values[] = $this->exportAttributeName($column) . '=' . $this->exportValue($object->getValue($column), $type, $this->notNull($column));
     }
 
     $updateSql = "update " . $this->exportResourceName() . " set " . implode(', ', $values) . " where id=" . $this->exportInteger($object->id);
@@ -246,7 +246,7 @@ abstract class SqlDao extends Dao {
    * @param DataObject $object
    */
   public function delete($object) {
-    $this->db->query("delete from " . $this->exportResourceName() . " where id=" . $this->exportValue($object->id, $this->columnTypes['id']));
+    $this->db->query("delete from " . $this->exportResourceName() . " where id=" . $this->exportValue($object->id, $this->attributes['id']));
     $this->afterDelete($object);
   }
 
@@ -265,15 +265,15 @@ abstract class SqlDao extends Dao {
   /**
    * This function generates the SQL query for the getters.
    *
-   * @param array|DataObject $map A map or dataObject containing the column assignments.
+   * @param array|DataObject $map A map or dataObject containing the attributes.
    * @param string|array $sort can be an array with ASCENDING values, or a map like
    *                           this: array('login'=>Dao::DESC), or simply a string
-   *                           containing the column. This value will be passed to
+   *                           containing the attribute. This value will be passed to
    *                           generateSortString()
    * @param int $offset 
    * @param int $limit 
    * @param bool $exportValues When you want to have complete control over the $map
-   *                           column names, you can set exportValues to false, so
+   *                           attributes, you can set exportValues to false, so
    *                           they won't be processed.
    *                           WARNING: Be sure to escape them yourself if you do so.
    * @param string $resourceName You can pass a different resource name than the default
@@ -293,23 +293,23 @@ abstract class SqlDao extends Dao {
     $assignments = array();
 
     foreach($map as $column=>$value) {
-      if ($value instanceof DAOColumnAssignment) {
-        $column   = $value->column;
+      if ($value instanceof DaoAttributeAssignment) {
+        $column   = $value->attributeName;
         $operator = $value->operator;
         $value    = $value->value;
       }
       else { $operator = '='; }
 
-      if (!isset($this->columnTypes[$column])) {
+      if (!isset($this->attributes[$column])) {
         $trace = debug_backtrace();
-        trigger_error('The type for column ' . $column . ' was not found in ' . $trace[0]['file'] . ' on line ' . $trace[0]['line'], E_USER_ERROR);
+        trigger_error('The type for attribute ' . $column . ' was not found in ' . $trace[0]['file'] . ' on line ' . $trace[0]['line'], E_USER_ERROR);
       }
       $escapedValue = $value;
       if ($exportValues) {
-        $type = $this->columnTypes[$column];
+        $type = $this->attributes[$column];
         $escapedValue = $this->exportValue($value, $type, $this->notNull($column));
       }
-      $assignments[] = $this->exportColumn($column) . ($value === null ? ($operator == '=' ? ' is null' : ' is not null') : $operator . $escapedValue);
+      $assignments[] = $this->exportAttributeName($column) . ($value === null ? ($operator == '=' ? ' is null' : ' is not null') : $operator . $escapedValue);
     }
 
     $sort = $this->generateSortString($sort);
@@ -375,15 +375,13 @@ abstract class SqlDao extends Dao {
   /**
    * This method takes the $sort attribute and returns a typical 'order by ' SQL string.
    * If $sort is false then the $this->defaultSort is used if it exists.
-   * The sort is passed to interpretSortVariable to get a valid column list.
+   * The sort is passed to interpretSortVariable to get a valid attribute list.
    *
    * @param string|array $sort
    */
   public function generateSortString($sort) {
     if (!$sort) {
-      /* Legacy... */
-      if (isset($this->defaultOrderByColumn)) { $sort = $this->defaultOrderByColumn; }
-      else { $sort = $this->defaultSort; }
+      $sort = $this->defaultSort;
     }
     
     if ($sort) {

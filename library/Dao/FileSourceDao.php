@@ -204,7 +204,7 @@ abstract class FileSourceDao extends Dao {
     $attributes = array();
 
     foreach ($this->attributes as $attributeName=>$type) {
-      if ($attributeName != 'id' && $type != Dao::IGNORE) $attributes[$attributeName] = $this->exportValue($object->getValue($attributeName), $type, $this->notNull($attributeName));
+      if ($attributeName != 'id' && $type != Dao::IGNORE) $attributes[$attributeName] = $this->exportValue($object->get($attributeName), $type, $this->notNull($attributeName));
     }
 
     $this->fileDataSource->update($this->resourceName, $object->id, $attributes);

@@ -32,7 +32,7 @@ class DaoException extends Exception { }
 class DaoWrongValueException extends DaoException { }
 
 /**
- * The Exception if some column types are not supported.
+ * The Exception if some attribute types are not supported.
  * When importing a value, and your Dao does not support it, throw this exception.
  *
  * @author Matthias Loitsch <developer@ma.tthias.com>

@@ -228,7 +228,7 @@ abstract class SqlDao extends Dao {
   public function update($object) {
     $values = array();
     foreach ($this->attributes as $column=>$type) {
-      if ($column != 'id' && $type != Dao::IGNORE) $values[] = $this->exportAttributeName($column) . '=' . $this->exportValue($object->getValue($column), $type, $this->notNull($column));
+      if ($column != 'id' && $type != Dao::IGNORE) $values[] = $this->exportAttributeName($column) . '=' . $this->exportValue($object->get($column), $type, $this->notNull($column));
     }
 
     $updateSql = "update " . $this->exportResourceName() . " set " . implode(', ', $values) . " where id=" . $this->exportInteger($object->id);

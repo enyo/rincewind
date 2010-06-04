@@ -41,8 +41,8 @@ class DataObject implements DataObjectInterface {
 
 
   /**
-   * Contains a list of changed columns (when set() is called)
-   * Indices are the column names.
+   * Contains a list of changed attributes (when set() is called)
+   * Indices are the attribute names.
    * @var array
    */
   protected $changedAttributes;
@@ -147,13 +147,13 @@ class DataObject implements DataObjectInterface {
     $data = array();
     if (!$phpNames) return $this->data;
     foreach ($this->data as $name=>$value) {
-      $data[$this->convertDbColumnToPhpName($name)] = $value;
+      $data[$this->convertAttributeNameToPhpName($name)] = $value;
     }
     return $data;
   }
 
   /**
-   * Returns an array of all columns that have been explicitly set. The indices are the column names
+   * Returns an array of all attributes that have been explicitly set. The indices are the attribute names
    * @return array
    */
   public function getChangedAttributes() {
@@ -161,13 +161,13 @@ class DataObject implements DataObjectInterface {
   }
 
   /**
-   * Returns an array of all values that have been explicitly set. The indices are the column names.
+   * Returns an array of all values that have been explicitly set. The indices are the attribute names.
    * @return array
    */
   public function getChangedValues() {
     $values = array();
-    foreach ($this->changedAttributes as $column=>$t) {
-      $values[$column] = $this->get($column);
+    foreach ($this->changedAttributes as $attributeName=>$t) {
+      $values[$attributeName] = $this->get($attributeName);
     }
     return $values;
   }
@@ -176,101 +176,93 @@ class DataObject implements DataObjectInterface {
    * Gets the value of the $data array and returns it.
    * If the value is a DATE or DATE_WITH_TIME type, it returns a Date Object.
    *
-   * @param string $column
+   * @param string $attributeName
    * @return mixed
    **/
-  public function get($column) {
-    $column = $this->convertPhpNameToDbColumn($column);
+  public function get($attributeName) {
+    $attributeName = $this->convertAttributeNameToDatasourceName($attributeName);
 
-    if (array_key_exists($column, $this->dao->getAttributes())) {
-      $value = $this->data[$column];
+    if (array_key_exists($attributeName, $this->dao->getAttributes())) {
+      $value = $this->data[$attributeName];
     }
-    elseif (array_key_exists($column, $this->dao->getAdditionalAttributes())) {
-      $value = array_key_exists($column, $this->data) ? $this->data[$column] : null;
+    elseif (array_key_exists($attributeName, $this->dao->getAdditionalAttributes())) {
+      $value = array_key_exists($attributeName, $this->data) ? $this->data[$attributeName] : null;
     }
-    elseif (array_key_exists($column, $this->dao->getReferences())) {
-      return $this->dao->getReference($this, $column);
+    elseif (array_key_exists($attributeName, $this->dao->getReferences())) {
+      return $this->dao->getReference($this, $attributeName);
     }
     else {
-      $this->triggerUndefinedPropertyError($column);
+      $this->triggerUndefinedAttributeError($attributeName);
       return null;
     }
-    $columnType = $this->getColumnType($column);
-    if ($value !== null && ($columnType == Dao::DATE || $columnType == Dao::DATE_WITH_TIME)) $value = new Date($value);
+    $attributeType = $this->getAttributeType($attributeName);
+    if ($value !== null && ($attributeType == Dao::DATE || $attributeType == Dao::DATE_WITH_TIME)) $value = new Date($value);
     return $value;
   }
-  /**
-   * @deprecated Use get() instead
-   **/
-  public function getValue($column) { return $this->get($column); }
 
   /**
    * You should NEVER use this function your app.
    * This is only a helper function for Daos to access the data directly.
    *
-   * @param string $column
+   * @param string $attributeName
    * @param mixed $value
    */
-  public function getDirectly($column) {
-    $column = $this->convertPhpNameToDbColumn($column);
-    return isset($this->data[$column]) ? $this->data[$column] : null;
+  public function getDirectly($attributeName) {
+    $attributeName = $this->convertAttributeNameToDatasourceName($attributeName);
+    return isset($this->data[$attributeName]) ? $this->data[$attributeName] : null;
   }
   
 
   /**
    * Sets the value in the $data array after calling coerce() on the value.
    *
-   * @param string $column
+   * @param string $attributeName
    * @param mixed $value
    * @return DataObject Returns itself for chaining.
    **/
-  public function set($column, $value) {
-    $column = $this->convertPhpNameToDbColumn($column);
+  public function set($attributeName, $value) {
+    $attributeName = $this->convertAttributeNameToDatasourceName($attributeName);
 
-    if (!array_key_exists($column, $this->dao->getAttributes())) {
-      $this->triggerUndefinedPropertyError($column);
+    if (!array_key_exists($attributeName, $this->dao->getAttributes())) {
+      $this->triggerUndefinedAttributeError($attributeName);
       return $this;
     }
-    $value = self::coerce($value, $this->getColumnType($column), in_array($column, $this->dao->getNullAttributes()));
-    $this->data[$column] = $value;
-    $this->changedAttributes[$column] = true;
+    $value = self::coerce($value, $this->getAttributeType($attributeName), in_array($attributeName, $this->dao->getNullAttributes()));
+    $this->data[$attributeName] = $value;
+    $this->changedAttributes[$attributeName] = true;
     return $this;
   }
-  /**
-   * @deprecated Use set() instead
-   **/
-  public function setValue($column, $value) { return $this->set($column, $value); }
 
   /**
    * You should NEVER use this function in your app.
    * This is only a helper function for Daos to access the data directly.
    *
-   * @param string $column
+   * @param string $attributeName
    * @param mixed $value
    */
-  public function setDirectly($column, $value) {
-    $this->data[$this->convertPhpNameToDbColumn($column)] = $value;
+  public function setDirectly($attributeName, $value) {
+    $this->data[$this->convertAttributeNameToDatasourceName($attributeName)] = $value;
   }
   
 
   /**
-   * Converts a php column name to the db name.
-   * Per default this simply transforms theColumn to the_column.
+   * Converts a php attribute name to the datasource name.
+   * Per default this simply transforms theAttribute to the_attribute.
    * If you data source handles names differently, overwrite this methods, and change your Daos to use your
    * own implementation of DataObjects.
    *
-   * @param string $column
+   * @param string $attributeName
    * @return string 
    */
-  protected function convertPhpNameToDbColumn($column) { return preg_replace('/([A-Z])/e', 'strtolower("_$1");', $column); }
+  protected function convertAttributeNameToDatasourceName($attributeName) { return preg_replace('/([A-Z])/e', 'strtolower("_$1");', $attributeName); }
   /**
-   * Converts a db column name to the php name.
-   * Per default this simply transforms the_column to theColumn.
+   * Converts a datasource attribute name to the php name.
+   * Per default this simply transforms the_attribute to theAttribute.
    *
-   * @param string $column
+   * @param string $attributeName
    * @return string 
    */
-  protected function convertDbColumnToPhpName($column) { return preg_replace('/_([a-z])/e', 'strtoupper("$1");', $column); }
+  protected function convertAttributeNameToPhpName($attributeName) { return preg_replace('/_([a-z])/e', 'strtoupper("$1");', $attributeName); }
 
   protected function convertGetMethodToPhpColumn($method) {
     $method = substr($method, 3);
@@ -278,15 +270,19 @@ class DataObject implements DataObjectInterface {
   }
   protected function convertSetMethodToPhpColumn($method) { return $this->convertGetMethodToPhpColumn($method); }
 
-  private function triggerUndefinedPropertyError($column) {
+  /**
+   * Triggers an undefined attribute error.
+   * @param string $attributeName
+   */
+  private function triggerUndefinedAttributeError($attributeName) {
     $trace = debug_backtrace();
-    trigger_error("Undefined column: $column in " . $trace[1]['file'] . ' on line ' . $trace[1]['line'], E_USER_ERROR);
+    trigger_error("Undefined attribute: $attributeName in " . $trace[1]['file'] . ' on line ' . $trace[1]['line'], E_USER_ERROR);
   }
 
   /**
    * Overloading the DataObject
    */
-  public function __isset($column) { return isset($this->data[$this->convertPhpNameToDbColumn($column)]); }
+  public function __isset($attributeName) { return isset($this->data[$this->convertAttributeNameToDatasourceName($attributeName)]); }
 
   public function __set($phpColumn, $value) {
     $this->set($phpColumn, $value);
@@ -316,25 +312,25 @@ class DataObject implements DataObjectInterface {
 
 
   /**
-   * Returns the type of the column defined in the Dao.
-   * If getAttributes() does not return the correct type, getAdditionalAttributes is tried.
+   * Returns the type of the attribute defined in the Dao.
+   * If getAttributes() does not return the correct type, getAdditionalAttributes() is tried.
    *
-   * @param string $column The column name
+   * @param string $attributeName The attribute name
    * @return INT
    */
-  protected function getColumnType($column) {
-    if (array_key_exists($column, $this->dao->getAttributes())) {
-      $columnTypes = $this->dao->getAttributes();
+  protected function getAttributeType($attributeName) {
+    if (array_key_exists($attributeName, $this->dao->getAttributes())) {
+      $attributeTypes = $this->dao->getAttributes();
     }
-    elseif (array_key_exists($column, $this->dao->getAdditionalAttributes())) {
-      $columnTypes = $this->dao->getAdditionalAttributes();
+    elseif (array_key_exists($attributeName, $this->dao->getAdditionalAttributes())) {
+      $attributeTypes = $this->dao->getAdditionalAttributes();
     }
     else {
       $trace = debug_backtrace();
-      trigger_error('No valid type found for column '.$column.' in ' . $trace[0]['file'] . ' on line ' . $trace[0]['line'], E_USER_ERROR);
+      trigger_error('No valid type found for attribute `' . $attributeName . '` in ' . $trace[0]['file'] . ' on line ' . $trace[0]['line'], E_USER_ERROR);
       return;
     }
-    return $columnTypes[$column];
+    return $attributeTypes[$attributeName];
   }
 
 

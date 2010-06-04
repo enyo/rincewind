@@ -32,14 +32,14 @@ include dirname(__FILE__) . '/MysqlResultIterator.php';
 class MysqlDao extends SqlDao {
 
   /**
-   * Takes a php attribute name, converts it via import/export column mapping, escapes it, and adds quotes.
-   * This is the correct way to insert column names in a SQL query.
+   * Takes a php attribute name, converts it via import/export attribute mapping, escapes it, and adds quotes.
+   * This is the correct way to insert attribute names in a SQL query.
    *
-   * @param string $column
+   * @param string $attributeName
    * @return string
    */
-  public function exportAttributeName($column) {
-    return '`' . $this->escapeAttributeName($this->applyAttributeExportMapping($column)) . '`';
+  public function exportAttributeName($attributeName) {
+    return '`' . $this->escapeAttributeName($this->applyAttributeExportMapping($attributeName)) . '`';
   }
 
   /**

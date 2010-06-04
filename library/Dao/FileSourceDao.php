@@ -252,7 +252,7 @@ abstract class FileSourceDao extends Dao {
 
       if (!isset($this->attributes[$attributeName])) {
         $trace = debug_backtrace();
-        trigger_error('The type for attribute ' . $attributeName . ' was not found in ' . $trace[0]['file'] . ' on line ' . $trace[0]['line'], E_USER_ERROR);
+        trigger_error('The type for attribute ' . $attributeName . ' ('.$this->resourceName.') is not defined in ' . $trace[2]['file'] . ' on line ' . $trace[2]['line'], E_USER_ERROR);
       }
 
       $type = $this->attributes[$attributeName];

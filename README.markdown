@@ -12,7 +12,7 @@ This library is meant to facilitate common tasks in PHP.
 
 The biggest and probably most used part of the library is the Dao.
 
-Once your Dao is configured (simply define the types of columns you have in your database table), you access your database like this:
+Once your Dao is configured (simply define the attributes you have in your resource), you access your datasource like this:
 
     <?php
     $user = $userDao->getById($id);
@@ -31,7 +31,7 @@ You can also chain calls like this:
     ?>
 
 One thing that's really cool with Daos are references.
-Eg.: You can specify that the column `address_id` points to the foreign key `id` on the AddressDao, and that you can access that object on the `address` property.
+Eg.: You can specify that the attribute `address_id` points to the foreign key `id` on the AddressDao, and that you can access that object on the `address` property.
 This means that you can then simply access the address like this:
 
     <?php
@@ -62,7 +62,7 @@ The submitted data could look like this:
     { "id": 4, "username": "Joe", "address_id": 3, "address": { "id": 3, "street": "Somethinglane 3" }}
 
 This works for chained references too of course!
-This would be the most direct way to access the country name of the user with username 'Billy' if you had 4 tables: users, addresses, cities and countries, and they were all joined:
+This would be the most direct way to access the country name of the user with username 'Billy' if you had 4 resources: users, addresses, cities and countries, and they were all joined:
 
     <?php
     $countryName = $userDao->get()->set('username', 'Billy')
@@ -75,9 +75,9 @@ This would be the most direct way to access the country name of the user with us
 
 
 
-Daos support import/export definitions (so you can rename table columns the way you like them in your php script), escape all values correctly, and check for the correct values when setting them.
+Daos support import/export definitions (so you can rename datasource attributes the way you like them in your php script), escape all values correctly, and check for the correct values when setting them.
 
-You can specify if a column is allowed to be null, and the type for it.
+You can specify if an attribute is allowed to be null, and the type for it.
 Supported types are:
 
 - INT

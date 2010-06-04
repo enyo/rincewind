@@ -62,7 +62,7 @@ class XmlDao extends FileSourceDao {
     xml_parser_set_option($parser, XML_OPTION_SKIP_TAGSTART, 0);
     xml_parser_set_option($parser, XML_OPTION_TARGET_ENCODING, 'UTF-8');
     if (!xml_parse_into_struct($parser, $content, $values, $tags)) {
-      throw new XmlDaoException('Could not parse XML for table ' . $this->tableName. '.');
+      throw new XmlDaoException('Could not parse XML for resource ' . $this->resourceName. '.');
     }
     xml_parser_free($parser);
 
@@ -73,13 +73,13 @@ class XmlDao extends FileSourceDao {
     $errorMessages = array();
 
     foreach ($tags as $key=>$value) {
-      if ($key == $this->tableName . 'Entry') {
+      if ($key == $this->resourceName . 'Entry') {
         $count = 0;
         $items = $value;
         // There's always the start and the end... therefore: every 2 items
         for ($i=0; $i < count($items); $i+=2)
         {
-          if (!isset($items[$i]) || !isset($items[$i + 1])) { file_put_contents('/tmp/TTT', $content); throw new XmlDaoException('The XML file seems to be incorrect for table \'' .$this->tableName. '\'.'); }
+          if (!isset($items[$i]) || !isset($items[$i + 1])) { file_put_contents('/tmp/TTT', $content); throw new XmlDaoException('The XML file seems to be incorrect for resource \'' .$this->resourceName. '\'.'); }
           $offset = $items[$i] + 1;
           $len = $items[$i + 1] - $offset;
           $fields = array_slice($values, $offset, $len);
@@ -92,7 +92,7 @@ class XmlDao extends FileSourceDao {
           $count ++;
         }
       }
-      elseif ($key == $this->tableName . 'RowCount')
+      elseif ($key == $this->resourceName . 'RowCount')
       {
         $rowCount = intval(@$values[$value[0]]['value']);
       }
@@ -103,7 +103,7 @@ class XmlDao extends FileSourceDao {
         // There's always the start and the end... therefore: every 2 items
         for ($i=0; $i < count($items); $i+=2)
         {
-          if (!isset($items[$i]) || !isset($items[$i + 1])) { throw new XmlDaoException('The XML file seems to be incorrect for table \'' . $this->tableName . '\'. (The errors section is not formatted correctly)'); }
+          if (!isset($items[$i]) || !isset($items[$i + 1])) { throw new XmlDaoException('The XML file seems to be incorrect for resource \'' . $this->resourceName . '\'. (The errors section is not formatted correctly)'); }
           $offset = $items[$i] + 1;
           $len = $items[$i + 1] - $offset;
           $fields = array_slice($values, $offset, $len);
@@ -122,7 +122,7 @@ class XmlDao extends FileSourceDao {
         $items = $value;
         // There's always the start and the end... therefore: every 2 items
         for ($i=0; $i < count($items); $i+=2) {
-          if (!isset($items[$i]) || !isset($items[$i + 1])) { throw new XmlDaoException('The XML file seems to be incorrect for table \'' . $this->tableName . '\'. (The debug section is not formatted correctly)'); }
+          if (!isset($items[$i]) || !isset($items[$i + 1])) { throw new XmlDaoException('The XML file seems to be incorrect for resource \'' . $this->resourceName . '\'. (The debug section is not formatted correctly)'); }
           $offset = $items[$i] + 1;
           $len = $items[$i + 1] - $offset;
           $fields = array_slice($values, $offset, $len);
@@ -136,7 +136,7 @@ class XmlDao extends FileSourceDao {
     }
 
     if ($error) {
-      throw new XmlDaoException("Error while retrieving data for table '" . $this->tableName . "'.\n The server responded: '" . implode("\n", $errorMessages) . "'");
+      throw new XmlDaoException("Error while retrieving data for resource '" . $this->resourceName . "'.\n The server responded: '" . implode("\n", $errorMessages) . "'");
     }
 
     if (!$rowCount) { $rowCount = count($itemList); }
@@ -145,10 +145,10 @@ class XmlDao extends FileSourceDao {
   }
 
 
-  public function get($map = null, $exportValues = true, $tableName = null) {
+  public function get($map = null, $exportValues = true, $resourceName = null) {
     if (!$map) return $this->getRawObject();
 
-    $content = $this->fileDataSource->view($this->exportTable($tableName ? $tableName : ($this->viewName ? $this->viewName : $this->tableName)), $exportValues ? $this->exportMap($map) : $map);
+    $content = $this->fileDataSource->view($this->exportResourceName($resourceName ? $resourceName : ($this->viewName ? $this->viewName : $this->resourceName)), $exportValues ? $this->exportMap($map) : $map);
 
     $data = $this->interpretFileContent($content);
 
@@ -158,8 +158,8 @@ class XmlDao extends FileSourceDao {
   /**
    * Just calls the parent, but then returns only one element of the list
    */
-  public function getData($map, $exportValues = true, $tableName = null) {
-    $data = parent::getData($map, $exportValues, $tableName);
+  public function getData($map, $exportValues = true, $resourceName = null) {
+    $data = parent::getData($map, $exportValues, $resourceName);
     return $data[0];
   }
 

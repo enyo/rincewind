@@ -12,7 +12,7 @@
 	 * The test dao with all column types to be tested.
 	 */
 	class MysqlTestDao extends MysqlDao {
-		protected $tableName = 'dao_test';
+		protected $resourceName = 'dao_test';
 		
 		protected $columnTypes = array(
 			'id'=>Dao::INTEGER,

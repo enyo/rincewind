@@ -31,13 +31,13 @@ abstract class SqlDao extends Dao {
 
   /**
    * @param Database $db
-   * @param string $tableName You should specify this as an attribute when writing a Dao implementation
+   * @param string $resourceName You should specify this as an attribute when writing a Dao implementation
    * @param array $columnTypes You should specify this as an attribute when writing a Dao implementation
    * @param array $nullColumns You should specify this as an attribute when writing a Dao implementation
    * @param array $defaultColumns You should specify this as an attribute when writing a Dao implementation
    */
-  public function __construct($db, $tableName = null, $columnTypes = null, $nullColumns = null, $defaultColumns = null) {
-    parent::__construct($tableName, $columnTypes, $nullColumns, $defaultColumns);
+  public function __construct($db, $resourceName = null, $columnTypes = null, $nullColumns = null, $defaultColumns = null) {
+    parent::__construct($resourceName, $columnTypes, $nullColumns, $defaultColumns);
     $this->db = $db;
   }
 
@@ -104,13 +104,13 @@ abstract class SqlDao extends Dao {
   }
   
   /**
-   * Calls the internal db->escapeTable function
+   * Calls the internal db->escapeResourceName function
    * 
-   * @param string $table
+   * @param string $resourceName
    * @return string
    */
-  protected function escapeTable($table = null) {
-    return $this->db->escapeTable($table ? $table : $this->tableName);
+  protected function escapeResourceName($resourceName = null) {
+    return $this->db->escapeTable($resourceName ? $resourceName : $this->resourceName);
   }
   
 
@@ -148,16 +148,16 @@ abstract class SqlDao extends Dao {
    *                           column names, you can set exportValues to false, so they
    *                           won't be processed.
    *                           WARNING: Be sure to escape them yourself if you do so.
-   * @param string $tableName You can specify a different table (most probably a view)
+   * @param string $resourceName You can specify a different resource (most probably a view)
    *                          to get data from.
    *                          If not set, $this->viewName will be used if present; if not
-   *                          $this->tableName is used.
+   *                          $this->resourceName is used.
    * @see generateQuery()
    * @see get()
    * @return DataObject
    */
-  public function find($map = null, $exportValues = true, $tableName = null) {
-    return $this->getFromQuery($this->generateQuery($map, $sort = null, $offset = null, $limit = 1, $exportValues, $tableName ? $tableName : ($this->viewName ? $this->viewName : $this->tableName)));
+  public function find($map = null, $exportValues = true, $resourceName = null) {
+    return $this->getFromQuery($this->generateQuery($map, $sort = null, $offset = null, $limit = 1, $exportValues, $resourceName ? $resourceName : ($this->viewName ? $this->viewName : $this->resourceName)));
   }
 
   /**
@@ -165,13 +165,13 @@ abstract class SqlDao extends Dao {
    *
    * @param array|DataObject $map
    * @param bool $exportValues
-   * @param string $tableName
+   * @param string $resourceName
    * @see get()
    * @see generateQuery()
    * @return array
    */
-  public function getData($map, $exportValues = true, $tableName = null) {
-    $data = $this->getFromQuery($this->generateQuery($map, $sort = null, $offset = null, $limit = 1, $exportValues, $tableName ? $tableName : ($this->viewName ? $this->viewName : $this->tableName)), $returnData = true);
+  public function getData($map, $exportValues = true, $resourceName = null) {
+    $data = $this->getFromQuery($this->generateQuery($map, $sort = null, $offset = null, $limit = 1, $exportValues, $resourceName ? $resourceName : ($this->viewName ? $this->viewName : $this->resourceName)), $returnData = true);
     if (!$data) throw new DaoNotFoundException("The query did not return any results.");
     return $this->prepareDataForObject($data);
   }
@@ -184,13 +184,13 @@ abstract class SqlDao extends Dao {
    * @param int $offset 
    * @param int $limit 
    * @param bool $exportValues
-   * @param string $tableName
+   * @param string $resourceName
    * @see get()
    * @see generateQuery()
    * @return DaoResultIterator
    */
-  public function getIterator($map, $sort = null, $offset = null, $limit = null, $exportValues = true, $tableName = null) {
-    return $this->getIteratorFromQuery($this->generateQuery($map, $sort, $offset, $limit, $exportValues, $tableName ? $tableName : ($this->viewName ? $this->viewName : $this->tableName)));
+  public function getIterator($map, $sort = null, $offset = null, $limit = null, $exportValues = true, $resourceName = null) {
+    return $this->getIteratorFromQuery($this->generateQuery($map, $sort, $offset, $limit, $exportValues, $resourceName ? $resourceName : ($this->viewName ? $this->viewName : $this->resourceName)));
   }
 
 
@@ -206,7 +206,7 @@ abstract class SqlDao extends Dao {
     
     list ($columns, $values) = $this->generateInsertArrays($object);
 
-    $insertSql = "insert into " . $this->exportTable() . " (" . implode(', ', $columns) . ") values (" . implode(', ', $values) . ");";
+    $insertSql = "insert into " . $this->exportResourceName() . " (" . implode(', ', $columns) . ") values (" . implode(', ', $values) . ");";
     
     $newId = $this->insertByQuery($insertSql, $object->id);
 
@@ -231,7 +231,7 @@ abstract class SqlDao extends Dao {
       if ($column != 'id' && $type != Dao::IGNORE) $values[] = $this->exportColumn($column) . '=' . $this->exportValue($object->getValue($column), $type, $this->notNull($column));
     }
 
-    $updateSql = "update " . $this->exportTable() . " set " . implode(', ', $values) . " where id=" . $this->exportInteger($object->id);
+    $updateSql = "update " . $this->exportResourceName() . " set " . implode(', ', $values) . " where id=" . $this->exportInteger($object->id);
 
     $this->db->query($updateSql);
 
@@ -246,19 +246,19 @@ abstract class SqlDao extends Dao {
    * @param DataObject $object
    */
   public function delete($object) {
-    $this->db->query("delete from " . $this->exportTable() . " where id=" . $this->exportValue($object->id, $this->columnTypes['id']));
+    $this->db->query("delete from " . $this->exportResourceName() . " where id=" . $this->exportValue($object->id, $this->columnTypes['id']));
     $this->afterDelete($object);
   }
 
 
 
   /**
-   * Returns the total row count in the table the Dao is assigned to.
+   * Returns the total row count in the resource the Dao is assigned to.
    *
    * @return int
    */
   public function getTotalCount() {
-    return $this->db->query("select count(id) as count from " . $this->exportTable())->fetch('count');
+    return $this->db->query("select count(id) as count from " . $this->exportResourceName())->fetch('count');
   }
 
 
@@ -276,11 +276,11 @@ abstract class SqlDao extends Dao {
    *                           column names, you can set exportValues to false, so
    *                           they won't be processed.
    *                           WARNING: Be sure to escape them yourself if you do so.
-   * @param string $tableName You can pass a different table name than the default
+   * @param string $resourceName You can pass a different resource name than the default
    *                          one. This is mostly used for views. 
    * @return string
    */
-  protected function generateQuery($map, $sort = null, $offset = null, $limit = null, $exportValues = true, $tableName = null) {
+  protected function generateQuery($map, $sort = null, $offset = null, $limit = null, $exportValues = true, $resourceName = null) {
     if ($offset !== null && !is_int($offset) ||
       $limit !== null && !is_int($limit) ||
       !is_bool($exportValues)) {
@@ -314,7 +314,7 @@ abstract class SqlDao extends Dao {
 
     $sort = $this->generateSortString($sort);
 
-    $query  = 'select * from ' . $this->exportTable($tableName);
+    $query  = 'select * from ' . $this->exportResourceName($resourceName);
     if (count($assignments) > 0) $query .= ' where ' . implode(' and ', $assignments);
     $query .= " " . $sort;
     if ($offset !== null) { $query .= " offset " . intval($offset); }

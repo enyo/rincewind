@@ -45,11 +45,11 @@ class MysqlDao extends SqlDao {
   /**
    * Escapes and quotes a table name.
    *
-   * @param string $table
+   * @param string $resourceName
    * @return string The escaped and quoted table name.
    */
-  public function exportTable($table = null) {
-    return '`' . $this->escapeTable($table ? $table : $this->tableName) . '`';
+  public function exportResourceName($resourceName = null) {
+    return '`' . $this->escapeResourceName($resourceName ? $resourceName : $this->resourceName) . '`';
   }
 
   /**

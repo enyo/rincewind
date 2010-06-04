@@ -27,7 +27,7 @@ class RawTestDao extends SqlDao {
     return new RawTestDataObject($data);
   }
   public function exportColumn($column) {  }
-  public function exportTable($table = null) {  }
+  public function exportResourceName($resource = null) {  }
   public function exportString($text) {  }
   protected function getLastInsertId() {  }
   protected function createIterator($result) { return $result; }
@@ -122,7 +122,7 @@ class SqlDao_Returns_Test extends Snap_UnitTestCase {
 require_once(LIBRARY_ROOT_PATH . 'DatabaseResult/DatabaseResultInterface.php');
 
 class RawTestDao2 extends SqlDao {
-  protected $tableName = 'test_table_name';
+  protected $resourceName = 'test_resource_name';
   protected $columnTypes = array(
     'id'=>Dao::INT,
     'name'=>Dao::STRING,
@@ -132,7 +132,7 @@ class RawTestDao2 extends SqlDao {
     return new RawTestDataObject($data);
   }
   public function exportColumn($column) { return $column; }
-  public function exportTable($table = null) { return $table; }
+  public function exportResourceName($resource = null) { return $resource; }
   public function exportString($text) { return $text; }
   protected function getLastInsertId() {  }
   protected function createIterator($result) { return $result; }
@@ -149,13 +149,13 @@ class SqlDao_Queries_Test extends Snap_UnitTestCase {
       ->setReturnValue('fetchArray', array('id'=>1, 'name'=>'test', 'is_admin'=>true))
       ->construct(null);
     $this->db = $this->mock('DatabaseInterface')
-      ->setReturnValue('escapeTable', 'ESCAPED_TABLE')
+      ->setReturnValue('escapeTable', 'ESCAPED_RESOURCE')
       ->setReturnValue('escapeString', 'ESCAPED_STRING')
       ->setReturnValue('escapeColumn', 'ESCAPED_COLUMN')
       ->setReturnValue('query', $this->result)
-      ->listenTo('query', array(new Snap_Identical_Expectation('select * from test_table_name where id=4  limit 1')))
-      ->listenTo('query', array(new Snap_Identical_Expectation('select * from test_table_name where id=7  limit 1')))
-      ->listenTo('query', array(new Snap_Identical_Expectation('select * from test_table_name where id=11 and name=TEST  limit 1')))
+      ->listenTo('query', array(new Snap_Identical_Expectation('select * from test_resource_name where id=4  limit 1')))
+      ->listenTo('query', array(new Snap_Identical_Expectation('select * from test_resource_name where id=7  limit 1')))
+      ->listenTo('query', array(new Snap_Identical_Expectation('select * from test_resource_name where id=11 and name=TEST  limit 1')))
       ->construct(null);
     $this->dao = new RawTestDao2($this->db);
   }
@@ -164,14 +164,14 @@ class SqlDao_Queries_Test extends Snap_UnitTestCase {
 
   public function testQuery() {
     $this->dao->getById(4);
-    return $this->assertCallCount($this->db, 'query', 1, array(new Snap_Identical_Expectation('select * from test_table_name where id=4  limit 1')));
+    return $this->assertCallCount($this->db, 'query', 1, array(new Snap_Identical_Expectation('select * from test_resource_name where id=4  limit 1')));
   }
 
   public function testQueryWithDataObjectAsColumn() {
     $dataObject = new DataObject(array(), $this->dao);
     $dataObject->id = 7;
     $this->dao->get($dataObject);
-    return $this->assertCallCount($this->db, 'query', 1, array(new Snap_Identical_Expectation('select * from test_table_name where id=7  limit 1')));
+    return $this->assertCallCount($this->db, 'query', 1, array(new Snap_Identical_Expectation('select * from test_resource_name where id=7  limit 1')));
   }
 
   public function testQueryWithDataObjectAsColumns() {
@@ -179,7 +179,7 @@ class SqlDao_Queries_Test extends Snap_UnitTestCase {
     $dataObject->id = 11;
     $dataObject->name = 'TEST';
     $this->dao->get($dataObject);
-    return $this->assertCallCount($this->db, 'query', 1, array(new Snap_Identical_Expectation('select * from test_table_name where id=11 and name=TEST  limit 1')));
+    return $this->assertCallCount($this->db, 'query', 1, array(new Snap_Identical_Expectation('select * from test_resource_name where id=11 and name=TEST  limit 1')));
   }
 
 }

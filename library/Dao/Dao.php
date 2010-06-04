@@ -60,14 +60,14 @@ if (!class_exists('Date', false)) include dirname(dirname(__FILE__)) . '/Date/Da
 
 /**
  * This abstract base class for all Daos.
- * IMPORTANT NOTE: The Dao (and DataObject for that matter) depend on the table
+ * IMPORTANT NOTE: The Dao (and DataObject for that matter) depend on the resource
  * having a primary `id` column!
- * If your table layout does not provide this column, the framework will not work.
+ * If your resource layout does not provide this column, the framework will not work.
  *
  * The typical usage of the Dao is as follows:
  * <code>
  * <?php
- *   $userDao = new UserDao($database); // UserDao extends MysqlDao for example
+ *   $userDao = new UserDao($datasource); // UserDao extends MysqlDao for example
  *   $userDao->get()->set('username', 'user2000')->save(); // Insert new user
  *   $userDao->getById(4)->set('name', 'New Name')->save(); // Update existing user
  *   $userDao->getByUsername('user2000')->delete(); // Deletes the user.
@@ -75,14 +75,14 @@ if (!class_exists('Date', false)) include dirname(dirname(__FILE__)) . '/Date/Da
  * ?>
  * </code>
  *
- * To create a Dao for you table, simply extend a Dao implementation (eg: MysqlDao)
+ * To create a Dao for you resource, simply extend a Dao implementation (eg: MysqlDao)
  * and set the necessary properties.
  * Example:
  * <code>
  * <?php
  *   class UserDao extends MysqlDao {
  *
- *     protected $tableName = 'users';
+ *     protected $resourceName = 'users';
  *
  *     protected $columnTypes = array(
  *       'id'=>Dao::INT,
@@ -160,13 +160,13 @@ abstract class Dao implements DaoInterface {
    *
    * You should configure them as member variables when defining your Daos.
    *
-   * @param string $tableName You should specify this as an attribute when writing a Dao implementation
+   * @param string $resourceName You should specify this as an attribute when writing a Dao implementation
    * @param array $columnTypes You should specify this as an attribute when writing a Dao implementation
    * @param array $nullColumns You should specify this as an attribute when writing a Dao implementation
    * @param array $defaultColumns You should specify this as an attribute when writing a Dao implementation
    */
-  public function __construct($tableName = null, $columnTypes = null, $nullColumns = null, $defaultColumns = null) {
-    if ($tableName) $this->tableName = $tableName;
+  public function __construct($resourceName = null, $columnTypes = null, $nullColumns = null, $defaultColumns = null) {
+    if ($resourceName) $this->resourceName = $resourceName;
     if ($columnTypes) $this->columnTypes = $columnTypes;
     if ($nullColumns) $this->nullColumns = $nullColumns;
     if ($defaultColumns) $this->defaultColumns = $defaultColumns;
@@ -182,14 +182,14 @@ abstract class Dao implements DaoInterface {
   protected $logger = null;
 
   /**
-   * This is the table name this Dao works with.
+   * This is the resource name this Dao works with.
    * @var string
    */
-  protected $tableName = null;
+  protected $resourceName = null;
 
   /**
-   * This viewName will be used in every get() (and getIterator) instead of the tableName.
-   * For updating and inserts tableName is still used.
+   * This viewName will be used in every get() (and getIterator) instead of the resourceName.
+   * For updating and inserts resourceName is still used.
    * @var string
    */
   protected $viewName = null;
@@ -213,9 +213,9 @@ abstract class Dao implements DaoInterface {
 
   /**
    * This works exactly the same as the column types, except that it only defines columns, that may additionally be returned by the
-   * database (for example in joins).
+   * datasource (for example in joins).
    * Those values can *not* be set in the DataObjects afterwards, but are checked for their types when retrieved.
-   * When trying to get an additional column out of a DataObject, that has not been retrieved from the database, the DataObject should
+   * When trying to get an additional column out of a DataObject, that has not been retrieved from the datasource, the DataObject should
    * just return null and not error.
    * When trying to set an additional column the DataObject should trigger an error.
    *
@@ -226,7 +226,7 @@ abstract class Dao implements DaoInterface {
 
 
   /**
-   * The references array contains a list of DaoReference instances to map certain columns to other tables.
+   * The references array contains a list of DaoReference instances to map certain columns to other resources.
    * You set them in the setupReferences method, that gets called in the constructor.
    *
    * This array would look like this then:
@@ -267,7 +267,7 @@ abstract class Dao implements DaoInterface {
    */
   protected function addReference($identifier, $daoClassName, $localKey = null, $foreignKey = 'id') {
     if ($localKey && !$this->columnExists($localKey)) {
-      trigger_error(sprintf('Local key `%s` does not exist in the %s Dao.', $localKey, $this->tableName), E_USER_ERROR);
+      trigger_error(sprintf('Local key `%s` does not exist in the %s Dao.', $localKey, $this->resourceName), E_USER_ERROR);
     }
     $this->references[$identifier] = new DaoReference($daoClassName, $localKey, $foreignKey);
   }
@@ -283,7 +283,7 @@ abstract class Dao implements DaoInterface {
    */
   protected function addToManyReference($identifier, $daoClassName, $localKey = null, $foreignKey = 'id') {
     if ($localKey && (!$this->columnExists($localKey) || $this->columnTypes[$localKey] != Dao::SEQUENCE)) {
-      trigger_error(sprintf('Local key `%s` does not exist or is not a Dao::SEQUENCE in the %s Dao.', $localKey, $this->tableName), E_USER_ERROR);
+      trigger_error(sprintf('Local key `%s` does not exist or is not a Dao::SEQUENCE in the %s Dao.', $localKey, $this->resourceName), E_USER_ERROR);
     }
     $this->references[$identifier] = new DaoToManyReference($daoClassName, $localKey, $foreignKey);
   }
@@ -347,6 +347,7 @@ abstract class Dao implements DaoInterface {
 
         if ($localKey && $foreignKey) {
           $localValue = $dataObject->get($localKey);
+          if ($localValue === null) return null;
           $return = $dao->get(array($foreignKey=>$localValue));
           $dataObject->setDirectly($column, $return->getArray());
           return $return;
@@ -371,12 +372,12 @@ abstract class Dao implements DaoInterface {
 
 
   /**
-   * If your database holds different column names than you want in you DataObjects, you can specify export & import mappings.
-   * (Don't confuse this with your php values. Meaning: if the database value is 'strangely_named', but you want to access your object
+   * If your datasource holds different column names than you want in you DataObjects, you can specify export & import mappings.
+   * (Don't confuse this with your php values. Meaning: if the datasource value is 'strangely_named', but you want to access your object
    * like this: $object->perfectName, then you have to map it from strangely_named to perfect_name (not perfectName).)
    * If no mapping is found in the imports, than a reverse lookup is done in exports, and vice versa, so for a normal conversion
    * only the columnImportMapping (or columnExportMapping if you prefer) has to be set.
-   * E.g.: array('what_the_database_value_actually_is'=>'what_you_would_want_it_to_be');
+   * E.g.: array('what_the_datasource_value_actually_is'=>'what_you_would_want_it_to_be');
    *
    * @var array
    */
@@ -398,9 +399,9 @@ abstract class Dao implements DaoInterface {
 
 
   /**
-   * This is a list of columns that have default values in the database.
-   * This means that, if the values are NULL, and the entry is inserted in the database, they will not be
-   * passed, so that the database can automatically set the values.
+   * This is a list of columns that have default values in the datasource.
+   * This means that, if the values are NULL, and the entry is inserted in the datasource, they will not be
+   * passed, so that the datasource can automatically set the values.
    * So when you call getRawObject() those values will be null.
    * Per default the id is given.
    *
@@ -420,15 +421,15 @@ abstract class Dao implements DaoInterface {
    *                           column names, you can set exportValues to false, so they
    *                           won't be processed.
    *                           WARNING: Be sure to escape them yourself if you do so.
-   * @param string $tableName You can specify a different table (most probably a view)
+   * @param string $resourceName You can specify a different resource (most probably a view)
    *                          to get data from.
    *                          If not set, $this->viewName will be used if present; if not
-   *                          $this->tableName is used.
+   *                          $this->resourceName is used.
    * @return DataObject
    */
-  public function get($map = null, $exportValues = true, $tableName = null) {
+  public function get($map = null, $exportValues = true, $resourceName = null) {
     if (!$map) return $this->getRawObject();
-    $dataObject = $this->find($map, $exportValues, $tableName);
+    $dataObject = $this->find($map, $exportValues, $resourceName);
     if (!$dataObject) throw new DaoNotFoundException('Did not find any object.');
     return $dataObject;
   }
@@ -460,7 +461,7 @@ abstract class Dao implements DaoInterface {
   /**
    * @param LoggerFactory $loggerFactory
    */
-  public function setLoggerFactory($loggerFactory) { $this->setLogger($loggerFactory->getLogger($this->tableName . 'Dao')); }
+  public function setLoggerFactory($loggerFactory) { $this->setLogger($loggerFactory->getLogger($this->resourceName . 'Dao')); }
 
   /**
    * @param Logger $logger
@@ -646,7 +647,7 @@ abstract class Dao implements DaoInterface {
   }
 
   /**
-   * Converts the database column name to a valid php name.
+   * Converts the datasource column name to a valid php name.
    * This is done with applyColumnImportMapping()
    *
    * @param string $column
@@ -722,9 +723,9 @@ abstract class Dao implements DaoInterface {
 
   /**
    * Prepares the data, and gets a new object.
-   * This is the way you should get a DataObject from database data with.
+   * This is the way you should get a DataObject from datasource data with.
    *
-   * @param array $data The data returned from the database
+   * @param array $data The data returned from the datasource
    * @see prepareDataForObject()
    * @see getObjectFromPreparedData()
    * @return DataObject
@@ -736,7 +737,7 @@ abstract class Dao implements DaoInterface {
   /**
    * Prepares the data, and updates the object
    *
-   * @param array $data The data returned from the database
+   * @param array $data The data returned from the datasource
    * @param DataObject $object The object to be updated
    * @see prepareDataForObject()
    * @return void
@@ -748,7 +749,7 @@ abstract class Dao implements DaoInterface {
 
 
   /**
-   * Goes through the data array returned from the database, and converts the values that are necessary.
+   * Goes through the data array returned from the datasource, and converts the values that are necessary.
    * Meaning: if some values are null, check if they are allowed to be null.
    * This function also checks if every column in the columnTypes array has been transmitted
    *
@@ -773,14 +774,14 @@ abstract class Dao implements DaoInterface {
       elseif (isset($this->references[$column])) {
         if (!is_array($value)) {
           $trace = debug_backtrace();
-          trigger_error('The value for column ' . $column . ' ('.$this->tableName.') was not correct in ' . $trace[0]['file'] . ' on line ' . $trace[0]['line'], E_USER_WARNING);
+          trigger_error('The value for column ' . $column . ' ('.$this->resourceName.') was not correct in ' . $trace[0]['file'] . ' on line ' . $trace[0]['line'], E_USER_WARNING);
           unset($data[$column]);
         }
         // Just let it untouched.
       }
       else {
         $trace = debug_backtrace();
-        trigger_error('The type for column ' . $column . ' ('.$this->tableName.') is not defined in ' . $trace[0]['file'] . ' on line ' . $trace[0]['line'], E_USER_WARNING);
+        trigger_error('The type for column ' . $column . ' ('.$this->resourceName.') is not defined in ' . $trace[0]['file'] . ' on line ' . $trace[0]['line'], E_USER_WARNING);
         unset($data[$column]);
       }
     }
@@ -788,7 +789,7 @@ abstract class Dao implements DaoInterface {
       if ($type != Dao::IGNORE) {
         if ($this->notNull($column)) {
           $trace = debug_backtrace();
-          trigger_error('The column ' . $column . ' ('.$this->tableName.') was not transmitted from data source in ' . $trace[0]['file'] . ' on line ' . $trace[0]['line'], E_USER_WARNING);
+          trigger_error('The column ' . $column . ' ('.$this->resourceName.') was not transmitted from data source in ' . $trace[0]['file'] . ' on line ' . $trace[0]['line'], E_USER_WARNING);
           $data[$column] = DataObject::coerce(null, $type, false, $quiet = true);
         } else {
           $data[$column] = null;
@@ -831,7 +832,7 @@ abstract class Dao implements DaoInterface {
 
 
   /**
-   * Imports an external value (either from database, or xml, etc...) into an expected PHP variable.
+   * Imports an external value (either from datasource, or xml, etc...) into an expected PHP variable.
    * If the column can be null, null will be returned.
    *
    * @param mixed $externalValue The value to be imported
@@ -858,12 +859,12 @@ abstract class Dao implements DaoInterface {
       }
     }
     catch (Exception $e) {
-      throw new Exception('There was an error processing the table "' . $this->tableName . '": ' . $e->getMessage());
+      throw new Exception('There was an error processing the resource "' . $this->resourceName . '": ' . $e->getMessage());
     }
   }
 
   /**
-   * Converts a database value to a timestamp.
+   * Converts a datasource value to a timestamp.
    * Obviously every Database Dao has to implement that itself.
    * If you do not count on implementing this just overwrite the function and throw a DaoNotSupportedException inside.
    *
@@ -1000,14 +1001,14 @@ abstract class Dao implements DaoInterface {
 
 
   /**
-   * Escapes and quotes a table name.
-   * If none provied $this->tableName will be used.
+   * Escapes and quotes a resource name.
+   * If none provied $this->resourceName will be used.
    *
-   * @param string $string
+   * @param string $resourceName
    * @return string
-   * @see $tableName
+   * @see $resourceName
    */
-  abstract public function exportTable($table = null);
+  abstract public function exportResourceName($resourceName = null);
 
 
 

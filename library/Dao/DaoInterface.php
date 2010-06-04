@@ -20,7 +20,7 @@
 interface DaoInterface {
 
   /**
-   * This is the method to get a DataObject from the database.
+   * This is the method to get a DataObject from the datasource.
    * If you want to select more objects, call getIterator.
    * If you call get() without parameters, a "raw object" will be returned, containing
    * only default values, and null as id.
@@ -31,14 +31,14 @@ interface DaoInterface {
    *                           column names, you can set exportValues to false, so they
    *                           won't be processed.
    *                           WARNING: Be sure to escape them yourself if you do so.
-   * @param string $tableName You can specify a different table (most probably a view)
+   * @param string $resourceName You can specify a different resource (most probably a view)
    *                          to get data from.
    *                          If not set, $this->viewName will be used if present; if not
-   *                          $this->tableName is used.
+   *                          $this->resourceName is used.
    * @return DataObject
    * @see find()
    */
-  public function get($map = null, $exportValues = true, $tableName = null);
+  public function get($map = null, $exportValues = true, $resourceName = null);
 
 
   /**
@@ -46,11 +46,11 @@ interface DaoInterface {
    *
    * @param array|DataObject $map
    * @param bool $exportValues
-   * @param string $tableName
+   * @param string $resourceName
    * @return DataObject
    * @see get()
    */
-  public function find($map = null, $exportValues = true, $tableName = null);
+  public function find($map = null, $exportValues = true, $resourceName = null);
 
 
   /**
@@ -58,11 +58,11 @@ interface DaoInterface {
    *
    * @param array|DataObject $map
    * @param bool $exportValues
-   * @param string $tableName
+   * @param string $resourceName
    * @return array
    * @see get()
    */
-  public function getData($map, $exportValues = true, $tableName = null);
+  public function getData($map, $exportValues = true, $resourceName = null);
 
 
   /**
@@ -76,11 +76,11 @@ interface DaoInterface {
    * @param int $offset 
    * @param int $limit 
    * @param bool $exportValues
-   * @param string $tableName
+   * @param string $resourceName
    * @see get()
    * @return DaoResultIterator
    */
-  public function getIterator($map, $sort = null, $offset = null, $limit = null, $exportValues = true, $tableName = null);
+  public function getIterator($map, $sort = null, $offset = null, $limit = null, $exportValues = true, $resourceName = null);
 
   /**
    * @param int $id
@@ -95,14 +95,14 @@ interface DaoInterface {
   public function getAll();
 
   /**
-   * Takes a DataObject and inserts it in the database.
+   * Takes a DataObject and inserts it in the datasource.
    * @see DataObject
    * @param DataObject
    */
   public function insert($object);
 
   /**
-   * Takes a DataObject and updates it in the database.
+   * Takes a DataObject and updates it in the datasource.
    * Daos always take the id column to find the right row.
    * @see DataObject
    * @param DataObject
@@ -110,14 +110,14 @@ interface DaoInterface {
   public function update($object);
 
   /**
-   * Takes a DataObject and delets it in the database. (Again the id is used)
+   * Takes a DataObject and delets it in the datasource. (Again the id is used)
    * @see DataObject
    * @param DataObject
    */
   public function delete($object);
 
   /**
-   * Takes an id and deletes it in the database.
+   * Takes an id and deletes it in the datasource.
    * @param int $id
    */
   public function deleteById($id);
@@ -172,7 +172,7 @@ interface DaoInterface {
   public function getTotalCount();
 
   /**
-   * Returns an object filled with an array of database values.
+   * Returns an object filled with an array of datasource values.
    * (Typically this array comes from DatabaseResult::fetchArray())
    *
    * @param array $data

@@ -32,13 +32,13 @@ abstract class FileSourceDao extends Dao {
 
   /**
    * @param FileDataSource $fileDataSource The fileDataSource is used to create the requests.
-   * @param string $tableName You can specify this as an attribute when writing a Dao implementation
+   * @param string $resourceName You can specify this as an attribute when writing a Dao implementation
    * @param array $columnTypes You can specify this as an attribute when writing a Dao implementation
    * @param array $nullColumns You can specify this as an attribute when writing a Dao implementation
    * @param array $defaultColumns You can specify this as an attribute when writing a Dao implementation
    */
-  public function __construct($fileDataSource, $tableName = null, $columnTypes = null, $nullColumns = null, $defaultColumns = null) {
-    parent::__construct($tableName, $columnTypes, $nullColumns, $defaultColumns);
+  public function __construct($fileDataSource, $resourceName = null, $columnTypes = null, $nullColumns = null, $defaultColumns = null) {
+    parent::__construct($resourceName, $columnTypes, $nullColumns, $defaultColumns);
     $this->fileDataSource = $fileDataSource;
   }
 
@@ -109,14 +109,14 @@ abstract class FileSourceDao extends Dao {
    *                           column names, you can set exportValues to false, so they
    *                           won't be processed.
    *                           WARNING: Be sure to escape them yourself if you do so.
-   * @param string $tableName You can specify a different table (most probably a view)
+   * @param string $resourceName You can specify a different resource (most probably a view)
    *                          to get data from.
    *                          If not set, $this->viewName will be used if present; if not
-   *                          $this->tableName is used.
+   *                          $this->resourceName is used.
    * @return DataObject
    */
-  public function find($map = null, $exportValues = true, $tableName = null) {
-    $content = $this->fileDataSource->view($this->exportTable($tableName ? $tableName : ($this->viewName ? $this->viewName : $this->tableName)), $exportValues ? $this->exportMap($map) : $map);
+  public function find($map = null, $exportValues = true, $resourceName = null) {
+    $content = $this->fileDataSource->view($this->exportResourceName($resourceName ? $resourceName : ($this->viewName ? $this->viewName : $this->resourceName)), $exportValues ? $this->exportMap($map) : $map);
 
     $data = $this->interpretFileContent($content);
 
@@ -130,12 +130,12 @@ abstract class FileSourceDao extends Dao {
    *
    * @param array|DataObject $map
    * @param bool $exportValues
-   * @param string $tableName
+   * @param string $resourceName
    * @see get()
    * @return array
    */
-  public function getData($map, $exportValues = true, $tableName = null) {
-    $data = $this->interpretFileContent($this->fileDataSource->view($this->exportTable($tableName ? $tableName : ($this->viewName ? $this->viewName : $this->tableName)), $exportValues ? $this->exportMap($map) : $map));
+  public function getData($map, $exportValues = true, $resourceName = null) {
+    $data = $this->interpretFileContent($this->fileDataSource->view($this->exportResourceName($resourceName ? $resourceName : ($this->viewName ? $this->viewName : $this->resourceName)), $exportValues ? $this->exportMap($map) : $map));
     if (!$data || !is_array($data)) throw new DaoNotFoundException("The query did not return any results.");
     return $this->prepareDataForObject($data);
   }
@@ -155,12 +155,12 @@ abstract class FileSourceDao extends Dao {
    * @param int $offset 
    * @param int $limit 
    * @param bool $exportValues
-   * @param string $tableName
+   * @param string $resourceName
    * @see get()
    * @return DaoResultIterator
    */
-  public function getIterator($map, $sort = null, $offset = null, $limit = null, $exportValues = true, $tableName = null) {
-    $content = $this->fileDataSource->viewList($this->exportTable($tableName ? $tableName : ($this->viewName ? $this->viewName : $this->tableName)), $exportValues ? $this->exportMap($map) : $map, $this->generateSortString($sort), $offset, $limit);
+  public function getIterator($map, $sort = null, $offset = null, $limit = null, $exportValues = true, $resourceName = null) {
+    $content = $this->fileDataSource->viewList($this->exportResourceName($resourceName ? $resourceName : ($this->viewName ? $this->viewName : $this->resourceName)), $exportValues ? $this->exportMap($map) : $map, $this->generateSortString($sort), $offset, $limit);
 
     $data = $this->interpretFileContent($content);
 
@@ -183,7 +183,7 @@ abstract class FileSourceDao extends Dao {
 
     $attibutes = array_combine($columns, $values);
 
-    $id = $this->fileDataSource->insert($this->tableName, $attributes);
+    $id = $this->fileDataSource->insert($this->resourceName, $attributes);
 
     $this->updateObjectWithData($this->getData(array('id'=>$newId)), $object);
     
@@ -207,7 +207,7 @@ abstract class FileSourceDao extends Dao {
       if ($column != 'id' && $type != Dao::IGNORE) $attributes[$column] = $this->exportValue($object->getValue($column), $type, $this->notNull($column));
     }
 
-    $this->fileDataSource->update($this->tableName, $object->id, $attributes);
+    $this->fileDataSource->update($this->resourceName, $object->id, $attributes);
 
     $this->afterUpdate($object);
 
@@ -220,17 +220,17 @@ abstract class FileSourceDao extends Dao {
    * @param DataObject $object
    */
   public function delete($object) {
-    $this->fileDataSource->delete($this->tableName, $object->id);
+    $this->fileDataSource->delete($this->resourceName, $object->id);
     $this->afterDelete($object);
   }
 
   /**
-   * Returns the total row count in the table the Dao is assigned to.
+   * Returns the total row count in the resource the Dao is assigned to.
    *
    * @return int
    */
   public function getTotalCount() {
-    return $this->fileDataSource->getTotalCount($this->tableName);
+    return $this->fileDataSource->getTotalCount($this->resourceName);
   }
 
   /**
@@ -323,24 +323,24 @@ abstract class FileSourceDao extends Dao {
   }
 
   /**
-   * Escapes a table name and potentially quotes a table name.
-   * By default it simply calls escapeTable
+   * Escapes a resource name and potentially quotes a resource name.
+   * By default it simply calls escapeResourceName
    *
-   * @param string $table
-   * @return string The escaped and quoted table name.
+   * @param string $resourceName
+   * @return string The escaped and quoted resource name.
    */
-  public function exportTable($table = null) {
-    return $this->escapeTable($table ? $table : $this->tableName);
+  public function exportResourceName($resourceName = null) {
+    return $this->escapeResourceName($resourceName ? $resourceName : $this->resourceName);
   }
 
   /**
    * Does nothing by default.
    * 
-   * @param string $table
+   * @param string $resourceName
    * @return string
    */
-  protected function escapeTable($table = null) {
-    return $table ? $table : $this->tableName;
+  protected function escapeResourceName($resourceName = null) {
+    return $resourceName ? $resourceName : $this->resourceName;
   }
 
 }

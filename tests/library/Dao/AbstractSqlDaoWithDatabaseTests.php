@@ -8,14 +8,14 @@
     protected $db;
     protected $dao;
     protected $iteratorClassName;
-    protected $tableName = 'dao_test';
+    protected $resourceName = 'dao_test';
 
     protected $defaultValue = 7;
 
     public function setUp() {
       $this->db = $this->getDatabaseConnection();
       $this->dao = $this->getDao();
-      $this->db->query(sprintf("create temporary table `%s` (`id` int primary key, `integer` int not null, `string` varchar(100) not null, `timestamp` timestamp not null, `float` float not null, `null_value` varchar(100), `default_value` int default %d not null)", $this->tableName, $this->defaultValue));
+      $this->db->query(sprintf("create temporary table `%s` (`id` int primary key, `integer` int not null, `string` varchar(100) not null, `timestamp` timestamp not null, `float` float not null, `null_value` varchar(100), `default_value` int default %d not null)", $this->resourceName, $this->defaultValue));
     }
 
     public function tearDown() {

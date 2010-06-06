@@ -242,50 +242,63 @@ abstract class Dao implements DaoInterface {
    * @see DaoReference
    * @see setupReferences()
    * @see addReference()
+   * @see addToManyReference()
    */
   protected $references = array();
 
 
   /**
    * Overwrite this in a specific Dao implementation to setup the references.
-   * Setting the references directly to the member variables is not possible since a references is an object.
+   * Setting the references directly to the member variables is not possible since a reference is an object.
    * This function gets called from the constructor.
-   * You should call addReference() inside this function.
+   * You should call addReference() or addToManyReference() inside this function.
    *
    * @see addReference()
+   * @see addToManyReference()
    */
   protected function setupReferences() { }
 
   /**
-   * Adds a reference definition
+   * Adds a reference definition. This method should be called inside setupReferences().
    *
-   * @param string $identifier The name of the identifier (eg.: address)
+   * To see how references work in detail, please have a look at the DaoReference class.
+   *
+   * @param string $attributeName The name of the attribute. You will then be able to access the reference
+   *                              on this attribute name on the DataObject. So if you setup a reference with
+   *                              'address' as $attributeName on the UserDao, then you will be able to access
+   *                              it with: $user->address or $user->get('address')
    * @param string|Dao $daoClassName Eg.: 'AddressDao' or the dao directly
    * @param string $localKey Eg.: address_id
    * @param string $foreignKey Eg.: id
+   * @see setupReferences()
    * @see DaoReference
+   * @see createDao
    */
-  protected function addReference($identifier, $daoClassName, $localKey = null, $foreignKey = 'id') {
+  protected function addReference($attributeName, $daoClassName, $localKey = null, $foreignKey = 'id') {
     if ($localKey && !$this->attributeExists($localKey)) {
       trigger_error(sprintf('Local key `%s` does not exist in the %s Dao.', $localKey, $this->resourceName), E_USER_ERROR);
     }
-    $this->references[$identifier] = new DaoReference($daoClassName, $localKey, $foreignKey);
+    $this->references[$attributeName] = new DaoReference($daoClassName, $localKey, $foreignKey);
   }
 
   /**
-   * Adds a toMany reference definition
+   * Adds a toMany reference definition. This method should be called inside setupReferences().
    *
-   * @param string $identifier The name of the identifier (eg.: addresses)
+   * To see how toMany references work in detail, please have a look at the DaoToManyReference class.
+   *
+   * @param string $attributeName The name of the attribute (eg.: addresses)
    * @param string|Dao $daoClassName Eg.: AddressDao
    * @param string $localKey Eg.: address_ids
    * @param string $foreignKey Eg.: id
-   * @see addReference
+   * @see setupReferences()
+   * @see addReference()
+   * @see DaoToManyReference
    */
-  protected function addToManyReference($identifier, $daoClassName, $localKey = null, $foreignKey = 'id') {
+  protected function addToManyReference($attributeName, $daoClassName, $localKey = null, $foreignKey = 'id') {
     if ($localKey && (!$this->attributeExists($localKey) || $this->attributes[$localKey] != Dao::SEQUENCE)) {
       trigger_error(sprintf('Local key `%s` does not exist or is not a Dao::SEQUENCE in the %s Dao.', $localKey, $this->resourceName), E_USER_ERROR);
     }
-    $this->references[$identifier] = new DaoToManyReference($daoClassName, $localKey, $foreignKey);
+    $this->references[$attributeName] = new DaoToManyReference($daoClassName, $localKey, $foreignKey);
   }
 
   /**

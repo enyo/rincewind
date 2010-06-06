@@ -172,13 +172,13 @@ Source Location: /Dao/DaoToManyReference.php<br /><br />
 <h4>Author(s):</h4>
 <ul>
           <li>Matthias Loitsch &lt;<a href="mailto:developer@ma.tthias.com">developer@ma.tthias.com</a>&gt;</li>
-                  </ul>
+                              </ul>
 
 
 
 
           
-      
+              
 
 <h4>Copyright:</h4>
 <ul>
@@ -264,8 +264,8 @@ Source Location: /Dao/DaoToManyReference.php<br /><br />
 <a name="class_details"></a>
 <h3>Class Details</h3>
 <div class="tags">
-[line 27]<br />
-A DaoToManyReference describes references to many resources.<br /><br /><p>The DaoToManyReference works exactly as the DaoReference, but works with  arrays that either contain ids, or data hashes.</p><p>In a DaoToManyReference the localKey has to be of type Dao::SEQUENCE</p><br /><br /><br />
+[line 33]<br />
+A DaoToManyReference describes references to many resources.<br /><br /><p>The DaoToManyReference works exactly as the DaoReference, but works with  arrays that either contain ids, or data hashes.</p><p>In a DaoToManyReference the localKey has to be of type Dao::SEQUENCE.</p><p>The DaoToManyReference is setup in the Dao with the method addToManyReference(). The  method setupReferences() is used to contain those calls.</p><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
@@ -276,7 +276,13 @@ A DaoToManyReference describes references to many resources.<br /><br /><p>The D
     <td><b>copyright:</b>&nbsp;&nbsp;</td><td>Copyright (c) 2010, Matthias Loitsch</td>
   </tr>
   <tr>
+    <td><b>see:</b>&nbsp;&nbsp;</td><td><a href="../Dao/Dao.html#methodaddToManyReference">Dao::addToManyReference()</a></td>
+  </tr>
+  <tr>
     <td><b>see:</b>&nbsp;&nbsp;</td><td><a href="../Dao/DaoReference.html">DaoReference</a></td>
+  </tr>
+  <tr>
+    <td><b>see:</b>&nbsp;&nbsp;</td><td><a href="../Dao/Dao.html#methodsetupReferences">Dao::setupReferences()</a></td>
   </tr>
 </table>
 </div>

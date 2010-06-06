@@ -17,17 +17,19 @@
  * You can setup the $userDao, so it understands, that when you access $user->address
  * it should use the $addressDao, and get the address with $user->addressId as id.
  *
- * The DaoReference is setup in the dao, in the $references array, where the index is
- * the access key (eg.: address). The Dao to be used to instantiate the referenced object,
- * the local key (eg.: address_id) and foreign key (eg.: id) are stored in the DaoReference.
- * 
+ * The DaoReference is setup in the Dao with the method addReference(). The method
+ * setupReferences() is used to contain those calls.
+ *
+ * When you access a reference on a DataObject, internally the Dao will instantiate the
+ * reference Dao and get the DataObject where `foreign_key` is the same as `local_key`.
+ * (If you want to have control over how the Dao is instantiated, look at Dao->createDao()).
+ *
  * Sometimes your data source returns the data hash of a reference directly to avoid
  * traffic overhead (this makes especially sense with FileSourceDaos like the JsonDao).
  * In that case you only need to specify the $daoClassName since the Dao does not have
  * to link / fetch the data hash itself, but only to instantiate a DataObject with the
  * given hash.
- * 
- * 
+ *
  *
  * Before setting up a DaoReference:
  * <code>
@@ -49,6 +51,9 @@
  * @author Matthias Loitsch <developer@ma.tthias.com>
  * @copyright Copyright (c) 2010, Matthias Loitsch
  * @package Dao
+ * @see DaoToManyReference
+ * @see Dao::setupReferences()
+ * @see Dao::addReference()
  **/
 class DaoReference {
 

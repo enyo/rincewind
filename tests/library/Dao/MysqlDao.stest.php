@@ -74,5 +74,4 @@ class MysqlDao_Basic_Test extends Snap_UnitTestCase {
 
 
 
-
 ?>

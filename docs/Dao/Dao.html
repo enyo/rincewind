@@ -28,9 +28,6 @@
 	<div id="ric">
 					<p><a href="../ric_README.html">README</a></p>
 			</div>
-	<div id="todolist">
-			<p><a href="../todolist.html">Todo List</a></p>
-	</div>
       <b>Packages:</b><br />
               <a href="../li_php-library.html">php-library</a><br />
               <a href="../li_Config.html">Config</a><br />
@@ -91,20 +88,20 @@
 			<a href="../Dao/_Dao---Xml---XmlResultIterator.php.html">		XmlResultIterator.php
 		</a><br>
 	  </div><br />
-	subpackage <b>DataObject</b><br>  <div class="package">
-			<a href="../Dao/DataObject/_DataObject---DataObject.php.html">		DataObject.php
-		</a><br>
-			<a href="../Dao/DataObject/_DataObject---DataObjectExceptions.php.html">		DataObjectExceptions.php
-		</a><br>
-			<a href="../Dao/DataObject/_DataObject---DataObjectInterface.php.html">		DataObjectInterface.php
-		</a><br>
-			<a href="../Dao/DataObject/_DataObject---UserDataObject.php.html">		UserDataObject.php
-		</a><br>
-	  </div><br />
 	subpackage <b>Exceptions</b><br>  <div class="package">
 			<a href="../Dao/Exceptions/_Dao---DaoExceptions.php.html">		DaoExceptions.php
 		</a><br>
 			<a href="../Dao/Exceptions/_Dao---Json---JsonDaoExceptions.php.html">		JsonDaoExceptions.php
+		</a><br>
+	  </div><br />
+	subpackage <b>Record</b><br>  <div class="package">
+			<a href="../Dao/Record/_Record---Record.php.html">		Record.php
+		</a><br>
+			<a href="../Dao/Record/_Record---RecordExceptions.php.html">		RecordExceptions.php
+		</a><br>
+			<a href="../Dao/Record/_Record---RecordInterface.php.html">		RecordInterface.php
+		</a><br>
+			<a href="../Dao/Record/_Record---UserRecord.php.html">		UserRecord.php
 		</a><br>
 	  </div><br />
       
@@ -114,7 +111,7 @@
 	    		<a href="../Dao/UserDaoInterface.html">UserDaoInterface</a><br />
 	  </div>
   <div class="package">
-	DataObject<br />	    &nbsp;&nbsp;		<a href="../Dao/DataObject/DataObjectInterface.html">DataObjectInterface</a><br />
+	Record<br />	    &nbsp;&nbsp;		<a href="../Dao/Record/RecordInterface.html">RecordInterface</a><br />
 	  </div>
       
             <b>Classes:</b><br />
@@ -145,13 +142,13 @@
 	    &nbsp;&nbsp;		<a href="../Dao/Exceptions/DaoNotFoundException.html">DaoNotFoundException</a><br />
 	    &nbsp;&nbsp;		<a href="../Dao/Exceptions/DaoNotSupportedException.html">DaoNotSupportedException</a><br />
 	    &nbsp;&nbsp;		<a href="../Dao/Exceptions/DaoWrongValueException.html">DaoWrongValueException</a><br />
-	    &nbsp;&nbsp;		<a href="../Dao/Exceptions/DataObjectException.html">DataObjectException</a><br />
 	    &nbsp;&nbsp;		<a href="../Dao/Exceptions/JsonDaoException.html">JsonDaoException</a><br />
+	    &nbsp;&nbsp;		<a href="../Dao/Exceptions/RecordException.html">RecordException</a><br />
 	    &nbsp;&nbsp;		<a href="../Dao/Exceptions/XmlDaoException.html">XmlDaoException</a><br />
 	  </div>
   <div class="package">
-	DataObject<br />	    &nbsp;&nbsp;		<a href="../Dao/DataObject/DataObject.html">DataObject</a><br />
-	    &nbsp;&nbsp;		<a href="../Dao/DataObject/UserDataObject.html">UserDataObject</a><br />
+	Record<br />	    &nbsp;&nbsp;		<a href="../Dao/Record/Record.html">Record</a><br />
+	    &nbsp;&nbsp;		<a href="../Dao/Record/UserRecord.html">UserRecord</a><br />
 	  </div>
                 </td>
     <td>
@@ -267,9 +264,9 @@ Source Location: /Dao/Dao.php<br /><br />
     <li><a href="../Dao/Dao.html#methodgetById">getById</a></li>
     <li><a href="../Dao/Dao.html#methodgetDefaultValueAttributes">getDefaultValueAttributes</a></li>
     <li><a href="../Dao/Dao.html#methodgetNullAttributes">getNullAttributes</a></li>
-    <li><a href="../Dao/Dao.html#methodgetObjectFromData">getObjectFromData</a></li>
-    <li><a href="../Dao/Dao.html#methodgetObjectFromPreparedData">getObjectFromPreparedData</a></li>
-    <li><a href="../Dao/Dao.html#methodgetRawObject">getRawObject</a></li>
+    <li><a href="../Dao/Dao.html#methodgetRawRecord">getRawRecord</a></li>
+    <li><a href="../Dao/Dao.html#methodgetRecordFromData">getRecordFromData</a></li>
+    <li><a href="../Dao/Dao.html#methodgetRecordFromPreparedData">getRecordFromPreparedData</a></li>
     <li><a href="../Dao/Dao.html#methodgetReference">getReference</a></li>
     <li><a href="../Dao/Dao.html#methodgetReferences">getReferences</a></li>
     <li><a href="../Dao/Dao.html#methodimportAttributeName">importAttributeName</a></li>
@@ -286,11 +283,11 @@ Source Location: /Dao/Dao.php<br /><br />
     <li><a href="../Dao/Dao.html#methodisVector">isVector</a></li>
     <li><a href="../Dao/Dao.html#methodlog">log</a></li>
     <li><a href="../Dao/Dao.html#methodnotNull">notNull</a></li>
-    <li><a href="../Dao/Dao.html#methodprepareDataForObject">prepareDataForObject</a></li>
+    <li><a href="../Dao/Dao.html#methodprepareDataForRecord">prepareDataForRecord</a></li>
     <li><a href="../Dao/Dao.html#methodsetLogger">setLogger</a></li>
     <li><a href="../Dao/Dao.html#methodsetLoggerFactory">setLoggerFactory</a></li>
     <li><a href="../Dao/Dao.html#methodsetupReferences">setupReferences</a></li>
-    <li><a href="../Dao/Dao.html#methodupdateObjectWithData">updateObjectWithData</a></li>
+    <li><a href="../Dao/Dao.html#methodupdateRecordWithData">updateRecordWithData</a></li>
     <li><a href="../Dao/Dao.html#method__call">__call</a></li>
   </ul>
 </td>
@@ -325,7 +322,7 @@ Source Location: /Dao/Dao.php<br /><br />
 <h3>Class Details</h3>
 <div class="tags">
 [line 113]<br />
-This abstract base class for all Daos.<br /><br /><p>IMPORTANT NOTE: The Dao (and DataObject for that matter) depend on the resource  having a primary `id` attribute!  If your resource layout does not provide this attribute, the framework will not work.</p><p>The typical usage of the Dao is as follows:  <ol><li><div class="src-line">&nbsp;<span class="src-php">&lt;?php</span></div></li>
+This abstract base class for all Daos.<br /><br /><p>IMPORTANT NOTE: The Dao (and Record for that matter) depend on the resource  having a primary `id` attribute!  If your resource layout does not provide this attribute, the framework will not work.</p><p>The typical usage of the Dao is as follows:  <ol><li><div class="src-line">&nbsp;<span class="src-php">&lt;?php</span></div></li>
 <li><div class="src-line">&nbsp;&nbsp;&nbsp;<span class="src-var">$userDao&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id">UserDao</span><span class="src-sym">(</span><span class="src-var">$datasource</span><span class="src-sym">)</span><span class="src-sym">;&nbsp;</span><span class="src-comm">//&nbsp;UserDao&nbsp;extends&nbsp;MysqlDao&nbsp;for&nbsp;example</span></div></li>
 <li><div class="src-line">&nbsp;&nbsp;&nbsp;<span class="src-var">$userDao</span><span class="src-sym">-&gt;</span><a href="../Dao/Dao.html#methodget">get</a><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">-&gt;</span><span class="src-id">set</span><span class="src-sym">(</span><span class="src-str">'username'</span><span class="src-sym">,&nbsp;</span><span class="src-str">'user2000'</span><span class="src-sym">)</span><span class="src-sym">-&gt;</span><span class="src-id">save</span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;&nbsp;</span><span class="src-comm">//&nbsp;Insert&nbsp;new&nbsp;user</span></div></li>
 <li><div class="src-line">&nbsp;&nbsp;&nbsp;<span class="src-var">$userDao</span><span class="src-sym">-&gt;</span><a href="../Dao/Dao.html#methodgetById">getById</a><span class="src-sym">(</span><span class="src-num">4</span><span class="src-sym">)</span><span class="src-sym">-&gt;</span><span class="src-id">set</span><span class="src-sym">(</span><span class="src-str">'name'</span><span class="src-sym">,&nbsp;</span><span class="src-str">'New&nbsp;Name'</span><span class="src-sym">)</span><span class="src-sym">-&gt;</span><span class="src-id">save</span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;&nbsp;</span><span class="src-comm">//&nbsp;Update&nbsp;existing&nbsp;user</span></div></li>
@@ -385,7 +382,7 @@ This abstract base class for all Daos.<br /><br /><p>IMPORTANT NOTE: The Dao (an
 	<p></p>
 	<h4>$additionalAttributes = <span class="value">array()</span></h4>
 	<p>[line 224]</p>
-  This works exactly the same as the attributes, except that it only defines attributes, that may additionally be returned by the  datasource (for example in joins).<br /><br /><p>Those values can *not* be set in the DataObjects afterwards, but are checked for their types when retrieved.  When trying to get an additional attribute out of a DataObject, that has not been retrieved from the datasource, the DataObject should  just return null and not error.  When trying to set an additional attribute the DataObject should trigger an error.</p><br /><br /><br />
+  This works exactly the same as the attributes, except that it only defines attributes, that may additionally be returned by the  datasource (for example in joins).<br /><br /><p>Those values can *not* be set in the Records afterwards, but are checked for their types when retrieved.  When trying to get an additional attribute out of a Record, that has not been retrieved from the datasource, the Record should  just return null and not error.  When trying to set an additional attribute the Record should trigger an error.</p><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
@@ -433,7 +430,7 @@ This abstract base class for all Daos.<br /><br /><p>IMPORTANT NOTE: The Dao (an
 	<p></p>
 	<h4>$attributeImportMapping = <span class="value">array()</span></h4>
 	<p>[line 397]</p>
-  If your datasource holds different attribute names than you want in you DataObjects, you can specify export &amp; import mappings.<br /><br /><p>(Don't confuse this with your php values. Meaning: if the datasource value is 'strangely_named', but you want to access your object  like this: $object-&gt;perfectName, then you have to map it from strangely_named to perfect_name (not perfectName).)  If no mapping is found in the imports, than a reverse lookup is done in exports, and vice versa, so for a normal conversion  only the attributeImportMapping (or attributeExportMapping if you prefer) has to be set.  E.g.: array('what_the_datasource_value_actually_is'=&gt;'what_you_would_want_it_to_be');</p><br /><br /><br />
+  If your datasource holds different attribute names than you want in you Records, you can specify export &amp; import mappings.<br /><br /><p>(Don't confuse this with your php values. Meaning: if the datasource value is 'strangely_named', but you want to access your record  like this: $record-&gt;perfectName, then you have to map it from strangely_named to perfect_name (not perfectName).)  If no mapping is found in the imports, than a reverse lookup is done in exports, and vice versa, so for a normal conversion  only the attributeImportMapping (or attributeExportMapping if you prefer) has to be set.  E.g.: array('what_the_datasource_value_actually_is'=&gt;'what_you_would_want_it_to_be');</p><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
@@ -508,7 +505,7 @@ This abstract base class for all Daos.<br /><br /><p>IMPORTANT NOTE: The Dao (an
 	<p></p>
 	<h4>$defaultValueAttributes = <span class="value">array('id')</span></h4>
 	<p>[line 423]</p>
-  This is a list of attributes that have default values in the datasource.<br /><br /><p>This means that, if the values are NULL, and the entry is inserted in the datasource, they will not be  passed, so that the datasource can automatically set the values.  So when you call getRawObject() those values will be null.  Per default the id is given.</p><br /><br /><br />
+  This is a list of attributes that have default values in the datasource.<br /><br /><p>This means that, if the values are NULL, and the entry is inserted in the datasource, they will not be  passed, so that the datasource can automatically set the values.  So when you call getRawRecord() those values will be null.  Per default the id is given.</p><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
@@ -744,7 +741,7 @@ $foreignKey = 'id'])</code>
           <tr>
         <td class="type">string&nbsp;&nbsp;</td>
         <td><b>$attributeName</b>&nbsp;&nbsp;</td>
-        <td>The name of the attribute. You will then be able to access the reference                               on this attribute name on the DataObject. So if you setup a reference with                               'address' as $attributeName on the UserDao, then you will be able to access                               it with: $user-&gt;address or $user-&gt;get('address')</td>
+        <td>The name of the attribute. You will then be able to access the reference                               on this attribute name on the Record. So if you setup a reference with                               'address' as $attributeName on the UserDao, then you will be able to access                               it with: $user-&gt;address or $user-&gt;get('address')</td>
       </tr>
           <tr>
         <td class="type">string|<a href="../Dao/Dao.html">Dao</a>&nbsp;&nbsp;</td>
@@ -835,8 +832,8 @@ $foreignKey = 'id'])</code>
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
 		<code>void afterDelete(
-<a href="../Dao/DataObject/DataObject.html">DataObject</a>
-$object)</code>
+<a href="../Dao/Record/Record.html">Record</a>
+$record)</code>
     </td></tr></table>
     </td></tr></table><br />
 	
@@ -845,7 +842,7 @@ $object)</code>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
   <tr>
-    <td><b>see:</b>&nbsp;&nbsp;</td><td><a href="../Dao/DataObject/DataObject.html">DataObject</a></td>
+    <td><b>see:</b>&nbsp;&nbsp;</td><td><a href="../Dao/Record/Record.html">Record</a></td>
   </tr>
   <tr>
     <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
@@ -859,8 +856,8 @@ $object)</code>
     <div class="tags">
     <table border="0" cellspacing="0" cellpadding="0">
           <tr>
-        <td class="type"><a href="../Dao/DataObject/DataObject.html">DataObject</a>&nbsp;&nbsp;</td>
-        <td><b>$object</b>&nbsp;&nbsp;</td>
+        <td class="type"><a href="../Dao/Record/Record.html">Record</a>&nbsp;&nbsp;</td>
+        <td><b>$record</b>&nbsp;&nbsp;</td>
         <td></td>
       </tr>
         </table>
@@ -874,8 +871,8 @@ $object)</code>
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
 		<code>void afterInsert(
-<a href="../Dao/DataObject/DataObject.html">DataObject</a>
-$object)</code>
+<a href="../Dao/Record/Record.html">Record</a>
+$record)</code>
     </td></tr></table>
     </td></tr></table><br />
 	
@@ -884,7 +881,7 @@ $object)</code>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
   <tr>
-    <td><b>see:</b>&nbsp;&nbsp;</td><td><a href="../Dao/DataObject/DataObject.html">DataObject</a></td>
+    <td><b>see:</b>&nbsp;&nbsp;</td><td><a href="../Dao/Record/Record.html">Record</a></td>
   </tr>
   <tr>
     <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
@@ -898,8 +895,8 @@ $object)</code>
     <div class="tags">
     <table border="0" cellspacing="0" cellpadding="0">
           <tr>
-        <td class="type"><a href="../Dao/DataObject/DataObject.html">DataObject</a>&nbsp;&nbsp;</td>
-        <td><b>$object</b>&nbsp;&nbsp;</td>
+        <td class="type"><a href="../Dao/Record/Record.html">Record</a>&nbsp;&nbsp;</td>
+        <td><b>$record</b>&nbsp;&nbsp;</td>
         <td></td>
       </tr>
         </table>
@@ -913,8 +910,8 @@ $object)</code>
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
 		<code>void afterUpdate(
-<a href="../Dao/DataObject/DataObject.html">DataObject</a>
-$object)</code>
+<a href="../Dao/Record/Record.html">Record</a>
+$record)</code>
     </td></tr></table>
     </td></tr></table><br />
 	
@@ -923,7 +920,7 @@ $object)</code>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
   <tr>
-    <td><b>see:</b>&nbsp;&nbsp;</td><td><a href="../Dao/DataObject/DataObject.html">DataObject</a></td>
+    <td><b>see:</b>&nbsp;&nbsp;</td><td><a href="../Dao/Record/Record.html">Record</a></td>
   </tr>
   <tr>
     <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
@@ -937,8 +934,8 @@ $object)</code>
     <div class="tags">
     <table border="0" cellspacing="0" cellpadding="0">
           <tr>
-        <td class="type"><a href="../Dao/DataObject/DataObject.html">DataObject</a>&nbsp;&nbsp;</td>
-        <td><b>$object</b>&nbsp;&nbsp;</td>
+        <td class="type"><a href="../Dao/Record/Record.html">Record</a>&nbsp;&nbsp;</td>
+        <td><b>$record</b>&nbsp;&nbsp;</td>
         <td></td>
       </tr>
         </table>
@@ -1278,7 +1275,7 @@ $id)</code>
     </td></tr></table>
     </td></tr></table><br />
 	
-		Gets the object by id and deletes it.<br /><br /><br /><br />
+		Gets the record by id and deletes it.<br /><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
@@ -1732,8 +1729,8 @@ $notNull = true])</code>
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
 		<code>array generateInsertArrays(
-<a href="../Dao/DataObject/DataObject.html">DataObject</a>
-$object)</code>
+<a href="../Dao/Record/Record.html">Record</a>
+$record)</code>
     </td></tr></table>
     </td></tr></table><br />
 	
@@ -1756,8 +1753,8 @@ $object)</code>
     <div class="tags">
     <table border="0" cellspacing="0" cellpadding="0">
           <tr>
-        <td class="type"><a href="../Dao/DataObject/DataObject.html">DataObject</a>&nbsp;&nbsp;</td>
-        <td><b>$object</b>&nbsp;&nbsp;</td>
+        <td class="type"><a href="../Dao/Record/Record.html">Record</a>&nbsp;&nbsp;</td>
+        <td><b>$record</b>&nbsp;&nbsp;</td>
         <td></td>
       </tr>
         </table>
@@ -1822,15 +1819,15 @@ $sort)</code>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
-		<code><a href="../Dao/DataObject/DataObject.html">DataObject</a> get(
-[array|<a href="../Dao/DataObject/DataObject.html">DataObject</a>
+		<code><a href="../Dao/Record/Record.html">Record</a> get(
+[array|<a href="../Dao/Record/Record.html">Record</a>
 $map = null], [bool
 $exportValues = true], [string
 $resourceName = null])</code>
     </td></tr></table>
     </td></tr></table><br />
 	
-		Calls find() and throws an error if null is returned, otherwise it just passes the DataObject  If you call get() without parameters, a &quot;raw object&quot; will be returned, containing  only default values, and null as id.<br /><br /><br /><br />
+		Calls find() and throws an error if null is returned, otherwise it just passes the Record  If you call get() without parameters, a &quot;raw record&quot; will be returned, containing  only default values, and null as id.<br /><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
@@ -1851,16 +1848,16 @@ $resourceName = null])</code>
 		<div class="notes">Implementation of:</div>
 			<dl>
 			<dt><a href="../Dao/DaoInterface.html#methodget">DaoInterface::get()</a></dt>
-						<dd>This is the method to get a DataObject from the datasource.</dd>
+						<dd>This is the method to get a Record from the datasource.</dd>
 					</dl>
 		
         <h4>Parameters:</h4>
     <div class="tags">
     <table border="0" cellspacing="0" cellpadding="0">
           <tr>
-        <td class="type">array|<a href="../Dao/DataObject/DataObject.html">DataObject</a>&nbsp;&nbsp;</td>
+        <td class="type">array|<a href="../Dao/Record/Record.html">Record</a>&nbsp;&nbsp;</td>
         <td><b>$map</b>&nbsp;&nbsp;</td>
-        <td>A map or dataObject containing the attribute assignments.</td>
+        <td>A map or record containing the attribute assignments.</td>
       </tr>
           <tr>
         <td class="type">bool&nbsp;&nbsp;</td>
@@ -2030,7 +2027,7 @@ $limit = null])</code>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
-		<code><a href="../Dao/DataObject/DataObject.html">DataObject</a> getById(
+		<code><a href="../Dao/Record/Record.html">Record</a> getById(
 int
 $id)</code>
     </td></tr></table>
@@ -2041,7 +2038,7 @@ $id)</code>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
   <tr>
-    <td><b>see:</b>&nbsp;&nbsp;</td><td><a href="../Dao/DataObject/DataObject.html">DataObject</a></td>
+    <td><b>see:</b>&nbsp;&nbsp;</td><td><a href="../Dao/Record/Record.html">Record</a></td>
   </tr>
   <tr>
     <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
@@ -2125,107 +2122,17 @@ $id)</code>
         <div class="top">[ <a href="#top">Top</a> ]</div>
   </div>
   <hr />
-	<a name="methodgetObjectFromData"></a>
-	<h3>method getObjectFromData <span class="smalllinenumber">[line 746]</span></h3>
+	<a name="methodgetRawRecord"></a>
+	<h3>method getRawRecord <span class="smalllinenumber">[line 830]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
-		<code><a href="../Dao/DataObject/DataObject.html">DataObject</a> getObjectFromData(
-array
-$data)</code>
-    </td></tr></table>
-    </td></tr></table><br />
-	
-		Prepares the data, and gets a new object.<br /><br /><p>This is the way you should get a DataObject from datasource data with.</p><br /><br /><br />
-<h4>Tags:</h4>
-<div class="tags">
-<table border="0" cellspacing="0" cellpadding="0">
-  <tr>
-    <td><b>see:</b>&nbsp;&nbsp;</td><td><a href="../Dao/Dao.html#methodprepareDataForObject">Dao::prepareDataForObject()</a></td>
-  </tr>
-  <tr>
-    <td><b>see:</b>&nbsp;&nbsp;</td><td><a href="../Dao/Dao.html#methodgetObjectFromPreparedData">Dao::getObjectFromPreparedData()</a></td>
-  </tr>
-  <tr>
-    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
-  </tr>
-</table>
-</div>
-<br /><br />
-
-			<hr class="separator" />
-		<div class="notes">Implementation of:</div>
-			<dl>
-			<dt><a href="../Dao/DaoInterface.html#methodgetObjectFromData">DaoInterface::getObjectFromData()</a></dt>
-						<dd>Returns an object filled with an array of datasource values.</dd>
-					</dl>
-		
-        <h4>Parameters:</h4>
-    <div class="tags">
-    <table border="0" cellspacing="0" cellpadding="0">
-          <tr>
-        <td class="type">array&nbsp;&nbsp;</td>
-        <td><b>$data</b>&nbsp;&nbsp;</td>
-        <td>The data returned from the datasource</td>
-      </tr>
-        </table>
-    </div><br />
-        <div class="top">[ <a href="#top">Top</a> ]</div>
-  </div>
-  <hr />
-	<a name="methodgetObjectFromPreparedData"></a>
-	<h3>method getObjectFromPreparedData <span class="smalllinenumber">[line 733]</span></h3>
-	<div class="function">
-    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
-    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
-		<code><a href="../Dao/DataObject/DataObject.html">DataObject</a> getObjectFromPreparedData(
-array
-$data, [bool
-$existsInDatabase = true])</code>
-    </td></tr></table>
-    </td></tr></table><br />
-	
-		Returns a data object with the data in it.<br /><br /><p>Override this function if you want a specific DataObject, not the default one.  Using your own DataObject is sometimes useful if your datasource has a strange  naming convention and you have to do different name conversion than the default  one.</p><br /><br /><br />
-<h4>Tags:</h4>
-<div class="tags">
-<table border="0" cellspacing="0" cellpadding="0">
-  <tr>
-    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
-  </tr>
-</table>
-</div>
-<br /><br />
-
-	
-        <h4>Parameters:</h4>
-    <div class="tags">
-    <table border="0" cellspacing="0" cellpadding="0">
-          <tr>
-        <td class="type">array&nbsp;&nbsp;</td>
-        <td><b>$data</b>&nbsp;&nbsp;</td>
-        <td></td>
-      </tr>
-          <tr>
-        <td class="type">bool&nbsp;&nbsp;</td>
-        <td><b>$existsInDatabase</b>&nbsp;&nbsp;</td>
-        <td></td>
-      </tr>
-        </table>
-    </div><br />
-        <div class="top">[ <a href="#top">Top</a> ]</div>
-  </div>
-  <hr />
-	<a name="methodgetRawObject"></a>
-	<h3>method getRawObject <span class="smalllinenumber">[line 830]</span></h3>
-	<div class="function">
-    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
-    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
-		<code><a href="../Dao/DataObject/DataObject.html">DataObject</a> getRawObject(
+		<code><a href="../Dao/Record/Record.html">Record</a> getRawRecord(
 )</code>
     </td></tr></table>
     </td></tr></table><br />
 	
-		Returns an object with all attributes defined, but only set if necessary.<br /><br /><p>nullAttributes will be null as well as defaultValueAttributes. All other attributes will have a default value set with coerce().  Be careful! This function will soon be protected, and should not be called anymore! Use get() (without map) instead (which will call  getRawObject() for you).  You can not depend on this function... it is subject to change.</p><br /><br /><br />
+		Returns a record with all attributes defined, but only set if necessary.<br /><br /><p>nullAttributes will be null as well as defaultValueAttributes. All other attributes will have a default value set with coerce().  Be careful! This function will soon be protected, and should not be called anymore! Use get() (without map) instead (which will call  getRawRecord() for you).  You can not depend on this function... it is subject to change.</p><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
@@ -2255,19 +2162,109 @@ $existsInDatabase = true])</code>
         <div class="top">[ <a href="#top">Top</a> ]</div>
   </div>
   <hr />
+	<a name="methodgetRecordFromData"></a>
+	<h3>method getRecordFromData <span class="smalllinenumber">[line 746]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code><a href="../Dao/Record/Record.html">Record</a> getRecordFromData(
+array
+$data)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Prepares the data, and gets a new record.<br /><br /><p>This is the way you should get a Record from datasource data with.</p><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>see:</b>&nbsp;&nbsp;</td><td><a href="../Dao/Dao.html#methodprepareDataForRecord">Dao::prepareDataForRecord()</a></td>
+  </tr>
+  <tr>
+    <td><b>see:</b>&nbsp;&nbsp;</td><td><a href="../Dao/Dao.html#methodgetRecordFromPreparedData">Dao::getRecordFromPreparedData()</a></td>
+  </tr>
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+			<hr class="separator" />
+		<div class="notes">Implementation of:</div>
+			<dl>
+			<dt><a href="../Dao/DaoInterface.html#methodgetRecordFromData">DaoInterface::getRecordFromData()</a></dt>
+						<dd>Returns a record filled with an array of datasource values.</dd>
+					</dl>
+		
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">array&nbsp;&nbsp;</td>
+        <td><b>$data</b>&nbsp;&nbsp;</td>
+        <td>The data returned from the datasource</td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodgetRecordFromPreparedData"></a>
+	<h3>method getRecordFromPreparedData <span class="smalllinenumber">[line 733]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code><a href="../Dao/Record/Record.html">Record</a> getRecordFromPreparedData(
+array
+$data, [bool
+$existsInDatabase = true])</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Returns a data record with the data in it.<br /><br /><p>Override this function if you want a specific Record, not the default one.  Using your own Record is sometimes useful if your datasource has a strange  naming convention and you have to do different name conversion than the default  one.</p><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">array&nbsp;&nbsp;</td>
+        <td><b>$data</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+          <tr>
+        <td class="type">bool&nbsp;&nbsp;</td>
+        <td><b>$existsInDatabase</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
 	<a name="methodgetReference"></a>
 	<h3>method getReference <span class="smalllinenumber">[line 312]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
-		<code><a href="../Dao/DataObject/DataObject.html">DataObject</a> getReference(
+		<code><a href="../Dao/Record/Record.html">Record</a> getReference(
 
-$dataObject, 
+$record, 
 $attribute)</code>
     </td></tr></table>
     </td></tr></table><br />
 	
-		Returns the DataObject for a specific reference.<br /><br /><p>It then sets the hash in the DataObject so it can be retrieved next time.  If it is accessed after that, the already fetched DataHash is used.  A DataSource can directly return the DataHash, so it doesn't have to be fetched.</p><br /><br /><br />
+		Returns the Record for a specific reference.<br /><br /><p>It then sets the hash in the Record so it can be retrieved next time.  If it is accessed after that, the already fetched DataHash is used.  A DataSource can directly return the DataHash, so it doesn't have to be fetched.</p><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
@@ -2284,7 +2281,7 @@ $attribute)</code>
     <table border="0" cellspacing="0" cellpadding="0">
           <tr>
         <td class="type">&nbsp;&nbsp;</td>
-        <td><b>$dataObject</b>&nbsp;&nbsp;</td>
+        <td><b>$record</b>&nbsp;&nbsp;</td>
         <td></td>
       </tr>
           <tr>
@@ -2682,12 +2679,12 @@ $notNull = true])</code>
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
 		<code>array interpretMap(
-array|<a href="../Dao/DataObject/DataObject.html">DataObject</a>
-$mapOrObject)</code>
+array|<a href="../Dao/Record/Record.html">Record</a>
+$mapOrRecord)</code>
     </td></tr></table>
     </td></tr></table><br />
 	
-		If the passed parameter is not an array, but a DataObject, then it gets the changed values out of it.<br /><br /><br /><br />
+		If the passed parameter is not an array, but a Record, then it gets the changed values out of it.<br /><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
@@ -2703,8 +2700,8 @@ $mapOrObject)</code>
     <div class="tags">
     <table border="0" cellspacing="0" cellpadding="0">
           <tr>
-        <td class="type">array|<a href="../Dao/DataObject/DataObject.html">DataObject</a>&nbsp;&nbsp;</td>
-        <td><b>$mapOrObject</b>&nbsp;&nbsp;</td>
+        <td class="type">array|<a href="../Dao/Record/Record.html">Record</a>&nbsp;&nbsp;</td>
+        <td><b>$mapOrRecord</b>&nbsp;&nbsp;</td>
         <td></td>
       </tr>
         </table>
@@ -2823,12 +2820,12 @@ $attributeName)</code>
         <div class="top">[ <a href="#top">Top</a> ]</div>
   </div>
   <hr />
-	<a name="methodprepareDataForObject"></a>
-	<h3>method prepareDataForObject <span class="smalllinenumber">[line 772]</span></h3>
+	<a name="methodprepareDataForRecord"></a>
+	<h3>method prepareDataForRecord <span class="smalllinenumber">[line 772]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
-		<code>array prepareDataForObject(
+		<code>array prepareDataForRecord(
 array
 $data)</code>
     </td></tr></table>
@@ -2962,24 +2959,24 @@ $loggerFactory)</code>
         <div class="top">[ <a href="#top">Top</a> ]</div>
   </div>
   <hr />
-	<a name="methodupdateObjectWithData"></a>
-	<h3>method updateObjectWithData <span class="smalllinenumber">[line 758]</span></h3>
+	<a name="methodupdateRecordWithData"></a>
+	<h3>method updateRecordWithData <span class="smalllinenumber">[line 758]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
-		<code>void updateObjectWithData(
+		<code>void updateRecordWithData(
 array
-$data, <a href="../Dao/DataObject/DataObject.html">DataObject</a>
-$object)</code>
+$data, <a href="../Dao/Record/Record.html">Record</a>
+$record)</code>
     </td></tr></table>
     </td></tr></table><br />
 	
-		Prepares the data, and updates the object<br /><br /><br /><br />
+		Prepares the data, and updates the record<br /><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
   <tr>
-    <td><b>see:</b>&nbsp;&nbsp;</td><td><a href="../Dao/Dao.html#methodprepareDataForObject">Dao::prepareDataForObject()</a></td>
+    <td><b>see:</b>&nbsp;&nbsp;</td><td><a href="../Dao/Dao.html#methodprepareDataForRecord">Dao::prepareDataForRecord()</a></td>
   </tr>
   <tr>
     <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
@@ -2998,9 +2995,9 @@ $object)</code>
         <td>The data returned from the datasource</td>
       </tr>
           <tr>
-        <td class="type"><a href="../Dao/DataObject/DataObject.html">DataObject</a>&nbsp;&nbsp;</td>
-        <td><b>$object</b>&nbsp;&nbsp;</td>
-        <td>The object to be updated</td>
+        <td class="type"><a href="../Dao/Record/Record.html">Record</a>&nbsp;&nbsp;</td>
+        <td><b>$record</b>&nbsp;&nbsp;</td>
+        <td>The record to be updated</td>
       </tr>
         </table>
     </div><br />

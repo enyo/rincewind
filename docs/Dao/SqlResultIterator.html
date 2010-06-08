@@ -28,9 +28,6 @@
 	<div id="ric">
 					<p><a href="../ric_README.html">README</a></p>
 			</div>
-	<div id="todolist">
-			<p><a href="../todolist.html">Todo List</a></p>
-	</div>
       <b>Packages:</b><br />
               <a href="../li_php-library.html">php-library</a><br />
               <a href="../li_Config.html">Config</a><br />
@@ -91,20 +88,20 @@
 			<a href="../Dao/_Dao---Xml---XmlResultIterator.php.html">		XmlResultIterator.php
 		</a><br>
 	  </div><br />
-	subpackage <b>DataObject</b><br>  <div class="package">
-			<a href="../Dao/DataObject/_DataObject---DataObject.php.html">		DataObject.php
-		</a><br>
-			<a href="../Dao/DataObject/_DataObject---DataObjectExceptions.php.html">		DataObjectExceptions.php
-		</a><br>
-			<a href="../Dao/DataObject/_DataObject---DataObjectInterface.php.html">		DataObjectInterface.php
-		</a><br>
-			<a href="../Dao/DataObject/_DataObject---UserDataObject.php.html">		UserDataObject.php
-		</a><br>
-	  </div><br />
 	subpackage <b>Exceptions</b><br>  <div class="package">
 			<a href="../Dao/Exceptions/_Dao---DaoExceptions.php.html">		DaoExceptions.php
 		</a><br>
 			<a href="../Dao/Exceptions/_Dao---Json---JsonDaoExceptions.php.html">		JsonDaoExceptions.php
+		</a><br>
+	  </div><br />
+	subpackage <b>Record</b><br>  <div class="package">
+			<a href="../Dao/Record/_Record---Record.php.html">		Record.php
+		</a><br>
+			<a href="../Dao/Record/_Record---RecordExceptions.php.html">		RecordExceptions.php
+		</a><br>
+			<a href="../Dao/Record/_Record---RecordInterface.php.html">		RecordInterface.php
+		</a><br>
+			<a href="../Dao/Record/_Record---UserRecord.php.html">		UserRecord.php
 		</a><br>
 	  </div><br />
       
@@ -114,7 +111,7 @@
 	    		<a href="../Dao/UserDaoInterface.html">UserDaoInterface</a><br />
 	  </div>
   <div class="package">
-	DataObject<br />	    &nbsp;&nbsp;		<a href="../Dao/DataObject/DataObjectInterface.html">DataObjectInterface</a><br />
+	Record<br />	    &nbsp;&nbsp;		<a href="../Dao/Record/RecordInterface.html">RecordInterface</a><br />
 	  </div>
       
             <b>Classes:</b><br />
@@ -145,13 +142,13 @@
 	    &nbsp;&nbsp;		<a href="../Dao/Exceptions/DaoNotFoundException.html">DaoNotFoundException</a><br />
 	    &nbsp;&nbsp;		<a href="../Dao/Exceptions/DaoNotSupportedException.html">DaoNotSupportedException</a><br />
 	    &nbsp;&nbsp;		<a href="../Dao/Exceptions/DaoWrongValueException.html">DaoWrongValueException</a><br />
-	    &nbsp;&nbsp;		<a href="../Dao/Exceptions/DataObjectException.html">DataObjectException</a><br />
 	    &nbsp;&nbsp;		<a href="../Dao/Exceptions/JsonDaoException.html">JsonDaoException</a><br />
+	    &nbsp;&nbsp;		<a href="../Dao/Exceptions/RecordException.html">RecordException</a><br />
 	    &nbsp;&nbsp;		<a href="../Dao/Exceptions/XmlDaoException.html">XmlDaoException</a><br />
 	  </div>
   <div class="package">
-	DataObject<br />	    &nbsp;&nbsp;		<a href="../Dao/DataObject/DataObject.html">DataObject</a><br />
-	    &nbsp;&nbsp;		<a href="../Dao/DataObject/UserDataObject.html">UserDataObject</a><br />
+	Record<br />	    &nbsp;&nbsp;		<a href="../Dao/Record/Record.html">Record</a><br />
+	    &nbsp;&nbsp;		<a href="../Dao/Record/UserRecord.html">UserRecord</a><br />
 	  </div>
                 </td>
     <td>
@@ -172,13 +169,13 @@ Source Location: /Dao/SqlResultIterator.php<br /><br />
 <h4>Author(s):</h4>
 <ul>
           <li>Matthias Loitsch &lt;<a href="mailto:developer@ma.tthias.com">developer@ma.tthias.com</a>&gt;</li>
-                  </ul>
+            </ul>
 
 
 
 
           
-      
+  
 
 <h4>Copyright:</h4>
 <ul>
@@ -244,7 +241,7 @@ Source Location: /Dao/SqlResultIterator.php<br /><br />
    
 </dd>
 <dt>
-  <a href="../Dao/DaoResultIterator.html#var$returnDataObjectsAsArray">DaoResultIterator::$returnDataObjectsAsArray</a>
+  <a href="../Dao/DaoResultIterator.html#var$returnRecordsAsArray">DaoResultIterator::$returnRecordsAsArray</a>
   </dt>
 <dd>
    
@@ -274,7 +271,7 @@ Source Location: /Dao/SqlResultIterator.php<br /><br />
     <a href="../Dao/DaoResultIterator.html#methodcurrent">DaoResultIterator::current()</a>
   </dt>
   <dd>
-    Return the current DataObject.
+    Return the current Record.
   </dd>
     <dt>
     <a href="../Dao/DaoResultIterator.html#methodgetCurrentData">DaoResultIterator::getCurrentData()</a>
@@ -304,7 +301,7 @@ Source Location: /Dao/SqlResultIterator.php<br /><br />
 <a name="class_details"></a>
 <h3>Class Details</h3>
 <div class="tags">
-[line 25]<br />
+[line 24]<br />
 The SQL result iterator is the implementation of the DaoResultIterator.<br /><br /><p>It allows managing the result of a sql query.</p><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
@@ -314,9 +311,6 @@ The SQL result iterator is the implementation of the DaoResultIterator.<br /><br
   </tr>
   <tr>
     <td><b>copyright:</b>&nbsp;&nbsp;</td><td>Copyright (c) 2010, Matthias Loitsch</td>
-  </tr>
-  <tr>
-    <td><b>todo:</b>&nbsp;&nbsp;</td><td>The Iterator should not fetch the rows in advance, but rather on demand.</td>
   </tr>
 </table>
 </div>
@@ -331,7 +325,7 @@ The SQL result iterator is the implementation of the DaoResultIterator.<br /><br
 
   <hr />
 	<a name="method__construct"></a>
-	<h3>constructor __construct <span class="smalllinenumber">[line 36]</span></h3>
+	<h3>constructor __construct <span class="smalllinenumber">[line 35]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -373,7 +367,7 @@ $dao)</code>
   </div>
   <hr />
 	<a name="methodgetCurrentData"></a>
-	<h3>method getCurrentData <span class="smalllinenumber">[line 71]</span></h3>
+	<h3>method getCurrentData <span class="smalllinenumber">[line 70]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -398,7 +392,7 @@ $dao)</code>
   </div>
   <hr />
 	<a name="methodnext"></a>
-	<h3>method next <span class="smalllinenumber">[line 61]</span></h3>
+	<h3>method next <span class="smalllinenumber">[line 60]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -426,7 +420,7 @@ $dao)</code>
   </div>
   <hr />
 	<a name="methodrewind"></a>
-	<h3>method rewind <span class="smalllinenumber">[line 47]</span></h3>
+	<h3>method rewind <span class="smalllinenumber">[line 46]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">

@@ -28,9 +28,6 @@
 	<div id="ric">
 					<p><a href="../ric_README.html">README</a></p>
 			</div>
-	<div id="todolist">
-			<p><a href="../todolist.html">Todo List</a></p>
-	</div>
       <b>Packages:</b><br />
               <a href="../li_php-library.html">php-library</a><br />
               <a href="../li_Config.html">Config</a><br />
@@ -91,20 +88,20 @@
 			<a href="../Dao/_Dao---Xml---XmlResultIterator.php.html">		XmlResultIterator.php
 		</a><br>
 	  </div><br />
-	subpackage <b>DataObject</b><br>  <div class="package">
-			<a href="../Dao/DataObject/_DataObject---DataObject.php.html">		DataObject.php
-		</a><br>
-			<a href="../Dao/DataObject/_DataObject---DataObjectExceptions.php.html">		DataObjectExceptions.php
-		</a><br>
-			<a href="../Dao/DataObject/_DataObject---DataObjectInterface.php.html">		DataObjectInterface.php
-		</a><br>
-			<a href="../Dao/DataObject/_DataObject---UserDataObject.php.html">		UserDataObject.php
-		</a><br>
-	  </div><br />
 	subpackage <b>Exceptions</b><br>  <div class="package">
 			<a href="../Dao/Exceptions/_Dao---DaoExceptions.php.html">		DaoExceptions.php
 		</a><br>
 			<a href="../Dao/Exceptions/_Dao---Json---JsonDaoExceptions.php.html">		JsonDaoExceptions.php
+		</a><br>
+	  </div><br />
+	subpackage <b>Record</b><br>  <div class="package">
+			<a href="../Dao/Record/_Record---Record.php.html">		Record.php
+		</a><br>
+			<a href="../Dao/Record/_Record---RecordExceptions.php.html">		RecordExceptions.php
+		</a><br>
+			<a href="../Dao/Record/_Record---RecordInterface.php.html">		RecordInterface.php
+		</a><br>
+			<a href="../Dao/Record/_Record---UserRecord.php.html">		UserRecord.php
 		</a><br>
 	  </div><br />
       
@@ -114,7 +111,7 @@
 	    		<a href="../Dao/UserDaoInterface.html">UserDaoInterface</a><br />
 	  </div>
   <div class="package">
-	DataObject<br />	    &nbsp;&nbsp;		<a href="../Dao/DataObject/DataObjectInterface.html">DataObjectInterface</a><br />
+	Record<br />	    &nbsp;&nbsp;		<a href="../Dao/Record/RecordInterface.html">RecordInterface</a><br />
 	  </div>
       
             <b>Classes:</b><br />
@@ -145,13 +142,13 @@
 	    &nbsp;&nbsp;		<a href="../Dao/Exceptions/DaoNotFoundException.html">DaoNotFoundException</a><br />
 	    &nbsp;&nbsp;		<a href="../Dao/Exceptions/DaoNotSupportedException.html">DaoNotSupportedException</a><br />
 	    &nbsp;&nbsp;		<a href="../Dao/Exceptions/DaoWrongValueException.html">DaoWrongValueException</a><br />
-	    &nbsp;&nbsp;		<a href="../Dao/Exceptions/DataObjectException.html">DataObjectException</a><br />
 	    &nbsp;&nbsp;		<a href="../Dao/Exceptions/JsonDaoException.html">JsonDaoException</a><br />
+	    &nbsp;&nbsp;		<a href="../Dao/Exceptions/RecordException.html">RecordException</a><br />
 	    &nbsp;&nbsp;		<a href="../Dao/Exceptions/XmlDaoException.html">XmlDaoException</a><br />
 	  </div>
   <div class="package">
-	DataObject<br />	    &nbsp;&nbsp;		<a href="../Dao/DataObject/DataObject.html">DataObject</a><br />
-	    &nbsp;&nbsp;		<a href="../Dao/DataObject/UserDataObject.html">UserDataObject</a><br />
+	Record<br />	    &nbsp;&nbsp;		<a href="../Dao/Record/Record.html">Record</a><br />
+	    &nbsp;&nbsp;		<a href="../Dao/Record/UserRecord.html">UserRecord</a><br />
 	  </div>
                 </td>
     <td>
@@ -515,7 +512,7 @@ Source Location: /Dao/SqlDao.php<br /><br />
     <a href="../Dao/Dao.html#methoddeleteById">Dao::deleteById()</a>
   </dt>
   <dd>
-    Gets the object by id and deletes it.
+    Gets the record by id and deletes it.
   </dd>
     <dt>
     <a href="../Dao/Dao.html#methodexportAttributeName">Dao::exportAttributeName()</a>
@@ -593,7 +590,7 @@ Source Location: /Dao/SqlDao.php<br /><br />
     <a href="../Dao/Dao.html#methodget">Dao::get()</a>
   </dt>
   <dd>
-    Calls find() and throws an error if null is returned, otherwise it just passes the DataObject  If you call get() without parameters, a &quot;raw object&quot; will be returned, containing  only default values, and null as id.
+    Calls find() and throws an error if null is returned, otherwise it just passes the Record  If you call get() without parameters, a &quot;raw record&quot; will be returned, containing  only default values, and null as id.
   </dd>
     <dt>
     <a href="../Dao/Dao.html#methodgetAdditionalAttributes">Dao::getAdditionalAttributes()</a>
@@ -638,28 +635,28 @@ Source Location: /Dao/SqlDao.php<br /><br />
     Returns the null attributes
   </dd>
     <dt>
-    <a href="../Dao/Dao.html#methodgetObjectFromData">Dao::getObjectFromData()</a>
+    <a href="../Dao/Dao.html#methodgetRawRecord">Dao::getRawRecord()</a>
   </dt>
   <dd>
-    Prepares the data, and gets a new object.
+    Returns a record with all attributes defined, but only set if necessary.
   </dd>
     <dt>
-    <a href="../Dao/Dao.html#methodgetObjectFromPreparedData">Dao::getObjectFromPreparedData()</a>
+    <a href="../Dao/Dao.html#methodgetRecordFromData">Dao::getRecordFromData()</a>
   </dt>
   <dd>
-    Returns a data object with the data in it.
+    Prepares the data, and gets a new record.
   </dd>
     <dt>
-    <a href="../Dao/Dao.html#methodgetRawObject">Dao::getRawObject()</a>
+    <a href="../Dao/Dao.html#methodgetRecordFromPreparedData">Dao::getRecordFromPreparedData()</a>
   </dt>
   <dd>
-    Returns an object with all attributes defined, but only set if necessary.
+    Returns a data record with the data in it.
   </dd>
     <dt>
     <a href="../Dao/Dao.html#methodgetReference">Dao::getReference()</a>
   </dt>
   <dd>
-    Returns the DataObject for a specific reference.
+    Returns the Record for a specific reference.
   </dd>
     <dt>
     <a href="../Dao/Dao.html#methodgetReferences">Dao::getReferences()</a>
@@ -725,7 +722,7 @@ Source Location: /Dao/SqlDao.php<br /><br />
     <a href="../Dao/Dao.html#methodinterpretMap">Dao::interpretMap()</a>
   </dt>
   <dd>
-    If the passed parameter is not an array, but a DataObject, then it gets the changed values out of it.
+    If the passed parameter is not an array, but a Record, then it gets the changed values out of it.
   </dd>
     <dt>
     <a href="../Dao/Dao.html#methodinterpretSortVariable">Dao::interpretSortVariable()</a>
@@ -752,7 +749,7 @@ Source Location: /Dao/SqlDao.php<br /><br />
     Returns true if the attribute can not be null.
   </dd>
     <dt>
-    <a href="../Dao/Dao.html#methodprepareDataForObject">Dao::prepareDataForObject()</a>
+    <a href="../Dao/Dao.html#methodprepareDataForRecord">Dao::prepareDataForRecord()</a>
   </dt>
   <dd>
     Goes through the data array returned from the datasource, and converts the values that are necessary.
@@ -776,10 +773,10 @@ Source Location: /Dao/SqlDao.php<br /><br />
     Overwrite this in a specific Dao implementation to setup the references.
   </dd>
     <dt>
-    <a href="../Dao/Dao.html#methodupdateObjectWithData">Dao::updateObjectWithData()</a>
+    <a href="../Dao/Dao.html#methodupdateRecordWithData">Dao::updateRecordWithData()</a>
   </dt>
   <dd>
-    Prepares the data, and updates the object
+    Prepares the data, and updates the record
   </dd>
     <dt>
     <a href="../Dao/Dao.html#method__call">Dao::__call()</a>
@@ -1091,12 +1088,12 @@ $result)</code>
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
 		<code>void delete(
-<a href="../Dao/DataObject/DataObject.html">DataObject</a>
-$object)</code>
+<a href="../Dao/Record/Record.html">Record</a>
+$record)</code>
     </td></tr></table>
     </td></tr></table><br />
 	
-		Deletes an object in the database using the id.<br /><br /><br /><br />
+		Deletes a record in the database using the id.<br /><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
@@ -1112,8 +1109,8 @@ $object)</code>
     <div class="tags">
     <table border="0" cellspacing="0" cellpadding="0">
           <tr>
-        <td class="type"><a href="../Dao/DataObject/DataObject.html">DataObject</a>&nbsp;&nbsp;</td>
-        <td><b>$object</b>&nbsp;&nbsp;</td>
+        <td class="type"><a href="../Dao/Record/Record.html">Record</a>&nbsp;&nbsp;</td>
+        <td><b>$record</b>&nbsp;&nbsp;</td>
         <td></td>
       </tr>
         </table>
@@ -1276,15 +1273,15 @@ $withTime)</code>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
-		<code><a href="../Dao/DataObject/DataObject.html">DataObject</a> find(
-[array|<a href="../Dao/DataObject/DataObject.html">DataObject</a>
+		<code><a href="../Dao/Record/Record.html">Record</a> find(
+[array|<a href="../Dao/Record/Record.html">Record</a>
 $map = null], [bool
 $exportValues = true], [string
 $resourceName = null])</code>
     </td></tr></table>
     </td></tr></table><br />
 	
-		This is the method to get a DataObject from the database.<br /><br /><p>If you want to select more objects, call getIterator.  This function returns null if nothing has been found. If you want it to throw an exception (for  chaining) you can call get(), which is mostly a wrapper for find().</p><br /><br /><br />
+		This is the method to get a Record from the database.<br /><br /><p>If you want to select more records, call getIterator.  This function returns null if nothing has been found. If you want it to throw an exception (for  chaining) you can call get(), which is mostly a wrapper for find().</p><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
@@ -1306,9 +1303,9 @@ $resourceName = null])</code>
     <div class="tags">
     <table border="0" cellspacing="0" cellpadding="0">
           <tr>
-        <td class="type">array|<a href="../Dao/DataObject/DataObject.html">DataObject</a>&nbsp;&nbsp;</td>
+        <td class="type">array|<a href="../Dao/Record/Record.html">Record</a>&nbsp;&nbsp;</td>
         <td><b>$map</b>&nbsp;&nbsp;</td>
-        <td>A map or dataObject containing the attributes.</td>
+        <td>A map or record containing the attributes.</td>
       </tr>
           <tr>
         <td class="type">bool&nbsp;&nbsp;</td>
@@ -1331,7 +1328,7 @@ $resourceName = null])</code>
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
 		<code>string generateQuery(
-array|<a href="../Dao/DataObject/DataObject.html">DataObject</a>
+array|<a href="../Dao/Record/Record.html">Record</a>
 $map, [string|array
 $sort = null], [int
 $offset = null], [int
@@ -1357,9 +1354,9 @@ $resourceName = null])</code>
     <div class="tags">
     <table border="0" cellspacing="0" cellpadding="0">
           <tr>
-        <td class="type">array|<a href="../Dao/DataObject/DataObject.html">DataObject</a>&nbsp;&nbsp;</td>
+        <td class="type">array|<a href="../Dao/Record/Record.html">Record</a>&nbsp;&nbsp;</td>
         <td><b>$map</b>&nbsp;&nbsp;</td>
-        <td>A map or dataObject containing the attributes.</td>
+        <td>A map or record containing the attributes.</td>
       </tr>
           <tr>
         <td class="type">string|array&nbsp;&nbsp;</td>
@@ -1433,14 +1430,14 @@ $sort)</code>
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
 		<code>array getData(
-array|<a href="../Dao/DataObject/DataObject.html">DataObject</a>
+array|<a href="../Dao/Record/Record.html">Record</a>
 $map, [bool
 $exportValues = true], [string
 $resourceName = null])</code>
     </td></tr></table>
     </td></tr></table><br />
 	
-		Same as get() but returns an array with the data instead of an object<br /><br /><br /><br />
+		Same as get() but returns an array with the data instead of a record<br /><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
@@ -1462,7 +1459,7 @@ $resourceName = null])</code>
     <div class="tags">
     <table border="0" cellspacing="0" cellpadding="0">
           <tr>
-        <td class="type">array|<a href="../Dao/DataObject/DataObject.html">DataObject</a>&nbsp;&nbsp;</td>
+        <td class="type">array|<a href="../Dao/Record/Record.html">Record</a>&nbsp;&nbsp;</td>
         <td><b>$map</b>&nbsp;&nbsp;</td>
         <td></td>
       </tr>
@@ -1514,14 +1511,14 @@ $resourceName = null])</code>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
-		<code><a href="../Dao/DataObject/DataObject.html">DataObject</a>|array getFromQuery(
+		<code><a href="../Dao/Record/Record.html">Record</a>|array getFromQuery(
 string
 $query, [bool
 $returnData = false])</code>
     </td></tr></table>
     </td></tr></table><br />
 	
-		Returns a DataObject or data array from a query.<br /><br /><p>Returns null if nothing found.</p><br /><br /><br />
+		Returns a Record or data array from a query.<br /><br /><p>Returns null if nothing found.</p><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
@@ -1544,7 +1541,7 @@ $returnData = false])</code>
           <tr>
         <td class="type">bool&nbsp;&nbsp;</td>
         <td><b>$returnData</b>&nbsp;&nbsp;</td>
-        <td>If set to true, only the data as array is returned, not a DataObject.</td>
+        <td>If set to true, only the data as array is returned, not a Record.</td>
       </tr>
         </table>
     </div><br />
@@ -1557,7 +1554,7 @@ $returnData = false])</code>
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
 		<code><a href="../Dao/DaoResultIterator.html">DaoResultIterator</a> getIterator(
-array|<a href="../Dao/DataObject/DataObject.html">DataObject</a>
+array|<a href="../Dao/Record/Record.html">Record</a>
 $map, [string|array
 $sort = null], [int
 $offset = null], [int
@@ -1589,7 +1586,7 @@ $resourceName = null])</code>
     <div class="tags">
     <table border="0" cellspacing="0" cellpadding="0">
           <tr>
-        <td class="type">array|<a href="../Dao/DataObject/DataObject.html">DataObject</a>&nbsp;&nbsp;</td>
+        <td class="type">array|<a href="../Dao/Record/Record.html">Record</a>&nbsp;&nbsp;</td>
         <td><b>$map</b>&nbsp;&nbsp;</td>
         <td></td>
       </tr>
@@ -1726,18 +1723,18 @@ $query)</code>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
-		<code><a href="../Dao/DataObject/DataObject.html">DataObject</a> insert(
-<a href="../Dao/DataObject/DataObject.html">DataObject</a>
-$object)</code>
+		<code><a href="../Dao/Record/Record.html">Record</a> insert(
+<a href="../Dao/Record/Record.html">Record</a>
+$record)</code>
     </td></tr></table>
     </td></tr></table><br />
 	
-		Inserts an object in the database, and updates the object with the new data (in  case some default values of the database have been set.)<br /><br /><br /><br />
+		Inserts a record in the database, and updates the record with the new data (in  case some default values of the database have been set.)<br /><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
   <tr>
-    <td><b>return:</b>&nbsp;&nbsp;</td><td>The updated object.</td>
+    <td><b>return:</b>&nbsp;&nbsp;</td><td>The updated record.</td>
   </tr>
   <tr>
     <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
@@ -1751,8 +1748,8 @@ $object)</code>
     <div class="tags">
     <table border="0" cellspacing="0" cellpadding="0">
           <tr>
-        <td class="type"><a href="../Dao/DataObject/DataObject.html">DataObject</a>&nbsp;&nbsp;</td>
-        <td><b>$object</b>&nbsp;&nbsp;</td>
+        <td class="type"><a href="../Dao/Record/Record.html">Record</a>&nbsp;&nbsp;</td>
+        <td><b>$record</b>&nbsp;&nbsp;</td>
         <td></td>
       </tr>
         </table>
@@ -1835,18 +1832,18 @@ $id = null])</code>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
-		<code><a href="../Dao/DataObject/DataObject.html">DataObject</a> update(
-<a href="../Dao/DataObject/DataObject.html">DataObject</a>
-$object)</code>
+		<code><a href="../Dao/Record/Record.html">Record</a> update(
+<a href="../Dao/Record/Record.html">Record</a>
+$record)</code>
     </td></tr></table>
     </td></tr></table><br />
 	
-		Updates an object in the database using the id.<br /><br /><br /><br />
+		Updates a record in the database using the id.<br /><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
   <tr>
-    <td><b>return:</b>&nbsp;&nbsp;</td><td>The updated object.</td>
+    <td><b>return:</b>&nbsp;&nbsp;</td><td>The updated record.</td>
   </tr>
   <tr>
     <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
@@ -1860,8 +1857,8 @@ $object)</code>
     <div class="tags">
     <table border="0" cellspacing="0" cellpadding="0">
           <tr>
-        <td class="type"><a href="../Dao/DataObject/DataObject.html">DataObject</a>&nbsp;&nbsp;</td>
-        <td><b>$object</b>&nbsp;&nbsp;</td>
+        <td class="type"><a href="../Dao/Record/Record.html">Record</a>&nbsp;&nbsp;</td>
+        <td><b>$record</b>&nbsp;&nbsp;</td>
         <td></td>
       </tr>
         </table>

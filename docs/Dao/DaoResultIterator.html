@@ -28,9 +28,6 @@
 	<div id="ric">
 					<p><a href="../ric_README.html">README</a></p>
 			</div>
-	<div id="todolist">
-			<p><a href="../todolist.html">Todo List</a></p>
-	</div>
       <b>Packages:</b><br />
               <a href="../li_php-library.html">php-library</a><br />
               <a href="../li_Config.html">Config</a><br />
@@ -91,20 +88,20 @@
 			<a href="../Dao/_Dao---Xml---XmlResultIterator.php.html">		XmlResultIterator.php
 		</a><br>
 	  </div><br />
-	subpackage <b>DataObject</b><br>  <div class="package">
-			<a href="../Dao/DataObject/_DataObject---DataObject.php.html">		DataObject.php
-		</a><br>
-			<a href="../Dao/DataObject/_DataObject---DataObjectExceptions.php.html">		DataObjectExceptions.php
-		</a><br>
-			<a href="../Dao/DataObject/_DataObject---DataObjectInterface.php.html">		DataObjectInterface.php
-		</a><br>
-			<a href="../Dao/DataObject/_DataObject---UserDataObject.php.html">		UserDataObject.php
-		</a><br>
-	  </div><br />
 	subpackage <b>Exceptions</b><br>  <div class="package">
 			<a href="../Dao/Exceptions/_Dao---DaoExceptions.php.html">		DaoExceptions.php
 		</a><br>
 			<a href="../Dao/Exceptions/_Dao---Json---JsonDaoExceptions.php.html">		JsonDaoExceptions.php
+		</a><br>
+	  </div><br />
+	subpackage <b>Record</b><br>  <div class="package">
+			<a href="../Dao/Record/_Record---Record.php.html">		Record.php
+		</a><br>
+			<a href="../Dao/Record/_Record---RecordExceptions.php.html">		RecordExceptions.php
+		</a><br>
+			<a href="../Dao/Record/_Record---RecordInterface.php.html">		RecordInterface.php
+		</a><br>
+			<a href="../Dao/Record/_Record---UserRecord.php.html">		UserRecord.php
 		</a><br>
 	  </div><br />
       
@@ -114,7 +111,7 @@
 	    		<a href="../Dao/UserDaoInterface.html">UserDaoInterface</a><br />
 	  </div>
   <div class="package">
-	DataObject<br />	    &nbsp;&nbsp;		<a href="../Dao/DataObject/DataObjectInterface.html">DataObjectInterface</a><br />
+	Record<br />	    &nbsp;&nbsp;		<a href="../Dao/Record/RecordInterface.html">RecordInterface</a><br />
 	  </div>
       
             <b>Classes:</b><br />
@@ -145,13 +142,13 @@
 	    &nbsp;&nbsp;		<a href="../Dao/Exceptions/DaoNotFoundException.html">DaoNotFoundException</a><br />
 	    &nbsp;&nbsp;		<a href="../Dao/Exceptions/DaoNotSupportedException.html">DaoNotSupportedException</a><br />
 	    &nbsp;&nbsp;		<a href="../Dao/Exceptions/DaoWrongValueException.html">DaoWrongValueException</a><br />
-	    &nbsp;&nbsp;		<a href="../Dao/Exceptions/DataObjectException.html">DataObjectException</a><br />
 	    &nbsp;&nbsp;		<a href="../Dao/Exceptions/JsonDaoException.html">JsonDaoException</a><br />
+	    &nbsp;&nbsp;		<a href="../Dao/Exceptions/RecordException.html">RecordException</a><br />
 	    &nbsp;&nbsp;		<a href="../Dao/Exceptions/XmlDaoException.html">XmlDaoException</a><br />
 	  </div>
   <div class="package">
-	DataObject<br />	    &nbsp;&nbsp;		<a href="../Dao/DataObject/DataObject.html">DataObject</a><br />
-	    &nbsp;&nbsp;		<a href="../Dao/DataObject/UserDataObject.html">UserDataObject</a><br />
+	Record<br />	    &nbsp;&nbsp;		<a href="../Dao/Record/Record.html">Record</a><br />
+	    &nbsp;&nbsp;		<a href="../Dao/Record/UserRecord.html">UserRecord</a><br />
 	  </div>
                 </td>
     <td>
@@ -196,7 +193,7 @@ Source Location: /Dao/DaoResultIterator.php<br /><br />
     <li><a href="../Dao/DaoResultIterator.html#var$currentKey">$currentKey</a></li>
     <li><a href="../Dao/DaoResultIterator.html#var$dao">$dao</a></li>
     <li><a href="../Dao/DaoResultIterator.html#var$length">$length</a></li>
-    <li><a href="../Dao/DaoResultIterator.html#var$returnDataObjectsAsArray">$returnDataObjectsAsArray</a></li>
+    <li><a href="../Dao/DaoResultIterator.html#var$returnRecordsAsArray">$returnRecordsAsArray</a></li>
   </ul>
 </td>
 
@@ -224,11 +221,11 @@ Source Location: /Dao/DaoResultIterator.php<br /><br />
 <div class="tags">
 <dl>
 <dt><a href="../Dao/DaoHashListIterator.html">DaoHashListIterator</a></dt>
-	<dd>The DaoHashListIterator takes an array of data hashes, and lets you iterate over it, returning the corresponding  DataObjects by instantiating them with the dao and the given data hash.</dd>
+	<dd>The DaoHashListIterator takes an array of data hashes, and lets you iterate over it, returning the corresponding  Records by instantiating them with the dao and the given data hash.</dd>
 </dl>
 <dl>
 <dt><a href="../Dao/DaoKeyListIterator.html">DaoKeyListIterator</a></dt>
-	<dd>The DaoKeyListIterator takes an array of keys, and lets you iterate over it, returning the corresponding  DataObjects by calling the dao, and getting it.</dd>
+	<dd>The DaoKeyListIterator takes an array of keys, and lets you iterate over it, returning the corresponding  Records by calling the dao, and getting it.</dd>
 </dl>
 <dl>
 <dt><a href="../Dao/FileSourceResultIterator.html">FileSourceResultIterator</a></dt>
@@ -352,11 +349,11 @@ The Dao Result iterator is returned whenever a query returns more than one row.<
       </table>
 	</div><br /><br />
 	<div class="top">[ <a href="#top">Top</a> ]</div><br />
-	<a name="var$returnDataObjectsAsArray"></a>
+	<a name="var$returnRecordsAsArray"></a>
 	<p></p>
-	<h4>$returnDataObjectsAsArray = <span class="value">&nbsp;false</span></h4>
+	<h4>$returnRecordsAsArray = <span class="value">&nbsp;false</span></h4>
 	<p>[line 57]</p>
-  If set to true, instead of returning the DataObject, DataObject-&gt;getArray() is returned.<br /><br /><br /><br />
+  If set to true, instead of returning the Record, Record-&gt;getArray() is returned.<br /><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
@@ -394,7 +391,7 @@ The Dao Result iterator is returned whenever a query returns more than one row.<
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
 		<code><a href="../Dao/DaoResultIterator.html">DaoResultIterator</a> asArrays(
 [bool
-$returnDataObjectsAsArray = true])</code>
+$returnRecordsAsArray = true])</code>
     </td></tr></table>
     </td></tr></table><br />
 	
@@ -406,7 +403,7 @@ $returnDataObjectsAsArray = true])</code>
     <td><b>return:</b>&nbsp;&nbsp;</td><td>Returns itself for chaining.</td>
   </tr>
   <tr>
-    <td><b>see:</b>&nbsp;&nbsp;</td><td><a href="../Dao/DaoResultIterator.html#var$returnDataObjectsAsArray">DaoResultIterator::$returnDataObjectsAsArray</a></td>
+    <td><b>see:</b>&nbsp;&nbsp;</td><td><a href="../Dao/DaoResultIterator.html#var$returnRecordsAsArray">DaoResultIterator::$returnRecordsAsArray</a></td>
   </tr>
   <tr>
     <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
@@ -421,7 +418,7 @@ $returnDataObjectsAsArray = true])</code>
     <table border="0" cellspacing="0" cellpadding="0">
           <tr>
         <td class="type">bool&nbsp;&nbsp;</td>
-        <td><b>$returnDataObjectsAsArray</b>&nbsp;&nbsp;</td>
+        <td><b>$returnRecordsAsArray</b>&nbsp;&nbsp;</td>
         <td></td>
       </tr>
         </table>
@@ -459,12 +456,12 @@ $returnDataObjectsAsArray = true])</code>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
-		<code><a href="../Dao/DataObject/DataObject.html">DataObject</a>|array current(
+		<code><a href="../Dao/Record/Record.html">Record</a>|array current(
 )</code>
     </td></tr></table>
     </td></tr></table><br />
 	
-		Return the current DataObject.<br /><br /><p>If getAsArray() has been called, returns an array instead of the DataObject.</p><br /><br /><br />
+		Return the current Record.<br /><br /><p>If getAsArray() has been called, returns an array instead of the Record.</p><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">

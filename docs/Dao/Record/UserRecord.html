@@ -1,6 +1,6 @@
 <html>
 <head>
-<title>Docs For Class DataObjectInterface</title>
+<title>Docs For Class UserRecord</title>
 <link rel="stylesheet" type="text/css" href="../../media/style.css">
 </head>
 <body>
@@ -28,9 +28,6 @@
 	<div id="ric">
 					<p><a href="../../ric_README.html">README</a></p>
 			</div>
-	<div id="todolist">
-			<p><a href="../../todolist.html">Todo List</a></p>
-	</div>
       <b>Packages:</b><br />
               <a href="../../li_php-library.html">php-library</a><br />
               <a href="../../li_Config.html">Config</a><br />
@@ -91,20 +88,20 @@
 			<a href="../../Dao/_Dao---Xml---XmlResultIterator.php.html">		XmlResultIterator.php
 		</a><br>
 	  </div><br />
-	subpackage <b>DataObject</b><br>  <div class="package">
-			<a href="../../Dao/DataObject/_DataObject---DataObject.php.html">		DataObject.php
-		</a><br>
-			<a href="../../Dao/DataObject/_DataObject---DataObjectExceptions.php.html">		DataObjectExceptions.php
-		</a><br>
-			<a href="../../Dao/DataObject/_DataObject---DataObjectInterface.php.html">		DataObjectInterface.php
-		</a><br>
-			<a href="../../Dao/DataObject/_DataObject---UserDataObject.php.html">		UserDataObject.php
-		</a><br>
-	  </div><br />
 	subpackage <b>Exceptions</b><br>  <div class="package">
 			<a href="../../Dao/Exceptions/_Dao---DaoExceptions.php.html">		DaoExceptions.php
 		</a><br>
 			<a href="../../Dao/Exceptions/_Dao---Json---JsonDaoExceptions.php.html">		JsonDaoExceptions.php
+		</a><br>
+	  </div><br />
+	subpackage <b>Record</b><br>  <div class="package">
+			<a href="../../Dao/Record/_Record---Record.php.html">		Record.php
+		</a><br>
+			<a href="../../Dao/Record/_Record---RecordExceptions.php.html">		RecordExceptions.php
+		</a><br>
+			<a href="../../Dao/Record/_Record---RecordInterface.php.html">		RecordInterface.php
+		</a><br>
+			<a href="../../Dao/Record/_Record---UserRecord.php.html">		UserRecord.php
 		</a><br>
 	  </div><br />
       
@@ -114,7 +111,7 @@
 	    		<a href="../../Dao/UserDaoInterface.html">UserDaoInterface</a><br />
 	  </div>
   <div class="package">
-	DataObject<br />	    &nbsp;&nbsp;		<a href="../../Dao/DataObject/DataObjectInterface.html">DataObjectInterface</a><br />
+	Record<br />	    &nbsp;&nbsp;		<a href="../../Dao/Record/RecordInterface.html">RecordInterface</a><br />
 	  </div>
       
             <b>Classes:</b><br />
@@ -145,28 +142,30 @@
 	    &nbsp;&nbsp;		<a href="../../Dao/Exceptions/DaoNotFoundException.html">DaoNotFoundException</a><br />
 	    &nbsp;&nbsp;		<a href="../../Dao/Exceptions/DaoNotSupportedException.html">DaoNotSupportedException</a><br />
 	    &nbsp;&nbsp;		<a href="../../Dao/Exceptions/DaoWrongValueException.html">DaoWrongValueException</a><br />
-	    &nbsp;&nbsp;		<a href="../../Dao/Exceptions/DataObjectException.html">DataObjectException</a><br />
 	    &nbsp;&nbsp;		<a href="../../Dao/Exceptions/JsonDaoException.html">JsonDaoException</a><br />
+	    &nbsp;&nbsp;		<a href="../../Dao/Exceptions/RecordException.html">RecordException</a><br />
 	    &nbsp;&nbsp;		<a href="../../Dao/Exceptions/XmlDaoException.html">XmlDaoException</a><br />
 	  </div>
   <div class="package">
-	DataObject<br />	    &nbsp;&nbsp;		<a href="../../Dao/DataObject/DataObject.html">DataObject</a><br />
-	    &nbsp;&nbsp;		<a href="../../Dao/DataObject/UserDataObject.html">UserDataObject</a><br />
+	Record<br />	    &nbsp;&nbsp;		<a href="../../Dao/Record/Record.html">Record</a><br />
+	    &nbsp;&nbsp;		<a href="../../Dao/Record/UserRecord.html">UserRecord</a><br />
 	  </div>
                 </td>
     <td>
       <table cellpadding="10" cellspacing="0" width="100%" border="0"><tr><td valign="top">
 
-<h1>Class: DataObjectInterface</h1>
-Source Location: /DataObject/DataObjectInterface.php<br /><br />
+<h1>Class: UserRecord</h1>
+Source Location: /Record/UserRecord.php<br /><br />
 
 
 <table width="100%" border="0">
 <tr><td valign="top">
 
-<h3><a href="#class_details">Interface Overview</a></h3>
-<pre></pre><br />
-<div class="description">The DataObjectInterface</div><br /><br />
+<h3><a href="#class_details">Class Overview</a></h3>
+<pre><a href="../../Dao/Record/Record.html">Record</a>
+   |
+   --UserRecord</pre><br />
+<div class="description">The UserRecord is a special Record that provides a few additional methods typical for user handling.</div><br /><br />
 <h4>Author(s):</h4>
 <ul>
           <li>Matthias Loitsch &lt;<a href="mailto:developer@ma.tthias.com">developer@ma.tthias.com</a>&gt;</li>
@@ -190,10 +189,9 @@ Source Location: /DataObject/DataObjectInterface.php<br /><br />
 <td valign="top">
 <h3><a href="#class_methods">Methods</a></h3>
 <ul>
-    <li><a href="../../Dao/DataObject/DataObjectInterface.html#methoddelete">delete</a></li>
-    <li><a href="../../Dao/DataObject/DataObjectInterface.html#methodget">get</a></li>
-    <li><a href="../../Dao/DataObject/DataObjectInterface.html#methodsave">save</a></li>
-    <li><a href="../../Dao/DataObject/DataObjectInterface.html#methodset">set</a></li>
+    <li><a href="../../Dao/Record/UserRecord.html#methodencryptPassword">encryptPassword</a></li>
+    <li><a href="../../Dao/Record/UserRecord.html#methodisGuest">isGuest</a></li>
+    <li><a href="../../Dao/Record/UserRecord.html#methodpasswordEquals">passwordEquals</a></li>
   </ul>
 </td>
 
@@ -205,7 +203,191 @@ Source Location: /DataObject/DataObjectInterface.php<br /><br />
 
 
 
+<td valign="top">
+<h3>Inherited Variables</h3>
+<div class="tags">
+<h4>Class: <a href="../../Dao/Record/Record.html">Record</a></h4>
+<dl>
+<dt>
+  <a href="../../Dao/Record/Record.html#var$changedAttributes">Record::$changedAttributes</a>
+  </dt>
+<dd>
+   
+</dd>
+<dt>
+  <a href="../../Dao/Record/Record.html#var$dao">Record::$dao</a>
+  </dt>
+<dd>
+   
+</dd>
+<dt>
+  <a href="../../Dao/Record/Record.html#var$data">Record::$data</a>
+  </dt>
+<dd>
+   
+</dd>
+<dt>
+  <a href="../../Dao/Record/Record.html#var$existsInDatabase">Record::$existsInDatabase</a>
+  </dt>
+<dd>
+   
+</dd>
+</dl>
+</div>
+</td>
 
+<td valign="top">
+<h3>Inherited Methods</h3>
+<div class="tags">
+<h4>Class: <a href="../../Dao/Record/Record.html">Record</a></h4>
+<dl>
+    <dt>
+    <a href="../../Dao/Record/Record.html#method__construct">Record::__construct()</a>
+  </dt>
+  <dd>
+    Every record holds a reference to it's dao.
+  </dd>
+    <dt>
+    <a href="../../Dao/Record/Record.html#methodcoerce">Record::coerce()</a>
+  </dt>
+  <dd>
+    
+  </dd>
+    <dt>
+    <a href="../../Dao/Record/Record.html#methodconvertAttributeNameToDatasourceName">Record::convertAttributeNameToDatasourceName()</a>
+  </dt>
+  <dd>
+    Converts a php attribute name to the datasource name.
+  </dd>
+    <dt>
+    <a href="../../Dao/Record/Record.html#methodconvertAttributeNameToPhpName">Record::convertAttributeNameToPhpName()</a>
+  </dt>
+  <dd>
+    Converts a datasource attribute name to the php name.
+  </dd>
+    <dt>
+    <a href="../../Dao/Record/Record.html#methodconvertGetMethodToPhpColumn">Record::convertGetMethodToPhpColumn()</a>
+  </dt>
+  <dd>
+    
+  </dd>
+    <dt>
+    <a href="../../Dao/Record/Record.html#methodconvertSetMethodToPhpColumn">Record::convertSetMethodToPhpColumn()</a>
+  </dt>
+  <dd>
+    
+  </dd>
+    <dt>
+    <a href="../../Dao/Record/Record.html#methoddelete">Record::delete()</a>
+  </dt>
+  <dd>
+    Calls delete($this) on the dao.
+  </dd>
+    <dt>
+    <a href="../../Dao/Record/Record.html#methodget">Record::get()</a>
+  </dt>
+  <dd>
+    Gets the value of the $data array and returns it.
+  </dd>
+    <dt>
+    <a href="../../Dao/Record/Record.html#methodgetArray">Record::getArray()</a>
+  </dt>
+  <dd>
+    Returns an associative array with the values.
+  </dd>
+    <dt>
+    <a href="../../Dao/Record/Record.html#methodgetAttributeType">Record::getAttributeType()</a>
+  </dt>
+  <dd>
+    Returns the type of the attribute defined in the Dao.
+  </dd>
+    <dt>
+    <a href="../../Dao/Record/Record.html#methodgetChangedAttributes">Record::getChangedAttributes()</a>
+  </dt>
+  <dd>
+    Returns an array of all attributes that have been explicitly set. The indices are the attribute names
+  </dd>
+    <dt>
+    <a href="../../Dao/Record/Record.html#methodgetChangedValues">Record::getChangedValues()</a>
+  </dt>
+  <dd>
+    Returns an array of all values that have been explicitly set. The indices are the attribute names.
+  </dd>
+    <dt>
+    <a href="../../Dao/Record/Record.html#methodgetDao">Record::getDao()</a>
+  </dt>
+  <dd>
+    Returns the dao from this record.
+  </dd>
+    <dt>
+    <a href="../../Dao/Record/Record.html#methodgetDirectly">Record::getDirectly()</a>
+  </dt>
+  <dd>
+    You should NEVER use this function your app.
+  </dd>
+    <dt>
+    <a href="../../Dao/Record/Record.html#methodload">Record::load()</a>
+  </dt>
+  <dd>
+    Uses the changed values (the values that have explicitly been set with set()) to updated  the data hash.
+  </dd>
+    <dt>
+    <a href="../../Dao/Record/Record.html#methodsave">Record::save()</a>
+  </dt>
+  <dd>
+    When there is an id, update() is called on the dao.
+  </dd>
+    <dt>
+    <a href="../../Dao/Record/Record.html#methodset">Record::set()</a>
+  </dt>
+  <dd>
+    Sets the value in the $data array after calling coerce() on the value.
+  </dd>
+    <dt>
+    <a href="../../Dao/Record/Record.html#methodsetData">Record::setData()</a>
+  </dt>
+  <dd>
+    Sets a new data array, and resets the changedAttributes array.
+  </dd>
+    <dt>
+    <a href="../../Dao/Record/Record.html#methodsetDirectly">Record::setDirectly()</a>
+  </dt>
+  <dd>
+    You should NEVER use this function in your app.
+  </dd>
+    <dt>
+    <a href="../../Dao/Record/Record.html#methodsetExistsInDatabase">Record::setExistsInDatabase()</a>
+  </dt>
+  <dd>
+    
+  </dd>
+    <dt>
+    <a href="../../Dao/Record/Record.html#method__call">Record::__call()</a>
+  </dt>
+  <dd>
+    
+  </dd>
+    <dt>
+    <a href="../../Dao/Record/Record.html#method__get">Record::__get()</a>
+  </dt>
+  <dd>
+    
+  </dd>
+    <dt>
+    <a href="../../Dao/Record/Record.html#method__isset">Record::__isset()</a>
+  </dt>
+  <dd>
+    Overloading the Record
+  </dd>
+    <dt>
+    <a href="../../Dao/Record/Record.html#method__set">Record::__set()</a>
+  </dt>
+  <dd>
+    
+  </dd>
+  </dl>
+</div>
+</td>
 
 </tr></table>
 <hr />
@@ -213,8 +395,8 @@ Source Location: /DataObject/DataObjectInterface.php<br /><br />
 <a name="class_details"></a>
 <h3>Class Details</h3>
 <div class="tags">
-[line 21]<br />
-The DataObjectInterface<br /><br /><br /><br />
+[line 26]<br />
+The UserRecord is a special Record that provides a few additional methods typical for user handling.<br /><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
@@ -236,46 +418,24 @@ The DataObjectInterface<br /><br /><br /><br />
 <div class="tags">
 
   <hr />
-	<a name="methoddelete"></a>
-	<h3>method delete <span class="smalllinenumber">[line 29]</span></h3>
+	<a name="methodencryptPassword"></a>
+	<h3>method encryptPassword <span class="smalllinenumber">[line 34]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
-		<code>void delete(
-)</code>
+		<code>string encryptPassword(
+string
+$password)</code>
     </td></tr></table>
     </td></tr></table><br />
 	
-		Calls delete($this) on the dao.<br /><br /><p>Throws an exception if no id is set.</p><br /><br /><br />
+		Encrypts the password<br /><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
   <tr>
-    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+    <td><b>return:</b>&nbsp;&nbsp;</td><td>Encrypted password</td>
   </tr>
-</table>
-</div>
-<br /><br />
-
-	
-        <div class="top">[ <a href="#top">Top</a> ]</div>
-  </div>
-  <hr />
-	<a name="methodget"></a>
-	<h3>method get <span class="smalllinenumber">[line 44]</span></h3>
-	<div class="function">
-    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
-    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
-		<code>mixed get(
-string
-$column)</code>
-    </td></tr></table>
-    </td></tr></table><br />
-	
-		Returns the value of a column<br /><br /><br /><br />
-<h4>Tags:</h4>
-<div class="tags">
-<table border="0" cellspacing="0" cellpadding="0">
   <tr>
     <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
   </tr>
@@ -289,7 +449,7 @@ $column)</code>
     <table border="0" cellspacing="0" cellpadding="0">
           <tr>
         <td class="type">string&nbsp;&nbsp;</td>
-        <td><b>$column</b>&nbsp;&nbsp;</td>
+        <td><b>$password</b>&nbsp;&nbsp;</td>
         <td></td>
       </tr>
         </table>
@@ -297,23 +457,20 @@ $column)</code>
         <div class="top">[ <a href="#top">Top</a> ]</div>
   </div>
   <hr />
-	<a name="methodsave"></a>
-	<h3>method save <span class="smalllinenumber">[line 36]</span></h3>
+	<a name="methodisGuest"></a>
+	<h3>method isGuest <span class="smalllinenumber">[line 53]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
-		<code><a href="../../Dao/DataObject/DataObject.html">DataObject</a> save(
+		<code>bool isGuest(
 )</code>
     </td></tr></table>
     </td></tr></table><br />
 	
-		Depending on the state of the DataObject does dao-&gt;update($this) or dao-&gt;insert($this)<br /><br /><br /><br />
+		Checks if the user is a guest<br /><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
-  <tr>
-    <td><b>return:</b>&nbsp;&nbsp;</td><td>Itself for chaining</td>
-  </tr>
   <tr>
     <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
   </tr>
@@ -325,25 +482,21 @@ $column)</code>
         <div class="top">[ <a href="#top">Top</a> ]</div>
   </div>
   <hr />
-	<a name="methodset"></a>
-	<h3>method set <span class="smalllinenumber">[line 52]</span></h3>
+	<a name="methodpasswordEquals"></a>
+	<h3>method passwordEquals <span class="smalllinenumber">[line 44]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
-		<code><a href="../../Dao/DataObject/DataObject.html">DataObject</a> set(
+		<code>bool passwordEquals(
 string
-$column, mixed
-$value)</code>
+$password)</code>
     </td></tr></table>
     </td></tr></table><br />
 	
-		Sets the value of a column<br /><br /><br /><br />
+		Checks if the passwords equal<br /><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
-  <tr>
-    <td><b>return:</b>&nbsp;&nbsp;</td><td>Itself for chaining</td>
-  </tr>
   <tr>
     <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
   </tr>
@@ -357,12 +510,7 @@ $value)</code>
     <table border="0" cellspacing="0" cellpadding="0">
           <tr>
         <td class="type">string&nbsp;&nbsp;</td>
-        <td><b>$column</b>&nbsp;&nbsp;</td>
-        <td></td>
-      </tr>
-          <tr>
-        <td class="type">mixed&nbsp;&nbsp;</td>
-        <td><b>$value</b>&nbsp;&nbsp;</td>
+        <td><b>$password</b>&nbsp;&nbsp;</td>
         <td></td>
       </tr>
         </table>

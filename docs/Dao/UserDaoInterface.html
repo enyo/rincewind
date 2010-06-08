@@ -28,9 +28,6 @@
 	<div id="ric">
 					<p><a href="../ric_README.html">README</a></p>
 			</div>
-	<div id="todolist">
-			<p><a href="../todolist.html">Todo List</a></p>
-	</div>
       <b>Packages:</b><br />
               <a href="../li_php-library.html">php-library</a><br />
               <a href="../li_Config.html">Config</a><br />
@@ -91,20 +88,20 @@
 			<a href="../Dao/_Dao---Xml---XmlResultIterator.php.html">		XmlResultIterator.php
 		</a><br>
 	  </div><br />
-	subpackage <b>DataObject</b><br>  <div class="package">
-			<a href="../Dao/DataObject/_DataObject---DataObject.php.html">		DataObject.php
-		</a><br>
-			<a href="../Dao/DataObject/_DataObject---DataObjectExceptions.php.html">		DataObjectExceptions.php
-		</a><br>
-			<a href="../Dao/DataObject/_DataObject---DataObjectInterface.php.html">		DataObjectInterface.php
-		</a><br>
-			<a href="../Dao/DataObject/_DataObject---UserDataObject.php.html">		UserDataObject.php
-		</a><br>
-	  </div><br />
 	subpackage <b>Exceptions</b><br>  <div class="package">
 			<a href="../Dao/Exceptions/_Dao---DaoExceptions.php.html">		DaoExceptions.php
 		</a><br>
 			<a href="../Dao/Exceptions/_Dao---Json---JsonDaoExceptions.php.html">		JsonDaoExceptions.php
+		</a><br>
+	  </div><br />
+	subpackage <b>Record</b><br>  <div class="package">
+			<a href="../Dao/Record/_Record---Record.php.html">		Record.php
+		</a><br>
+			<a href="../Dao/Record/_Record---RecordExceptions.php.html">		RecordExceptions.php
+		</a><br>
+			<a href="../Dao/Record/_Record---RecordInterface.php.html">		RecordInterface.php
+		</a><br>
+			<a href="../Dao/Record/_Record---UserRecord.php.html">		UserRecord.php
 		</a><br>
 	  </div><br />
       
@@ -114,7 +111,7 @@
 	    		<a href="../Dao/UserDaoInterface.html">UserDaoInterface</a><br />
 	  </div>
   <div class="package">
-	DataObject<br />	    &nbsp;&nbsp;		<a href="../Dao/DataObject/DataObjectInterface.html">DataObjectInterface</a><br />
+	Record<br />	    &nbsp;&nbsp;		<a href="../Dao/Record/RecordInterface.html">RecordInterface</a><br />
 	  </div>
       
             <b>Classes:</b><br />
@@ -145,13 +142,13 @@
 	    &nbsp;&nbsp;		<a href="../Dao/Exceptions/DaoNotFoundException.html">DaoNotFoundException</a><br />
 	    &nbsp;&nbsp;		<a href="../Dao/Exceptions/DaoNotSupportedException.html">DaoNotSupportedException</a><br />
 	    &nbsp;&nbsp;		<a href="../Dao/Exceptions/DaoWrongValueException.html">DaoWrongValueException</a><br />
-	    &nbsp;&nbsp;		<a href="../Dao/Exceptions/DataObjectException.html">DataObjectException</a><br />
 	    &nbsp;&nbsp;		<a href="../Dao/Exceptions/JsonDaoException.html">JsonDaoException</a><br />
+	    &nbsp;&nbsp;		<a href="../Dao/Exceptions/RecordException.html">RecordException</a><br />
 	    &nbsp;&nbsp;		<a href="../Dao/Exceptions/XmlDaoException.html">XmlDaoException</a><br />
 	  </div>
   <div class="package">
-	DataObject<br />	    &nbsp;&nbsp;		<a href="../Dao/DataObject/DataObject.html">DataObject</a><br />
-	    &nbsp;&nbsp;		<a href="../Dao/DataObject/UserDataObject.html">UserDataObject</a><br />
+	Record<br />	    &nbsp;&nbsp;		<a href="../Dao/Record/Record.html">Record</a><br />
+	    &nbsp;&nbsp;		<a href="../Dao/Record/UserRecord.html">UserRecord</a><br />
 	  </div>
                 </td>
     <td>
@@ -227,7 +224,7 @@ Source Location: /Dao/UserDaoInterface.php<br /><br />
     <a href="../Dao/DaoInterface.html#methoddelete">DaoInterface::delete()</a>
   </dt>
   <dd>
-    Takes a DataObject and delets it in the datasource. (Again the id is used)
+    Takes a Record and delets it in the datasource. (Again the id is used)
   </dd>
     <dt>
     <a href="../Dao/DaoInterface.html#methoddeleteById">DaoInterface::deleteById()</a>
@@ -245,7 +242,7 @@ Source Location: /Dao/UserDaoInterface.php<br /><br />
     <a href="../Dao/DaoInterface.html#methodget">DaoInterface::get()</a>
   </dt>
   <dd>
-    This is the method to get a DataObject from the datasource.
+    This is the method to get a Record from the datasource.
   </dd>
     <dt>
     <a href="../Dao/DaoInterface.html#methodgetAdditionalAttributes">DaoInterface::getAdditionalAttributes()</a>
@@ -290,10 +287,10 @@ Source Location: /Dao/UserDaoInterface.php<br /><br />
     Returns all the attributes that can be null.
   </dd>
     <dt>
-    <a href="../Dao/DaoInterface.html#methodgetObjectFromData">DaoInterface::getObjectFromData()</a>
+    <a href="../Dao/DaoInterface.html#methodgetRecordFromData">DaoInterface::getRecordFromData()</a>
   </dt>
   <dd>
-    Returns an object filled with an array of datasource values.
+    Returns a record filled with an array of datasource values.
   </dd>
     <dt>
     <a href="../Dao/DaoInterface.html#methodgetTotalCount">DaoInterface::getTotalCount()</a>
@@ -305,7 +302,7 @@ Source Location: /Dao/UserDaoInterface.php<br /><br />
     <a href="../Dao/DaoInterface.html#methodinsert">DaoInterface::insert()</a>
   </dt>
   <dd>
-    Takes a DataObject and inserts it in the datasource.
+    Takes a Record and inserts it in the datasource.
   </dd>
     <dt>
     <a href="../Dao/DaoInterface.html#methodrollback">DaoInterface::rollback()</a>
@@ -317,7 +314,7 @@ Source Location: /Dao/UserDaoInterface.php<br /><br />
     <a href="../Dao/DaoInterface.html#methodupdate">DaoInterface::update()</a>
   </dt>
   <dd>
-    Takes a DataObject and updates it in the datasource.
+    Takes a Record and updates it in the datasource.
   </dd>
   </dl>
 </div>
@@ -357,7 +354,7 @@ The UserDaoInterface defines a few methods useful for user daos.<br /><br /><br 
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
-		<code><a href="../Dao/DataObject/DataObject.html">DataObject</a> getByUsername(
+		<code><a href="../Dao/Record/Record.html">Record</a> getByUsername(
 string
 $username)</code>
     </td></tr></table>
@@ -393,7 +390,7 @@ $username)</code>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
-		<code><a href="../Dao/DataObject/DataObject.html">DataObject</a> getGuest(
+		<code><a href="../Dao/Record/Record.html">Record</a> getGuest(
 )</code>
     </td></tr></table>
     </td></tr></table><br />

@@ -24,31 +24,31 @@ abstract class AbstractSqlDaoWithDatabaseTest extends Snap_UnitTestCase {
   }
 
   public function testNullValuesArentInserted() {
-    $object = $this->dao->getRawObject();
+    $object = $this->dao->getRawRecord();
     $object->save();
     $data = $this->dao->getAll()->current();
       return $this->assertNull($data->nullValue);
   }
 
   public function testDefaultValuesAreNullInRawObjects() {
-    $object = $this->dao->getRawObject();
+    $object = $this->dao->getRawRecord();
       return $this->assertNull($object->defaultValue);
   }
 
   public function testDefaultValuesAreSetByTheDatabase() {
-    $object = $this->dao->getRawObject();
+    $object = $this->dao->getRawRecord();
     $object->save();
       return $this->assertEqual($object->defaultValue, $this->defaultValue);
   }
 
   public function testObjectReturnedFromInsertIsIdentical() {
-    $object = $this->dao->getRawObject();
+    $object = $this->dao->getRawRecord();
     $object2 = $this->dao->insert($object);
       return $this->assertIdentical($object, $object2, "The dao should return the same object after insert, not create a new one.");
   }
 
   public function testObjectReturnedFromUpdateIsIdentical() {
-    $object = $this->dao->getRawObject();
+    $object = $this->dao->getRawRecord();
     $object = $this->dao->insert($object);
     $object->string = 'TEST';
     $object2 = $this->dao->update($object);
@@ -93,7 +93,7 @@ abstract class AbstractSqlDaoWithDatabaseTest extends Snap_UnitTestCase {
   public function testLoadingRecords() {
     $this->dao->get()->set('id', 5)->set('string', 'testest')->save();
     $o = $this->dao->get()->set('id', 5)->set('string', 'testest')->load();
-    return $this->assertIsA($o, 'DataObject');
+    return $this->assertIsA($o, 'Record');
   }
 
   public function testLoadingRecordsAndVerifyValues() {

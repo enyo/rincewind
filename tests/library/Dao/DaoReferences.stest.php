@@ -32,18 +32,18 @@ class FakeDao extends NonAbstractDao {
 class DaoReferences_Basic_Test extends Snap_UnitTestCase {
 
   protected $dao;
-  protected $dataObject;
+  protected $record;
   protected $mockDao;
 
   public function setUp() {
-    $this->referencedDataObject = new DataObject(array('SOMEDATAHASH'=>987), null);
+    $this->referencedRecord = new Record(array('SOMEDATAHASH'=>987), null);
 
     $this->mockDao = $this->mock('Dao')
-      ->setReturnValue('get', $this->referencedDataObject)
-      ->setReturnValue('getObjectFromData', $this->referencedDataObject)
+      ->setReturnValue('get', $this->referencedRecord)
+      ->setReturnValue('getRecordFromData', $this->referencedRecord)
     	->listenTo('get', array(new Snap_Equals_Expectation(array('THEFOREIGNKEY'=>123))))
-      ->listenTo('getObjectFromData', array(new Snap_Equals_Expectation(array('SOMEDATAHASH'=>987))))
-      ->listenTo('getObjectFromData', array(new Snap_Equals_Expectation(array('ALREADY_EXISTING_DATAHASH'=>789))))
+      ->listenTo('getRecordFromData', array(new Snap_Equals_Expectation(array('SOMEDATAHASH'=>987))))
+      ->listenTo('getRecordFromData', array(new Snap_Equals_Expectation(array('ALREADY_EXISTING_DATAHASH'=>789))))
       ->construct();
 
     $this->dao = new FakeDao($this->mockDao);
@@ -52,44 +52,44 @@ class DaoReferences_Basic_Test extends Snap_UnitTestCase {
   public function tearDown() {}
 
   public function testReference() {
-    $do = new DataObject(array('address_id'=>1), $this->dao);
-    return $this->assertIdentical($do->address, $this->referencedDataObject);
+    $do = new Record(array('address_id'=>1), $this->dao);
+    return $this->assertIdentical($do->address, $this->referencedRecord);
   }
 
   public function testForeignDaoGetsCalled() {
-    $do = new DataObject(array('address_id'=>123), $this->dao);
+    $do = new Record(array('address_id'=>123), $this->dao);
     $do->address; // Getting the address so it gets remote fetched.
 		return $this->assertCallCount($this->mockDao, 'get', 1, array(new Snap_Equals_Expectation(array('THEFOREIGNKEY'=>123))));
   }
 
   public function testHashGetsCached() {
-    $do = new DataObject(array('address_id'=>123), $this->dao);
+    $do = new Record(array('address_id'=>123), $this->dao);
     $do->address; // Getting the address so it gets remote fetched.
     $do->address; // Getting the address twice
 		return $this->assertCallCount($this->mockDao, 'get', 1, array(new Snap_Equals_Expectation(array('THEFOREIGNKEY'=>123))));
   }
 
   public function testHashGetsCachedAndReturned() {
-    $do = new DataObject(array('address_id'=>123), $this->dao);
+    $do = new Record(array('address_id'=>123), $this->dao);
     // Getting the address so it gets remote fetched.
-    // This should store the hash of the foreign DataObject in the local DataObject, to be reused next time.
-    // So the new DataObject returned, should have the same data hash as the test DataObject in the constructor.
+    // This should store the hash of the foreign Record in the local Record, to be reused next time.
+    // So the new Record returned, should have the same data hash as the test Record in the constructor.
     $do->address; 
     $do->address; // Getting the address twice
-		return $this->assertCallCount($this->mockDao, 'getObjectFromData', 1, array(new Snap_Equals_Expectation(array('SOMEDATAHASH'=>987))));
+		return $this->assertCallCount($this->mockDao, 'getRecordFromData', 1, array(new Snap_Equals_Expectation(array('SOMEDATAHASH'=>987))));
   }
 
   public function testHashGetsReturnedDirectly() {
-    $do = new DataObject(array('address_id'=>123, 'address'=>array('ALREADY_EXISTING_DATAHASH'=>789)), $this->dao);
+    $do = new Record(array('address_id'=>123, 'address'=>array('ALREADY_EXISTING_DATAHASH'=>789)), $this->dao);
     // Getting the address so the hash gets read and put in a data object
     $do->address; 
-		return $this->assertCallCount($this->mockDao, 'getObjectFromData', 1, array(new Snap_Equals_Expectation(array('ALREADY_EXISTING_DATAHASH'=>789))));
+		return $this->assertCallCount($this->mockDao, 'getRecordFromData', 1, array(new Snap_Equals_Expectation(array('ALREADY_EXISTING_DATAHASH'=>789))));
   }
 
 
 
-  public function testDataObjectIsFetchedIfKeyIsSetButNull() {
-    $do = new DataObject(array('address_id'=>123, 'address'=>null), $this->dao);
+  public function testRecordIsFetchedIfKeyIsSetButNull() {
+    $do = new Record(array('address_id'=>123, 'address'=>null), $this->dao);
     $do->address; // Getting the address so it gets remote fetched.
 		return $this->assertCallCount($this->mockDao, 'get', 1, array(new Snap_Equals_Expectation(array('THEFOREIGNKEY'=>123))), 'Even though address was set, it should have called the dao to get the data since it was null.');
   }
@@ -97,7 +97,7 @@ class DaoReferences_Basic_Test extends Snap_UnitTestCase {
 
   public function testNullIsReturnedAndWarnsIfHashIsIncorrect() {
     $this->willWarn();
-    $do = new DataObject(array('address'=>'something'), $this->dao);
+    $do = new Record(array('address'=>'something'), $this->dao);
 		return $this->assertNull($do->address, 'Accessing a faulty hash should return null and warn.');
   }
 
@@ -127,16 +127,16 @@ class FakeWithoutKeysDao extends NonAbstractDao {
 class DaoReferences_WithoutLocalAndForeignKey_Test extends Snap_UnitTestCase {
 
   protected $dao;
-  protected $dataObject;
+  protected $record;
   protected $mockDao;
 
   public function setUp() {
-    $this->referencedDataObject = new DataObject(array(), null);
+    $this->referencedRecord = new Record(array(), null);
 
     $this->mockDao = $this->mock('Dao')
-      ->setReturnValue('getObjectFromData', $this->referencedDataObject)
-      ->listenTo('getObjectFromData', array(new Snap_Equals_Expectation(array('SOMEDATAHASH'=>987))))
-      ->listenTo('getObjectFromData', array(new Snap_Equals_Expectation(array('ALREADY_EXISTING_DATAHASH'=>789))))
+      ->setReturnValue('getRecordFromData', $this->referencedRecord)
+      ->listenTo('getRecordFromData', array(new Snap_Equals_Expectation(array('SOMEDATAHASH'=>987))))
+      ->listenTo('getRecordFromData', array(new Snap_Equals_Expectation(array('ALREADY_EXISTING_DATAHASH'=>789))))
       ->construct();
 
     $this->dao = new FakeWithoutKeysDao($this->mockDao);
@@ -144,20 +144,20 @@ class DaoReferences_WithoutLocalAndForeignKey_Test extends Snap_UnitTestCase {
 
   public function tearDown() {}
 
-  public function testDataObjectPrintsWarningWhenHashNotSet() {
+  public function testRecordPrintsWarningWhenHashNotSet() {
     $this->willWarn();
-    $do = new DataObject(array(), $this->dao);
+    $do = new Record(array(), $this->dao);
     return $this->assertNull($do->address);
   }
 
-  public function testDataObjectGetsInstantiatedWithHash() {
-    $do = new DataObject(array('address'=>array('SOMEDATAHASH'=>987)), $this->dao);
+  public function testRecordGetsInstantiatedWithHash() {
+    $do = new Record(array('address'=>array('SOMEDATAHASH'=>987)), $this->dao);
     $do->address;
-		return $this->assertCallCount($this->mockDao, 'getObjectFromData', 1, array(new Snap_Equals_Expectation(array('SOMEDATAHASH'=>987))));
+		return $this->assertCallCount($this->mockDao, 'getRecordFromData', 1, array(new Snap_Equals_Expectation(array('SOMEDATAHASH'=>987))));
   }
 
   public function testReturnsNullIfHashIsNull() {
-    $do = new DataObject(array('address'=>null), $this->dao);
+    $do = new Record(array('address'=>null), $this->dao);
     return $this->assertNull($do->address);
   }
 

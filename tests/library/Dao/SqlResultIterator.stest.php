@@ -17,7 +17,7 @@
     protected $result;
     protected $dao;
 
-    protected $dataObject = 'abcdefg';
+    protected $record = 'abcdefg';
 
       public function setUp() {
       $this->result = $this->mock('DatabaseResultInterface')
@@ -28,7 +28,7 @@
         ->listenTo('reset')
         ->construct();
       $this->dao = $this->mock('DaoInterface')
-        ->setReturnValue('getObjectFromData', $this->dataObject)
+        ->setReturnValue('getRecordFromData', $this->record)
         ->construct();
       $this->iterator = new SqlResultIterator($this->result, $this->dao);
       }

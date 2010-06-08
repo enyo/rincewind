@@ -28,14 +28,14 @@ interface UserDaoInterface extends DaoInterface {
    * Return a user by login
    *
    * @param string $username
-   * @return DataObject
+   * @return Record
    */
   public function getByUsername($username);
 
   /**
    * Get a raw object with username 'guest'
    *
-   * @return DataObject
+   * @return Record
    */
   public function getGuest();
 

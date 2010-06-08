@@ -13,10 +13,10 @@ class DaoHashListIterator_Basic_Test extends Snap_UnitTestCase {
 
   public function setUp() {
     $this->dao = $this->mock('Dao')
-      ->setReturnValue('getObjectFromData', 'THE_OBJECT')
-      ->listenTo('getObjectFromData', array(new Snap_Equals_Expectation(array('hash'=>1))))
-      ->listenTo('getObjectFromData', array(new Snap_Equals_Expectation(array('hash'=>3))))
-      ->listenTo('getObjectFromData', array(new Snap_Equals_Expectation(array('hash'=>5))))
+      ->setReturnValue('getRecordFromData', 'THE_OBJECT')
+      ->listenTo('getRecordFromData', array(new Snap_Equals_Expectation(array('hash'=>1))))
+      ->listenTo('getRecordFromData', array(new Snap_Equals_Expectation(array('hash'=>3))))
+      ->listenTo('getRecordFromData', array(new Snap_Equals_Expectation(array('hash'=>5))))
       ->construct(null);
     $this->it = new DaoHashListIterator(array(array('hash'=>1), array('hash'=>3), array('hash'=>5)), $this->dao);
   }
@@ -29,14 +29,14 @@ class DaoHashListIterator_Basic_Test extends Snap_UnitTestCase {
 
   public function testGetObjectIsCalled() {
     $ob = $this->it->current();
-    return $this->assertCallCount($this->dao, 'getObjectFromData', 1, array(new Snap_Equals_Expectation(array('hash'=>1))));
+    return $this->assertCallCount($this->dao, 'getRecordFromData', 1, array(new Snap_Equals_Expectation(array('hash'=>1))));
   }
 
   public function testGetIsCalledTwice() {
     $ob = $this->it->current();
     $this->it->next();
     $ob = $this->it->current();
-    return $this->assertCallCount($this->dao, 'getObjectFromData', 1, array(new Snap_Equals_Expectation(array('hash'=>3))));
+    return $this->assertCallCount($this->dao, 'getRecordFromData', 1, array(new Snap_Equals_Expectation(array('hash'=>3))));
   }
 
   public function testGetIsCalledThrice() {
@@ -45,7 +45,7 @@ class DaoHashListIterator_Basic_Test extends Snap_UnitTestCase {
     $ob = $this->it->current();
     $this->it->next();
     $ob = $this->it->current();
-    return $this->assertCallCount($this->dao, 'getObjectFromData', 1, array(new Snap_Equals_Expectation(array('hash'=>5))));
+    return $this->assertCallCount($this->dao, 'getRecordFromData', 1, array(new Snap_Equals_Expectation(array('hash'=>5))));
   }
 
   public function testGetIsCalledThriceAndReturned() {
@@ -71,7 +71,7 @@ class DaoHashListIterator_Basic_Test extends Snap_UnitTestCase {
 
   public function testCorrectCallCount() {
     foreach ($this->it as $ob) {}
-    return $this->assertCallCount($this->dao, 'getObjectFromData', 3);
+    return $this->assertCallCount($this->dao, 'getRecordFromData', 3);
   }
 
 

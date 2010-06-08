@@ -99,12 +99,12 @@ abstract class FileSourceDao extends Dao {
 
 
   /**
-   * This is the method to get a DataObject from the database.
-   * If you want to select more objects, call getIterator.
-   * If you call get() without parameters, a "raw object" will be returned, containing
+   * This is the method to get a Record from the database.
+   * If you want to select more records, call getIterator.
+   * If you call get() without parameters, a "raw record" will be returned, containing
    * only default values, and null as id.
    *
-   * @param array|DataObject $map A map containing the attributes.
+   * @param array|Record $map A map containing the attributes.
    * @param bool $exportValues When you want to have complete control over the $map
    *                           attributes, you can set exportValues to false, so they
    *                           won't be processed.
@@ -113,7 +113,7 @@ abstract class FileSourceDao extends Dao {
    *                          to get data from.
    *                          If not set, $this->viewName will be used if present; if not
    *                          $this->resourceName is used.
-   * @return DataObject
+   * @return Record
    */
   public function find($map = null, $exportValues = true, $resourceName = null) {
     $content = $this->fileDataSource->view($this->exportResourceName($resourceName ? $resourceName : ($this->viewName ? $this->viewName : $this->resourceName)), $exportValues ? $this->exportMap($map) : $map);
@@ -122,13 +122,13 @@ abstract class FileSourceDao extends Dao {
 
     if (!$data || !is_array($data)) return null;
 
-    return $this->getObjectFromData($data);
+    return $this->getRecordFromData($data);
   }
 
   /**
-   * Same as get() but returns an array with the data instead of an object
+   * Same as get() but returns an array with the data instead of a record
    *
-   * @param array|DataObject $map
+   * @param array|Record $map
    * @param bool $exportValues
    * @param string $resourceName
    * @see get()
@@ -137,7 +137,7 @@ abstract class FileSourceDao extends Dao {
   public function getData($map, $exportValues = true, $resourceName = null) {
     $data = $this->interpretFileContent($this->fileDataSource->view($this->exportResourceName($resourceName ? $resourceName : ($this->viewName ? $this->viewName : $this->resourceName)), $exportValues ? $this->exportMap($map) : $map));
     if (!$data || !is_array($data)) throw new DaoNotFoundException("The query did not return any results.");
-    return $this->prepareDataForObject($data);
+    return $this->prepareDataForRecord($data);
   }
 
   /**
@@ -150,7 +150,7 @@ abstract class FileSourceDao extends Dao {
   /**
    * The same as get, but returns an iterator to go through all the rows.
    *
-   * @param array|DataObject $map
+   * @param array|Record $map
    * @param string|array $sort
    * @param int $offset 
    * @param int $limit 
@@ -171,57 +171,57 @@ abstract class FileSourceDao extends Dao {
 
 
   /**
-   * Inserts an object in the database, and updates the object with the new data (in
+   * Inserts a record in the database, and updates the record with the new data (in
    * case some default values of the database have been set.)
    *
-   * @param DataObject $object
-   * @return DataObject The updated object.
+   * @param Record $record
+   * @return Record The updated record.
    */
-  public function insert($object) {
+  public function insert($record) {
 
-    list ($attributeNames, $values) = $this->generateInsertArrays($object);
+    list ($attributeNames, $values) = $this->generateInsertArrays($record);
 
     $attibutes = array_combine($attributeNames, $values);
 
     $id = $this->fileDataSource->insert($this->resourceName, $attributes);
 
-    $this->updateObjectWithData($this->getData(array('id'=>$newId)), $object);
+    $this->updateRecordWithData($this->getData(array('id'=>$newId)), $record);
     
-    $this->afterInsert($object);
+    $this->afterInsert($record);
 
-    $object->setExistsInDatabase();
+    $record->setExistsInDatabase();
 
-    return $object;
+    return $record;
   }
 
   /**
-   * Updates an object in the database using the id.
+   * Updates a record in the database using the id.
    *
-   * @param DataObject $object
-   * @return DataObject The updated object.
+   * @param Record $record
+   * @return Record The updated record.
    */
-  public function update($object) {
+  public function update($record) {
     $attributes = array();
 
     foreach ($this->attributes as $attributeName=>$type) {
-      if ($attributeName != 'id' && $type != Dao::IGNORE) $attributes[$attributeName] = $this->exportValue($object->get($attributeName), $type, $this->notNull($attributeName));
+      if ($attributeName != 'id' && $type != Dao::IGNORE) $attributes[$attributeName] = $this->exportValue($record->get($attributeName), $type, $this->notNull($attributeName));
     }
 
-    $this->fileDataSource->update($this->resourceName, $object->id, $attributes);
+    $this->fileDataSource->update($this->resourceName, $record->id, $attributes);
 
-    $this->afterUpdate($object);
+    $this->afterUpdate($record);
 
-    return $object;
+    return $record;
   }
 
   /**
-   * Deletes an object in the database using the id.
+   * Deletes a record in the database using the id.
    *
-   * @param DataObject $object
+   * @param Record $record
    */
-  public function delete($object) {
-    $this->fileDataSource->delete($this->resourceName, $object->id);
-    $this->afterDelete($object);
+  public function delete($record) {
+    $this->fileDataSource->delete($this->resourceName, $record->id);
+    $this->afterDelete($record);
   }
 
   /**
@@ -236,7 +236,7 @@ abstract class FileSourceDao extends Dao {
   /**
    * This function exports every values of a map
    *
-   * @param array|DataObject $map A map or DataObject containing the attributes.
+   * @param array|Record $map A map or Record containing the attributes.
    * @return array The map with exported values.
    */
   protected function exportMap($map) {

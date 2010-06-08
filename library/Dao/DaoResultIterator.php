@@ -49,12 +49,12 @@ abstract class DaoResultIterator implements Iterator {
   protected $currentKey = 0;
 
   /**
-   * If set to true, instead of returning the DataObject, DataObject->getArray() is returned.
+   * If set to true, instead of returning the Record, Record->getArray() is returned.
    *
    * @var bool
    * @see asArrays()
    */
-  protected $returnDataObjectsAsArray = false;
+  protected $returnRecordsAsArray = false;
 
 
   /**
@@ -68,15 +68,15 @@ abstract class DaoResultIterator implements Iterator {
 
 
   /**
-   * Return the current DataObject.
-   * If getAsArray() has been called, returns an array instead of the DataObject.
+   * Return the current Record.
+   * If getAsArray() has been called, returns an array instead of the Record.
    *
-   * @return DataObject|array
+   * @return Record|array
    */
   public function current() {
     if (!$this->valid()) return null;
-    $dataObject = $this->dao->getObjectFromData($this->getCurrentData());
-    return $this->returnDataObjectsAsArray ? $dataObject->getArray() : $dataObject;
+    $record = $this->dao->getRecordFromData($this->getCurrentData());
+    return $this->returnRecordsAsArray ? $record->getArray() : $record;
   }
 
   /**
@@ -87,12 +87,12 @@ abstract class DaoResultIterator implements Iterator {
 
 
   /**
-   * @param bool $returnDataObjectsAsArray
-   * @see $returnDataObjectsAsArray
+   * @param bool $returnRecordsAsArray
+   * @see $returnRecordsAsArray
    * @return DaoResultIterator Returns itself for chaining.
    */
-  public function asArrays($returnDataObjectsAsArray = true) {
-    $this->returnDataObjectsAsArray = !!$returnDataObjectsAsArray;
+  public function asArrays($returnRecordsAsArray = true) {
+    $this->returnRecordsAsArray = !!$returnRecordsAsArray;
     return $this;
   }
 

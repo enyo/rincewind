@@ -1,23 +1,23 @@
 <?php
 
 /**
- * This file contains the DataObject Exceptions.
+ * This file contains the Record Exceptions.
  *
  * @author Matthias Loitsch <developer@ma.tthias.com>
  * @copyright Copyright (c) 2010, Matthias Loitsch
  * @package Dao
- * @subpackage DataObject
+ * @subpackage Record
  **/
 
 
 /**
- * The DataObjectException gets thrown whenever there is a DataObject problem.
+ * The RecordException gets thrown whenever there is a Record problem.
  *
  * @author Matthias Loitsch <developer@ma.tthias.com>
  * @copyright Copyright (c) 2010, Matthias Loitsch
  * @package Dao
  * @subpackage Exceptions
  **/
-class DataObjectException extends Exception { }
+class RecordException extends Exception { }
 
 ?>

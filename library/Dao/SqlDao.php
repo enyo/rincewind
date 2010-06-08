@@ -137,13 +137,13 @@ abstract class SqlDao extends Dao {
 
 
   /**
-   * This is the method to get a DataObject from the database.
-   * If you want to select more objects, call getIterator.
+   * This is the method to get a Record from the database.
+   * If you want to select more records, call getIterator.
    * This function returns null if nothing has been found. If you want it to throw an exception (for
    * chaining) you can call get(), which is mostly a wrapper for find().
    * 
    *
-   * @param array|DataObject $map A map or dataObject containing the attributes.
+   * @param array|Record $map A map or record containing the attributes.
    * @param bool $exportValues When you want to have complete control over the $map
    *                           attributes, you can set exportValues to false, so they
    *                           won't be processed.
@@ -154,16 +154,16 @@ abstract class SqlDao extends Dao {
    *                          $this->resourceName is used.
    * @see generateQuery()
    * @see get()
-   * @return DataObject
+   * @return Record
    */
   public function find($map = null, $exportValues = true, $resourceName = null) {
     return $this->getFromQuery($this->generateQuery($map, $sort = null, $offset = null, $limit = 1, $exportValues, $resourceName ? $resourceName : ($this->viewName ? $this->viewName : $this->resourceName)));
   }
 
   /**
-   * Same as get() but returns an array with the data instead of an object
+   * Same as get() but returns an array with the data instead of a record
    *
-   * @param array|DataObject $map
+   * @param array|Record $map
    * @param bool $exportValues
    * @param string $resourceName
    * @see get()
@@ -173,13 +173,13 @@ abstract class SqlDao extends Dao {
   public function getData($map, $exportValues = true, $resourceName = null) {
     $data = $this->getFromQuery($this->generateQuery($map, $sort = null, $offset = null, $limit = 1, $exportValues, $resourceName ? $resourceName : ($this->viewName ? $this->viewName : $this->resourceName)), $returnData = true);
     if (!$data) throw new DaoNotFoundException("The query did not return any results.");
-    return $this->prepareDataForObject($data);
+    return $this->prepareDataForRecord($data);
   }
 
   /**
    * The same as get, but returns an iterator to go through all the rows.
    *
-   * @param array|DataObject $map
+   * @param array|Record $map
    * @param string|array $sort
    * @param int $offset 
    * @param int $limit 
@@ -196,58 +196,58 @@ abstract class SqlDao extends Dao {
 
 
   /**
-   * Inserts an object in the database, and updates the object with the new data (in
+   * Inserts a record in the database, and updates the record with the new data (in
    * case some default values of the database have been set.)
    *
-   * @param DataObject $object
-   * @return DataObject The updated object.
+   * @param Record $record
+   * @return Record The updated record.
    */
-  public function insert($object) {
+  public function insert($record) {
     
-    list ($columns, $values) = $this->generateInsertArrays($object);
+    list ($columns, $values) = $this->generateInsertArrays($record);
 
     $insertSql = "insert into " . $this->exportResourceName() . " (" . implode(', ', $columns) . ") values (" . implode(', ', $values) . ");";
     
-    $newId = $this->insertByQuery($insertSql, $object->id);
+    $newId = $this->insertByQuery($insertSql, $record->id);
 
-    $this->updateObjectWithData($this->getData(array('id'=>$newId)), $object);
+    $this->updateRecordWithData($this->getData(array('id'=>$newId)), $record);
     
-    $this->afterInsert($object);
+    $this->afterInsert($record);
 
-    $object->setExistsInDatabase();
+    $record->setExistsInDatabase();
 
-    return $object;
+    return $record;
   }
 
   /**
-   * Updates an object in the database using the id.
+   * Updates a record in the database using the id.
    *
-   * @param DataObject $object
-   * @return DataObject The updated object.
+   * @param Record $record
+   * @return Record The updated record.
    */
-  public function update($object) {
+  public function update($record) {
     $values = array();
     foreach ($this->attributes as $column=>$type) {
-      if ($column != 'id' && $type != Dao::IGNORE) $values[] = $this->exportAttributeName($column) . '=' . $this->exportValue($object->get($column), $type, $this->notNull($column));
+      if ($column != 'id' && $type != Dao::IGNORE) $values[] = $this->exportAttributeName($column) . '=' . $this->exportValue($record->get($column), $type, $this->notNull($column));
     }
 
-    $updateSql = "update " . $this->exportResourceName() . " set " . implode(', ', $values) . " where id=" . $this->exportInteger($object->id);
+    $updateSql = "update " . $this->exportResourceName() . " set " . implode(', ', $values) . " where id=" . $this->exportInteger($record->id);
 
     $this->db->query($updateSql);
 
-    $this->afterUpdate($object);
+    $this->afterUpdate($record);
 
-    return $object;
+    return $record;
   }
 
   /**
-   * Deletes an object in the database using the id.
+   * Deletes a record in the database using the id.
    *
-   * @param DataObject $object
+   * @param Record $record
    */
-  public function delete($object) {
-    $this->db->query("delete from " . $this->exportResourceName() . " where id=" . $this->exportValue($object->id, $this->attributes['id']));
-    $this->afterDelete($object);
+  public function delete($record) {
+    $this->db->query("delete from " . $this->exportResourceName() . " where id=" . $this->exportValue($record->id, $this->attributes['id']));
+    $this->afterDelete($record);
   }
 
 
@@ -265,7 +265,7 @@ abstract class SqlDao extends Dao {
   /**
    * This function generates the SQL query for the getters.
    *
-   * @param array|DataObject $map A map or dataObject containing the attributes.
+   * @param array|Record $map A map or record containing the attributes.
    * @param string|array $sort can be an array with ASCENDING values, or a map like
    *                           this: array('login'=>Dao::DESC), or simply a string
    *                           containing the attribute. This value will be passed to
@@ -325,12 +325,12 @@ abstract class SqlDao extends Dao {
 
 
   /**
-   * Returns a DataObject or data array from a query.
+   * Returns a Record or data array from a query.
    * Returns null if nothing found.
    *
    * @param string $query
-   * @param bool $returnData If set to true, only the data as array is returned, not a DataObject.
-   * @return DataObject|array
+   * @param bool $returnData If set to true, only the data as array is returned, not a Record.
+   * @return Record|array
    */
   protected function getFromQuery($query, $returnData = false) {
     $result = $this->db->query($query);
@@ -338,7 +338,7 @@ abstract class SqlDao extends Dao {
 
     if ($returnData) return $result->fetchArray();
 
-    return $this->getObjectFromData($result->fetchArray());
+    return $this->getRecordFromData($result->fetchArray());
   }
 
 

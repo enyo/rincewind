@@ -34,7 +34,7 @@ class MysqlUserDao extends MysqlDao implements UserDaoInterface {
    * Returns the user by username
    *
    * @param string $username
-   * @return DataObject
+   * @return Record
    */
   public function getByUsername($username) {
     return $this->get(array('username'=>$username));
@@ -43,10 +43,10 @@ class MysqlUserDao extends MysqlDao implements UserDaoInterface {
   /**
    * Returns a raw object with 'guest' as username
    *
-   * @return DataObject
+   * @return Record
    */
   public function getGuest() {
-    return $this->getRawObject()->set('username', 'guest');
+    return $this->getRawRecord()->set('username', 'guest');
   }
 
 }

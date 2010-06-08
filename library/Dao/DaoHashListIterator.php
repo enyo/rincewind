@@ -15,12 +15,11 @@ if (!class_exists('DaoResultIterator', false)) include dirname(__FILE__) . '/Dao
 
 /**
  * The DaoHashListIterator takes an array of data hashes, and lets you iterate over it, returning the corresponding
- * DataObjects by instantiating them with the dao and the given data hash.
+ * Records by instantiating them with the dao and the given data hash.
  *
  * @author Matthias Loitsch <developer@ma.tthias.com>
  * @copyright Copyright (c) 2010, Matthias Loitsch
  * @package Dao
- * @todo The Iterator should not fetch the objects in advance, but rather on demand.
  **/
 class DaoHashListIterator extends DaoResultIterator {
 

@@ -20,14 +20,14 @@
  * The DaoReference is setup in the Dao with the method addReference(). The method
  * setupReferences() is used to contain those calls.
  *
- * When you access a reference on a DataObject, internally the Dao will instantiate the
- * reference Dao and get the DataObject where `foreign_key` is the same as `local_key`.
+ * When you access a reference on a Record, internally the Dao will instantiate the
+ * reference Dao and get the Record where `foreign_key` is the same as `local_key`.
  * (If you want to have control over how the Dao is instantiated, look at Dao->createDao()).
  *
  * Sometimes your data source returns the data hash of a reference directly to avoid
  * traffic overhead (this makes especially sense with FileSourceDaos like the JsonDao).
  * In that case you only need to specify the $daoClassName since the Dao does not have
- * to link / fetch the data hash itself, but only to instantiate a DataObject with the
+ * to link / fetch the data hash itself, but only to instantiate a Record with the
  * given hash.
  *
  *
@@ -58,7 +58,7 @@
 class DaoReference {
 
   /**
-   * The dao class name used to get the referenced foreign DataObject.
+   * The dao class name used to get the referenced foreign Record.
    * @var string
    */
   protected $daoClassName;

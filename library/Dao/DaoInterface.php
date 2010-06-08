@@ -20,13 +20,13 @@
 interface DaoInterface {
 
   /**
-   * This is the method to get a DataObject from the datasource.
-   * If you want to select more objects, call getIterator.
-   * If you call get() without parameters, a "raw object" will be returned, containing
+   * This is the method to get a Record from the datasource.
+   * If you want to select more records, call getIterator.
+   * If you call get() without parameters, a "raw record" will be returned, containing
    * only default values, and null as id.
    * If the entry is not found, an exception is thrown.
    *
-   * @param array|DataObject $map A map or DataObject containing the attributes.
+   * @param array|Record $map A map or Record containing the attributes.
    * @param bool $exportValues When you want to have complete control over the $map
    *                           attributes, you can set exportValues to false, so they
    *                           won't be processed.
@@ -35,7 +35,7 @@ interface DaoInterface {
    *                          to get data from.
    *                          If not set, $this->viewName will be used if present; if not
    *                          $this->resourceName is used.
-   * @return DataObject
+   * @return Record
    * @see find()
    */
   public function get($map = null, $exportValues = true, $resourceName = null);
@@ -44,10 +44,10 @@ interface DaoInterface {
   /**
    * This function does the same as get(), but returns null if the data is not found.
    *
-   * @param array|DataObject $map
+   * @param array|Record $map
    * @param bool $exportValues
    * @param string $resourceName
-   * @return DataObject
+   * @return Record
    * @see get()
    */
   public function find($map = null, $exportValues = true, $resourceName = null);
@@ -56,7 +56,7 @@ interface DaoInterface {
   /**
    * The same as get(), but returns an array with the data.
    *
-   * @param array|DataObject $map
+   * @param array|Record $map
    * @param bool $exportValues
    * @param string $resourceName
    * @return array
@@ -84,7 +84,7 @@ interface DaoInterface {
 
   /**
    * @param int $id
-   * @return DataObject
+   * @return Record
    */
   public function getById($id);
 
@@ -95,26 +95,26 @@ interface DaoInterface {
   public function getAll();
 
   /**
-   * Takes a DataObject and inserts it in the datasource.
-   * @see DataObject
-   * @param DataObject
+   * Takes a Record and inserts it in the datasource.
+   * @see Record
+   * @param Record
    */
-  public function insert($object);
+  public function insert($record);
 
   /**
-   * Takes a DataObject and updates it in the datasource.
+   * Takes a Record and updates it in the datasource.
    * Daos always take the id attribute to find the right row.
-   * @see DataObject
-   * @param DataObject
+   * @see Record
+   * @param Record
    */
-  public function update($object);
+  public function update($record);
 
   /**
-   * Takes a DataObject and delets it in the datasource. (Again the id is used)
-   * @see DataObject
-   * @param DataObject
+   * Takes a Record and delets it in the datasource. (Again the id is used)
+   * @see Record
+   * @param Record
    */
-  public function delete($object);
+  public function delete($record);
 
   /**
    * Takes an id and deletes it in the datasource.
@@ -172,13 +172,13 @@ interface DaoInterface {
   public function getTotalCount();
 
   /**
-   * Returns an object filled with an array of datasource values.
+   * Returns a record filled with an array of datasource values.
    * (Typically this array comes from DatabaseResult::fetchArray())
    *
    * @param array $data
-   * @return DataObject
+   * @return Record
    */
-  public function getObjectFromData($data);
+  public function getRecordFromData($data);
 
 }
 

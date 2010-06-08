@@ -6,7 +6,7 @@ require_once(dirname(dirname(__FILE__)) . '/setup.php');
 require_once(LIBRARY_ROOT_PATH . 'Dao/SqlDao.php');
 
 
-class RawTestDataObject {
+class RawTestRecord {
   public $data;
   public function __construct($data) { $this->data = $data; }
 }
@@ -23,8 +23,8 @@ class RawTestDao extends SqlDao {
   );
 
   protected $nullAttributes = array('possibly_null');
-  protected function getObjectFromPreparedData($data) {
-    return new RawTestDataObject($data);
+  protected function getRecordFromPreparedData($data) {
+    return new RawTestRecord($data);
   }
   public function exportAttributeName($attribute) {  }
   public function exportResourceName($resource = null) {  }
@@ -33,7 +33,7 @@ class RawTestDao extends SqlDao {
   protected function createIterator($result) { return $result; }
 
 }
-class SqlDao_RawObjects_Test extends Snap_UnitTestCase {
+class SqlDao_RawRecords_Test extends Snap_UnitTestCase {
 
   protected $dao;
 
@@ -45,23 +45,23 @@ class SqlDao_RawObjects_Test extends Snap_UnitTestCase {
     unset($this->dao);
     }
 
-  public function testGettingRawObject() {
-    return $this->assertIsA($this->dao->get(), 'RawTestDataObject');
+  public function testGettingRawRecord() {
+    return $this->assertIsA($this->dao->get(), 'RawTestRecord');
   }
 
-  public function testIdIsNullOnRawObject() {
-    return $this->assertNull($this->dao->get()->data['id'], 'The id in a raw object has to be null.');
+  public function testIdIsNullOnRawRecord() {
+    return $this->assertNull($this->dao->get()->data['id'], 'The id in a raw record has to be null.');
   }
 
-  public function testPossiblyNullIsNullOnRawObject() {
-    return $this->assertNull($this->dao->get()->data['possibly_null'], 'Values that can be null have to be null in raw objects.');
+  public function testPossiblyNullIsNullOnRawRecord() {
+    return $this->assertNull($this->dao->get()->data['possibly_null'], 'Values that can be null have to be null in raw records.');
   }
 
-  public function testStringNotNullIsNotNullOnRawObject() {
+  public function testStringNotNullIsNotNullOnRawRecord() {
     return $this->assertIdentical($this->dao->get()->data['string_not_null'], '');
   }
 
-  public function testEnumIsFirstValueInObject() {
+  public function testEnumIsFirstValueInRecord() {
     return $this->assertEqual($this->dao->get()->data['enum'], 'enum_a');
   }
 
@@ -128,8 +128,8 @@ class RawTestDao2 extends SqlDao {
     'name'=>Dao::STRING,
     'is_admin'=>Dao::BOOL
   );
-  protected function getObjectFromPreparedData($data) {
-    return new RawTestDataObject($data);
+  protected function getRecordFromPreparedData($data) {
+    return new RawTestRecord($data);
   }
   public function exportAttributeName($attributeName) { return $attributeName; }
   public function exportResourceName($resource = null) { return $resource; }
@@ -167,18 +167,18 @@ class SqlDao_Queries_Test extends Snap_UnitTestCase {
     return $this->assertCallCount($this->db, 'query', 1, array(new Snap_Identical_Expectation('select * from test_resource_name where id=4  limit 1')));
   }
 
-  public function testQueryWithDataObjectAsAttribute() {
-    $dataObject = new DataObject(array(), $this->dao);
-    $dataObject->id = 7;
-    $this->dao->get($dataObject);
+  public function testQueryWithRecordAsAttribute() {
+    $record = new Record(array(), $this->dao);
+    $record->id = 7;
+    $this->dao->get($record);
     return $this->assertCallCount($this->db, 'query', 1, array(new Snap_Identical_Expectation('select * from test_resource_name where id=7  limit 1')));
   }
 
-  public function testQueryWithDataObjectAsAttributes() {
-    $dataObject = new DataObject(array(), $this->dao);
-    $dataObject->id = 11;
-    $dataObject->name = 'TEST';
-    $this->dao->get($dataObject);
+  public function testQueryWithRecordAsAttributes() {
+    $record = new Record(array(), $this->dao);
+    $record->id = 11;
+    $record->name = 'TEST';
+    $this->dao->get($record);
     return $this->assertCallCount($this->db, 'query', 1, array(new Snap_Identical_Expectation('select * from test_resource_name where id=11 and name=TEST  limit 1')));
   }
 

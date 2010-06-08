@@ -1,12 +1,12 @@
 <?php
 
 /**
- * This file contains the DataObject definition.
+ * This file contains the Record definition.
  *
  * @author Matthias Loitsch <developer@ma.tthias.com>
  * @copyright Copyright (c) 2010, Matthias Loitsch
  * @package Dao
- * @subpackage DataObject
+ * @subpackage Record
  **/
 
 
@@ -14,24 +14,24 @@
 /**
  * Loading the Exceptions
  */
-include dirname(__FILE__) . '/DataObjectExceptions.php';
+include dirname(__FILE__) . '/RecordExceptions.php';
 
 
 /**
- * Loading the DataObject interface
+ * Loading the Record interface
  */
-include dirname(__FILE__) . '/DataObjectInterface.php';
+include dirname(__FILE__) . '/RecordInterface.php';
 
 
 /**
- * The DataObject is the data representation of one row from a Database request done with a Dao.
+ * The Record is the data representation of one row from a Database request done with a Dao.
  *
  * @author Matthias Loitsch <developer@ma.tthias.com>
  * @copyright Copyright (c) 2010, Matthias Loitsch
  * @package Dao
- * @subpackage DataObject
+ * @subpackage Record
  **/
-class DataObject implements DataObjectInterface {
+class Record implements RecordInterface {
 
   /**
    * This array holds all the data from a record.
@@ -55,17 +55,17 @@ class DataObject implements DataObjectInterface {
 
 
   /**
-   * Whether the Data exists in database or not. (RawObjects don't)
+   * Whether the Data exists in database or not. (RawRecords don't)
    * @var bool
    */
   protected $existsInDatabase;
 
 
   /**
-   * Every data object holds a reference to it's dao.
+   * Every record holds a reference to it's dao.
    *
    * @param array $data The complete data in an associative array.
-   * @param Dao $dao The dao that created this object.
+   * @param Dao $dao The dao that created this record.
    */
   public function __construct($data, $dao, $existsInDatabase = false) {
     $this->setData($data);
@@ -75,7 +75,7 @@ class DataObject implements DataObjectInterface {
 
 
   /**
-   * Returns the dao from this object.
+   * Returns the dao from this record.
    *
    * @return Dao
    */
@@ -103,9 +103,9 @@ class DataObject implements DataObjectInterface {
 
   /**
    * When there is an id, update() is called on the dao.
-   * If there is no id insert() is called, and the dao updates the data in this DataObject.
+   * If there is no id insert() is called, and the dao updates the data in this Record.
    * 
-   * @return DataObject itself for chaining.
+   * @return Record itself for chaining.
    */
   public function save() {
     if (!$this->existsInDatabase) { $this->getDao()->insert($this); }
@@ -118,7 +118,7 @@ class DataObject implements DataObjectInterface {
    * Throws an exception if no id is set.
    */
   public function delete() {
-    if (!$this->id) throw new DataObjectException("Can't delete an object with no id.");
+    if (!$this->id) throw new RecordException("Can't delete a record with no id.");
     $this->getDao()->delete($this);
   }
 
@@ -129,7 +129,7 @@ class DataObject implements DataObjectInterface {
    * This method actually calls the dao->getData() function, and passes itself. It then updates
    * its own hash with the one returned.
    *
-   * @return DataObject Returns itself for chaining.
+   * @return Record Returns itself for chaining.
    */
   public function load() {
     $this->setData($this->dao->getData($this));
@@ -218,7 +218,7 @@ class DataObject implements DataObjectInterface {
    *
    * @param string $attributeName
    * @param mixed $value
-   * @return DataObject Returns itself for chaining.
+   * @return Record Returns itself for chaining.
    **/
   public function set($attributeName, $value) {
     $attributeName = $this->convertAttributeNameToDatasourceName($attributeName);
@@ -249,7 +249,7 @@ class DataObject implements DataObjectInterface {
    * Converts a php attribute name to the datasource name.
    * Per default this simply transforms theAttribute to the_attribute.
    * If you data source handles names differently, overwrite this methods, and change your Daos to use your
-   * own implementation of DataObjects.
+   * own implementation of Records.
    *
    * @param string $attributeName
    * @return string 
@@ -280,7 +280,7 @@ class DataObject implements DataObjectInterface {
   }
 
   /**
-   * Overloading the DataObject
+   * Overloading the Record
    */
   public function __isset($attributeName) { return isset($this->data[$this->convertAttributeNameToDatasourceName($attributeName)]); }
 

@@ -15,12 +15,11 @@ if (!class_exists('DaoResultIterator', false)) include dirname(__FILE__) . '/Dao
 
 /**
  * The DaoKeyListIterator takes an array of keys, and lets you iterate over it, returning the corresponding
- * DataObjects by calling the dao, and getting it.
+ * Records by calling the dao, and getting it.
  *
  * @author Matthias Loitsch <developer@ma.tthias.com>
  * @copyright Copyright (c) 2010, Matthias Loitsch
  * @package Dao
- * @todo The Iterator should not fetch the objects in advance, but rather on demand.
  **/
 class DaoKeyListIterator extends DaoResultIterator {
 

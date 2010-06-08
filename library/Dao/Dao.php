@@ -26,9 +26,9 @@ include dirname(__FILE__) . '/DaoInterface.php';
 include dirname(__FILE__) . '/DaoAttributeAssignment.php';
 
 /**
- * Loading the DataObject Class
+ * Loading the Record Class
  */
-include dirname(dirname(__FILE__)) . '/DataObject/DataObject.php';
+include dirname(dirname(__FILE__)) . '/Record/Record.php';
 
 /**
  * Loading the Exceptions
@@ -60,7 +60,7 @@ if (!class_exists('Date', false)) include dirname(dirname(__FILE__)) . '/Date/Da
 
 /**
  * This abstract base class for all Daos.
- * IMPORTANT NOTE: The Dao (and DataObject for that matter) depend on the resource
+ * IMPORTANT NOTE: The Dao (and Record for that matter) depend on the resource
  * having a primary `id` attribute!
  * If your resource layout does not provide this attribute, the framework will not work.
  *
@@ -214,10 +214,10 @@ abstract class Dao implements DaoInterface {
   /**
    * This works exactly the same as the attributes, except that it only defines attributes, that may additionally be returned by the
    * datasource (for example in joins).
-   * Those values can *not* be set in the DataObjects afterwards, but are checked for their types when retrieved.
-   * When trying to get an additional attribute out of a DataObject, that has not been retrieved from the datasource, the DataObject should
+   * Those values can *not* be set in the Records afterwards, but are checked for their types when retrieved.
+   * When trying to get an additional attribute out of a Record, that has not been retrieved from the datasource, the Record should
    * just return null and not error.
-   * When trying to set an additional attribute the DataObject should trigger an error.
+   * When trying to set an additional attribute the Record should trigger an error.
    *
    * @var array
    */
@@ -264,7 +264,7 @@ abstract class Dao implements DaoInterface {
    * To see how references work in detail, please have a look at the DaoReference class.
    *
    * @param string $attributeName The name of the attribute. You will then be able to access the reference
-   *                              on this attribute name on the DataObject. So if you setup a reference with
+   *                              on this attribute name on the Record. So if you setup a reference with
    *                              'address' as $attributeName on the UserDao, then you will be able to access
    *                              it with: $user->address or $user->get('address')
    * @param string|Dao $daoClassName Eg.: 'AddressDao' or the dao directly
@@ -302,14 +302,14 @@ abstract class Dao implements DaoInterface {
   }
 
   /**
-   * Returns the DataObject for a specific reference.
-   * It then sets the hash in the DataObject so it can be retrieved next time.
+   * Returns the Record for a specific reference.
+   * It then sets the hash in the Record so it can be retrieved next time.
    * If it is accessed after that, the already fetched DataHash is used.
    * A DataSource can directly return the DataHash, so it doesn't have to be fetched.
    *
-   * @return DataObject
+   * @return Record
    */
-  public function getReference($dataObject, $attribute) {
+  public function getReference($record, $attribute) {
     if (!isset($this->references[$attribute])) throw new DaoWrongValueException("The attribute `$attribute` is not specified in references.");
 
     $reference = $this->references[$attribute];
@@ -319,10 +319,10 @@ abstract class Dao implements DaoInterface {
 
     if ($reference instanceof DaoToManyReference) {
       // toMany reference
-      if ($data = $dataObject->getDirectly($attribute)) {
+      if ($data = $record->getDirectly($attribute)) {
         if (is_array($data)) {
           // The sequence of data hashes has been set already
-          return new DaoHashListIterator($dataObject->getDirectly($attribute), $this);
+          return new DaoHashListIterator($record->getDirectly($attribute), $this);
         }
         trigger_error(sprintf('The data hash for `%s` was set but incorrect.', $attribute), E_USER_WARNING);
         return new DaoHashListIterator(array(), $this);
@@ -333,7 +333,7 @@ abstract class Dao implements DaoInterface {
         $foreignKey = $reference->getForeignKey();
 
         if ($localKey && $foreignKey) {
-          $localValue = $dataObject->get($localKey);
+          $localValue = $record->get($localKey);
 
           return new DaoKeyListIterator($localValue, $this, $foreignKey);
         }
@@ -342,10 +342,10 @@ abstract class Dao implements DaoInterface {
     }
     else {
       // toOne reference
-      if ($data = $dataObject->getDirectly($attribute)) {
+      if ($data = $record->getDirectly($attribute)) {
         if (is_array($data)) {
-          // If the data hash exists already, just return the DataObject with it.
-          return $dao->getObjectFromData($data);
+          // If the data hash exists already, just return the Record with it.
+          return $dao->getRecordFromData($data);
         }
         else {
           trigger_error(sprintf('The data hash for `%s` was set but incorrect.', $attribute), E_USER_WARNING);
@@ -353,16 +353,16 @@ abstract class Dao implements DaoInterface {
         }
       }
       else {
-        // Otherwise: get the data hash, store it in the DataObject that's referencing it, and
-        // return the DataObject.
+        // Otherwise: get the data hash, store it in the Record that's referencing it, and
+        // return the Record.
         $localKey = $reference->getLocalKey();
         $foreignKey = $reference->getForeignKey();
 
         if ($localKey && $foreignKey) {
-          $localValue = $dataObject->get($localKey);
+          $localValue = $record->get($localKey);
           if ($localValue === null) return null;
           $return = $dao->get(array($foreignKey=>$localValue));
-          $dataObject->setDirectly($attribute, $return->getArray());
+          $record->setDirectly($attribute, $return->getArray());
           return $return;
         }
         else {
@@ -385,9 +385,9 @@ abstract class Dao implements DaoInterface {
 
 
   /**
-   * If your datasource holds different attribute names than you want in you DataObjects, you can specify export & import mappings.
-   * (Don't confuse this with your php values. Meaning: if the datasource value is 'strangely_named', but you want to access your object
-   * like this: $object->perfectName, then you have to map it from strangely_named to perfect_name (not perfectName).)
+   * If your datasource holds different attribute names than you want in you Records, you can specify export & import mappings.
+   * (Don't confuse this with your php values. Meaning: if the datasource value is 'strangely_named', but you want to access your record
+   * like this: $record->perfectName, then you have to map it from strangely_named to perfect_name (not perfectName).)
    * If no mapping is found in the imports, than a reverse lookup is done in exports, and vice versa, so for a normal conversion
    * only the attributeImportMapping (or attributeExportMapping if you prefer) has to be set.
    * E.g.: array('what_the_datasource_value_actually_is'=>'what_you_would_want_it_to_be');
@@ -415,7 +415,7 @@ abstract class Dao implements DaoInterface {
    * This is a list of attributes that have default values in the datasource.
    * This means that, if the values are NULL, and the entry is inserted in the datasource, they will not be
    * passed, so that the datasource can automatically set the values.
-   * So when you call getRawObject() those values will be null.
+   * So when you call getRawRecord() those values will be null.
    * Per default the id is given.
    *
    * @var array
@@ -425,11 +425,11 @@ abstract class Dao implements DaoInterface {
 
 
   /**
-   * Calls find() and throws an error if null is returned, otherwise it just passes the DataObject
-   * If you call get() without parameters, a "raw object" will be returned, containing
+   * Calls find() and throws an error if null is returned, otherwise it just passes the Record
+   * If you call get() without parameters, a "raw record" will be returned, containing
    * only default values, and null as id.
    *
-   * @param array|DataObject $map A map or dataObject containing the attribute assignments.
+   * @param array|Record $map A map or record containing the attribute assignments.
    * @param bool $exportValues When you want to have complete control over the $map
    *                           attribute names, you can set exportValues to false, so they
    *                           won't be processed.
@@ -438,13 +438,13 @@ abstract class Dao implements DaoInterface {
    *                          to get data from.
    *                          If not set, $this->viewName will be used if present; if not
    *                          $this->resourceName is used.
-   * @return DataObject
+   * @return Record
    */
   public function get($map = null, $exportValues = true, $resourceName = null) {
-    if (!$map) return $this->getRawObject();
-    $dataObject = $this->find($map, $exportValues, $resourceName);
-    if (!$dataObject) throw new DaoNotFoundException('Did not find any object.');
-    return $dataObject;
+    if (!$map) return $this->getRawRecord();
+    $record = $this->find($map, $exportValues, $resourceName);
+    if (!$record) throw new DaoNotFoundException('Did not find any record.');
+    return $record;
   }
 
 
@@ -459,15 +459,15 @@ abstract class Dao implements DaoInterface {
 
 
   /**
-   * If the passed parameter is not an array, but a DataObject, then it gets the changed values out of it.
+   * If the passed parameter is not an array, but a Record, then it gets the changed values out of it.
    *
-   * @param array|DataObject $mapOrObject
+   * @param array|Record $mapOrRecord
    * @return array
    */
-  protected function interpretMap($mapOrObject) {
-    if (is_array($mapOrObject)) return $mapOrObject;
-    if ($mapOrObject instanceof DataObject) return $mapOrObject->getChangedValues();
-    throw new DaoWrongValueException("The passed map is neither an array nor a DataObject.");
+  protected function interpretMap($mapOrRecord) {
+    if (is_array($mapOrRecord)) return $mapOrRecord;
+    if ($mapOrRecord instanceof Record) return $mapOrRecord->getChangedValues();
+    throw new DaoWrongValueException("The passed map is neither an array nor a Record.");
   }
 
 
@@ -546,28 +546,28 @@ abstract class Dao implements DaoInterface {
    * If you have to do stuff after an insert, overwrite this function.
    * It gets called by the Dao after doing an insert.
    *
-   * @param DataObject $object
-   * @see DataObject
+   * @param Record $record
+   * @see Record
    */
-  protected function afterInsert($object) { }
+  protected function afterInsert($record) { }
 
   /**
    * If you have to do stuff after an update, overwrite this function.
    * It gets called by the Dao after doing an update.
    *
-   * @param DataObject $object
-   * @see DataObject
+   * @param Record $record
+   * @see Record
    */
-  protected function afterUpdate($object) { }
+  protected function afterUpdate($record) { }
 
   /**
    * If you have to do stuff after a deletion, overwrite this function.
    * It gets called by the Dao after deleting.
    *
-   * @param DataObject $object
-   * @see DataObject
+   * @param Record $record
+   * @see Record
    */
-  protected function afterDelete($object) { }
+  protected function afterDelete($record) { }
 
 
   
@@ -584,21 +584,21 @@ abstract class Dao implements DaoInterface {
   /**
    * This is a wrapper for get() and the id as parameter.
    * @param int $id
-   * @return DataObject
-   * @see DataObject
+   * @return Record
+   * @see Record
    */
   public function getById($id) {
     return $this->get(array('id'=>intval($id)));
   }
 
   /**
-   * Gets the object by id and deletes it.
+   * Gets the record by id and deletes it.
    * 
    * @param int $id
    */
   public function deleteById($id) {
-    $object = $this->getById($id);
-    $this->delete($object);
+    $record = $this->getById($id);
+    $this->delete($record);
   }
 
 
@@ -700,15 +700,15 @@ abstract class Dao implements DaoInterface {
    * Returns the arrays containing the attributes, and values to perform an insert.
    * Values that are null are simply left out. So are Dao::IGNORE types.
    *
-   * @param DataObject $object
+   * @param Record $record
    * @return array With $attributes and $values as 0 and 1st index respectively.
    */
-  protected function generateInsertArrays($object) {
+  protected function generateInsertArrays($record) {
     $values = array();
     $attributeNames = array();
     $id = null;
     foreach ($this->attributes as $attributeName=>$type) {
-      $value = $object->get($attributeName);
+      $value = $record->get($attributeName);
       if ($value !== null && $type != Dao::IGNORE) {
         $attributeNames[] = $this->exportAttributeName($attributeName);
         $values[]  = $this->exportValue($value, $type, $this->notNull($attributeName));
@@ -720,43 +720,43 @@ abstract class Dao implements DaoInterface {
 
 
   /**
-   * Returns a data object with the data in it.
-   * Override this function if you want a specific DataObject, not the default one.
-   * Using your own DataObject is sometimes useful if your datasource has a strange
+   * Returns a data record with the data in it.
+   * Override this function if you want a specific Record, not the default one.
+   * Using your own Record is sometimes useful if your datasource has a strange
    * naming convention and you have to do different name conversion than the default
    * one.
    *
    * @param array $data
    * @param bool $existsInDatabase
-   * @return DataObject
+   * @return Record
    */
-  protected function getObjectFromPreparedData($data, $existsInDatabase = true) {
-    return new DataObject($data, $this, $existsInDatabase);
+  protected function getRecordFromPreparedData($data, $existsInDatabase = true) {
+    return new Record($data, $this, $existsInDatabase);
   }
 
   /**
-   * Prepares the data, and gets a new object.
-   * This is the way you should get a DataObject from datasource data with.
+   * Prepares the data, and gets a new record.
+   * This is the way you should get a Record from datasource data with.
    *
    * @param array $data The data returned from the datasource
-   * @see prepareDataForObject()
-   * @see getObjectFromPreparedData()
-   * @return DataObject
+   * @see prepareDataForRecord()
+   * @see getRecordFromPreparedData()
+   * @return Record
    */
-  public function getObjectFromData($data) {
-    return $this->getObjectFromPreparedData($this->prepareDataForObject($data));
+  public function getRecordFromData($data) {
+    return $this->getRecordFromPreparedData($this->prepareDataForRecord($data));
   }
 
   /**
-   * Prepares the data, and updates the object
+   * Prepares the data, and updates the record
    *
    * @param array $data The data returned from the datasource
-   * @param DataObject $object The object to be updated
-   * @see prepareDataForObject()
+   * @param Record $record The record to be updated
+   * @see prepareDataForRecord()
    * @return void
    */
-  public function updateObjectWithData($data, $object) {
-    $object->setData($this->prepareDataForObject($data));
+  public function updateRecordWithData($data, $record) {
+    $record->setData($this->prepareDataForRecord($data));
   }
 
 
@@ -769,7 +769,7 @@ abstract class Dao implements DaoInterface {
    * @param array $data
    * @return array
    */
-  protected function prepareDataForObject($data) {
+  protected function prepareDataForRecord($data) {
     $neededValues = $this->attributes;
     foreach ($data as $attributeName=>$value) {
       $attributeName = $this->importAttributeName($attributeName);
@@ -803,7 +803,7 @@ abstract class Dao implements DaoInterface {
         if ($this->notNull($attributeName)) {
           $trace = debug_backtrace();
           trigger_error('The attribute ' . $attributeName . ' ('.$this->resourceName.') was not transmitted from data source in ' . $trace[0]['file'] . ' on line ' . $trace[0]['line'], E_USER_WARNING);
-          $data[$attributeName] = DataObject::coerce(null, $type, false, $quiet = true);
+          $data[$attributeName] = Record::coerce(null, $type, false, $quiet = true);
         } else {
           $data[$attributeName] = null;
         }
@@ -814,10 +814,10 @@ abstract class Dao implements DaoInterface {
 
 
   /**
-   * Returns an object with all attributes defined, but only set if necessary.
+   * Returns a record with all attributes defined, but only set if necessary.
    * nullAttributes will be null as well as defaultValueAttributes. All other attributes will have a default value set with coerce().
    * Be careful! This function will soon be protected, and should not be called anymore! Use get() (without map) instead (which will call
-   * getRawObject() for you).
+   * getRawRecord() for you).
    * You can not depend on this function... it is subject to change.
    *
    * @see $nullAttributes
@@ -825,15 +825,15 @@ abstract class Dao implements DaoInterface {
    * @see $attributes
    * @see coerce()
    * @see get()
-   * @return DataObject
+   * @return Record
    */
-  public function getRawObject() {
+  public function getRawRecord() {
     $data = array();
     foreach ($this->attributes as $attributeName=>$type) {
       if (in_array($attributeName, $this->nullAttributes) || in_array($attributeName, $this->defaultValueAttributes)) { $data[$attributeName] = null; }
-      elseif ($type != Dao::IGNORE) $data[$attributeName] = DataObject::coerce(null, $type, $allowNull = false, $quiet = true);
+      elseif ($type != Dao::IGNORE) $data[$attributeName] = Record::coerce(null, $type, $allowNull = false, $quiet = true);
     }
-    return $this->getObjectFromPreparedData($data, $existsInDatabase = false);
+    return $this->getRecordFromPreparedData($data, $existsInDatabase = false);
   }
 
 

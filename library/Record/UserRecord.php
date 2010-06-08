@@ -1,29 +1,29 @@
 <?php
 
 /**
- * This file contains the DataObject definition.
+ * This file contains the Record definition.
  *
  * @author Matthias Loitsch <developer@ma.tthias.com>
  * @copyright Copyright (c) 2010, Matthias Loitsch
  * @package Dao
- * @subpackage DataObject
+ * @subpackage Record
  **/
 
 /**
- * Loading the DataObject
+ * Loading the Record
  */
-include_once dirname(__FILE__) . '/DataObject.php';
+include_once dirname(__FILE__) . '/Record.php';
 
 
 /**
- * The UserDataObject is a special DataObject that provides a few additional methods typical for user handling.
+ * The UserRecord is a special Record that provides a few additional methods typical for user handling.
  *
  * @author Matthias Loitsch <developer@ma.tthias.com>
  * @copyright Copyright (c) 2010, Matthias Loitsch
  * @package Dao
- * @subpackage DataObject
+ * @subpackage Record
  **/
-class UserDataObject extends DataObject {
+class UserRecord extends Record {
 
   /**
    * Encrypts the password

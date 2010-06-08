@@ -29,11 +29,11 @@ class FakeDao extends NonAbstractDao {
 class DaoToManyReferences_Basic_Test extends Snap_UnitTestCase {
 
   protected $dao;
-  protected $dataObject;
+  protected $record;
   protected $mockDao;
 
   public function setUp() {
-    $this->referencedDataObject = new DataObject(array('SOMEDATAHASH'=>987), null);
+    $this->referencedRecord = new Record(array('SOMEDATAHASH'=>987), null);
 
     $this->mockDao = $this->mock('Dao')
       ->construct();
@@ -44,12 +44,12 @@ class DaoToManyReferences_Basic_Test extends Snap_UnitTestCase {
   public function tearDown() {}
 
   public function testReference() {
-    $do = new DataObject(array('address_ids'=>array(1, 3, 4)), $this->dao);
+    $do = new Record(array('address_ids'=>array(1, 3, 4)), $this->dao);
     return $this->assertIsA($do->addresses, 'DaoKeyListIterator');
   }
 
   public function testIteratorSize() {
-    $do = new DataObject(array('address_ids'=>array(1, 3, 4)), $this->dao);
+    $do = new Record(array('address_ids'=>array(1, 3, 4)), $this->dao);
     $addresses = $do->addresses;
     return $this->assertIdentical($addresses->count(), 3);
   }
@@ -82,11 +82,11 @@ class FakeDaoWithHash extends NonAbstractDao {
 class DaoToManyReferencesWithHash_Basic_Test extends Snap_UnitTestCase {
 
   protected $dao;
-  protected $dataObject;
+  protected $record;
   protected $mockDao;
 
   public function setUp() {
-    $this->referencedDataObject = new DataObject(array('SOMEDATAHASH'=>987), null);
+    $this->referencedRecord = new Record(array('SOMEDATAHASH'=>987), null);
 
     $this->mockDao = $this->mock('Dao')
       ->construct();
@@ -97,12 +97,12 @@ class DaoToManyReferencesWithHash_Basic_Test extends Snap_UnitTestCase {
   public function tearDown() {}
 
   public function testReference() {
-    $do = new DataObject(array('addresses'=>array(array(), array(), array())), $this->dao);
+    $do = new Record(array('addresses'=>array(array(), array(), array())), $this->dao);
     return $this->assertIsA($do->addresses, 'DaoHashListIterator');
   }
 
   public function testIteratorSize() {
-    $do = new DataObject(array('addresses'=>array(array(), array(), array())), $this->dao);
+    $do = new Record(array('addresses'=>array(array(), array(), array())), $this->dao);
     $addresses = $do->addresses;
     return $this->assertIdentical($addresses->count(), 3);
   }

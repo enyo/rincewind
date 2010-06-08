@@ -14,12 +14,12 @@ class DaoKeyListIterator_Basic_Test extends Snap_UnitTestCase {
   public function setUp() {
     $this->dao = $this->mock('Dao')
       ->setReturnValue('getData', array('some'=>'hash'))
-      ->setReturnValue('getObjectFromData', 'THE_OBJECT')
+      ->setReturnValue('getRecordFromData', 'THE_OBJECT')
       ->listenTo('getData')
       ->listenTo('getData', array(new Snap_Equals_Expectation(array('key'=>1))))
       ->listenTo('getData', array(new Snap_Equals_Expectation(array('key'=>3))))
       ->listenTo('getData', array(new Snap_Equals_Expectation(array('key'=>5))))
-      ->listenTo('getObjectFromData', array(new Snap_Equals_Expectation(array('some'=>'hash'))))
+      ->listenTo('getRecordFromData', array(new Snap_Equals_Expectation(array('some'=>'hash'))))
       ->construct(null);
     $this->it = new DaoKeyListIterator(array(1, 3, 5), $this->dao, 'key');
   }
@@ -37,7 +37,7 @@ class DaoKeyListIterator_Basic_Test extends Snap_UnitTestCase {
 
   public function testRightObjectIsInstantiated() {
     $ob = $this->it->current();
-    return $this->assertCallCount($this->dao, 'getObjectFromData', 1, array(new Snap_Equals_Expectation(array('some'=>'hash'))));
+    return $this->assertCallCount($this->dao, 'getRecordFromData', 1, array(new Snap_Equals_Expectation(array('some'=>'hash'))));
   }
 
   public function testGetIsCalledTwice() {

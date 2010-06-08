@@ -146,13 +146,13 @@ class XmlDao extends FileSourceDao {
 
 
   public function get($map = null, $exportValues = true, $resourceName = null) {
-    if (!$map) return $this->getRawObject();
+    if (!$map) return $this->getRawRecord();
 
     $content = $this->fileDataSource->view($this->exportResourceName($resourceName ? $resourceName : ($this->viewName ? $this->viewName : $this->resourceName)), $exportValues ? $this->exportMap($map) : $map);
 
     $data = $this->interpretFileContent($content);
 
-    return $this->getObjectFromData($data[0]);
+    return $this->getRecordFromData($data[0]);
   }
 
   /**

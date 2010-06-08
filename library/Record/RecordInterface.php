@@ -1,24 +1,24 @@
 <?php
 
 /**
- * This file contains the DataObject interface definition.
+ * This file contains the Record interface definition.
  *
  * @author Matthias Loitsch <developer@ma.tthias.com>
  * @copyright Copyright (c) 2010, Matthias Loitsch
  * @package Dao
- * @subpackage DataObject
+ * @subpackage Record
  **/
 
 
 /**
- * The DataObjectInterface
+ * The RecordInterface
  *
  * @author Matthias Loitsch <developer@ma.tthias.com>
  * @copyright Copyright (c) 2010, Matthias Loitsch
  * @package Dao
- * @subpackage DataObject
+ * @subpackage Record
  **/
-interface DataObjectInterface {
+interface RecordInterface {
 
   /**
    * Calls delete($this) on the dao.
@@ -29,9 +29,9 @@ interface DataObjectInterface {
   public function delete();
 
   /**
-   * Depending on the state of the DataObject does dao->update($this) or dao->insert($this)
+   * Depending on the state of the Record does dao->update($this) or dao->insert($this)
    *
-   * @return DataObject Itself for chaining
+   * @return Record Itself for chaining
    */
   public function save();
 
@@ -47,7 +47,7 @@ interface DataObjectInterface {
    * Sets the value of a column
    * @param string $column
    * @param mixed $value
-   * @return DataObject Itself for chaining
+   * @return Record Itself for chaining
    */
   public function set($column, $value);
 

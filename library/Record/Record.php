@@ -49,6 +49,13 @@ class Record implements RecordInterface {
 
 
   /**
+   * This is the cache for computed properties.
+   * Whenever a computed property is accessed, it first looks if it exists here.
+   * @var array
+   */
+  protected $computedAttributesCache = array();
+
+  /**
    * @var Dao
    */
   protected $dao;
@@ -179,8 +186,8 @@ class Record implements RecordInterface {
    * @param string $attributeName
    * @return mixed
    **/
-  public function get($attributeName) {
-    $attributeName = $this->convertAttributeNameToDatasourceName($attributeName);
+  public function get($originalAttributeName) {
+    $attributeName = $this->convertAttributeNameToDatasourceName($originalAttributeName);
 
     if (array_key_exists($attributeName, $this->dao->getAttributes())) {
       $value = $this->data[$attributeName];
@@ -190,6 +197,16 @@ class Record implements RecordInterface {
     }
     elseif (array_key_exists($attributeName, $this->dao->getReferences())) {
       return $this->dao->getReference($this, $attributeName);
+    }
+    elseif (method_exists($this, '_' . $originalAttributeName)) {
+      if (array_key_exists($originalAttributeName, $this->computedAttributesCache)) {
+        return $this->computedAttributesCache[$originalAttributeName];
+      }
+      else {
+        $value = call_user_func(array($this, '_' . $originalAttributeName));
+        $this->computedAttributesCache[$originalAttributeName] = $value;
+        return $value;
+      }
     }
     else {
       $this->triggerUndefinedAttributeError($attributeName);

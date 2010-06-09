@@ -209,7 +209,19 @@ Source Location: /Record/UserRecord.php<br /><br />
 <h4>Class: <a href="../../Dao/Record/Record.html">Record</a></h4>
 <dl>
 <dt>
+  <a href="../../Dao/Record/Record.html#var$cacheDependencies">Record::$cacheDependencies</a>
+  </dt>
+<dd>
+   
+</dd>
+<dt>
   <a href="../../Dao/Record/Record.html#var$changedAttributes">Record::$changedAttributes</a>
+  </dt>
+<dd>
+   
+</dd>
+<dt>
+  <a href="../../Dao/Record/Record.html#var$computedAttributesCache">Record::$computedAttributesCache</a>
   </dt>
 <dd>
    
@@ -246,6 +258,12 @@ Source Location: /Record/UserRecord.php<br /><br />
   </dt>
   <dd>
     Every record holds a reference to it's dao.
+  </dd>
+    <dt>
+    <a href="../../Dao/Record/Record.html#methodclearComputedAttributesCache">Record::clearComputedAttributesCache()</a>
+  </dt>
+  <dd>
+    Clears the computed attributes cache.
   </dd>
     <dt>
     <a href="../../Dao/Record/Record.html#methodcoerce">Record::coerce()</a>
@@ -314,6 +332,12 @@ Source Location: /Record/UserRecord.php<br /><br />
     Returns an array of all values that have been explicitly set. The indices are the attribute names.
   </dd>
     <dt>
+    <a href="../../Dao/Record/Record.html#methodgetComputedAttribute">Record::getComputedAttribute()</a>
+  </dt>
+  <dd>
+    Returns the value of a computed attribute.
+  </dd>
+    <dt>
     <a href="../../Dao/Record/Record.html#methodgetDao">Record::getDao()</a>
   </dt>
   <dd>
@@ -347,7 +371,7 @@ Source Location: /Record/UserRecord.php<br /><br />
     <a href="../../Dao/Record/Record.html#methodsetData">Record::setData()</a>
   </dt>
   <dd>
-    Sets a new data array, and resets the changedAttributes array.
+    Sets a new data array, resets the changedAttributes array and clears the computed attributes cache.
   </dd>
     <dt>
     <a href="../../Dao/Record/Record.html#methodsetDirectly">Record::setDirectly()</a>

@@ -201,6 +201,7 @@ Source Location: /Dao/DaoInterface.php<br /><br />
     <li><a href="../Dao/DaoInterface.html#methodgetIterator">getIterator</a></li>
     <li><a href="../Dao/DaoInterface.html#methodgetNullAttributes">getNullAttributes</a></li>
     <li><a href="../Dao/DaoInterface.html#methodgetRecordFromData">getRecordFromData</a></li>
+    <li><a href="../Dao/DaoInterface.html#methodgetReferences">getReferences</a></li>
     <li><a href="../Dao/DaoInterface.html#methodgetTotalCount">getTotalCount</a></li>
     <li><a href="../Dao/DaoInterface.html#methodinsert">insert</a></li>
     <li><a href="../Dao/DaoInterface.html#methodrollback">rollback</a></li>
@@ -743,7 +744,7 @@ $resourceName = null])</code>
   </div>
   <hr />
 	<a name="methodgetRecordFromData"></a>
-	<h3>method getRecordFromData <span class="smalllinenumber">[line 181]</span></h3>
+	<h3>method getRecordFromData <span class="smalllinenumber">[line 187]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -778,8 +779,33 @@ $data)</code>
         <div class="top">[ <a href="#top">Top</a> ]</div>
   </div>
   <hr />
+	<a name="methodgetReferences"></a>
+	<h3>method getReferences <span class="smalllinenumber">[line 171]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>array getReferences(
+)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Returns an array of all references setup in this dao.<br /><br /><p>The keys are the attribute names. The values are the actual DaoReference or DaoToManyReference  objects.</p><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
 	<a name="methodgetTotalCount"></a>
-	<h3>method getTotalCount <span class="smalllinenumber">[line 172]</span></h3>
+	<h3>method getTotalCount <span class="smalllinenumber">[line 178]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">

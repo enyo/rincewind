@@ -314,8 +314,14 @@
 				<dd>in file JsonDao.php, method <a href="Dao/JsonDao.html#methodcreateIterator">JsonDao::createIterator()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Creates an iterator for a json data hash.</dd>
 							<dt><b>current</b></dt>
 				<dd>in file DaoResultIterator.php, method <a href="Dao/DaoResultIterator.html#methodcurrent">DaoResultIterator::current()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Return the current Record.</dd>
+							<dt><b>$cacheDependencies</b></dt>
+				<dd>in file Record.php, variable <a href="Dao/Record/Record.html#var$cacheDependencies">Record::$cacheDependencies</a><br>&nbsp;&nbsp;&nbsp;&nbsp;This array contains all the dependencies on how caches are done for computed attributes.</dd>
 							<dt><b>$changedAttributes</b></dt>
 				<dd>in file Record.php, variable <a href="Dao/Record/Record.html#var$changedAttributes">Record::$changedAttributes</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Contains a list of changed attributes (when set() is called)  Indices are the attribute names.</dd>
+							<dt><b>$computedAttributesCache</b></dt>
+				<dd>in file Record.php, variable <a href="Dao/Record/Record.html#var$computedAttributesCache">Record::$computedAttributesCache</a><br>&nbsp;&nbsp;&nbsp;&nbsp;This is the cache for computed properties.</dd>
+							<dt><b>clearComputedAttributesCache</b></dt>
+				<dd>in file Record.php, method <a href="Dao/Record/Record.html#methodclearComputedAttributesCache">Record::clearComputedAttributesCache()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Clears the computed attributes cache.</dd>
 							<dt><b>coerce</b></dt>
 				<dd>in file Record.php, method <a href="Dao/Record/Record.html#methodcoerce">Record::coerce()</a></dd>
 							<dt><b>convertAttributeNameToDatasourceName</b></dt>
@@ -521,53 +527,53 @@
 							<dt><b>get</b></dt>
 				<dd>in file XmlDao.php, method <a href="Dao/XmlDao.html#methodget">XmlDao::get()</a></dd>
 							<dt><b>get</b></dt>
-				<dd>in file DaoInterface.php, method <a href="Dao/DaoInterface.html#methodget">DaoInterface::get()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;This is the method to get a Record from the datasource.</dd>
-							<dt><b>get</b></dt>
 				<dd>in file Dao.php, method <a href="Dao/Dao.html#methodget">Dao::get()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Calls find() and throws an error if null is returned, otherwise it just passes the Record  If you call get() without parameters, a &quot;raw record&quot; will be returned, containing  only default values, and null as id.</dd>
+							<dt><b>get</b></dt>
+				<dd>in file DaoInterface.php, method <a href="Dao/DaoInterface.html#methodget">DaoInterface::get()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;This is the method to get a Record from the datasource.</dd>
 							<dt><b>getAdditionalAttributes</b></dt>
 				<dd>in file DaoInterface.php, method <a href="Dao/DaoInterface.html#methodgetAdditionalAttributes">DaoInterface::getAdditionalAttributes()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns all the additional attributes.</dd>
 							<dt><b>getAdditionalAttributes</b></dt>
 				<dd>in file Dao.php, method <a href="Dao/Dao.html#methodgetAdditionalAttributes">Dao::getAdditionalAttributes()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns the additional attribute types array</dd>
 							<dt><b>getAll</b></dt>
-				<dd>in file Dao.php, method <a href="Dao/Dao.html#methodgetAll">Dao::getAll()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns all rows (but you can specify offset &amp;amp; limit)</dd>
-							<dt><b>getAll</b></dt>
 				<dd>in file DaoInterface.php, method <a href="Dao/DaoInterface.html#methodgetAll">DaoInterface::getAll()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Retrieves all rows</dd>
+							<dt><b>getAll</b></dt>
+				<dd>in file Dao.php, method <a href="Dao/Dao.html#methodgetAll">Dao::getAll()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns all rows (but you can specify offset &amp;amp; limit)</dd>
 							<dt><b>getAllAsArrays</b></dt>
 				<dd>in file Dao.php, method <a href="Dao/Dao.html#methodgetAllAsArrays">Dao::getAllAsArrays()</a></dd>
 							<dt><b>getAttributes</b></dt>
-				<dd>in file DaoInterface.php, method <a href="Dao/DaoInterface.html#methodgetAttributes">DaoInterface::getAttributes()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns all the attribute.</dd>
-							<dt><b>getAttributes</b></dt>
 				<dd>in file Dao.php, method <a href="Dao/Dao.html#methodgetAttributes">Dao::getAttributes()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns the attributes array</dd>
-							<dt><b>getById</b></dt>
-				<dd>in file Dao.php, method <a href="Dao/Dao.html#methodgetById">Dao::getById()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;This is a wrapper for get() and the id as parameter.</dd>
+							<dt><b>getAttributes</b></dt>
+				<dd>in file DaoInterface.php, method <a href="Dao/DaoInterface.html#methodgetAttributes">DaoInterface::getAttributes()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns all the attribute.</dd>
 							<dt><b>getById</b></dt>
 				<dd>in file DaoInterface.php, method <a href="Dao/DaoInterface.html#methodgetById">DaoInterface::getById()</a></dd>
-							<dt><b>getByUsername</b></dt>
-				<dd>in file UserDaoInterface.php, method <a href="Dao/UserDaoInterface.html#methodgetByUsername">UserDaoInterface::getByUsername()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Return a user by login</dd>
+							<dt><b>getById</b></dt>
+				<dd>in file Dao.php, method <a href="Dao/Dao.html#methodgetById">Dao::getById()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;This is a wrapper for get() and the id as parameter.</dd>
 							<dt><b>getByUsername</b></dt>
 				<dd>in file PostgresqlUserDao.php, method <a href="Dao/PostgresqlUserDao.html#methodgetByUsername">PostgresqlUserDao::getByUsername()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns the user by username</dd>
 							<dt><b>getByUsername</b></dt>
+				<dd>in file UserDaoInterface.php, method <a href="Dao/UserDaoInterface.html#methodgetByUsername">UserDaoInterface::getByUsername()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Return a user by login</dd>
+							<dt><b>getByUsername</b></dt>
 				<dd>in file MysqlUserDao.php, method <a href="Dao/MysqlUserDao.html#methodgetByUsername">MysqlUserDao::getByUsername()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns the user by username</dd>
 							<dt><b>getCurrentData</b></dt>
-				<dd>in file DaoHashListIterator.php, method <a href="Dao/DaoHashListIterator.html#methodgetCurrentData">DaoHashListIterator::getCurrentData()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Fetches the current data.</dd>
-							<dt><b>getCurrentData</b></dt>
-				<dd>in file DaoKeyListIterator.php, method <a href="Dao/DaoKeyListIterator.html#methodgetCurrentData">DaoKeyListIterator::getCurrentData()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Fetches the current data.</dd>
-							<dt><b>getCurrentData</b></dt>
-				<dd>in file FileSourceResultIterator.php, method <a href="Dao/FileSourceResultIterator.html#methodgetCurrentData">FileSourceResultIterator::getCurrentData()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Fetches the current data.</dd>
+				<dd>in file DaoResultIterator.php, method <a href="Dao/DaoResultIterator.html#methodgetCurrentData">DaoResultIterator::getCurrentData()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns the data of the current iteration</dd>
 							<dt><b>getCurrentData</b></dt>
 				<dd>in file SqlResultIterator.php, method <a href="Dao/SqlResultIterator.html#methodgetCurrentData">SqlResultIterator::getCurrentData()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Fetches the current data.</dd>
 							<dt><b>getCurrentData</b></dt>
-				<dd>in file DaoResultIterator.php, method <a href="Dao/DaoResultIterator.html#methodgetCurrentData">DaoResultIterator::getCurrentData()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns the data of the current iteration</dd>
+				<dd>in file FileSourceResultIterator.php, method <a href="Dao/FileSourceResultIterator.html#methodgetCurrentData">FileSourceResultIterator::getCurrentData()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Fetches the current data.</dd>
+							<dt><b>getCurrentData</b></dt>
+				<dd>in file DaoKeyListIterator.php, method <a href="Dao/DaoKeyListIterator.html#methodgetCurrentData">DaoKeyListIterator::getCurrentData()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Fetches the current data.</dd>
+							<dt><b>getCurrentData</b></dt>
+				<dd>in file DaoHashListIterator.php, method <a href="Dao/DaoHashListIterator.html#methodgetCurrentData">DaoHashListIterator::getCurrentData()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Fetches the current data.</dd>
 							<dt><b>getDaoClassName</b></dt>
 				<dd>in file DaoReference.php, method <a href="Dao/DaoReference.html#methodgetDaoClassName">DaoReference::getDaoClassName()</a></dd>
 							<dt><b>getData</b></dt>
 				<dd>in file FileSourceDao.php, method <a href="Dao/FileSourceDao.html#methodgetData">FileSourceDao::getData()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Same as get() but returns an array with the data instead of a record</dd>
 							<dt><b>getData</b></dt>
+				<dd>in file DaoInterface.php, method <a href="Dao/DaoInterface.html#methodgetData">DaoInterface::getData()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;The same as get(), but returns an array with the data.</dd>
+							<dt><b>getData</b></dt>
 				<dd>in file XmlDao.php, method <a href="Dao/XmlDao.html#methodgetData">XmlDao::getData()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Just calls the parent, but then returns only one element of the list</dd>
 							<dt><b>getData</b></dt>
 				<dd>in file SqlDao.php, method <a href="Dao/SqlDao.html#methodgetData">SqlDao::getData()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Same as get() but returns an array with the data instead of a record</dd>
-							<dt><b>getData</b></dt>
-				<dd>in file DaoInterface.php, method <a href="Dao/DaoInterface.html#methodgetData">DaoInterface::getData()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;The same as get(), but returns an array with the data.</dd>
 							<dt><b>getDb</b></dt>
 				<dd>in file SqlDao.php, method <a href="Dao/SqlDao.html#methodgetDb">SqlDao::getDb()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns the database.</dd>
 							<dt><b>getDefaultValueAttributes</b></dt>
@@ -579,17 +585,17 @@
 							<dt><b>getFromQuery</b></dt>
 				<dd>in file SqlDao.php, method <a href="Dao/SqlDao.html#methodgetFromQuery">SqlDao::getFromQuery()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns a Record or data array from a query.</dd>
 							<dt><b>getGuest</b></dt>
-				<dd>in file MysqlUserDao.php, method <a href="Dao/MysqlUserDao.html#methodgetGuest">MysqlUserDao::getGuest()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns a raw object with 'guest' as username</dd>
-							<dt><b>getGuest</b></dt>
 				<dd>in file PostgresqlUserDao.php, method <a href="Dao/PostgresqlUserDao.html#methodgetGuest">PostgresqlUserDao::getGuest()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns a raw object with 'guest' as username</dd>
 							<dt><b>getGuest</b></dt>
 				<dd>in file UserDaoInterface.php, method <a href="Dao/UserDaoInterface.html#methodgetGuest">UserDaoInterface::getGuest()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Get a raw object with username 'guest'</dd>
-							<dt><b>getIterator</b></dt>
-				<dd>in file DaoInterface.php, method <a href="Dao/DaoInterface.html#methodgetIterator">DaoInterface::getIterator()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;The same as get, but returns an iterator to go through all the rows.</dd>
+							<dt><b>getGuest</b></dt>
+				<dd>in file MysqlUserDao.php, method <a href="Dao/MysqlUserDao.html#methodgetGuest">MysqlUserDao::getGuest()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns a raw object with 'guest' as username</dd>
 							<dt><b>getIterator</b></dt>
 				<dd>in file SqlDao.php, method <a href="Dao/SqlDao.html#methodgetIterator">SqlDao::getIterator()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;The same as get, but returns an iterator to go through all the rows.</dd>
 							<dt><b>getIterator</b></dt>
 				<dd>in file FileSourceDao.php, method <a href="Dao/FileSourceDao.html#methodgetIterator">FileSourceDao::getIterator()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;The same as get, but returns an iterator to go through all the rows.</dd>
+							<dt><b>getIterator</b></dt>
+				<dd>in file DaoInterface.php, method <a href="Dao/DaoInterface.html#methodgetIterator">DaoInterface::getIterator()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;The same as get, but returns an iterator to go through all the rows.</dd>
 							<dt><b>getIteratorFromData</b></dt>
 				<dd>in file FileSourceDao.php, method <a href="Dao/FileSourceDao.html#methodgetIteratorFromData">FileSourceDao::getIteratorFromData()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns an Iterator for data</dd>
 							<dt><b>getIteratorFromQuery</b></dt>
@@ -601,19 +607,21 @@
 							<dt><b>getLocalKey</b></dt>
 				<dd>in file DaoReference.php, method <a href="Dao/DaoReference.html#methodgetLocalKey">DaoReference::getLocalKey()</a></dd>
 							<dt><b>getNullAttributes</b></dt>
-				<dd>in file DaoInterface.php, method <a href="Dao/DaoInterface.html#methodgetNullAttributes">DaoInterface::getNullAttributes()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns all the attributes that can be null.</dd>
-							<dt><b>getNullAttributes</b></dt>
 				<dd>in file Dao.php, method <a href="Dao/Dao.html#methodgetNullAttributes">Dao::getNullAttributes()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns the null attributes</dd>
+							<dt><b>getNullAttributes</b></dt>
+				<dd>in file DaoInterface.php, method <a href="Dao/DaoInterface.html#methodgetNullAttributes">DaoInterface::getNullAttributes()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns all the attributes that can be null.</dd>
 							<dt><b>getRawRecord</b></dt>
 				<dd>in file Dao.php, method <a href="Dao/Dao.html#methodgetRawRecord">Dao::getRawRecord()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns a record with all attributes defined, but only set if necessary.</dd>
 							<dt><b>getRecordFromData</b></dt>
-				<dd>in file DaoInterface.php, method <a href="Dao/DaoInterface.html#methodgetRecordFromData">DaoInterface::getRecordFromData()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns a record filled with an array of datasource values.</dd>
-							<dt><b>getRecordFromData</b></dt>
 				<dd>in file Dao.php, method <a href="Dao/Dao.html#methodgetRecordFromData">Dao::getRecordFromData()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Prepares the data, and gets a new record.</dd>
+							<dt><b>getRecordFromData</b></dt>
+				<dd>in file DaoInterface.php, method <a href="Dao/DaoInterface.html#methodgetRecordFromData">DaoInterface::getRecordFromData()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns a record filled with an array of datasource values.</dd>
 							<dt><b>getRecordFromPreparedData</b></dt>
 				<dd>in file Dao.php, method <a href="Dao/Dao.html#methodgetRecordFromPreparedData">Dao::getRecordFromPreparedData()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns a data record with the data in it.</dd>
 							<dt><b>getReference</b></dt>
 				<dd>in file Dao.php, method <a href="Dao/Dao.html#methodgetReference">Dao::getReference()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns the Record for a specific reference.</dd>
+							<dt><b>getReferences</b></dt>
+				<dd>in file DaoInterface.php, method <a href="Dao/DaoInterface.html#methodgetReferences">DaoInterface::getReferences()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns an array of all references setup in this dao.</dd>
 							<dt><b>getReferences</b></dt>
 				<dd>in file Dao.php, method <a href="Dao/Dao.html#methodgetReferences">Dao::getReferences()</a></dd>
 							<dt><b>getTotalCount</b></dt>
@@ -623,9 +631,9 @@
 							<dt><b>getTotalCount</b></dt>
 				<dd>in file SqlDao.php, method <a href="Dao/SqlDao.html#methodgetTotalCount">SqlDao::getTotalCount()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns the total row count in the resource the Dao is assigned to.</dd>
 							<dt><b>get</b></dt>
-				<dd>in file RecordInterface.php, method <a href="Dao/Record/RecordInterface.html#methodget">RecordInterface::get()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns the value of a column</dd>
-							<dt><b>get</b></dt>
 				<dd>in file Record.php, method <a href="Dao/Record/Record.html#methodget">Record::get()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Gets the value of the $data array and returns it.</dd>
+							<dt><b>get</b></dt>
+				<dd>in file RecordInterface.php, method <a href="Dao/Record/RecordInterface.html#methodget">RecordInterface::get()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns the value of a column</dd>
 							<dt><b>getArray</b></dt>
 				<dd>in file Record.php, method <a href="Dao/Record/Record.html#methodgetArray">Record::getArray()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns an associative array with the values.</dd>
 							<dt><b>getAttributeType</b></dt>
@@ -634,6 +642,8 @@
 				<dd>in file Record.php, method <a href="Dao/Record/Record.html#methodgetChangedAttributes">Record::getChangedAttributes()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns an array of all attributes that have been explicitly set. The indices are the attribute names</dd>
 							<dt><b>getChangedValues</b></dt>
 				<dd>in file Record.php, method <a href="Dao/Record/Record.html#methodgetChangedValues">Record::getChangedValues()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns an array of all values that have been explicitly set. The indices are the attribute names.</dd>
+							<dt><b>getComputedAttribute</b></dt>
+				<dd>in file Record.php, method <a href="Dao/Record/Record.html#methodgetComputedAttribute">Record::getComputedAttribute()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns the value of a computed attribute.</dd>
 							<dt><b>getDao</b></dt>
 				<dd>in file Record.php, method <a href="Dao/Record/Record.html#methodgetDao">Record::getDao()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns the dao from this record.</dd>
 							<dt><b>getDirectly</b></dt>
@@ -820,6 +830,8 @@
 	<div>
 		<h2>r</h2>
 		<dl>
+							<dt><b>$recordClassName</b></dt>
+				<dd>in file Dao.php, variable <a href="Dao/Dao.html#var$recordClassName">Dao::$recordClassName</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Defines the class name of the record to be instantiated.</dd>
 							<dt><b>$references</b></dt>
 				<dd>in file Dao.php, variable <a href="Dao/Dao.html#var$references">Dao::$references</a><br>&nbsp;&nbsp;&nbsp;&nbsp;The references array contains a list of DaoReference instances to map certain attributes to other resources.</dd>
 							<dt><b>$resourceName</b></dt>
@@ -827,9 +839,9 @@
 							<dt><b>$returnRecordsAsArray</b></dt>
 				<dd>in file DaoResultIterator.php, variable <a href="Dao/DaoResultIterator.html#var$returnRecordsAsArray">DaoResultIterator::$returnRecordsAsArray</a><br>&nbsp;&nbsp;&nbsp;&nbsp;If set to true, instead of returning the Record, Record-&gt;getArray() is returned.</dd>
 							<dt><b>rewind</b></dt>
-				<dd>in file SqlResultIterator.php, method <a href="Dao/SqlResultIterator.html#methodrewind">SqlResultIterator::rewind()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Sets the pointer to row 1.</dd>
-							<dt><b>rewind</b></dt>
 				<dd>in file FileSourceResultIterator.php, method <a href="Dao/FileSourceResultIterator.html#methodrewind">FileSourceResultIterator::rewind()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Sets the pointer to entry 1.</dd>
+							<dt><b>rewind</b></dt>
+				<dd>in file SqlResultIterator.php, method <a href="Dao/SqlResultIterator.html#methodrewind">SqlResultIterator::rewind()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Sets the pointer to row 1.</dd>
 							<dt><b>rewind</b></dt>
 				<dd>in file DaoKeyListIterator.php, method <a href="Dao/DaoKeyListIterator.html#methodrewind">DaoKeyListIterator::rewind()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Sets the pointer to row 1.</dd>
 							<dt><b>rewind</b></dt>
@@ -893,7 +905,7 @@
 							<dt><b>set</b></dt>
 				<dd>in file RecordInterface.php, method <a href="Dao/Record/RecordInterface.html#methodset">RecordInterface::set()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Sets the value of a column</dd>
 							<dt><b>setData</b></dt>
-				<dd>in file Record.php, method <a href="Dao/Record/Record.html#methodsetData">Record::setData()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Sets a new data array, and resets the changedAttributes array.</dd>
+				<dd>in file Record.php, method <a href="Dao/Record/Record.html#methodsetData">Record::setData()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Sets a new data array, resets the changedAttributes array and clears the computed attributes cache.</dd>
 							<dt><b>setDirectly</b></dt>
 				<dd>in file Record.php, method <a href="Dao/Record/Record.html#methodsetDirectly">Record::setDirectly()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;You should NEVER use this function in your app.</dd>
 							<dt><b>setExistsInDatabase</b></dt>

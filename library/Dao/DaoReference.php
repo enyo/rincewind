@@ -47,6 +47,8 @@
  * ?>
  * </code>
  *
+ * Once a DaoReference has been fetched by a dao, the data hash gets cached inside the Dao
+ * so it doesn't get fetched more then once.
  *
  * @author Matthias Loitsch <developer@ma.tthias.com>
  * @copyright Copyright (c) 2010, Matthias Loitsch

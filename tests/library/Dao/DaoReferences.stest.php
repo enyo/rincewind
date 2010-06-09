@@ -59,7 +59,7 @@ class DaoReferences_Basic_Test extends Snap_UnitTestCase {
   public function testForeignDaoGetsCalled() {
     $do = new Record(array('address_id'=>123), $this->dao);
     $do->address; // Getting the address so it gets remote fetched.
-		return $this->assertCallCount($this->mockDao, 'get', 1, array(new Snap_Equals_Expectation(array('THEFOREIGNKEY'=>123))));
+    return $this->assertCallCount($this->mockDao, 'get', 1, array(new Snap_Equals_Expectation(array('THEFOREIGNKEY'=>123))));
   }
 
   public function testHashGetsCached() {

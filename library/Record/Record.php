@@ -51,9 +51,24 @@ class Record implements RecordInterface {
   /**
    * This is the cache for computed properties.
    * Whenever a computed property is accessed, it first looks if it exists here.
+   * @see $cacheDependencies
    * @var array
    */
   protected $computedAttributesCache = array();
+
+
+  /**
+   * This array contains all the dependencies on how caches are done for computed attributes.
+   * The index is the name of the attribute and the value is either the name or an array of names
+   * of the cache that has to be cleared.
+   *
+   * Eg.: array('first_name'=>'fullName', 'last_name'=>'fullName');
+   *
+   * When you now access fullName once, it gets cached. If now, either first_name or last_name
+   * gets set, the fullName cache gets erased, and the next time you access it, it will be recalculated.
+   * @var array
+   */
+  protected $cacheDependencies = array();
 
   /**
    * @var Dao
@@ -98,12 +113,13 @@ class Record implements RecordInterface {
 
 
   /**
-   * Sets a new data array, and resets the changedAttributes array.
+   * Sets a new data array, resets the changedAttributes array and clears the computed attributes cache.
    *
    * @param array $data
    */
   public function setData($data) {
     $this->changedAttributes = array();
+    $this->clearComputedAttributesCache();
     $this->data = $data;  
   }
 
@@ -182,6 +198,9 @@ class Record implements RecordInterface {
   /**
    * Gets the value of the $data array and returns it.
    * If the value is a DATE or DATE_WITH_TIME type, it returns a Date Object.
+   * If the attribute name is not defined in the attributes list, the record checks if a function with
+   * the same name but an underscore in front exists, and 
+   * _theAttributeName 
    *
    * @param string $attributeName
    * @return mixed
@@ -199,14 +218,7 @@ class Record implements RecordInterface {
       return $this->dao->getReference($this, $attributeName);
     }
     elseif (method_exists($this, '_' . $originalAttributeName)) {
-      if (array_key_exists($originalAttributeName, $this->computedAttributesCache)) {
-        return $this->computedAttributesCache[$originalAttributeName];
-      }
-      else {
-        $value = call_user_func(array($this, '_' . $originalAttributeName));
-        $this->computedAttributesCache[$originalAttributeName] = $value;
-        return $value;
-      }
+      return $this->getComputedAttribute($originalAttributeName);
     }
     else {
       $this->triggerUndefinedAttributeError($attributeName);
@@ -215,6 +227,35 @@ class Record implements RecordInterface {
     $attributeType = $this->getAttributeType($attributeName);
     if ($value !== null && ($attributeType == Dao::DATE || $attributeType == Dao::DATE_WITH_TIME)) $value = new Date($value);
     return $value;
+  }
+
+
+  /**
+   * Returns the value of a computed attribute.
+   * If you try to access $yourRecord->fullName, it calls $yourRecord->_fullName() internally and returns the value.
+   * Those computed attributes get cached.
+   *
+   * @param string $attributeName
+   * @return mixed
+   */
+  protected function getComputedAttribute($attributeName) {
+    if (array_key_exists($attributeName, $this->computedAttributesCache)) {
+      return $this->computedAttributesCache[$attributeName];
+    }
+    else {
+      $value = call_user_func(array($this, '_' . $attributeName));
+      $this->computedAttributesCache[$attributeName] = $value;
+      return $value;
+    }
+  }
+
+  /**
+   * Clears the computed attributes cache.
+   * @param string $attributeName If present, only this attribute cache gets cleared.
+   */
+  protected function clearComputedAttributesCache($attributeName = null) {
+    if ($attributeName) { unset($this->computedAttributesCache[$attributeName]); }
+    else { $this->computedAttributesCache = array(); }
   }
 
   /**
@@ -247,6 +288,17 @@ class Record implements RecordInterface {
     $value = self::coerce($value, $this->getAttributeType($attributeName), in_array($attributeName, $this->dao->getNullAttributes()));
     $this->data[$attributeName] = $value;
     $this->changedAttributes[$attributeName] = true;
+    
+    // If there is a cache dependency for this attribute, clear the cache related to it.
+    if (isset($this->cacheDependencies[$attributeName])) {
+      $dependencies = $this->cacheDependencies[$attributeName];
+      if (is_array($dependencies)) {
+        foreach ($dependencies as $dependency) { $this->clearComputedAttributesCache($dependency); }
+      }
+      else {
+        $this->clearComputedAttributesCache($dependencies);
+      }
+    }
     return $this;
   }
 

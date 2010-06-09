@@ -194,6 +194,16 @@ abstract class Dao implements DaoInterface {
    */
   protected $viewName = null;
 
+
+  /**
+   * Defines the class name of the record to be instantiated.
+   * You can overwrite this if your Dao uses a specific Record.
+   *
+   * @var string
+   * @see getRecordFromPreparedData()
+   */
+  protected $recordClassName = 'Record';
+
   /**
    * If no sort attribute is passed to a query method, this will be used.
    *
@@ -731,7 +741,7 @@ abstract class Dao implements DaoInterface {
    * @return Record
    */
   protected function getRecordFromPreparedData($data, $existsInDatabase = true) {
-    return new Record($data, $this, $existsInDatabase);
+    return new $this->recordClassName($data, $this, $existsInDatabase);
   }
 
   /**

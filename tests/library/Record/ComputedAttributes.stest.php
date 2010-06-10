@@ -65,8 +65,8 @@ class TestRecord2 extends Record {
 
 
   protected $cacheDependencies = array(
-    'first_name'=>array('fullName', 'computedAttribute'),
-    'last_name'=>'fullName'
+    'firstName'=>array('fullName', 'computedAttribute'),
+    'lastName'=>'fullName'
   );
 
   public $computedCount = 0;
@@ -88,13 +88,13 @@ class Record_CacheDependencies_Test extends Snap_UnitTestCase {
 
   public function setUp() {
     $this->dao = $this->mock('DaoInterface')
-    ->setReturnValue('getAttributes', array('first_name'=>Dao::STRING, 'last_name'=>Dao::STRING))
+    ->setReturnValue('getAttributes', array('firstName'=>Dao::STRING, 'lastName'=>Dao::STRING))
     ->setReturnValue('getAdditionalAttributes', array())
     ->setReturnValue('getNullAttributes', array())
     ->setReturnValue('getReferences', array())
     ->construct();
 
-    $this->record = new TestRecord2(array('first_name'=>'John', 'last_name'=>'Doe'), $this->dao);
+    $this->record = new TestRecord2(array('firstName'=>'John', 'lastName'=>'Doe'), $this->dao);
   }
 
   public function tearDown() {

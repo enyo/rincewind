@@ -163,16 +163,11 @@ class Record implements RecordInterface {
   /**
    * Returns an associative array with the values.
    *
-   * @param bool $phpNames If true the indices will be converted to php names, if false, the indices will be like the database names.
    * @return array
    */
-  public function getArray($phpNames = true) {
+  public function getArray() {
     $data = array();
-    if (!$phpNames) return $this->data;
-    foreach ($this->data as $name=>$value) {
-      $data[$this->convertAttributeNameToPhpName($name)] = $value;
-    }
-    return $data;
+    return $this->data;
   }
 
   /**
@@ -205,8 +200,7 @@ class Record implements RecordInterface {
    * @param string $attributeName
    * @return mixed
    **/
-  public function get($originalAttributeName) {
-    $attributeName = $this->convertAttributeNameToDatasourceName($originalAttributeName);
+  public function get($attributeName) {
 
     if (array_key_exists($attributeName, $this->dao->getAttributes())) {
       $value = $this->data[$attributeName];
@@ -217,8 +211,8 @@ class Record implements RecordInterface {
     elseif (array_key_exists($attributeName, $this->dao->getReferences())) {
       return $this->dao->getReference($this, $attributeName);
     }
-    elseif (method_exists($this, '_' . $originalAttributeName)) {
-      return $this->getComputedAttribute($originalAttributeName);
+    elseif (method_exists($this, '_' . $attributeName)) {
+      return $this->getComputedAttribute($attributeName);
     }
     else {
       $this->triggerUndefinedAttributeError($attributeName);
@@ -266,7 +260,6 @@ class Record implements RecordInterface {
    * @param mixed $value
    */
   public function getDirectly($attributeName) {
-    $attributeName = $this->convertAttributeNameToDatasourceName($attributeName);
     return isset($this->data[$attributeName]) ? $this->data[$attributeName] : null;
   }
   
@@ -279,8 +272,6 @@ class Record implements RecordInterface {
    * @return Record Returns itself for chaining.
    **/
   public function set($attributeName, $value) {
-    $attributeName = $this->convertAttributeNameToDatasourceName($attributeName);
-
     if (!array_key_exists($attributeName, $this->dao->getAttributes())) {
       $this->triggerUndefinedAttributeError($attributeName);
       return $this;
@@ -310,28 +301,9 @@ class Record implements RecordInterface {
    * @param mixed $value
    */
   public function setDirectly($attributeName, $value) {
-    $this->data[$this->convertAttributeNameToDatasourceName($attributeName)] = $value;
+    $this->data[$attributeName] = $value;
   }
   
-
-  /**
-   * Converts a php attribute name to the datasource name.
-   * Per default this simply transforms theAttribute to the_attribute.
-   * If you data source handles names differently, overwrite this methods, and change your Daos to use your
-   * own implementation of Records.
-   *
-   * @param string $attributeName
-   * @return string 
-   */
-  protected function convertAttributeNameToDatasourceName($attributeName) { return preg_replace('/([A-Z])/e', 'strtolower("_$1");', $attributeName); }
-  /**
-   * Converts a datasource attribute name to the php name.
-   * Per default this simply transforms the_attribute to theAttribute.
-   *
-   * @param string $attributeName
-   * @return string 
-   */
-  protected function convertAttributeNameToPhpName($attributeName) { return preg_replace('/_([a-z])/e', 'strtoupper("$1");', $attributeName); }
 
   protected function convertGetMethodToPhpColumn($method) {
     $method = substr($method, 3);
@@ -351,7 +323,7 @@ class Record implements RecordInterface {
   /**
    * Overloading the Record
    */
-  public function __isset($attributeName) { return isset($this->data[$this->convertAttributeNameToDatasourceName($attributeName)]); }
+  public function __isset($attributeName) { return isset($this->data[$attributeName]); }
 
   public function __set($phpColumn, $value) {
     $this->set($phpColumn, $value);

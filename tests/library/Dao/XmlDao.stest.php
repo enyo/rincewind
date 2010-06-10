@@ -19,13 +19,13 @@ class XmlTestDao extends XmlDao {
     'string'=>Dao::STRING,
     'timestamp'=>Dao::DATE_WITH_TIME,
     'float'=>Dao::FLOAT,
-    'null_value'=>Dao::STRING,
-    'default_value'=>Dao::INT
+    'nullValue'=>Dao::STRING,
+    'defaultValue'=>Dao::INT
   );
 
-  protected $nullAttributes = array('null_value');
+  protected $nullAttributes = array('nullValue');
 
-  protected $defaultValueAttributes = array('default_value');
+  protected $defaultValueAttributes = array('defaultValue');
 
 }
 

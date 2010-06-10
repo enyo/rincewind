@@ -16,10 +16,10 @@ class FakeDao extends NonAbstractDao {
     parent::__construct();
   }
 
-  protected $attributes = array('address_ids'=>Dao::SEQUENCE);
+  protected $attributes = array('addressIds'=>Dao::SEQUENCE);
 
   protected function setupReferences() {
-    $this->addToManyReference('addresses', $this->mockDao, 'address_ids', 'THEFOREIGNKEY');
+    $this->addToManyReference('addresses', $this->mockDao, 'addressIds', 'THEFOREIGNKEY');
   }
 
 }
@@ -44,12 +44,12 @@ class DaoToManyReferences_Basic_Test extends Snap_UnitTestCase {
   public function tearDown() {}
 
   public function testReference() {
-    $do = new Record(array('address_ids'=>array(1, 3, 4)), $this->dao);
+    $do = new Record(array('addressIds'=>array(1, 3, 4)), $this->dao);
     return $this->assertIsA($do->addresses, 'DaoKeyListIterator');
   }
 
   public function testIteratorSize() {
-    $do = new Record(array('address_ids'=>array(1, 3, 4)), $this->dao);
+    $do = new Record(array('addressIds'=>array(1, 3, 4)), $this->dao);
     $addresses = $do->addresses;
     return $this->assertIdentical($addresses->count(), 3);
   }

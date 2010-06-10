@@ -20,13 +20,13 @@ class MysqlTestDao extends MysqlDao {
     'string'=>Dao::STRING,
     'timestamp'=>Dao::DATE_WITH_TIME,
     'float'=>Dao::FLOAT,
-    'null_value'=>Dao::STRING,
-    'default_value'=>Dao::INT
+    'nullValue'=>Dao::STRING,
+    'defaultValue'=>Dao::INT
   );
 
-  protected $nullAttributes = array('null_value');
+  protected $nullAttributes = array('nullValue');
 
-  protected $defaultValueAttributes = array('default_value');
+  protected $defaultValueAttributes = array('defaultValue');
 
 }
 
@@ -52,16 +52,16 @@ class MysqlDaoWithDatabaseTest extends AbstractSqlDaoWithDatabaseTest {
 
 class AddressDao extends MysqlDao {
   protected $resourceName = 'addresses';
-  protected $attributes = array('id'=>Dao::INT, 'city_id'=>Dao::INT);
+  protected $attributes = array('id'=>Dao::INT, 'cityId'=>Dao::INT);
   protected function setupReferences() {
-    $this->addReference('city', 'CityDao', 'city_id');
+    $this->addReference('city', 'CityDao', 'cityId');
   }
 }
 class CityDao extends MysqlDao {
   protected $resourceName = 'cities';
-  protected $attributes = array('id'=>Dao::INT, 'country_id'=>Dao::INT);
+  protected $attributes = array('id'=>Dao::INT, 'countryId'=>Dao::INT);
   protected function setupReferences() {
-    $this->addReference('country', 'CountryDao', 'country_id');
+    $this->addReference('country', 'CountryDao', 'countryId');
   }
 }
 class CountryDao extends MysqlDao {

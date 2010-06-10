@@ -19,13 +19,13 @@ class JsonTestDao extends JsonDao {
     'string'=>Dao::STRING,
     'timestamp'=>Dao::DATE_WITH_TIME,
     'float'=>Dao::FLOAT,
-    'null_value'=>Dao::STRING,
-    'default_value'=>Dao::INT
+    'nullValue'=>Dao::STRING,
+    'defaultValue'=>Dao::INT
   );
 
-  protected $nullAttributes = array('null_value');
+  protected $nullAttributes = array('nullValue');
 
-  protected $defaultValueAttributes = array('default_value');
+  protected $defaultValueAttributes = array('defaultValue');
 
 }
 
@@ -105,10 +105,10 @@ class AddressDao extends JsonDao {
   
   protected $attributes = array(
     'id'=>Dao::INTEGER,
-    'city_id'=>Dao::INTEGER
+    'cityId'=>Dao::INTEGER
   );
   protected function setupReferences() {
-    $this->addReference('city', 'CityDao', 'city_id', 'id');
+    $this->addReference('city', 'CityDao', 'cityId', 'id');
   }
 }
 class CityDao extends JsonDao {
@@ -125,13 +125,13 @@ class JsonReferencesDao extends JsonDao {
   
   protected $attributes = array(
     'id'=>Dao::INTEGER,
-    'address_id'=>Dao::INTEGER,
-    'address_ids'=>Dao::SEQUENCE
+    'addressId'=>Dao::INTEGER,
+    'addressIds'=>Dao::SEQUENCE
   );
 
   protected function setupReferences() {
-    $this->addReference('address', 'AddressDao', 'address_id', 'id');
-    $this->addToManyReference('addresses', 'AddressDao', 'address_ids', 'id');
+    $this->addReference('address', 'AddressDao', 'addressId', 'id');
+    $this->addToManyReference('addresses', 'AddressDao', 'addressIds', 'id');
   }
 }
 

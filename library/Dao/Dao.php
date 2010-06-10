@@ -398,20 +398,14 @@ abstract class Dao implements DaoInterface {
    * If your datasource holds different attribute names than you want in you Records, you can specify export & import mappings.
    * (Don't confuse this with your php values. Meaning: if the datasource value is 'strangely_named', but you want to access your record
    * like this: $record->perfectName, then you have to map it from strangely_named to perfect_name (not perfectName).)
-   * If no mapping is found in the imports, than a reverse lookup is done in exports, and vice versa, so for a normal conversion
-   * only the attributeImportMapping (or attributeExportMapping if you prefer) has to be set.
    * E.g.: array('what_the_datasource_value_actually_is'=>'what_you_would_want_it_to_be');
+   *
+   * This variable is called attribute import mapping, but is used to export the attributes too.
    *
    * @var array
    */
   protected $attributeImportMapping = array();
 
-  /**
-   * The same as attributeImportMapping but the other way around.
-   *
-   * @var array
-   */
-  protected $attributeExportMapping = array();
 
   /**
    * This is an array containing all attributes that can be null. eg: $nullAttributes = array('email', 'name');
@@ -646,11 +640,9 @@ abstract class Dao implements DaoInterface {
    * @param string $attributeName
    * @return string
    * @see $attributeImportMapping
-   * @see $attributeExportMapping
    */
   protected function applyAttributeImportMapping($attributeName) {
     if (isset($this->attributeImportMapping[$attributeName]))        { return $this->attributeImportMapping[$attributeName]; }
-    elseif (in_array($attributeName, $this->attributeExportMapping)) { return array_search($attributeName, $this->attributeExportMapping); }
     return $attributeName;
   }
 
@@ -661,27 +653,45 @@ abstract class Dao implements DaoInterface {
    * @param string $attributeName
    * @return string
    * @see $attributeImportMapping
-   * @see $attributeExportMapping
    */
   protected function applyAttributeExportMapping($attributeName) {
-    if (isset($this->attributeExportMapping[$attributeName]))        { return $this->attributeExportMapping[$attributeName]; }
-    elseif (in_array($attributeName, $this->attributeImportMapping)) { return array_search($attributeName, $this->attributeImportMapping); }
+    if (in_array($attributeName, $this->attributeImportMapping)) { return array_search($attributeName, $this->attributeImportMapping); }
     return $attributeName;
   }
 
   /**
-   * Converts the datasource attributeName name to a valid php name.
-   * This is done with applyAttributeImportMapping()
+   * Checks if there is an import mapping, applies it if there is, and converts the attribute to a php name.
    *
    * @param string $attributeName
    * @return string
-   * @see applyAttributeImportMapping
+   * @see applyAttributeImportMapping()
+   * @see convertAttributeNameToPhpName()
    */
   public function importAttributeName($attributeName) {
-    return $this->applyAttributeImportMapping($attributeName);
+    return $this->convertAttributeNameToPhpName($this->applyAttributeImportMapping($attributeName));
   }
 
 
+  /**
+   * Converts a php attribute name to the datasource name.
+   * Per default this simply transforms theAttribute to the_attribute.
+   * If you data source handles names differently, overwrite this methods.
+   *
+   * @param string $attributeName
+   * @return string
+   * @see convertAttributeNameToPhpName()
+   */
+  protected function convertAttributeNameToDatasourceName($attributeName) { return preg_replace('/([A-Z])/e', 'strtolower("_$1");', $attributeName); }
+
+  /**
+   * Converts a datasource attribute name to the php name.
+   * Per default this simply transforms the_attribute to theAttribute.
+   *
+   * @param string $attributeName
+   * @return string 
+   * @see convertAttributeNameToDatasourceName()
+   */
+  protected function convertAttributeNameToPhpName($attributeName) { return preg_replace('/_([a-z])/e', 'strtoupper("$1");', $attributeName); }
 
 
   /**
@@ -1014,25 +1024,32 @@ abstract class Dao implements DaoInterface {
 
 
   /**
-   * Has to determine the correct attributeName (with import/export mappings), escape and quote it.
-   * (eg.: user'name becomes `user\'name`)
+   * Takes a php attribute name, converts it via import/export attribute mapping, converts it to the datasource name
+   * and calls escapeAttributeName.
+   * This is the correct way to insert attribute names in a map.
    *
    * @param string $attributeName
    * @return string
+   * @see applyAttributeExportMapping()
+   * @see convertAttributeNameToDatasourceName()
+   * @see escapeAttributeName()
    */
-  abstract public function exportAttributeName($attributeName);
+  public function exportAttributeName($attributeName) {
+    return $this->escapeAttributeName($this->applyAttributeExportMapping($this->convertAttributeNameToDatasourceName($attributeName)));
+  }
 
 
   /**
-   * Escapes and quotes a resource name.
-   * If none provied $this->resourceName will be used.
+   * Escapes a resource name.
+   * If no resourceName is provied $this->resourceName will be used.
+   * By default it simply calls escapeResourceName
    *
    * @param string $resourceName
-   * @return string
-   * @see $resourceName
+   * @return string The escaped and quoted resource name.
    */
-  abstract public function exportResourceName($resourceName = null);
-
+  public function exportResourceName($resourceName = null) {
+    return $this->escapeResourceName($resourceName ? $resourceName : $this->resourceName);
+  }
 
 
   /**

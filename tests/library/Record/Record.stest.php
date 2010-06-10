@@ -16,13 +16,13 @@ class Record_WithId_Test extends Snap_UnitTestCase {
 
   public function setUp() {
       $this->dao = $this->mock('DaoInterface')
-      ->setReturnValue('getAttributes', array('id'=>Dao::INT, 'integer'=>Dao::INT, 'time'=>Dao::TIMESTAMP, 'name'=>Dao::STRING, 'null_attribute'=>Dao::STRING, 'enum'=>array('a', 'b', 'c')))
-      ->setReturnValue('getNullAttributes', array('null_attribute'))
+      ->setReturnValue('getAttributes', array('id'=>Dao::INT, 'integer'=>Dao::INT, 'time'=>Dao::TIMESTAMP, 'name'=>Dao::STRING, 'nullAttribute'=>Dao::STRING, 'enum'=>array('a', 'b', 'c')))
+      ->setReturnValue('getNullAttributes', array('nullAttribute'))
       ->listenTo('insert')
       ->listenTo('update')
       ->listenTo('delete')
       ->construct();
-    $this->record = new Record(array('id'=>$this->testId, 'integer'=>$this->testInteger, 'time'=>$this->testTime, 'name'=>'matthias', 'null_attribute'=>null, 'additional_attribute_string'=>'ADDCOLUMNSTTT', 'enum'=>'b'), $this->dao, $existsInDatabase = true);
+    $this->record = new Record(array('id'=>$this->testId, 'integer'=>$this->testInteger, 'time'=>$this->testTime, 'name'=>'matthias', 'nullAttribute'=>null, 'additionalAttributeString'=>'ADDCOLUMNSTTT', 'enum'=>'b'), $this->dao, $existsInDatabase = true);
   }
 
   public function tearDown() {
@@ -172,13 +172,13 @@ class Record_WithoutId_Test extends Snap_UnitTestCase {
 
   public function setUp() {
     $this->dao = $this->mock('DaoInterface')
-      ->setReturnValue('getAttributes', array('id'=>Dao::INT, 'integer'=>Dao::INT, 'time'=>Dao::TIMESTAMP, 'name'=>Dao::STRING, 'null_attribute'=>Dao::STRING))
-      ->setReturnValue('getNullAttributes', array('null_attribute'))
+      ->setReturnValue('getAttributes', array('id'=>Dao::INT, 'integer'=>Dao::INT, 'time'=>Dao::TIMESTAMP, 'name'=>Dao::STRING, 'nullAttribute'=>Dao::STRING))
+      ->setReturnValue('getNullAttributes', array('nullAttribute'))
       ->listenTo('insert')
       ->listenTo('update')
       ->construct();
 
-    $this->dataHash = array('id'=>null, 'integer'=>$this->testInteger, 'time'=>$this->testTime, 'name'=>'matthias', 'null_attribute'=>null);
+    $this->dataHash = array('id'=>null, 'integer'=>$this->testInteger, 'time'=>$this->testTime, 'name'=>'matthias', 'nullAttribute'=>null);
   }
 
   public function tearDown() {
@@ -215,11 +215,11 @@ class Record_WithAdditionalValues_Test extends Snap_UnitTestCase {
       $this->dao = $this->mock('DaoInterface')
         ->setReturnValue('getAttributes',       array('id'=>Dao::INT))
         ->setReturnValue('getNullAttributes',       array())
-        ->setReturnValue('getAdditionalAttributes', array('additional_attribute_string'=>Dao::STRING, 'additional_attribute_int'=>Dao::INT))
-      ->listenTo('insert')
-      ->listenTo('update')
+        ->setReturnValue('getAdditionalAttributes', array('additionalAttributeString'=>Dao::STRING, 'additionalAttributeInt'=>Dao::INT))
+        ->listenTo('insert')
+        ->listenTo('update')
         ->construct();
-      $this->record = new Record(array('id'=>null, 'additional_attribute_string'=>$this->additionalValue), $this->dao);
+      $this->record = new Record(array('id'=>null, 'additionalAttributeString'=>$this->additionalValue), $this->dao);
   }
 
   public function tearDown() {
@@ -251,7 +251,7 @@ class Record_ChangedAttributes_Test extends Snap_UnitTestCase {
 
   public function setUp() {
       $this->dao = $this->mock('DaoInterface')
-        ->setReturnValue('getAttributes',       array('a'=>Dao::INT, 'b'=>Dao::STRING, 'c'=>Dao::BOOL))
+        ->setReturnValue('getAttributes',           array('a'=>Dao::INT, 'b'=>Dao::STRING, 'c'=>Dao::BOOL))
         ->setReturnValue('getNullAttributes',       array())
         ->setReturnValue('getAdditionalAttributes', array())
         ->construct();

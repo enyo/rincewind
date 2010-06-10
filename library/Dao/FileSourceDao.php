@@ -299,18 +299,6 @@ abstract class FileSourceDao extends Dao {
 
 
   /**
-   * Takes a php attribute name, converts it via import/export attribute mapping and calls escapeAttributeName.
-   * This is the correct way to insert attribute names in a map.
-   *
-   * @param string $attributeName
-   * @return string
-   */
-  public function exportAttributeName($attributeName) {
-    return $this->escapeAttributeName($this->applyAttributeExportMapping($attributeName));
-  }
-
-
-  /**
    * By default does nothing for FileDaos.
    * 
    * @param string $attributeName
@@ -320,16 +308,6 @@ abstract class FileSourceDao extends Dao {
     return $attributeName;
   }
 
-  /**
-   * Escapes a resource name and potentially quotes a resource name.
-   * By default it simply calls escapeResourceName
-   *
-   * @param string $resourceName
-   * @return string The escaped and quoted resource name.
-   */
-  public function exportResourceName($resourceName = null) {
-    return $this->escapeResourceName($resourceName ? $resourceName : $this->resourceName);
-  }
 
   /**
    * Does nothing by default.

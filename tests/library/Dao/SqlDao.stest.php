@@ -14,15 +14,15 @@ class RawTestRecord {
 class RawTestDao extends SqlDao {
   protected $attributes = array(
     'id'=>Dao::INT,
-    'possibly_null'=>Dao::STRING,
-    'string_not_null'=>Dao::STRING,
+    'possiblyNull'=>Dao::STRING,
+    'stringNotNull'=>Dao::STRING,
     'enum'=>array('enum_a', 'enum_b', 'enum_c')
   );
   protected $additionalAttributes = array(
-    'additional_attribute'=>Dao::STRING,
+    'additionalAttribute'=>Dao::STRING,
   );
 
-  protected $nullAttributes = array('possibly_null');
+  protected $nullAttributes = array('possiblyNull');
   protected function getRecordFromPreparedData($data) {
     return new RawTestRecord($data);
   }
@@ -54,11 +54,11 @@ class SqlDao_RawRecords_Test extends Snap_UnitTestCase {
   }
 
   public function testPossiblyNullIsNullOnRawRecord() {
-    return $this->assertNull($this->dao->get()->data['possibly_null'], 'Values that can be null have to be null in raw records.');
+    return $this->assertNull($this->dao->get()->data['possiblyNull'], 'Values that can be null have to be null in raw records.');
   }
 
   public function testStringNotNullIsNotNullOnRawRecord() {
-    return $this->assertIdentical($this->dao->get()->data['string_not_null'], '');
+    return $this->assertIdentical($this->dao->get()->data['stringNotNull'], '');
   }
 
   public function testEnumIsFirstValueInRecord() {
@@ -72,24 +72,24 @@ class SqlDao_RawRecords_Test extends Snap_UnitTestCase {
 class SqlDao_Getters_Test extends Snap_UnitTestCase {
   protected $dao;
 
-    public function setUp() {
+  public function setUp() {
     $this->dao = new RawTestDao(null);
-    }
+  }
 
-    public function tearDown() {
+  public function tearDown() {
     unset($this->dao);
-    }
+  }
 
   public function testGetAttributes() {
-    return $this->assertEqual($this->dao->getAttributes(), array('id'=>Dao::INT, 'possibly_null'=>Dao::STRING, 'string_not_null'=>Dao::STRING, 'enum'=>array('enum_a', 'enum_b', 'enum_c')));
+    return $this->assertEqual($this->dao->getAttributes(), array('id'=>Dao::INT, 'possiblyNull'=>Dao::STRING, 'stringNotNull'=>Dao::STRING, 'enum'=>array('enum_a', 'enum_b', 'enum_c')));
   }
 
   public function testGetNullAttributes() {
-    return $this->assertEqual($this->dao->getNullAttributes(), array('possibly_null'));
+    return $this->assertEqual($this->dao->getNullAttributes(), array('possiblyNull'));
   }
 
   public function testGetAdditionalAttributes() {
-    return $this->assertEqual($this->dao->getAdditionalAttributes(), array('additional_attribute'=>Dao::STRING));
+    return $this->assertEqual($this->dao->getAdditionalAttributes(), array('additionalAttribute'=>Dao::STRING));
   }
 }
 
@@ -126,7 +126,7 @@ class RawTestDao2 extends SqlDao {
   protected $attributes = array(
     'id'=>Dao::INT,
     'name'=>Dao::STRING,
-    'is_admin'=>Dao::BOOL
+    'isAdmin'=>Dao::BOOL
   );
   protected function getRecordFromPreparedData($data) {
     return new RawTestRecord($data);

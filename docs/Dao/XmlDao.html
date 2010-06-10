@@ -345,12 +345,6 @@ Source Location: /Dao/Xml/XmlDao.php<br /><br />
    
 </dd>
 <dt>
-  <a href="../Dao/Dao.html#var$attributeExportMapping">Dao::$attributeExportMapping</a>
-  </dt>
-<dd>
-   
-</dd>
-<dt>
   <a href="../Dao/Dao.html#var$attributeImportMapping">Dao::$attributeImportMapping</a>
   </dt>
 <dd>
@@ -474,22 +468,10 @@ Source Location: /Dao/Xml/XmlDao.php<br /><br />
     Does nothing by default.
   </dd>
     <dt>
-    <a href="../Dao/FileSourceDao.html#methodexportAttributeName">FileSourceDao::exportAttributeName()</a>
-  </dt>
-  <dd>
-    Takes a php attribute name, converts it via import/export attribute mapping and calls escapeAttributeName.
-  </dd>
-    <dt>
     <a href="../Dao/FileSourceDao.html#methodexportMap">FileSourceDao::exportMap()</a>
   </dt>
   <dd>
     This function exports every values of a map
-  </dd>
-    <dt>
-    <a href="../Dao/FileSourceDao.html#methodexportResourceName">FileSourceDao::exportResourceName()</a>
-  </dt>
-  <dd>
-    Escapes a resource name and potentially quotes a resource name.
   </dd>
     <dt>
     <a href="../Dao/FileSourceDao.html#methodfind">FileSourceDao::find()</a>
@@ -615,6 +597,18 @@ Source Location: /Dao/Xml/XmlDao.php<br /><br />
     Checks if a attribute name exists as real or additional attribute.
   </dd>
     <dt>
+    <a href="../Dao/Dao.html#methodconvertAttributeNameToDatasourceName">Dao::convertAttributeNameToDatasourceName()</a>
+  </dt>
+  <dd>
+    Converts a php attribute name to the datasource name.
+  </dd>
+    <dt>
+    <a href="../Dao/Dao.html#methodconvertAttributeNameToPhpName">Dao::convertAttributeNameToPhpName()</a>
+  </dt>
+  <dd>
+    Converts a datasource attribute name to the php name.
+  </dd>
+    <dt>
     <a href="../Dao/Dao.html#methodconvertRemoteValueToTimestamp">Dao::convertRemoteValueToTimestamp()</a>
   </dt>
   <dd>
@@ -642,7 +636,7 @@ Source Location: /Dao/Xml/XmlDao.php<br /><br />
     <a href="../Dao/Dao.html#methodexportAttributeName">Dao::exportAttributeName()</a>
   </dt>
   <dd>
-    Has to determine the correct attributeName (with import/export mappings), escape and quote it.
+    Takes a php attribute name, converts it via import/export attribute mapping, converts it to the datasource name  and calls escapeAttributeName.
   </dd>
     <dt>
     <a href="../Dao/Dao.html#methodexportBool">Dao::exportBool()</a>
@@ -684,7 +678,7 @@ Source Location: /Dao/Xml/XmlDao.php<br /><br />
     <a href="../Dao/Dao.html#methodexportResourceName">Dao::exportResourceName()</a>
   </dt>
   <dd>
-    Escapes and quotes a resource name.
+    Escapes a resource name.
   </dd>
     <dt>
     <a href="../Dao/Dao.html#methodexportString">Dao::exportString()</a>
@@ -792,7 +786,7 @@ Source Location: /Dao/Xml/XmlDao.php<br /><br />
     <a href="../Dao/Dao.html#methodimportAttributeName">Dao::importAttributeName()</a>
   </dt>
   <dd>
-    Converts the datasource attributeName name to a valid php name.
+    Checks if there is an import mapping, applies it if there is, and converts the attribute to a php name.
   </dd>
     <dt>
     <a href="../Dao/Dao.html#methodimportBool">Dao::importBool()</a>

@@ -204,9 +204,7 @@ Source Location: /Dao/FileSourceDao.php<br /><br />
     <li><a href="../Dao/FileSourceDao.html#methoddelete">delete</a></li>
     <li><a href="../Dao/FileSourceDao.html#methodescapeAttributeName">escapeAttributeName</a></li>
     <li><a href="../Dao/FileSourceDao.html#methodescapeResourceName">escapeResourceName</a></li>
-    <li><a href="../Dao/FileSourceDao.html#methodexportAttributeName">exportAttributeName</a></li>
     <li><a href="../Dao/FileSourceDao.html#methodexportMap">exportMap</a></li>
-    <li><a href="../Dao/FileSourceDao.html#methodexportResourceName">exportResourceName</a></li>
     <li><a href="../Dao/FileSourceDao.html#methodfind">find</a></li>
     <li><a href="../Dao/FileSourceDao.html#methodgenerateSortString">generateSortString</a></li>
     <li><a href="../Dao/FileSourceDao.html#methodgetData">getData</a></li>
@@ -370,12 +368,6 @@ Source Location: /Dao/FileSourceDao.php<br /><br />
    
 </dd>
 <dt>
-  <a href="../Dao/Dao.html#var$attributeExportMapping">Dao::$attributeExportMapping</a>
-  </dt>
-<dd>
-   
-</dd>
-<dt>
   <a href="../Dao/Dao.html#var$attributeImportMapping">Dao::$attributeImportMapping</a>
   </dt>
 <dd>
@@ -499,6 +491,18 @@ Source Location: /Dao/FileSourceDao.php<br /><br />
     Checks if a attribute name exists as real or additional attribute.
   </dd>
     <dt>
+    <a href="../Dao/Dao.html#methodconvertAttributeNameToDatasourceName">Dao::convertAttributeNameToDatasourceName()</a>
+  </dt>
+  <dd>
+    Converts a php attribute name to the datasource name.
+  </dd>
+    <dt>
+    <a href="../Dao/Dao.html#methodconvertAttributeNameToPhpName">Dao::convertAttributeNameToPhpName()</a>
+  </dt>
+  <dd>
+    Converts a datasource attribute name to the php name.
+  </dd>
+    <dt>
     <a href="../Dao/Dao.html#methodconvertRemoteValueToTimestamp">Dao::convertRemoteValueToTimestamp()</a>
   </dt>
   <dd>
@@ -526,7 +530,7 @@ Source Location: /Dao/FileSourceDao.php<br /><br />
     <a href="../Dao/Dao.html#methodexportAttributeName">Dao::exportAttributeName()</a>
   </dt>
   <dd>
-    Has to determine the correct attributeName (with import/export mappings), escape and quote it.
+    Takes a php attribute name, converts it via import/export attribute mapping, converts it to the datasource name  and calls escapeAttributeName.
   </dd>
     <dt>
     <a href="../Dao/Dao.html#methodexportBool">Dao::exportBool()</a>
@@ -568,7 +572,7 @@ Source Location: /Dao/FileSourceDao.php<br /><br />
     <a href="../Dao/Dao.html#methodexportResourceName">Dao::exportResourceName()</a>
   </dt>
   <dd>
-    Escapes and quotes a resource name.
+    Escapes a resource name.
   </dd>
     <dt>
     <a href="../Dao/Dao.html#methodexportString">Dao::exportString()</a>
@@ -676,7 +680,7 @@ Source Location: /Dao/FileSourceDao.php<br /><br />
     <a href="../Dao/Dao.html#methodimportAttributeName">Dao::importAttributeName()</a>
   </dt>
   <dd>
-    Converts the datasource attributeName name to a valid php name.
+    Checks if there is an import mapping, applies it if there is, and converts the attribute to a php name.
   </dd>
     <dt>
     <a href="../Dao/Dao.html#methodimportBool">Dao::importBool()</a>
@@ -1131,7 +1135,7 @@ $record)</code>
   </div>
   <hr />
 	<a name="methodescapeAttributeName"></a>
-	<h3>method escapeAttributeName <span class="smalllinenumber">[line 319]</span></h3>
+	<h3>method escapeAttributeName <span class="smalllinenumber">[line 307]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1167,7 +1171,7 @@ $attributeName)</code>
   </div>
   <hr />
 	<a name="methodescapeResourceName"></a>
-	<h3>method escapeResourceName <span class="smalllinenumber">[line 340]</span></h3>
+	<h3>method escapeResourceName <span class="smalllinenumber">[line 318]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1195,42 +1199,6 @@ $resourceName = null])</code>
           <tr>
         <td class="type">string&nbsp;&nbsp;</td>
         <td><b>$resourceName</b>&nbsp;&nbsp;</td>
-        <td></td>
-      </tr>
-        </table>
-    </div><br />
-        <div class="top">[ <a href="#top">Top</a> ]</div>
-  </div>
-  <hr />
-	<a name="methodexportAttributeName"></a>
-	<h3>method exportAttributeName <span class="smalllinenumber">[line 308]</span></h3>
-	<div class="function">
-    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
-    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
-		<code>string exportAttributeName(
-string
-$attributeName)</code>
-    </td></tr></table>
-    </td></tr></table><br />
-	
-		Takes a php attribute name, converts it via import/export attribute mapping and calls escapeAttributeName.<br /><br /><p>This is the correct way to insert attribute names in a map.</p><br /><br /><br />
-<h4>Tags:</h4>
-<div class="tags">
-<table border="0" cellspacing="0" cellpadding="0">
-  <tr>
-    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
-  </tr>
-</table>
-</div>
-<br /><br />
-
-	Overrides <a href="../Dao/Dao.html#methodexportAttributeName">Dao::exportAttributeName()</a> (Has to determine the correct attributeName (with import/export mappings), escape and quote it.)<br /><br />
-        <h4>Parameters:</h4>
-    <div class="tags">
-    <table border="0" cellspacing="0" cellpadding="0">
-          <tr>
-        <td class="type">string&nbsp;&nbsp;</td>
-        <td><b>$attributeName</b>&nbsp;&nbsp;</td>
         <td></td>
       </tr>
         </table>
@@ -1271,45 +1239,6 @@ $map)</code>
         <td class="type">array|<a href="../Dao/Record/Record.html">Record</a>&nbsp;&nbsp;</td>
         <td><b>$map</b>&nbsp;&nbsp;</td>
         <td>A map or Record containing the attributes.</td>
-      </tr>
-        </table>
-    </div><br />
-        <div class="top">[ <a href="#top">Top</a> ]</div>
-  </div>
-  <hr />
-	<a name="methodexportResourceName"></a>
-	<h3>method exportResourceName <span class="smalllinenumber">[line 330]</span></h3>
-	<div class="function">
-    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
-    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
-		<code>string exportResourceName(
-[string
-$resourceName = null])</code>
-    </td></tr></table>
-    </td></tr></table><br />
-	
-		Escapes a resource name and potentially quotes a resource name.<br /><br /><p>By default it simply calls escapeResourceName</p><br /><br /><br />
-<h4>Tags:</h4>
-<div class="tags">
-<table border="0" cellspacing="0" cellpadding="0">
-  <tr>
-    <td><b>return:</b>&nbsp;&nbsp;</td><td>The escaped and quoted resource name.</td>
-  </tr>
-  <tr>
-    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
-  </tr>
-</table>
-</div>
-<br /><br />
-
-	Overrides <a href="../Dao/Dao.html#methodexportResourceName">Dao::exportResourceName()</a> (Escapes and quotes a resource name.)<br /><br />
-        <h4>Parameters:</h4>
-    <div class="tags">
-    <table border="0" cellspacing="0" cellpadding="0">
-          <tr>
-        <td class="type">string&nbsp;&nbsp;</td>
-        <td><b>$resourceName</b>&nbsp;&nbsp;</td>
-        <td></td>
       </tr>
         </table>
     </div><br />

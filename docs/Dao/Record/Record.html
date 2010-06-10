@@ -206,8 +206,6 @@ Source Location: /Record/Record.php<br /><br />
     <li><a href="../../Dao/Record/Record.html#method__construct">__construct</a></li>
     <li><a href="../../Dao/Record/Record.html#methodclearComputedAttributesCache">clearComputedAttributesCache</a></li>
     <li><a href="../../Dao/Record/Record.html#methodcoerce">coerce</a></li>
-    <li><a href="../../Dao/Record/Record.html#methodconvertAttributeNameToDatasourceName">convertAttributeNameToDatasourceName</a></li>
-    <li><a href="../../Dao/Record/Record.html#methodconvertAttributeNameToPhpName">convertAttributeNameToPhpName</a></li>
     <li><a href="../../Dao/Record/Record.html#methodconvertGetMethodToPhpColumn">convertGetMethodToPhpColumn</a></li>
     <li><a href="../../Dao/Record/Record.html#methodconvertSetMethodToPhpColumn">convertSetMethodToPhpColumn</a></li>
     <li><a href="../../Dao/Record/Record.html#methoddelete">delete</a></li>
@@ -432,7 +430,7 @@ The Record is the data representation of one row from a Database request done wi
 <div class="tags">
   <hr />
 	<a name="methodcoerce"></a>
-	<h3>static method coerce <span class="smalllinenumber">[line 406]</span></h3>
+	<h3>static method coerce <span class="smalllinenumber">[line 378]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -526,7 +524,7 @@ $existsInDatabase = false])</code>
   </div>
   <hr />
 	<a name="methodclearComputedAttributesCache"></a>
-	<h3>method clearComputedAttributesCache <span class="smalllinenumber">[line 256]</span></h3>
+	<h3>method clearComputedAttributesCache <span class="smalllinenumber">[line 250]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -561,80 +559,8 @@ $attributeName = null])</code>
         <div class="top">[ <a href="#top">Top</a> ]</div>
   </div>
   <hr />
-	<a name="methodconvertAttributeNameToDatasourceName"></a>
-	<h3>method convertAttributeNameToDatasourceName <span class="smalllinenumber">[line 326]</span></h3>
-	<div class="function">
-    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
-    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
-		<code>string convertAttributeNameToDatasourceName(
-string
-$attributeName)</code>
-    </td></tr></table>
-    </td></tr></table><br />
-	
-		Converts a php attribute name to the datasource name.<br /><br /><p>Per default this simply transforms theAttribute to the_attribute.  If you data source handles names differently, overwrite this methods, and change your Daos to use your  own implementation of Records.</p><br /><br /><br />
-<h4>Tags:</h4>
-<div class="tags">
-<table border="0" cellspacing="0" cellpadding="0">
-  <tr>
-    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
-  </tr>
-</table>
-</div>
-<br /><br />
-
-	
-        <h4>Parameters:</h4>
-    <div class="tags">
-    <table border="0" cellspacing="0" cellpadding="0">
-          <tr>
-        <td class="type">string&nbsp;&nbsp;</td>
-        <td><b>$attributeName</b>&nbsp;&nbsp;</td>
-        <td></td>
-      </tr>
-        </table>
-    </div><br />
-        <div class="top">[ <a href="#top">Top</a> ]</div>
-  </div>
-  <hr />
-	<a name="methodconvertAttributeNameToPhpName"></a>
-	<h3>method convertAttributeNameToPhpName <span class="smalllinenumber">[line 334]</span></h3>
-	<div class="function">
-    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
-    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
-		<code>string convertAttributeNameToPhpName(
-string
-$attributeName)</code>
-    </td></tr></table>
-    </td></tr></table><br />
-	
-		Converts a datasource attribute name to the php name.<br /><br /><p>Per default this simply transforms the_attribute to theAttribute.</p><br /><br /><br />
-<h4>Tags:</h4>
-<div class="tags">
-<table border="0" cellspacing="0" cellpadding="0">
-  <tr>
-    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
-  </tr>
-</table>
-</div>
-<br /><br />
-
-	
-        <h4>Parameters:</h4>
-    <div class="tags">
-    <table border="0" cellspacing="0" cellpadding="0">
-          <tr>
-        <td class="type">string&nbsp;&nbsp;</td>
-        <td><b>$attributeName</b>&nbsp;&nbsp;</td>
-        <td></td>
-      </tr>
-        </table>
-    </div><br />
-        <div class="top">[ <a href="#top">Top</a> ]</div>
-  </div>
-  <hr />
 	<a name="methodconvertGetMethodToPhpColumn"></a>
-	<h3>method convertGetMethodToPhpColumn <span class="smalllinenumber">[line 336]</span></h3>
+	<h3>method convertGetMethodToPhpColumn <span class="smalllinenumber">[line 308]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -670,7 +596,7 @@ $method)</code>
   </div>
   <hr />
 	<a name="methodconvertSetMethodToPhpColumn"></a>
-	<h3>method convertSetMethodToPhpColumn <span class="smalllinenumber">[line 340]</span></h3>
+	<h3>method convertSetMethodToPhpColumn <span class="smalllinenumber">[line 312]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -737,13 +663,12 @@ $method)</code>
   </div>
   <hr />
 	<a name="methodget"></a>
-	<h3>method get <span class="smalllinenumber">[line 208]</span></h3>
+	<h3>method get <span class="smalllinenumber">[line 203]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
 		<code>mixed get(
-
-$originalAttributeName, string
+string
 $attributeName)</code>
     </td></tr></table>
     </td></tr></table><br />
@@ -774,24 +699,18 @@ $attributeName)</code>
         <td><b>$attributeName</b>&nbsp;&nbsp;</td>
         <td></td>
       </tr>
-          <tr>
-        <td class="type">&nbsp;&nbsp;</td>
-        <td><b>$originalAttributeName</b>&nbsp;&nbsp;</td>
-        <td></td>
-      </tr>
         </table>
     </div><br />
         <div class="top">[ <a href="#top">Top</a> ]</div>
   </div>
   <hr />
 	<a name="methodgetArray"></a>
-	<h3>method getArray <span class="smalllinenumber">[line 169]</span></h3>
+	<h3>method getArray <span class="smalllinenumber">[line 168]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
 		<code>array getArray(
-[bool
-$phpNames = true])</code>
+)</code>
     </td></tr></table>
     </td></tr></table><br />
 	
@@ -807,21 +726,11 @@ $phpNames = true])</code>
 <br /><br />
 
 	
-        <h4>Parameters:</h4>
-    <div class="tags">
-    <table border="0" cellspacing="0" cellpadding="0">
-          <tr>
-        <td class="type">bool&nbsp;&nbsp;</td>
-        <td><b>$phpNames</b>&nbsp;&nbsp;</td>
-        <td>If true the indices will be converted to php names, if false, the indices will be like the database names.</td>
-      </tr>
-        </table>
-    </div><br />
         <div class="top">[ <a href="#top">Top</a> ]</div>
   </div>
   <hr />
 	<a name="methodgetAttributeType"></a>
-	<h3>method getAttributeType <span class="smalllinenumber">[line 390]</span></h3>
+	<h3>method getAttributeType <span class="smalllinenumber">[line 362]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -857,7 +766,7 @@ $attributeName)</code>
   </div>
   <hr />
 	<a name="methodgetChangedAttributes"></a>
-	<h3>method getChangedAttributes <span class="smalllinenumber">[line 182]</span></h3>
+	<h3>method getChangedAttributes <span class="smalllinenumber">[line 177]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -882,7 +791,7 @@ $attributeName)</code>
   </div>
   <hr />
 	<a name="methodgetChangedValues"></a>
-	<h3>method getChangedValues <span class="smalllinenumber">[line 190]</span></h3>
+	<h3>method getChangedValues <span class="smalllinenumber">[line 185]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -907,7 +816,7 @@ $attributeName)</code>
   </div>
   <hr />
 	<a name="methodgetComputedAttribute"></a>
-	<h3>method getComputedAttribute <span class="smalllinenumber">[line 241]</span></h3>
+	<h3>method getComputedAttribute <span class="smalllinenumber">[line 235]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -968,7 +877,7 @@ $attributeName)</code>
   </div>
   <hr />
 	<a name="methodgetDirectly"></a>
-	<h3>method getDirectly <span class="smalllinenumber">[line 268]</span></h3>
+	<h3>method getDirectly <span class="smalllinenumber">[line 262]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1072,7 +981,7 @@ $value)</code>
   </div>
   <hr />
 	<a name="methodset"></a>
-	<h3>method set <span class="smalllinenumber">[line 281]</span></h3>
+	<h3>method set <span class="smalllinenumber">[line 274]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1159,7 +1068,7 @@ $data)</code>
   </div>
   <hr />
 	<a name="methodsetDirectly"></a>
-	<h3>method setDirectly <span class="smalllinenumber">[line 312]</span></h3>
+	<h3>method setDirectly <span class="smalllinenumber">[line 303]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1237,7 +1146,7 @@ $existsInDatabase = true])</code>
   </div>
   <hr />
 	<a name="method__call"></a>
-	<h3>method __call <span class="smalllinenumber">[line 364]</span></h3>
+	<h3>method __call <span class="smalllinenumber">[line 336]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1270,7 +1179,7 @@ $param)</code>
   </div>
   <hr />
 	<a name="method__get"></a>
-	<h3>method __get <span class="smalllinenumber">[line 360]</span></h3>
+	<h3>method __get <span class="smalllinenumber">[line 332]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1306,7 +1215,7 @@ $phpColumn)</code>
   </div>
   <hr />
 	<a name="method__isset"></a>
-	<h3>method __isset <span class="smalllinenumber">[line 354]</span></h3>
+	<h3>method __isset <span class="smalllinenumber">[line 326]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1342,7 +1251,7 @@ $attributeName)</code>
   </div>
   <hr />
 	<a name="method__set"></a>
-	<h3>method __set <span class="smalllinenumber">[line 356]</span></h3>
+	<h3>method __set <span class="smalllinenumber">[line 328]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">

@@ -224,8 +224,6 @@
 		<dl>
 							<dt><b>$additionalAttributes</b></dt>
 				<dd>in file Dao.php, variable <a href="Dao/Dao.html#var$additionalAttributes">Dao::$additionalAttributes</a><br>&nbsp;&nbsp;&nbsp;&nbsp;This works exactly the same as the attributes, except that it only defines attributes, that may additionally be returned by the  datasource (for example in joins).</dd>
-							<dt><b>$attributeExportMapping</b></dt>
-				<dd>in file Dao.php, variable <a href="Dao/Dao.html#var$attributeExportMapping">Dao::$attributeExportMapping</a><br>&nbsp;&nbsp;&nbsp;&nbsp;The same as attributeImportMapping but the other way around.</dd>
 							<dt><b>$attributeImportMapping</b></dt>
 				<dd>in file Dao.php, variable <a href="Dao/Dao.html#var$attributeImportMapping">Dao::$attributeImportMapping</a><br>&nbsp;&nbsp;&nbsp;&nbsp;If your datasource holds different attribute names than you want in you Records, you can specify export &amp; import mappings.</dd>
 							<dt><b>$attributeName</b></dt>
@@ -281,37 +279,41 @@
 							<dt><b>$currentKey</b></dt>
 				<dd>in file DaoResultIterator.php, variable <a href="Dao/DaoResultIterator.html#var$currentKey">DaoResultIterator::$currentKey</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Stores the current key (in this case: row number) of the iterator.</dd>
 							<dt><b>commit</b></dt>
-				<dd>in file DaoInterface.php, method <a href="Dao/DaoInterface.html#methodcommit">DaoInterface::commit()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Commits a transaction</dd>
-							<dt><b>commit</b></dt>
 				<dd>in file SqlDao.php, method <a href="Dao/SqlDao.html#methodcommit">SqlDao::commit()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Shorthand for: Dao.getDb()-&gt;commit()</dd>
 							<dt><b>commit</b></dt>
+				<dd>in file DaoInterface.php, method <a href="Dao/DaoInterface.html#methodcommit">DaoInterface::commit()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Commits a transaction</dd>
+							<dt><b>commit</b></dt>
 				<dd>in file FileSourceDao.php, method <a href="Dao/FileSourceDao.html#methodcommit">FileSourceDao::commit()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Overwrite this if your file connection allows transaction.</dd>
-							<dt><b>convertRemoteValueToTimestamp</b></dt>
-				<dd>in file Dao.php, method <a href="Dao/Dao.html#methodconvertRemoteValueToTimestamp">Dao::convertRemoteValueToTimestamp()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Converts a datasource value to a timestamp.</dd>
+							<dt><b>convertAttributeNameToDatasourceName</b></dt>
+				<dd>in file Dao.php, method <a href="Dao/Dao.html#methodconvertAttributeNameToDatasourceName">Dao::convertAttributeNameToDatasourceName()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Converts a php attribute name to the datasource name.</dd>
+							<dt><b>convertAttributeNameToPhpName</b></dt>
+				<dd>in file Dao.php, method <a href="Dao/Dao.html#methodconvertAttributeNameToPhpName">Dao::convertAttributeNameToPhpName()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Converts a datasource attribute name to the php name.</dd>
 							<dt><b>convertRemoteValueToTimestamp</b></dt>
 				<dd>in file SqlDao.php, method <a href="Dao/SqlDao.html#methodconvertRemoteValueToTimestamp">SqlDao::convertRemoteValueToTimestamp()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;For most SQL Database simply calling strtotime() will work.</dd>
+							<dt><b>convertRemoteValueToTimestamp</b></dt>
+				<dd>in file Dao.php, method <a href="Dao/Dao.html#methodconvertRemoteValueToTimestamp">Dao::convertRemoteValueToTimestamp()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Converts a datasource value to a timestamp.</dd>
 							<dt><b>convertRemoteValueToTimestamp</b></dt>
 				<dd>in file FileSourceDao.php, method <a href="Dao/FileSourceDao.html#methodconvertRemoteValueToTimestamp">FileSourceDao::convertRemoteValueToTimestamp()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Most file data connections will transfer time values as timestamps.</dd>
 							<dt><b>count</b></dt>
 				<dd>in file DaoResultIterator.php, method <a href="Dao/DaoResultIterator.html#methodcount">DaoResultIterator::count()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Return the number of rows.</dd>
 							<dt><b>createDao</b></dt>
-				<dd>in file Dao.php, method <a href="Dao/Dao.html#methodcreateDao">Dao::createDao()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Creates a Dao.</dd>
+				<dd>in file SqlDao.php, method <a href="Dao/SqlDao.html#methodcreateDao">SqlDao::createDao()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Creates a Dao.</dd>
 							<dt><b>createDao</b></dt>
 				<dd>in file FileSourceDao.php, method <a href="Dao/FileSourceDao.html#methodcreateDao">FileSourceDao::createDao()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Creates a Dao.</dd>
 							<dt><b>createDao</b></dt>
-				<dd>in file SqlDao.php, method <a href="Dao/SqlDao.html#methodcreateDao">SqlDao::createDao()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Creates a Dao.</dd>
+				<dd>in file Dao.php, method <a href="Dao/Dao.html#methodcreateDao">Dao::createDao()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Creates a Dao.</dd>
 							<dt><b>createDaoAttributeAssignment</b></dt>
 				<dd>in file DaoAttributeAssignment.php, function <a href="Dao/_Dao---DaoAttributeAssignment.php.html#functioncreateDaoAttributeAssignment">createDaoAttributeAssignment()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;This function is a shortcut for creating the DaoAttributeAssignment Object</dd>
 							<dt><b>createIterator</b></dt>
-				<dd>in file XmlDao.php, method <a href="Dao/XmlDao.html#methodcreateIterator">XmlDao::createIterator()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Creates an iterator for a Xml data hash.</dd>
-							<dt><b>createIterator</b></dt>
 				<dd>in file SqlDao.php, method <a href="Dao/SqlDao.html#methodcreateIterator">SqlDao::createIterator()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Creates an iterator from a php result.</dd>
+							<dt><b>createIterator</b></dt>
+				<dd>in file JsonDao.php, method <a href="Dao/JsonDao.html#methodcreateIterator">JsonDao::createIterator()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Creates an iterator for a json data hash.</dd>
 							<dt><b>createIterator</b></dt>
 				<dd>in file MysqlDao.php, method <a href="Dao/MysqlDao.html#methodcreateIterator">MysqlDao::createIterator()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Creates an iterator for a mysql result.</dd>
 							<dt><b>createIterator</b></dt>
 				<dd>in file FileSourceDao.php, method <a href="Dao/FileSourceDao.html#methodcreateIterator">FileSourceDao::createIterator()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Creates an iterator from a data hash.</dd>
 							<dt><b>createIterator</b></dt>
-				<dd>in file JsonDao.php, method <a href="Dao/JsonDao.html#methodcreateIterator">JsonDao::createIterator()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Creates an iterator for a json data hash.</dd>
+				<dd>in file XmlDao.php, method <a href="Dao/XmlDao.html#methodcreateIterator">XmlDao::createIterator()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Creates an iterator for a Xml data hash.</dd>
 							<dt><b>current</b></dt>
 				<dd>in file DaoResultIterator.php, method <a href="Dao/DaoResultIterator.html#methodcurrent">DaoResultIterator::current()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Return the current Record.</dd>
 							<dt><b>$cacheDependencies</b></dt>
@@ -324,10 +326,6 @@
 				<dd>in file Record.php, method <a href="Dao/Record/Record.html#methodclearComputedAttributesCache">Record::clearComputedAttributesCache()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Clears the computed attributes cache.</dd>
 							<dt><b>coerce</b></dt>
 				<dd>in file Record.php, method <a href="Dao/Record/Record.html#methodcoerce">Record::coerce()</a></dd>
-							<dt><b>convertAttributeNameToDatasourceName</b></dt>
-				<dd>in file Record.php, method <a href="Dao/Record/Record.html#methodconvertAttributeNameToDatasourceName">Record::convertAttributeNameToDatasourceName()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Converts a php attribute name to the datasource name.</dd>
-							<dt><b>convertAttributeNameToPhpName</b></dt>
-				<dd>in file Record.php, method <a href="Dao/Record/Record.html#methodconvertAttributeNameToPhpName">Record::convertAttributeNameToPhpName()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Converts a datasource attribute name to the php name.</dd>
 							<dt><b>convertGetMethodToPhpColumn</b></dt>
 				<dd>in file Record.php, method <a href="Dao/Record/Record.html#methodconvertGetMethodToPhpColumn">Record::convertGetMethodToPhpColumn()</a></dd>
 							<dt><b>convertSetMethodToPhpColumn</b></dt>
@@ -435,17 +433,15 @@
 							<dt><b>escapeAttributeName</b></dt>
 				<dd>in file FileSourceDao.php, method <a href="Dao/FileSourceDao.html#methodescapeAttributeName">FileSourceDao::escapeAttributeName()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;By default does nothing for FileDaos.</dd>
 							<dt><b>escapeResourceName</b></dt>
-				<dd>in file SqlDao.php, method <a href="Dao/SqlDao.html#methodescapeResourceName">SqlDao::escapeResourceName()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Calls the internal db-&gt;escapeResourceName function</dd>
-							<dt><b>escapeResourceName</b></dt>
 				<dd>in file FileSourceDao.php, method <a href="Dao/FileSourceDao.html#methodescapeResourceName">FileSourceDao::escapeResourceName()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Does nothing by default.</dd>
+							<dt><b>escapeResourceName</b></dt>
+				<dd>in file SqlDao.php, method <a href="Dao/SqlDao.html#methodescapeResourceName">SqlDao::escapeResourceName()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Calls the internal db-&gt;escapeResourceName function</dd>
 							<dt><b>escapeString</b></dt>
 				<dd>in file SqlDao.php, method <a href="Dao/SqlDao.html#methodescapeString">SqlDao::escapeString()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Calls the internal db-&gt;escapeString function</dd>
 							<dt><b>exportAttributeName</b></dt>
-				<dd>in file MysqlDao.php, method <a href="Dao/MysqlDao.html#methodexportAttributeName">MysqlDao::exportAttributeName()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Takes a php attribute name, converts it via import/export attribute mapping, escapes it, and adds quotes.</dd>
+				<dd>in file MysqlDao.php, method <a href="Dao/MysqlDao.html#methodexportAttributeName">MysqlDao::exportAttributeName()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Calls the Dao::exportAttributeName and adds quotes.</dd>
 							<dt><b>exportAttributeName</b></dt>
-				<dd>in file Dao.php, method <a href="Dao/Dao.html#methodexportAttributeName">Dao::exportAttributeName()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Has to determine the correct attributeName (with import/export mappings), escape and quote it.</dd>
-							<dt><b>exportAttributeName</b></dt>
-				<dd>in file FileSourceDao.php, method <a href="Dao/FileSourceDao.html#methodexportAttributeName">FileSourceDao::exportAttributeName()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Takes a php attribute name, converts it via import/export attribute mapping and calls escapeAttributeName.</dd>
+				<dd>in file Dao.php, method <a href="Dao/Dao.html#methodexportAttributeName">Dao::exportAttributeName()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Takes a php attribute name, converts it via import/export attribute mapping, converts it to the datasource name  and calls escapeAttributeName.</dd>
 							<dt><b>exportBool</b></dt>
 				<dd>in file Dao.php, method <a href="Dao/Dao.html#methodexportBool">Dao::exportBool()</a></dd>
 							<dt><b>exportDate</b></dt>
@@ -463,11 +459,9 @@
 							<dt><b>exportNull</b></dt>
 				<dd>in file Dao.php, method <a href="Dao/Dao.html#methodexportNull">Dao::exportNull()</a></dd>
 							<dt><b>exportResourceName</b></dt>
-				<dd>in file FileSourceDao.php, method <a href="Dao/FileSourceDao.html#methodexportResourceName">FileSourceDao::exportResourceName()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Escapes a resource name and potentially quotes a resource name.</dd>
-							<dt><b>exportResourceName</b></dt>
 				<dd>in file MysqlDao.php, method <a href="Dao/MysqlDao.html#methodexportResourceName">MysqlDao::exportResourceName()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Escapes and quotes a table name.</dd>
 							<dt><b>exportResourceName</b></dt>
-				<dd>in file Dao.php, method <a href="Dao/Dao.html#methodexportResourceName">Dao::exportResourceName()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Escapes and quotes a resource name.</dd>
+				<dd>in file Dao.php, method <a href="Dao/Dao.html#methodexportResourceName">Dao::exportResourceName()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Escapes a resource name.</dd>
 							<dt><b>exportString</b></dt>
 				<dd>in file Dao.php, method <a href="Dao/Dao.html#methodexportString">Dao::exportString()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;If your strings need quoting, do that in here.</dd>
 							<dt><b>exportString</b></dt>
@@ -659,7 +653,7 @@
 							<dt><b>IGNORE</b></dt>
 				<dd>in file Dao.php, class constant <a href="Dao/Dao.html#constIGNORE">Dao::IGNORE</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Data types</dd>
 							<dt><b>importAttributeName</b></dt>
-				<dd>in file Dao.php, method <a href="Dao/Dao.html#methodimportAttributeName">Dao::importAttributeName()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Converts the datasource attributeName name to a valid php name.</dd>
+				<dd>in file Dao.php, method <a href="Dao/Dao.html#methodimportAttributeName">Dao::importAttributeName()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Checks if there is an import mapping, applies it if there is, and converts the attribute to a php name.</dd>
 							<dt><b>importBool</b></dt>
 				<dd>in file Dao.php, method <a href="Dao/Dao.html#methodimportBool">Dao::importBool()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;This function tries to convert strings integers and stuff into a bool.</dd>
 							<dt><b>importDate</b></dt>

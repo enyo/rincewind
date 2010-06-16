@@ -20,4 +20,3 @@
   class ConfigException extends Exception { }
 
 
-?>

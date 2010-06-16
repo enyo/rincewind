@@ -84,4 +84,3 @@ interface DatabaseInterface {
 
 }
 
-?>

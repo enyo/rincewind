@@ -87,4 +87,3 @@ class MysqlDao extends SqlDao {
 
 }
 
-?>

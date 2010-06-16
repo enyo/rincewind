@@ -53,4 +53,3 @@ class DaoNotSupportedException extends DaoException { }
  */
 class DaoNotFoundException extends DaoException { }
 
-?>

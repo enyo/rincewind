@@ -69,4 +69,3 @@ class DaoAttributeAssignment {
 function createDaoAttributeAssignment($attributeName, $value, $operator = '=') { return new DaoAttributeAssignment($attributeName, $value, $operator); }
   
   
-?>

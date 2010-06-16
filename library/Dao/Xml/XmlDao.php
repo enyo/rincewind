@@ -176,4 +176,3 @@ class XmlDao extends FileSourceDao {
 
 }
 
-?>

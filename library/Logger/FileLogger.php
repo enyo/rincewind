@@ -121,4 +121,3 @@ class FileLogger extends Logger {
 }
 
 
-?>

@@ -288,4 +288,3 @@ class ImageFile extends File {
 
 }
 
-?>

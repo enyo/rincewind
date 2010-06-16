@@ -118,4 +118,3 @@ abstract class DaoResultIterator implements Iterator {
 }
 
 
-?>

@@ -406,4 +406,3 @@ abstract class SqlDao extends Dao {
 
 }
 
-?>

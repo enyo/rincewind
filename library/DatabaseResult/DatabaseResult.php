@@ -70,4 +70,3 @@ abstract class DatabaseResult implements DatabaseResultInterface {
 
 
 
-?>

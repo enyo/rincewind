@@ -63,4 +63,3 @@ class PostgresqlResult extends AbstractDatabaseResult
 
 }
 */
-?>

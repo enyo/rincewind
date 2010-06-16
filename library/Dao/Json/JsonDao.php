@@ -63,4 +63,3 @@ class JsonDao extends FileSourceDao {
 
 }
 
-?>

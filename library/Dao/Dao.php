@@ -1154,4 +1154,3 @@ abstract class Dao implements DaoInterface {
 
 }
 
-?>

@@ -73,4 +73,3 @@ interface DatabaseResultInterface {
 }
 
 
-?>

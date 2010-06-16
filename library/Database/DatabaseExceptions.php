@@ -40,4 +40,3 @@ class SqlConnectionException extends SqlException { }
  */
 class SqlQueryException extends SqlException { }
 
-?>

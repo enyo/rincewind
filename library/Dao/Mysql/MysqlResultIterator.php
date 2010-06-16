@@ -24,4 +24,3 @@ include dirname(dirname(__FILE__)) . '/SqlResultIterator.php';
 class MysqlResultIterator extends SqlResultIterator { }
 
 
-?>

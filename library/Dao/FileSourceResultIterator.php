@@ -75,4 +75,3 @@ abstract class FileSourceResultIterator extends DaoResultIterator {
 }
 
 
-?>

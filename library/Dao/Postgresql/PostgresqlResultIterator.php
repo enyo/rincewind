@@ -22,4 +22,3 @@ include dirname(dirname(__FILE__)) . '/SqlResultIterator.php';
  */
 class PostgresqlResultIterator extends SqlResultIterator { }
 
-?>

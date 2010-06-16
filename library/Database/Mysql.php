@@ -158,4 +158,3 @@ class Mysql extends Database {
   }
 }
 
-?>

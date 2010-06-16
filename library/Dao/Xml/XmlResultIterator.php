@@ -24,4 +24,3 @@ include dirname(dirname(__FILE__)) . '/FileSourceResultIterator.php';
 class XmlResultIterator extends FileSourceResultIterator { }
 
 
-?>

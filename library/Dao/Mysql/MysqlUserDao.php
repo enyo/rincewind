@@ -51,4 +51,3 @@ class MysqlUserDao extends MysqlDao implements UserDaoInterface {
 
 }
 
-?>

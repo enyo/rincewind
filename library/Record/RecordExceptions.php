@@ -20,4 +20,3 @@
  **/
 class RecordException extends Exception { }
 
-?>

@@ -75,4 +75,3 @@ class SqlResultIterator extends DaoResultIterator {
 }
 
 
-?>

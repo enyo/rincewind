@@ -41,4 +41,3 @@ interface UserDaoInterface extends DaoInterface {
 
 }
   
-?>

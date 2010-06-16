@@ -51,4 +51,3 @@ class PostgresqlUserDao extends PostgresqlDao implements UserDaoInterface {
 
 }
 
-?>

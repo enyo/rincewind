@@ -119,4 +119,3 @@ class DaoReference {
  */
 include dirname(__FILE__) . '/DaoToManyReference.php';
 
-?>

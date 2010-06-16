@@ -74,4 +74,3 @@ class ImageFileRetriever extends FileRetriever {
 
 
 
-?>

@@ -598,6 +598,17 @@ abstract class Dao implements DaoInterface {
     return $this->get(array('id'=>intval($id)));
   }
 
+
+  /**
+   * This is a wrapper for find() and the id as parameter.
+   * @param int $id
+   * @return Record
+   * @see Record
+   */
+  public function findId($id) {
+    return $this->find(array('id'=>intval($id)));
+  }
+
   /**
    * Gets the record by id and deletes it.
    * 

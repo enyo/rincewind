@@ -89,6 +89,12 @@ interface DaoInterface {
   public function getById($id);
 
   /**
+   * @param int $id
+   * @return Record
+   */
+  public function findId($id);
+
+  /**
    * Retrieves all rows
    * @return DaoResultIterator
    */

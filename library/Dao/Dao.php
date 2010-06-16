@@ -89,12 +89,12 @@ if (!class_exists('Date', false)) include dirname(dirname(__FILE__)) . '/Date/Da
  *       'username'=>Dao::STRING,
  *       'status'=>array('online', 'offline'), // This is an enum.
  *       'comment'=>Dao::TEXT,
- *       'creation_time'=>Dao::TIMESTAMP
+ *       'creationTime'=>Dao::TIMESTAMP
  *     );
  *
  *     protected $nullAttributes = array('comment');
  *
- *     protected $defaultSort = array('creation_time'=>Dao::DESC, 'username'=>Dao::ASC);
+ *     protected $defaultSort = array('creationTime'=>Dao::DESC, 'username'=>Dao::ASC);
  *
  *     public function getByUsername($username) {
  *       // No checking for SQL Injections has to be done here, since get() will do all of
@@ -214,7 +214,10 @@ abstract class Dao implements DaoInterface {
 
 
   /**
-   * This array/map must contain all attribute types. eg: array('id'=>Dao::INT)
+   * This array/map must contain all attribute types. eg: array('id'=>Dao::INT, 'firstName'=>Dao::STRING)
+   * The index is always the php name you want to access on the Record.
+   * The methods importAttributeName() and exportAttributeName() take care of converting these names into
+   * the names for the datasource.
    *
    * @var array
    */

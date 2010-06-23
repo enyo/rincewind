@@ -11,6 +11,8 @@
 
 if (!class_exists('LoggerException', false)) include(dirname(__FILE__) . '/LoggerExceptions.php');
 
+if (!class_exists('Log', false)) include(dirname(__FILE__) . '/Log.php');
+
 /**
  * Loggers have to extend this class
  *

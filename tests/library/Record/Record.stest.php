@@ -360,6 +360,10 @@ class Record_Load_Test extends Snap_UnitTestCase {
     return $this->assertEqual($this->record->getChangedValues(), array());
   }
 
+  public function testRecordExistsInDatabaseAfter() {
+    $this->record->set('a', 321)->load();
+    return $this->assertTrue($this->record->existsInDatabase());
+  }
 
 
 }

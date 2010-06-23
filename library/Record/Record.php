@@ -113,6 +113,14 @@ class Record implements RecordInterface {
 
 
   /**
+   * @return bool Whether the record exists in the database or not.
+   */
+  public function existsInDatabase() {
+    return $this->existsInDatabase;
+  }
+
+
+  /**
    * Sets a new data array, resets the changedAttributes array and clears the computed attributes cache.
    *
    * @param array $data
@@ -156,6 +164,7 @@ class Record implements RecordInterface {
    */
   public function load() {
     $this->setData($this->dao->getData($this));
+    $this->setExistsInDatabase();
     return $this;
   }
 

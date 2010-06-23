@@ -14,14 +14,14 @@
  * Loading the file class.
  * They are codependent so this has to be include_once to avoid an endless loop.
  */
-include_once('File/File.php');
+include_once(dirname(__FILE__) . '/File.php');
 
 
 
 /**
  * Loading the Log class.
  */
-if (!class_exists('Log', false)) include('Logger/Log.php');
+if (!class_exists('Log', false)) include(dirname(dirname(__FILE__)) . '/Logger/Log.php');
 
 
 /**

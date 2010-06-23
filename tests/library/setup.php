@@ -5,7 +5,7 @@ define('TESTS_ROOT_PATH', dirname(dirname(__FILE__)) . '/');
 define('LIBRARY_ROOT_PATH', dirname(dirname(dirname(__FILE__))) . '/library/');
 
 
-ini_set('include_path', '.:' . LIBRARY_ROOT_PATH);
+ini_set('include_path', '.');
 
 
 if (!is_file(TESTS_ROOT_PATH . '/library/local.conf')) die('No local.conf file!');

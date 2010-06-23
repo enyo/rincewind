@@ -13,7 +13,7 @@
 /**
  * Loading the Log class.
  */
-if (!class_exists('Log', false)) include('Logger/Log.php');
+if (!class_exists('Log', false)) include(dirname(dirname(__FILE__)) . '/Logger/Log.php');
 
 /**
  * Loading the interface

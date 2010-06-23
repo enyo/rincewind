@@ -13,7 +13,7 @@
  * Loading the file retriever class.
  * They are codependent.
  */
-if (!class_exists('FileRetriever', false)) require('File/FileRetriever.php');
+if (!class_exists('FileRetriever', false)) require(dirname(__FILE__) . '/FileRetriever.php');
 
 
 /**

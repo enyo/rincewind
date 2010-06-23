@@ -12,7 +12,7 @@
 /**
  * Loading the file class
  */
-if (!class_exists('File', false)) require('File/File.php');
+if (!class_exists('File', false)) require(dirname(__FILE__) . '/File.php');
 
 
 /**

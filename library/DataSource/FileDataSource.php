@@ -13,14 +13,14 @@
 /**
  * Loading the data source class
  */
-include('DataSource/DataSource.php');
+include(dirname(__FILE__) . '/DataSource.php');
 
 
 
 /**
  * Loading the file class
  */
-if (!class_exists('File', false)) require('File/File.php');
+if (!class_exists('File', false)) require(dirname(dirname(__FILE__)) . '/File/File.php');
 
 
 

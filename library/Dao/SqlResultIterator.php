@@ -68,7 +68,7 @@ class SqlResultIterator extends DaoResultIterator {
    * @return array
    */
   protected function getCurrentData() {
-    return $this->key() > $this->count() ? null : $this->result->fetchArray($this->key());
+    return $this->key() > $this->count() ? null : $this->result->fetchArray($this->key() - 1);
   }
 
 

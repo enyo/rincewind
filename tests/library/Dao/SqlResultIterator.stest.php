@@ -26,6 +26,10 @@
         ->setReturnValue('reset', 0)
         ->listenTo('fetchArray')
         ->listenTo('reset')
+        ->listenTo('fetchArray', array(new Snap_Identical_Expectation(0)))
+        ->listenTo('fetchArray', array(new Snap_Identical_Expectation(1)))
+        ->listenTo('fetchArray', array(new Snap_Identical_Expectation(2)))
+        ->listenTo('fetchArray', array(new Snap_Identical_Expectation(3)))
         ->construct();
       $this->dao = $this->mock('DaoInterface')
         ->setReturnValue('getRecordFromData', $this->record)
@@ -87,13 +91,24 @@
       return $this->assertCallCount($this->result, 'fetchArray', 2);
     }
 
-      public function testNextReturnsItself() {
-      return $this->assertIdentical($this->iterator->next(), $this->iterator);
-      }
+    public function testNextReturnsItself() {
+    return $this->assertIdentical($this->iterator->next(), $this->iterator);
+    }
 
-      public function testRewindReturnsItself() {
-      return $this->assertIdentical($this->iterator->rewind(), $this->iterator);
-      }
+    public function testRewindReturnsItself() {
+    return $this->assertIdentical($this->iterator->rewind(), $this->iterator);
+    }
+
+
+    public function testRowNumsAreCorrectFirst() {
+      $this->iterator->current();
+      return $this->assertCallCount($this->result, 'fetchArray', 1, array(new Snap_Identical_Expectation(0)));
+    }
+    public function testRowNumsAreCorrectSecond() {
+      $this->iterator->next();
+      $this->iterator->current();
+      return $this->assertCallCount($this->result, 'fetchArray', 1, array(new Snap_Identical_Expectation(1)));
+    }
 
   }
 

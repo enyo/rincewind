@@ -26,6 +26,7 @@ include dirname(__FILE__) . '/DatabaseResult.php';
 class MysqlResult extends DatabaseResult {
 
   /**
+   * The current row number. The first row is 0.
    * @var int
    **/
   private $currentRowNumber = 0;

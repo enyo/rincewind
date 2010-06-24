@@ -335,10 +335,10 @@ abstract class Dao implements DaoInterface {
       if ($data = $record->getDirectly($attribute)) {
         if (is_array($data)) {
           // The sequence of data hashes has been set already
-          return new DaoHashListIterator($record->getDirectly($attribute), $this);
+          return new DaoHashListIterator($record->getDirectly($attribute), $dao);
         }
         trigger_error(sprintf('The data hash for `%s` was set but incorrect.', $attribute), E_USER_WARNING);
-        return new DaoHashListIterator(array(), $this);
+        return new DaoHashListIterator(array(), $dao);
       }
       else {
         // Get the list of ids

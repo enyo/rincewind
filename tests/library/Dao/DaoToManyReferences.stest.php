@@ -54,6 +54,12 @@ class DaoToManyReferences_Basic_Test extends Snap_UnitTestCase {
     return $this->assertIdentical($addresses->count(), 3);
   }
 
+  public function testForRightDao() {
+    $do = new Record(array('addressIds'=>array(1, 3, 4)), $this->dao);
+    $addresses = $do->addresses;
+    return $this->assertIdentical($addresses->getDao(), $this->mockDao);
+  }
+
 }
 
 
@@ -106,6 +112,13 @@ class DaoToManyReferencesWithHash_Basic_Test extends Snap_UnitTestCase {
     $addresses = $do->addresses;
     return $this->assertIdentical($addresses->count(), 3);
   }
+
+  public function testForRightDao() {
+    $do = new Record(array('addresses'=>array(array(), array(), array())), $this->dao);
+    $addresses = $do->addresses;
+    return $this->assertIdentical($addresses->getDao(), $this->mockDao);
+  }
+
 
 }
 

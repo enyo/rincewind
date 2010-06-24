@@ -87,6 +87,13 @@ abstract class DaoResultIterator implements Iterator {
 
 
   /**
+   * @return Dao
+   */
+  public function getDao() {
+    return $this->dao;
+  }
+
+  /**
    * @param bool $returnRecordsAsArray
    * @see $returnRecordsAsArray
    * @return DaoResultIterator Returns itself for chaining.

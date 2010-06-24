@@ -348,9 +348,9 @@ abstract class Dao implements DaoInterface {
         if ($localKey && $foreignKey) {
           $localValue = $record->get($localKey);
 
-          return new DaoKeyListIterator($localValue, $this, $foreignKey);
+          return new DaoKeyListIterator($localValue, $dao, $foreignKey);
         }
-        return new DaoKeyListIterator(array(), $this, $foreignKey);
+        return new DaoKeyListIterator(array(), $dao, $foreignKey);
       }
     }
     else {

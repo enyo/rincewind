@@ -54,14 +54,14 @@ class AddressDao extends MysqlDao {
   protected $resourceName = 'addresses';
   protected $attributes = array('id'=>Dao::INT, 'cityId'=>Dao::INT);
   protected function setupReferences() {
-    $this->addReference('city', 'CityDao', 'cityId');
+    $this->addReference('city', new DaoToOneReference('CityDao', 'cityId'));
   }
 }
 class CityDao extends MysqlDao {
   protected $resourceName = 'cities';
   protected $attributes = array('id'=>Dao::INT, 'countryId'=>Dao::INT);
   protected function setupReferences() {
-    $this->addReference('country', 'CountryDao', 'countryId');
+    $this->addReference('country', new DaoToOneReference('CountryDao', 'countryId'));
   }
 }
 class CountryDao extends MysqlDao {

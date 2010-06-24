@@ -13,51 +13,18 @@
 /**
  * A DaoReference describes references between two resources.
  *
- * Lets say you have a user, that points to an address id.
- * You can setup the $userDao, so it understands, that when you access $user->address
- * it should use the $addressDao, and get the address with $user->addressId as id.
+ * See DaoToOneReference or DaoToManyReference for more info.
  *
- * The DaoReference is setup in the Dao with the method addReference(). The method
- * setupReferences() is used to contain those calls.
- *
- * When you access a reference on a Record, internally the Dao will instantiate the
- * reference Dao and get the Record where `foreign_key` is the same as `local_key`.
- * (If you want to have control over how the Dao is instantiated, look at Dao->createDao()).
- *
- * Sometimes your data source returns the data hash of a reference directly to avoid
- * traffic overhead (this makes especially sense with FileSourceDaos like the JsonDao).
- * In that case you only need to specify the $daoClassName since the Dao does not have
- * to link / fetch the data hash itself, but only to instantiate a Record with the
- * given hash.
- *
- *
- * Before setting up a DaoReference:
- * <code>
- * <?php
- *   $user = $userDao->getById(2);
- *   $address = $addressDao->getById($user->addressId);
- * ?>
- * </code>
- * 
- * After:
- * <code>
- * <?php
- *   $user = $userDao->getById(2);
- *   $address = $user->address;
- * ?>
- * </code>
- *
- * Once a DaoReference has been fetched by a dao, the data hash gets cached inside the Dao
- * so it doesn't get fetched more then once.
  *
  * @author Matthias Loitsch <developer@ma.tthias.com>
  * @copyright Copyright (c) 2010, Matthias Loitsch
  * @package Dao
+ * @see DaoToOneReference
  * @see DaoToManyReference
  * @see Dao::setupReferences()
  * @see Dao::addReference()
  **/
-class DaoReference {
+abstract class DaoReference {
 
   /**
    * The dao class name used to get the referenced foreign Record.
@@ -79,16 +46,35 @@ class DaoReference {
 
 
   /**
+   * The Dao this reference is assigned to.
+   * @var Dao
+   */
+  protected $sourceDao;
+
+
+  /**
    * @param string|Dao $daoClassName
    * @param string $localKey
    * @param string $foreignKey
+   * @param Dao $sourceDao The this reference is assigned to. If you don't set it in the
+   *                       constructor, it has to be set with setSourceDao(). The addReference
+   *                       function of the Dao does this for you.
    */
-  public function __construct($daoClassName, $localKey = null, $foreignKey = 'id') {
+  public function __construct($daoClassName, $localKey = null, $foreignKey = 'id', $sourceDao = null) {
     $this->daoClassName = $daoClassName;
     $this->localKey = $localKey;
     $this->foreignKey = $foreignKey;
+    if ($sourceDao) $this->sourceDao = $sourceDao;
   }
 
+
+  /**
+   * Sets the source dao.
+   * @param Dao $dao
+   */
+  public function setSourceDao($dao) {
+    $this->sourceDao = $dao;
+  }
 
   /**
    * @return string|Dao
@@ -111,6 +97,26 @@ class DaoReference {
     return $this->localKey;
   }
 
+  /**
+   * Creates a Dao. This calls createDao internally on the sourceDao.
+   *
+   * @param string $daoClassName
+   * @return Dao
+   */
+  protected function createDao($daoClassName) {
+    return $this->sourceDao->createDao($daoClassName);
+  }
+
+
+  /**
+   * When a record is accessed on a reference attribute, it calls this method to get the actual records or record.
+   *
+   * @param Record $record The record the reference is accessed at.
+   * @param string $attribute The attribute it's accessed on.
+   * @return Record|DaoResultIterator
+   */
+  abstract public function getData($record, $attribute);
+
 }
 
 
@@ -118,4 +124,9 @@ class DaoReference {
  * Loading the DaoToManyReference
  */
 include dirname(__FILE__) . '/DaoToManyReference.php';
+
+/**
+ * Loading the DaoToOneReference
+ */
+include dirname(__FILE__) . '/DaoToOneReference.php';
 

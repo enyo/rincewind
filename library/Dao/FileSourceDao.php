@@ -58,7 +58,7 @@ abstract class FileSourceDao extends Dao {
    * @param string $daoClassName
    * @return FileSourceDao
    */
-  protected function createDao($daoClassName) {
+  public function createDao($daoClassName) {
     return new $daoClassName($this->getFileDataSource());
   }
 

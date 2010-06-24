@@ -108,7 +108,7 @@ class AddressDao extends JsonDao {
     'cityId'=>Dao::INTEGER
   );
   protected function setupReferences() {
-    $this->addReference('city', 'CityDao', 'cityId', 'id');
+    $this->addReference('city', new DaoToOneReference('CityDao', 'cityId', 'id'));
   }
 }
 class CityDao extends JsonDao {
@@ -130,8 +130,8 @@ class JsonReferencesDao extends JsonDao {
   );
 
   protected function setupReferences() {
-    $this->addReference('address', 'AddressDao', 'addressId', 'id');
-    $this->addToManyReference('addresses', 'AddressDao', 'addressIds', 'id');
+    $this->addReference('address', new DaoToOneReference('AddressDao', 'addressId', 'id'));
+    $this->addReference('addresses', new DaoToManyReference('AddressDao', 'addressIds', 'id'));
   }
 }
 

@@ -57,7 +57,7 @@ abstract class SqlDao extends Dao {
    * @param string $daoClassName
    * @return SqlDao
    */
-  protected function createDao($daoClassName) {
+  public function createDao($daoClassName) {
     return new $daoClassName($this->getDb());
   }
 

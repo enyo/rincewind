@@ -273,6 +273,7 @@ abstract class Dao implements DaoInterface {
 
   /**
    * Adds a reference definition. This method should be called inside setupReferences().
+   * Also sets the source dao on the reference.
    *
    * To see how references work in detail, please have a look at the DaoReference class.
    *
@@ -280,110 +281,26 @@ abstract class Dao implements DaoInterface {
    *                              on this attribute name on the Record. So if you setup a reference with
    *                              'address' as $attributeName on the UserDao, then you will be able to access
    *                              it with: $user->address or $user->get('address')
-   * @param string|Dao $daoClassName Eg.: 'AddressDao' or the dao directly
-   * @param string $localKey Eg.: address_id
-   * @param string $foreignKey Eg.: id
+   * @param DaoReference $reference The reference you want to add.
    * @see setupReferences()
    * @see DaoReference
-   * @see createDao
    */
-  protected function addReference($attributeName, $daoClassName, $localKey = null, $foreignKey = 'id') {
-    if ($localKey && !$this->attributeExists($localKey)) {
-      trigger_error(sprintf('Local key `%s` does not exist in the %s Dao.', $localKey, $this->resourceName), E_USER_ERROR);
-    }
-    $this->references[$attributeName] = new DaoReference($daoClassName, $localKey, $foreignKey);
+  protected function addReference($attributeName, $reference) {
+    $reference->setSourceDao($this);
+    $this->references[$attributeName] = $reference;
   }
 
   /**
-   * Adds a toMany reference definition. This method should be called inside setupReferences().
+   * Returns the reference for an attribute
    *
-   * To see how toMany references work in detail, please have a look at the DaoToManyReference class.
-   *
-   * @param string $attributeName The name of the attribute (eg.: addresses)
-   * @param string|Dao $daoClassName Eg.: AddressDao
-   * @param string $localKey Eg.: address_ids
-   * @param string $foreignKey Eg.: id
-   * @see setupReferences()
-   * @see addReference()
-   * @see DaoToManyReference
+   * @param string $attribute
+   * @return Record|DaoResultIterator
    */
-  protected function addToManyReference($attributeName, $daoClassName, $localKey = null, $foreignKey = 'id') {
-    if ($localKey && (!$this->attributeExists($localKey) || $this->attributes[$localKey] != Dao::SEQUENCE)) {
-      trigger_error(sprintf('Local key `%s` does not exist or is not a Dao::SEQUENCE in the %s Dao.', $localKey, $this->resourceName), E_USER_ERROR);
-    }
-    $this->references[$attributeName] = new DaoToManyReference($daoClassName, $localKey, $foreignKey);
-  }
-
-  /**
-   * Returns the Record for a specific reference.
-   * It then sets the hash in the Record so it can be retrieved next time.
-   * If it is accessed after that, the already fetched DataHash is used.
-   * A DataSource can directly return the DataHash, so it doesn't have to be fetched.
-   *
-   * @return Record
-   */
-  public function getReference($record, $attribute) {
+  public function getReference($attribute) {
     if (!isset($this->references[$attribute])) throw new DaoWrongValueException("The attribute `$attribute` is not specified in references.");
-
-    $reference = $this->references[$attribute];
-
-    $dao = $reference->getDaoClassName();
-    if (is_string($dao)) $dao = $this->createDao($dao);
-
-    if ($reference instanceof DaoToManyReference) {
-      // toMany reference
-      if ($data = $record->getDirectly($attribute)) {
-        if (is_array($data)) {
-          // The sequence of data hashes has been set already
-          return new DaoHashListIterator($record->getDirectly($attribute), $dao);
-        }
-        trigger_error(sprintf('The data hash for `%s` was set but incorrect.', $attribute), E_USER_WARNING);
-        return new DaoHashListIterator(array(), $dao);
-      }
-      else {
-        // Get the list of ids
-        $localKey = $reference->getLocalKey();
-        $foreignKey = $reference->getForeignKey();
-
-        if ($localKey && $foreignKey) {
-          $localValue = $record->get($localKey);
-
-          return new DaoKeyListIterator($localValue, $dao, $foreignKey);
-        }
-        return new DaoKeyListIterator(array(), $dao, $foreignKey);
-      }
-    }
-    else {
-      // toOne reference
-      if ($data = $record->getDirectly($attribute)) {
-        if (is_array($data)) {
-          // If the data hash exists already, just return the Record with it.
-          return $dao->getRecordFromData($data);
-        }
-        else {
-          trigger_error(sprintf('The data hash for `%s` was set but incorrect.', $attribute), E_USER_WARNING);
-          return null;
-        }
-      }
-      else {
-        // Otherwise: get the data hash, store it in the Record that's referencing it, and
-        // return the Record.
-        $localKey = $reference->getLocalKey();
-        $foreignKey = $reference->getForeignKey();
-
-        if ($localKey && $foreignKey) {
-          $localValue = $record->get($localKey);
-          if ($localValue === null) return null;
-          $return = $dao->get(array($foreignKey=>$localValue));
-          $record->setDirectly($attribute, $return->getArray());
-          return $return;
-        }
-        else {
-          return null;
-        }
-      }
-    }
+    return $this->references[$attribute];
   }
+
 
   /**
    * Creates a Dao.
@@ -392,7 +309,7 @@ abstract class Dao implements DaoInterface {
    * @param string $daoClassName
    * @return Dao
    */
-  protected function createDao($daoClassName) {
+  public function createDao($daoClassName) {
     return new $daoClassName();
   }
 

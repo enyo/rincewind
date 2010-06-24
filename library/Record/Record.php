@@ -218,7 +218,8 @@ class Record implements RecordInterface {
       $value = array_key_exists($attributeName, $this->data) ? $this->data[$attributeName] : null;
     }
     elseif (array_key_exists($attributeName, $this->dao->getReferences())) {
-      return $this->dao->getReference($this, $attributeName);
+      $reference = $this->dao->getReference($attributeName);
+      return $reference->getData($this, $attributeName);
     }
     elseif (method_exists($this, '_' . $attributeName)) {
       return $this->getComputedAttribute($attributeName);

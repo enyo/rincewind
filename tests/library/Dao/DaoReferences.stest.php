@@ -19,7 +19,7 @@ class FakeDao extends NonAbstractDao {
   protected $attributes = array('address_id'=>Dao::INT);
 
   protected function setupReferences() {
-    $this->addReference('address', $this->mockDao, 'address_id', 'THEFOREIGNKEY');
+    $this->addReference('address', new DaoToOneReference($this->mockDao, 'address_id', 'THEFOREIGNKEY'));
   }
 
 }
@@ -117,7 +117,7 @@ class FakeWithoutKeysDao extends NonAbstractDao {
   }
 
   protected function setupReferences() {
-    $this->addReference('address', $this->mockDao);
+    $this->addReference('address', new DaoToOneReference($this->mockDao));
   }
 
 }

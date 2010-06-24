@@ -176,6 +176,22 @@ interface DaoInterface {
    */
   public function getReferences();
 
+
+  /**
+   * Returns a reference for a specific attribute.
+   * Throws an exception if not found.
+   * @param string $attribute
+   * @return DaoReference
+   */
+  public function getReference($attribute);
+
+  /**
+   * Instantiates a dao.
+   * @param string $daoClassName
+   * @return Dao
+   */
+  public function createDao($daoClassName);
+
   /**
    * Returns the total number of entries
    *

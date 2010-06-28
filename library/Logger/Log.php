@@ -58,6 +58,18 @@ abstract class Log {
   protected static $loggers = array();
 
 
+
+  /**
+   * This is a simple bool, to be able to check quickly if logging has been enabled or not.
+   * If one logger gets added for any context this bool is set to true.
+   * This is to prevent having to check an array of loggers, or sanitizing the context if
+   * no logger has been added.
+   *
+   * @var bool
+   */
+  protected static $isEnabled = false;
+
+
   /**
    * Adds a logger in the loggers array to be used in a certain context.
    *
@@ -66,6 +78,7 @@ abstract class Log {
    */
   public static function addLogger($logger, $context = self::GENERAL) {
     if ($context !== self::GENERAL && $context !== self::CATCHALL && (empty($context) || preg_replace('/[^a-z0-9\_\-]/im', '', $context) != $context)) throw new LogException("The context name '$context' is not allowed.");
+    self::$isEnabled = true;
     $context = self::sanitizeContext($context);
     self::$loggers[$context] = $logger;
   }
@@ -78,6 +91,7 @@ abstract class Log {
    * @return Logger or null if not set for this context.
    */
   public static function getLogger($context = self::GENERAL) {
+    if (!self::$isEnabled) return null;
     $context = self::sanitizeContext($context);
     if (isset(self::$loggers[$context])) return self::$loggers[$context];
     elseif (isset(self::$loggers[self::CATCHALL])) return self::$loggers[self::CATCHALL];

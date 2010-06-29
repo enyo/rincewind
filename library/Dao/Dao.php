@@ -721,32 +721,35 @@ abstract class Dao implements DaoInterface {
    * @return array
    */
   protected function prepareDataForRecord($data) {
+    $recordData = array();
+
     $neededValues = $this->attributes;
     foreach ($data as $attributeName=>$value) {
       $attributeName = $this->importAttributeName($attributeName);
       if (array_key_exists($attributeName, $this->attributes)) {
         unset($neededValues[$attributeName]);
         if ($this->attributes[$attributeName] != Dao::IGNORE) {
-          $data[$attributeName] = $this->importValue($value, $this->attributes[$attributeName], $this->notNull($attributeName));
+          $recordData[$attributeName] = $this->importValue($value, $this->attributes[$attributeName], $this->notNull($attributeName));
         }
       }
       elseif (array_key_exists($attributeName, $this->additionalAttributes)) {
         if ($this->additionalAttributes[$attributeName] != Dao::IGNORE) {
-          $data[$attributeName] = $this->importValue($value, $this->additionalAttributes[$attributeName], $this->notNull($attributeName));
+          $recordData[$attributeName] = $this->importValue($value, $this->additionalAttributes[$attributeName], $this->notNull($attributeName));
         }
       }
       elseif (isset($this->references[$attributeName])) {
         if (!is_array($value)) {
           $trace = debug_backtrace();
           trigger_error('The value for attribute ' . $attributeName . ' ('.$this->resourceName.') was not correct in ' . $trace[0]['file'] . ' on line ' . $trace[0]['line'], E_USER_WARNING);
-          unset($data[$attributeName]);
         }
-        // Just let it untouched.
+        else {
+          // Just let it untouched.
+          $recordData[$attributeName] = $data[$attributeName];
+        }
       }
       else {
         $trace = debug_backtrace();
         trigger_error('The type for attribute ' . $attributeName . ' ('.$this->resourceName.') is not defined in ' . $trace[0]['file'] . ' on line ' . $trace[0]['line'], E_USER_WARNING);
-        unset($data[$attributeName]);
       }
     }
     foreach ($neededValues as $attributeName=>$type) {
@@ -754,13 +757,13 @@ abstract class Dao implements DaoInterface {
         if ($this->notNull($attributeName)) {
           $trace = debug_backtrace();
           trigger_error('The attribute ' . $attributeName . ' ('.$this->resourceName.') was not transmitted from data source in ' . $trace[0]['file'] . ' on line ' . $trace[0]['line'], E_USER_WARNING);
-          $data[$attributeName] = Record::coerce(null, $type, false, $quiet = true);
+          $recordData[$attributeName] = Record::coerce(null, $type, false, $quiet = true);
         } else {
-          $data[$attributeName] = null;
+          $recordData[$attributeName] = null;
         }
       }
     }
-    return $data;     
+    return $recordData;     
   }
 
 
@@ -847,7 +850,7 @@ abstract class Dao implements DaoInterface {
    * @param bool $withTime
    */
   public function importDate($value, $withTime) {
-    return new Date($this->convertRemoteValueToTimestamp($value, $withTime));
+    return $this->convertRemoteValueToTimestamp($value, $withTime);
   }
 
   /**

@@ -181,11 +181,11 @@ abstract class FileSourceDao extends Dao {
 
     list ($attributeNames, $values) = $this->generateInsertArrays($record);
 
-    $attibutes = array_combine($attributeNames, $values);
+    $attributes = array_combine($attributeNames, $values);
 
     $id = $this->fileDataSource->insert($this->resourceName, $attributes);
 
-    $this->updateRecordWithData($this->getData(array('id'=>$newId)), $record);
+    $this->updateRecordWithData($this->getData(array('id'=>$id)), $record);
     
     $this->afterInsert($record);
 

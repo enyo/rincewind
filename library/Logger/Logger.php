@@ -8,9 +8,14 @@
  * @package Logger
  **/
 
-
+/**
+ * Including the exceptions
+ */
 if (!class_exists('LoggerException', false)) include(dirname(__FILE__) . '/LoggerExceptions.php');
 
+/**
+ * Including the static class Log
+ */
 if (!class_exists('Log', false)) include(dirname(__FILE__) . '/Log.php');
 
 /**

@@ -13,8 +13,8 @@
   <tr>
     <td class="header_menu">
         
-                                                                            
-                                                                                                                                                      		  [ <a href="../classtrees_Dao.html" class="menu">class tree: Dao</a> ]
+                                                        
+                                                                                                                                                                          		  [ <a href="../classtrees_Dao.html" class="menu">class tree: Dao</a> ]
 		  [ <a href="../elementindex_Dao.html" class="menu">index: Dao</a> ]
 		  	    [ <a href="../elementindex.html" class="menu">all elements</a> ]
     </td>
@@ -29,7 +29,6 @@
 					<p><a href="../ric_README.html">README</a></p>
 			</div>
       <b>Packages:</b><br />
-              <a href="../li_php-library.html">php-library</a><br />
               <a href="../li_Config.html">Config</a><br />
               <a href="../li_Dao.html">Dao</a><br />
               <a href="../li_Database.html">Database</a><br />
@@ -37,6 +36,7 @@
               <a href="../li_Date.html">Date</a><br />
               <a href="../li_File.html">File</a><br />
               <a href="../li_Logger.html">Logger</a><br />
+              <a href="../li_Profiler.html">Profiler</a><br />
               <a href="../li_Storage.html">Storage</a><br />
             <br /><br />
                         <b>Files:</b><br />
@@ -56,6 +56,8 @@
 			<a href="../Dao/_Dao---DaoResultIterator.php.html">		DaoResultIterator.php
 		</a><br>
 			<a href="../Dao/_Dao---DaoToManyReference.php.html">		DaoToManyReference.php
+		</a><br>
+			<a href="../Dao/_Dao---DaoToOneReference.php.html">		DaoToOneReference.php
 		</a><br>
 			<a href="../Dao/_Dao---FileSourceDao.php.html">		FileSourceDao.php
 		</a><br>
@@ -123,6 +125,7 @@
 	    		<a href="../Dao/DaoReference.html">DaoReference</a><br />
 	    		<a href="../Dao/DaoResultIterator.html">DaoResultIterator</a><br />
 	    		<a href="../Dao/DaoToManyReference.html">DaoToManyReference</a><br />
+	    		<a href="../Dao/DaoToOneReference.html">DaoToOneReference</a><br />
 	    		<a href="../Dao/FileSourceDao.html">FileSourceDao</a><br />
 	    		<a href="../Dao/FileSourceResultIterator.html">FileSourceResultIterator</a><br />
 	    		<a href="../Dao/JsonDao.html">JsonDao</a><br />
@@ -130,6 +133,7 @@
 	    		<a href="../Dao/MysqlDao.html">MysqlDao</a><br />
 	    		<a href="../Dao/MysqlResultIterator.html">MysqlResultIterator</a><br />
 	    		<a href="../Dao/MysqlUserDao.html">MysqlUserDao</a><br />
+	    		<a href="../Dao/PostgresqlDao.html">PostgresqlDao</a><br />
 	    		<a href="../Dao/PostgresqlResultIterator.html">PostgresqlResultIterator</a><br />
 	    		<a href="../Dao/PostgresqlUserDao.html">PostgresqlUserDao</a><br />
 	    		<a href="../Dao/SqlDao.html">SqlDao</a><br />
@@ -167,13 +171,13 @@ Source Location: /Dao/DaoReference.php<br /><br />
 <h4>Author(s):</h4>
 <ul>
           <li>Matthias Loitsch &lt;<a href="mailto:developer@ma.tthias.com">developer@ma.tthias.com</a>&gt;</li>
-                              </ul>
+                                          </ul>
 
 
 
 
           
-              
+                      
 
 <h4>Copyright:</h4>
 <ul>
@@ -188,6 +192,7 @@ Source Location: /Dao/DaoReference.php<br /><br />
     <li><a href="../Dao/DaoReference.html#var$daoClassName">$daoClassName</a></li>
     <li><a href="../Dao/DaoReference.html#var$foreignKey">$foreignKey</a></li>
     <li><a href="../Dao/DaoReference.html#var$localKey">$localKey</a></li>
+    <li><a href="../Dao/DaoReference.html#var$sourceDao">$sourceDao</a></li>
   </ul>
 </td>
 
@@ -196,9 +201,12 @@ Source Location: /Dao/DaoReference.php<br /><br />
 <h3><a href="#class_methods">Methods</a></h3>
 <ul>
     <li><a href="../Dao/DaoReference.html#method__construct">__construct</a></li>
+    <li><a href="../Dao/DaoReference.html#methodcreateDao">createDao</a></li>
     <li><a href="../Dao/DaoReference.html#methodgetDaoClassName">getDaoClassName</a></li>
+    <li><a href="../Dao/DaoReference.html#methodgetData">getData</a></li>
     <li><a href="../Dao/DaoReference.html#methodgetForeignKey">getForeignKey</a></li>
     <li><a href="../Dao/DaoReference.html#methodgetLocalKey">getLocalKey</a></li>
+    <li><a href="../Dao/DaoReference.html#methodsetSourceDao">setSourceDao</a></li>
   </ul>
 </td>
 
@@ -215,6 +223,10 @@ Source Location: /Dao/DaoReference.php<br /><br />
 <dt><a href="../Dao/DaoToManyReference.html">DaoToManyReference</a></dt>
 	<dd>A DaoToManyReference describes references to many resources.</dd>
 </dl>
+<dl>
+<dt><a href="../Dao/DaoToOneReference.html">DaoToOneReference</a></dt>
+	<dd>A DaoToOneReference describes a reference to another record in another resource.</dd>
+</dl>
 </div>
 </td>
 
@@ -227,16 +239,8 @@ Source Location: /Dao/DaoReference.php<br /><br />
 <a name="class_details"></a>
 <h3>Class Details</h3>
 <div class="tags">
-[line 60]<br />
-A DaoReference describes references between two resources.<br /><br /><p>Lets say you have a user, that points to an address id.  You can setup the $userDao, so it understands, that when you access $user-&gt;address  it should use the $addressDao, and get the address with $user-&gt;addressId as id.</p><p>The DaoReference is setup in the Dao with the method addReference(). The method  setupReferences() is used to contain those calls.</p><p>When you access a reference on a Record, internally the Dao will instantiate the  reference Dao and get the Record where `foreign_key` is the same as `local_key`.  (If you want to have control over how the Dao is instantiated, look at Dao-&gt;createDao()).</p><p>Sometimes your data source returns the data hash of a reference directly to avoid  traffic overhead (this makes especially sense with FileSourceDaos like the JsonDao).  In that case you only need to specify the $daoClassName since the Dao does not have  to link / fetch the data hash itself, but only to instantiate a Record with the  given hash.</p><p>Before setting up a DaoReference:  <ol><li><div class="src-line">&nbsp;<span class="src-php">&lt;?php</span></div></li>
-<li><div class="src-line">&nbsp;&nbsp;&nbsp;<span class="src-var">$user&nbsp;</span>=&nbsp;<span class="src-var">$userDao</span><span class="src-sym">-&gt;</span><span class="src-id">getById</span><span class="src-sym">(</span><span class="src-num">2</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
-<li><div class="src-line">&nbsp;&nbsp;&nbsp;<span class="src-var">$address&nbsp;</span>=&nbsp;<span class="src-var">$addressDao</span><span class="src-sym">-&gt;</span><span class="src-id">getById</span><span class="src-sym">(</span><span class="src-var">$user</span><span class="src-sym">-&gt;</span><span class="src-id">addressId</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
-<li><div class="src-line">&nbsp;<span class="src-php">?&gt;</span></div></li>
-</ol></p><p>After:  <ol><li><div class="src-line">&nbsp;<span class="src-php">&lt;?php</span></div></li>
-<li><div class="src-line">&nbsp;&nbsp;&nbsp;<span class="src-var">$user&nbsp;</span>=&nbsp;<span class="src-var">$userDao</span><span class="src-sym">-&gt;</span><span class="src-id">getById</span><span class="src-sym">(</span><span class="src-num">2</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
-<li><div class="src-line">&nbsp;&nbsp;&nbsp;<span class="src-var">$address&nbsp;</span>=&nbsp;<span class="src-var">$user</span><span class="src-sym">-&gt;</span><span class="src-id">address</span><span class="src-sym">;</span></div></li>
-<li><div class="src-line">&nbsp;<span class="src-php">?&gt;</span></div></li>
-</ol></p><p>Once a DaoReference has been fetched by a dao, the data hash gets cached inside the Dao  so it doesn't get fetched more then once.</p><br /><br /><br />
+[line 27]<br />
+A DaoReference describes references between two resources.<br /><br /><p>See DaoToOneReference or DaoToManyReference for more info.</p><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
@@ -247,13 +251,19 @@ A DaoReference describes references between two resources.<br /><br /><p>Lets sa
     <td><b>copyright:</b>&nbsp;&nbsp;</td><td>Copyright (c) 2010, Matthias Loitsch</td>
   </tr>
   <tr>
+    <td><b>see:</b>&nbsp;&nbsp;</td><td><a href="../Dao/Dao.html#methodsetupReferences">Dao::setupReferences()</a></td>
+  </tr>
+  <tr>
     <td><b>see:</b>&nbsp;&nbsp;</td><td><a href="../Dao/Dao.html#methodaddReference">Dao::addReference()</a></td>
   </tr>
   <tr>
     <td><b>see:</b>&nbsp;&nbsp;</td><td><a href="../Dao/DaoToManyReference.html">DaoToManyReference</a></td>
   </tr>
   <tr>
-    <td><b>see:</b>&nbsp;&nbsp;</td><td><a href="../Dao/Dao.html#methodsetupReferences">Dao::setupReferences()</a></td>
+    <td><b>see:</b>&nbsp;&nbsp;</td><td><a href="../Dao/DaoToOneReference.html">DaoToOneReference</a></td>
+  </tr>
+  <tr>
+    <td><b>abstract:</b>&nbsp;&nbsp;</td><td></td>
   </tr>
 </table>
 </div>
@@ -267,7 +277,7 @@ A DaoReference describes references between two resources.<br /><br /><p>Lets sa
 	<a name="var$daoClassName"></a>
 	<p></p>
 	<h4>$daoClassName = <span class="value"></span></h4>
-	<p>[line 66]</p>
+	<p>[line 33]</p>
   The dao class name used to get the referenced foreign Record.<br /><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
@@ -291,7 +301,7 @@ A DaoReference describes references between two resources.<br /><br /><p>Lets sa
 	<a name="var$foreignKey"></a>
 	<p></p>
 	<h4>$foreignKey = <span class="value"></span></h4>
-	<p>[line 78]</p>
+	<p>[line 45]</p>
   The foreign key. eg: id<br /><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
@@ -315,7 +325,7 @@ A DaoReference describes references between two resources.<br /><br /><p>Lets sa
 	<a name="var$localKey"></a>
 	<p></p>
 	<h4>$localKey = <span class="value"></span></h4>
-	<p>[line 72]</p>
+	<p>[line 39]</p>
   The local key. eg: address_id<br /><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
@@ -336,6 +346,30 @@ A DaoReference describes references between two resources.<br /><br /><p>Lets sa
       </table>
 	</div><br /><br />
 	<div class="top">[ <a href="#top">Top</a> ]</div><br />
+	<a name="var$sourceDao"></a>
+	<p></p>
+	<h4>$sourceDao = <span class="value"></span></h4>
+	<p>[line 52]</p>
+  The Dao this reference is assigned to.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
+  </tr>
+</table>
+</div>
+
+  <br />
+	<div class="tags">
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td><b>Type:</b>&nbsp;&nbsp;</td>
+      <td><a href="../Dao/Dao.html">Dao</a></td>
+    </tr>
+      </table>
+	</div><br /><br />
+	<div class="top">[ <a href="#top">Top</a> ]</div><br />
 </div><br />
 
 <hr />
@@ -345,7 +379,7 @@ A DaoReference describes references between two resources.<br /><br /><p>Lets sa
 
   <hr />
 	<a name="method__construct"></a>
-	<h3>constructor __construct <span class="smalllinenumber">[line 86]</span></h3>
+	<h3>constructor __construct <span class="smalllinenumber">[line 63]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -353,7 +387,8 @@ A DaoReference describes references between two resources.<br /><br /><p>Lets sa
 string|<a href="../Dao/Dao.html">Dao</a>
 $daoClassName, [string
 $localKey = null], [string
-$foreignKey = 'id'])</code>
+$foreignKey = 'id'], [<a href="../Dao/Dao.html">Dao</a>
+$sourceDao = null])</code>
     </td></tr></table>
     </td></tr></table><br />
 	
@@ -387,13 +422,54 @@ $foreignKey = 'id'])</code>
         <td><b>$foreignKey</b>&nbsp;&nbsp;</td>
         <td></td>
       </tr>
+          <tr>
+        <td class="type"><a href="../Dao/Dao.html">Dao</a>&nbsp;&nbsp;</td>
+        <td><b>$sourceDao</b>&nbsp;&nbsp;</td>
+        <td>The this reference is assigned to. If you don't set it in the                        constructor, it has to be set with setSourceDao(). The addReference                        function of the Dao does this for you.</td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodcreateDao"></a>
+	<h3>method createDao <span class="smalllinenumber">[line 106]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code><a href="../Dao/Dao.html">Dao</a> createDao(
+string
+$daoClassName)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Creates a Dao. This calls createDao internally on the sourceDao.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">string&nbsp;&nbsp;</td>
+        <td><b>$daoClassName</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
         </table>
     </div><br />
         <div class="top">[ <a href="#top">Top</a> ]</div>
   </div>
   <hr />
 	<a name="methodgetDaoClassName"></a>
-	<h3>method getDaoClassName <span class="smalllinenumber">[line 96]</span></h3>
+	<h3>method getDaoClassName <span class="smalllinenumber">[line 82]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -417,8 +493,63 @@ $foreignKey = 'id'])</code>
         <div class="top">[ <a href="#top">Top</a> ]</div>
   </div>
   <hr />
+	<a name="methodgetData"></a>
+	<h3>method getData <span class="smalllinenumber">[line 118]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code><a href="../Dao/Record/Record.html">Record</a>|<a href="../Dao/DaoResultIterator.html">DaoResultIterator</a> getData(
+<a href="../Dao/Record/Record.html">Record</a>
+$record, string
+$attribute)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		When a record is accessed on a reference attribute, it calls this method to get the actual records or record.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>abstract:</b>&nbsp;&nbsp;</td><td></td>
+  </tr>
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	<p>Overridden in child classes as:<br />
+		<dl>
+	<dt><a href="../Dao/DaoToManyReference.html#methodgetData">DaoToManyReference::getData()</a></dt>
+		<dd>Returns a DaoIterator for a specific reference.</dd>
+	</dl>
+		<dl>
+	<dt><a href="../Dao/DaoToOneReference.html#methodgetData">DaoToOneReference::getData()</a></dt>
+		<dd>Returns a Record for a specific reference.</dd>
+	</dl>
+	</p>
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type"><a href="../Dao/Record/Record.html">Record</a>&nbsp;&nbsp;</td>
+        <td><b>$record</b>&nbsp;&nbsp;</td>
+        <td>The record the reference is accessed at.</td>
+      </tr>
+          <tr>
+        <td class="type">string&nbsp;&nbsp;</td>
+        <td><b>$attribute</b>&nbsp;&nbsp;</td>
+        <td>The attribute it's accessed on.</td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
 	<a name="methodgetForeignKey"></a>
-	<h3>method getForeignKey <span class="smalllinenumber">[line 103]</span></h3>
+	<h3>method getForeignKey <span class="smalllinenumber">[line 89]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -443,7 +574,7 @@ $foreignKey = 'id'])</code>
   </div>
   <hr />
 	<a name="methodgetLocalKey"></a>
-	<h3>method getLocalKey <span class="smalllinenumber">[line 110]</span></h3>
+	<h3>method getLocalKey <span class="smalllinenumber">[line 96]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -464,6 +595,42 @@ $foreignKey = 'id'])</code>
 <br /><br />
 
 	
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodsetSourceDao"></a>
+	<h3>method setSourceDao <span class="smalllinenumber">[line 75]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void setSourceDao(
+<a href="../Dao/Dao.html">Dao</a>
+$dao)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Sets the source dao.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type"><a href="../Dao/Dao.html">Dao</a>&nbsp;&nbsp;</td>
+        <td><b>$dao</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+        </table>
+    </div><br />
         <div class="top">[ <a href="#top">Top</a> ]</div>
   </div>
 </div><br />

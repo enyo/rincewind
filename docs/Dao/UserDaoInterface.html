@@ -13,8 +13,8 @@
   <tr>
     <td class="header_menu">
         
-                                                                            
-                                                                                                                                                      		  [ <a href="../classtrees_Dao.html" class="menu">class tree: Dao</a> ]
+                                                        
+                                                                                                                                                                          		  [ <a href="../classtrees_Dao.html" class="menu">class tree: Dao</a> ]
 		  [ <a href="../elementindex_Dao.html" class="menu">index: Dao</a> ]
 		  	    [ <a href="../elementindex.html" class="menu">all elements</a> ]
     </td>
@@ -29,7 +29,6 @@
 					<p><a href="../ric_README.html">README</a></p>
 			</div>
       <b>Packages:</b><br />
-              <a href="../li_php-library.html">php-library</a><br />
               <a href="../li_Config.html">Config</a><br />
               <a href="../li_Dao.html">Dao</a><br />
               <a href="../li_Database.html">Database</a><br />
@@ -37,6 +36,7 @@
               <a href="../li_Date.html">Date</a><br />
               <a href="../li_File.html">File</a><br />
               <a href="../li_Logger.html">Logger</a><br />
+              <a href="../li_Profiler.html">Profiler</a><br />
               <a href="../li_Storage.html">Storage</a><br />
             <br /><br />
                         <b>Files:</b><br />
@@ -56,6 +56,8 @@
 			<a href="../Dao/_Dao---DaoResultIterator.php.html">		DaoResultIterator.php
 		</a><br>
 			<a href="../Dao/_Dao---DaoToManyReference.php.html">		DaoToManyReference.php
+		</a><br>
+			<a href="../Dao/_Dao---DaoToOneReference.php.html">		DaoToOneReference.php
 		</a><br>
 			<a href="../Dao/_Dao---FileSourceDao.php.html">		FileSourceDao.php
 		</a><br>
@@ -123,6 +125,7 @@
 	    		<a href="../Dao/DaoReference.html">DaoReference</a><br />
 	    		<a href="../Dao/DaoResultIterator.html">DaoResultIterator</a><br />
 	    		<a href="../Dao/DaoToManyReference.html">DaoToManyReference</a><br />
+	    		<a href="../Dao/DaoToOneReference.html">DaoToOneReference</a><br />
 	    		<a href="../Dao/FileSourceDao.html">FileSourceDao</a><br />
 	    		<a href="../Dao/FileSourceResultIterator.html">FileSourceResultIterator</a><br />
 	    		<a href="../Dao/JsonDao.html">JsonDao</a><br />
@@ -130,6 +133,7 @@
 	    		<a href="../Dao/MysqlDao.html">MysqlDao</a><br />
 	    		<a href="../Dao/MysqlResultIterator.html">MysqlResultIterator</a><br />
 	    		<a href="../Dao/MysqlUserDao.html">MysqlUserDao</a><br />
+	    		<a href="../Dao/PostgresqlDao.html">PostgresqlDao</a><br />
 	    		<a href="../Dao/PostgresqlResultIterator.html">PostgresqlResultIterator</a><br />
 	    		<a href="../Dao/PostgresqlUserDao.html">PostgresqlUserDao</a><br />
 	    		<a href="../Dao/SqlDao.html">SqlDao</a><br />
@@ -221,6 +225,12 @@ Source Location: /Dao/UserDaoInterface.php<br /><br />
     Commits a transaction
   </dd>
     <dt>
+    <a href="../Dao/DaoInterface.html#methodcreateDao">DaoInterface::createDao()</a>
+  </dt>
+  <dd>
+    Instantiates a dao.
+  </dd>
+    <dt>
     <a href="../Dao/DaoInterface.html#methoddelete">DaoInterface::delete()</a>
   </dt>
   <dd>
@@ -237,6 +247,12 @@ Source Location: /Dao/UserDaoInterface.php<br /><br />
   </dt>
   <dd>
     This function does the same as get(), but returns null if the data is not found.
+  </dd>
+    <dt>
+    <a href="../Dao/DaoInterface.html#methodfindId">DaoInterface::findId()</a>
+  </dt>
+  <dd>
+    
   </dd>
     <dt>
     <a href="../Dao/DaoInterface.html#methodget">DaoInterface::get()</a>
@@ -291,6 +307,12 @@ Source Location: /Dao/UserDaoInterface.php<br /><br />
   </dt>
   <dd>
     Returns a record filled with an array of datasource values.
+  </dd>
+    <dt>
+    <a href="../Dao/DaoInterface.html#methodgetReference">DaoInterface::getReference()</a>
+  </dt>
+  <dd>
+    Returns a reference for a specific attribute.
   </dd>
     <dt>
     <a href="../Dao/DaoInterface.html#methodgetReferences">DaoInterface::getReferences()</a>

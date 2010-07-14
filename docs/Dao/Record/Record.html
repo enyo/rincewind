@@ -13,8 +13,8 @@
   <tr>
     <td class="header_menu">
         
-                                                                            
-                                                                                                                                                      		  [ <a href="../../classtrees_Dao.html" class="menu">class tree: Dao</a> ]
+                                                        
+                                                                                                                                                                          		  [ <a href="../../classtrees_Dao.html" class="menu">class tree: Dao</a> ]
 		  [ <a href="../../elementindex_Dao.html" class="menu">index: Dao</a> ]
 		  	    [ <a href="../../elementindex.html" class="menu">all elements</a> ]
     </td>
@@ -29,7 +29,6 @@
 					<p><a href="../../ric_README.html">README</a></p>
 			</div>
       <b>Packages:</b><br />
-              <a href="../../li_php-library.html">php-library</a><br />
               <a href="../../li_Config.html">Config</a><br />
               <a href="../../li_Dao.html">Dao</a><br />
               <a href="../../li_Database.html">Database</a><br />
@@ -37,6 +36,7 @@
               <a href="../../li_Date.html">Date</a><br />
               <a href="../../li_File.html">File</a><br />
               <a href="../../li_Logger.html">Logger</a><br />
+              <a href="../../li_Profiler.html">Profiler</a><br />
               <a href="../../li_Storage.html">Storage</a><br />
             <br /><br />
                         <b>Files:</b><br />
@@ -56,6 +56,8 @@
 			<a href="../../Dao/_Dao---DaoResultIterator.php.html">		DaoResultIterator.php
 		</a><br>
 			<a href="../../Dao/_Dao---DaoToManyReference.php.html">		DaoToManyReference.php
+		</a><br>
+			<a href="../../Dao/_Dao---DaoToOneReference.php.html">		DaoToOneReference.php
 		</a><br>
 			<a href="../../Dao/_Dao---FileSourceDao.php.html">		FileSourceDao.php
 		</a><br>
@@ -123,6 +125,7 @@
 	    		<a href="../../Dao/DaoReference.html">DaoReference</a><br />
 	    		<a href="../../Dao/DaoResultIterator.html">DaoResultIterator</a><br />
 	    		<a href="../../Dao/DaoToManyReference.html">DaoToManyReference</a><br />
+	    		<a href="../../Dao/DaoToOneReference.html">DaoToOneReference</a><br />
 	    		<a href="../../Dao/FileSourceDao.html">FileSourceDao</a><br />
 	    		<a href="../../Dao/FileSourceResultIterator.html">FileSourceResultIterator</a><br />
 	    		<a href="../../Dao/JsonDao.html">JsonDao</a><br />
@@ -130,6 +133,7 @@
 	    		<a href="../../Dao/MysqlDao.html">MysqlDao</a><br />
 	    		<a href="../../Dao/MysqlResultIterator.html">MysqlResultIterator</a><br />
 	    		<a href="../../Dao/MysqlUserDao.html">MysqlUserDao</a><br />
+	    		<a href="../../Dao/PostgresqlDao.html">PostgresqlDao</a><br />
 	    		<a href="../../Dao/PostgresqlResultIterator.html">PostgresqlResultIterator</a><br />
 	    		<a href="../../Dao/PostgresqlUserDao.html">PostgresqlUserDao</a><br />
 	    		<a href="../../Dao/SqlDao.html">SqlDao</a><br />
@@ -209,6 +213,7 @@ Source Location: /Record/Record.php<br /><br />
     <li><a href="../../Dao/Record/Record.html#methodconvertGetMethodToPhpColumn">convertGetMethodToPhpColumn</a></li>
     <li><a href="../../Dao/Record/Record.html#methodconvertSetMethodToPhpColumn">convertSetMethodToPhpColumn</a></li>
     <li><a href="../../Dao/Record/Record.html#methoddelete">delete</a></li>
+    <li><a href="../../Dao/Record/Record.html#methodexistsInDatabase">existsInDatabase</a></li>
     <li><a href="../../Dao/Record/Record.html#methodget">get</a></li>
     <li><a href="../../Dao/Record/Record.html#methodgetArray">getArray</a></li>
     <li><a href="../../Dao/Record/Record.html#methodgetAttributeType">getAttributeType</a></li>
@@ -430,7 +435,7 @@ The Record is the data representation of one row from a Database request done wi
 <div class="tags">
   <hr />
 	<a name="methodcoerce"></a>
-	<h3>static method coerce <span class="smalllinenumber">[line 378]</span></h3>
+	<h3>static method coerce <span class="smalllinenumber">[line 388]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -524,7 +529,7 @@ $existsInDatabase = false])</code>
   </div>
   <hr />
 	<a name="methodclearComputedAttributesCache"></a>
-	<h3>method clearComputedAttributesCache <span class="smalllinenumber">[line 250]</span></h3>
+	<h3>method clearComputedAttributesCache <span class="smalllinenumber">[line 260]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -560,7 +565,7 @@ $attributeName = null])</code>
   </div>
   <hr />
 	<a name="methodconvertGetMethodToPhpColumn"></a>
-	<h3>method convertGetMethodToPhpColumn <span class="smalllinenumber">[line 308]</span></h3>
+	<h3>method convertGetMethodToPhpColumn <span class="smalllinenumber">[line 318]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -596,7 +601,7 @@ $method)</code>
   </div>
   <hr />
 	<a name="methodconvertSetMethodToPhpColumn"></a>
-	<h3>method convertSetMethodToPhpColumn <span class="smalllinenumber">[line 312]</span></h3>
+	<h3>method convertSetMethodToPhpColumn <span class="smalllinenumber">[line 322]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -632,7 +637,7 @@ $method)</code>
   </div>
   <hr />
 	<a name="methoddelete"></a>
-	<h3>method delete <span class="smalllinenumber">[line 143]</span></h3>
+	<h3>method delete <span class="smalllinenumber">[line 151]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -662,8 +667,36 @@ $method)</code>
         <div class="top">[ <a href="#top">Top</a> ]</div>
   </div>
   <hr />
+	<a name="methodexistsInDatabase"></a>
+	<h3>method existsInDatabase <span class="smalllinenumber">[line 118]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>bool existsInDatabase(
+)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		<br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>return:</b>&nbsp;&nbsp;</td><td>Whether the record exists in the database or not.</td>
+  </tr>
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
 	<a name="methodget"></a>
-	<h3>method get <span class="smalllinenumber">[line 203]</span></h3>
+	<h3>method get <span class="smalllinenumber">[line 212]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -705,7 +738,7 @@ $attributeName)</code>
   </div>
   <hr />
 	<a name="methodgetArray"></a>
-	<h3>method getArray <span class="smalllinenumber">[line 168]</span></h3>
+	<h3>method getArray <span class="smalllinenumber">[line 177]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -730,7 +763,7 @@ $attributeName)</code>
   </div>
   <hr />
 	<a name="methodgetAttributeType"></a>
-	<h3>method getAttributeType <span class="smalllinenumber">[line 362]</span></h3>
+	<h3>method getAttributeType <span class="smalllinenumber">[line 372]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -766,7 +799,7 @@ $attributeName)</code>
   </div>
   <hr />
 	<a name="methodgetChangedAttributes"></a>
-	<h3>method getChangedAttributes <span class="smalllinenumber">[line 177]</span></h3>
+	<h3>method getChangedAttributes <span class="smalllinenumber">[line 186]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -791,7 +824,7 @@ $attributeName)</code>
   </div>
   <hr />
 	<a name="methodgetChangedValues"></a>
-	<h3>method getChangedValues <span class="smalllinenumber">[line 185]</span></h3>
+	<h3>method getChangedValues <span class="smalllinenumber">[line 194]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -816,7 +849,7 @@ $attributeName)</code>
   </div>
   <hr />
 	<a name="methodgetComputedAttribute"></a>
-	<h3>method getComputedAttribute <span class="smalllinenumber">[line 235]</span></h3>
+	<h3>method getComputedAttribute <span class="smalllinenumber">[line 245]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -877,7 +910,7 @@ $attributeName)</code>
   </div>
   <hr />
 	<a name="methodgetDirectly"></a>
-	<h3>method getDirectly <span class="smalllinenumber">[line 262]</span></h3>
+	<h3>method getDirectly <span class="smalllinenumber">[line 272]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -919,7 +952,7 @@ $value)</code>
   </div>
   <hr />
 	<a name="methodload"></a>
-	<h3>method load <span class="smalllinenumber">[line 157]</span></h3>
+	<h3>method load <span class="smalllinenumber">[line 165]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -947,7 +980,7 @@ $value)</code>
   </div>
   <hr />
 	<a name="methodsave"></a>
-	<h3>method save <span class="smalllinenumber">[line 133]</span></h3>
+	<h3>method save <span class="smalllinenumber">[line 141]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -981,7 +1014,7 @@ $value)</code>
   </div>
   <hr />
 	<a name="methodset"></a>
-	<h3>method set <span class="smalllinenumber">[line 274]</span></h3>
+	<h3>method set <span class="smalllinenumber">[line 284]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1032,7 +1065,7 @@ $value)</code>
   </div>
   <hr />
 	<a name="methodsetData"></a>
-	<h3>method setData <span class="smalllinenumber">[line 120]</span></h3>
+	<h3>method setData <span class="smalllinenumber">[line 128]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1068,7 +1101,7 @@ $data)</code>
   </div>
   <hr />
 	<a name="methodsetDirectly"></a>
-	<h3>method setDirectly <span class="smalllinenumber">[line 303]</span></h3>
+	<h3>method setDirectly <span class="smalllinenumber">[line 313]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1146,7 +1179,7 @@ $existsInDatabase = true])</code>
   </div>
   <hr />
 	<a name="method__call"></a>
-	<h3>method __call <span class="smalllinenumber">[line 336]</span></h3>
+	<h3>method __call <span class="smalllinenumber">[line 346]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1179,7 +1212,7 @@ $param)</code>
   </div>
   <hr />
 	<a name="method__get"></a>
-	<h3>method __get <span class="smalllinenumber">[line 332]</span></h3>
+	<h3>method __get <span class="smalllinenumber">[line 342]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1215,7 +1248,7 @@ $phpColumn)</code>
   </div>
   <hr />
 	<a name="method__isset"></a>
-	<h3>method __isset <span class="smalllinenumber">[line 326]</span></h3>
+	<h3>method __isset <span class="smalllinenumber">[line 336]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1251,7 +1284,7 @@ $attributeName)</code>
   </div>
   <hr />
 	<a name="method__set"></a>
-	<h3>method __set <span class="smalllinenumber">[line 328]</span></h3>
+	<h3>method __set <span class="smalllinenumber">[line 338]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">

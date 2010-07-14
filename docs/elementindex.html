@@ -27,13 +27,13 @@
 			</div>
       <b>Packages:</b><br />
               <a href="li_Config.html">Config</a><br />
-              <a href="li_php-library.html">php-library</a><br />
               <a href="li_Dao.html">Dao</a><br />
               <a href="li_DataSource.html">DataSource</a><br />
               <a href="li_Database.html">Database</a><br />
               <a href="li_Date.html">Date</a><br />
               <a href="li_File.html">File</a><br />
               <a href="li_Logger.html">Logger</a><br />
+              <a href="li_Profiler.html">Profiler</a><br />
               <a href="li_Storage.html">Storage</a><br />
             <br /><br />
                 </td>
@@ -75,12 +75,6 @@
 		<dl>
 							<dt><b>$additionalAttributes</b></dt>
 				<dd>in file Dao.php, variable <a href="Dao/Dao.html#var$additionalAttributes">Dao::$additionalAttributes</a><br>&nbsp;&nbsp;&nbsp;&nbsp;This works exactly the same as the attributes, except that it only defines attributes, that may additionally be returned by the  datasource (for example in joins).</dd>
-							<dt><b>$additionalGetVars</b></dt>
-				<dd>in file FileRetriever.php, variable <a href="php-library/FileRetriever.html#var$additionalGetVars">FileRetriever::$additionalGetVars</a></dd>
-							<dt><b>$additionalPostVars</b></dt>
-				<dd>in file FileRetriever.php, variable <a href="php-library/FileRetriever.html#var$additionalPostVars">FileRetriever::$additionalPostVars</a></dd>
-							<dt><b>$address</b></dt>
-				<dd>in file FileRetriever.php, variable <a href="php-library/FileRetriever.html#var$address">FileRetriever::$address</a></dd>
 							<dt><b>$allowedImageTypes</b></dt>
 				<dd>in file ImageFileRetriever.php, variable <a href="File/ImageFileRetriever.html#var$allowedImageTypes">ImageFileRetriever::$allowedImageTypes</a></dd>
 							<dt><b>$attributeImportMapping</b></dt>
@@ -88,13 +82,11 @@
 							<dt><b>$attributeName</b></dt>
 				<dd>in file DaoAttributeAssignment.php, variable <a href="Dao/DaoAttributeAssignment.html#var$attributeName">DaoAttributeAssignment::$attributeName</a><br>&nbsp;&nbsp;&nbsp;&nbsp;The attribute name of the assignment</dd>
 							<dt><b>$attributes</b></dt>
-				<dd>in file Dao.php, variable <a href="Dao/Dao.html#var$attributes">Dao::$attributes</a><br>&nbsp;&nbsp;&nbsp;&nbsp;This array/map must contain all attribute types. eg: array('id'=&gt;Dao::INT)</dd>
+				<dd>in file Dao.php, variable <a href="Dao/Dao.html#var$attributes">Dao::$attributes</a><br>&nbsp;&nbsp;&nbsp;&nbsp;This array/map must contain all attribute types. eg: array('id'=&gt;Dao::INT, 'firstName'=&gt;Dao::STRING)  The index is always the php name you want to access on the Record.</dd>
 							<dt><b>addLogger</b></dt>
 				<dd>in file Log.php, method <a href="Logger/Log.html#methodaddLogger">Log::addLogger()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Adds a logger in the loggers array to be used in a certain context.</dd>
 							<dt><b>addReference</b></dt>
 				<dd>in file Dao.php, method <a href="Dao/Dao.html#methodaddReference">Dao::addReference()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Adds a reference definition. This method should be called inside setupReferences().</dd>
-							<dt><b>addToManyReference</b></dt>
-				<dd>in file Dao.php, method <a href="Dao/Dao.html#methodaddToManyReference">Dao::addToManyReference()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Adds a toMany reference definition. This method should be called inside setupReferences().</dd>
 							<dt><b>afterDelete</b></dt>
 				<dd>in file Dao.php, method <a href="Dao/Dao.html#methodafterDelete">Dao::afterDelete()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;If you have to do stuff after a deletion, overwrite this function.</dd>
 							<dt><b>afterInsert</b></dt>
@@ -170,11 +162,11 @@
 							<dt><b>coerce</b></dt>
 				<dd>in file Record.php, method <a href="Dao/Record/Record.html#methodcoerce">Record::coerce()</a></dd>
 							<dt><b>commit</b></dt>
-				<dd>in file FileSourceDao.php, method <a href="Dao/FileSourceDao.html#methodcommit">FileSourceDao::commit()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Overwrite this if your file connection allows transaction.</dd>
-							<dt><b>commit</b></dt>
 				<dd>in file Mysql.php, method <a href="Database/Mysql.html#methodcommit">Mysql::commit()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Commits a transaction</dd>
 							<dt><b>commit</b></dt>
 				<dd>in file SqlDao.php, method <a href="Dao/SqlDao.html#methodcommit">SqlDao::commit()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Shorthand for: Dao.getDb()-&gt;commit()</dd>
+							<dt><b>commit</b></dt>
+				<dd>in file FileSourceDao.php, method <a href="Dao/FileSourceDao.html#methodcommit">FileSourceDao::commit()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Overwrite this if your file connection allows transaction.</dd>
 							<dt><b>commit</b></dt>
 				<dd>in file DaoInterface.php, method <a href="Dao/DaoInterface.html#methodcommit">DaoInterface::commit()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Commits a transaction</dd>
 							<dt><b>Config</b></dt>
@@ -186,9 +178,9 @@
 							<dt><b>ConfigException</b></dt>
 				<dd>in file ConfigExceptions.php, class <a href="Config/Exceptions/ConfigException.html">ConfigException</a><br>&nbsp;&nbsp;&nbsp;&nbsp;The normal ConfigException gets thrown whenever there is a Config error.</dd>
 							<dt><b>connect</b></dt>
-				<dd>in file Database.php, method <a href="Database/Database.html#methodconnect">Database::connect()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Implement your database specific connection here.</dd>
-							<dt><b>connect</b></dt>
 				<dd>in file Mysql.php, method <a href="Database/Mysql.html#methodconnect">Mysql::connect()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;This is the connect function that tries to create a mysql connection, and set the correct character set.</dd>
+							<dt><b>connect</b></dt>
+				<dd>in file Database.php, method <a href="Database/Database.html#methodconnect">Database::connect()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Implement your database specific connection here.</dd>
 							<dt><b>convertAttributeNameToDatasourceName</b></dt>
 				<dd>in file Dao.php, method <a href="Dao/Dao.html#methodconvertAttributeNameToDatasourceName">Dao::convertAttributeNameToDatasourceName()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Converts a php attribute name to the datasource name.</dd>
 							<dt><b>convertAttributeNameToPhpName</b></dt>
@@ -206,17 +198,21 @@
 							<dt><b>count</b></dt>
 				<dd>in file DaoResultIterator.php, method <a href="Dao/DaoResultIterator.html#methodcount">DaoResultIterator::count()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Return the number of rows.</dd>
 							<dt><b>create</b></dt>
-				<dd>in file FileRetriever.php, method <a href="File/FileRetriever.html#methodcreate">FileRetriever::create()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;This is the way to create a file.</dd>
+				<dd>in file ImageFile.php, method <a href="File/ImageFile.html#methodcreate">ImageFile::create()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;This is a wrapper for (new ImageFileRetriever())-&gt;create()</dd>
 							<dt><b>create</b></dt>
 				<dd>in file File.php, method <a href="File/File.html#methodcreate">File::create()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;This is a wrapper for (new FileRetriever())-&gt;create()</dd>
 							<dt><b>create</b></dt>
-				<dd>in file ImageFile.php, method <a href="File/ImageFile.html#methodcreate">ImageFile::create()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;This is a wrapper for (new ImageFileRetriever())-&gt;create()</dd>
+				<dd>in file FileRetriever.php, method <a href="File/FileRetriever.html#methodcreate">FileRetriever::create()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;This is the way to create a file.</dd>
+							<dt><b>createDao</b></dt>
+				<dd>in file DaoInterface.php, method <a href="Dao/DaoInterface.html#methodcreateDao">DaoInterface::createDao()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Instantiates a dao.</dd>
+							<dt><b>createDao</b></dt>
+				<dd>in file FileSourceDao.php, method <a href="Dao/FileSourceDao.html#methodcreateDao">FileSourceDao::createDao()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Creates a Dao.</dd>
 							<dt><b>createDao</b></dt>
 				<dd>in file SqlDao.php, method <a href="Dao/SqlDao.html#methodcreateDao">SqlDao::createDao()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Creates a Dao.</dd>
 							<dt><b>createDao</b></dt>
-				<dd>in file Dao.php, method <a href="Dao/Dao.html#methodcreateDao">Dao::createDao()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Creates a Dao.</dd>
+				<dd>in file DaoReference.php, method <a href="Dao/DaoReference.html#methodcreateDao">DaoReference::createDao()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Creates a Dao. This calls createDao internally on the sourceDao.</dd>
 							<dt><b>createDao</b></dt>
-				<dd>in file FileSourceDao.php, method <a href="Dao/FileSourceDao.html#methodcreateDao">FileSourceDao::createDao()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Creates a Dao.</dd>
+				<dd>in file Dao.php, method <a href="Dao/Dao.html#methodcreateDao">Dao::createDao()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Creates a Dao.</dd>
 							<dt><b>createDaoAttributeAssignment</b></dt>
 				<dd>in file DaoAttributeAssignment.php, function <a href="Dao/_Dao---DaoAttributeAssignment.php.html#functioncreateDaoAttributeAssignment">createDaoAttributeAssignment()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;This function is a shortcut for creating the DaoAttributeAssignment Object</dd>
 							<dt><b>createFromFormUpload</b></dt>
@@ -226,15 +222,15 @@
 							<dt><b>createFromLocalFile</b></dt>
 				<dd>in file FileRetriever.php, method <a href="File/FileRetriever.html#methodcreateFromLocalFile">FileRetriever::createFromLocalFile()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;This method is the way to get a file from a local file.</dd>
 							<dt><b>createIterator</b></dt>
-				<dd>in file MysqlDao.php, method <a href="Dao/MysqlDao.html#methodcreateIterator">MysqlDao::createIterator()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Creates an iterator for a mysql result.</dd>
+				<dd>in file SqlDao.php, method <a href="Dao/SqlDao.html#methodcreateIterator">SqlDao::createIterator()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Creates an iterator from a php result.</dd>
 							<dt><b>createIterator</b></dt>
 				<dd>in file XmlDao.php, method <a href="Dao/XmlDao.html#methodcreateIterator">XmlDao::createIterator()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Creates an iterator for a Xml data hash.</dd>
-							<dt><b>createIterator</b></dt>
-				<dd>in file SqlDao.php, method <a href="Dao/SqlDao.html#methodcreateIterator">SqlDao::createIterator()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Creates an iterator from a php result.</dd>
 							<dt><b>createIterator</b></dt>
 				<dd>in file FileSourceDao.php, method <a href="Dao/FileSourceDao.html#methodcreateIterator">FileSourceDao::createIterator()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Creates an iterator from a data hash.</dd>
 							<dt><b>createIterator</b></dt>
 				<dd>in file JsonDao.php, method <a href="Dao/JsonDao.html#methodcreateIterator">JsonDao::createIterator()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Creates an iterator for a json data hash.</dd>
+							<dt><b>createIterator</b></dt>
+				<dd>in file MysqlDao.php, method <a href="Dao/MysqlDao.html#methodcreateIterator">MysqlDao::createIterator()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Creates an iterator for a mysql result.</dd>
 							<dt><b>current</b></dt>
 				<dd>in file DaoResultIterator.php, method <a href="Dao/DaoResultIterator.html#methodcurrent">DaoResultIterator::current()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Return the current Record.</dd>
 					</dl>
@@ -246,9 +242,9 @@
 		<h2>d</h2>
 		<dl>
 							<dt><b>$dao</b></dt>
-				<dd>in file Record.php, variable <a href="Dao/Record/Record.html#var$dao">Record::$dao</a></dd>
-							<dt><b>$dao</b></dt>
 				<dd>in file DaoResultIterator.php, variable <a href="Dao/DaoResultIterator.html#var$dao">DaoResultIterator::$dao</a></dd>
+							<dt><b>$dao</b></dt>
+				<dd>in file Record.php, variable <a href="Dao/Record/Record.html#var$dao">Record::$dao</a></dd>
 							<dt><b>$daoClassName</b></dt>
 				<dd>in file DaoReference.php, variable <a href="Dao/DaoReference.html#var$daoClassName">DaoReference::$daoClassName</a><br>&nbsp;&nbsp;&nbsp;&nbsp;The dao class name used to get the referenced foreign Record.</dd>
 							<dt><b>$data</b></dt>
@@ -289,6 +285,8 @@
 				<dd>procedural page <a href="Dao/_Dao---DaoResultIterator.php.html">DaoResultIterator.php</a></dd>
 							<dt><b>DaoToManyReference.php</b></dt>
 				<dd>procedural page <a href="Dao/_Dao---DaoToManyReference.php.html">DaoToManyReference.php</a></dd>
+							<dt><b>DaoToOneReference.php</b></dt>
+				<dd>procedural page <a href="Dao/_Dao---DaoToOneReference.php.html">DaoToOneReference.php</a></dd>
 							<dt><b>DaoAttributeAssignment</b></dt>
 				<dd>in file DaoAttributeAssignment.php, class <a href="Dao/DaoAttributeAssignment.html">DaoAttributeAssignment</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Sometimes an associative array is simply not enough to create a query.</dd>
 							<dt><b>DaoException</b></dt>
@@ -309,6 +307,8 @@
 				<dd>in file DaoResultIterator.php, class <a href="Dao/DaoResultIterator.html">DaoResultIterator</a><br>&nbsp;&nbsp;&nbsp;&nbsp;The Dao Result iterator is returned whenever a query returns more than one row.</dd>
 							<dt><b>DaoToManyReference</b></dt>
 				<dd>in file DaoToManyReference.php, class <a href="Dao/DaoToManyReference.html">DaoToManyReference</a><br>&nbsp;&nbsp;&nbsp;&nbsp;A DaoToManyReference describes references to many resources.</dd>
+							<dt><b>DaoToOneReference</b></dt>
+				<dd>in file DaoToOneReference.php, class <a href="Dao/DaoToOneReference.html">DaoToOneReference</a><br>&nbsp;&nbsp;&nbsp;&nbsp;A DaoToOneReference describes a reference to another record in another resource.</dd>
 							<dt><b>DaoWrongValueException</b></dt>
 				<dd>in file DaoExceptions.php, class <a href="Dao/Exceptions/DaoWrongValueException.html">DaoWrongValueException</a><br>&nbsp;&nbsp;&nbsp;&nbsp;The WrongValue Exception. It's used if a value is not present in an enum for example.</dd>
 							<dt><b>Database</b></dt>
@@ -319,8 +319,6 @@
 				<dd>procedural page <a href="Database/Exceptions/_Database---DatabaseExceptions.php.html">DatabaseExceptions.php</a></dd>
 							<dt><b>DatabaseInterface.php</b></dt>
 				<dd>procedural page <a href="Database/_Database---DatabaseInterface.php.html">DatabaseInterface.php</a></dd>
-							<dt><b>DatabaseFileRetriever</b></dt>
-				<dd>in file DatabaseFileRetriever.php, class <a href="php-library/DatabaseFileRetriever.html">DatabaseFileRetriever</a></dd>
 							<dt><b>DatabaseInterface</b></dt>
 				<dd>in file DatabaseInterface.php, class <a href="Database/DatabaseInterface.html">DatabaseInterface</a><br>&nbsp;&nbsp;&nbsp;&nbsp;The database interface.</dd>
 							<dt><b>DatabaseResult</b></dt>
@@ -348,45 +346,37 @@
 							<dt><b>DATE_WITH_TIME</b></dt>
 				<dd>in file Dao.php, class constant <a href="Dao/Dao.html#constDATE_WITH_TIME">Dao::DATE_WITH_TIME</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Data types</dd>
 							<dt><b>debug</b></dt>
-				<dd>in file FileRetrieverInterface.php, method <a href="php-library/FileRetrieverInterface.html#methoddebug">FileRetrieverInterface::debug()</a></dd>
-							<dt><b>debug</b></dt>
 				<dd>in file Logger.php, method <a href="Logger/Logger.html#methoddebug">Logger::debug()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Log a debug message</dd>
-							<dt><b>debug</b></dt>
-				<dd>in file Log.php, method <a href="Logger/Log.html#methoddebug">Log::debug()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Logs a debug message in the logger for the specific context</dd>
-							<dt><b>debug</b></dt>
-				<dd>in file FileRetriever.php, method <a href="php-library/FileRetriever.html#methoddebug">FileRetriever::debug()</a></dd>
 							<dt><b>DEBUG</b></dt>
 				<dd>in file Logger.php, class constant <a href="Logger/Logger.html#constDEBUG">Logger::DEBUG</a><br>&nbsp;&nbsp;&nbsp;&nbsp;The different Log levels.</dd>
 							<dt><b>debug</b></dt>
 				<dd>in file Dao.php, method <a href="Dao/Dao.html#methoddebug">Dao::debug()</a></dd>
+							<dt><b>debug</b></dt>
+				<dd>in file Log.php, method <a href="Logger/Log.html#methoddebug">Log::debug()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Logs a debug message in the logger for the specific context</dd>
 							<dt><b>delete</b></dt>
 				<dd>in file RecordInterface.php, method <a href="Dao/Record/RecordInterface.html#methoddelete">RecordInterface::delete()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Calls delete($this) on the dao.</dd>
 							<dt><b>delete</b></dt>
-				<dd>in file DaoInterface.php, method <a href="Dao/DaoInterface.html#methoddelete">DaoInterface::delete()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Takes a Record and delets it in the datasource. (Again the id is used)</dd>
-							<dt><b>delete</b></dt>
-				<dd>in file DatabaseFileRetriever.php, method <a href="php-library/DatabaseFileRetriever.html#methoddelete">DatabaseFileRetriever::delete()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;See select()</dd>
-							<dt><b>delete</b></dt>
-				<dd>in file Record.php, method <a href="Dao/Record/Record.html#methoddelete">Record::delete()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Calls delete($this) on the dao.</dd>
-							<dt><b>delete</b></dt>
 				<dd>in file FileSourceDao.php, method <a href="Dao/FileSourceDao.html#methoddelete">FileSourceDao::delete()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Deletes a record in the database using the id.</dd>
+							<dt><b>delete</b></dt>
+				<dd>in file DaoInterface.php, method <a href="Dao/DaoInterface.html#methoddelete">DaoInterface::delete()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Takes a Record and delets it in the datasource. (Again the id is used)</dd>
 							<dt><b>delete</b></dt>
 				<dd>in file DataSource.php, method <a href="DataSource/DataSource.html#methoddelete">DataSource::delete()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Deletes the object</dd>
 							<dt><b>delete</b></dt>
 				<dd>in file SqlDao.php, method <a href="Dao/SqlDao.html#methoddelete">SqlDao::delete()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Deletes a record in the database using the id.</dd>
-							<dt><b>deleteById</b></dt>
-				<dd>in file Dao.php, method <a href="Dao/Dao.html#methoddeleteById">Dao::deleteById()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Gets the record by id and deletes it.</dd>
+							<dt><b>delete</b></dt>
+				<dd>in file Record.php, method <a href="Dao/Record/Record.html#methoddelete">Record::delete()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Calls delete($this) on the dao.</dd>
 							<dt><b>deleteById</b></dt>
 				<dd>in file DaoInterface.php, method <a href="Dao/DaoInterface.html#methoddeleteById">DaoInterface::deleteById()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Takes an id and deletes it in the datasource.</dd>
+							<dt><b>deleteById</b></dt>
+				<dd>in file Dao.php, method <a href="Dao/Dao.html#methoddeleteById">Dao::deleteById()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Gets the record by id and deletes it.</dd>
 							<dt><b>DESC</b></dt>
 				<dd>in file Dao.php, class constant <a href="Dao/Dao.html#constDESC">Dao::DESC</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Sort types</dd>
 							<dt><b>doLog</b></dt>
-				<dd>in file FileLogger.php, method <a href="Logger/FileLogger.html#methoddoLog">FileLogger::doLog()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Logs the message to a file.</dd>
-							<dt><b>doLog</b></dt>
 				<dd>in file Logger.php, method <a href="Logger/Logger.html#methoddoLog">Logger::doLog()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;The actual method that logs the message</dd>
+							<dt><b>doLog</b></dt>
+				<dd>in file FileLogger.php, method <a href="Logger/FileLogger.html#methoddoLog">FileLogger::doLog()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Logs the message to a file.</dd>
 							<dt><b>DO_NOT_EXPORT_VALUES</b></dt>
 				<dd>in file Dao.php, class constant <a href="Dao/Dao.html#constDO_NOT_EXPORT_VALUES">Dao::DO_NOT_EXPORT_VALUES</a></dd>
-							<dt><b>DatabaseFileRetriever.php</b></dt>
-				<dd>procedural page <a href="php-library/_FileRetriever_DEPRECATED---DatabaseFileRetriever.php.html">DatabaseFileRetriever.php</a></dd>
 					</dl>
 	</div>
 	<a href="elementindex.html#top">top</a><br>
@@ -401,44 +391,46 @@
 				<dd>in file UserRecord.php, method <a href="Dao/Record/UserRecord.html#methodencryptPassword">UserRecord::encryptPassword()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Encrypts the password</dd>
 							<dt><b>ensureConnection</b></dt>
 				<dd>in file Database.php, method <a href="Database/Database.html#methodensureConnection">Database::ensureConnection()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Checks if it's connected, and calls connect() if not.</dd>
+							<dt><b>error</b></dt>
+				<dd>in file Log.php, method <a href="Logger/Log.html#methoderror">Log::error()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Logs an error message in the logger for the specific context</dd>
 							<dt><b>ERROR</b></dt>
 				<dd>in file Logger.php, class constant <a href="Logger/Logger.html#constERROR">Logger::ERROR</a><br>&nbsp;&nbsp;&nbsp;&nbsp;The different Log levels.</dd>
 							<dt><b>error</b></dt>
-				<dd>in file Log.php, method <a href="Logger/Log.html#methoderror">Log::error()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Logs an error message in the logger for the specific context</dd>
-							<dt><b>error</b></dt>
 				<dd>in file Logger.php, method <a href="Logger/Logger.html#methoderror">Logger::error()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Log an error</dd>
 							<dt><b>escapeAttributeName</b></dt>
-				<dd>in file FileSourceDao.php, method <a href="Dao/FileSourceDao.html#methodescapeAttributeName">FileSourceDao::escapeAttributeName()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;By default does nothing for FileDaos.</dd>
-							<dt><b>escapeAttributeName</b></dt>
 				<dd>in file SqlDao.php, method <a href="Dao/SqlDao.html#methodescapeAttributeName">SqlDao::escapeAttributeName()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Calls the internal db-&gt;escapeColumn function</dd>
+							<dt><b>escapeAttributeName</b></dt>
+				<dd>in file FileSourceDao.php, method <a href="Dao/FileSourceDao.html#methodescapeAttributeName">FileSourceDao::escapeAttributeName()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;By default does nothing for FileDaos.</dd>
 							<dt><b>escapeColumn</b></dt>
 				<dd>in file Database.php, method <a href="Database/Database.html#methodescapeColumn">Database::escapeColumn()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Typically columns are just escaped as strings.</dd>
 							<dt><b>escapeColumn</b></dt>
 				<dd>in file DatabaseInterface.php, method <a href="Database/DatabaseInterface.html#methodescapeColumn">DatabaseInterface::escapeColumn()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Escapes a column so it can be used in a query.</dd>
 							<dt><b>escapeResourceName</b></dt>
-				<dd>in file FileSourceDao.php, method <a href="Dao/FileSourceDao.html#methodescapeResourceName">FileSourceDao::escapeResourceName()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Does nothing by default.</dd>
-							<dt><b>escapeResourceName</b></dt>
 				<dd>in file SqlDao.php, method <a href="Dao/SqlDao.html#methodescapeResourceName">SqlDao::escapeResourceName()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Calls the internal db-&gt;escapeResourceName function</dd>
-							<dt><b>escapeString</b></dt>
-				<dd>in file DatabaseInterface.php, method <a href="Database/DatabaseInterface.html#methodescapeString">DatabaseInterface::escapeString()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Escapes a string so it can be used in a query.</dd>
+							<dt><b>escapeResourceName</b></dt>
+				<dd>in file FileSourceDao.php, method <a href="Dao/FileSourceDao.html#methodescapeResourceName">FileSourceDao::escapeResourceName()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Does nothing by default.</dd>
 							<dt><b>escapeString</b></dt>
 				<dd>in file SqlDao.php, method <a href="Dao/SqlDao.html#methodescapeString">SqlDao::escapeString()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Calls the internal db-&gt;escapeString function</dd>
 							<dt><b>escapeString</b></dt>
 				<dd>in file Mysql.php, method <a href="Database/Mysql.html#methodescapeString">Mysql::escapeString()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Escapes the string for mysql queries.</dd>
-							<dt><b>escapeTable</b></dt>
-				<dd>in file DatabaseInterface.php, method <a href="Database/DatabaseInterface.html#methodescapeTable">DatabaseInterface::escapeTable()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Escapes a table so it can be used in a query.</dd>
+							<dt><b>escapeString</b></dt>
+				<dd>in file DatabaseInterface.php, method <a href="Database/DatabaseInterface.html#methodescapeString">DatabaseInterface::escapeString()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Escapes a string so it can be used in a query.</dd>
 							<dt><b>escapeTable</b></dt>
 				<dd>in file Database.php, method <a href="Database/Database.html#methodescapeTable">Database::escapeTable()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Typically tables are just escaped as strings.</dd>
-							<dt><b>exportAttributeName</b></dt>
-				<dd>in file Dao.php, method <a href="Dao/Dao.html#methodexportAttributeName">Dao::exportAttributeName()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Takes a php attribute name, converts it via import/export attribute mapping, converts it to the datasource name  and calls escapeAttributeName.</dd>
+							<dt><b>escapeTable</b></dt>
+				<dd>in file DatabaseInterface.php, method <a href="Database/DatabaseInterface.html#methodescapeTable">DatabaseInterface::escapeTable()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Escapes a table so it can be used in a query.</dd>
+							<dt><b>existsInDatabase</b></dt>
+				<dd>in file Record.php, method <a href="Dao/Record/Record.html#methodexistsInDatabase">Record::existsInDatabase()</a></dd>
 							<dt><b>exportAttributeName</b></dt>
 				<dd>in file MysqlDao.php, method <a href="Dao/MysqlDao.html#methodexportAttributeName">MysqlDao::exportAttributeName()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Calls the Dao::exportAttributeName and adds quotes.</dd>
+							<dt><b>exportAttributeName</b></dt>
+				<dd>in file Dao.php, method <a href="Dao/Dao.html#methodexportAttributeName">Dao::exportAttributeName()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Takes a php attribute name, converts it via import/export attribute mapping, converts it to the datasource name  and calls escapeAttributeName.</dd>
 							<dt><b>exportBool</b></dt>
 				<dd>in file Dao.php, method <a href="Dao/Dao.html#methodexportBool">Dao::exportBool()</a></dd>
 							<dt><b>exportDate</b></dt>
-				<dd>in file SqlDao.php, method <a href="Dao/SqlDao.html#methodexportDate">SqlDao::exportDate()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns a formatted date, and escaped with exportString.</dd>
-							<dt><b>exportDate</b></dt>
 				<dd>in file Dao.php, method <a href="Dao/Dao.html#methodexportDate">Dao::exportDate()</a></dd>
+							<dt><b>exportDate</b></dt>
+				<dd>in file SqlDao.php, method <a href="Dao/SqlDao.html#methodexportDate">SqlDao::exportDate()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns a formatted date, and escaped with exportString.</dd>
 							<dt><b>exportEnum</b></dt>
 				<dd>in file Dao.php, method <a href="Dao/Dao.html#methodexportEnum">Dao::exportEnum()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;If the value is in the enum list, it calls exportString, and returns it.</dd>
 							<dt><b>exportFloat</b></dt>
@@ -454,9 +446,9 @@
 							<dt><b>exportResourceName</b></dt>
 				<dd>in file MysqlDao.php, method <a href="Dao/MysqlDao.html#methodexportResourceName">MysqlDao::exportResourceName()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Escapes and quotes a table name.</dd>
 							<dt><b>exportString</b></dt>
-				<dd>in file MysqlDao.php, method <a href="Dao/MysqlDao.html#methodexportString">MysqlDao::exportString()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Escapes and quotes a string.</dd>
-							<dt><b>exportString</b></dt>
 				<dd>in file Dao.php, method <a href="Dao/Dao.html#methodexportString">Dao::exportString()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;If your strings need quoting, do that in here.</dd>
+							<dt><b>exportString</b></dt>
+				<dd>in file MysqlDao.php, method <a href="Dao/MysqlDao.html#methodexportString">MysqlDao::exportString()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Escapes and quotes a string.</dd>
 							<dt><b>exportValue</b></dt>
 				<dd>in file Dao.php, method <a href="Dao/Dao.html#methodexportValue">Dao::exportValue()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Exports a PHP value into a value understood by the Database</dd>
 					</dl>
@@ -483,16 +475,16 @@
 				<dd>procedural page <a href="Dao/_Dao---FileSourceResultIterator.php.html">FileSourceResultIterator.php</a></dd>
 							<dt><b>FileDataSource.php</b></dt>
 				<dd>procedural page <a href="DataSource/_DataSource---FileDataSource.php.html">FileDataSource.php</a></dd>
-							<dt><b>FATAL</b></dt>
-				<dd>in file Logger.php, class constant <a href="Logger/Logger.html#constFATAL">Logger::FATAL</a><br>&nbsp;&nbsp;&nbsp;&nbsp;The different Log levels.</dd>
-							<dt><b>fatal</b></dt>
-				<dd>in file Log.php, method <a href="Logger/Log.html#methodfatal">Log::fatal()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Logs a fatal error message in the logger for the specific context</dd>
 							<dt><b>fatal</b></dt>
 				<dd>in file Logger.php, method <a href="Logger/Logger.html#methodfatal">Logger::fatal()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Log a fatal error</dd>
-							<dt><b>fetch</b></dt>
-				<dd>in file DatabaseResult.php, method <a href="Database/DatabaseResult/DatabaseResult.html#methodfetch">DatabaseResult::fetch()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;This is a shortcut for fetchArray or fetchResult.</dd>
+							<dt><b>fatal</b></dt>
+				<dd>in file Log.php, method <a href="Logger/Log.html#methodfatal">Log::fatal()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Logs a fatal error message in the logger for the specific context</dd>
+							<dt><b>FATAL</b></dt>
+				<dd>in file Logger.php, class constant <a href="Logger/Logger.html#constFATAL">Logger::FATAL</a><br>&nbsp;&nbsp;&nbsp;&nbsp;The different Log levels.</dd>
 							<dt><b>fetch</b></dt>
 				<dd>in file DatabaseResultInterface.php, method <a href="Database/DatabaseResult/DatabaseResultInterface.html#methodfetch">DatabaseResultInterface::fetch()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;If $field is given, fetchResult is used.</dd>
+							<dt><b>fetch</b></dt>
+				<dd>in file DatabaseResult.php, method <a href="Database/DatabaseResult/DatabaseResult.html#methodfetch">DatabaseResult::fetch()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;This is a shortcut for fetchArray or fetchResult.</dd>
 							<dt><b>fetchArray</b></dt>
 				<dd>in file MysqlResult.php, method <a href="Database/DatabaseResult/MysqlResult.html#methodfetchArray">MysqlResult::fetchArray()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;If you pass a row number, seek() is called.</dd>
 							<dt><b>fetchArray</b></dt>
@@ -519,28 +511,22 @@
 				<dd>in file FileLogger.php, class <a href="Logger/LoggerExceptions/FileLoggerException.html">FileLoggerException</a><br>&nbsp;&nbsp;&nbsp;&nbsp;The FileLoggerException</dd>
 							<dt><b>FileRetriever</b></dt>
 				<dd>in file FileRetriever.php, class <a href="File/FileRetriever.html">FileRetriever</a><br>&nbsp;&nbsp;&nbsp;&nbsp;The FileRetriever actually fetches a files, and returns the File object.</dd>
-							<dt><b>FileRetriever</b></dt>
-				<dd>in file FileRetriever.php, class <a href="php-library/FileRetriever.html">FileRetriever</a></dd>
-							<dt><b>FileRetrieverException</b></dt>
-				<dd>in file FileRetrieverInterface.php, class <a href="php-library/FileRetrieverException.html">FileRetrieverException</a></dd>
 							<dt><b>FileRetrieverException</b></dt>
 				<dd>in file FileRetriever.php, class <a href="File/FileRetrieverExceptions/FileRetrieverException.html">FileRetrieverException</a><br>&nbsp;&nbsp;&nbsp;&nbsp;The Exception base class for FileRetrieverExceptions.</dd>
-							<dt><b>FileRetrieverInterface</b></dt>
-				<dd>in file FileRetrieverInterface.php, class <a href="php-library/FileRetrieverInterface.html">FileRetrieverInterface</a></dd>
-							<dt><b>FileRetriever.php</b></dt>
-				<dd>procedural page <a href="php-library/_FileRetriever_DEPRECATED---FileRetriever.php.html">FileRetriever.php</a></dd>
-							<dt><b>FileRetrieverInterface.php</b></dt>
-				<dd>procedural page <a href="php-library/_FileRetriever_DEPRECATED---FileRetrieverInterface.php.html">FileRetrieverInterface.php</a></dd>
 							<dt><b>FileSourceDao</b></dt>
 				<dd>in file FileSourceDao.php, class <a href="Dao/FileSourceDao.html">FileSourceDao</a><br>&nbsp;&nbsp;&nbsp;&nbsp;The FileSourceDao is used to get a file somewhere, interpret it and act as a normal datasource.</dd>
 							<dt><b>FileSourceResultIterator</b></dt>
 				<dd>in file FileSourceResultIterator.php, class <a href="Dao/FileSourceResultIterator.html">FileSourceResultIterator</a><br>&nbsp;&nbsp;&nbsp;&nbsp;This class implements the FileSourceResultIterator.</dd>
 							<dt><b>find</b></dt>
-				<dd>in file DaoInterface.php, method <a href="Dao/DaoInterface.html#methodfind">DaoInterface::find()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;This function does the same as get(), but returns null if the data is not found.</dd>
+				<dd>in file FileSourceDao.php, method <a href="Dao/FileSourceDao.html#methodfind">FileSourceDao::find()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;This is the method to get a Record from the database.</dd>
 							<dt><b>find</b></dt>
 				<dd>in file SqlDao.php, method <a href="Dao/SqlDao.html#methodfind">SqlDao::find()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;This is the method to get a Record from the database.</dd>
 							<dt><b>find</b></dt>
-				<dd>in file FileSourceDao.php, method <a href="Dao/FileSourceDao.html#methodfind">FileSourceDao::find()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;This is the method to get a Record from the database.</dd>
+				<dd>in file DaoInterface.php, method <a href="Dao/DaoInterface.html#methodfind">DaoInterface::find()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;This function does the same as get(), but returns null if the data is not found.</dd>
+							<dt><b>findId</b></dt>
+				<dd>in file Dao.php, method <a href="Dao/Dao.html#methodfindId">Dao::findId()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;This is a wrapper for find() and the id as parameter.</dd>
+							<dt><b>findId</b></dt>
+				<dd>in file DaoInterface.php, method <a href="Dao/DaoInterface.html#methodfindId">DaoInterface::findId()</a></dd>
 							<dt><b>FLOAT</b></dt>
 				<dd>in file Dao.php, class constant <a href="Dao/Dao.html#constFLOAT">Dao::FLOAT</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Data types</dd>
 							<dt><b>format</b></dt>
@@ -568,63 +554,57 @@
 							<dt><b>generateQuery</b></dt>
 				<dd>in file SqlDao.php, method <a href="Dao/SqlDao.html#methodgenerateQuery">SqlDao::generateQuery()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;This function generates the SQL query for the getters.</dd>
 							<dt><b>generateSortString</b></dt>
-				<dd>in file SqlDao.php, method <a href="Dao/SqlDao.html#methodgenerateSortString">SqlDao::generateSortString()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;This method takes the $sort attribute and returns a typical 'order by ' SQL string.</dd>
+				<dd>in file FileSourceDao.php, method <a href="Dao/FileSourceDao.html#methodgenerateSortString">FileSourceDao::generateSortString()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;This method takes the $sort attribute and returns a typical 'order by ' SQL string.</dd>
 							<dt><b>generateSortString</b></dt>
 				<dd>in file Dao.php, method <a href="Dao/Dao.html#methodgenerateSortString">Dao::generateSortString()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Given the $sort parameter, it generates a sort String used in the query.</dd>
 							<dt><b>generateSortString</b></dt>
-				<dd>in file FileSourceDao.php, method <a href="Dao/FileSourceDao.html#methodgenerateSortString">FileSourceDao::generateSortString()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;This method takes the $sort attribute and returns a typical 'order by ' SQL string.</dd>
-							<dt><b>generateUrl</b></dt>
-				<dd>in file FileRetriever.php, method <a href="php-library/FileRetriever.html#methodgenerateUrl">FileRetriever::generateUrl()</a></dd>
-							<dt><b>generateVariableString</b></dt>
-				<dd>in file SignedFileRetriever.php, method <a href="php-library/SignedFileRetriever.html#methodgenerateVariableString">SignedFileRetriever::generateVariableString()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;This function signs the data.</dd>
-							<dt><b>generateVariableString</b></dt>
-				<dd>in file FileRetriever.php, method <a href="php-library/FileRetriever.html#methodgenerateVariableString">FileRetriever::generateVariableString()</a></dd>
+				<dd>in file SqlDao.php, method <a href="Dao/SqlDao.html#methodgenerateSortString">SqlDao::generateSortString()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;This method takes the $sort attribute and returns a typical 'order by ' SQL string.</dd>
 							<dt><b>get</b></dt>
 				<dd>in file Config.php, method <a href="Config/Config.html#methodget">Config::get()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Get a configuration value.</dd>
 							<dt><b>get</b></dt>
-				<dd>in file Record.php, method <a href="Dao/Record/Record.html#methodget">Record::get()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Gets the value of the $data array and returns it.</dd>
-							<dt><b>get</b></dt>
-				<dd>in file DaoInterface.php, method <a href="Dao/DaoInterface.html#methodget">DaoInterface::get()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;This is the method to get a Record from the datasource.</dd>
-							<dt><b>get</b></dt>
-				<dd>in file IniFileConfig.php, method <a href="Config/IniFileConfig.html#methodget">IniFileConfig::get()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Just returns the appropriate indices.</dd>
-							<dt><b>get</b></dt>
-				<dd>in file RecordInterface.php, method <a href="Dao/Record/RecordInterface.html#methodget">RecordInterface::get()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns the value of a column</dd>
+				<dd>in file XmlDao.php, method <a href="Dao/XmlDao.html#methodget">XmlDao::get()</a></dd>
 							<dt><b>get</b></dt>
 				<dd>in file Dao.php, method <a href="Dao/Dao.html#methodget">Dao::get()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Calls find() and throws an error if null is returned, otherwise it just passes the Record  If you call get() without parameters, a &quot;raw record&quot; will be returned, containing  only default values, and null as id.</dd>
 							<dt><b>get</b></dt>
-				<dd>in file XmlDao.php, method <a href="Dao/XmlDao.html#methodget">XmlDao::get()</a></dd>
+				<dd>in file DaoInterface.php, method <a href="Dao/DaoInterface.html#methodget">DaoInterface::get()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;This is the method to get a Record from the datasource.</dd>
+							<dt><b>get</b></dt>
+				<dd>in file RecordInterface.php, method <a href="Dao/Record/RecordInterface.html#methodget">RecordInterface::get()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns the value of a column</dd>
+							<dt><b>get</b></dt>
+				<dd>in file Record.php, method <a href="Dao/Record/Record.html#methodget">Record::get()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Gets the value of the $data array and returns it.</dd>
+							<dt><b>get</b></dt>
+				<dd>in file IniFileConfig.php, method <a href="Config/IniFileConfig.html#methodget">IniFileConfig::get()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Just returns the appropriate indices.</dd>
 							<dt><b>getAdditionalAttributes</b></dt>
 				<dd>in file DaoInterface.php, method <a href="Dao/DaoInterface.html#methodgetAdditionalAttributes">DaoInterface::getAdditionalAttributes()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns all the additional attributes.</dd>
 							<dt><b>getAdditionalAttributes</b></dt>
 				<dd>in file Dao.php, method <a href="Dao/Dao.html#methodgetAdditionalAttributes">Dao::getAdditionalAttributes()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns the additional attribute types array</dd>
 							<dt><b>getAll</b></dt>
-				<dd>in file DaoInterface.php, method <a href="Dao/DaoInterface.html#methodgetAll">DaoInterface::getAll()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Retrieves all rows</dd>
-							<dt><b>getAll</b></dt>
 				<dd>in file Dao.php, method <a href="Dao/Dao.html#methodgetAll">Dao::getAll()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns all rows (but you can specify offset &amp;amp; limit)</dd>
+							<dt><b>getAll</b></dt>
+				<dd>in file DaoInterface.php, method <a href="Dao/DaoInterface.html#methodgetAll">DaoInterface::getAll()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Retrieves all rows</dd>
 							<dt><b>getAllAsArrays</b></dt>
 				<dd>in file Dao.php, method <a href="Dao/Dao.html#methodgetAllAsArrays">Dao::getAllAsArrays()</a></dd>
 							<dt><b>getArray</b></dt>
 				<dd>in file IniFileConfig.php, method <a href="Config/IniFileConfig.html#methodgetArray">IniFileConfig::getArray()</a></dd>
 							<dt><b>getArray</b></dt>
-				<dd>in file Record.php, method <a href="Dao/Record/Record.html#methodgetArray">Record::getArray()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns an associative array with the values.</dd>
-							<dt><b>getArray</b></dt>
 				<dd>in file Config.php, method <a href="Config/Config.html#methodgetArray">Config::getArray()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;This gets all variables and returns an associative array with the sections and variables.</dd>
-							<dt><b>getAttributes</b></dt>
-				<dd>in file DaoInterface.php, method <a href="Dao/DaoInterface.html#methodgetAttributes">DaoInterface::getAttributes()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns all the attribute.</dd>
+							<dt><b>getArray</b></dt>
+				<dd>in file Record.php, method <a href="Dao/Record/Record.html#methodgetArray">Record::getArray()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns an associative array with the values.</dd>
 							<dt><b>getAttributes</b></dt>
 				<dd>in file Dao.php, method <a href="Dao/Dao.html#methodgetAttributes">Dao::getAttributes()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns the attributes array</dd>
+							<dt><b>getAttributes</b></dt>
+				<dd>in file DaoInterface.php, method <a href="Dao/DaoInterface.html#methodgetAttributes">DaoInterface::getAttributes()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns all the attribute.</dd>
 							<dt><b>getAttributeType</b></dt>
 				<dd>in file Record.php, method <a href="Dao/Record/Record.html#methodgetAttributeType">Record::getAttributeType()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns the type of the attribute defined in the Dao.</dd>
 							<dt><b>getById</b></dt>
-				<dd>in file DaoInterface.php, method <a href="Dao/DaoInterface.html#methodgetById">DaoInterface::getById()</a></dd>
-							<dt><b>getById</b></dt>
 				<dd>in file Dao.php, method <a href="Dao/Dao.html#methodgetById">Dao::getById()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;This is a wrapper for get() and the id as parameter.</dd>
-							<dt><b>getByUsername</b></dt>
-				<dd>in file UserDaoInterface.php, method <a href="Dao/UserDaoInterface.html#methodgetByUsername">UserDaoInterface::getByUsername()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Return a user by login</dd>
+							<dt><b>getById</b></dt>
+				<dd>in file DaoInterface.php, method <a href="Dao/DaoInterface.html#methodgetById">DaoInterface::getById()</a></dd>
 							<dt><b>getByUsername</b></dt>
 				<dd>in file PostgresqlUserDao.php, method <a href="Dao/PostgresqlUserDao.html#methodgetByUsername">PostgresqlUserDao::getByUsername()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns the user by username</dd>
 							<dt><b>getByUsername</b></dt>
 				<dd>in file MysqlUserDao.php, method <a href="Dao/MysqlUserDao.html#methodgetByUsername">MysqlUserDao::getByUsername()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns the user by username</dd>
+							<dt><b>getByUsername</b></dt>
+				<dd>in file UserDaoInterface.php, method <a href="Dao/UserDaoInterface.html#methodgetByUsername">UserDaoInterface::getByUsername()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Return a user by login</dd>
 							<dt><b>getChangedAttributes</b></dt>
 				<dd>in file Record.php, method <a href="Dao/Record/Record.html#methodgetChangedAttributes">Record::getChangedAttributes()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns an array of all attributes that have been explicitly set. The indices are the attribute names</dd>
 							<dt><b>getChangedValues</b></dt>
@@ -636,27 +616,35 @@
 							<dt><b>getContent</b></dt>
 				<dd>in file File.php, method <a href="File/File.html#methodgetContent">File::getContent()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Get the content of the file.</dd>
 							<dt><b>getCurrentData</b></dt>
-				<dd>in file FileSourceResultIterator.php, method <a href="Dao/FileSourceResultIterator.html#methodgetCurrentData">FileSourceResultIterator::getCurrentData()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Fetches the current data.</dd>
-							<dt><b>getCurrentData</b></dt>
-				<dd>in file DaoHashListIterator.php, method <a href="Dao/DaoHashListIterator.html#methodgetCurrentData">DaoHashListIterator::getCurrentData()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Fetches the current data.</dd>
+				<dd>in file DaoResultIterator.php, method <a href="Dao/DaoResultIterator.html#methodgetCurrentData">DaoResultIterator::getCurrentData()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns the data of the current iteration</dd>
 							<dt><b>getCurrentData</b></dt>
 				<dd>in file SqlResultIterator.php, method <a href="Dao/SqlResultIterator.html#methodgetCurrentData">SqlResultIterator::getCurrentData()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Fetches the current data.</dd>
 							<dt><b>getCurrentData</b></dt>
-				<dd>in file DaoKeyListIterator.php, method <a href="Dao/DaoKeyListIterator.html#methodgetCurrentData">DaoKeyListIterator::getCurrentData()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Fetches the current data.</dd>
+				<dd>in file DaoHashListIterator.php, method <a href="Dao/DaoHashListIterator.html#methodgetCurrentData">DaoHashListIterator::getCurrentData()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Fetches the current data.</dd>
 							<dt><b>getCurrentData</b></dt>
-				<dd>in file DaoResultIterator.php, method <a href="Dao/DaoResultIterator.html#methodgetCurrentData">DaoResultIterator::getCurrentData()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns the data of the current iteration</dd>
+				<dd>in file FileSourceResultIterator.php, method <a href="Dao/FileSourceResultIterator.html#methodgetCurrentData">FileSourceResultIterator::getCurrentData()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Fetches the current data.</dd>
+							<dt><b>getCurrentData</b></dt>
+				<dd>in file DaoKeyListIterator.php, method <a href="Dao/DaoKeyListIterator.html#methodgetCurrentData">DaoKeyListIterator::getCurrentData()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Fetches the current data.</dd>
 							<dt><b>getDao</b></dt>
 				<dd>in file Record.php, method <a href="Dao/Record/Record.html#methodgetDao">Record::getDao()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns the dao from this record.</dd>
+							<dt><b>getDao</b></dt>
+				<dd>in file DaoResultIterator.php, method <a href="Dao/DaoResultIterator.html#methodgetDao">DaoResultIterator::getDao()</a></dd>
 							<dt><b>getDaoClassName</b></dt>
 				<dd>in file DaoReference.php, method <a href="Dao/DaoReference.html#methodgetDaoClassName">DaoReference::getDaoClassName()</a></dd>
 							<dt><b>getData</b></dt>
-				<dd>in file FileSourceDao.php, method <a href="Dao/FileSourceDao.html#methodgetData">FileSourceDao::getData()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Same as get() but returns an array with the data instead of a record</dd>
+				<dd>in file SqlDao.php, method <a href="Dao/SqlDao.html#methodgetData">SqlDao::getData()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Same as get() but returns an array with the data instead of a record</dd>
+							<dt><b>getData</b></dt>
+				<dd>in file DaoToOneReference.php, method <a href="Dao/DaoToOneReference.html#methodgetData">DaoToOneReference::getData()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns a Record for a specific reference.</dd>
 							<dt><b>getData</b></dt>
 				<dd>in file DaoInterface.php, method <a href="Dao/DaoInterface.html#methodgetData">DaoInterface::getData()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;The same as get(), but returns an array with the data.</dd>
 							<dt><b>getData</b></dt>
-				<dd>in file SqlDao.php, method <a href="Dao/SqlDao.html#methodgetData">SqlDao::getData()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Same as get() but returns an array with the data instead of a record</dd>
+				<dd>in file FileSourceDao.php, method <a href="Dao/FileSourceDao.html#methodgetData">FileSourceDao::getData()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Same as get() but returns an array with the data instead of a record</dd>
+							<dt><b>getData</b></dt>
+				<dd>in file DaoReference.php, method <a href="Dao/DaoReference.html#methodgetData">DaoReference::getData()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;When a record is accessed on a reference attribute, it calls this method to get the actual records or record.</dd>
 							<dt><b>getData</b></dt>
 				<dd>in file XmlDao.php, method <a href="Dao/XmlDao.html#methodgetData">XmlDao::getData()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Just calls the parent, but then returns only one element of the list</dd>
+							<dt><b>getData</b></dt>
+				<dd>in file DaoToManyReference.php, method <a href="Dao/DaoToManyReference.html#methodgetData">DaoToManyReference::getData()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns a DaoIterator for a specific reference.</dd>
 							<dt><b>getDb</b></dt>
 				<dd>in file SqlDao.php, method <a href="Dao/SqlDao.html#methodgetDb">SqlDao::getDb()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns the database.</dd>
 							<dt><b>getDefaultValueAttributes</b></dt>
@@ -668,15 +656,11 @@
 							<dt><b>getDirectly</b></dt>
 				<dd>in file Record.php, method <a href="Dao/Record/Record.html#methodgetDirectly">Record::getDirectly()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;You should NEVER use this function your app.</dd>
 							<dt><b>getFile</b></dt>
-				<dd>in file ImageFileRetriever.php, method <a href="File/ImageFileRetriever.html#methodgetFile">ImageFileRetriever::getFile()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Creates a file, and returns it.</dd>
-							<dt><b>getFile</b></dt>
 				<dd>in file ImageFile.php, method <a href="File/ImageFile.html#methodgetFile">ImageFile::getFile()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Creates an ImageFile instead of File.</dd>
 							<dt><b>getFile</b></dt>
-				<dd>in file FileRetrieverInterface.php, method <a href="php-library/FileRetrieverInterface.html#methodgetFile">FileRetrieverInterface::getFile()</a></dd>
+				<dd>in file ImageFileRetriever.php, method <a href="File/ImageFileRetriever.html#methodgetFile">ImageFileRetriever::getFile()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Creates a file, and returns it.</dd>
 							<dt><b>getFile</b></dt>
 				<dd>in file FileRetriever.php, method <a href="File/FileRetriever.html#methodgetFile">FileRetriever::getFile()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Creates a file, and returns it.</dd>
-							<dt><b>getFile</b></dt>
-				<dd>in file FileRetriever.php, method <a href="php-library/FileRetriever.html#methodgetFile">FileRetriever::getFile()</a></dd>
 							<dt><b>getFileDataSource</b></dt>
 				<dd>in file FileSourceDao.php, method <a href="Dao/FileSourceDao.html#methodgetFileDataSource">FileSourceDao::getFileDataSource()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns the fileDataSource.</dd>
 							<dt><b>getFileUri</b></dt>
@@ -686,19 +670,19 @@
 							<dt><b>getFromQuery</b></dt>
 				<dd>in file SqlDao.php, method <a href="Dao/SqlDao.html#methodgetFromQuery">SqlDao::getFromQuery()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns a Record or data array from a query.</dd>
 							<dt><b>getGuest</b></dt>
-				<dd>in file UserDaoInterface.php, method <a href="Dao/UserDaoInterface.html#methodgetGuest">UserDaoInterface::getGuest()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Get a raw object with username 'guest'</dd>
-							<dt><b>getGuest</b></dt>
 				<dd>in file MysqlUserDao.php, method <a href="Dao/MysqlUserDao.html#methodgetGuest">MysqlUserDao::getGuest()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns a raw object with 'guest' as username</dd>
 							<dt><b>getGuest</b></dt>
 				<dd>in file PostgresqlUserDao.php, method <a href="Dao/PostgresqlUserDao.html#methodgetGuest">PostgresqlUserDao::getGuest()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns a raw object with 'guest' as username</dd>
+							<dt><b>getGuest</b></dt>
+				<dd>in file UserDaoInterface.php, method <a href="Dao/UserDaoInterface.html#methodgetGuest">UserDaoInterface::getGuest()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Get a raw object with username 'guest'</dd>
 							<dt><b>getHeight</b></dt>
 				<dd>in file ImageFile.php, method <a href="File/ImageFile.html#methodgetHeight">ImageFile::getHeight()</a></dd>
 							<dt><b>getImage</b></dt>
 				<dd>in file ImageFile.php, method <a href="File/ImageFile.html#methodgetImage">ImageFile::getImage()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns the image created with imagecreatefromXXX.</dd>
 							<dt><b>getIterator</b></dt>
-				<dd>in file SqlDao.php, method <a href="Dao/SqlDao.html#methodgetIterator">SqlDao::getIterator()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;The same as get, but returns an iterator to go through all the rows.</dd>
-							<dt><b>getIterator</b></dt>
 				<dd>in file FileSourceDao.php, method <a href="Dao/FileSourceDao.html#methodgetIterator">FileSourceDao::getIterator()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;The same as get, but returns an iterator to go through all the rows.</dd>
+							<dt><b>getIterator</b></dt>
+				<dd>in file SqlDao.php, method <a href="Dao/SqlDao.html#methodgetIterator">SqlDao::getIterator()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;The same as get, but returns an iterator to go through all the rows.</dd>
 							<dt><b>getIterator</b></dt>
 				<dd>in file DaoInterface.php, method <a href="Dao/DaoInterface.html#methodgetIterator">DaoInterface::getIterator()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;The same as get, but returns an iterator to go through all the rows.</dd>
 							<dt><b>getIteratorFromData</b></dt>
@@ -706,9 +690,9 @@
 							<dt><b>getIteratorFromQuery</b></dt>
 				<dd>in file SqlDao.php, method <a href="Dao/SqlDao.html#methodgetIteratorFromQuery">SqlDao::getIteratorFromQuery()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns an Iterator for a query</dd>
 							<dt><b>getLastInsertId</b></dt>
-				<dd>in file MysqlDao.php, method <a href="Dao/MysqlDao.html#methodgetLastInsertId">MysqlDao::getLastInsertId()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns the id of the last inserted record.</dd>
-							<dt><b>getLastInsertId</b></dt>
 				<dd>in file SqlDao.php, method <a href="Dao/SqlDao.html#methodgetLastInsertId">SqlDao::getLastInsertId()</a></dd>
+							<dt><b>getLastInsertId</b></dt>
+				<dd>in file MysqlDao.php, method <a href="Dao/MysqlDao.html#methodgetLastInsertId">MysqlDao::getLastInsertId()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns the id of the last inserted record.</dd>
 							<dt><b>getLevel</b></dt>
 				<dd>in file Logger.php, method <a href="Logger/Logger.html#methodgetLevel">Logger::getLevel()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns the current level for logging.</dd>
 							<dt><b>getLocalKey</b></dt>
@@ -720,35 +704,37 @@
 							<dt><b>getName</b></dt>
 				<dd>in file File.php, method <a href="File/File.html#methodgetName">File::getName()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Get the file name.</dd>
 							<dt><b>getNullAttributes</b></dt>
-				<dd>in file Dao.php, method <a href="Dao/Dao.html#methodgetNullAttributes">Dao::getNullAttributes()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns the null attributes</dd>
-							<dt><b>getNullAttributes</b></dt>
 				<dd>in file DaoInterface.php, method <a href="Dao/DaoInterface.html#methodgetNullAttributes">DaoInterface::getNullAttributes()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns all the attributes that can be null.</dd>
+							<dt><b>getNullAttributes</b></dt>
+				<dd>in file Dao.php, method <a href="Dao/Dao.html#methodgetNullAttributes">Dao::getNullAttributes()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns the null attributes</dd>
 							<dt><b>getProfiler</b></dt>
 				<dd>in file GlobalStorage.php, method <a href="Storage/GlobalStorage.html#methodgetProfiler">GlobalStorage::getProfiler()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns the profiler</dd>
 							<dt><b>getRawRecord</b></dt>
 				<dd>in file Dao.php, method <a href="Dao/Dao.html#methodgetRawRecord">Dao::getRawRecord()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns a record with all attributes defined, but only set if necessary.</dd>
 							<dt><b>getRecordFromData</b></dt>
-				<dd>in file Dao.php, method <a href="Dao/Dao.html#methodgetRecordFromData">Dao::getRecordFromData()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Prepares the data, and gets a new record.</dd>
-							<dt><b>getRecordFromData</b></dt>
 				<dd>in file DaoInterface.php, method <a href="Dao/DaoInterface.html#methodgetRecordFromData">DaoInterface::getRecordFromData()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns a record filled with an array of datasource values.</dd>
+							<dt><b>getRecordFromData</b></dt>
+				<dd>in file Dao.php, method <a href="Dao/Dao.html#methodgetRecordFromData">Dao::getRecordFromData()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Prepares the data, and gets a new record.</dd>
 							<dt><b>getRecordFromPreparedData</b></dt>
 				<dd>in file Dao.php, method <a href="Dao/Dao.html#methodgetRecordFromPreparedData">Dao::getRecordFromPreparedData()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns a data record with the data in it.</dd>
 							<dt><b>getReference</b></dt>
-				<dd>in file Dao.php, method <a href="Dao/Dao.html#methodgetReference">Dao::getReference()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns the Record for a specific reference.</dd>
-							<dt><b>getReferences</b></dt>
-				<dd>in file DaoInterface.php, method <a href="Dao/DaoInterface.html#methodgetReferences">DaoInterface::getReferences()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns an array of all references setup in this dao.</dd>
+				<dd>in file DaoInterface.php, method <a href="Dao/DaoInterface.html#methodgetReference">DaoInterface::getReference()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns a reference for a specific attribute.</dd>
+							<dt><b>getReference</b></dt>
+				<dd>in file Dao.php, method <a href="Dao/Dao.html#methodgetReference">Dao::getReference()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns the reference for an attribute</dd>
 							<dt><b>getReferences</b></dt>
 				<dd>in file Dao.php, method <a href="Dao/Dao.html#methodgetReferences">Dao::getReferences()</a></dd>
+							<dt><b>getReferences</b></dt>
+				<dd>in file DaoInterface.php, method <a href="Dao/DaoInterface.html#methodgetReferences">DaoInterface::getReferences()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns an array of all references setup in this dao.</dd>
 							<dt><b>getResized</b></dt>
 				<dd>in file ImageFile.php, method <a href="File/ImageFile.html#methodgetResized">ImageFile::getResized()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Resizes the original image, and returns it.</dd>
 							<dt><b>getResource</b></dt>
-				<dd>in file Database.php, method <a href="Database/Database.html#methodgetResource">Database::getResource()</a></dd>
-							<dt><b>getResource</b></dt>
 				<dd>in file DatabaseInterface.php, method <a href="Database/DatabaseInterface.html#methodgetResource">DatabaseInterface::getResource()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns the database resource</dd>
-							<dt><b>getResult</b></dt>
-				<dd>in file DatabaseResultInterface.php, method <a href="Database/DatabaseResult/DatabaseResultInterface.html#methodgetResult">DatabaseResultInterface::getResult()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns the result stored from the actual php command.</dd>
+							<dt><b>getResource</b></dt>
+				<dd>in file Database.php, method <a href="Database/Database.html#methodgetResource">Database::getResource()</a></dd>
 							<dt><b>getResult</b></dt>
 				<dd>in file DatabaseResult.php, method <a href="Database/DatabaseResult/DatabaseResult.html#methodgetResult">DatabaseResult::getResult()</a></dd>
+							<dt><b>getResult</b></dt>
+				<dd>in file DatabaseResultInterface.php, method <a href="Database/DatabaseResult/DatabaseResultInterface.html#methodgetResult">DatabaseResultInterface::getResult()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns the result stored from the actual php command.</dd>
 							<dt><b>getSize</b></dt>
 				<dd>in file File.php, method <a href="File/File.html#methodgetSize">File::getSize()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Get the file size.</dd>
 							<dt><b>getSource</b></dt>
@@ -793,6 +779,8 @@
 				<dd>in file ImageFile.php, variable <a href="File/ImageFile.html#var$image">ImageFile::$image</a></dd>
 							<dt><b>$includedFiles</b></dt>
 				<dd>in file GlobalStorage.php, variable <a href="Storage/GlobalStorage.html#var$includedFiles">GlobalStorage::$includedFiles</a></dd>
+							<dt><b>$isEnabled</b></dt>
+				<dd>in file Log.php, variable <a href="Logger/Log.html#var$isEnabled">Log::$isEnabled</a><br>&nbsp;&nbsp;&nbsp;&nbsp;This is a simple bool, to be able to check quickly if logging has been enabled or not.</dd>
 							<dt><b>IniFileConfig.php</b></dt>
 				<dd>procedural page <a href="Config/_Config---IniFileConfig.php.html">IniFileConfig.php</a></dd>
 							<dt><b>ImageFile.php</b></dt>
@@ -829,24 +817,22 @@
 				<dd>in file Dao.php, method <a href="Dao/Dao.html#methodimportValue">Dao::importValue()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Imports an external value (either from datasource, or xml, etc...) into an expected PHP variable.</dd>
 							<dt><b>includeOnce</b></dt>
 				<dd>in file GlobalStorage.php, method <a href="Storage/GlobalStorage.html#methodincludeOnce">GlobalStorage::includeOnce()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Since include_once and require_once are so incredibly slow, this function  fills the includedFiles array with the filenames.</dd>
-							<dt><b>INFO</b></dt>
-				<dd>in file Logger.php, class constant <a href="Logger/Logger.html#constINFO">Logger::INFO</a><br>&nbsp;&nbsp;&nbsp;&nbsp;The different Log levels.</dd>
 							<dt><b>info</b></dt>
 				<dd>in file Logger.php, method <a href="Logger/Logger.html#methodinfo">Logger::info()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Log an info message</dd>
 							<dt><b>info</b></dt>
 				<dd>in file Log.php, method <a href="Logger/Log.html#methodinfo">Log::info()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Logs an info message in the logger for the specific context</dd>
+							<dt><b>INFO</b></dt>
+				<dd>in file Logger.php, class constant <a href="Logger/Logger.html#constINFO">Logger::INFO</a><br>&nbsp;&nbsp;&nbsp;&nbsp;The different Log levels.</dd>
 							<dt><b>IniFileConfig</b></dt>
 				<dd>in file IniFileConfig.php, class <a href="Config/IniFileConfig.html">IniFileConfig</a><br>&nbsp;&nbsp;&nbsp;&nbsp;This is the IniFileConfig implementation of Config  It's written to parse default php.ini files to set the config.</dd>
-							<dt><b>insert</b></dt>
-				<dd>in file SqlDao.php, method <a href="Dao/SqlDao.html#methodinsert">SqlDao::insert()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Inserts a record in the database, and updates the record with the new data (in  case some default values of the database have been set.)</dd>
-							<dt><b>insert</b></dt>
-				<dd>in file DaoInterface.php, method <a href="Dao/DaoInterface.html#methodinsert">DaoInterface::insert()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Takes a Record and inserts it in the datasource.</dd>
 							<dt><b>insert</b></dt>
 				<dd>in file DataSource.php, method <a href="DataSource/DataSource.html#methodinsert">DataSource::insert()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Inserts the object, and returns the id.</dd>
 							<dt><b>insert</b></dt>
 				<dd>in file FileSourceDao.php, method <a href="Dao/FileSourceDao.html#methodinsert">FileSourceDao::insert()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Inserts a record in the database, and updates the record with the new data (in  case some default values of the database have been set.)</dd>
 							<dt><b>insert</b></dt>
-				<dd>in file DatabaseFileRetriever.php, method <a href="php-library/DatabaseFileRetriever.html#methodinsert">DatabaseFileRetriever::insert()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;See select()</dd>
+				<dd>in file DaoInterface.php, method <a href="Dao/DaoInterface.html#methodinsert">DaoInterface::insert()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Takes a Record and inserts it in the datasource.</dd>
+							<dt><b>insert</b></dt>
+				<dd>in file SqlDao.php, method <a href="Dao/SqlDao.html#methodinsert">SqlDao::insert()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Inserts a record in the database, and updates the record with the new data (in  case some default values of the database have been set.)</dd>
 							<dt><b>insertByQuery</b></dt>
 				<dd>in file SqlDao.php, method <a href="Dao/SqlDao.html#methodinsertByQuery">SqlDao::insertByQuery()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Inserts and returns the new id</dd>
 							<dt><b>INT</b></dt>
@@ -854,9 +840,9 @@
 							<dt><b>INTEGER</b></dt>
 				<dd>in file Dao.php, class constant <a href="Dao/Dao.html#constINTEGER">Dao::INTEGER</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Data types</dd>
 							<dt><b>interpretFileContent</b></dt>
-				<dd>in file JsonDao.php, method <a href="Dao/JsonDao.html#methodinterpretFileContent">JsonDao::interpretFileContent()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Intepretes the json content, and returns it.</dd>
-							<dt><b>interpretFileContent</b></dt>
 				<dd>in file XmlDao.php, method <a href="Dao/XmlDao.html#methodinterpretFileContent">XmlDao::interpretFileContent()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Intepretes the xml content, and returns it as array.</dd>
+							<dt><b>interpretFileContent</b></dt>
+				<dd>in file JsonDao.php, method <a href="Dao/JsonDao.html#methodinterpretFileContent">JsonDao::interpretFileContent()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Intepretes the json content, and returns it.</dd>
 							<dt><b>interpretFileContent</b></dt>
 				<dd>in file FileSourceDao.php, method <a href="Dao/FileSourceDao.html#methodinterpretFileContent">FileSourceDao::interpretFileContent()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Converts the content returned by the file factory into a usable data array.</dd>
 							<dt><b>interpretMap</b></dt>
@@ -915,8 +901,6 @@
 				<dd>in file DaoReference.php, variable <a href="Dao/DaoReference.html#var$localKey">DaoReference::$localKey</a><br>&nbsp;&nbsp;&nbsp;&nbsp;The local key. eg: address_id</dd>
 							<dt><b>$logger</b></dt>
 				<dd>in file Dao.php, variable <a href="Dao/Dao.html#var$logger">Dao::$logger</a></dd>
-							<dt><b>$logger</b></dt>
-				<dd>in file FileRetriever.php, variable <a href="php-library/FileRetriever.html#var$logger">FileRetriever::$logger</a></dd>
 							<dt><b>$loggers</b></dt>
 				<dd>in file Log.php, variable <a href="Logger/Log.html#var$loggers">Log::$loggers</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Contains a list of loggers for each context.</dd>
 							<dt><b>lastError</b></dt>
@@ -927,14 +911,10 @@
 				<dd>in file Record.php, method <a href="Dao/Record/Record.html#methodload">Record::load()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Uses the changed values (the values that have explicitly been set with set()) to updated  the data hash.</dd>
 							<dt><b>log</b></dt>
 				<dd>in file Logger.php, method <a href="Logger/Logger.html#methodlog">Logger::log()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;The actual method that logs the message</dd>
-							<dt><b>Log</b></dt>
-				<dd>in file Log.php, class <a href="Logger/Log.html">Log</a><br>&nbsp;&nbsp;&nbsp;&nbsp;The Log class is abstract and only used with static function.</dd>
 							<dt><b>log</b></dt>
 				<dd>in file Dao.php, method <a href="Dao/Dao.html#methodlog">Dao::log()</a></dd>
-							<dt><b>log</b></dt>
-				<dd>in file FileRetriever.php, method <a href="php-library/FileRetriever.html#methodlog">FileRetriever::log()</a></dd>
-							<dt><b>log</b></dt>
-				<dd>in file FileRetrieverInterface.php, method <a href="php-library/FileRetrieverInterface.html#methodlog">FileRetrieverInterface::log()</a></dd>
+							<dt><b>Log</b></dt>
+				<dd>in file Log.php, class <a href="Logger/Log.html">Log</a><br>&nbsp;&nbsp;&nbsp;&nbsp;The Log class is abstract and only used with static function.</dd>
 							<dt><b>LogException</b></dt>
 				<dd>in file LoggerExceptions.php, class <a href="Logger/LoggerExceptions/LogException.html">LogException</a><br>&nbsp;&nbsp;&nbsp;&nbsp;The LogException gets thrown whenever there is a Log problem.</dd>
 							<dt><b>Logger</b></dt>
@@ -1030,11 +1010,13 @@
 							<dt><b>$password</b></dt>
 				<dd>in file Database.php, variable <a href="Database/Database.html#var$password">Database::$password</a></dd>
 							<dt><b>$port</b></dt>
-				<dd>in file Database.php, variable <a href="Database/Database.html#var$port">Database::$port</a></dd>
-							<dt><b>$port</b></dt>
 				<dd>in file FileDataSource.php, variable <a href="DataSource/FileDataSource.html#var$port">FileDataSource::$port</a><br>&nbsp;&nbsp;&nbsp;&nbsp;This is the port used to connect to the backend.</dd>
+							<dt><b>$port</b></dt>
+				<dd>in file Database.php, variable <a href="Database/Database.html#var$port">Database::$port</a></dd>
 							<dt><b>$profiler</b></dt>
 				<dd>in file GlobalStorage.php, variable <a href="Storage/GlobalStorage.html#var$profiler">GlobalStorage::$profiler</a><br>&nbsp;&nbsp;&nbsp;&nbsp;A profiler to be used anywhere in the application.</dd>
+							<dt><b>$profiler</b></dt>
+				<dd>in file Profile.php, variable <a href="Profiler/Profile.html#var$profiler">Profile::$profiler</a></dd>
 							<dt><b>PostgresqlDao.php</b></dt>
 				<dd>procedural page <a href="Dao/_Dao---Postgresql---PostgresqlDao.php.html">PostgresqlDao.php</a></dd>
 							<dt><b>PostgresqlResultIterator.php</b></dt>
@@ -1047,6 +1029,8 @@
 				<dd>procedural page <a href="Database/DatabaseResult/_DatabaseResult---PostgresqlResult.php.html">PostgresqlResult.php</a></dd>
 							<dt><b>passwordEquals</b></dt>
 				<dd>in file UserRecord.php, method <a href="Dao/Record/UserRecord.html#methodpasswordEquals">UserRecord::passwordEquals()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Checks if the passwords equal</dd>
+							<dt><b>PostgresqlDao</b></dt>
+				<dd>in file PostgresqlDao.php, class <a href="Dao/PostgresqlDao.html">PostgresqlDao</a><br>&nbsp;&nbsp;&nbsp;&nbsp;The PostgresqlDao implementation of a SqlDao</dd>
 							<dt><b>PostgresqlResultIterator</b></dt>
 				<dd>in file PostgresqlResultIterator.php, class <a href="Dao/PostgresqlResultIterator.html">PostgresqlResultIterator</a><br>&nbsp;&nbsp;&nbsp;&nbsp;The class does nothing different then the SqlResultIterator, but is used everytime a Postgresql request is made.</dd>
 							<dt><b>PostgresqlUserDao</b></dt>
@@ -1057,6 +1041,14 @@
 				<dd>in file ImageFileRetriever.php, method <a href="File/ImageFileRetriever.html#methodprocess">ImageFileRetriever::process()</a></dd>
 							<dt><b>process</b></dt>
 				<dd>in file FileRetriever.php, method <a href="File/FileRetriever.html#methodprocess">FileRetriever::process()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;After a file gets created, the method creating it calls  process($file), so the file can be processed before it's returned.</dd>
+							<dt><b>Profile</b></dt>
+				<dd>in file Profile.php, class <a href="Profiler/Profile.html">Profile</a><br>&nbsp;&nbsp;&nbsp;&nbsp;The abstract Profile class is very small, and only a static wrapper for a specific  Profiler implementation.</dd>
+							<dt><b>Profiler</b></dt>
+				<dd>in file Profiler.php, class <a href="Profiler/Profiler.html">Profiler</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Normally you don't use an instance of Profiler to profile your app, but you set a Profiler instance  to the static Profile class.</dd>
+							<dt><b>Profile.php</b></dt>
+				<dd>procedural page <a href="Profiler/_Profiler---Profile.php.html">Profile.php</a></dd>
+							<dt><b>Profiler.php</b></dt>
+				<dd>procedural page <a href="Profiler/_Profiler---Profiler.php.html">Profiler.php</a></dd>
 					</dl>
 	</div>
 	<a href="elementindex.html#top">top</a><br>
@@ -1102,13 +1094,13 @@
 							<dt><b>RecordInterface</b></dt>
 				<dd>in file RecordInterface.php, class <a href="Dao/Record/RecordInterface.html">RecordInterface</a><br>&nbsp;&nbsp;&nbsp;&nbsp;The RecordInterface</dd>
 							<dt><b>reset</b></dt>
-				<dd>in file DatabaseResult.php, method <a href="Database/DatabaseResult/DatabaseResult.html#methodreset">DatabaseResult::reset()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Sets the internal row pointer to row 0</dd>
-							<dt><b>reset</b></dt>
 				<dd>in file DatabaseResultInterface.php, method <a href="Database/DatabaseResult/DatabaseResultInterface.html#methodreset">DatabaseResultInterface::reset()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Resets the pointer to 0</dd>
-							<dt><b>rewind</b></dt>
-				<dd>in file DaoHashListIterator.php, method <a href="Dao/DaoHashListIterator.html#methodrewind">DaoHashListIterator::rewind()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Sets the pointer to row 1.</dd>
+							<dt><b>reset</b></dt>
+				<dd>in file DatabaseResult.php, method <a href="Database/DatabaseResult/DatabaseResult.html#methodreset">DatabaseResult::reset()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Sets the internal row pointer to row 0</dd>
 							<dt><b>rewind</b></dt>
 				<dd>in file SqlResultIterator.php, method <a href="Dao/SqlResultIterator.html#methodrewind">SqlResultIterator::rewind()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Sets the pointer to row 1.</dd>
+							<dt><b>rewind</b></dt>
+				<dd>in file DaoHashListIterator.php, method <a href="Dao/DaoHashListIterator.html#methodrewind">DaoHashListIterator::rewind()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Sets the pointer to row 1.</dd>
 							<dt><b>rewind</b></dt>
 				<dd>in file DaoKeyListIterator.php, method <a href="Dao/DaoKeyListIterator.html#methodrewind">DaoKeyListIterator::rewind()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Sets the pointer to row 1.</dd>
 							<dt><b>rewind</b></dt>
@@ -1133,30 +1125,26 @@
 				<dd>in file Database.php, variable <a href="Database/Database.html#var$search_path">Database::$search_path</a></dd>
 							<dt><b>$section</b></dt>
 				<dd>in file Config.php, variable <a href="Config/Config.html#var$section">Config::$section</a></dd>
-							<dt><b>$seed</b></dt>
-				<dd>in file SignedFileRetriever.php, variable <a href="php-library/SignedFileRetriever.html#var$seed">SignedFileRetriever::$seed</a><br>&nbsp;&nbsp;&nbsp;&nbsp;The seed used to sign the variables.</dd>
-							<dt><b>$seed</b></dt>
-				<dd>in file FileRetriever.php, variable <a href="php-library/FileRetriever.html#var$seed">FileRetriever::$seed</a></dd>
 							<dt><b>$size</b></dt>
 				<dd>in file File.php, variable <a href="File/File.html#var$size">File::$size</a><br>&nbsp;&nbsp;&nbsp;&nbsp;The file size in bytes.</dd>
 							<dt><b>$source</b></dt>
 				<dd>in file File.php, variable <a href="File/File.html#var$source">File::$source</a><br>&nbsp;&nbsp;&nbsp;&nbsp;The file source. One of File::SOURCE_XXX</dd>
+							<dt><b>$sourceDao</b></dt>
+				<dd>in file DaoReference.php, variable <a href="Dao/DaoReference.html#var$sourceDao">DaoReference::$sourceDao</a><br>&nbsp;&nbsp;&nbsp;&nbsp;The Dao this reference is assigned to.</dd>
 							<dt><b>SqlDao.php</b></dt>
 				<dd>procedural page <a href="Dao/_Dao---SqlDao.php.html">SqlDao.php</a></dd>
 							<dt><b>SqlResultIterator.php</b></dt>
 				<dd>procedural page <a href="Dao/_Dao---SqlResultIterator.php.html">SqlResultIterator.php</a></dd>
-							<dt><b>SignedFileRetriever.php</b></dt>
-				<dd>procedural page <a href="php-library/_FileRetriever_DEPRECATED---SignedFileRetriever.php.html">SignedFileRetriever.php</a></dd>
 							<dt><b>sanitizeContext</b></dt>
 				<dd>in file Log.php, method <a href="Logger/Log.html#methodsanitizeContext">Log::sanitizeContext()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Sanitizes a context.</dd>
 							<dt><b>sanitizeToken</b></dt>
 				<dd>in file Config.php, method <a href="Config/Config.html#methodsanitizeToken">Config::sanitizeToken()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Sanitizes a token by removing special chars, and coverting spaces to underscores</dd>
 							<dt><b>save</b></dt>
+				<dd>in file File.php, method <a href="File/File.html#methodsave">File::save()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Saves the file to antoher location.</dd>
+							<dt><b>save</b></dt>
 				<dd>in file Record.php, method <a href="Dao/Record/Record.html#methodsave">Record::save()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;When there is an id, update() is called on the dao.</dd>
 							<dt><b>save</b></dt>
 				<dd>in file RecordInterface.php, method <a href="Dao/Record/RecordInterface.html#methodsave">RecordInterface::save()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Depending on the state of the Record does dao-&gt;update($this) or dao-&gt;insert($this)</dd>
-							<dt><b>save</b></dt>
-				<dd>in file File.php, method <a href="File/File.html#methodsave">File::save()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Saves the file to antoher location.</dd>
 							<dt><b>saveImage</b></dt>
 				<dd>in file ImageFile.php, method <a href="File/ImageFile.html#methodsaveImage">ImageFile::saveImage()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Saves the image.</dd>
 							<dt><b>saveOriginal</b></dt>
@@ -1164,27 +1152,17 @@
 							<dt><b>saveResized</b></dt>
 				<dd>in file ImageFile.php, method <a href="File/ImageFile.html#methodsaveResized">ImageFile::saveResized()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Resizes an image and saves it.</dd>
 							<dt><b>seek</b></dt>
-				<dd>in file MysqlResult.php, method <a href="Database/DatabaseResult/MysqlResult.html#methodseek">MysqlResult::seek()</a></dd>
-							<dt><b>seek</b></dt>
 				<dd>in file DatabaseResultInterface.php, method <a href="Database/DatabaseResult/DatabaseResultInterface.html#methodseek">DatabaseResultInterface::seek()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Sets the internal pointer to specific row</dd>
-							<dt><b>select</b></dt>
-				<dd>in file DatabaseFileRetriever.php, method <a href="php-library/DatabaseFileRetriever.html#methodselect">DatabaseFileRetriever::select()</a></dd>
+							<dt><b>seek</b></dt>
+				<dd>in file MysqlResult.php, method <a href="Database/DatabaseResult/MysqlResult.html#methodseek">MysqlResult::seek()</a></dd>
 							<dt><b>SEQ</b></dt>
 				<dd>in file Dao.php, class constant <a href="Dao/Dao.html#constSEQ">Dao::SEQ</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Data types</dd>
 							<dt><b>SEQUENCE</b></dt>
 				<dd>in file Dao.php, class constant <a href="Dao/Dao.html#constSEQUENCE">Dao::SEQUENCE</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Data types</dd>
 							<dt><b>set</b></dt>
-				<dd>in file RecordInterface.php, method <a href="Dao/Record/RecordInterface.html#methodset">RecordInterface::set()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Sets the value of a column</dd>
-							<dt><b>set</b></dt>
 				<dd>in file Record.php, method <a href="Dao/Record/Record.html#methodset">Record::set()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Sets the value in the $data array after calling coerce() on the value.</dd>
-							<dt><b>setAdditionalGetVars</b></dt>
-				<dd>in file FileRetriever.php, method <a href="php-library/FileRetriever.html#methodsetAdditionalGetVars">FileRetriever::setAdditionalGetVars()</a></dd>
-							<dt><b>setAdditionalPostVars</b></dt>
-				<dd>in file FileRetriever.php, method <a href="php-library/FileRetriever.html#methodsetAdditionalPostVars">FileRetriever::setAdditionalPostVars()</a></dd>
-							<dt><b>setAddress</b></dt>
-				<dd>in file FileRetrieverInterface.php, method <a href="php-library/FileRetrieverInterface.html#methodsetAddress">FileRetrieverInterface::setAddress()</a></dd>
-							<dt><b>setAddress</b></dt>
-				<dd>in file FileRetriever.php, method <a href="php-library/FileRetriever.html#methodsetAddress">FileRetriever::setAddress()</a></dd>
+							<dt><b>set</b></dt>
+				<dd>in file RecordInterface.php, method <a href="Dao/Record/RecordInterface.html#methodset">RecordInterface::set()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Sets the value of a column</dd>
 							<dt><b>setCharacterSet</b></dt>
 				<dd>in file Mysql.php, method <a href="Database/Mysql.html#methodsetCharacterSet">Mysql::setCharacterSet()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Sets the charsetName for future queries.</dd>
 							<dt><b>setContent</b></dt>
@@ -1206,35 +1184,25 @@
 							<dt><b>setLevel</b></dt>
 				<dd>in file Logger.php, method <a href="Logger/Logger.html#methodsetLevel">Logger::setLevel()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Sets the level for logging.</dd>
 							<dt><b>setLogger</b></dt>
-				<dd>in file FileRetriever.php, method <a href="php-library/FileRetriever.html#methodsetLogger">FileRetriever::setLogger()</a></dd>
-							<dt><b>setLogger</b></dt>
 				<dd>in file Dao.php, method <a href="Dao/Dao.html#methodsetLogger">Dao::setLogger()</a></dd>
-							<dt><b>setLogger</b></dt>
-				<dd>in file FileRetrieverInterface.php, method <a href="php-library/FileRetrieverInterface.html#methodsetLogger">FileRetrieverInterface::setLogger()</a></dd>
 							<dt><b>setLoggerFactory</b></dt>
 				<dd>in file Dao.php, method <a href="Dao/Dao.html#methodsetLoggerFactory">Dao::setLoggerFactory()</a></dd>
-							<dt><b>setLoggerFactory</b></dt>
-				<dd>in file FileRetrieverInterface.php, method <a href="php-library/FileRetrieverInterface.html#methodsetLoggerFactory">FileRetrieverInterface::setLoggerFactory()</a></dd>
-							<dt><b>setLoggerFactory</b></dt>
-				<dd>in file FileRetriever.php, method <a href="php-library/FileRetriever.html#methodsetLoggerFactory">FileRetriever::setLoggerFactory()</a></dd>
 							<dt><b>setMimeType</b></dt>
 				<dd>in file File.php, method <a href="File/File.html#methodsetMimeType">File::setMimeType()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Set the mime type of a file.</dd>
 							<dt><b>setName</b></dt>
 				<dd>in file File.php, method <a href="File/File.html#methodsetName">File::setName()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Use this function to set a filename.</dd>
 							<dt><b>setProfiler</b></dt>
+				<dd>in file Profile.php, method <a href="Profiler/Profile.html#methodsetProfiler">Profile::setProfiler()</a></dd>
+							<dt><b>setProfiler</b></dt>
 				<dd>in file GlobalStorage.php, method <a href="Storage/GlobalStorage.html#methodsetProfiler">GlobalStorage::setProfiler()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Sets the profiler</dd>
 							<dt><b>setSection</b></dt>
 				<dd>in file Config.php, method <a href="Config/Config.html#methodsetSection">Config::setSection()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Set section for future get.</dd>
-							<dt><b>setSeed</b></dt>
-				<dd>in file FileRetriever.php, method <a href="php-library/FileRetriever.html#methodsetSeed">FileRetriever::setSeed()</a></dd>
-							<dt><b>setSeed</b></dt>
-				<dd>in file SignedFileRetriever.php, method <a href="php-library/SignedFileRetriever.html#methodsetSeed">SignedFileRetriever::setSeed()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Sets the seed. This is necessary! If you don't seed the seed, the FileRetriever will fail.</dd>
 							<dt><b>setSize</b></dt>
 				<dd>in file File.php, method <a href="File/File.html#methodsetSize">File::setSize()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Set the size of the file.</dd>
 							<dt><b>setSource</b></dt>
 				<dd>in file File.php, method <a href="File/File.html#methodsetSource">File::setSource()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Sets the source of the file.</dd>
-							<dt><b>setTimeout</b></dt>
-				<dd>in file FileRetriever.php, method <a href="php-library/FileRetriever.html#methodsetTimeout">FileRetriever::setTimeout()</a></dd>
+							<dt><b>setSourceDao</b></dt>
+				<dd>in file DaoReference.php, method <a href="Dao/DaoReference.html#methodsetSourceDao">DaoReference::setSourceDao()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Sets the source dao.</dd>
 							<dt><b>setType</b></dt>
 				<dd>in file ImageFile.php, method <a href="File/ImageFile.html#methodsetType">ImageFile::setType()</a></dd>
 							<dt><b>setupReferences</b></dt>
@@ -1243,8 +1211,6 @@
 				<dd>in file ImageFile.php, method <a href="File/ImageFile.html#methodsetWidth">ImageFile::setWidth()</a></dd>
 							<dt><b>shouldLog</b></dt>
 				<dd>in file Logger.php, method <a href="Logger/Logger.html#methodshouldLog">Logger::shouldLog()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Checks if it's ok to log for specified level</dd>
-							<dt><b>SignedFileRetriever</b></dt>
-				<dd>in file SignedFileRetriever.php, class <a href="php-library/SignedFileRetriever.html">SignedFileRetriever</a></dd>
 							<dt><b>SORT_ASCENDING</b></dt>
 				<dd>in file Dao.php, class constant <a href="Dao/Dao.html#constSORT_ASCENDING">Dao::SORT_ASCENDING</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Sort types</dd>
 							<dt><b>SORT_DESCENDING</b></dt>
@@ -1273,6 +1239,14 @@
 				<dd>in file DatabaseExceptions.php, class <a href="Database/Exceptions/SqlQueryException.html">SqlQueryException</a><br>&nbsp;&nbsp;&nbsp;&nbsp;If a query fails, this exception gets thrown.</dd>
 							<dt><b>SqlResultIterator</b></dt>
 				<dd>in file SqlResultIterator.php, class <a href="Dao/SqlResultIterator.html">SqlResultIterator</a><br>&nbsp;&nbsp;&nbsp;&nbsp;The SQL result iterator is the implementation of the DaoResultIterator.</dd>
+							<dt><b>start</b></dt>
+				<dd>in file Profiler.php, method <a href="Profiler/Profiler.html#methodstart">Profiler::start()</a></dd>
+							<dt><b>start</b></dt>
+				<dd>in file Profile.php, method <a href="Profiler/Profile.html#methodstart">Profile::start()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Reroutes to self::$profiler-&gt;start()</dd>
+							<dt><b>stop</b></dt>
+				<dd>in file Profile.php, method <a href="Profiler/Profile.html#methodstop">Profile::stop()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Reroutes to self::$profiler-&gt;stop()</dd>
+							<dt><b>stop</b></dt>
+				<dd>in file Profiler.php, method <a href="Profiler/Profiler.html#methodstop">Profiler::stop()</a></dd>
 							<dt><b>STRING</b></dt>
 				<dd>in file Dao.php, class constant <a href="Dao/Dao.html#constSTRING">Dao::STRING</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Data types</dd>
 					</dl>
@@ -1283,8 +1257,6 @@
 	<div>
 		<h2>t</h2>
 		<dl>
-							<dt><b>$timeout</b></dt>
-				<dd>in file FileRetriever.php, variable <a href="php-library/FileRetriever.html#var$timeout">FileRetriever::$timeout</a></dd>
 							<dt><b>$timestamp</b></dt>
 				<dd>in file Date.php, variable <a href="Date/Date.html#var$timestamp">Date::$timestamp</a><br>&nbsp;&nbsp;&nbsp;&nbsp;The time of the date object.</dd>
 							<dt><b>$type</b></dt>
@@ -1312,11 +1284,9 @@
 							<dt><b>update</b></dt>
 				<dd>in file SqlDao.php, method <a href="Dao/SqlDao.html#methodupdate">SqlDao::update()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Updates a record in the database using the id.</dd>
 							<dt><b>update</b></dt>
-				<dd>in file DaoInterface.php, method <a href="Dao/DaoInterface.html#methodupdate">DaoInterface::update()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Takes a Record and updates it in the datasource.</dd>
-							<dt><b>update</b></dt>
 				<dd>in file FileSourceDao.php, method <a href="Dao/FileSourceDao.html#methodupdate">FileSourceDao::update()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Updates a record in the database using the id.</dd>
 							<dt><b>update</b></dt>
-				<dd>in file DatabaseFileRetriever.php, method <a href="php-library/DatabaseFileRetriever.html#methodupdate">DatabaseFileRetriever::update()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;See select()</dd>
+				<dd>in file DaoInterface.php, method <a href="Dao/DaoInterface.html#methodupdate">DaoInterface::update()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Takes a Record and updates it in the datasource.</dd>
 							<dt><b>update</b></dt>
 				<dd>in file DataSource.php, method <a href="DataSource/DataSource.html#methodupdate">DataSource::update()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Updates the object.</dd>
 							<dt><b>updateRecordWithData</b></dt>
@@ -1396,11 +1366,11 @@
 							<dt><b>__construct</b></dt>
 				<dd>in file FileSourceDao.php, method <a href="Dao/FileSourceDao.html#method__construct">FileSourceDao::__construct()</a></dd>
 							<dt><b>__construct</b></dt>
-				<dd>in file FileLogger.php, method <a href="Logger/FileLogger.html#method__construct">FileLogger::__construct()</a></dd>
+				<dd>in file Dao.php, method <a href="Dao/Dao.html#method__construct">Dao::__construct()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Has to be called from any extended Dao to make sure everything gets setup properly</dd>
 							<dt><b>__construct</b></dt>
 				<dd>in file FileSourceResultIterator.php, method <a href="Dao/FileSourceResultIterator.html#method__construct">FileSourceResultIterator::__construct()</a></dd>
 							<dt><b>__construct</b></dt>
-				<dd>in file FileRetriever.php, method <a href="php-library/FileRetriever.html#method__construct">FileRetriever::__construct()</a></dd>
+				<dd>in file FileLogger.php, method <a href="Logger/FileLogger.html#method__construct">FileLogger::__construct()</a></dd>
 							<dt><b>__construct</b></dt>
 				<dd>in file Record.php, method <a href="Dao/Record/Record.html#method__construct">Record::__construct()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Every record holds a reference to it's dao.</dd>
 							<dt><b>__construct</b></dt>
@@ -1408,13 +1378,11 @@
 							<dt><b>__construct</b></dt>
 				<dd>in file SqlDao.php, method <a href="Dao/SqlDao.html#method__construct">SqlDao::__construct()</a></dd>
 							<dt><b>__construct</b></dt>
-				<dd>in file Dao.php, method <a href="Dao/Dao.html#method__construct">Dao::__construct()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Has to be called from any extended Dao to make sure everything gets setup properly</dd>
+				<dd>in file File.php, method <a href="File/File.html#method__construct">File::__construct()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;The constructor sets the uri and the name (generated from the uri).</dd>
 							<dt><b>__construct</b></dt>
 				<dd>in file IniFileConfig.php, method <a href="Config/IniFileConfig.html#method__construct">IniFileConfig::__construct()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Parses the config file. If a defaultConfigFile is provided, they get merged, and the config file overwrites the default settings.</dd>
 							<dt><b>__construct</b></dt>
 				<dd>in file FileDataSource.php, method <a href="DataSource/FileDataSource.html#method__construct">FileDataSource::__construct()</a></dd>
-							<dt><b>__construct</b></dt>
-				<dd>in file DaoReference.php, method <a href="Dao/DaoReference.html#method__construct">DaoReference::__construct()</a></dd>
 							<dt><b>__construct</b></dt>
 				<dd>in file DaoKeyListIterator.php, method <a href="Dao/DaoKeyListIterator.html#method__construct">DaoKeyListIterator::__construct()</a></dd>
 							<dt><b>__construct</b></dt>
@@ -1422,9 +1390,9 @@
 							<dt><b>__construct</b></dt>
 				<dd>in file DaoAttributeAssignment.php, method <a href="Dao/DaoAttributeAssignment.html#method__construct">DaoAttributeAssignment::__construct()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;All assignment info is passed in the constructor</dd>
 							<dt><b>__construct</b></dt>
-				<dd>in file File.php, method <a href="File/File.html#method__construct">File::__construct()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;The constructor sets the uri and the name (generated from the uri).</dd>
-							<dt><b>__construct</b></dt>
 				<dd>in file Database.php, method <a href="Database/Database.html#method__construct">Database::__construct()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;You have to submit all connection infos in the constructor.</dd>
+							<dt><b>__construct</b></dt>
+				<dd>in file DaoReference.php, method <a href="Dao/DaoReference.html#method__construct">DaoReference::__construct()</a></dd>
 							<dt><b>__construct</b></dt>
 				<dd>in file DatabaseResult.php, method <a href="Database/DatabaseResult/DatabaseResult.html#method__construct">DatabaseResult::__construct()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;The php result from a query is passed in the constructor</dd>
 							<dt><b>__construct</b></dt>

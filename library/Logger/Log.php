@@ -9,6 +9,9 @@
  **/
 
 
+/**
+ * Including the LoggerExceptions
+ */
 if (!class_exists('LogException', false)) include(dirname(__FILE__) . '/LoggerExceptions.php');
 
 /**

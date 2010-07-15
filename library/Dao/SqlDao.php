@@ -302,7 +302,7 @@ abstract class SqlDao extends Dao {
 
       if (!isset($this->attributes[$column])) {
         $trace = debug_backtrace();
-        trigger_error('The type for attribute ' . $column . ' was not found in ' . $trace[0]['file'] . ' on line ' . $trace[0]['line'], E_USER_ERROR);
+        trigger_error('The type for attribute ' . $column . ' was not found in ' . $trace[2]['file'] . ' on line ' . $trace[2]['line'], E_USER_ERROR);
       }
       $escapedValue = $value;
       if ($exportValues) {

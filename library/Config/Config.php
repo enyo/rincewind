@@ -45,7 +45,7 @@
     /**
      * Set section for future get.
      * When get is called without a section argument, this section will be used.
-     * If section is called with a section argument, the default section will be set to null.
+     * If get is called with a section argument, the default section will be set to null.
      */
     public function setSection($section) {
       $this->section = $section;

@@ -67,9 +67,13 @@
 <a name="top"></a>
 <h1>Element index for package Config</h1>
 	[ <a href="elementindex_Config.html#c">c</a> ]
+	[ <a href="elementindex_Config.html#d">d</a> ]
 	[ <a href="elementindex_Config.html#g">g</a> ]
 	[ <a href="elementindex_Config.html#i">i</a> ]
+	[ <a href="elementindex_Config.html#l">l</a> ]
+	[ <a href="elementindex_Config.html#r">r</a> ]
 	[ <a href="elementindex_Config.html#s">s</a> ]
+	[ <a href="elementindex_Config.html#u">u</a> ]
 	[ <a href="elementindex_Config.html#_">_</a> ]
 
   <hr />
@@ -88,9 +92,11 @@
 		<h2>c</h2>
 		<dl>
 							<dt><b>$config</b></dt>
-				<dd>in file IniFileConfig.php, variable <a href="Config/IniFileConfig.html#var$config">IniFileConfig::$config</a></dd>
+				<dd>in file Config.php, variable <a href="Config/Config.html#var$config">Config::$config</a><br>&nbsp;&nbsp;&nbsp;&nbsp;The cached config array</dd>
+							<dt><b>$configFileUri</b></dt>
+				<dd>in file IniFileConfig.php, variable <a href="Config/IniFileConfig.html#var$configFileUri">IniFileConfig::$configFileUri</a></dd>
 							<dt><b>Config</b></dt>
-				<dd>in file Config.php, class <a href="Config/Config.html">Config</a><br>&nbsp;&nbsp;&nbsp;&nbsp;This is the Config interface.</dd>
+				<dd>in file Config.php, class <a href="Config/Config.html">Config</a><br>&nbsp;&nbsp;&nbsp;&nbsp;This is the Config class. It implements basic functionality such as loading a configuration, and providing getters.</dd>
 							<dt><b>Config.php</b></dt>
 				<dd>procedural page <a href="Config/_Config---Config.php.html">Config.php</a></dd>
 							<dt><b>ConfigExceptions.php</b></dt>
@@ -101,18 +107,26 @@
 	</div>
 	<a href="elementindex_Config.html#top">top</a><br>
   <hr />
+	<a name="d"></a>
+	<div>
+		<h2>d</h2>
+		<dl>
+							<dt><b>$defaultConfigFileUri</b></dt>
+				<dd>in file IniFileConfig.php, variable <a href="Config/IniFileConfig.html#var$defaultConfigFileUri">IniFileConfig::$defaultConfigFileUri</a></dd>
+							<dt><b>$defaultSection</b></dt>
+				<dd>in file Config.php, variable <a href="Config/Config.html#var$defaultSection">Config::$defaultSection</a><br>&nbsp;&nbsp;&nbsp;&nbsp;The default section. If this is set, this section will be used, if no section is specified when getting a variable.</dd>
+					</dl>
+	</div>
+	<a href="elementindex_Config.html#top">top</a><br>
+  <hr />
 	<a name="g"></a>
 	<div>
 		<h2>g</h2>
 		<dl>
 							<dt><b>get</b></dt>
-				<dd>in file IniFileConfig.php, method <a href="Config/IniFileConfig.html#methodget">IniFileConfig::get()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Just returns the appropriate indices.</dd>
-							<dt><b>get</b></dt>
 				<dd>in file Config.php, method <a href="Config/Config.html#methodget">Config::get()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Get a configuration value.</dd>
 							<dt><b>getArray</b></dt>
-				<dd>in file IniFileConfig.php, method <a href="Config/IniFileConfig.html#methodgetArray">IniFileConfig::getArray()</a></dd>
-							<dt><b>getArray</b></dt>
-				<dd>in file Config.php, method <a href="Config/Config.html#methodgetArray">Config::getArray()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;This gets all variables and returns an associative array with the sections and variables.</dd>
+				<dd>in file Config.php, method <a href="Config/Config.html#methodgetArray">Config::getArray()</a></dd>
 					</dl>
 	</div>
 	<a href="elementindex_Config.html#top">top</a><br>
@@ -129,16 +143,46 @@
 	</div>
 	<a href="elementindex_Config.html#top">top</a><br>
   <hr />
+	<a name="l"></a>
+	<div>
+		<h2>l</h2>
+		<dl>
+							<dt><b>load</b></dt>
+				<dd>in file IniFileConfig.php, method <a href="Config/IniFileConfig.html#methodload">IniFileConfig::load()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Loads and caches the config files</dd>
+							<dt><b>load</b></dt>
+				<dd>in file Config.php, method <a href="Config/Config.html#methodload">Config::load()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Implement this to load your configuration.</dd>
+					</dl>
+	</div>
+	<a href="elementindex_Config.html#top">top</a><br>
+  <hr />
+	<a name="r"></a>
+	<div>
+		<h2>r</h2>
+		<dl>
+							<dt><b>reload</b></dt>
+				<dd>in file Config.php, method <a href="Config/Config.html#methodreload">Config::reload()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Use this to reload your configuration</dd>
+					</dl>
+	</div>
+	<a href="elementindex_Config.html#top">top</a><br>
+  <hr />
 	<a name="s"></a>
 	<div>
 		<h2>s</h2>
 		<dl>
-							<dt><b>$section</b></dt>
-				<dd>in file Config.php, variable <a href="Config/Config.html#var$section">Config::$section</a></dd>
 							<dt><b>sanitizeToken</b></dt>
 				<dd>in file Config.php, method <a href="Config/Config.html#methodsanitizeToken">Config::sanitizeToken()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Sanitizes a token by removing special chars, and coverting spaces to underscores</dd>
-							<dt><b>setSection</b></dt>
-				<dd>in file Config.php, method <a href="Config/Config.html#methodsetSection">Config::setSection()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Set section for future get.</dd>
+							<dt><b>setDefaultSection</b></dt>
+				<dd>in file Config.php, method <a href="Config/Config.html#methodsetDefaultSection">Config::setDefaultSection()</a></dd>
+					</dl>
+	</div>
+	<a href="elementindex_Config.html#top">top</a><br>
+  <hr />
+	<a name="u"></a>
+	<div>
+		<h2>u</h2>
+		<dl>
+							<dt><b>$useSections</b></dt>
+				<dd>in file Config.php, variable <a href="Config/Config.html#var$useSections">Config::$useSections</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Whether sections should be used or not.</dd>
 					</dl>
 	</div>
 	<a href="elementindex_Config.html#top">top</a><br>

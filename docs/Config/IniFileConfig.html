@@ -97,7 +97,8 @@ Source Location: /Config/IniFileConfig.php<br /><br />
 <td valign="top">
 <h3><a href="#class_vars">Variables</a></h3>
 <ul>
-    <li><a href="../Config/IniFileConfig.html#var$config">$config</a></li>
+    <li><a href="../Config/IniFileConfig.html#var$configFileUri">$configFileUri</a></li>
+    <li><a href="../Config/IniFileConfig.html#var$defaultConfigFileUri">$defaultConfigFileUri</a></li>
   </ul>
 </td>
 
@@ -106,8 +107,7 @@ Source Location: /Config/IniFileConfig.php<br /><br />
 <h3><a href="#class_methods">Methods</a></h3>
 <ul>
     <li><a href="../Config/IniFileConfig.html#method__construct">__construct</a></li>
-    <li><a href="../Config/IniFileConfig.html#methodget">get</a></li>
-    <li><a href="../Config/IniFileConfig.html#methodgetArray">getArray</a></li>
+    <li><a href="../Config/IniFileConfig.html#methodload">load</a></li>
   </ul>
 </td>
 
@@ -125,7 +125,19 @@ Source Location: /Config/IniFileConfig.php<br /><br />
 <h4>Class: <a href="../Config/Config.html">Config</a></h4>
 <dl>
 <dt>
-  <a href="../Config/Config.html#var$section">Config::$section</a>
+  <a href="../Config/Config.html#var$config">Config::$config</a>
+  </dt>
+<dd>
+   
+</dd>
+<dt>
+  <a href="../Config/Config.html#var$defaultSection">Config::$defaultSection</a>
+  </dt>
+<dd>
+   
+</dd>
+<dt>
+  <a href="../Config/Config.html#var$useSections">Config::$useSections</a>
   </dt>
 <dd>
    
@@ -149,7 +161,19 @@ Source Location: /Config/IniFileConfig.php<br /><br />
     <a href="../Config/Config.html#methodgetArray">Config::getArray()</a>
   </dt>
   <dd>
-    This gets all variables and returns an associative array with the sections and variables.
+    
+  </dd>
+    <dt>
+    <a href="../Config/Config.html#methodload">Config::load()</a>
+  </dt>
+  <dd>
+    Implement this to load your configuration.
+  </dd>
+    <dt>
+    <a href="../Config/Config.html#methodreload">Config::reload()</a>
+  </dt>
+  <dd>
+    Use this to reload your configuration
   </dd>
     <dt>
     <a href="../Config/Config.html#methodsanitizeToken">Config::sanitizeToken()</a>
@@ -158,10 +182,10 @@ Source Location: /Config/IniFileConfig.php<br /><br />
     Sanitizes a token by removing special chars, and coverting spaces to underscores
   </dd>
     <dt>
-    <a href="../Config/Config.html#methodsetSection">Config::setSection()</a>
+    <a href="../Config/Config.html#methodsetDefaultSection">Config::setDefaultSection()</a>
   </dt>
   <dd>
-    Set section for future get.
+    
   </dd>
   </dl>
 </div>
@@ -173,7 +197,7 @@ Source Location: /Config/IniFileConfig.php<br /><br />
 <a name="class_details"></a>
 <h3>Class Details</h3>
 <div class="tags">
-[line 22]<br />
+[line 23]<br />
 This is the IniFileConfig implementation of Config  It's written to parse default php.ini files to set the config.<br /><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
@@ -193,10 +217,10 @@ This is the IniFileConfig implementation of Config  It's written to parse defaul
 <a name="class_vars"></a>
 <h3>Class Variables</h3>
 <div class="tags">
-	<a name="var$config"></a>
+	<a name="var$configFileUri"></a>
 	<p></p>
-	<h4>$config = <span class="value"></span></h4>
-	<p>[line 24]</p>
+	<h4>$configFileUri = <span class="value"></span></h4>
+	<p>[line 28]</p>
   <br /><br />
 <h4>Tags:</h4>
 <div class="tags">
@@ -212,7 +236,31 @@ This is the IniFileConfig implementation of Config  It's written to parse defaul
   <table border="0" cellspacing="0" cellpadding="0">
     <tr>
       <td><b>Type:</b>&nbsp;&nbsp;</td>
-      <td>mixed</td>
+      <td>string</td>
+    </tr>
+      </table>
+	</div><br /><br />
+	<div class="top">[ <a href="#top">Top</a> ]</div><br />
+	<a name="var$defaultConfigFileUri"></a>
+	<p></p>
+	<h4>$defaultConfigFileUri = <span class="value"></span></h4>
+	<p>[line 33]</p>
+  <br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
+  </tr>
+</table>
+</div>
+
+  <br />
+	<div class="tags">
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td><b>Type:</b>&nbsp;&nbsp;</td>
+      <td>string</td>
     </tr>
       </table>
 	</div><br /><br />
@@ -226,14 +274,16 @@ This is the IniFileConfig implementation of Config  It's written to parse defaul
 
   <hr />
 	<a name="method__construct"></a>
-	<h3>constructor __construct <span class="smalllinenumber">[line 34]</span></h3>
+	<h3>constructor __construct <span class="smalllinenumber">[line 45]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
 		<code>IniFileConfig __construct(
 string
 $configFileUri, [string
-$defaultConfigFileUri = null])</code>
+$defaultConfigFileUri = null], [bool
+$useSections = null], [string
+$defaultSection = null])</code>
     </td></tr></table>
     </td></tr></table><br />
 	
@@ -262,64 +312,32 @@ $defaultConfigFileUri = null])</code>
         <td><b>$defaultConfigFileUri</b>&nbsp;&nbsp;</td>
         <td></td>
       </tr>
-        </table>
-    </div><br />
-        <div class="top">[ <a href="#top">Top</a> ]</div>
-  </div>
-  <hr />
-	<a name="methodget"></a>
-	<h3>method get <span class="smalllinenumber">[line 45]</span></h3>
-	<div class="function">
-    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
-    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
-		<code>void get(
-string
-$variable, [string
-$section = null])</code>
-    </td></tr></table>
-    </td></tr></table><br />
-	
-		Just returns the appropriate indices.<br /><br /><br /><br />
-<h4>Tags:</h4>
-<div class="tags">
-<table border="0" cellspacing="0" cellpadding="0">
-  <tr>
-    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
-  </tr>
-</table>
-</div>
-<br /><br />
-
-	Overrides <a href="../Config/Config.html#methodget">Config::get()</a> (Get a configuration value.)<br /><br />
-        <h4>Parameters:</h4>
-    <div class="tags">
-    <table border="0" cellspacing="0" cellpadding="0">
           <tr>
-        <td class="type">string&nbsp;&nbsp;</td>
-        <td><b>$variable</b>&nbsp;&nbsp;</td>
-        <td></td>
+        <td class="type">bool&nbsp;&nbsp;</td>
+        <td><b>$useSections</b>&nbsp;&nbsp;</td>
+        <td>To overwrite the default</td>
       </tr>
           <tr>
         <td class="type">string&nbsp;&nbsp;</td>
-        <td><b>$section</b>&nbsp;&nbsp;</td>
-        <td></td>
+        <td><b>$defaultSection</b>&nbsp;&nbsp;</td>
+        <td>To overwrite the default.</td>
       </tr>
         </table>
     </div><br />
         <div class="top">[ <a href="#top">Top</a> ]</div>
   </div>
   <hr />
-	<a name="methodgetArray"></a>
-	<h3>method getArray <span class="smalllinenumber">[line 62]</span></h3>
+	<a name="methodload"></a>
+	<h3>method load <span class="smalllinenumber">[line 57]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
-		<code>array getArray(
+		<code>void load(
 )</code>
     </td></tr></table>
     </td></tr></table><br />
 	
-		<br /><br />
+		Loads and caches the config files<br /><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
@@ -330,7 +348,7 @@ $section = null])</code>
 </div>
 <br /><br />
 
-	Overrides <a href="../Config/Config.html#methodgetArray">Config::getArray()</a> (This gets all variables and returns an associative array with the sections and variables.)<br /><br />
+	Overrides <a href="../Config/Config.html#methodload">Config::load()</a> (Implement this to load your configuration.)<br /><br />
         <div class="top">[ <a href="#top">Top</a> ]</div>
   </div>
 </div><br />

@@ -73,7 +73,7 @@ Source Location: /Config/Config.php<br /><br />
 
 <h3><a href="#class_details">Class Overview</a></h3>
 <pre></pre><br />
-<div class="description">This is the Config interface.</div><br /><br />
+<div class="description">This is the Config class. It implements basic functionality such as loading a configuration, and providing getters.</div><br /><br />
 <h4>Author(s):</h4>
 <ul>
           <li>Matthias Loitsch &lt;<a href="mailto:developer@ma.tthias.com">developer@ma.tthias.com</a>&gt;</li>
@@ -95,7 +95,9 @@ Source Location: /Config/Config.php<br /><br />
 <td valign="top">
 <h3><a href="#class_vars">Variables</a></h3>
 <ul>
-    <li><a href="../Config/Config.html#var$section">$section</a></li>
+    <li><a href="../Config/Config.html#var$config">$config</a></li>
+    <li><a href="../Config/Config.html#var$defaultSection">$defaultSection</a></li>
+    <li><a href="../Config/Config.html#var$useSections">$useSections</a></li>
   </ul>
 </td>
 
@@ -105,8 +107,10 @@ Source Location: /Config/Config.php<br /><br />
 <ul>
     <li><a href="../Config/Config.html#methodget">get</a></li>
     <li><a href="../Config/Config.html#methodgetArray">getArray</a></li>
+    <li><a href="../Config/Config.html#methodload">load</a></li>
+    <li><a href="../Config/Config.html#methodreload">reload</a></li>
     <li><a href="../Config/Config.html#methodsanitizeToken">sanitizeToken</a></li>
-    <li><a href="../Config/Config.html#methodsetSection">setSection</a></li>
+    <li><a href="../Config/Config.html#methodsetDefaultSection">setDefaultSection</a></li>
   </ul>
 </td>
 
@@ -136,7 +140,7 @@ Source Location: /Config/Config.php<br /><br />
 <h3>Class Details</h3>
 <div class="tags">
 [line 24]<br />
-This is the Config interface.<br /><br /><p>It doesn't define much, but Config classes inheriting this class have to support sections (as in php.ini files).</p><br /><br /><br />
+This is the Config class. It implements basic functionality such as loading a configuration, and providing getters.<br /><br /><p>It also supports sections.</p><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
@@ -158,11 +162,11 @@ This is the Config interface.<br /><br /><p>It doesn't define much, but Config c
 <a name="class_vars"></a>
 <h3>Class Variables</h3>
 <div class="tags">
-	<a name="var$section"></a>
+	<a name="var$config"></a>
 	<p></p>
-	<h4>$section = <span class="value"></span></h4>
-	<p>[line 26]</p>
-  <br /><br />
+	<h4>$config = <span class="value"></span></h4>
+	<p>[line 31]</p>
+  The cached config array<br /><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
@@ -177,7 +181,55 @@ This is the Config interface.<br /><br /><p>It doesn't define much, but Config c
   <table border="0" cellspacing="0" cellpadding="0">
     <tr>
       <td><b>Type:</b>&nbsp;&nbsp;</td>
-      <td>mixed</td>
+      <td>array</td>
+    </tr>
+      </table>
+	</div><br /><br />
+	<div class="top">[ <a href="#top">Top</a> ]</div><br />
+	<a name="var$defaultSection"></a>
+	<p></p>
+	<h4>$defaultSection = <span class="value">&nbsp;'general'</span></h4>
+	<p>[line 46]</p>
+  The default section. If this is set, this section will be used, if no section is specified when getting a variable.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
+  </tr>
+</table>
+</div>
+
+  <br />
+	<div class="tags">
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td><b>Type:</b>&nbsp;&nbsp;</td>
+      <td>string</td>
+    </tr>
+      </table>
+	</div><br /><br />
+	<div class="top">[ <a href="#top">Top</a> ]</div><br />
+	<a name="var$useSections"></a>
+	<p></p>
+	<h4>$useSections = <span class="value">&nbsp;true</span></h4>
+	<p>[line 39]</p>
+  Whether sections should be used or not.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
+  </tr>
+</table>
+</div>
+
+  <br />
+	<div class="tags">
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td><b>Type:</b>&nbsp;&nbsp;</td>
+      <td>bool</td>
     </tr>
       </table>
 	</div><br /><br />
@@ -191,7 +243,7 @@ This is the Config interface.<br /><br /><p>It doesn't define much, but Config c
 
   <hr />
 	<a name="methodget"></a>
-	<h3>method get <span class="smalllinenumber">[line 42]</span></h3>
+	<h3>method get <span class="smalllinenumber">[line 56]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -202,13 +254,10 @@ $section = null])</code>
     </td></tr></table>
     </td></tr></table><br />
 	
-		Get a configuration value.<br /><br /><p>Don't forget to unset $this-&gt;section when a section is passed here.</p><br /><br /><br />
+		Get a configuration value.<br /><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
-  <tr>
-    <td><b>abstract:</b>&nbsp;&nbsp;</td><td></td>
-  </tr>
   <tr>
     <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
   </tr>
@@ -216,12 +265,6 @@ $section = null])</code>
 </div>
 <br /><br />
 
-	<p>Overridden in child classes as:<br />
-		<dl>
-	<dt><a href="../Config/IniFileConfig.html#methodget">IniFileConfig::get()</a></dt>
-		<dd>Just returns the appropriate indices.</dd>
-	</dl>
-	</p>
 	
         <h4>Parameters:</h4>
     <div class="tags">
@@ -234,7 +277,7 @@ $section = null])</code>
           <tr>
         <td class="type">string&nbsp;&nbsp;</td>
         <td><b>$section</b>&nbsp;&nbsp;</td>
-        <td>If null, $this-&gt;section is used if set.</td>
+        <td>If null, $this-&gt;defaultSection will be used if set.</td>
       </tr>
         </table>
     </div><br />
@@ -242,7 +285,7 @@ $section = null])</code>
   </div>
   <hr />
 	<a name="methodgetArray"></a>
-	<h3>method getArray <span class="smalllinenumber">[line 33]</span></h3>
+	<h3>method getArray <span class="smalllinenumber">[line 100]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -251,13 +294,35 @@ $section = null])</code>
     </td></tr></table>
     </td></tr></table><br />
 	
-		This gets all variables and returns an associative array with the sections and variables.<br /><br /><br /><br />
+		<br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
   <tr>
-    <td><b>return:</b>&nbsp;&nbsp;</td><td>Associative array like this: array('sectionName'=&gt;array('varName'=&gt;value))</td>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
   </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodload"></a>
+	<h3>method load <span class="smalllinenumber">[line 86]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void load(
+)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Implement this to load your configuration.<br /><br /><p>It should only load the configuration once! If you want to reload it, use reload() instead.</p><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
   <tr>
     <td><b>abstract:</b>&nbsp;&nbsp;</td><td></td>
   </tr>
@@ -270,16 +335,41 @@ $section = null])</code>
 
 	<p>Overridden in child classes as:<br />
 		<dl>
-	<dt><a href="../Config/IniFileConfig.html#methodgetArray">IniFileConfig::getArray()</a></dt>
-		<dd></dd>
+	<dt><a href="../Config/IniFileConfig.html#methodload">IniFileConfig::load()</a></dt>
+		<dd>Loads and caches the config files</dd>
 	</dl>
 	</p>
 	
         <div class="top">[ <a href="#top">Top</a> ]</div>
   </div>
   <hr />
+	<a name="methodreload"></a>
+	<h3>method reload <span class="smalllinenumber">[line 92]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void reload(
+)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Use this to reload your configuration<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
 	<a name="methodsanitizeToken"></a>
-	<h3>method sanitizeToken <span class="smalllinenumber">[line 60]</span></h3>
+	<h3>method sanitizeToken <span class="smalllinenumber">[line 118]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -294,7 +384,7 @@ $token)</code>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
   <tr>
-    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
   </tr>
 </table>
 </div>
@@ -314,21 +404,24 @@ $token)</code>
         <div class="top">[ <a href="#top">Top</a> ]</div>
   </div>
   <hr />
-	<a name="methodsetSection"></a>
-	<h3>method setSection <span class="smalllinenumber">[line 50]</span></h3>
+	<a name="methodsetDefaultSection"></a>
+	<h3>method setDefaultSection <span class="smalllinenumber">[line 107]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
-		<code>void setSection(
-
+		<code>void setDefaultSection(
+string
 $section)</code>
     </td></tr></table>
     </td></tr></table><br />
 	
-		Set section for future get.<br /><br /><p>When get is called without a section argument, this section will be used.  If get is called with a section argument, the default section will be set to null.</p><br /><br /><br />
+		<br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>see:</b>&nbsp;&nbsp;</td><td><a href="../Config/Config.html#var$defaultSection">Config::$defaultSection</a></td>
+  </tr>
   <tr>
     <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
   </tr>
@@ -341,7 +434,7 @@ $section)</code>
     <div class="tags">
     <table border="0" cellspacing="0" cellpadding="0">
           <tr>
-        <td class="type">&nbsp;&nbsp;</td>
+        <td class="type">string&nbsp;&nbsp;</td>
         <td><b>$section</b>&nbsp;&nbsp;</td>
         <td></td>
       </tr>

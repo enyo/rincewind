@@ -14,8 +14,8 @@
 include dirname(__FILE__) . '/ConfigExceptions.php';
 
 /**
- * This is the Config interface.
- * It doesn't define much, but Config classes inheriting this class have to support sections (as in php.ini files).
+ * This is the Config class. It implements basic functionality such as loading a configuration, and providing getters.
+ * It also supports sections.
  *
  * @author Matthias Loitsch <developer@ma.tthias.com>
  * @copyright Copyright (c) 2010, Matthias Loitsch

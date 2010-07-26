@@ -23,6 +23,13 @@ include dirname(__FILE__) . '/ConfigExceptions.php';
  */
 abstract class Config {
 
+  
+  /**
+   * The cached config array
+   * @var array
+   */
+  protected $config;
+
 
   /**
    * Whether sections should be used or not.
@@ -74,9 +81,19 @@ abstract class Config {
 
   /**
    * Implement this to load your configuration.
+   * It should only load the configuration once! If you want to reload it, use reload() instead.
    */
   abstract public function load();
-  
+
+
+  /**
+   * Use this to reload your configuration
+   */
+  public function reload() {
+    $this->config = null;
+    $this->load();
+  }
+
   /**
    * @return array
    */

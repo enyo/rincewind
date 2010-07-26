@@ -21,11 +21,6 @@ if (!class_exists('Config', false)) include dirname(__FILE__) . '/Config.php';
  * @package Config
  */
 class IniFileConfig extends Config {
-  
-  /**
-   * @var array
-   */
-  protected $config;
 
   /**
    * @var string

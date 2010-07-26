@@ -26,7 +26,17 @@ class IniFileConfig extends Config {
    * @var array
    */
   protected $config;
-  
+
+  /**
+   * @var string
+   */
+  protected $configFileUri;
+
+  /**
+   * @var string
+   */
+  protected $defaultConfigFileUri;
+
   /**
    * Parses the config file. If a defaultConfigFile is provided, they get merged, and the config file overwrites the default settings.
    * All variables do not have to exist in the defaultConfig file, but if a section in the defaultConfigFile does not exist, then
@@ -41,45 +51,21 @@ class IniFileConfig extends Config {
     if ($useSections !== null) $this->useSections = (bool) $useSections;
     if ($defaultSection !== null) $this->setDefaultSection($defaultSection);
 
-    if ($defaultConfigFileUri) $this->config = $this->mergeConfigArrays(parse_ini_file($defaultConfigFileUri, $this->useSections), parse_ini_file($configFileUri, $this->useSections));
-    else                       $this->config = parse_ini_file($configFileUri, $this->useSections);
-  }
-  
-  /**
-   * Just returns the appropriate indices.
-   *
-   * @param string $variable
-   * @param string $section
-   */
-  public function get($variable, $section = null) {
-    $variable = $this->sanitizeToken($variable);
-
-
-    $section = $section ? $section : $this->defaultSection;
-    $section = $this->sanitizeToken($section);
-
-    if ($this->useSections) {
-      if (!$section) throw new ConfigException('No section set.');
-
-      if (!isset($this->config[$section])) throw new ConfigException("Section '$section' does not exist.");
-      if (!array_key_exists($variable, $this->config[$section])) throw new ConfigException("Variable '$section.$variable' does not exist.");
-
-      return $this->config[$section][$variable];
-    }
-    else {
-      if (!array_key_exists($variable, $this->config)) throw new ConfigException("Variable '$variable' does not exist.");
-
-      return $this->config[$variable];
-    }
-    
+    $this->configFileUri = $configFileUri;
+    $this->defaultConfigFileUri = $defaultConfigFileUri;
   }
 
-  
+
   /**
-   * @return array
+   * Loads and caches the config files
    */
-  public function getArray() { return $this->config; }
-  
+  public function load() {
+    if ($this->config) return;
+    if ($this->defaultConfigFileUri) $this->config = $this->mergeConfigArrays(parse_ini_file($this->defaultConfigFileUri, $this->useSections), parse_ini_file($this->configFileUri, $this->useSections));
+    else                             $this->config = parse_ini_file($this->configFileUri, $this->useSections);
+  }
+
+
   /**
    * Merges to arrays
    *

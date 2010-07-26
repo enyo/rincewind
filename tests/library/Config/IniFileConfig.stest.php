@@ -18,6 +18,7 @@ class IniFileConfig_OneFile_Test extends Snap_UnitTestCase {
   }
 
   public function testArray() {
+    $this->config->load();
     return $this->assertIdentical($this->config->getArray(), array('section_a'=>array('a1'=>'1', 'a2'=>'2'), 'section_b'=>array('b1'=>'3', 'b2'=>'4')));
   }
   
@@ -39,6 +40,7 @@ class IniFileConfig_WithSections_Test extends Snap_UnitTestCase {
 
 
   public function testArray() {
+    $this->config->load();
     return $this->assertIdentical($this->config->getArray(), array('section_a'=>array('a1'=>'1', 'a2'=>'overwritten'), 'section_b'=>array('b1'=>'3', 'b2'=>'also overwritten')));
   }
 
@@ -83,6 +85,7 @@ class IniFileConfig_WithoutSections_Test extends Snap_UnitTestCase {
 
 
   public function testArray() {
+    $this->config->load();
     return $this->assertIdentical($this->config->getArray(), array('a1'=>'1', 'a2'=>'overwritten', 'b1'=>'3', 'b2'=>'also overwritten'));
   }
 

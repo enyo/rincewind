@@ -38,20 +38,49 @@ abstract class Config {
    */
   protected $defaultSection = 'general';
 
-  /**
-   * This gets all variables and returns an associative array with the sections and variables.
-   *
-   * @return array Associative array like this: array('sectionName'=>array('varName'=>value))
-   */
-  abstract public function getArray();
-  
+
+
   /**
    * Get a configuration value.
    *
    * @param string $variable
    * @param string $section If null, $this->defaultSection will be used if set.
    */
-  abstract public function get($variable, $section = null);
+  public function get($variable, $section = null) {
+    $this->load();
+
+    $variable = $this->sanitizeToken($variable);
+
+
+    $section = $section ? $section : $this->defaultSection;
+    $section = $this->sanitizeToken($section);
+
+    if ($this->useSections) {
+      if (!$section) throw new ConfigException('No section set.');
+
+      if (!isset($this->config[$section])) throw new ConfigException("Section '$section' does not exist.");
+      if (!array_key_exists($variable, $this->config[$section])) throw new ConfigException("Variable '$section.$variable' does not exist.");
+
+      return $this->config[$section][$variable];
+    }
+    else {
+      if (!array_key_exists($variable, $this->config)) throw new ConfigException("Variable '$variable' does not exist.");
+
+      return $this->config[$variable];
+    }
+    
+  }
+
+
+  /**
+   * Implement this to load your configuration.
+   */
+  abstract public function load();
+  
+  /**
+   * @return array
+   */
+  public function getArray() { return $this->config; }
 
 
   /**

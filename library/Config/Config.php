@@ -115,10 +115,9 @@ abstract class Config {
    *
    * @param $token
    */ 
-  protected function sanitizeToken($token) {
+  public function sanitizeToken($token) {
     return strtolower(str_replace(array('?', '!', '.'), '', str_replace(array(':', ' '), '_', $token)));
   }
-
 
 }
 

@@ -95,9 +95,24 @@ abstract class Config {
   }
 
   /**
+   * @param bool $oneDimensional If set to true, and the config uses sections, the sections will be used to prefix the names.
    * @return array
    */
-  public function getArray() { return $this->config; }
+  public function getArray($oneDimensional = false) {
+    $this->load();
+    if ($this->useSections) {
+      $return = array();
+      foreach ($this->config as $section=>$variables) {
+        foreach ($variables as $variable=>$content) {
+          $return[$section . '.' . $variable] = $content;
+        }
+      }
+      return $return;
+    }
+    else {
+      return $this->config;
+    }
+  }
 
 
   /**

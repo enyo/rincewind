@@ -6,14 +6,11 @@
  * @author Matthias Loitsch <developer@ma.tthias.com>
  * @copyright Copyright (c) 2010, Matthias Loitsch
  * @package Database
- **/
-
-
+ * */
 /**
  * Loading the interface
  */
 include dirname(__FILE__) . '/DatabaseInterface.php';
-
 
 /**
  * If you implement a Database (eg: for mysql) extend this class.
@@ -21,49 +18,41 @@ include dirname(__FILE__) . '/DatabaseInterface.php';
  * @author Matthias Loitsch <developer@ma.tthias.com>
  * @copyright Copyright (c) 2010, Matthias Loitsch
  * @package Database
- **/
+ * */
 abstract class Database implements DatabaseInterface {
 
   /**
    * @var boolean
    */
-  protected $connected  = false;
-
+  protected $connected = false;
   /**
    * @var mixed The resource
    */
   protected $resource;
-
   /**
    * @var string
    */
   protected $host;
-
   /**
    * @var string
    */
   protected $port;
-
   /**
    * @var string
    */
   protected $dbname;
-
   /**
    * @var string
    */
   protected $user;
-
   /**
    * @var string
    */
   protected $password;
-
   /**
    * @var string
    */
   protected $searchPath;
-
 
   /**
    * You have to submit all connection infos in the constructor.
@@ -76,15 +65,14 @@ abstract class Database implements DatabaseInterface {
    * @param string $password
    */
   public function __construct($dbname, $user = null, $host = null, $port = null, $password = null, $searchPath = null) {
-    $this->dbname       = $dbname;
-    $this->host         = $host;
-    $this->port         = (int) $port;
-    $this->user         = $user;
-    $this->password     = $password;
-    $this->searchPath     = $searchPath;
+    $this->dbname = $dbname;
+    $this->host = $host;
+    $this->port = (int) $port;
+    $this->user = $user;
+    $this->password = $password;
+    $this->searchPath = $searchPath;
     $this->connect();
   }
-
 
   /**
    * Implement your database specific connection here.
@@ -100,9 +88,10 @@ abstract class Database implements DatabaseInterface {
    * Checks if it's connected, and calls connect() if not.
    */
   public function ensureConnection() {
-    if (!$this->connected) { $this->connect(); }
+    if ( ! $this->connected) {
+      $this->connect();
+    }
   }
-
 
   /**
    * @return mixed The resource returned by the connection (eg: pg_connect)
@@ -110,9 +99,6 @@ abstract class Database implements DatabaseInterface {
   public function getResource() {
     return $this->resource;
   }
-
-
-
 
   /**
    * Some databases (eg: Mysql) do not support multiple queries by themselves.
@@ -132,12 +118,24 @@ abstract class Database implements DatabaseInterface {
   public function getConnectionString($separator = '/') {
     $path = array();
 
-    if ($this->host)        { $path[] = '[host: ' . $this->host . ']'; }
-    if ($this->port)        { $path[] = '[port: ' . $this->port . ']'; }
-    if ($this->dbname)      { $path[] = '[dbname: ' . $this->dbname . ']'; }
-    if ($this->searchPath)  { $path[] = '[search_path: ' . $this->searchPath . ']'; }
-    if ($this->user)        { $path[] = '[user: ' . $this->user . ']'; }
-    if ($this->password)    { $path[] = '[pass: [not_shown]]'; }
+    if ($this->host) {
+      $path[] = '[host: ' . $this->host . ']';
+    }
+    if ($this->port) {
+      $path[] = '[port: ' . $this->port . ']';
+    }
+    if ($this->dbname) {
+      $path[] = '[dbname: ' . $this->dbname . ']';
+    }
+    if ($this->searchPath) {
+      $path[] = '[search_path: ' . $this->searchPath . ']';
+    }
+    if ($this->user) {
+      $path[] = '[user: ' . $this->user . ']';
+    }
+    if ($this->password) {
+      $path[] = '[pass: [not_shown]]';
+    }
 
     return implode($separator, $path);
   }
@@ -149,7 +147,6 @@ abstract class Database implements DatabaseInterface {
   public function __destruct() {
     $this->close();
   }
-
 
   /**
    * Typically columns are just escaped as strings.
@@ -169,8 +166,5 @@ abstract class Database implements DatabaseInterface {
     return $this->escapeString($table);
   }
 
-
-
 }
-
 

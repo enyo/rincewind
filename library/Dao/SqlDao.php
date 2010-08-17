@@ -25,7 +25,7 @@ include dirname(__FILE__) . '/SqlResultIterator.php';
  * @copyright Copyright (c) 2010, Matthias Loitsch
  * @package Dao
  * */
-abstract class SqlDao extends Dao {
+class SqlDao extends Dao {
 
   /**
    * @var Database
@@ -42,6 +42,9 @@ abstract class SqlDao extends Dao {
   public function __construct($db, $resourceName = null, $attributes = null, $nullAttributes = null, $defaultValueAttributes = null) {
     parent::__construct($resourceName, $attributes, $nullAttributes, $defaultValueAttributes);
     $this->db = $db;
+    if (!$this->resourceName) {
+      throw new DaoException('No resource name provided!');
+    }
   }
 
   /**

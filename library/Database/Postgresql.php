@@ -84,10 +84,10 @@ class Postgresql extends Database {
       $connection_string .= "password='" . pg_escape_string($this->password) . "' ";
     }
 
-    $this->resource = @pg_connect($connection_string);
+    $this->resource = pg_connect($connection_string);
 
     if ( ! $this->resource) {
-      throw new SqlException("Sorry, impossible to connect to the server with this connection string: '" . $this->getConnectionString() . "'. (" . pg_last_error() . ")");
+      throw new SqlException("Sorry, impossible to connect to the server with this connection string: '" . $this->getConnectionString() . "'.");
     }
 
     $this->connected = true;

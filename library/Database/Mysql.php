@@ -6,9 +6,7 @@
  * @author Matthias Loitsch <developer@ma.tthias.com>
  * @copyright Copyright (c) 2010, Matthias Loitsch
  * @package Database
- **/
-
-
+ * */
 /**
  * Loading the abstract database
  */
@@ -19,14 +17,13 @@ include dirname(__FILE__) . '/Database.php';
  */
 include dirname(dirname(__FILE__)) . '/DatabaseResult/MysqlResult.php';
 
-
 /**
  * The Mysql Database implementation.
  *
  * @author Matthias Loitsch <developer@ma.tthias.com>
  * @copyright Copyright (c) 2010, Matthias Loitsch
  * @package Database
- **/
+ * */
 class Mysql extends Database {
 
   /**
@@ -34,58 +31,52 @@ class Mysql extends Database {
    * @var string
    */
   protected $commentString = '-- ';
-
   /**
    * The character set used for connections.
    * @var string
    */
-  protected $charsetName   = 'utf8';
+  protected $charsetName = 'utf8';
 
-
-
-
-  /**
-   * Escapes the string for mysql queries.
-   * @param string $string
-   * @return string The escaped string
-   */
-  public function escapeString($string) {
-    return $this->resource->real_escape_string((string) $string);
-  }
 
   /**
    * Begins a transaction
    */
-  public function beginTransaction() { $this->query('start transaction'); }
+  public function beginTransaction() {
+    $this->query('start transaction');
+  }
 
   /**
    * Commits a transaction
    */
-  public function commit()           { $this->query('commit'); }
+  public function commit() {
+    $this->query('commit');
+  }
 
   /**
    * Rolls back a transaction
    */
-  public function rollback()         { $this->query('rollback'); }
-
+  public function rollback() {
+    $this->query('rollback');
+  }
 
   /**
    * This is the connect function that tries to create a mysql connection, and set the correct character set.
    */
   protected function connect() {
-    if (!function_exists("mysqli_connect")) { throw new SqlException("The function mysqli_connect is not available! Please install the mysqli php module."); }
+    if ( ! function_exists("mysqli_connect")) {
+      throw new SqlException("The function mysqli_connect is not available! Please install the mysqli php module.");
+    }
 
     $this->resource = new mysqli($this->host, $this->user, $this->password, $this->dbname, $this->port);
 
     if ($this->resource->connect_error) {
-      throw new SqlConnectionException("Sorry, impossible to connect to the server with this connection string: '" . $this->getConnectionString()."'. " . ' (#' . $this->resource->connect_errno . ' ' . $this->resource->connect_error);
+      throw new SqlConnectionException("Sorry, impossible to connect to the server with this connection string: '" . $this->getConnectionString() . "'. " . ' (#' . $this->resource->connect_errno . ' ' . $this->resource->connect_error);
     }
 
     $this->connected = true;
-  
+
     $this->setCharacterSet();
   }
-
 
   /**
    * Sets the charsetName for future queries.
@@ -94,7 +85,7 @@ class Mysql extends Database {
    * @param string $charsetName If null the default is passed to mysql.
    */
   public function setCharacterSet($charsetName = null) {
-    if ($charsetName)   $this->charsetName = $charsetName;
+    if ($charsetName) $this->charsetName = $charsetName;
     if ($this->connected) {
       $this->query("SET CHARACTER SET '" . $this->escapeString($this->charsetName) . "'");
     }
@@ -109,10 +100,6 @@ class Mysql extends Database {
       $this->connected = false;
     }
   }
-
-
-
-
 
   /**
    * Performs a query
@@ -141,13 +128,11 @@ class Mysql extends Database {
     // This is really strange:
     // When I don't iterate over the results, it seems that there's a mysql bug that doesn't free the result sets, so a normal query()
     // after that won't work.
-    while($this->resource->more_results()) {
+    while ($this->resource->more_results()) {
       $this->resource->next_result();
       $this->resource->use_result();
     }
   }
-
-
 
   /**
    * Returns the last sql error
@@ -156,5 +141,55 @@ class Mysql extends Database {
   public function lastError() {
     return @$this->resource->error;
   }
+
+
+
+
+
+  /**
+   * @param string $string
+   * @return string The escaped string
+   */
+  public function escapeString($string) {
+    return $this->resource->real_escape_string((string) $string);
+  }
+
+  /**
+   * @param string $text
+   * @return string The escaped and quoted string.
+   */
+  public function exportString($text) {
+    return "'" . $this->escapeString($text) . "'";
+  }
+
+
+  /**
+   * @param string $column
+   * @return string
+   */
+  public function exportColumn($column) {
+    return '`' . $this->escapeColumn($column) . '`';
+  }
+
+  /**
+   * @param string $resourceName
+   * @return string The escaped and quoted table name.
+   */
+  public function exportTable($table) {
+    return '`' . $this->escapeTable($table) . '`';
+  }
+
+  /**
+   * Returns the id of the last inserted record.
+   *
+   * @return int
+   */
+  public function getLastInsertId() {
+    $id = $this->query("select LAST_INSERT_ID() as id");
+    $id = $id->fetchArray();
+    return $id['id'];
+  }
+
+
 }
 

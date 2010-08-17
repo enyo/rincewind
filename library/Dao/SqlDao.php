@@ -6,13 +6,17 @@
  * @author Matthias Loitsch <developer@ma.tthias.com>
  * @copyright Copyright (c) 2010, Matthias Loitsch
  * @package Dao
- **/
-
+ * */
 /**
  * Loading the abstract Dao Class
  */
-if (!class_exists('Dao', false)) include dirname(__FILE__) . '/Dao.php';
+if ( ! class_exists('Dao', false)) include dirname(__FILE__) . '/Dao.php';
 
+
+/**
+ * Loading the SqlResultIterator
+ */
+include dirname(__FILE__) . '/SqlResultIterator.php';
 
 /**
  * The SqlDao has all the main functionality for SQL databases.
@@ -20,14 +24,13 @@ if (!class_exists('Dao', false)) include dirname(__FILE__) . '/Dao.php';
  * @author Matthias Loitsch <developer@ma.tthias.com>
  * @copyright Copyright (c) 2010, Matthias Loitsch
  * @package Dao
- **/
+ * */
 abstract class SqlDao extends Dao {
 
   /**
    * @var Database
    */
   protected $db;
-
 
   /**
    * @param Database $db
@@ -41,14 +44,15 @@ abstract class SqlDao extends Dao {
     $this->db = $db;
   }
 
-
   /**
    * Returns the database.
    *
    * @see Database
    * @return Database
    */
-  public function getDb() { return $this->db; }
+  public function getDb() {
+    return $this->db;
+  }
 
   /**
    * Creates a Dao.
@@ -64,15 +68,19 @@ abstract class SqlDao extends Dao {
   /**
    * @return int The last id that has been inserted
    */
-  abstract protected function getLastInsertId();
+  protected function getLastInsertId() {
+    return $this->db->getLastInsertId();
+  }
 
   /**
-   * Creates an iterator from a php result.
+   * Creates an iterator for a sql result.
    *
    * @param result $result
-   * @return DaoResultIterator
+   * @return SqlResultIterator
    */
-  abstract protected function createIterator($result);
+  protected function createIterator($result) {
+    return new SqlResultIterator($result, $this);
+  }
 
   /**
    * For most SQL Database simply calling strtotime() will work.
@@ -80,61 +88,33 @@ abstract class SqlDao extends Dao {
    * @param string $databaseValue
    * @param bool $withTime
    */
-  protected function convertRemoteValueToTimestamp($databaseValue, $withTime) { return strtotime($databaseValue); }
-
-
-  /**
-   * Calls the internal db->escapeString function
-   * 
-   * @param string $string
-   * @return string
-   */
-  protected function escapeString($string) {
-    return $this->db->escapeString($string);
+  protected function convertRemoteValueToTimestamp($databaseValue, $withTime) {
+    return strtotime($databaseValue);
   }
-
-  /**
-   * Calls the internal db->escapeColumn function
-   * 
-   * @param string $attributeName
-   * @return string
-   */
-  protected function escapeAttributeName($attributeName) {
-    return $this->db->escapeColumn($attributeName);
-  }
-  
-  /**
-   * Calls the internal db->escapeResourceName function
-   * 
-   * @param string $resourceName
-   * @return string
-   */
-  protected function escapeResourceName($resourceName = null) {
-    return $this->db->escapeTable($resourceName ? $resourceName : $this->resourceName);
-  }
-  
-
 
   /**
    * Shorthand for: Dao.getDb()->beginTransaction()
    * Be careful: this starts a transaction on the database! So all Daos using the same database will be in the same transaction
    */
-  public function beginTransaction() { $this->db->beginTransaction(); }
+  public function beginTransaction() {
+    $this->db->beginTransaction();
+  }
 
   /**
    * Shorthand for: Dao.getDb()->commit()
    * Be careful: this starts a transaction on the database! So all Daos using the same database will be in the same transaction
    */
-  public function commit() { $this->db->commit(); }
+  public function commit() {
+    $this->db->commit();
+  }
 
   /**
    * Shorthand for: Dao.getDb()->rollback()
    * Be careful: this starts a transaction on the database! So all Daos using the same database will be in the same transaction
    */
-  public function rollback() { $this->db->rollback(); }
-
-
-
+  public function rollback() {
+    $this->db->rollback();
+  }
 
   /**
    * This is the method to get a Record from the database.
@@ -172,7 +152,7 @@ abstract class SqlDao extends Dao {
    */
   public function getData($map, $exportValues = true, $resourceName = null) {
     $data = $this->getFromQuery($this->generateQuery($map, $sort = null, $offset = null, $limit = 1, $exportValues, $resourceName ? $resourceName : ($this->viewName ? $this->viewName : $this->resourceName)), $returnData = true);
-    if (!$data) throw new DaoNotFoundException("The query did not return any results.");
+    if ( ! $data) throw new DaoNotFoundException("The query did not return any results.");
     return $this->prepareDataForRecord($data);
   }
 
@@ -193,8 +173,6 @@ abstract class SqlDao extends Dao {
     return $this->getIteratorFromQuery($this->generateQuery($map, $sort, $offset, $limit, $exportValues, $resourceName ? $resourceName : ($this->viewName ? $this->viewName : $this->resourceName)));
   }
 
-
-
   /**
    * Inserts a record in the database, and updates the record with the new data (in
    * case some default values of the database have been set.)
@@ -203,15 +181,15 @@ abstract class SqlDao extends Dao {
    * @return Record The updated record.
    */
   public function insert($record) {
-    
+
     list ($columns, $values) = $this->generateInsertArrays($record);
 
     $insertSql = "insert into " . $this->exportResourceName() . " (" . implode(', ', $columns) . ") values (" . implode(', ', $values) . ");";
-    
+
     $newId = $this->insertByQuery($insertSql, $record->id);
 
-    $this->updateRecordWithData($this->getData(array('id'=>$newId)), $record);
-    
+    $this->updateRecordWithData($this->getData(array('id' => $newId)), $record);
+
     $this->afterInsert($record);
 
     $record->setExistsInDatabase();
@@ -227,7 +205,7 @@ abstract class SqlDao extends Dao {
    */
   public function update($record) {
     $values = array();
-    foreach ($this->attributes as $column=>$type) {
+    foreach ($this->attributes as $column => $type) {
       if ($column != 'id' && $type != Dao::IGNORE) $values[] = $this->exportAttributeName($column) . '=' . $this->exportValue($record->get($column), $type, $this->notNull($column));
     }
 
@@ -250,8 +228,6 @@ abstract class SqlDao extends Dao {
     $this->afterDelete($record);
   }
 
-
-
   /**
    * Returns the total row count in the resource the Dao is assigned to.
    *
@@ -260,7 +236,6 @@ abstract class SqlDao extends Dao {
   public function getTotalCount() {
     return $this->db->query("select count(id) as count from " . $this->exportResourceName())->fetch('count');
   }
-
 
   /**
    * This function generates the SQL query for the getters.
@@ -281,9 +256,9 @@ abstract class SqlDao extends Dao {
    * @return string
    */
   protected function generateQuery($map, $sort = null, $offset = null, $limit = null, $exportValues = true, $resourceName = null) {
-    if ($offset !== null && !is_int($offset) ||
-      $limit !== null && !is_int($limit) ||
-      !is_bool($exportValues)) {
+    if ($offset !== null && ! is_int($offset) ||
+        $limit !== null && ! is_int($limit) ||
+        ! is_bool($exportValues)) {
       $trace = debug_backtrace();
       trigger_error('Wrong parameters in ' . $trace[0]['file'] . ' on line ' . $trace[0]['line'], E_USER_ERROR);
     }
@@ -292,15 +267,17 @@ abstract class SqlDao extends Dao {
 
     $assignments = array();
 
-    foreach($map as $column=>$value) {
+    foreach ($map as $column => $value) {
       if ($value instanceof DaoAttributeAssignment) {
-        $column   = $value->attributeName;
+        $column = $value->attributeName;
         $operator = $value->operator;
-        $value    = $value->value;
+        $value = $value->value;
       }
-      else { $operator = '='; }
+      else {
+        $operator = '=';
+      }
 
-      if (!isset($this->attributes[$column])) {
+      if ( ! isset($this->attributes[$column])) {
         $trace = debug_backtrace();
         trigger_error('The type for attribute ' . $column . ' was not found in ' . $trace[2]['file'] . ' on line ' . $trace[2]['line'], E_USER_ERROR);
       }
@@ -314,15 +291,17 @@ abstract class SqlDao extends Dao {
 
     $sort = $this->generateSortString($sort);
 
-    $query  = 'select * from ' . $this->exportResourceName($resourceName);
+    $query = 'select * from ' . $this->exportResourceName($resourceName);
     if (count($assignments) > 0) $query .= ' where ' . implode(' and ', $assignments);
     $query .= " " . $sort;
-    if ($offset !== null) { $query .= " offset " . intval($offset); }
-    if ($limit  !== null) { $query .= " limit " . intval($limit); }
+    if ($offset !== null) {
+      $query .= " offset " . intval($offset);
+    }
+    if ($limit !== null) {
+      $query .= " limit " . intval($limit);
+    }
     return $query;
   }
-
-
 
   /**
    * Returns a Record or data array from a query.
@@ -341,7 +320,6 @@ abstract class SqlDao extends Dao {
     return $this->getRecordFromData($result->fetchArray());
   }
 
-
   /**
    * Returns an Iterator for a query
    *
@@ -351,9 +329,6 @@ abstract class SqlDao extends Dao {
   protected function getIteratorFromQuery($query) {
     return $this->createIterator($this->db->query($query));
   }
-
-
-
 
   /**
    * Inserts and returns the new id
@@ -369,9 +344,6 @@ abstract class SqlDao extends Dao {
     return $id;
   }
 
-
-
-
   /**
    * This method takes the $sort attribute and returns a typical 'order by ' SQL string.
    * If $sort is false then the $this->defaultSort is used if it exists.
@@ -380,19 +352,18 @@ abstract class SqlDao extends Dao {
    * @param string|array $sort
    */
   public function generateSortString($sort) {
-    if (!$sort) {
+    if ( ! $sort) {
       $sort = $this->defaultSort;
     }
-    
+
     if ($sort) {
       $columnArray = $this->interpretSortVariable($sort);
     }
 
-    if (!$columnArray) return '';
+    if ( ! $columnArray) return '';
 
     return ' order by ' . implode(', ', $columnArray);
   }
-
 
   /**
    * Returns a formatted date, and escaped with exportString.
@@ -402,6 +373,66 @@ abstract class SqlDao extends Dao {
    */
   public function exportDate($date, $withTime) {
     return $this->exportString($date->format('Y-m-d' . ($withTime ? ' H:i:s' : '')));
+  }
+
+  /**
+   * Wrapper for the db.
+   *
+   * @param string $string
+   * @return string
+   */
+  public function escapeString($string) {
+    return $this->db->escapeString($string);
+  }
+
+  /**
+   * Wrapper for the db.
+   *
+   * @param string $string
+   * @return string
+   */
+  public function exportString($string) {
+    return $this->db->exportString($string);
+  }
+
+  /**
+   * Wrapper for the db.
+   *
+   * @param string $attributeName
+   * @return string
+   */
+  public function escapeAttributeName($attributeName) {
+    return $this->db->escapeColumn($this->applyAttributeExportMapping($this->convertAttributeNameToDatasourceName($attributeName)));
+  }
+
+  /**
+   * Wrapper for the db.
+   *
+   * @param string $string
+   * @return string
+   */
+  public function exportAttributeName($attributeName) {
+    return $this->db->exportColumn($this->applyAttributeExportMapping($this->convertAttributeNameToDatasourceName($attributeName)));
+  }
+
+  /**
+   * Wrapper for the db.
+   *
+   * @param string $resourceName
+   * @return string
+   */
+  public function escapeResourceName($resourceName = null) {
+    return $this->db->escapeTable($resourceName ? $resourceName : $this->resourceName);
+  }
+
+  /**
+   * Wrapper for the db.
+   *
+   * @param string $resourceName
+   * @return string
+   */
+  public function exportResourceName($resourceName = null) {
+    return $this->db->exportTable($resourceName ? $resourceName : $this->resourceName);
   }
 
 }

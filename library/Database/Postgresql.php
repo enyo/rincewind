@@ -161,7 +161,10 @@ class Postgresql extends Database {
     }
   }
 
+
+
   /**
+   * Escapes the string for mysql queries.
    * @param string $string
    * @return string The escaped string
    */

@@ -115,6 +115,6 @@ interface DatabaseInterface {
    * @return string
    * @uses escapeTable()
    */
-  public function escapeTable($table);
+  public function exportTable($table);
 }
 

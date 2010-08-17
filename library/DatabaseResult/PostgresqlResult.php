@@ -1,65 +1,71 @@
 <?php
 
 /**
- * THIS FILE IS DEPRECATED!!!
- * I HAVE TO UPDATE IT TO WORK
+ * This file contains the PostgresqlResult class definition.
+ *
+ * @author Matthias Loitsch <matthias@loitsch.com>
+ * @copyright Copyright (c) 2010, Matthias Loitsch
  * @package Database
  * @subpackage DatabaseResult
+ * */
+/**
+ * Loading the interface
  */
+include dirname(__FILE__) . '/DatabaseResult.php';
 
-/*
+/**
+ * The Postgresql DatabaseResult implementation.
+ *
+ * @author Matthias Loitsch <matthias@loitsch.com>
+ * @copyright Copyright (c) 2010, Matthias Loitsch
+ * @package Database
+ * @subpackage DatabaseResult
+ * */
+class PostgresqlResult extends DatabaseResult {
 
-require_once ('DatabaseResult/AbstractDatabaseResult.php');
-
-
-
-class PostgresqlResult extends AbstractDatabaseResult
-{
-
-
-  protected $fetch_result_row = 0;
-
-
-  public function fetchArray($row = NULL, $result_type = PGSQL_ASSOC)
-  {
-    parent::fetchArray ($row, $result_type);
-    $return = @pg_fetch_array ($this->result, $row, $result_type);
-    return ($return);
+  /**
+   * Returns the array of the current row (or the specified row) and seeks to the
+   * next row.
+   *
+   * @param int $rowNumber
+   * @return array
+   */
+  public function fetchArray($rowNumber = null) {
+    $rowNumber = $rowNumber ? (int) $rowNumber : $this->currentRowNumber;
+    $this->seek($rowNumber + 1);
+    return pg_fetch_assoc($this->result, $rowNumber);
   }
 
-  public function fetchResult($field, $row = NULL)
-  {
-    parent::fetchResult ($field, $row);
-    if ($row === NULL) { $row = $this->getFetchResultRow (); }
-    $return = @pg_fetch_result ($this->result, $row, $field);
-    return ($return);
+  /**
+   * Returns a specific field of the current row.
+   *
+   * @param string $field
+   * @return mixed
+   */
+  public function fetchResult($field) {
+    return pg_fetch_result($this->result, $this->currentRowNumber, $field);
   }
 
-  public function fetchRow($row = NULL)
-  {
-    parent::fetchRow ($row);
-    $return = @pg_fetch_row ($this->result, $row);
-    return ($return);
+  /**
+   * @return int
+   */
+  public function numRows() {
+    return pg_num_rows($this->result);
   }
 
-  public function numRows()
-  {
-    parent::numRows ();
-    $return = @pg_num_rows ($this->result);
-    return ($return);
+  /**
+   * Doesn't call pg_result_seek() but simply sets the currentRowNumber to the
+   * $rowNumber, because all functions explicitely specify which row to use.
+   * 
+   * @param int $rowNumber
+   */
+  public function seek($rowNumber) {
+    $rowNumber = (int) $rowNumber;
+    $this->currentRowNumber = $rowNumber;
   }
 
-
-  protected function getFetchResultRow()
-  {
-    return ($this->fetch_result_row ++);
+  public function free() {
+    pg_free_result($this->result);
   }
-
-  public function reset()
-  {
-    pg_result_seek($this->result, 0);
-  }
-
 
 }
-*/

@@ -31,6 +31,13 @@ abstract class DatabaseResult implements DatabaseResultInterface {
    */
   protected $result = false;
 
+
+  /**
+   * The current row number. The first row is 0.
+   * @var int
+   **/
+  protected $currentRowNumber = 0;
+
   /**
    * The php result from a query is passed in the constructor
    *

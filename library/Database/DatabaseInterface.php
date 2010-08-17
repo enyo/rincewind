@@ -6,13 +6,11 @@
  * @author Matthias Loitsch <developer@ma.tthias.com>
  * @copyright Copyright (c) 2010, Matthias Loitsch
  * @package Database
- **/
-
+ * */
 /**
  * Loading the exceptions
  */
 include dirname(__FILE__) . '/DatabaseExceptions.php';
-
 
 /**
  * The database interface.
@@ -20,9 +18,8 @@ include dirname(__FILE__) . '/DatabaseExceptions.php';
  * @author Matthias Loitsch <developer@ma.tthias.com>
  * @copyright Copyright (c) 2010, Matthias Loitsch
  * @package Database
- **/
+ * */
 interface DatabaseInterface {
-
 
   /**
    * Perform query.
@@ -41,39 +38,11 @@ interface DatabaseInterface {
    */
   public function multiQuery($query);
 
-
-
-  /**
-   * Escapes a string so it can be used in a query.
-   * IMPORTANT: You still have to put quotes around it.
-   * @param string $string
-   * @return string
-   */
-  public function escapeString($string);
-
-  /**
-   * Escapes a column so it can be used in a query.
-   * IMPORTANT: You still have to put quotes around it.
-   * @param string $column
-   * @return string
-   */
-  public function escapeColumn($column);
-
-  /**
-   * Escapes a table so it can be used in a query.
-   * IMPORTANT: You still have to put quotes around it.
-   * @param string $table
-   * @return string
-   */
-  public function escapeTable($table);
-
-
   /**
    * Returns the database resource
    * @return mixed
    */
   public function getResource();
-
 
   /**
    * Returns the last error.
@@ -81,6 +50,71 @@ interface DatabaseInterface {
    */
   public function lastError();
 
+  /**
+   * Returns the id of the last inserted record.
+   *
+   * @return int
+   */
+  public function getLastInsertId();
 
+  /**
+   * Escapes a string so it can be used in a query.
+   * IMPORTANT: You still have to put quotes around it.
+   * Use exportString() for that.
+   *
+   * @param string $string
+   * @return string
+   * @see exportString()
+   */
+  public function escapeString($string);
+
+  /**
+   * Escapes the string, and puts quotes around it.
+   *
+   * @param string $string
+   * @return string
+   * @uses escapeString()
+   */
+  public function exportString($string);
+
+  /**
+   * Escapes a column so it can be used in a query.
+   * IMPORTANT: You still have to put quotes around it.
+   * Use exportColumn() for that.
+   *
+   * @param string $column
+   * @return string
+   * @see exportColumn()
+   */
+  public function escapeColumn($column);
+
+  /**
+   * Escapes a column and puts quotes around it.
+   *
+   * @param string $column
+   * @return string
+   * @uses escapeColumn()
+   */
+  public function exportColumn($column);
+
+  /**
+   * Escapes a table so it can be used in a query.
+   * IMPORTANT: You still have to put quotes around it.
+   * Use exportTable() for that.
+   * 
+   * @param string $table
+   * @return string
+   * @see exportTable()
+   */
+  public function escapeTable($table);
+
+  /**
+   * Escapes a table and puts quotes around it.
+   *
+   * @param string $table
+   * @return string
+   * @uses escapeTable()
+   */
+  public function escapeTable($table);
 }
 

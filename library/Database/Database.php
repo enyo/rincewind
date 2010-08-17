@@ -62,7 +62,7 @@ abstract class Database implements DatabaseInterface {
   /**
    * @var string
    */
-  protected $search_path;
+  protected $searchPath;
 
 
   /**
@@ -75,12 +75,13 @@ abstract class Database implements DatabaseInterface {
    * @param string $port
    * @param string $password
    */
-  public function __construct($dbname, $user = null, $host = null, $port = null, $password = null) {
+  public function __construct($dbname, $user = null, $host = null, $port = null, $password = null, $searchPath = null) {
     $this->dbname       = $dbname;
     $this->host         = $host;
     $this->port         = (int) $port;
     $this->user         = $user;
     $this->password     = $password;
+    $this->searchPath     = $searchPath;
     $this->connect();
   }
 
@@ -134,7 +135,7 @@ abstract class Database implements DatabaseInterface {
     if ($this->host)        { $path[] = '[host: ' . $this->host . ']'; }
     if ($this->port)        { $path[] = '[port: ' . $this->port . ']'; }
     if ($this->dbname)      { $path[] = '[dbname: ' . $this->dbname . ']'; }
-    if ($this->search_path) { $path[] = '[search_path: ' . $this->search_path . ']'; }
+    if ($this->searchPath)  { $path[] = '[search_path: ' . $this->searchPath . ']'; }
     if ($this->user)        { $path[] = '[user: ' . $this->user . ']'; }
     if ($this->password)    { $path[] = '[pass: [not_shown]]'; }
 

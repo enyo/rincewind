@@ -7,9 +7,7 @@
  * @copyright Copyright (c) 2010, Matthias Loitsch
  * @package Database
  * @subpackage DatabaseResult
- **/
-
-
+ * */
 /**
  * Loading the interface
  */
@@ -22,24 +20,24 @@ include dirname(__FILE__) . '/DatabaseResult.php';
  * @copyright Copyright (c) 2010, Matthias Loitsch
  * @package Database
  * @subpackage DatabaseResult
- **/
+ * */
 class MysqlResult extends DatabaseResult {
 
   /**
-   * The current row number. The first row is 0.
-   * @var int
-   **/
-  private $currentRowNumber = 0;
-
-
-  /**
    * If you pass a row number, seek() is called.
+   * The result is then advanced to the next row.
+   * 
    * @param int $rowNumber
    * @return array
    */
   public function fetchArray($rowNumber = null) {
-    if ($rowNumber !== null) { $this->seek($rowNumber); }
-    else { $this->currentRowNumber ++; }
+    if ($rowNumber !== null) {
+      $this->seek($rowNumber);
+    }
+    else {
+      // Increase the counter, because result::fetch_assoc() automatically selects the next row.
+      $this->currentRowNumber ++;
+    }
     return ($this->result->fetch_assoc());
   }
 
@@ -67,7 +65,7 @@ class MysqlResult extends DatabaseResult {
   public function seek($rowNumber) {
     $rowNumber = (int) $rowNumber;
     $this->currentRowNumber = $rowNumber;
-    $this->result->data_seek($rowNumber); 
+    $this->result->data_seek($rowNumber);
   }
 
   public function free() {

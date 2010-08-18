@@ -132,7 +132,7 @@ interface DaoInterface {
   /**
    * Begins a transaction
    */
-  public function beginTransaction();
+  public function startTransaction();
 
   /**
    * Commits a transaction

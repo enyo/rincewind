@@ -53,9 +53,15 @@ interface DatabaseInterface {
   /**
    * Returns the id of the last inserted record.
    *
+   * @param string $table If possible return the last insert id for specified table.
    * @return int
    */
-  public function getLastInsertId();
+  public function getLastInsertId($table);
+
+  /**
+   * Starts a transaction in the database.
+   */
+  public function startTransaction();
 
   /**
    * Escapes a string so it can be used in a query.

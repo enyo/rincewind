@@ -42,9 +42,6 @@ class SqlDao extends Dao {
   public function __construct($db, $resourceName = null, $attributes = null, $nullAttributes = null, $defaultValueAttributes = null) {
     parent::__construct($resourceName, $attributes, $nullAttributes, $defaultValueAttributes);
     $this->db = $db;
-    if (!$this->resourceName) {
-      throw new DaoException('No resource name provided!');
-    }
   }
 
   /**
@@ -72,7 +69,7 @@ class SqlDao extends Dao {
    * @return int The last id that has been inserted
    */
   protected function getLastInsertId() {
-    return $this->db->getLastInsertId();
+    return $this->db->getLastInsertId($this->resourceName);
   }
 
   /**
@@ -96,11 +93,11 @@ class SqlDao extends Dao {
   }
 
   /**
-   * Shorthand for: Dao.getDb()->beginTransaction()
-   * Be careful: this starts a transaction on the database! So all Daos using the same database will be in the same transaction
+   * Shorthand for: Dao->getDb()->beginTransaction()
+   * Be careful: this starts a transaction on the database! So all Daos using the same database will be in the same transaction.
    */
-  public function beginTransaction() {
-    $this->db->beginTransaction();
+  public function startTransaction() {
+    $this->db->startTransaction();
   }
 
   /**
@@ -185,9 +182,7 @@ class SqlDao extends Dao {
    */
   public function insert($record) {
 
-    list ($columns, $values) = $this->generateInsertArrays($record);
-
-    $insertSql = "insert into " . $this->exportResourceName() . " (" . implode(', ', $columns) . ") values (" . implode(', ', $values) . ");";
+    $insertSql = $this->generateInsertQuery($record);
 
     $newId = $this->insertByQuery($insertSql, $record->id);
 
@@ -198,6 +193,17 @@ class SqlDao extends Dao {
     $record->setExistsInDatabase();
 
     return $record;
+  }
+
+  /**
+   * Generates the query for insertion.
+   * 
+   * @param Record $record
+   * @return string
+   */
+  protected function generateInsertQuery($record) {
+    list ($columns, $values) = $this->generateInsertArrays($record);
+    return "insert into " . $this->exportResourceName() . " (" . implode(', ', $columns) . ") values (" . implode(', ', $values) . ")";
   }
 
   /**

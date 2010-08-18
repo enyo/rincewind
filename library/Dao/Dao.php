@@ -156,9 +156,12 @@ abstract class Dao implements DaoInterface {
   /**
    * Has to be called from any extended Dao to make sure everything gets setup properly
    *
-   * Configuring your Dao in the constructor is only to be able to test them.
+   * The normal way of configuring your Dao is to extend the type of Dao you want
+   * (SqlDao, FileDao, etc...) and configure it with parameters, instead of the
+   * constructor call.
    *
-   * You should configure them as member variables when defining your Daos.
+   * The constructor checks if the resourceName and attributes array are set (either
+   * with the constructor or as properties) and throws an Exception if not.
    *
    * @param string $resourceName You should specify this as an attribute when writing a Dao implementation
    * @param array $attributes You should specify this as an attribute when writing a Dao implementation
@@ -170,6 +173,14 @@ abstract class Dao implements DaoInterface {
     if ($attributes) $this->attributes = $attributes;
     if ($nullAttributes) $this->nullAttributes = $nullAttributes;
     if ($defaultValueAttributes) $this->defaultValueAttributes = $defaultValueAttributes;
+
+    if (!$this->resourceName) {
+      throw new DaoException('No resource name provided.');
+    }
+    if (!is_array($this->attributes)) {
+      throw new DaoException('No attributes provied.');
+    }
+
     $this->setupReferences();
   }
 
@@ -221,7 +232,7 @@ abstract class Dao implements DaoInterface {
    *
    * @var array
    */
-  protected $attributes = array();
+  protected $attributes;
 
 
   /**

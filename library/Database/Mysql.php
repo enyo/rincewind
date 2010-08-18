@@ -41,7 +41,7 @@ class Mysql extends Database {
   /**
    * Begins a transaction
    */
-  public function beginTransaction() {
+  public function startTransaction() {
     $this->query('start transaction');
   }
 
@@ -182,9 +182,10 @@ class Mysql extends Database {
   /**
    * Returns the id of the last inserted record.
    *
+   * @param string $table Gets ignored for mysql
    * @return int
    */
-  public function getLastInsertId() {
+  public function getLastInsertId($table) {
     $id = $this->query("select LAST_INSERT_ID() as id");
     $id = $id->fetchArray();
     return $id['id'];

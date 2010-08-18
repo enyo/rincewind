@@ -40,7 +40,7 @@ class Postgresql extends Database {
   /**
    * Begins a transaction
    */
-  public function beginTransaction() {
+  public function startTransaction() {
     $this->query('start transaction');
   }
 
@@ -103,9 +103,9 @@ class Postgresql extends Database {
 
   /**
    * Sets the charsetName for future queries.
-   * If a connection already exists, the mysql command set names is called.
+   * If a connection already exists, pg_set_client_encoding() is called.
    *
-   * @param string $charsetName If null the default is passed to mysql.
+   * @param string $charsetName If null the default is passed to postgresql.
    */
   public function setCharacterSet($charsetName = null) {
     if ($charsetName) $this->charsetName = $charsetName;
@@ -127,10 +127,10 @@ class Postgresql extends Database {
   /**
    * Performs a query
    * @param string $query
-   * @return MysqlResult
+   * @return PostgresqlResult
    */
   public function query($query) {
-    $result = @pg_query($this->resource, $query);
+    $result = pg_query($this->resource, $query);
     if ($result === false) {
       throw new SqlQueryException("There was a problem with the query.\nThe server responded: " . $this->lastError());
     }
@@ -157,14 +157,14 @@ class Postgresql extends Database {
       return pg_last_error($this->resource);
     }
     else {
-      return '';
+      return '(No connection)';
     }
   }
 
 
 
   /**
-   * Escapes the string for mysql queries.
+   * Escapes the string for postgresql queries.
    * @param string $string
    * @return string The escaped string
    */
@@ -198,12 +198,13 @@ class Postgresql extends Database {
   }
 
   /**
-   * Returns the id of the last inserted record.
+   * Returns the id of the last inserted record for given table.
    *
+   * @param string $table
    * @return int
    */
-  public function getLastInsertId() {
-    $id = $this->query('select currval("' . parent::exportResourceName() . '_seq")');
+  public function getLastInsertId($table) {
+    $id = $this->query('select currval(\'' . $this->escapeTable($table) . '_id_seq\') as id');
     $id = $id->fetchArray();
     return $id['id'];
   }

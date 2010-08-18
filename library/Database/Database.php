@@ -6,7 +6,7 @@
  * @author Matthias Loitsch <developer@ma.tthias.com>
  * @copyright Copyright (c) 2010, Matthias Loitsch
  * @package Database
- * */
+ */
 /**
  * Loading the interface
  */
@@ -18,7 +18,7 @@ include dirname(__FILE__) . '/DatabaseInterface.php';
  * @author Matthias Loitsch <developer@ma.tthias.com>
  * @copyright Copyright (c) 2010, Matthias Loitsch
  * @package Database
- * */
+ */
 abstract class Database implements DatabaseInterface {
 
   /**

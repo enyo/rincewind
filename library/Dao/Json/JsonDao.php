@@ -60,6 +60,12 @@ class JsonDao extends FileSourceDao {
     return new JsonResultIterator($data, $this);
   }
 
+  /**
+   * Doesn't work for JSON normally.
+   */
+  public  function startTransaction() {
+    throw new JsonDaoException('Transactions not implemented.');
+  }
 
 }
 

@@ -130,7 +130,7 @@ class Postgresql extends Database {
    * @return PostgresqlResult
    */
   public function query($query) {
-    $result = pg_query($this->resource, $query);
+    $result = @pg_query($this->resource, $query);
     if ($result === false) {
       throw new SqlQueryException("There was a problem with the query.\nThe server responded: " . $this->lastError());
     }
@@ -161,8 +161,6 @@ class Postgresql extends Database {
     }
   }
 
-
-
   /**
    * Escapes the string for postgresql queries.
    * @param string $string
@@ -179,7 +177,6 @@ class Postgresql extends Database {
   public function exportString($text) {
     return "'" . $this->escapeString($text) . "'";
   }
-
 
   /**
    * @param string $column

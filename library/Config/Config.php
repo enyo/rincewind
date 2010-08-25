@@ -100,7 +100,7 @@ abstract class Config {
    */
   public function getArray($oneDimensional = false) {
     $this->load();
-    if ($this->useSections) {
+    if ($this->useSections && $oneDimensional) {
       $return = array();
       foreach ($this->config as $section=>$variables) {
         foreach ($variables as $variable=>$content) {

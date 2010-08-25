@@ -1,6 +1,6 @@
-# PHP Library
+# Rincewind
 
-More info coming soon
+Is a PHP library.
 
 
 ## Short introduction

@@ -6,7 +6,7 @@
  * @author Matthias Loitsch <developer@ma.tthias.com>
  * @copyright Copyright (c) 2010, Matthias Loitsch
  * @package Database
- * */
+ */
 /**
  * Loading the abstract database
  */
@@ -23,7 +23,7 @@ include dirname(dirname(__FILE__)) . '/DatabaseResult/MysqlResult.php';
  * @author Matthias Loitsch <developer@ma.tthias.com>
  * @copyright Copyright (c) 2010, Matthias Loitsch
  * @package Database
- * */
+ */
 class Mysql extends Database {
 
   /**

@@ -2,7 +2,7 @@
 
 require_once 'PHPUnit/Framework.php';
 
-require_once dirname(__FILE__) . '/../../setup.php';
+require_once dirname(__FILE__) . '/../../../setup.php';
 
 /**
  * Test class for SqlDao.

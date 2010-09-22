@@ -41,6 +41,13 @@ abstract class FileSourceResultIterator extends DaoResultIterator {
   }
 
 
+  /**
+   * @return array
+   * @uses $data
+   */
+  public function getData() {
+    return $this->data;
+  }
 
   /**
    * Sets the pointer to entry 1.

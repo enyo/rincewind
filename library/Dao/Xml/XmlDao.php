@@ -53,7 +53,7 @@ class XmlDao extends FileSourceDao {
    * @param string $content The file content
    * @return array
    */
-  protected function interpretFileContent($content) {
+  public function interpretFileContent($content) {
     $values = array();
     $tags = array();
     $parser = xml_parser_create();
@@ -111,7 +111,6 @@ class XmlDao extends FileSourceDao {
           foreach ($fields as $thisField) {
             $error = true;
             $errorMessages[] = @$thisField["value"];
-            $this->log(@$thisField["value"]);
           }
           $count ++;
         }
@@ -127,9 +126,6 @@ class XmlDao extends FileSourceDao {
           $len = $items[$i + 1] - $offset;
           $fields = array_slice($values, $offset, $len);
 
-          foreach ($fields as $thisField) {
-            $this->debug(@$thisField["value"]);
-          }
           $count ++;
         }
       }
@@ -169,7 +165,7 @@ class XmlDao extends FileSourceDao {
    * @param array $data
    * @return XmlResultIterator
    */
-  protected function createIterator($data) {
+  public function createIterator($data) {
     return new XmlResultIterator($data, $this);
   }
 

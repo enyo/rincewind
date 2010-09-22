@@ -41,7 +41,7 @@ class JsonDao extends FileSourceDao {
    * @param string $content The file content
    * @return array
    */
-  protected function interpretFileContent($content) {
+  public function interpretFileContent($content) {
     $return = json_decode($content, true);
     if ($return === null) {
       Log::error('Json could not be decoded.', 'JsonDao', array('content'=>$content));
@@ -56,7 +56,7 @@ class JsonDao extends FileSourceDao {
    * @param array $data
    * @return JsonResultIterator
    */
-  protected function createIterator($data) {
+  public function createIterator($data) {
     return new JsonResultIterator($data, $this);
   }
 
@@ -67,5 +67,17 @@ class JsonDao extends FileSourceDao {
     throw new JsonDaoException('Transactions not implemented.');
   }
 
+  /**
+   * Returns an array.
+   * 
+   * If the value is already an array, it just returns it. Otherwise it puts the
+   * value in an array.
+   * 
+   * @param mixed $value
+   * @return array
+   */
+  public function exportSequence($value) {
+    return is_array($value) ? $value : array($value);
+  }
 }
 

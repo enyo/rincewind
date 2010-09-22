@@ -187,12 +187,6 @@ abstract class Dao implements DaoInterface {
 
 
   /**
-   * @see Logger
-   * @var Logger
-   */
-  protected $logger = null;
-
-  /**
    * This is the resource name this Dao works with.
    * @var string
    */
@@ -404,28 +398,6 @@ abstract class Dao implements DaoInterface {
     if ($mapOrRecord instanceof Record) return $mapOrRecord->getChangedValues();
     throw new DaoWrongValueException("The passed map is neither an array nor a Record.");
   }
-
-
-  /**
-   * @param LoggerFactory $loggerFactory
-   */
-  public function setLoggerFactory($loggerFactory) { $this->setLogger($loggerFactory->getLogger($this->resourceName . 'Dao')); }
-
-  /**
-   * @param Logger $logger
-   */
-  public function setLogger($logger) { $this->logger = $logger; }
-
-  /**
-   * @param string $message
-   */
-  protected function log($message)   { if ($this->logger) $this->logger->log($message); }
-
-  /**
-   * @param string $message
-   */
-  protected function debug($message) { if ($this->logger) $this->logger->debug($message); }
-
 
 
   /**

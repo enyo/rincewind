@@ -69,7 +69,7 @@ abstract class FileSourceDao extends Dao {
    * @param array $data
    * @return FileResultIterator
    */
-  abstract protected function createIterator($data);
+  abstract public function createIterator($data);
 
   /**
    * Most file data connections will transfer time values as timestamps.
@@ -145,7 +145,7 @@ abstract class FileSourceDao extends Dao {
    * @param string $content
    * @return array The data array
    */
-  abstract protected function interpretFileContent($content);
+  abstract public function interpretFileContent($content);
 
   /**
    * The same as get, but returns an iterator to go through all the rows.

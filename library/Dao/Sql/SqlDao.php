@@ -78,7 +78,7 @@ class SqlDao extends Dao {
    * @param result $result
    * @return SqlResultIterator
    */
-  protected function createIterator($result) {
+  public function createIterator($result) {
     return new SqlResultIterator($result, $this);
   }
 

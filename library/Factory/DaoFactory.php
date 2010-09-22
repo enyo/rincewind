@@ -49,4 +49,11 @@ class DaoFactory extends Factory {
     return new $className($this->dataSource);
   }
 
+  /**
+   * @param string $daoName
+   * @return Dao
+   */
+  public function get($daoName) {
+    return parent::get($daoName);
+  }
 }

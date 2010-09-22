@@ -8,7 +8,7 @@ require_once LIBRARY_PATH . 'Dao/SqlDao.php';
 require_once LIBRARY_PATH . 'Database/DatabaseInterface.php';
 
 /**
- * Test class for SqlDao.
+ * Test class for SqlDao. This testcase makes sure that all calls get forwarded correctly to the database object.
  */
 class SqlDaoDatabaseWrapperTest extends PHPUnit_Framework_TestCase {
 
@@ -16,9 +16,9 @@ class SqlDaoDatabaseWrapperTest extends PHPUnit_Framework_TestCase {
   protected $db;
 
   public function setUp() {
-    $this->db = $this->getMock('DatabaseInterface', array('escapeString', 'exportString', 'escapeColumn', 'exportColumn', 'escapeTable', 'exportTable', 'query', 'multiQuery', 'getResource', 'lastError', 'getLastInsertId'), array(), '', false);
+    $this->db = $this->getMock('DatabaseInterface', array('escapeString', 'exportString', 'escapeColumn', 'exportColumn', 'escapeTable', 'exportTable', 'query', 'multiQuery', 'getResource', 'lastError', 'getLastInsertId', 'startTransaction'), array(), '', false);
 
-    $this->sqlDao = new SqlDao($this->db, 'tablename', array());
+    $this->sqlDao = new SqlDao($this->db, 'tablename', array('id'=>Dao::INT));
   }
 
   public function testEscapeAndExportFunctionsGetForwardedProperly() {

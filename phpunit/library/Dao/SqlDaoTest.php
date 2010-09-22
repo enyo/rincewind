@@ -14,6 +14,7 @@ class SqlDaoTest extends PHPUnit_Framework_TestSuite {
     $suite = new PHPUnit_Framework_TestSuite();
 
     $suite->addTestFile(dirname(__FILE__) . '/SqlDao.DatabaseWrapperTest.php');
+    $suite->addTestFile(dirname(__FILE__) . '/SqlDao.InitializationTest.php');
 
     return $suite;
   }

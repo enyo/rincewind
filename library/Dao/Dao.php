@@ -434,6 +434,13 @@ abstract class Dao implements DaoInterface {
    */   
   public function getAttributes() { return $this->attributes; }
 
+
+  /**
+   * Returns the resource name
+   * @return string
+   */
+  public function getResourceName() { return $this->resourceName; }
+
   /**
    * Returns the additional attribute types array
    * @return array
@@ -956,13 +963,14 @@ abstract class Dao implements DaoInterface {
     }
     $dateWithTime = false;
     switch ($type) {
-      case Dao::BOOL:   return $this->exportBool($internalValue); break;
-      case Dao::INT:    return $this->exportInteger($internalValue); break;
-      case Dao::FLOAT:  return $this->exportFloat($internalValue); break;
-      case Dao::TEXT:   return $this->exportString($internalValue); break;
+      case Dao::BOOL:    return $this->exportBool($internalValue); break;
+      case Dao::INT:      return $this->exportInteger($internalValue); break;
+      case Dao::FLOAT:    return $this->exportFloat($internalValue); break;
+      case Dao::TEXT:     return $this->exportString($internalValue); break;
       case Dao::DATE_WITH_TIME: $dateWithTime = true; // No break
-      case Dao::DATE:   return $this->exportDate($internalValue, $dateWithTime); break;
-      case Dao::IGNORE: return $internalValue; break;
+      case Dao::DATE:     return $this->exportDate($internalValue, $dateWithTime); break;
+      case Dao::SEQUENCE: return $this->exportSequence($internalValue); break;
+      case Dao::IGNORE:   return $internalValue; break;
       default: throw new DaoException('Unhandled type when exporting a value.'); break;
     }
   }
@@ -1059,6 +1067,18 @@ abstract class Dao implements DaoInterface {
     return $this->exportString($value);
   }
 
+
+  /**
+   * Exports a sequence. The generic Dao really can't handle this.
+   *
+   * This has to be implemented by each specific dao.
+   *
+   * @param mixed $value
+   * @return mixed
+   */
+  public function exportSequence($value) {
+    throw new DaoException('The generic Dao does not support exporting Sequences.');
+  }
 
 
   /**

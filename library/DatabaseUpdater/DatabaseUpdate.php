@@ -9,7 +9,6 @@
  * @subpackage Updater
  */
 
-
 /**
  * Holds all necessary information about a database update, and is used by the
  * DatabaseUpdater

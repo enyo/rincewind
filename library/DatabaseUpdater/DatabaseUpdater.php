@@ -33,12 +33,10 @@ class DatabaseNotInitializedException extends DatabaseUpdaterException {
 
 }
 
-
 /**
  * Including the DatabaseUpdate
  */
 include dirname(__FILE__) . '/DatabaseUpdate.php';
-
 
 /**
  * @author Matthias Loitsch <developer@ma.tthias.com>
@@ -210,7 +208,7 @@ class DatabaseUpdater {
     if ($update->type === 'sql') {
 
       try {
-//        $this->db->multiQuery(file_get_contents($update->filename));
+        $this->db->multiQuery(file_get_contents($this->updatesPath . $update->filename));
       }
       catch (SqlQueryException $e) {
         throw new DatabaseUpdaterException('Error in file: ' . $update->filename . "\n" . $e->getMessage());
@@ -221,7 +219,7 @@ class DatabaseUpdater {
     }
 
     if ($update->number != 0) {
-//      $this->versionDao->get()->set('number', $update->number)->set('username', $update->username)->set('branch', $update->branch)->save();
+      $this->versionDao->get()->set('number', $update->number)->set('username', $update->username)->set('branch', $update->branch)->save();
     }
   }
 

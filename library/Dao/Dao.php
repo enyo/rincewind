@@ -290,7 +290,7 @@ abstract class Dao implements DaoInterface {
    * @see setupReferences()
    * @see DaoReference
    */
-  protected function addReference($attributeName, $reference) {
+  public function addReference($attributeName, $reference) {
     $reference->setSourceDao($this);
     $this->references[$attributeName] = $reference;
   }
@@ -298,12 +298,12 @@ abstract class Dao implements DaoInterface {
   /**
    * Returns the reference for an attribute
    *
-   * @param string $attribute
+   * @param string $attributeName
    * @return Record|DaoResultIterator
    */
-  public function getReference($attribute) {
-    if (!isset($this->references[$attribute])) throw new DaoWrongValueException("The attribute `$attribute` is not specified in references.");
-    return $this->references[$attribute];
+  public function getReference($attributeName) {
+    if (!isset($this->references[$attributeName])) throw new DaoWrongValueException("The attribute `$attributeName` is not specified in references.");
+    return $this->references[$attributeName];
   }
 
 
@@ -620,7 +620,7 @@ abstract class Dao implements DaoInterface {
    *
    * @return bool
    */
-  protected function notNull($attributeName) {
+  public function notNull($attributeName) {
     return !in_array($attributeName, $this->nullAttributes);
   }
 

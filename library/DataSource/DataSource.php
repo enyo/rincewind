@@ -29,13 +29,24 @@ abstract class DataSource {
 
 
   /**
-   * Returns one object.
+   * Returns a specific record.
+   *
+   * @param string $resource
+   * @param mixed $id The primary key
+   * @return string The file content
+   */
+  abstract public function get($resource, $id);
+
+
+  /**
+   * Returns a record, defined by attributes.
    *
    * @param string $resource
    * @param array $attributes Associative array
    * @return string The file content
    */
-  abstract public function view($resource, $attributes);
+  abstract public function find($resource, $attributes);
+
 
   /**
    * Returns all objects found.
@@ -47,7 +58,7 @@ abstract class DataSource {
    * @param int $limit 
    * @return string The file content
    */
-  abstract public function viewList($resource, $attributes, $sort, $offset, $limit);
+  abstract public function getList($resource, $attributes = null, $sort = null, $offset = null, $limit = null);
 
   /**
    * Inserts the object, and returns the id.

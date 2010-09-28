@@ -116,7 +116,13 @@ abstract class FileSourceDao extends Dao {
    * @return Record
    */
   public function find($map = null, $exportValues = true, $resourceName = null) {
-    $content = $this->fileDataSource->view($this->exportResourceName($resourceName ? $resourceName : ($this->viewName ? $this->viewName : $this->resourceName)), $exportValues ? $this->exportMap($map) : $map);
+
+    if (count($map) === 1 && array_key_exists('id', $map)) {
+      $content = $this->fileDataSource->get($this->exportResourceName($resourceName ? $resourceName : ($this->viewName ? $this->viewName : $this->resourceName)), $map['id']);
+    }
+    else {
+      $content = $this->fileDataSource->find($this->exportResourceName($resourceName ? $resourceName : ($this->viewName ? $this->viewName : $this->resourceName)), $exportValues ? $this->exportMap($map) : $map);
+    }
 
     $data = $this->interpretFileContent($content);
 
@@ -160,7 +166,7 @@ abstract class FileSourceDao extends Dao {
    * @return DaoResultIterator
    */
   public function getIterator($map, $sort = null, $offset = null, $limit = null, $exportValues = true, $resourceName = null) {
-    $content = $this->fileDataSource->viewList($this->exportResourceName($resourceName ? $resourceName : ($this->viewName ? $this->viewName : $this->resourceName)), $exportValues ? $this->exportMap($map) : $map, $this->generateSortString($sort), $offset, $limit);
+    $content = $this->fileDataSource->getList($this->exportResourceName($resourceName ? $resourceName : ($this->viewName ? $this->viewName : $this->resourceName)), $exportValues ? $this->exportMap($map) : $map, $this->generateSortString($sort), $offset, $limit);
 
     $data = $this->interpretFileContent($content);
 

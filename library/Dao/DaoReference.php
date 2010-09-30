@@ -104,6 +104,19 @@ abstract class DaoReference {
     return $this->localKey;
   }
 
+
+  /**
+   * Returns the foreign dao. If $daoClassName is already a dao, it is only
+   * returned. If it's a string, createDao() is called.
+   * @return Dao
+   * @uses createDao()
+   */
+  public function getForeignDao() {
+    $dao = $this->getDaoClassName();
+    if (is_string($dao)) $dao = $this->createDao($dao);
+    return $dao;
+  }
+
   /**
    * Creates a Dao. This calls createDao internally on the sourceDao.
    *

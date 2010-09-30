@@ -74,4 +74,28 @@ class DaoReferenceTest extends PHPUnit_Framework_TestCase {
     self::assertSame('OTHER DAO', $daoReference->createDao('AddressDao'));
 //    setSourceDao
   }
+
+
+  /**
+   * @covers DaoReference::getForeignDao
+   */
+  public function testGetForeignDaoCallsCreateDaoIfNecessary() {
+
+    $daoReference = $this->getMock('DaoReference', array('createDao', 'getData'), array('AddressDao'));
+    $daoReference->expects($this->once())->method('createDao')->with('AddressDao')->will($this->returnValue('OTHER DAO'));
+    self::assertSame('OTHER DAO', $daoReference->getForeignDao());
+
+  }
+
+  /**
+   * @covers DaoReference::getForeignDao
+   */
+  public function testGetForeignDaoSimplyReturnsDaoClassNameIfItsADao() {
+
+    $daoReference = $this->getMock('DaoReference', array('createDao', 'getData'), array($this->dao));
+    $daoReference->expects($this->never())->method('createDao');
+    self::assertSame($this->dao, $daoReference->getForeignDao());
+
+  }
+
 }

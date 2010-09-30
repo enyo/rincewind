@@ -42,7 +42,7 @@ class DaoToManyReference extends DaoReference {
    * @param string $attribute The attribute it's being accessed on
    * @return DaoIterator
    */
-  public function getData($record, $attribute) {
+  public function getReferenced($record, $attribute) {
 
     $dao = $this->getDaoClassName();
     if (is_string($dao)) $dao = $this->createDao($dao);

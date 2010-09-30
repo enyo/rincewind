@@ -135,7 +135,7 @@ abstract class DaoReference {
    * @param string $attribute The attribute it's accessed on.
    * @return Record|DaoResultIterator
    */
-  abstract public function getData($record, $attribute);
+  abstract public function getReferenced($record, $attribute);
 
 }
 

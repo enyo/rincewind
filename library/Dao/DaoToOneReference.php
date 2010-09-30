@@ -72,15 +72,18 @@ class DaoToOneReference extends DaoReference {
    * @param string $attribute The attribute it's being accessed on
    * @return Record
    */
-  public function getData($record, $attribute) {
+  public function getReferenced($record, $attribute) {
 
-    $dao = $this->getDaoClassName();
-    if (is_string($dao)) $dao = $this->createDao($dao);
+    $foreignDao = $this->getForeignDao();
 
     if ($data = $record->getDirectly($attribute)) {
       if (is_array($data)) {
         // If the data hash exists already, just return the Record with it.
-        return $dao->getRecordFromData($data);
+        return $foreignDao->getRecordFromData($data);
+      }
+      elseif (is_int($data)) {
+        // If data is an integer, it must be the id.
+        return $foreignDao->getById($data);
       }
       else {
         trigger_error(sprintf('The data hash for `%s` was set but incorrect.', $attribute), E_USER_WARNING);
@@ -96,7 +99,7 @@ class DaoToOneReference extends DaoReference {
       if ($localKey && $foreignKey) {
         $localValue = $record->get($localKey);
         if ($localValue === null) return null;
-        $return = $dao->get(array($foreignKey=>$localValue));
+        $return = $foreignDao->get(array($foreignKey=>$localValue));
         $record->setDirectly($attribute, $return->getArray());
         return $return;
       }

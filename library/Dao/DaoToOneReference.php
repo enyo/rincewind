@@ -18,8 +18,8 @@
  * You can setup the $userDao, so it understands, that when you access $user->address
  * it should use the $addressDao, and get the address with $user->addressId as id.
  *
- * The DaoReference is setup in the Dao with the method addReference(). The method
- * setupReferences() is used to contain those calls.
+ * The DaoReference is setup in the method Dao::addReference(). The method
+ * Dao::setupReferences() is used to contain those calls.
  *
  * When you access a reference on a Record, internally the Dao will instantiate the
  * reference Dao and get the Record where `foreign_key` is the same as `local_key`.

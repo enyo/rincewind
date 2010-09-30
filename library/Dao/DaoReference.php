@@ -64,7 +64,7 @@ abstract class DaoReference {
     $this->daoClassName = $daoClassName;
     $this->localKey = $localKey;
     $this->foreignKey = $foreignKey;
-    if ($sourceDao) $this->sourceDao = $sourceDao;
+    $this->sourceDao = $sourceDao;
   }
 
 
@@ -74,6 +74,13 @@ abstract class DaoReference {
    */
   public function setSourceDao($dao) {
     $this->sourceDao = $dao;
+  }
+
+  /**
+   * @return Dao
+   */
+  public function getSourceDao() {
+    return $this->sourceDao;
   }
 
   /**
@@ -103,7 +110,7 @@ abstract class DaoReference {
    * @param string $daoClassName
    * @return Dao
    */
-  protected function createDao($daoClassName) {
+  public function createDao($daoClassName) {
     return $this->sourceDao->createDao($daoClassName);
   }
 

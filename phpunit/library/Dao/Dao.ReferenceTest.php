@@ -14,7 +14,7 @@ $DAO_ABSTRACT_METHODS = array('setupReferences', 'generateSortString', 'convertR
 /**
  * Test class for Dao.
  */
-class DaoReferenceTest extends PHPUnit_Framework_TestCase {
+class Dao_ReferenceTest extends PHPUnit_Framework_TestCase {
 
   /**
    * @var Dao

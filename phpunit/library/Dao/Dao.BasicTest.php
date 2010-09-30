@@ -17,7 +17,7 @@ class TestDaoClass { }
 /**
  * Test class for Dao.
  */
-class DaoBasicTest extends PHPUnit_Framework_TestCase {
+class Dao_BasicTest extends PHPUnit_Framework_TestCase {
 
 
 

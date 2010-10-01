@@ -29,7 +29,7 @@ class Dao_ReferenceTest extends PHPUnit_Framework_TestCase {
    * @covers Dao::addReference
    */
   public function testReferenceGetsSourceDaoInjected() {
-    $reference = $this->getMock('DaoReference', array('setSourceDao', 'getData'), array(), '', false);
+    $reference = $this->getMock('DaoReference', array('setSourceDao', 'getReferenced'), array(), '', false);
     // TODO: I don't know why, but self::identicalTo doesn't work here... neither does equaltTo, with a bigger maxdepth, because
     // then the new object has the reference, whereas the old one doesn't.
     $reference->expects($this->once())->method('setSourceDao')->with(self::equalTo($this->dao, 0, 1));

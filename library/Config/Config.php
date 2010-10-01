@@ -87,10 +87,18 @@ abstract class Config {
 
 
   /**
+   * Sets $config to null;
+   * @uses $config
+   */
+  public function clear() {
+    $this->config = null;
+  }
+
+  /**
    * Use this to reload your configuration
    */
   public function reload() {
-    $this->config = null;
+    $this->clear();
     $this->load();
   }
 

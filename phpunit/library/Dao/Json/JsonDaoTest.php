@@ -29,11 +29,8 @@ class JsonDaoTest extends PHPUnit_Framework_TestCase {
   }
 
 
-  /**
-   * @expectedException JsonDaoException
-   * @expectedExceptionMessage Transactions not implemented.
-   */
   public function testStartTransactionThrowsException() {
+    $this->setExpectedException('JsonDaoException', 'Transactions not implemented.');
     $this->jsonDao->startTransaction();
   }
 
@@ -53,17 +50,17 @@ class JsonDaoTest extends PHPUnit_Framework_TestCase {
    */
   public function testInterpretFileContentDecodesJson() {
     $decoded = $this->jsonDao->interpretFileContent('{ "a": "bc" }');
-    self::assertEquals(array('a'=>'bc'), $decoded);
   }
 
 
   /**
    * @covers JsonDao::interpretFileContent
-   * @expectedException JsonDaoException
-   * @expectedExceptionMessage Json could not be decoded.
+   * @backupStaticAttributes enabled
    */
   public function testInterpretFileContentThrowsExceptionIfWrongJson() {
+    $this->setExpectedException('JsonDaoException', 'Json could not be decoded.');
     $decoded = $this->jsonDao->interpretFileContent('{ a: "bc" }');
+    self::assertEquals(array(''), Log::$errors);
   }
 
 }

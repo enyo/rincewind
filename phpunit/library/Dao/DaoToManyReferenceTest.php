@@ -4,16 +4,6 @@ require_once 'PHPUnit/Framework.php';
 
 require_once dirname(__FILE__) . '/../../setup.php';
 
-abstract class Log {
-
-  static public $warnings = array();
-
-  static public function warning($message) {
-    self::$warnings[] = $message;
-  }
-
-}
-
 require_once LIBRARY_PATH . 'Dao/Dao.php';
 
 /**
@@ -38,8 +28,8 @@ class DaoToManyReferenceTest extends PHPUnit_Framework_TestCase {
    * @covers DaoToManyReference::getReferenced
    */
   public function testReferenceReturnsDaoHashListIteratorIfDataPresent() {
-    $this->getMockForAbstractClass('Dao', array('createDao'), 'NotAbstractDao', false);
-    $dao = $this->getMock('NotAbstractDao', array('getRecordFromData'), array(), '', false);
+    $this->getMockForAbstractClass('Dao', array('createDao'), 'AAA_NotAbstractDao', false);
+    $dao = $this->getMock('AAA_NotAbstractDao', array('getRecordFromData'), array(), '', false);
     $recordData = array(array('id' => 1, 'name' => 'strasse'), array('id' => 2, 'name' => 'strasse2'));
 
     $this->record->expects($this->once())->method('getDirectly')->with('address')->will($this->returnValue($recordData));
@@ -57,8 +47,8 @@ class DaoToManyReferenceTest extends PHPUnit_Framework_TestCase {
    * @covers DaoToManyReference::getReferenced
    */
   public function testReferenceReturnsDaoIdListIteratorIfDataIsInt() {
-    $this->getMockForAbstractClass('Dao', array('createDao'), 'NotAbstractDao2', false);
-    $dao = $this->getMock('NotAbstractDao2', array('getById'), array(), '', false);
+    $this->getMockForAbstractClass('Dao', array('createDao'), 'AAA_NotAbstractDao2', false);
+    $dao = $this->getMock('AAA_NotAbstractDao2', array('getById'), array(), '', false);
 
     $this->record->expects($this->once())->method('getDirectly')->with('address')->will($this->returnValue(array(1, 2, 3)));
 
@@ -132,8 +122,8 @@ class DaoToManyReferenceTest extends PHPUnit_Framework_TestCase {
    * @covers DaoToManyReference::getReferenced
    */
   public function testReferenceReturnsDaoIdListIteratorFromLocalKey() {
-    $this->getMockForAbstractClass('Dao', array('createDao'), 'NotAbstractDao3', false);
-    $dao = $this->getMock('NotAbstractDao3', array('get'), array(), '', false);
+    $this->getMockForAbstractClass('Dao', array('createDao'), 'AAA_NotAbstractDao3', false);
+    $dao = $this->getMock('AAA_NotAbstractDao3', array('get'), array(), '', false);
 
     $this->record->expects($this->once())->method('getDirectly')->with('address')->will($this->returnValue(null));
 
@@ -151,8 +141,8 @@ class DaoToManyReferenceTest extends PHPUnit_Framework_TestCase {
    * @covers DaoToManyReference::getReferenced
    */
   public function testReferenceReturnsEmptyDaoIdListIteratorIfLocalKeyIsNull() {
-    $this->getMockForAbstractClass('Dao', array('createDao'), 'NotAbstractDao4', false);
-    $dao = $this->getMock('NotAbstractDao4', array('get'), array(), '', false);
+    $this->getMockForAbstractClass('Dao', array('createDao'), 'AAA_NotAbstractDao4', false);
+    $dao = $this->getMock('AAA_NotAbstractDao4', array('get'), array(), '', false);
 
     $this->record->expects($this->once())->method('getDirectly')->with('address')->will($this->returnValue(null));
 

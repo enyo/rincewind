@@ -4,13 +4,6 @@ require_once 'PHPUnit/Framework.php';
 
 require_once dirname(__FILE__) . '/../../setup.php';
 
-abstract class Log {
-  static public $warnings = array();
-  static public function warning($message) {
-    self::$warnings[] = $message;
-  }
-}
-
 require_once LIBRARY_PATH . 'Dao/Dao.php';
 
 /**
@@ -39,8 +32,8 @@ class DaoToOneReferenceTest extends PHPUnit_Framework_TestCase {
    * @covers DaoToOneReference::getReferenced
    */
   public function testReferenceJustInstantiatesRecordIfDataPresent() {
-    $this->getMockForAbstractClass('Dao', array('createDao'), 'NotAbstractDao', false);
-    $this->dao = $this->getMock('NotAbstractDao', array('getRecordFromData'), array(), '', false);
+    $this->getMockForAbstractClass('Dao', array('createDao'), 'BBB_NotAbstractDao', false);
+    $this->dao = $this->getMock('BBB_NotAbstractDao', array('getRecordFromData'), array(), '', false);
     $recordData = array('id' => 1, 'name' => 'strasse');
     $this->record->expects($this->once())->method('getDirectly')->with('address')->will($this->returnValue($recordData));
     $this->dao->expects($this->once())->method('getRecordFromData')->with($recordData)->will($this->returnValue('RECORD'));
@@ -54,8 +47,8 @@ class DaoToOneReferenceTest extends PHPUnit_Framework_TestCase {
    * @covers DaoToOneReference::getReferenced
    */
   public function testReferenceGetsByIdIfPresentDataIsInt() {
-    $this->getMockForAbstractClass('Dao', array('createDao'), 'NotAbstractDao2', false);
-    $this->dao = $this->getMock('NotAbstractDao2', array('getById'), array(), '', false);
+    $this->getMockForAbstractClass('Dao', array('createDao'), 'BBB_NotAbstractDao2', false);
+    $this->dao = $this->getMock('BBB_NotAbstractDao2', array('getById'), array(), '', false);
 
     $this->record->expects($this->once())->method('getDirectly')->with('address')->will($this->returnValue(123));
     $this->dao->expects($this->once())->method('getById')->with(123)->will($this->returnValue('RECORD'));
@@ -93,8 +86,8 @@ class DaoToOneReferenceTest extends PHPUnit_Framework_TestCase {
    * @covers DaoToOneReference::getReferenced
    */
   public function testReferenceGetsTheReferencedRecordAndReturnsIt() {
-    $this->getMockForAbstractClass('Dao', array('createDao'), 'NotAbstractDao3', false);
-    $dao = $this->getMock('NotAbstractDao3', array('get'), array(), '', false);
+    $this->getMockForAbstractClass('Dao', array('createDao'), 'BBB_NotAbstractDao3', false);
+    $dao = $this->getMock('BBB_NotAbstractDao3', array('get'), array(), '', false);
 
     $this->record->expects($this->once())->method('getDirectly')->with('address')->will($this->returnValue(null));
 
@@ -119,8 +112,8 @@ class DaoToOneReferenceTest extends PHPUnit_Framework_TestCase {
    * @covers DaoToOneReference::getReferenced
    */
   public function testReferenceReturnsNullIfLocalValueIsNull() {
-    $this->getMockForAbstractClass('Dao', array('createDao'), 'NotAbstractDao4', false);
-    $dao = $this->getMock('NotAbstractDao4', array('get'), array(), '', false);
+    $this->getMockForAbstractClass('Dao', array('createDao'), 'BBB_NotAbstractDao4', false);
+    $dao = $this->getMock('BBB_NotAbstractDao4', array('get'), array(), '', false);
 
     $this->record->expects($this->once())->method('getDirectly')->with('address')->will($this->returnValue(null));
 

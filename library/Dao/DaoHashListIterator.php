@@ -6,12 +6,11 @@
  * @author Matthias Loitsch <developer@ma.tthias.com>
  * @copyright Copyright (c) 2010, Matthias Loitsch
  * @package Dao
- **/
-
+ */
 /**
  * Loading the DaoResultIterator
  */
-if (!class_exists('DaoResultIterator', false)) include dirname(__FILE__) . '/DaoResultIterator.php';
+if ( ! class_exists('DaoResultIterator', false)) include dirname(__FILE__) . '/DaoResultIterator.php';
 
 /**
  * The DaoHashListIterator takes an array of data hashes, and lets you iterate over it, returning the corresponding
@@ -20,13 +19,13 @@ if (!class_exists('DaoResultIterator', false)) include dirname(__FILE__) . '/Dao
  * @author Matthias Loitsch <developer@ma.tthias.com>
  * @copyright Copyright (c) 2010, Matthias Loitsch
  * @package Dao
- **/
+ */
 class DaoHashListIterator extends DaoResultIterator {
 
   /**
    * @var result
    */
-  private $hashList = false;
+  private $hashList;
 
   /**
    * @param result $result
@@ -40,6 +39,16 @@ class DaoHashListIterator extends DaoResultIterator {
   }
 
   /**
+   * This method should not be used normally.
+   * I implemented it mostly to be able to use it in tests.
+   *
+   * @return array
+   */
+  public function getHashList() {
+    return $this->hashList;
+  }
+
+  /**
    * Sets the pointer to row 1.
    * @return SqlResultIterator Returns itself for chaining.
    */
@@ -50,7 +59,6 @@ class DaoHashListIterator extends DaoResultIterator {
     }
     return $this;
   }
-
 
   /**
    * Set the pointer to the next row.
@@ -70,5 +78,4 @@ class DaoHashListIterator extends DaoResultIterator {
   }
 
 }
-
 

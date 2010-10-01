@@ -6,12 +6,11 @@
  * @author Matthias Loitsch <developer@ma.tthias.com>
  * @copyright Copyright (c) 2010, Matthias Loitsch
  * @package Dao
- **/
-
+ */
 /**
  * Loading the DaoResultIterator
  */
-if (!class_exists('DaoResultIterator', false)) include dirname(__FILE__) . '/DaoResultIterator.php';
+if ( ! class_exists('DaoResultIterator', false)) include dirname(__FILE__) . '/DaoResultIterator.php';
 
 /**
  * The DaoKeyListIterator takes an array of keys, and lets you iterate over it, returning the corresponding
@@ -20,14 +19,13 @@ if (!class_exists('DaoResultIterator', false)) include dirname(__FILE__) . '/Dao
  * @author Matthias Loitsch <developer@ma.tthias.com>
  * @copyright Copyright (c) 2010, Matthias Loitsch
  * @package Dao
- **/
+ */
 class DaoKeyListIterator extends DaoResultIterator {
 
   /**
    * @var array
    */
-  private $keyList = false;
-
+  private $keyList;
   /**
    * @var string
    */
@@ -47,6 +45,24 @@ class DaoKeyListIterator extends DaoResultIterator {
   }
 
   /**
+   * Mainly used for testing purposes.
+   * 
+   * @return array
+   */
+  public function getKeyList() {
+    return $this->keyList;
+  }
+
+  /**
+   * Mainly used for testing purposes.
+   *
+   * @return string
+   */
+  public function getKeyName() {
+    return $this->keyName;
+  }
+
+  /**
    * Sets the pointer to row 1.
    * @return SqlResultIterator Returns itself for chaining.
    */
@@ -57,7 +73,6 @@ class DaoKeyListIterator extends DaoResultIterator {
     }
     return $this;
   }
-
 
   /**
    * Set the pointer to the next row.
@@ -73,9 +88,8 @@ class DaoKeyListIterator extends DaoResultIterator {
    * @return array
    */
   protected function getCurrentData() {
-    return $this->key() > $this->count() ? null : $this->dao->getData(array($this->keyName=>$this->keyList[$this->key() - 1]));
+    return $this->key() > $this->count() ? null : $this->dao->getData(array($this->keyName => $this->keyList[$this->key() - 1]));
   }
 
 }
-
 

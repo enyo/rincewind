@@ -4,6 +4,13 @@ require_once 'PHPUnit/Framework.php';
 
 require_once dirname(__FILE__) . '/../../setup.php';
 
+abstract class Log {
+  static public $warnings = array();
+  static public function warning($message) {
+    self::$warnings[] = $message;
+  }
+}
+
 require_once LIBRARY_PATH . 'Dao/Dao.php';
 
 /**
@@ -61,13 +68,13 @@ class DaoToOneReferenceTest extends PHPUnit_Framework_TestCase {
   /**
    * @covers DaoToOneReference::getReferenced
    */
-  public function testReferenceFailsIfPresentDataInvalid() {
+  public function testReferenceLogsWarningAndReturnsNullIfPresentDataInvalid() {
     $this->record->expects($this->once())->method('getDirectly')->with('address')->will($this->returnValue('FALSE VALUE'));
 
     $reference = new DaoToOneReference($this->dao, 'localKey', 'foreignKey');
 
-    $this->setExpectedException('PHPUnit_Framework_Error', 'The data hash for `address` was set but incorrect.');
     self::assertNull($reference->getReferenced($this->record, 'address'));
+    self::assertSame(array('The data hash for `address` was set but incorrect.'), Log::$warnings);
   }
 
   /**

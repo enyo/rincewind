@@ -86,7 +86,7 @@ class DaoToOneReference extends DaoReference {
         return $foreignDao->getById($data);
       }
       else {
-        trigger_error(sprintf('The data hash for `%s` was set but incorrect.', $attribute), E_USER_WARNING);
+        Log::warning(sprintf('The data hash for `%s` was set but incorrect.', $attribute));
         return null;
       }
     }

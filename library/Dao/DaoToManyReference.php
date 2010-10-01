@@ -44,16 +44,22 @@ class DaoToManyReference extends DaoReference {
    */
   public function getReferenced($record, $attribute) {
 
-    $dao = $this->getDaoClassName();
-    if (is_string($dao)) $dao = $this->createDao($dao);
+    $foreignDao = $this->getForeignDao();
 
     if ($data = $record->getDirectly($attribute)) {
       if (is_array($data)) {
-        // The sequence of data hashes has been set already
-        return new DaoHashListIterator($record->getDirectly($attribute), $dao);
+        if (count($data) === 0 || is_array(reset($data))) {
+          // The data hash is an array, either empty, or containing the hashes.
+          return new DaoHashListIterator($data, $foreignDao);
+        }
+        elseif (is_int(reset($data)) && ($foreignKey = $this->getForeignKey())) {
+          // The data hash is an array containing the ids, and there is a
+          // foreign key to link them to.
+          return new DaoKeyListIterator($data, $foreignDao, $foreignKey);
+        }
       }
-      trigger_error(sprintf('The data hash for `%s` was set but incorrect.', $attribute), E_USER_WARNING);
-      return new DaoHashListIterator(array(), $dao);
+      Log::warning(sprintf('The data hash for `%s` was set but incorrect.', $attribute));
+      return new DaoHashListIterator(array(), $foreignDao);
     }
     else {
       // Get the list of ids
@@ -63,9 +69,9 @@ class DaoToManyReference extends DaoReference {
       if ($localKey && $foreignKey) {
         $localValue = $record->get($localKey);
 
-        return new DaoKeyListIterator($localValue, $dao, $foreignKey);
+        return new DaoKeyListIterator($localValue ? $localValue : array(), $foreignDao, $foreignKey);
       }
-      return new DaoKeyListIterator(array(), $dao, $foreignKey);
+      return new DaoKeyListIterator(array(), $foreignDao, $foreignKey);
     }
 
   }

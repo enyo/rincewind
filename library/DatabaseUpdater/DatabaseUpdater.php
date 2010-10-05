@@ -215,7 +215,7 @@ class DatabaseUpdater {
       }
     }
     else {
-      include $update->filename;
+      include $this->updatesPath . $update->filename;
     }
 
     if ($update->number != 0) {

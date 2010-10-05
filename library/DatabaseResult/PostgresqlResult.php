@@ -32,6 +32,7 @@ class PostgresqlResult extends DatabaseResult {
    */
   public function fetchArray($rowNumber = null) {
     $rowNumber = $rowNumber ? (int) $rowNumber : $this->currentRowNumber;
+    if ($rowNumber >= $this->numRows()) return false;
     $this->seek($rowNumber + 1);
     return pg_fetch_assoc($this->result, $rowNumber);
   }
@@ -43,6 +44,7 @@ class PostgresqlResult extends DatabaseResult {
    * @return mixed
    */
   public function fetchResult($field) {
+    if ($this->currentRowNumber >= $this->numRows()) return false;
     return pg_fetch_result($this->result, $this->currentRowNumber, $field);
   }
 

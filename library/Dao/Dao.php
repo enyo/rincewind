@@ -649,8 +649,9 @@ abstract class Dao implements DaoInterface {
     $attributeNames = array();
     $id = null;
     foreach ($this->attributes as $attributeName=>$type) {
+      if ($type === Dao::IGNORE) continue;
       $value = $record->get($attributeName);
-      if ($value !== null && $type != Dao::IGNORE) {
+      if ($value !== null) {
         $attributeNames[] = $this->exportAttributeName($attributeName);
         $values[]  = $this->exportValue($value, $type, $this->notNull($attributeName));
       }

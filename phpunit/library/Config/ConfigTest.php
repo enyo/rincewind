@@ -6,28 +6,44 @@ require_once dirname(__FILE__) . '/../../setup.php';
 
 require_once LIBRARY_PATH . 'Config/Config.php';
 
+
+
+class SpecificConfig extends Config {
+
+  public function load() {
+    $this->config = array('a', 'b');
+  }
+
+  public function getConfigDirectly() {
+    return $this->config;
+  }
+
+}
+
 /**
  * Test class for Config.
  */
 class ConfigTest extends PHPUnit_Framework_TestCase {
 
-  /**
-   * @var Config
-   */
-  protected $config;
-
   protected function setUp() {
-    $this->getMockForAbstractClass('Config', array(), 'AAA_MockConfig');
-    $this->config = $this->getMock('AAA_MockConfig', array('clear', 'load'), array());
   }
-
 
   public function testReloadCallsClearAndLoad() {
-    $this->config->expects($this->once())->method('clear');
-    $this->config->expects($this->once())->method('load');
+    $this->getMockForAbstractClass('Config', array(), 'AAA_MockConfig');
+    $config = $this->getMock('AAA_MockConfig', array('clear', 'load'), array());
+    $config->expects($this->once())->method('clear');
+    $config->expects($this->once())->method('load');
 
-    $this->config->reload();
+    $config->reload();
   }
 
+  public function testClearDeletesConfig() {
+    $config = new SpecificConfig();
+    self::assertNull($config->getConfigDirectly());
+    $config->load();
+    self::assertSame(array('a', 'b'), $config->getConfigDirectly());
+    $config->clear();
+    self::assertNull($config->getConfigDirectly());
+  }
 
 }

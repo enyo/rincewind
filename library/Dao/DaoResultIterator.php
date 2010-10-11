@@ -6,7 +6,7 @@
  * @author Matthias Loitsch <developer@ma.tthias.com>
  * @copyright Copyright (c) 2010, Matthias Loitsch
  * @package Dao
- **/
+ * */
 
 /**
  * The Dao Result iterator is returned whenever a query returns more than one row.
@@ -26,28 +26,24 @@
  * @author Matthias Loitsch <developer@ma.tthias.com>
  * @copyright Copyright (c) 2010, Matthias Loitsch
  * @package Dao
- **/
+ * */
 abstract class DaoResultIterator implements Iterator {
-
 
   /**
    * @var Dao
    */
   protected $dao = false;
-
   /**
    * The number of rows
    *
    * @var int
    */
   protected $length = 0;
-
   /**
    * Stores the current key (in this case: row number) of the iterator.
    * @var integer
    */
   protected $currentKey = 0;
-
   /**
    * If set to true, instead of returning the Record, Record->getArray() is returned.
    *
@@ -56,6 +52,12 @@ abstract class DaoResultIterator implements Iterator {
    */
   protected $returnRecordsAsArray = false;
 
+  /**
+   * @param Dao $dao
+   */
+  public function __construct($dao) {
+    $this->dao = $dao;
+  }
 
   /**
    * Returns the current key (row number).
@@ -65,8 +67,6 @@ abstract class DaoResultIterator implements Iterator {
     return $this->currentKey;
   }
 
-
-
   /**
    * Return the current Record.
    * If getAsArray() has been called, returns an array instead of the Record.
@@ -74,7 +74,7 @@ abstract class DaoResultIterator implements Iterator {
    * @return Record|array
    */
   public function current() {
-    if (!$this->valid()) return null;
+    if ( ! $this->valid()) return null;
     $record = $this->dao->getRecordFromData($this->getCurrentData());
     return $this->returnRecordsAsArray ? $record->getArray() : $record;
   }
@@ -84,7 +84,6 @@ abstract class DaoResultIterator implements Iterator {
    * @return array
    */
   abstract protected function getCurrentData();
-
 
   /**
    * @return Dao
@@ -99,10 +98,9 @@ abstract class DaoResultIterator implements Iterator {
    * @return DaoResultIterator Returns itself for chaining.
    */
   public function asArrays($returnRecordsAsArray = true) {
-    $this->returnRecordsAsArray = !!$returnRecordsAsArray;
+    $this->returnRecordsAsArray = ! ! $returnRecordsAsArray;
     return $this;
   }
-
 
   /**
    * Check if the pointer is still valid.
@@ -123,5 +121,4 @@ abstract class DaoResultIterator implements Iterator {
   }
 
 }
-
 

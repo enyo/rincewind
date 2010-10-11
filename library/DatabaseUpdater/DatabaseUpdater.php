@@ -117,7 +117,7 @@ class DatabaseUpdater {
     }
     catch (SqlQueryException $e) {
       if ($this->initializeIfNecessary) {
-        $this->executeUpdate(0);
+        $this->executeUpdate(new DatabaseUpdate($this->initUpdateFilename, 0, 'sql'));
       }
       else {
         throw new DatabaseNotInitializedException();
@@ -166,7 +166,7 @@ class DatabaseUpdater {
   }
 
   /**
-   * Returns all update files, sorted by their names, as array.
+   * Returns all update files (except for 0000.sql), sorted by their names, as array.
    * 
    * @return array
    */
@@ -199,7 +199,7 @@ class DatabaseUpdater {
    */
   protected function executeUpdate($update) {
 
-    if ($this->updateIsDeprecated($update)) return;
+    if ($update->number !== 0 && $this->updateIsDeprecated($update)) return;
 
     $this->executedUpdates[] = $update;
 

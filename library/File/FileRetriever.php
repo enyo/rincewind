@@ -6,10 +6,7 @@
  * @author Matthias Loitsch <developer@ma.tthias.com>
  * @copyright Copyright (c) 2010, Matthias Loitsch
  * @package File
- **/
-
-
-
+ */
 /**
  * Loading the file class.
  * They are codependent so this has to be include_once to avoid an endless loop.
@@ -21,8 +18,7 @@ include_once(dirname(__FILE__) . '/File.php');
 /**
  * Loading the Log class.
  */
-if (!class_exists('Log', false)) include(dirname(dirname(__FILE__)) . '/Logger/Log.php');
-
+if ( ! class_exists('Log', false)) include(dirname(dirname(__FILE__)) . '/Logger/Log.php');
 
 /**
  * The Exception base class for FileRetrieverExceptions.
@@ -32,8 +28,11 @@ if (!class_exists('Log', false)) include(dirname(dirname(__FILE__)) . '/Logger/L
  * @package File
  * @subpackage FileRetrieverExceptions
  */
-class FileRetrieverException extends FileException { };
+class FileRetrieverException extends FileException {
 
+}
+
+;
 
 /**
  * The FileRetriever actually fetches a files, and returns the File object.
@@ -50,7 +49,6 @@ class FileRetrieverException extends FileException { };
  */
 class FileRetriever {
 
-
   /**
    * After a file gets created, the method creating it calls
    * process($file), so the file can be processed before it's returned.
@@ -58,8 +56,9 @@ class FileRetriever {
    *
    * @param File $file
    */
-  protected function process($file) { }
-
+  protected function process($file) {
+    
+  }
 
   /**
    * Creates a file, and returns it.
@@ -68,7 +67,6 @@ class FileRetriever {
   protected function getFile($uri) {
     return new File($uri);
   }
-
 
   /**
    * This is the way to create a file.
@@ -103,7 +101,6 @@ class FileRetriever {
     }
   }
 
-
   /**
    * This method is the way to get a file from a form upload.
    *
@@ -113,25 +110,31 @@ class FileRetriever {
    * @return File
    */
   public function createFromFormUpload($FILE, $maxFileSize = 100000) {
-    if (!is_array ($FILE) || count ($FILE) == 0) { throw new FileRetrieverException ('The FILE array from the form was not valid.'); }
+    if ( ! is_array($FILE) || count($FILE) == 0) {
+      throw new FileRetrieverException('The FILE array from the form was not valid.');
+    }
 
-    if (empty($FILE['tmp_name']) || empty($FILE['size'])) { throw new FileRetrieverException ('The file was probably larger than allowed by the html property MAX_FILE_SIZE.'); }
+    if (empty($FILE['tmp_name']) || empty($FILE['size'])) {
+      throw new FileRetrieverException('The file was probably larger than allowed by the html property MAX_FILE_SIZE.');
+    }
 
-    if ($FILE['error'] == UPLOAD_ERR_NO_FILE) { return null; }
+    if ($FILE['error'] == UPLOAD_ERR_NO_FILE) {
+      return null;
+    }
 
     if ($FILE['error'] != 0) {
       switch ($FILE['error']) {
-        case UPLOAD_ERR_INI_SIZE:   throw new FileRetrieverException ('The uploaded file exceeds the upload_max_filesize directive in php.ini.');
-        case UPLOAD_ERR_FORM_SIZE:  throw new FileRetrieverException ('The uploaded file exceeds '.($maxFileSize / 1000).'kB.');
-        case UPLOAD_ERR_PARTIAL:    throw new FileRetrieverException ('The uploaded file was only partially uploaded.');
-        case UPLOAD_ERR_NO_FILE:    throw new FileRetrieverException ('No file was uploaded.');
-        case UPLOAD_ERR_NO_TMP_DIR: throw new FileRetrieverException ('Missing a temporary folder.');
-        case UPLOAD_ERR_CANT_WRITE: throw new FileRetrieverException ('Failed to write file to disk.');
+        case UPLOAD_ERR_INI_SIZE: throw new FileRetrieverException('The uploaded file exceeds the upload_max_filesize directive in php.ini.');
+        case UPLOAD_ERR_FORM_SIZE: throw new FileRetrieverException('The uploaded file exceeds ' . ($maxFileSize / 1000) . 'kB.');
+        case UPLOAD_ERR_PARTIAL: throw new FileRetrieverException('The uploaded file was only partially uploaded.');
+        case UPLOAD_ERR_NO_FILE: throw new FileRetrieverException('No file was uploaded.');
+        case UPLOAD_ERR_NO_TMP_DIR: throw new FileRetrieverException('Missing a temporary folder.');
+        case UPLOAD_ERR_CANT_WRITE: throw new FileRetrieverException('Failed to write file to disk.');
       }
     }
 
     if ($FILE['size'] > $maxFileSize) {
-      throw new FileRetrieverException ('The uploaded file exceeds '.($maxFileSize / 1000).'kB.');
+      throw new FileRetrieverException('The uploaded file exceeds ' . ($maxFileSize / 1000) . 'kB.');
     }
 
     $file = $this->getFile($FILE['tmp_name']);
@@ -142,7 +145,7 @@ class FileRetriever {
     $file->setMimeType($FILE['type']);
 
     $this->process($file);
-    
+
     return $file;
   }
 
@@ -154,7 +157,7 @@ class FileRetriever {
    * @return File
    */
   public function createFromLocalFile($srcUri) {
-    if (!is_file($srcUri)) throw new FileRetrieverException("File '$srcUri' does not exist.");
+    if ( ! is_file($srcUri)) throw new FileRetrieverException("File '$srcUri' does not exist.");
     $file = $this->getFile($srcUri);
     $file->setSource(File::SOURCE_FILE);
     $file->setSize(filesize($srcUri));
@@ -177,12 +180,12 @@ class FileRetriever {
 
     $curlHandle = curl_init();
 
-    if ($getParameters) $getParameters = '?' . http_build_query($getParameters);
+    if ($getParameters && is_array($getParameters) && count($getParameters) > 0) $getParameters = '?' . http_build_query($getParameters);
     else $getParameters = '';
 
     $realUrl = $url . $getParameters;
 
-    Log::debug('Getting: ' . $realUrl, 'FileRetriever');
+    Log::debug('Getting: ' . $realUrl . " (port $port)", 'FileRetriever');
 
     curl_setopt($curlHandle, CURLOPT_URL, $realUrl);
     curl_setopt($curlHandle, CURLOPT_PORT, $port);
@@ -206,7 +209,7 @@ class FileRetriever {
     if ($result === false) {
 
       $errorCode = $info['http_code'] ? $info['http_code'] : 400;
-      $errorTypes = array(400=>'Bad Request', 500=>'Internal Server Error');
+      $errorTypes = array(400 => 'Bad Request', 500 => 'Internal Server Error');
       throw new FileRetrieverException('File could not be downloaded. ' . $errorCode . ' - ' . $errorTypes[floor($errorCode / 100) * 100] . '.', $errorCode);
     }
 
@@ -219,9 +222,5 @@ class FileRetriever {
     return $file;
   }
 
-
-
 }
-
-
 

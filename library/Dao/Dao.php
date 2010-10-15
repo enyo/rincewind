@@ -6,14 +6,11 @@
  * @author Matthias Loitsch <developer@ma.tthias.com>
  * @copyright Copyright (c) 2010, Matthias Loitsch
  * @package Dao
- **/
-
-
-
+ * */
 /**
  * Loading the Log class.
  */
-if (!class_exists('Log', false)) include(dirname(dirname(__FILE__)) . '/Logger/Log.php');
+if ( ! class_exists('Log', false)) include(dirname(dirname(__FILE__)) . '/Logger/Log.php');
 
 /**
  * Loading the interface
@@ -53,10 +50,7 @@ include dirname(__FILE__) . '/DaoHashListIterator.php';
 /**
  * Loading the Date Class
  */
-if (!class_exists('Date', false)) include dirname(dirname(__FILE__)) . '/Date/Date.php';
-
-
-
+if ( ! class_exists('Date', false)) include dirname(dirname(__FILE__)) . '/Date/Date.php';
 
 /**
  * This abstract base class for all Daos.
@@ -109,49 +103,45 @@ if (!class_exists('Date', false)) include dirname(dirname(__FILE__)) . '/Date/Da
  * @copyright Copyright (c) 2010, Matthias Loitsch
  * @package Dao
  * @see Database
- **/
+ * */
 abstract class Dao implements DaoInterface {
-
-
-  /**#@+
+  /*   * #@+
    * Data types
    *
    * @var int
    */
-  const INT            = 1;
-  const INTEGER        = self::INT;
-  const FLOAT          = 2;
-  const BOOL           = 3;
-  const BOOLEAN        = self::BOOL;
-  const TIMESTAMP      = 4;
+  const INT = 1;
+  const INTEGER = self::INT;
+  const FLOAT = 2;
+  const BOOL = 3;
+  const BOOLEAN = self::BOOL;
+  const TIMESTAMP = 4;
   const DATE_WITH_TIME = self::TIMESTAMP;
-  const DATE           = 5;
-  const TEXT           = 6;
-  const STRING         = self::TEXT;
-  const SEQUENCE       = 7;
-  const SEQ            = self::SEQUENCE;
-  const IGNORE         = -1;
-  /**#@-*/
+  const DATE = 5;
+  const TEXT = 6;
+  const STRING = self::TEXT;
+  const SEQUENCE = 7;
+  const SEQ = self::SEQUENCE;
+  const IGNORE = -1;
+  /*   * #@- */
 
 
-  /**#@+
+  /*   * #@+
    * Sort types
    *
    * @var int
    */
-  const SORT_ASCENDING  = 0;
+  const SORT_ASCENDING = 0;
   const SORT_DESCENDING = 1;
   const ASC = self::SORT_ASCENDING;
   const DESC = self::SORT_DESCENDING;
-  /**#@-*/
+  /*   * #@- */
 
 
   /**
    * @var bool
    */
   const DO_NOT_EXPORT_VALUES = false;
-
-
 
   /**
    * Has to be called from any extended Dao to make sure everything gets setup properly
@@ -174,32 +164,27 @@ abstract class Dao implements DaoInterface {
     if ($nullAttributes) $this->nullAttributes = $nullAttributes;
     if ($defaultValueAttributes) $this->defaultValueAttributes = $defaultValueAttributes;
 
-    if (!$this->resourceName) {
+    if ( ! $this->resourceName) {
       throw new DaoException('No resource name provided.');
     }
-    if (!is_array($this->attributes)) {
+    if ( ! is_array($this->attributes)) {
       throw new DaoException('No attributes provied.');
     }
 
     $this->setupReferences();
   }
 
-
-
   /**
    * This is the resource name this Dao works with.
    * @var string
    */
   protected $resourceName = null;
-
   /**
    * This viewName will be used in every get() (and getIterator) instead of the resourceName.
    * For updating and inserts resourceName is still used.
    * @var string
    */
   protected $viewName = null;
-
-
   /**
    * Defines the class name of the record to be instantiated.
    * You can overwrite this if your Dao uses a specific Record.
@@ -208,7 +193,6 @@ abstract class Dao implements DaoInterface {
    * @see getRecordFromPreparedData()
    */
   protected $recordClassName = 'Record';
-
   /**
    * If no sort attribute is passed to a query method, this will be used.
    *
@@ -216,8 +200,6 @@ abstract class Dao implements DaoInterface {
    * @var string|array
    */
   protected $defaultSort = 'sort';
-
-
   /**
    * This array/map must contain all attribute types. eg: array('id'=>Dao::INT, 'firstName'=>Dao::STRING)
    * The index is always the php name you want to access on the Record.
@@ -227,8 +209,6 @@ abstract class Dao implements DaoInterface {
    * @var array
    */
   protected $attributes;
-
-
   /**
    * This works exactly the same as the attributes, except that it only defines attributes, that may additionally be returned by the
    * datasource (for example in joins).
@@ -240,9 +220,6 @@ abstract class Dao implements DaoInterface {
    * @var array
    */
   protected $additionalAttributes = array();
-
-
-
   /**
    * The references array contains a list of DaoReference instances to map certain attributes to other resources.
    * You set them in the setupReferences method, that gets called in the constructor.
@@ -264,7 +241,6 @@ abstract class Dao implements DaoInterface {
    */
   protected $references = array();
 
-
   /**
    * Overwrite this in a specific Dao implementation to setup the references.
    * Setting the references directly to the member variables is not possible since a reference is an object.
@@ -274,7 +250,9 @@ abstract class Dao implements DaoInterface {
    * @see addReference()
    * @see addToManyReference()
    */
-  protected function setupReferences() { }
+  protected function setupReferences() {
+
+  }
 
   /**
    * Adds a reference definition. This method should be called inside setupReferences().
@@ -302,10 +280,9 @@ abstract class Dao implements DaoInterface {
    * @return Record|DaoResultIterator
    */
   public function getReference($attributeName) {
-    if (!isset($this->references[$attributeName])) throw new DaoWrongValueException("The attribute `$attributeName` is not specified in references.");
+    if ( ! isset($this->references[$attributeName])) throw new DaoWrongValueException("The attribute `$attributeName` is not specified in references.");
     return $this->references[$attributeName];
   }
-
 
   /**
    * Creates a Dao.
@@ -318,7 +295,6 @@ abstract class Dao implements DaoInterface {
     return new $daoClassName();
   }
 
-
   /**
    * If your datasource holds different attribute names than you want in you Records, you can specify export & import mappings.
    * (Don't confuse this with your php values. Meaning: if the datasource value is 'strangely_named', but you want to access your record
@@ -330,16 +306,12 @@ abstract class Dao implements DaoInterface {
    * @var array
    */
   protected $attributeImportMapping = array();
-
-
   /**
    * This is an array containing all attributes that can be null. eg: $nullAttributes = array('email', 'name');
    *
    * @var array
    */
   protected $nullAttributes = array();
-
-
   /**
    * This is a list of attributes that have default values in the datasource.
    * This means that, if the values are NULL, and the entry is inserted in the datasource, they will not be
@@ -350,8 +322,6 @@ abstract class Dao implements DaoInterface {
    * @var array
    */
   protected $defaultValueAttributes = array('id');
-
-
 
   /**
    * Calls find() and throws an error if null is returned, otherwise it just passes the Record
@@ -370,12 +340,11 @@ abstract class Dao implements DaoInterface {
    * @return Record
    */
   public function get($map = null, $exportValues = true, $resourceName = null) {
-    if (!$map) return $this->getRawRecord();
+    if ( ! $map) return $this->getRawRecord();
     $record = $this->find($map, $exportValues, $resourceName);
-    if (!$record) throw new DaoNotFoundException('Did not find any record.');
+    if ( ! $record) throw new DaoNotFoundException('Did not find any record.');
     return $record;
   }
-
 
   /**
    * Given the $sort parameter, it generates a sort String used in the query.
@@ -385,7 +354,6 @@ abstract class Dao implements DaoInterface {
    * @param string|array $sort
    */
   abstract protected function generateSortString($sort);
-
 
   /**
    * If the passed parameter is not an array, but a Record, then it gets the changed values out of it.
@@ -399,45 +367,54 @@ abstract class Dao implements DaoInterface {
     throw new DaoWrongValueException("The passed map is neither an array nor a Record.");
   }
 
-
   /**
    * Returns the attributes array
    * @return array
-   */   
-  public function getAttributes() { return $this->attributes; }
-
+   */
+  public function getAttributes() {
+    return $this->attributes;
+  }
 
   /**
    * Returns the resource name
    * @return string
    */
-  public function getResourceName() { return $this->resourceName; }
+  public function getResourceName() {
+    return $this->resourceName;
+  }
 
   /**
    * Returns the additional attribute types array
    * @return array
-   */   
-  public function getAdditionalAttributes() { return $this->additionalAttributes; }
+   */
+  public function getAdditionalAttributes() {
+    return $this->additionalAttributes;
+  }
 
   /**
    * @return array
    * @see $references
    */
-  public function getReferences() { return $this->references; }
+  public function getReferences() {
+    return $this->references;
+  }
 
   /**
    * Returns the null attributes
    * @return array
-   */   
-  public function getNullAttributes() { return $this->nullAttributes; }
+   */
+  public function getNullAttributes() {
+    return $this->nullAttributes;
+  }
 
   /**
    * Returns the default value attributes
    *
    * @return array
-   */   
-  public function getDefaultValueAttributes() { return $this->defaultValueAttributes; }
-
+   */
+  public function getDefaultValueAttributes() {
+    return $this->defaultValueAttributes;
+  }
 
   /**
    * Temporarly all getXXXIterator() calls get converted to getXXX().
@@ -454,8 +431,6 @@ abstract class Dao implements DaoInterface {
     trigger_error(sprintf('Call to undefined function: %s::%s() from %s on line %u.', get_class($this), $method, $trace[1]['file'], $trace[1]['line']), E_USER_ERROR);
   }
 
-
-
   /**
    * If you have to do stuff after an insert, overwrite this function.
    * It gets called by the Dao after doing an insert.
@@ -463,7 +438,9 @@ abstract class Dao implements DaoInterface {
    * @param Record $record
    * @see Record
    */
-  protected function afterInsert($record) { }
+  protected function afterInsert($record) {
+
+  }
 
   /**
    * If you have to do stuff after an update, overwrite this function.
@@ -472,7 +449,9 @@ abstract class Dao implements DaoInterface {
    * @param Record $record
    * @see Record
    */
-  protected function afterUpdate($record) { }
+  protected function afterUpdate($record) {
+
+  }
 
   /**
    * If you have to do stuff after a deletion, overwrite this function.
@@ -481,10 +460,10 @@ abstract class Dao implements DaoInterface {
    * @param Record $record
    * @see Record
    */
-  protected function afterDelete($record) { }
+  protected function afterDelete($record) {
+    
+  }
 
-
-  
   /**
    * Checks if a attribute name exists as real or additional attribute.
    *
@@ -494,7 +473,6 @@ abstract class Dao implements DaoInterface {
     return isset($this->attributes[$attributeName]) || isset($this->additionalAttributes[$attributeName]);
   }
 
-
   /**
    * This is a wrapper for get() and the id as parameter.
    * @param int $id
@@ -502,9 +480,8 @@ abstract class Dao implements DaoInterface {
    * @see Record
    */
   public function getById($id) {
-    return $this->get(array('id'=>intval($id)));
+    return $this->get(array('id' => intval($id)));
   }
-
 
   /**
    * This is a wrapper for find() and the id as parameter.
@@ -513,7 +490,7 @@ abstract class Dao implements DaoInterface {
    * @see Record
    */
   public function findId($id) {
-    return $this->find(array('id'=>intval($id)));
+    return $this->find(array('id' => intval($id)));
   }
 
   /**
@@ -525,7 +502,6 @@ abstract class Dao implements DaoInterface {
     $record = $this->getById($id);
     $this->delete($record);
   }
-
 
   /**
    * Returns all rows (but you can specify offset &amp; limit)
@@ -540,7 +516,6 @@ abstract class Dao implements DaoInterface {
     return $this->getIterator(array(), $sort, $offset, $limit);
   }
 
-
   /**
    * @deprecated
    * Use this instead:
@@ -553,7 +528,6 @@ abstract class Dao implements DaoInterface {
     trigger_error(sprintf('The method getAllAsArrays() is deprecated in %s on line %u.', $trace[0]['file'], $trace[0]['line']), E_USER_ERROR);
   }
 
-
   /**
    * Takes an attributeName and sees if there is an import/export mapping for it.
    * It then returns the correct attribute name, unescaped.
@@ -563,7 +537,9 @@ abstract class Dao implements DaoInterface {
    * @see $attributeImportMapping
    */
   protected function applyAttributeImportMapping($attributeName) {
-    if (isset($this->attributeImportMapping[$attributeName]))        { return $this->attributeImportMapping[$attributeName]; }
+    if (isset($this->attributeImportMapping[$attributeName])) {
+      return $this->attributeImportMapping[$attributeName];
+    }
     return $attributeName;
   }
 
@@ -576,7 +552,9 @@ abstract class Dao implements DaoInterface {
    * @see $attributeImportMapping
    */
   protected function applyAttributeExportMapping($attributeName) {
-    if (in_array($attributeName, $this->attributeImportMapping)) { return array_search($attributeName, $this->attributeImportMapping); }
+    if (in_array($attributeName, $this->attributeImportMapping)) {
+      return array_search($attributeName, $this->attributeImportMapping);
+    }
     return $attributeName;
   }
 
@@ -592,7 +570,6 @@ abstract class Dao implements DaoInterface {
     return $this->convertAttributeNameToPhpName($this->applyAttributeImportMapping($attributeName));
   }
 
-
   /**
    * Converts a php attribute name to the datasource name.
    * Per default this simply transforms theAttribute to the_attribute.
@@ -602,7 +579,9 @@ abstract class Dao implements DaoInterface {
    * @return string
    * @see convertAttributeNameToPhpName()
    */
-  protected function convertAttributeNameToDatasourceName($attributeName) { return preg_replace('/([A-Z])/e', 'strtolower("_$1");', $attributeName); }
+  protected function convertAttributeNameToDatasourceName($attributeName) {
+    return preg_replace('/([A-Z])/e', 'strtolower("_$1");', $attributeName);
+  }
 
   /**
    * Converts a datasource attribute name to the php name.
@@ -612,8 +591,9 @@ abstract class Dao implements DaoInterface {
    * @return string 
    * @see convertAttributeNameToDatasourceName()
    */
-  protected function convertAttributeNameToPhpName($attributeName) { return preg_replace('/_([a-z])/e', 'strtoupper("$1");', $attributeName); }
-
+  protected function convertAttributeNameToPhpName($attributeName) {
+    return preg_replace('/_([a-z])/e', 'strtoupper("$1");', $attributeName);
+  }
 
   /**
    * Returns true if the attribute can not be null.
@@ -621,9 +601,8 @@ abstract class Dao implements DaoInterface {
    * @return bool
    */
   public function notNull($attributeName) {
-    return !in_array($attributeName, $this->nullAttributes);
+    return ! in_array($attributeName, $this->nullAttributes);
   }
-
 
   /**
    * This is a helper class that defines if an array is a "vector" (has only integer indices starting from 0) or an associative array.
@@ -634,8 +613,6 @@ abstract class Dao implements DaoInterface {
   static function isVector($var) {
     return count(array_diff_key($var, range(0, count($var) - 1))) === 0;
   }
-
-
 
   /**
    * Returns the arrays containing the attributes, and values to perform an insert.
@@ -648,18 +625,16 @@ abstract class Dao implements DaoInterface {
     $values = array();
     $attributeNames = array();
     $id = null;
-    foreach ($this->attributes as $attributeName=>$type) {
+    foreach ($this->attributes as $attributeName => $type) {
       if ($type === Dao::IGNORE) continue;
       $value = $record->get($attributeName);
       if ($value !== null) {
         $attributeNames[] = $this->exportAttributeName($attributeName);
-        $values[]  = $this->exportValue($value, $type, $this->notNull($attributeName));
+        $values[] = $this->exportValue($value, $type, $this->notNull($attributeName));
       }
     }
     return array($attributeNames, $values);
   }
-
-
 
   /**
    * Returns a data record with the data in it.
@@ -701,8 +676,6 @@ abstract class Dao implements DaoInterface {
     $record->setData($this->prepareDataForRecord($data));
   }
 
-
-
   /**
    * Goes through the data array returned from the datasource, and converts the values that are necessary.
    * Meaning: if some values are null, check if they are allowed to be null.
@@ -715,7 +688,7 @@ abstract class Dao implements DaoInterface {
     $recordData = array();
 
     $neededValues = $this->attributes;
-    foreach ($data as $attributeName=>$value) {
+    foreach ($data as $attributeName => $value) {
       $attributeName = $this->importAttributeName($attributeName);
       if (array_key_exists($attributeName, $this->attributes)) {
         unset($neededValues[$attributeName]);
@@ -729,34 +702,28 @@ abstract class Dao implements DaoInterface {
         }
       }
       elseif (isset($this->references[$attributeName])) {
-        if (!is_array($value)) {
-          $trace = debug_backtrace();
-          trigger_error('The value for attribute ' . $attributeName . ' ('.$this->resourceName.') was not correct in ' . $trace[0]['file'] . ' on line ' . $trace[0]['line'], E_USER_WARNING);
-        }
-        else {
-          // Just let it untouched.
-          $recordData[$attributeName] = $data[$attributeName];
-        }
+        // Just let it untouched. The reference will check if it's OK.
+        $recordData[$attributeName] = $value;
       }
       else {
         $trace = debug_backtrace();
-        trigger_error('The type for attribute ' . $attributeName . ' ('.$this->resourceName.') is not defined in ' . $trace[0]['file'] . ' on line ' . $trace[0]['line'], E_USER_WARNING);
+        trigger_error('The type for attribute ' . $attributeName . ' (' . $this->resourceName . ') is not defined in ' . $trace[0]['file'] . ' on line ' . $trace[0]['line'], E_USER_WARNING);
       }
     }
-    foreach ($neededValues as $attributeName=>$type) {
+    foreach ($neededValues as $attributeName => $type) {
       if ($type != Dao::IGNORE) {
         if ($this->notNull($attributeName)) {
           $trace = debug_backtrace();
-          trigger_error('The attribute ' . $attributeName . ' ('.$this->resourceName.') was not transmitted from data source in ' . $trace[0]['file'] . ' on line ' . $trace[0]['line'], E_USER_WARNING);
+          trigger_error('The attribute ' . $attributeName . ' (' . $this->resourceName . ') was not transmitted from data source in ' . $trace[0]['file'] . ' on line ' . $trace[0]['line'], E_USER_WARNING);
           $recordData[$attributeName] = Record::coerce(null, $type, false, $quiet = true);
-        } else {
+        }
+        else {
           $recordData[$attributeName] = null;
         }
       }
     }
-    return $recordData;     
+    return $recordData;
   }
-
 
   /**
    * Returns a record with all attributes defined, but only set if necessary.
@@ -774,20 +741,14 @@ abstract class Dao implements DaoInterface {
    */
   public function getRawRecord() {
     $data = array();
-    foreach ($this->attributes as $attributeName=>$type) {
-      if (in_array($attributeName, $this->nullAttributes) || in_array($attributeName, $this->defaultValueAttributes)) { $data[$attributeName] = null; }
+    foreach ($this->attributes as $attributeName => $type) {
+      if (in_array($attributeName, $this->nullAttributes) || in_array($attributeName, $this->defaultValueAttributes)) {
+        $data[$attributeName] = null;
+      }
       elseif ($type != Dao::IGNORE) $data[$attributeName] = Record::coerce(null, $type, $allowNull = false, $quiet = true);
     }
     return $this->getRecordFromPreparedData($data, $existsInDatabase = false);
   }
-
-
-
-
-
-
-
-
 
   /**
    * Imports an external value (either from datasource, or xml, etc...) into an expected PHP variable.
@@ -799,21 +760,30 @@ abstract class Dao implements DaoInterface {
    * @return mixed
    */
   public function importValue($externalValue, $type, $notNull = true) {
-    if (!$notNull && $externalValue === null) { return null; }
+    if ( ! $notNull && $externalValue === null) {
+      return null;
+    }
     $dateWithTime = false;
     try {
       if (is_array($type)) {
         return $this->importEnum($externalValue, $type);
       }
       switch ($type) {
-        case Dao::BOOL:  return $this->importBool($externalValue); break;
-        case Dao::INT:   return $this->importInteger($externalValue); break;
-        case Dao::FLOAT: return $this->importFloat($externalValue); break;
-        case Dao::TEXT:  return $this->importString($externalValue); break;
+        case Dao::BOOL: return $this->importBool($externalValue);
+          break;
+        case Dao::INT: return $this->importInteger($externalValue);
+          break;
+        case Dao::FLOAT: return $this->importFloat($externalValue);
+          break;
+        case Dao::TEXT: return $this->importString($externalValue);
+          break;
         case Dao::DATE_WITH_TIME: $dateWithTime = true; // No break
-        case Dao::DATE:     return $this->importDate($externalValue, $dateWithTime); break;
-        case Dao::SEQUENCE: return $this->importSequence($externalValue); break;
-        default: throw new DaoException('Unknown type when importing a value.'); break;
+        case Dao::DATE: return $this->importDate($externalValue, $dateWithTime);
+          break;
+        case Dao::SEQUENCE: return $this->importSequence($externalValue);
+          break;
+        default: throw new DaoException('Unknown type when importing a value.');
+          break;
       }
     }
     catch (Exception $e) {
@@ -832,7 +802,6 @@ abstract class Dao implements DaoInterface {
    */
   abstract protected function convertRemoteValueToTimestamp($string, $withTime);
 
-  
   /**
    * Calls convertRemoteValueToTimestamp and returns a Date Object.
    * If you do not count on implementing this just overwrite the function and throw a DaoNotSupportedException inside.
@@ -877,7 +846,6 @@ abstract class Dao implements DaoInterface {
     return (string) $value;
   }
 
-
   /**
    * Checks if the value is present in the enum. Throws a DaoException if not.
    *
@@ -886,7 +854,7 @@ abstract class Dao implements DaoInterface {
    * @return string
    */
   public function importEnum($value, $list) {
-    if (!in_array($value, $list)) throw new DaoException("The value provided is not defined in the enum.");
+    if ( ! in_array($value, $list)) throw new DaoException("The value provided is not defined in the enum.");
     return (string) $value;
   }
 
@@ -897,13 +865,16 @@ abstract class Dao implements DaoInterface {
    * @return bool
    */
   public function importBool($value) {
-    if (!$value) return false;
+    if ( ! $value) return false;
     if (is_int($value)) return true;
     $value = strtolower($value);
     switch ($value) {
-      case 'false': case 'f': case '0': return false; break;
-      case 'true': case 't': case '1': return true; break;
-      default: throw new DaoException("The boolean ($value) could not be converted."); break;
+      case 'false': case 'f': case '0': return false;
+        break;
+      case 'true': case 't': case '1': return true;
+        break;
+      default: throw new DaoException("The boolean ($value) could not be converted.");
+        break;
     }
   }
 
@@ -917,7 +888,6 @@ abstract class Dao implements DaoInterface {
     return is_array($value) ? $value : array();
   }
 
-
   /**
    * Exports a PHP value into a value understood by the Database
    *
@@ -928,7 +898,7 @@ abstract class Dao implements DaoInterface {
    * @return mixed
    */
   public function exportValue($internalValue, $type, $notNull = true) {
-    if (!$notNull && $internalValue === NULL) {
+    if ( ! $notNull && $internalValue === NULL) {
       return $this->exportNull();
     }
     if (is_array($type)) {
@@ -936,18 +906,25 @@ abstract class Dao implements DaoInterface {
     }
     $dateWithTime = false;
     switch ($type) {
-      case Dao::BOOL:    return $this->exportBool($internalValue); break;
-      case Dao::INT:      return $this->exportInteger($internalValue); break;
-      case Dao::FLOAT:    return $this->exportFloat($internalValue); break;
-      case Dao::TEXT:     return $this->exportString($internalValue); break;
+      case Dao::BOOL: return $this->exportBool($internalValue);
+        break;
+      case Dao::INT: return $this->exportInteger($internalValue);
+        break;
+      case Dao::FLOAT: return $this->exportFloat($internalValue);
+        break;
+      case Dao::TEXT: return $this->exportString($internalValue);
+        break;
       case Dao::DATE_WITH_TIME: $dateWithTime = true; // No break
-      case Dao::DATE:     return $this->exportDate($internalValue, $dateWithTime); break;
-      case Dao::SEQUENCE: return $this->exportSequence($internalValue); break;
-      case Dao::IGNORE:   return $internalValue; break;
-      default: throw new DaoException('Unhandled type when exporting a value.'); break;
+      case Dao::DATE: return $this->exportDate($internalValue, $dateWithTime);
+        break;
+      case Dao::SEQUENCE: return $this->exportSequence($internalValue);
+        break;
+      case Dao::IGNORE: return $internalValue;
+        break;
+      default: throw new DaoException('Unhandled type when exporting a value.');
+        break;
     }
   }
-
 
   /**
    * Takes a php attribute name, converts it via import/export attribute mapping, converts it to the datasource name
@@ -964,7 +941,6 @@ abstract class Dao implements DaoInterface {
     return $this->escapeAttributeName($this->applyAttributeExportMapping($this->convertAttributeNameToDatasourceName($attributeName)));
   }
 
-
   /**
    * Escapes a resource name.
    * If no resourceName is provied $this->resourceName will be used.
@@ -976,7 +952,6 @@ abstract class Dao implements DaoInterface {
   public function exportResourceName($resourceName = null) {
     return $this->escapeResourceName($resourceName ? $resourceName : $this->resourceName);
   }
-
 
   /**
    * If your strings need quoting, do that in here.
@@ -1036,10 +1011,9 @@ abstract class Dao implements DaoInterface {
    * @return string
    */
   public function exportEnum($value, $list) {
-    if (!in_array($value, $list)) throw new DaoWrongValueException("The value provided is not defined in the enum.");
+    if ( ! in_array($value, $list)) throw new DaoWrongValueException("The value provided is not defined in the enum.");
     return $this->exportString($value);
   }
-
 
   /**
    * Exports a sequence. The generic Dao really can't handle this.
@@ -1053,7 +1027,6 @@ abstract class Dao implements DaoInterface {
     throw new DaoException('The generic Dao does not support exporting Sequences.');
   }
 
-
   /**
    * Tries to interpret a $sort parameter, which can be one of following:
    *
@@ -1065,7 +1038,7 @@ abstract class Dao implements DaoInterface {
    * @return array An array containing all attributes to sort by, escaped, and ASC or DESC appended. E.g.: array('name DESC', 'age');
    */
   protected function interpretSortVariable($sort) {
-    if (!is_array($sort)) {
+    if ( ! is_array($sort)) {
       return $this->attributeExists($sort) ? array($this->exportAttributeName($sort)) : null;
     }
 
@@ -1078,14 +1051,13 @@ abstract class Dao implements DaoInterface {
       }
     }
     else {
-      foreach ($sort as $attributeName=>$sort) {
+      foreach ($sort as $attributeName => $sort) {
         if ($this->attributeExists($attributeName)) $attributeArray[] = $this->exportAttributeName($attributeName) . ($sort == Dao::DESC ? ' desc' : '');
       }
     }
 
     return $attributeArray;
   }
-
 
 }
 

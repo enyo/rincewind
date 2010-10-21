@@ -171,12 +171,16 @@ class FileRetriever {
    * @param array $url the location of the file
    * @param array $getParameters A map with get parameters
    * @param array $postParameters A map with post parameters
-   * @param int $port
-   * @param int $timeout in seconds
+   * @param int $port If null, the default of 80 is used.
+   * @param int $timeout in seconds. If null, the default of 30 is used.
+   * @param array $headers optional array of lines to add to the header. Eg: array('Content-type: text/plain', 'Content-length: 100')
    * @deprecated Use get() instead.
    * @return File
    */
-  public function createFromHttp($url, $getParameters = null, $postParameters = null, $port = 80, $timeout = 30) {
+  public function createFromHttp($url, $getParameters = null, $postParameters = null, $port = null, $timeout = null, $headers = null) {
+
+    if ($port === null) $port = 80;
+    if ($timeout === null) $timeout = 30;
 
     $curlHandle = curl_init();
 
@@ -185,9 +189,12 @@ class FileRetriever {
 
     $realUrl = $url . $getParameters;
 
-    Log::debug('Getting: ' . $realUrl . " (port $port)", 'FileRetriever');
+    Log::debug('Getting: ' . $realUrl . " (port $port" . ($headers ? '; headers: ' . implode(', ', $headers) : '') . ")", 'FileRetriever');
 
     curl_setopt($curlHandle, CURLOPT_URL, $realUrl);
+    if ($headers) {
+      curl_setopt($curlHandle, CURLOPT_HTTPHEADER, $headers);
+    }
     curl_setopt($curlHandle, CURLOPT_PORT, $port);
     curl_setopt($curlHandle, CURLOPT_TIMEOUT, $timeout);
     curl_setopt($curlHandle, CURLOPT_FAILONERROR, true);
@@ -196,8 +203,12 @@ class FileRetriever {
     curl_setopt($curlHandle, CURLOPT_RETURNTRANSFER, true);
 
     if ($postParameters) {
-      curl_setopt($curlHandle, CURLOPT_POST, 1);
       curl_setopt($curlHandle, CURLOPT_POSTFIELDS, $postParameters);
+//      curl_setopt($curlHandle, CURLOPT_CUSTOMREQUEST, 'POST');
+
+      if (is_array($postParameters)) {
+        curl_setopt($curlHandle, CURLOPT_POST, 1);
+      }
     }
 
     $result = curl_exec($curlHandle);
@@ -207,7 +218,6 @@ class FileRetriever {
     curl_close($curlHandle);
 
     if ($result === false) {
-
       $errorCode = $info['http_code'] ? $info['http_code'] : 400;
       $errorTypes = array(400 => 'Bad Request', 500 => 'Internal Server Error');
       throw new FileRetrieverException('File could not be downloaded. ' . $errorCode . ' - ' . $errorTypes[floor($errorCode / 100) * 100] . '.', $errorCode);

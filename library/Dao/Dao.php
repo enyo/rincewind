@@ -707,14 +707,14 @@ abstract class Dao implements DaoInterface {
       }
       else {
         $trace = debug_backtrace();
-        trigger_error('The type for attribute ' . $attributeName . ' (' . $this->resourceName . ') is not defined in ' . $trace[0]['file'] . ' on line ' . $trace[0]['line'], E_USER_WARNING);
+        trigger_error('The type for attribute "' . $attributeName . '" (resource: "' . $this->resourceName . '") is not defined', E_USER_WARNING);
       }
     }
     foreach ($neededValues as $attributeName => $type) {
       if ($type != Dao::IGNORE) {
         if ($this->notNull($attributeName)) {
           $trace = debug_backtrace();
-          trigger_error('The attribute ' . $attributeName . ' (' . $this->resourceName . ') was not transmitted from data source in ' . $trace[0]['file'] . ' on line ' . $trace[0]['line'], E_USER_WARNING);
+          trigger_error('The attribute "' . $attributeName . '" (resource: "' . $this->resourceName . '") was not transmitted from data source', E_USER_WARNING);
           $recordData[$attributeName] = Record::coerce(null, $type, false, $quiet = true);
         }
         else {

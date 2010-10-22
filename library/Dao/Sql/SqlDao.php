@@ -58,10 +58,11 @@ class SqlDao extends Dao {
    * Creates a Dao.
    * You probably want to overwrite this method in your daos to use your implementation of instantiating Daos.
    *
-   * @param string $daoClassName
+   * @param string $daoName
    * @return SqlDao
    */
-  public function createDao($daoClassName) {
+  public function createDao($daoName) {
+    $daoClassName = $daoName . 'Dao';
     return new $daoClassName($this->getDb());
   }
 

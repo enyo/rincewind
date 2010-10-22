@@ -27,9 +27,15 @@
  *
  * Sometimes your data source returns the data hash of a reference directly to avoid
  * traffic overhead (this makes especially sense with FileSourceDaos like the JsonDao).
- * In that case you only need to specify the $daoClassName since the Dao does not have
+ * In that case you only need to specify the $daoName since the Dao does not have
  * to link / fetch the data hash itself, but only to instantiate a Record with the
  * given hash.
+ *
+ * If you are never only interested in the id itself, but always only in the object,
+ * you can just setup a reference over the id itself. In this case, the attribute
+ * should not have the name id of course. If you're free to change names then
+ * just calling the `countryId` `country`, and setting up a reference to fetch
+ * it automatically is the sweetest.
  *
  *
  * Before setting up a DaoReference:

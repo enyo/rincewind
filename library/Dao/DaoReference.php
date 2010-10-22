@@ -30,7 +30,7 @@ abstract class DaoReference {
    * The dao class name used to get the referenced foreign Record.
    * @var string
    */
-  protected $daoClassName;
+  protected $daoName;
 
   /**
    * The local key. eg: address_id
@@ -53,15 +53,15 @@ abstract class DaoReference {
 
 
   /**
-   * @param string|Dao $daoClassName
+   * @param string|Dao $daoName
    * @param string $localKey
    * @param string $foreignKey
    * @param Dao $sourceDao The this reference is assigned to. If you don't set it in the
    *                       constructor, it has to be set with setSourceDao(). The addReference
    *                       function of the Dao does this for you.
    */
-  public function __construct($daoClassName, $localKey = null, $foreignKey = 'id', $sourceDao = null) {
-    $this->daoClassName = $daoClassName;
+  public function __construct($daoName, $localKey = null, $foreignKey = 'id', $sourceDao = null) {
+    $this->daoName = $daoName;
     $this->localKey = $localKey;
     $this->foreignKey = $foreignKey;
     $this->sourceDao = $sourceDao;
@@ -86,8 +86,8 @@ abstract class DaoReference {
   /**
    * @return string|Dao
    */
-  public function getDaoClassName() {
-    return $this->daoClassName;
+  public function getDaoName() {
+    return $this->daoName;
   }
 
   /**
@@ -106,13 +106,13 @@ abstract class DaoReference {
 
 
   /**
-   * Returns the foreign dao. If $daoClassName is already a dao, it is only
+   * Returns the foreign dao. If $daoName is already a dao, it is only
    * returned. If it's a string, createDao() is called.
    * @return Dao
    * @uses createDao()
    */
   public function getForeignDao() {
-    $dao = $this->getDaoClassName();
+    $dao = $this->getDaoName();
     if (is_string($dao)) $dao = $this->createDao($dao);
     return $dao;
   }
@@ -120,11 +120,11 @@ abstract class DaoReference {
   /**
    * Creates a Dao. This calls createDao internally on the sourceDao.
    *
-   * @param string $daoClassName
+   * @param string $daoName
    * @return Dao
    */
-  public function createDao($daoClassName) {
-    return $this->sourceDao->createDao($daoClassName);
+  public function createDao($daoName) {
+    return $this->sourceDao->createDao($daoName);
   }
 
 

@@ -18,7 +18,7 @@ include_once(dirname(__FILE__) . '/File.php');
 /**
  * Loading the Log class.
  */
-if ( ! class_exists('Log', false)) include(dirname(dirname(__FILE__)) . '/Logger/Log.php');
+if ( ! class_exists('Log', false)) include dirname(__FILE__) . '/../Logger/Log.php';
 
 /**
  * The Exception base class for FileRetrieverExceptions.
@@ -220,6 +220,7 @@ class FileRetriever {
     if ($result === false) {
       $errorCode = $info['http_code'] ? $info['http_code'] : 400;
       $errorTypes = array(400 => 'Bad Request', 500 => 'Internal Server Error');
+      Log::warning('File could not be downloaded.', 'FileRetriever', array('url'=>$realUrl, 'port'=>$port, 'errorCode'=>$errorCode, 'postParams'=>$postParameters ? $postParameters : 'NONE'));
       throw new FileRetrieverException('File could not be downloaded. ' . $errorCode . ' - ' . $errorTypes[floor($errorCode / 100) * 100] . '.', $errorCode);
     }
 

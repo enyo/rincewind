@@ -7,9 +7,7 @@
  * @author Matthias Loitsch <developer@ma.tthias.com>
  * @copyright Copyright (c) 2010, Matthias Loitsch
  * @package Dao
- **/
-
-
+ */
 
 /**
  * A DaoToManyReference describes references to many resources.
@@ -30,9 +28,8 @@
  * @see DaoToOneReference
  * @see Dao::setupReferences()
  * @see Dao::addReference()
- **/
+ */
 class DaoToManyReference extends DaoReference {
-
 
   /**
    * Returns a DaoIterator for a specific reference.
@@ -73,9 +70,15 @@ class DaoToManyReference extends DaoReference {
       }
       return new DaoKeyListIterator(array(), $foreignDao, $foreignKey);
     }
+  }
 
+  /**
+   * @param mixed $value
+   * @return mixed the coerced value.
+   */
+  public function coerce($value) {
+    return ($value === null) ? null : (array) $value;
   }
 
 }
-
 

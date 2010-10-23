@@ -222,6 +222,8 @@ abstract class FileSourceDao extends Dao {
       $data = $this->interpretFileContent($result);
     }
 
+    if (!$data || !is_array($data)) throw new DaoException('The data returned from the datasource after insert was invalid (resource: ' . $this->getResourceName() . ').');
+
     $this->updateRecordWithData($data, $record);
 
     $this->afterInsert($record);

@@ -638,7 +638,12 @@ abstract class Dao implements DaoInterface {
     $id = null;
     foreach ($this->attributes as $attributeName => $type) {
       if ($type === Dao::IGNORE) continue;
-      $value = $record->get($attributeName);
+      if ($type === Dao::REFERENCE) {
+        $value = $record->getDirectly($attributeName);
+      }
+      else {
+        $value = $record->get($attributeName);
+      }
       if ($value !== null) {
         $attributeNames[] = $this->exportAttributeName($attributeName);
         $values[] = $this->exportValue($value, $type, $this->notNull($attributeName));
@@ -703,12 +708,12 @@ abstract class Dao implements DaoInterface {
       $attributeName = $this->importAttributeName($attributeName);
       if (array_key_exists($attributeName, $this->attributes)) {
         unset($neededValues[$attributeName]);
-        if ($this->attributes[$attributeName] != Dao::IGNORE) {
+        if ($this->attributes[$attributeName] !== Dao::IGNORE) {
           $recordData[$attributeName] = $this->importValue($value, $this->attributes[$attributeName], $this->notNull($attributeName));
         }
       }
       elseif (array_key_exists($attributeName, $this->additionalAttributes)) {
-        if ($this->additionalAttributes[$attributeName] != Dao::IGNORE) {
+        if ($this->additionalAttributes[$attributeName] !== Dao::IGNORE) {
           $recordData[$attributeName] = $this->importValue($value, $this->additionalAttributes[$attributeName], $this->notNull($attributeName));
         }
       }
@@ -722,7 +727,7 @@ abstract class Dao implements DaoInterface {
         if ($this->notNull($attributeName)) {
           $trace = debug_backtrace();
           trigger_error('The attribute "' . $attributeName . '" (resource: "' . $this->resourceName . '") was not transmitted from data source', E_USER_WARNING);
-          $recordData[$attributeName] = Record::coerce(null, $type, false, $quiet = true);
+          $recordData[$attributeName] = Record::coerce($this, $attributeName, null, $type, false, $quiet = true);
         }
         else {
           $recordData[$attributeName] = null;
@@ -752,7 +757,7 @@ abstract class Dao implements DaoInterface {
       if (in_array($attributeName, $this->nullAttributes) || in_array($attributeName, $this->defaultValueAttributes)) {
         $data[$attributeName] = null;
       }
-      elseif ($type != Dao::IGNORE) $data[$attributeName] = Record::coerce(null, $type, $allowNull = false, $quiet = true);
+      elseif ($type != Dao::IGNORE) $data[$attributeName] = Record::coerce($this, $attributeName, null, $type, $allowNull = false, $quiet = true);
     }
     return $this->getRecordFromPreparedData($data, $existsInDatabase = false);
   }
@@ -931,6 +936,10 @@ abstract class Dao implements DaoInterface {
       case Dao::SEQUENCE: return $this->exportSequence($internalValue);
         break;
       case Dao::IGNORE: return $internalValue;
+        break;
+      case Dao::REFERENCE:
+        // TODO.. don't really know what to do exactly here.
+        return $internalValue;
         break;
       default: throw new DaoException('Unhandled type when exporting a value.');
         break;

@@ -189,7 +189,11 @@ class FileRetriever {
 
     $realUrl = $url . $getParameters;
 
-    Log::debug('Getting: ' . $realUrl . " (port $port" . ($headers ? '; headers: ' . implode(', ', $headers) : '') . ")", 'FileRetriever');
+    Log::debug("Getting: $realUrl", 'FileRetriever',
+            array('Port' => $port,
+                'Headers' => $headers ? implode(', ', $headers) : null,
+                'Post' => $postParameters)
+    );
 
     curl_setopt($curlHandle, CURLOPT_URL, $realUrl);
     if ($headers) {
@@ -220,7 +224,7 @@ class FileRetriever {
     if ($result === false) {
       $errorCode = $info['http_code'] ? $info['http_code'] : 400;
       $errorTypes = array(400 => 'Bad Request', 500 => 'Internal Server Error');
-      Log::warning('File could not be downloaded.', 'FileRetriever', array('url'=>$realUrl, 'port'=>$port, 'errorCode'=>$errorCode, 'postParams'=>$postParameters ? $postParameters : 'NONE'));
+      Log::warning('File could not be downloaded.', 'FileRetriever', array('url' => $realUrl, 'port' => $port, 'errorCode' => $errorCode, 'postParams' => $postParameters ? $postParameters : 'NONE'));
       throw new FileRetrieverException('File could not be downloaded. ' . $errorCode . ' - ' . $errorTypes[floor($errorCode / 100) * 100] . '.', $errorCode);
     }
 

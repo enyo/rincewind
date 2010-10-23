@@ -7,9 +7,7 @@
  * @author Matthias Loitsch <developer@ma.tthias.com>
  * @copyright Copyright (c) 2010, Matthias Loitsch
  * @package Dao
- **/
-
-
+ */
 
 /**
  * A DaoToOneReference describes a reference to another record in another resource.
@@ -45,7 +43,7 @@
  *   $address = $addressDao->getById($user->addressId);
  * ?>
  * </code>
- * 
+ *
  * After:
  * <code>
  * <?php
@@ -65,7 +63,7 @@
  * @see DaoToManyReference
  * @see Dao::setupReferences()
  * @see Dao::addReference()
- **/
+ */
 class DaoToOneReference extends DaoReference {
 
   /**
@@ -105,7 +103,7 @@ class DaoToOneReference extends DaoReference {
       if ($localKey && $foreignKey) {
         $localValue = $record->get($localKey);
         if ($localValue === null) return null;
-        $return = $foreignDao->get(array($foreignKey=>$localValue));
+        $return = $foreignDao->get(array($foreignKey => $localValue));
         $record->setDirectly($attribute, $return->getArray());
         return $return;
       }
@@ -113,10 +111,16 @@ class DaoToOneReference extends DaoReference {
         return null;
       }
     }
-
   }
 
+  /**
+   * @param mixed $value
+   * @return mixed the coerced value.
+   */
+  public function coerce($value) {
+    if (is_object($value) && is_a($value, 'Record')) return $value->get('id');
+    return ($value === null) ? null : (int) $value;
+  }
 
 }
-
 

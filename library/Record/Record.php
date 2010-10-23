@@ -290,7 +290,7 @@ class Record implements RecordInterface {
       $this->triggerUndefinedAttributeError($attributeName);
       return $this;
     }
-    $value = self::coerce($value, $this->getAttributeType($attributeName), in_array($attributeName, $this->dao->getNullAttributes()));
+    $value = self::coerce($this->dao, $attributeName, $value, $this->getAttributeType($attributeName), in_array($attributeName, $this->dao->getNullAttributes()));
     $this->data[$attributeName] = $value;
     $this->changedAttributes[$attributeName] = true;
     
@@ -389,14 +389,27 @@ class Record implements RecordInterface {
   }
 
 
-  static function coerce($value, $type, $allowNull = false, $quiet = false) {
+  /**
+   * Forces a value into a specific type.
+   *
+   * If the type is a reference, then the coerce method on the reference is called.
+   *
+   * @param Dao $dao
+   * @param string $attributeName
+   * @param mixed $value
+   * @param int $type one of Dao::INT, Dao::STRING, etc..
+   * @param bool $allowNull
+   * @param bool $quiet If true, no warnings are displayed
+   * @return mixed
+   */
+  static function coerce($dao, $attributeName, $value, $type, $allowNull = false, $quiet = false) {
     if ($allowNull && $value === null) { return null; }
     $trace = debug_backtrace();
     if (is_array($type)) {
       // This is an enum.
-      if (!count($type)) trigger_error('Invalid enum in ' . $trace[0]['file'] . ' on line ' . $trace[0]['line'], E_USER_ERROR);
+      if (!count($type)) trigger_error('Invalid enum for "' . $attributeName . '" in ' . $trace[0]['file'] . ' on line ' . $trace[0]['line'], E_USER_ERROR);
       if (!in_array($value, $type)) {
-        if (!$quiet) trigger_error('The value provided was not in the enum in ' . $trace[0]['file'] . ' on line ' . $trace[0]['line'], E_USER_WARNING);
+        if (!$quiet) trigger_error('The value provided for "' . $attributeName . '" was not in the enum in ' . $trace[0]['file'] . ' on line ' . $trace[0]['line'], E_USER_WARNING);
         $value = $allowNull ? null : $type[0];
       }
       return $value;
@@ -406,7 +419,7 @@ class Record implements RecordInterface {
         if     ($value === 'true' || $value === '1' || $value === 1) $value = true;
         elseif ($value === 'false' || $value === '0' || $value === 0) $value = false;
         elseif (!is_bool($value)) {
-          if (!$quiet) trigger_error('The value of the type "BOOL" was not valid in ' . $trace[0]['file'] . ' on line ' . $trace[0]['line'], E_USER_WARNING);
+          if (!$quiet) trigger_error('The value of the type "BOOL" for "' . $attributeName . '" was not valid in ' . $trace[0]['file'] . ' on line ' . $trace[0]['line'], E_USER_WARNING);
           if ($allowNull) return null;
           else $value = true;
         }
@@ -414,14 +427,14 @@ class Record implements RecordInterface {
         break;
       case Dao::INT:
         if (!is_int($value) && !is_numeric($value) && (strval(intval($value)) !== strval($value))) {
-          if (!$quiet) trigger_error('The value of the type "INT" was not valid in ' . $trace[0]['file'] . ' on line ' . $trace[0]['line'], E_USER_WARNING);
+          if (!$quiet) trigger_error('The value of the type "INT" for "' . $attributeName . '" was not valid in ' . $trace[0]['file'] . ' on line ' . $trace[0]['line'], E_USER_WARNING);
           if ($allowNull) return null;
         }
         return (int) $value;
         break;
       case Dao::FLOAT:
         if (!is_float($value) && !is_numeric($value)) {
-          if (!$quiet) trigger_error('The value of the type "FLOAT" was not valid in ' . $trace[0]['file'] . ' on line ' . $trace[0]['line'], E_USER_WARNING);
+          if (!$quiet) trigger_error('The value of the type "FLOAT" for "' . $attributeName . '" was not valid in ' . $trace[0]['file'] . ' on line ' . $trace[0]['line'], E_USER_WARNING);
           if ($allowNull) return null;
         }
         return (float) $value;
@@ -431,7 +444,7 @@ class Record implements RecordInterface {
         if ($value instanceof Date) { return $value->getTimestamp(); }
         elseif (is_numeric($value)) { return (int) $value; }
         else {
-          if (!$quiet && !empty($value)) trigger_error('The value of the type "DATE/DATE_WITH_TIME" '.$value.' was not valid in ' . $trace[0]['file'] . ' on line ' . $trace[0]['line'], E_USER_WARNING);
+          if (!$quiet && !empty($value)) trigger_error('The value of the type "DATE/DATE_WITH_TIME" for "' . $attributeName . '" '.$value.' was not valid in ' . $trace[0]['file'] . ' on line ' . $trace[0]['line'], E_USER_WARNING);
           if ($allowNull) return null;
           return time();
         }
@@ -447,6 +460,12 @@ class Record implements RecordInterface {
         else {
           return $allowNull ? null : array();
         }
+        break;
+      case Dao::REFERENCE:
+        // Well.. if this is null, and
+        $return = $dao->getReference($attributeName)->coerce($value);
+        if (!$quiet && $value === null) trigger_error('The value of the type "REFERENCE" for "' . $attributeName . '" is not allowed to be null in ' . $trace[0]['file'] . ' on line ' . $trace[0]['line'], E_USER_WARNING);
+        return $return;
         break;
       default: trigger_error('Unknown type in ' . $trace[0]['file'] . ' on line ' . $trace[0]['line'], E_USER_ERROR);
     }

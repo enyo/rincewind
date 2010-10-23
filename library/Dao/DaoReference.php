@@ -7,8 +7,7 @@
  * @author Matthias Loitsch <developer@ma.tthias.com>
  * @copyright Copyright (c) 2010, Matthias Loitsch
  * @package Dao
- **/
-
+ */
 
 /**
  * A DaoReference describes references between two resources.
@@ -23,7 +22,7 @@
  * @see DaoToManyReference
  * @see Dao::setupReferences()
  * @see Dao::addReference()
- **/
+ */
 abstract class DaoReference {
 
   /**
@@ -31,26 +30,21 @@ abstract class DaoReference {
    * @var string
    */
   protected $daoName;
-
   /**
    * The local key. eg: address_id
    * @var string
    */
   protected $localKey;
-
   /**
    * The foreign key. eg: id
    * @var string
    */
   protected $foreignKey;
-
-
   /**
    * The Dao this reference is assigned to.
    * @var Dao
    */
   protected $sourceDao;
-
 
   /**
    * @param string|Dao $daoName
@@ -66,7 +60,6 @@ abstract class DaoReference {
     $this->foreignKey = $foreignKey;
     $this->sourceDao = $sourceDao;
   }
-
 
   /**
    * Sets the source dao.
@@ -104,7 +97,6 @@ abstract class DaoReference {
     return $this->localKey;
   }
 
-
   /**
    * Returns the foreign dao. If $daoName is already a dao, it is only
    * returned. If it's a string, createDao() is called.
@@ -127,7 +119,6 @@ abstract class DaoReference {
     return $this->sourceDao->createDao($daoName);
   }
 
-
   /**
    * When a record is accessed on a reference attribute, it calls this method to get the actual records or record.
    *
@@ -137,8 +128,17 @@ abstract class DaoReference {
    */
   abstract public function getReferenced($record, $attribute);
 
+  /**
+   * Forces a value in a correct representation of the reference.
+   *
+   * This can be either an integer as id, or an array of integers, or the data
+   * itself, etc...
+   *
+   * @param mixed $value
+   * @return mixed the coerced value.
+   */
+  abstract public function coerce($value);
 }
-
 
 /**
  * Loading the DaoToManyReference

@@ -211,15 +211,19 @@ class Record implements RecordInterface {
    **/
   public function get($attributeName) {
 
-    if (array_key_exists($attributeName, $this->dao->getAttributes())) {
-      $value = $this->data[$attributeName];
+    $attributes = $this->dao->getAttributes();
+    if (array_key_exists($attributeName, $attributes)) {
+      if ($attributes[$attributeName] !== Dao::REFERENCE) {
+        $value = $this->data[$attributeName];
+      }
+      else {
+        // It's a reference
+        $reference = $this->dao->getReference($attributeName);
+        return $reference->getReferenced($this, $attributeName);
+      }
     }
     elseif (array_key_exists($attributeName, $this->dao->getAdditionalAttributes())) {
       $value = array_key_exists($attributeName, $this->data) ? $this->data[$attributeName] : null;
-    }
-    elseif (array_key_exists($attributeName, $this->dao->getReferences())) {
-      $reference = $this->dao->getReference($attributeName);
-      return $reference->getReferenced($this, $attributeName);
     }
     elseif (method_exists($this, '_' . $attributeName)) {
       return $this->getComputedAttribute($attributeName);

@@ -10,7 +10,6 @@ require_once LIBRARY_PATH . 'Dao/Dao.php';
 
 $DAO_ABSTRACT_METHODS = array('setupReferences', 'generateSortString', 'convertRemoteValueToTimestamp', 'find', 'getData', 'getIterator', 'insert', 'update', 'delete', 'startTransaction', 'commit', 'rollback', 'getTotalCount');
 
-
 /**
  * Test class for Dao.
  */
@@ -21,27 +20,41 @@ class Dao_ReferenceTest extends PHPUnit_Framework_TestCase {
    */
   private $dao;
 
-  public function setUp() {
-    $this->dao = $this->getMockForAbstractClass('Dao', array('resource_name', array('id'=>Dao::INT, 'referenceId'=>Dao::INT)));
-  }
+  private $i = 0;
 
-  /**
-   * @covers Dao::addReference
-   */
-  public function testReferenceGetsSourceDaoInjected() {
-    $reference = $this->getMock('DaoReference', array('setSourceDao', 'getReferenced'), array(), '', false);
-    // TODO: I don't know why, but self::identicalTo doesn't work here... neither does equaltTo, with a bigger maxdepth, because
-    // then the new object has the reference, whereas the old one doesn't.
-    $reference->expects($this->once())->method('setSourceDao')->with(self::equalTo($this->dao, 0, 1));
-    $this->dao->addReference('referenceId', $reference);
+  public function setUp() {
+    $methods = $GLOBALS['DAO_ABSTRACT_METHODS'];
+    $methods[] = 'getUserReference';
+    $this->dao = $this->getMock('Dao', $methods, array('resource_name', array('id' => Dao::INT, 'userId' => Dao::INT, 'user' => Dao::REFERENCE, 'other' => Dao::REFERENCE)));
   }
 
   /**
    * @covers Dao::getReference
-   * @expectedException DaoWrongValueException
    */
-  public function testGettingUnexistingReferenceThrowsException() {
+  public function testGettingReferenceNotMarkedAsReferenceThrowsException() {
+    $this->setExpectedException('DaoException', 'Can\'t create the reference for attribute unexisting.');
     $this->dao->getReference('unexisting');
+  }
+
+  /**
+   * @covers Dao::getReference
+   */
+  public function testGettingReferenceWithMissingGetReferenceMethodThrowsException() {
+    $this->setExpectedException('DaoException', 'The method getOtherReference does not exist to create the reference.');
+    $this->dao->getReference('other');
+  }
+
+
+  /**
+   * @covers Dao::getReference
+   */
+  public function testReferenceGetsSourceDaoInjected() {
+    $reference = $this->getMock('DaoReference', array('setSourceDao', 'getReferenced'), array(), '', false);
+    $this->dao->expects($this->once())->method('getUserReference')->will($this->returnValue($reference));
+    // TODO: I don't know why, but self::identicalTo doesn't work here... neither does equaltTo, with a bigger maxdepth, because
+    // then the new object has the reference, whereas the old one doesn't.
+    $reference->expects($this->once())->method('setSourceDao')->with(self::equalTo($this->dao, 0, 1));
+    $this->dao->getReference('user');
   }
 
   /**
@@ -49,20 +62,21 @@ class Dao_ReferenceTest extends PHPUnit_Framework_TestCase {
    */
   public function testGettingReference() {
     $reference = $this->getMockForAbstractClass('DaoReference', array(), '', false);
-    $this->dao->addReference('referenceId', $reference);
-    self::assertEquals($reference, $this->dao->getReference('referenceId'));
+    $this->dao->expects($this->once())->method('getUserReference')->will($this->returnValue($reference));
+    self::assertEquals($reference, $this->dao->getReference('user'));
   }
 
+
   /**
-   * @covers Dao::getReferences
+   * @covers Dao::getReference
    */
-  public function testGettingAllReferences() {
+  public function testGettingReferenceCachesTheReference() {
     $reference = $this->getMockForAbstractClass('DaoReference', array(), '', false);
-    $reference2 = $this->getMockForAbstractClass('DaoReference', array(), '', false);
-    $this->dao->addReference('referenceId', $reference);
-    $this->dao->addReference('reference2Id', $reference2);
-    self::assertEquals(array('referenceId'=>$reference, 'reference2Id'=>$reference2), $this->dao->getReferences());
+    $this->dao->expects($this->once())->method('getUserReference')->will($this->returnValue($reference));
+    self::assertEquals($reference, $this->dao->getReference('user'));
+    self::assertEquals($reference, $this->dao->getReference('user'));
   }
+
 
 }
 

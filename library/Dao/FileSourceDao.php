@@ -28,6 +28,12 @@ abstract class FileSourceDao extends Dao {
   protected $fileDataSource;
 
   /**
+   * Whether the datasource returns the id, or the whole object on insert.
+   * @var bool
+   */
+  protected $dataSourceReturnsIdOnInsert = true;
+
+  /**
    * @param FileDataSource $fileDataSource The fileDataSource is used to create the requests.
    * @param string $resourceName You can specify this as an attribute when writing a Dao implementation
    * @param array $attributes You can specify this as an attribute when writing a Dao implementation
@@ -191,6 +197,7 @@ abstract class FileSourceDao extends Dao {
     return $this->getIteratorFromData($data);
   }
 
+
   /**
    * Inserts a record in the database, and updates the record with the new data (in
    * case some default values of the database have been set.)
@@ -198,6 +205,7 @@ abstract class FileSourceDao extends Dao {
    * @param Record $record
    * @return Record The updated record.
    * @uses $fileDataSource
+   * @uses $dataSourceReturnsIdOnInsert
    */
   public function insert($record) {
 
@@ -205,9 +213,16 @@ abstract class FileSourceDao extends Dao {
 
     $attributes = array_combine($attributeNames, $values);
 
-    $id = $this->fileDataSource->insert($this->resourceName, $attributes);
+    $result = $this->fileDataSource->insert($this->resourceName, $attributes);
 
-    $this->updateRecordWithData($this->getData(array('id' => $id)), $record);
+    if ($this->dataSourceReturnsIdOnInsert) {
+      $data = $this->getData(array('id' => $result));
+    }
+    else {
+      $data = $this->interpretFileContent($result);
+    }
+
+    $this->updateRecordWithData($data, $record);
 
     $this->afterInsert($record);
 

@@ -168,14 +168,6 @@ interface DaoInterface {
    */
   public function getNullAttributes();
 
-  /**
-   * Returns an array of all references setup in this dao.
-   * The keys are the attribute names. The values are the actual DaoReference or DaoToManyReference
-   * objects.
-   * @return array
-   */
-  public function getReferences();
-
 
   /**
    * Returns a reference for a specific attribute.

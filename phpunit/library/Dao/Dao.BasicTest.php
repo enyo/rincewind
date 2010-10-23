@@ -11,7 +11,7 @@ require_once LIBRARY_PATH . 'Dao/Dao.php';
 $DAO_ABSTRACT_METHODS = array('setupReferences', 'generateSortString', 'convertRemoteValueToTimestamp', 'find', 'getData', 'getIterator', 'insert', 'update', 'delete', 'startTransaction', 'commit', 'rollback', 'getTotalCount');
 
 
-class TestDaoClass { }
+class TestClassDao { }
 
 
 /**
@@ -124,8 +124,8 @@ class Dao_BasicTest extends PHPUnit_Framework_TestCase {
    */
   public function testCreateDaoJustInstantiatesClassWithName() {
     $mock = $this->getMockForAbstractClass('Dao', array(), '', false);
-    $object = $mock->createDao('TestDaoClass');
-    self::assertEquals('TestDaoClass', get_class($object));
+    $object = $mock->createDao('TestClass');
+    self::assertEquals('TestClassDao', get_class($object));
   }
 
 

@@ -122,6 +122,8 @@ abstract class Dao implements DaoInterface {
   const STRING = self::TEXT;
   const SEQUENCE = 7;
   const SEQ = self::SEQUENCE;
+  const REFERENCE = 8;
+  const REF = self::REFERENCE;
   const IGNORE = -1;
   /*   * #@- */
 
@@ -255,32 +257,37 @@ abstract class Dao implements DaoInterface {
   }
 
   /**
-   * Adds a reference definition. This method should be called inside setupReferences().
-   * Also sets the source dao on the reference.
+   * Returns the reference for an attribute.
    *
-   * To see how references work in detail, please have a look at the DaoReference class.
+   * If the reference has not yet been created, the appropriate method
+   * (eg.: getUserReference()) will be called to get the reference, and the
+   * reference will be stored for future use.
    *
-   * @param string $attributeName The name of the attribute. You will then be able to access the reference
-   *                              on this attribute name on the Record. So if you setup a reference with
-   *                              'address' as $attributeName on the UserDao, then you will be able to access
-   *                              it with: $user->address or $user->get('address')
-   * @param DaoReference $reference The reference you want to add.
-   * @see setupReferences()
-   * @see DaoReference
-   */
-  public function addReference($attributeName, $reference) {
-    $reference->setSourceDao($this);
-    $this->references[$attributeName] = $reference;
-  }
-
-  /**
-   * Returns the reference for an attribute
+   * If the attribute is not defined as Dao::REFERENCE, this method throws an
+   * exception.
    *
    * @param string $attributeName
    * @return Record|DaoResultIterator
+   * @uses $references
    */
   public function getReference($attributeName) {
-    if ( ! isset($this->references[$attributeName])) throw new DaoWrongValueException("The attribute `$attributeName` is not specified in references.");
+    if ( ! isset($this->references[$attributeName])) {
+      if ($this->getAttributeType($attributeName) !== Dao::REFERENCE) {
+        Log::fatal("Can't create a reference for an attribute that is not of type Dao::REFERENCE.", 'Dao', array('Resource' => $this->getResourceName(), 'Attribute' => $attributeName));
+        throw new DaoException("Can't create the reference for attribute $attributeName.");
+      }
+
+      $methodName = 'get' . ucfirst($attributeName) . 'Reference';
+
+      if (!method_exists($this, $methodName)) {
+        Log::fatal("Can't create a reference, because $methodName does not exist.", 'Dao', array('Resource' => $this->getResourceName(), 'Attribute' => $attributeName));
+        throw new DaoException("The method $methodName does not exist to create the reference.");
+      }
+
+      $reference = $this->$methodName();
+      $reference->setSourceDao($this);
+      return $this->references[$attributeName] = $reference;
+    }
     return $this->references[$attributeName];
   }
 
@@ -378,6 +385,16 @@ abstract class Dao implements DaoInterface {
   }
 
   /**
+   * Returns the type of an attribute (eg.: Dao::INT, etc..)
+   * @param string $attributeName
+   * @return int null if the attribute does not exist.
+   */
+  public function getAttributeType($attributeName) {
+    if (isset($this->attributes[$attributeName])) return $this->attributes[$attributeName];
+    else return null;
+  }
+
+  /**
    * Returns the resource name
    * @return string
    */
@@ -391,14 +408,6 @@ abstract class Dao implements DaoInterface {
    */
   public function getAdditionalAttributes() {
     return $this->additionalAttributes;
-  }
-
-  /**
-   * @return array
-   * @see $references
-   */
-  public function getReferences() {
-    return $this->references;
   }
 
   /**
@@ -703,10 +712,6 @@ abstract class Dao implements DaoInterface {
           $recordData[$attributeName] = $this->importValue($value, $this->additionalAttributes[$attributeName], $this->notNull($attributeName));
         }
       }
-      elseif (isset($this->references[$attributeName])) {
-        // Just let it untouched. The reference will check if it's OK.
-        $recordData[$attributeName] = $value;
-      }
       else {
         $trace = debug_backtrace();
         trigger_error('The type for attribute "' . $attributeName . '" (resource: "' . $this->resourceName . '") is not defined', E_USER_WARNING);
@@ -783,6 +788,10 @@ abstract class Dao implements DaoInterface {
         case Dao::DATE: return $this->importDate($externalValue, $dateWithTime);
           break;
         case Dao::SEQUENCE: return $this->importSequence($externalValue);
+          break;
+        case Dao::REFERENCE:
+          if ($externalValue === null && $notNull) throw new DaoException('Reference is marked as not null, but the value to import is null.');
+          return $externalValue; // Leave it untouched. The reference will do the rest.
           break;
         default: throw new DaoException('Unknown type when importing a value.');
           break;

@@ -31,6 +31,9 @@ You can also chain calls like this:
     ?>
 
 One thing that's really cool with Daos are references.
+
+#### References
+
 Eg.: You can specify that the attribute `address_id` points to the foreign key `id` on the AddressDao, and that you can access that object on the `address` property.
 This means that you can then simply access the address like this:
 
@@ -73,7 +76,16 @@ This would be the most direct way to access the country name of the user with us
       ->name; // Reads the name attribute of country.
     ?>
 
+Well, and probably the coolest thing is the possibility to define references, and not even define the id. This is especially cool when you are working with a FileDataSource that submits JSON from a Java backend for example.
+In this case the server really can decide if it transmits the id, or the dataset. You'll never see anything of it in your application.
+The two JSON objects would then result in exactly the same:
 
+    { "id": 4, "address": { "id": 3, "street": "Somethinglane 3" }}
+    { "id": 4, "address": 3 }
+
+When you access the reference (with `$user->address`), the reference checks the present data, and either returns the record directly (if the data is set), or fetches the record with the id.
+
+#### Import/Export definitions
 
 Daos support import/export definitions (so you can rename datasource attributes the way you like them in your php script), escape all values correctly, and check for the correct values when setting them.
 
@@ -88,6 +100,8 @@ Supported types are:
 - ENUM (You can specify the values allowed in an enum so php will check for it)
 - SEQUENCE (Only used for ID lists)
 
+
+#### Different implementations
 
 There are currently 4 Dao Implementations
 
@@ -105,7 +119,7 @@ This library is well tested.
 
 It contains over 50 test cases and over 300 tests.
 
-I'm using [snaptest](http://github.com/Jakobo/snaptest) for testing.
+I'm currently in between testing frameworks. I used [snaptest](http://github.com/Jakobo/snaptest), but I'm currently migrating to phpunit. So at this moment lots of old snaptest tests don't work right now.
 
 
 ## Includes

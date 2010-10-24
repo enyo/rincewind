@@ -15,10 +15,7 @@
  * The DaoToManyReference works exactly as the DaoReference, but works with
  * arrays that either contain ids, or data hashes.
  *
- * In a DaoToManyReference the localKey has to be of type Dao::SEQUENCE.
- *
- * The DaoToManyReference is setup in the Dao with the method addToManyReference(). The
- * method setupReferences() is used to contain those calls.
+ * In a DaoToManyReference the localKey, if specified, has to be of type Dao::SEQUENCE.
  *
  *
  * @author Matthias Loitsch <developer@ma.tthias.com>
@@ -26,8 +23,6 @@
  * @package Dao
  * @see DaoReference
  * @see DaoToOneReference
- * @see Dao::setupReferences()
- * @see Dao::addReference()
  */
 class DaoToManyReference extends DaoReference {
 

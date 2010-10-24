@@ -32,14 +32,29 @@ abstract class DataSource {
    *
    * @var bool
    */
-  protected $returnsIdOnInsert = true;
+  protected $returnsDataOnInsert = true;
   
   /**
    * @return bool
-   * @uses $returnsIdOnInsert
+   * @uses $returnsDataOnInsert
    */
-  public function returnsIdOnInsert() {
-    return $this->returnsIdOnInsert;
+  public function returnsDataOnInsert() {
+    return $this->returnsDataOnInsert;
+  }
+
+  /**
+   * Whether the datasource returns the data or nothing after an update.
+   *
+   * @var bool
+   */
+  protected $returnsDataOnUpdate = false;
+
+  /**
+   * @return bool
+   * @uses $returnsDataOnUpdate
+   */
+  public function returnsDataOnUpdate() {
+    return $this->returnsDataOnUpdate;
   }
 
   /**

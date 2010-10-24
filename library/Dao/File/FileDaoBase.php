@@ -217,11 +217,11 @@ abstract class FileDaoBase extends Dao {
 
     $result = $this->fileDataSource->insert($this->resourceName, $attributes);
 
-    if ($this->fileDataSource->returnsIdOnInsert()) {
-      $data = $this->getData(array('id' => $result));
+    if ($this->fileDataSource->returnsDataOnInsert()) {
+      $data = $this->interpretFileContent($result);
     }
     else {
-      $data = $this->interpretFileContent($result);
+      $data = $this->getData(array('id' => $result));
     }
 
     if ( ! $data || ! is_array($data)) throw new DaoException('The data returned from the datasource after insert was invalid (resource: ' . $this->getResourceName() . ').');
@@ -246,10 +246,20 @@ abstract class FileDaoBase extends Dao {
     $attributes = array();
 
     foreach ($this->attributes as $attributeName => $type) {
-      if ($attributeName != 'id' && $type != Dao::IGNORE) $attributes[$attributeName] = $this->exportValue($record->get($attributeName), $type, $this->notNull($attributeName));
+      if ($type === Dao::REFERENCE) {
+        $attributes[$attributeName] = $record->getDirectly($attributeName);
+      }
+      elseif ($attributeName != 'id' && $type != Dao::IGNORE) $attributes[$attributeName] = $this->exportValue($record->get($attributeName), $type, $this->notNull($attributeName));
     }
 
-    $this->fileDataSource->update($this->resourceName, $record->id, $attributes);
+    $result = $this->fileDataSource->update($this->resourceName, $record->id, $attributes);
+
+    if ($this->fileDataSource->returnsDataOnUpdate()) {
+      $data = $this->interpretFileContent($result);
+      if ( ! $data || ! is_array($data)) throw new DaoException('The data returned from the datasource after update was invalid (resource: ' . $this->getResourceName() . ').');
+      $this->updateRecordWithData($data, $record);
+    }
+
 
     $this->afterUpdate($record);
 

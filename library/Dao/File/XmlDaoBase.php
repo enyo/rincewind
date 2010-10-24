@@ -1,16 +1,16 @@
 <?php
 
 /**
- * This file contains the Json Dao definition.
+ * This file contains the Xml Dao definition.
  *
  * @author Matthias Loitsch <developer@ma.tthias.com>
  * @copyright Copyright (c) 2010, Matthias Loitsch
  * @package Dao
  */
 /**
- * Loading the FileDao
+ * Loading the FileDaoBase
  */
-include dirname(__FILE__) . '/FileDao.php';
+if ( ! class_exists('FileDaoBase', false)) include dirname(__FILE__) . '/FileDaoBase.php';
 
 /**
  * The Exception base class for XmlDaoException.
@@ -25,13 +25,13 @@ class XmlDaoException extends DaoException {
 }
 
 /**
- * The XmlDao implementation of a FileDao
+ * The XmlDaoBase implementation of a FileDaoBase
  *
  * @author Matthias Loitsch <developer@ma.tthias.com>
  * @copyright Copyright (c) 2010, Matthias Loitsch
  * @package Dao
  */
-class XmlDao extends FileDao {
+class XmlDaoBase extends FileDaoBase {
 
   /**
    * Intepretes the xml content, and returns it as array.

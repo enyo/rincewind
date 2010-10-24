@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file contains the FileDao definition.
+ * This file contains the FileDaoBase definition.
  *
  * @author Matthias Loitsch <developer@ma.tthias.com>
  * @copyright Copyright (c) 2010, Matthias Loitsch
@@ -11,21 +11,23 @@
  * Loading the abstract Dao Class
  * Checking for the class is actually faster then include_once
  */
-if ( ! class_exists('Dao', false)) include dirname(__FILE__) . '/Dao.php';
+if ( ! class_exists('Dao', false)) include dirname(__FILE__) . '/../Dao.php';
 
 /**
- * Loading the JsonResultIterator
+ * Loading the FileResultIterator
  */
 include dirname(__FILE__) . '/FileResultIterator.php';
 
 /**
- * The FileDao is used to get a file somewhere, interpret it and act as a normal datasource.
+ * The FileDaoBase is used to get a file somewhere, interpret it and act as a normal datasource.
+ *
+ * It's called FileDaoBase so you won't have any conflicts with a resource called 'files'.
  *
  * @author Matthias Loitsch <developer@ma.tthias.com>
  * @copyright Copyright (c) 2010, Matthias Loitsch
  * @package Dao
  */
-abstract class FileDao extends Dao {
+abstract class FileDaoBase extends Dao {
 
   /**
    * @var mixed

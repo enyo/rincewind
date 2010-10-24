@@ -201,7 +201,7 @@ class FileRetriever {
     }
     curl_setopt($curlHandle, CURLOPT_PORT, $port);
     curl_setopt($curlHandle, CURLOPT_TIMEOUT, $timeout);
-    curl_setopt($curlHandle, CURLOPT_FAILONERROR, true);
+    curl_setopt($curlHandle, CURLOPT_FAILONERROR, false);
     curl_setopt($curlHandle, CURLOPT_FOLLOWLOCATION, true);
     // return into a variable
     curl_setopt($curlHandle, CURLOPT_RETURNTRANSFER, true);
@@ -217,15 +217,15 @@ class FileRetriever {
 
     $result = curl_exec($curlHandle);
 
-    if ($result === false) $info = curl_getinfo($curlHandle);
+    $info = curl_getinfo($curlHandle);
 
     curl_close($curlHandle);
 
-    if ($result === false) {
+    if (!$info['http_code'] || $info['http_code'] >= 400) {
       $errorCode = $info['http_code'] ? $info['http_code'] : 400;
       $errorTypes = array(400 => 'Bad Request', 500 => 'Internal Server Error');
-      Log::warning('File could not be downloaded.', 'FileRetriever', array('url' => $realUrl, 'port' => $port, 'errorCode' => $errorCode, 'postParams' => $postParameters ? $postParameters : 'NONE'));
-      throw new FileRetrieverException('File could not be downloaded. ' . $errorCode . ' - ' . $errorTypes[floor($errorCode / 100) * 100] . '.', $errorCode);
+      Log::warning('File could not be downloaded.', 'FileRetriever', array('url' => $realUrl, 'port' => $port, 'errorCode' => $errorCode, 'postParams' => $postParameters ? $postParameters : 'NONE', 'response'=>$result));
+      throw new FileRetrieverException($errorCode . ' - ' . $errorTypes[floor($errorCode / 100) * 100] . ': ' . $result, $errorCode);
     }
 
     $file = $this->getFile($url);

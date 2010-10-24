@@ -8,9 +8,9 @@
  * @package Dao
  */
 /**
- * Loading the FileDao
+ * Loading the FileDaoBase
  */
-include dirname(__FILE__) . '/FileDao.php';
+if ( ! class_exists('FileDaoBase', false)) include dirname(__FILE__) . '/FileDaoBase.php';
 
 /**
  * The Exception base class for JsonDaoExceptions.
@@ -25,13 +25,13 @@ class JsonDaoException extends DaoException {
 }
 
 /**
- * The JsonDao implementation of a FileSourceDao
+ * The JsonDaoBase implementation of a FileDaoBase
  *
  * @author Matthias Loitsch <developer@ma.tthias.com>
  * @copyright Copyright (c) 2010, Matthias Loitsch
  * @package Dao
  */
-class JsonDao extends FileDao {
+class JsonDaoBase extends FileDaoBase {
 
   /**
    * Intepretes the json content, and returns it.

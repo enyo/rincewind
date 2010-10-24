@@ -19,13 +19,13 @@ if ( ! class_exists('Dao', false)) include dirname(__FILE__) . '/../Dao.php';
 include dirname(__FILE__) . '/SqlResultIterator.php';
 
 /**
- * The SqlDao has all the main functionality for SQL databases.
+ * The SqlDaoBase has all the main functionality for SQL databases.
  *
  * @author Matthias Loitsch <developer@ma.tthias.com>
  * @copyright Copyright (c) 2010, Matthias Loitsch
  * @package Dao
  * */
-class SqlDao extends Dao {
+class SqlDaoBase extends Dao {
 
   /**
    * @var Database

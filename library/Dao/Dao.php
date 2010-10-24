@@ -709,12 +709,12 @@ abstract class Dao implements DaoInterface {
       if (array_key_exists($attributeName, $this->attributes)) {
         unset($neededValues[$attributeName]);
         if ($this->attributes[$attributeName] !== Dao::IGNORE) {
-          $recordData[$attributeName] = $this->importValue($value, $this->attributes[$attributeName], $this->notNull($attributeName));
+          $recordData[$attributeName] = $this->importValue($attributeName, $value, $this->attributes[$attributeName], $this->notNull($attributeName));
         }
       }
       elseif (array_key_exists($attributeName, $this->additionalAttributes)) {
         if ($this->additionalAttributes[$attributeName] !== Dao::IGNORE) {
-          $recordData[$attributeName] = $this->importValue($value, $this->additionalAttributes[$attributeName], $this->notNull($attributeName));
+          $recordData[$attributeName] = $this->importValue($attributeName, $value, $this->additionalAttributes[$attributeName], $this->notNull($attributeName));
         }
       }
       else {
@@ -766,12 +766,13 @@ abstract class Dao implements DaoInterface {
    * Imports an external value (either from datasource, or xml, etc...) into an expected PHP variable.
    * If the attribute can be null, null will be returned.
    *
+   * @param string $attributeName
    * @param mixed $externalValue The value to be imported
    * @param int $type The type (selected from Dao)
    * @param bool $notNull Whether the value can be null or not
    * @return mixed
    */
-  public function importValue($externalValue, $type, $notNull = true) {
+  public function importValue($attributeName, $externalValue, $type, $notNull = true) {
     if ( ! $notNull && $externalValue === null) {
       return null;
     }
@@ -798,12 +799,12 @@ abstract class Dao implements DaoInterface {
           if ($externalValue === null && $notNull) throw new DaoException('Reference is marked as not null, but the value to import is null.');
           return $externalValue; // Leave it untouched. The reference will do the rest.
           break;
-        default: throw new DaoException('Unknown type when importing a value.');
+        default: throw new DaoException('Unknown type when importing the value.');
           break;
       }
     }
     catch (Exception $e) {
-      throw new Exception('There was an error processing the resource "' . $this->resourceName . '": ' . $e->getMessage());
+      throw new Exception('There was an error processing the attribute "' . $attributeName . '" in resource "' . $this->resourceName . '": ' . $e->getMessage());
     }
   }
 

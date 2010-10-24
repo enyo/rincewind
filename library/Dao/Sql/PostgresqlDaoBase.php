@@ -8,9 +8,9 @@
  * @package Dao
  */
 /**
- * Loading the SqlDao Class
+ * Loading the SqlDaoBase Class
  */
-if ( ! class_exists('SqlDao', false)) include dirname(__FILE__) . '/SqlDao.php';
+if ( ! class_exists('SqlDaoBase', false)) include dirname(__FILE__) . '/SqlDaoBase.php';
 
 /**
  * The PostgresqlDao has a few postgresql specific stuff, like automatically selecting the last insert id.
@@ -22,7 +22,7 @@ if ( ! class_exists('SqlDao', false)) include dirname(__FILE__) . '/SqlDao.php';
  * @copyright Copyright (c) 2010, Matthias Loitsch
  * @package Dao
  */
-class PostgresqlDao extends SqlDao {
+class PostgresqlDaoBase extends SqlDaoBase {
 
   /**
    * Generates the query for insertion, but adds the RETURNING clause, so the id

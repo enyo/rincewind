@@ -56,7 +56,7 @@ PATH_PHPDOC=/usr/bin/phpdoc
 #  *
 #  * @var               string PATH_DOCS
 #  */
-PATH_DOCS=$PWD/docs
+PATH_DOCS=$PWD/phpdoc
 
 #/**
 #  * what outputformat to use (html/pdf)

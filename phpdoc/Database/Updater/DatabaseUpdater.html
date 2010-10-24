@@ -1,0 +1,619 @@
+<html>
+<head>
+<title>Docs For Class DatabaseUpdater</title>
+<link rel="stylesheet" type="text/css" href="../../media/style.css">
+</head>
+<body>
+
+<table border="0" cellspacing="0" cellpadding="0" height="48" width="100%">
+  <tr>
+    <td class="header_top">Database</td>
+  </tr>
+  <tr><td class="header_line"><img src="../../media/empty.png" width="1" height="1" border="0" alt=""  /></td></tr>
+  <tr>
+    <td class="header_menu">
+        
+                                                                            
+                                                                                                                                                                          		  [ <a href="../../classtrees_Database.html" class="menu">class tree: Database</a> ]
+		  [ <a href="../../elementindex_Database.html" class="menu">index: Database</a> ]
+		  	    [ <a href="../../elementindex.html" class="menu">all elements</a> ]
+    </td>
+  </tr>
+  <tr><td class="header_line"><img src="../../media/empty.png" width="1" height="1" border="0" alt=""  /></td></tr>
+</table>
+
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="200" class="menu">
+	<div id="ric">
+					<p><a href="../../ric_README.html">README</a></p>
+			</div>
+      <b>Packages:</b><br />
+              <a href="../../li_Config.html">Config</a><br />
+              <a href="../../li_Dao.html">Dao</a><br />
+              <a href="../../li_Database.html">Database</a><br />
+              <a href="../../li_DataSource.html">DataSource</a><br />
+              <a href="../../li_Date.html">Date</a><br />
+              <a href="../../li_Factory.html">Factory</a><br />
+              <a href="../../li_File.html">File</a><br />
+              <a href="../../li_Logger.html">Logger</a><br />
+              <a href="../../li_Profiler.html">Profiler</a><br />
+              <a href="../../li_Storage.html">Storage</a><br />
+            <br /><br />
+                        <b>Files:</b><br />
+      	  <div class="package">
+			<a href="../../Database/_Database---Database.php.html">		Database.php
+		</a><br>
+			<a href="../../Database/_Database---DatabaseInterface.php.html">		DatabaseInterface.php
+		</a><br>
+			<a href="../../Database/_Database---Mysql.php.html">		Mysql.php
+		</a><br>
+			<a href="../../Database/_Database---Postgresql.php.html">		Postgresql.php
+		</a><br>
+	  </div><br />
+	subpackage <b>DatabaseResult</b><br>  <div class="package">
+			<a href="../../Database/DatabaseResult/_DatabaseResult---DatabaseResult.php.html">		DatabaseResult.php
+		</a><br>
+			<a href="../../Database/DatabaseResult/_DatabaseResult---DatabaseResultInterface.php.html">		DatabaseResultInterface.php
+		</a><br>
+			<a href="../../Database/DatabaseResult/_DatabaseResult---MysqlResult.php.html">		MysqlResult.php
+		</a><br>
+			<a href="../../Database/DatabaseResult/_DatabaseResult---PostgresqlResult.php.html">		PostgresqlResult.php
+		</a><br>
+	  </div><br />
+	subpackage <b>Exceptions</b><br>  <div class="package">
+			<a href="../../Database/Exceptions/_Database---DatabaseExceptions.php.html">		DatabaseExceptions.php
+		</a><br>
+	  </div><br />
+	subpackage <b>Updater</b><br>  <div class="package">
+			<a href="../../Database/Updater/_DatabaseUpdater---DatabaseUpdate.php.html">		DatabaseUpdate.php
+		</a><br>
+			<a href="../../Database/Updater/_DatabaseUpdater---DatabaseUpdater.php.html">		DatabaseUpdater.php
+		</a><br>
+	  </div><br />
+      
+            <b>Interfaces:</b><br />
+        <div class="package">
+		    		<a href="../../Database/DatabaseInterface.html">DatabaseInterface</a><br />
+	  </div>
+  <div class="package">
+	DatabaseResult<br />	    &nbsp;&nbsp;		<a href="../../Database/DatabaseResult/DatabaseResultInterface.html">DatabaseResultInterface</a><br />
+	  </div>
+      
+            <b>Classes:</b><br />
+        <div class="package">
+		    		<a href="../../Database/Database.html">Database</a><br />
+	    		<a href="../../Database/Mysql.html">Mysql</a><br />
+	    		<a href="../../Database/Postgresql.html">Postgresql</a><br />
+	  </div>
+  <div class="package">
+	Exceptions<br />	    &nbsp;&nbsp;		<a href="../../Database/Exceptions/SqlConnectionException.html">SqlConnectionException</a><br />
+	    &nbsp;&nbsp;		<a href="../../Database/Exceptions/SqlException.html">SqlException</a><br />
+	    &nbsp;&nbsp;		<a href="../../Database/Exceptions/SqlQueryException.html">SqlQueryException</a><br />
+	  </div>
+  <div class="package">
+	DatabaseResult<br />	    &nbsp;&nbsp;		<a href="../../Database/DatabaseResult/DatabaseResult.html">DatabaseResult</a><br />
+	    &nbsp;&nbsp;		<a href="../../Database/DatabaseResult/MysqlResult.html">MysqlResult</a><br />
+	    &nbsp;&nbsp;		<a href="../../Database/DatabaseResult/PostgresqlResult.html">PostgresqlResult</a><br />
+	  </div>
+  <div class="package">
+	Updater<br />	    &nbsp;&nbsp;		<a href="../../Database/Updater/DatabaseNotInitializedException.html">DatabaseNotInitializedException</a><br />
+	    &nbsp;&nbsp;		<a href="../../Database/Updater/DatabaseUpdate.html">DatabaseUpdate</a><br />
+	    &nbsp;&nbsp;		<a href="../../Database/Updater/DatabaseUpdater.html">DatabaseUpdater</a><br />
+	    &nbsp;&nbsp;		<a href="../../Database/Updater/DatabaseUpdaterException.html">DatabaseUpdaterException</a><br />
+	  </div>
+                </td>
+    <td>
+      <table cellpadding="10" cellspacing="0" width="100%" border="0"><tr><td valign="top">
+
+<h1>Class: DatabaseUpdater</h1>
+Source Location: /DatabaseUpdater/DatabaseUpdater.php<br /><br />
+
+
+<table width="100%" border="0">
+<tr><td valign="top">
+
+<h3><a href="#class_details">Class Overview</a></h3>
+<pre></pre><br />
+<div class="description"></div><br /><br />
+<h4>Author(s):</h4>
+<ul>
+          <li>Matthias Loitsch &lt;<a href="mailto:developer@ma.tthias.com">developer@ma.tthias.com</a>&gt;</li>
+            </ul>
+
+
+
+
+          
+  
+
+<h4>Copyright:</h4>
+<ul>
+  <li>Copyright (c) 2010, Matthias Loitsch</li>
+</ul>
+        
+</td>
+
+<td valign="top">
+<h3><a href="#class_vars">Variables</a></h3>
+<ul>
+    <li><a href="../../Database/Updater/DatabaseUpdater.html#var$db">$db</a></li>
+    <li><a href="../../Database/Updater/DatabaseUpdater.html#var$executedUpdates">$executedUpdates</a></li>
+    <li><a href="../../Database/Updater/DatabaseUpdater.html#var$updatesPath">$updatesPath</a></li>
+    <li><a href="../../Database/Updater/DatabaseUpdater.html#var$versionDao">$versionDao</a></li>
+    <li><a href="../../Database/Updater/DatabaseUpdater.html#var$versionNumberDigits">$versionNumberDigits</a></li>
+  </ul>
+</td>
+
+
+<td valign="top">
+<h3><a href="#class_methods">Methods</a></h3>
+<ul>
+    <li><a href="../../Database/Updater/DatabaseUpdater.html#method__construct">__construct</a></li>
+    <li><a href="../../Database/Updater/DatabaseUpdater.html#methodexecuteUpdate">executeUpdate</a></li>
+    <li><a href="../../Database/Updater/DatabaseUpdater.html#methodgetAllUpdateFilenames">getAllUpdateFilenames</a></li>
+    <li><a href="../../Database/Updater/DatabaseUpdater.html#methodgetAllUpdates">getAllUpdates</a></li>
+    <li><a href="../../Database/Updater/DatabaseUpdater.html#methodgetExecutedUpdates">getExecutedUpdates</a></li>
+    <li><a href="../../Database/Updater/DatabaseUpdater.html#methodinterpretUpdateFilename">interpretUpdateFilename</a></li>
+    <li><a href="../../Database/Updater/DatabaseUpdater.html#methodupdate">update</a></li>
+    <li><a href="../../Database/Updater/DatabaseUpdater.html#methodupdateIsDeprecated">updateIsDeprecated</a></li>
+  </ul>
+</td>
+
+</tr></table>
+<hr />
+
+<table width="100%" border="0"><tr>
+
+
+
+
+
+
+</tr></table>
+<hr />
+
+<a name="class_details"></a>
+<h3>Class Details</h3>
+<div class="tags">
+[line 47]<br />
+<br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>author:</b>&nbsp;&nbsp;</td><td>Matthias Loitsch &lt;<a href="mailto:developer@ma.tthias.com">developer@ma.tthias.com</a>&gt;</td>
+  </tr>
+  <tr>
+    <td><b>copyright:</b>&nbsp;&nbsp;</td><td>Copyright (c) 2010, Matthias Loitsch</td>
+  </tr>
+</table>
+</div>
+</div><br /><br />
+<div class="top">[ <a href="#top">Top</a> ]</div><br />
+
+<hr />
+<a name="class_vars"></a>
+<h3>Class Variables</h3>
+<div class="tags">
+	<a name="var$db"></a>
+	<p></p>
+	<h4>$db = <span class="value"></span></h4>
+	<p>[line 52]</p>
+  <br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
+  </tr>
+</table>
+</div>
+
+  <br />
+	<div class="tags">
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td><b>Type:</b>&nbsp;&nbsp;</td>
+      <td><a href="../../Database/Database.html">Database</a></td>
+    </tr>
+      </table>
+	</div><br /><br />
+	<div class="top">[ <a href="#top">Top</a> ]</div><br />
+	<a name="var$executedUpdates"></a>
+	<p></p>
+	<h4>$executedUpdates = <span class="value">array()</span></h4>
+	<p>[line 74]</p>
+  Holds the list of that have been executed, or could be executed.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
+  </tr>
+  <tr>
+    <td><b>usedby:</b>&nbsp;&nbsp;</td><td><a href="../../Database/Updater/DatabaseUpdater.html#methodgetExecutedUpdates">DatabaseUpdater::getExecutedUpdates()</a></td>
+  </tr>
+</table>
+</div>
+
+  <br />
+	<div class="tags">
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td><b>Type:</b>&nbsp;&nbsp;</td>
+      <td>array</td>
+    </tr>
+      </table>
+	</div><br /><br />
+	<div class="top">[ <a href="#top">Top</a> ]</div><br />
+	<a name="var$updatesPath"></a>
+	<p></p>
+	<h4>$updatesPath = <span class="value"></span></h4>
+	<p>[line 58]</p>
+  The location of the update files.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
+  </tr>
+</table>
+</div>
+
+  <br />
+	<div class="tags">
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td><b>Type:</b>&nbsp;&nbsp;</td>
+      <td>string</td>
+    </tr>
+      </table>
+	</div><br /><br />
+	<div class="top">[ <a href="#top">Top</a> ]</div><br />
+	<a name="var$versionDao"></a>
+	<p></p>
+	<h4>$versionDao = <span class="value"></span></h4>
+	<p>[line 62]</p>
+  <br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
+  </tr>
+</table>
+</div>
+
+  <br />
+	<div class="tags">
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td><b>Type:</b>&nbsp;&nbsp;</td>
+      <td><a href="../../Dao/Dao.html">Dao</a></td>
+    </tr>
+      </table>
+	</div><br /><br />
+	<div class="top">[ <a href="#top">Top</a> ]</div><br />
+	<a name="var$versionNumberDigits"></a>
+	<p></p>
+	<h4>$versionNumberDigits = <span class="value">&nbsp;4</span></h4>
+	<p>[line 68]</p>
+  The number of digits a version number has (0004.sql)<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
+  </tr>
+</table>
+</div>
+
+  <br />
+	<div class="tags">
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td><b>Type:</b>&nbsp;&nbsp;</td>
+      <td>int</td>
+    </tr>
+      </table>
+	</div><br /><br />
+	<div class="top">[ <a href="#top">Top</a> ]</div><br />
+</div><br />
+
+<hr />
+<a name="class_methods"></a>
+<h3>Class Methods</h3>
+<div class="tags">
+
+  <hr />
+	<a name="method__construct"></a>
+	<h3>constructor __construct <span class="smalllinenumber">[line 103]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>DatabaseUpdater __construct(
+<a href="../../Database/Database.html">Database</a>
+$db, <a href="../../Dao/Dao.html">Dao</a>
+$versionDao, string
+$updatesPath, [bool
+$initializeIfNecessary = false], [bool
+$simulate = true])</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		<br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type"><a href="../../Database/Database.html">Database</a>&nbsp;&nbsp;</td>
+        <td><b>$db</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+          <tr>
+        <td class="type"><a href="../../Dao/Dao.html">Dao</a>&nbsp;&nbsp;</td>
+        <td><b>$versionDao</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+          <tr>
+        <td class="type">string&nbsp;&nbsp;</td>
+        <td><b>$updatesPath</b>&nbsp;&nbsp;</td>
+        <td>The location of the updates</td>
+      </tr>
+          <tr>
+        <td class="type">bool&nbsp;&nbsp;</td>
+        <td><b>$initializeIfNecessary</b>&nbsp;&nbsp;</td>
+        <td>If the database is not initialized yet, if this is true, the 0000.sql file is used.</td>
+      </tr>
+          <tr>
+        <td class="type">bool&nbsp;&nbsp;</td>
+        <td><b>$simulate</b>&nbsp;&nbsp;</td>
+        <td>Doesn't execute the sql files if true</td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodexecuteUpdate"></a>
+	<h3>method executeUpdate <span class="smalllinenumber">[line 200]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void executeUpdate(
+<a href="../../Database/Updater/DatabaseUpdate.html">DatabaseUpdate</a>
+$update)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Executes an update.<br /><br /><p>This function also checks if the update hasn't already been inserted in the database.</p><p>Checks if it's sql or php. If it's PHP the file only gets included.</p><p>If $this-&gt;simulate == true, this function does nothing.</p><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type"><a href="../../Database/Updater/DatabaseUpdate.html">DatabaseUpdate</a>&nbsp;&nbsp;</td>
+        <td><b>$update</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodgetAllUpdateFilenames"></a>
+	<h3>method getAllUpdateFilenames <span class="smalllinenumber">[line 173]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>array getAllUpdateFilenames(
+)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Returns all update files (except for 0000.sql), sorted by their names, as array.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodgetAllUpdates"></a>
+	<h3>method getAllUpdates <span class="smalllinenumber">[line 150]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>array getAllUpdates(
+)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Returns all updates, sorted by their update filename, as array.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodgetExecutedUpdates"></a>
+	<h3>method getExecutedUpdates <span class="smalllinenumber">[line 240]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>array getExecutedUpdates(
+)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		<br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+  <tr>
+    <td><b>uses:</b>&nbsp;&nbsp;</td><td><a href="../../Database/Updater/DatabaseUpdater.html#var$executedUpdates">DatabaseUpdater::$executedUpdates</a></td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodinterpretUpdateFilename"></a>
+	<h3>method interpretUpdateFilename <span class="smalllinenumber">[line 163]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>array interpretUpdateFilename(
+string
+$filename)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Turns<br /><br /><p>0002.enyo.rewrite-of-stuff.sql  into    array('number'=&gt;2, 'username'=&gt;'enyo', 'branch'=&gt;'rewrite-of-stuff', 'type'=&gt;'sql')</p><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>return:</b>&nbsp;&nbsp;</td><td>containing the different parts of the update.</td>
+  </tr>
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">string&nbsp;&nbsp;</td>
+        <td><b>$filename</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodupdate"></a>
+	<h3>method update <span class="smalllinenumber">[line 114]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void update(
+)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Goes through the update files, and updates them.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodupdateIsDeprecated"></a>
+	<h3>method updateIsDeprecated <span class="smalllinenumber">[line 232]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>bool updateIsDeprecated(
+<a href="../../Database/Updater/DatabaseUpdate.html">DatabaseUpdate</a>
+$update)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Checks if an update hasn't already been inserted in the database.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>return:</b>&nbsp;&nbsp;</td><td>true if the update has already been executed.</td>
+  </tr>
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type"><a href="../../Database/Updater/DatabaseUpdate.html">DatabaseUpdate</a>&nbsp;&nbsp;</td>
+        <td><b>$update</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+</div><br />
+
+
+        <div class="credit">
+		    <hr />
+		    Documentation generated by <a href="http://www.phpdoc.org">phpDocumentor 1.4.3</a>
+	      </div>
+      </td></tr></table>
+    </td>
+  </tr>
+</table>
+
+</body>
+</html>

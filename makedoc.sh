@@ -27,14 +27,14 @@
 #  * 
 #  * @var               string TITLE
 #  */
-TITLE="PHP Library"
+TITLE="Rincewind"
 
 #/** 
 #  * name to use for the default package. If not specified, uses 'default'
 #  *
 #  * @var               string PACKAGES
 #  */
-PACKAGES="php-library"
+PACKAGES="rincewind"
 
 #/** 
 #  * name of a directory(s) to parse directory1,directory2

@@ -14,7 +14,7 @@
     <td class="header_menu">
         
                                                         
-                                                                                                                                                                          		  [ <a href="../classtrees_Dao.html" class="menu">class tree: Dao</a> ]
+                                                                                                                                                                                              		  [ <a href="../classtrees_Dao.html" class="menu">class tree: Dao</a> ]
 		  [ <a href="../elementindex_Dao.html" class="menu">index: Dao</a> ]
 		  	    [ <a href="../elementindex.html" class="menu">all elements</a> ]
     </td>
@@ -34,6 +34,7 @@
               <a href="../li_Database.html">Database</a><br />
               <a href="../li_DataSource.html">DataSource</a><br />
               <a href="../li_Date.html">Date</a><br />
+              <a href="../li_Factory.html">Factory</a><br />
               <a href="../li_File.html">File</a><br />
               <a href="../li_Logger.html">Logger</a><br />
               <a href="../li_Profiler.html">Profiler</a><br />
@@ -59,41 +60,29 @@
 		</a><br>
 			<a href="../Dao/_Dao---DaoToOneReference.php.html">		DaoToOneReference.php
 		</a><br>
-			<a href="../Dao/_Dao---FileSourceDao.php.html">		FileSourceDao.php
+			<a href="../Dao/_Dao---File---FileDao.php.html">		FileDao.php
 		</a><br>
-			<a href="../Dao/_Dao---FileSourceResultIterator.php.html">		FileSourceResultIterator.php
+			<a href="../Dao/_Dao---File---FileResultIterator.php.html">		FileResultIterator.php
 		</a><br>
-			<a href="../Dao/_Dao---Json---JsonDao.php.html">		JsonDao.php
+			<a href="../Dao/_Dao---File---JsonDao.php.html">		JsonDao.php
 		</a><br>
-			<a href="../Dao/_Dao---Json---JsonResultIterator.php.html">		JsonResultIterator.php
+			<a href="../Dao/_Dao---Sql---PostgresqlDao.php.html">		PostgresqlDao.php
 		</a><br>
-			<a href="../Dao/_Dao---Mysql---MysqlDao.php.html">		MysqlDao.php
+			<a href="../Dao/_Dao---Sql---SqlDao.php.html">		SqlDao.php
 		</a><br>
-			<a href="../Dao/_Dao---Mysql---MysqlResultIterator.php.html">		MysqlResultIterator.php
-		</a><br>
-			<a href="../Dao/_Dao---Mysql---MysqlUserDao.php.html">		MysqlUserDao.php
-		</a><br>
-			<a href="../Dao/_Dao---Postgresql---PostgresqlDao.php.html">		PostgresqlDao.php
-		</a><br>
-			<a href="../Dao/_Dao---Postgresql---PostgresqlResultIterator.php.html">		PostgresqlResultIterator.php
-		</a><br>
-			<a href="../Dao/_Dao---Postgresql---PostgresqlUserDao.php.html">		PostgresqlUserDao.php
-		</a><br>
-			<a href="../Dao/_Dao---SqlDao.php.html">		SqlDao.php
-		</a><br>
-			<a href="../Dao/_Dao---SqlResultIterator.php.html">		SqlResultIterator.php
+			<a href="../Dao/_Dao---Sql---SqlResultIterator.php.html">		SqlResultIterator.php
 		</a><br>
 			<a href="../Dao/_Dao---UserDaoInterface.php.html">		UserDaoInterface.php
 		</a><br>
-			<a href="../Dao/_Dao---Xml---XmlDao.php.html">		XmlDao.php
+			<a href="../Dao/_Dao---File---XmlDao.php.html">		XmlDao.php
 		</a><br>
-			<a href="../Dao/_Dao---Xml---XmlResultIterator.php.html">		XmlResultIterator.php
+	  </div><br />
+	subpackage <b>DaoFactory</b><br>  <div class="package">
+			<a href="../Dao/DaoFactory/_Factory---DaoFactory.php.html">		DaoFactory.php
 		</a><br>
 	  </div><br />
 	subpackage <b>Exceptions</b><br>  <div class="package">
 			<a href="../Dao/Exceptions/_Dao---DaoExceptions.php.html">		DaoExceptions.php
-		</a><br>
-			<a href="../Dao/Exceptions/_Dao---Json---JsonDaoExceptions.php.html">		JsonDaoExceptions.php
 		</a><br>
 	  </div><br />
 	subpackage <b>Record</b><br>  <div class="package">
@@ -126,20 +115,13 @@
 	    		<a href="../Dao/DaoResultIterator.html">DaoResultIterator</a><br />
 	    		<a href="../Dao/DaoToManyReference.html">DaoToManyReference</a><br />
 	    		<a href="../Dao/DaoToOneReference.html">DaoToOneReference</a><br />
-	    		<a href="../Dao/FileSourceDao.html">FileSourceDao</a><br />
-	    		<a href="../Dao/FileSourceResultIterator.html">FileSourceResultIterator</a><br />
+	    		<a href="../Dao/FileDao.html">FileDao</a><br />
+	    		<a href="../Dao/FileResultIterator.html">FileResultIterator</a><br />
 	    		<a href="../Dao/JsonDao.html">JsonDao</a><br />
-	    		<a href="../Dao/JsonResultIterator.html">JsonResultIterator</a><br />
-	    		<a href="../Dao/MysqlDao.html">MysqlDao</a><br />
-	    		<a href="../Dao/MysqlResultIterator.html">MysqlResultIterator</a><br />
-	    		<a href="../Dao/MysqlUserDao.html">MysqlUserDao</a><br />
 	    		<a href="../Dao/PostgresqlDao.html">PostgresqlDao</a><br />
-	    		<a href="../Dao/PostgresqlResultIterator.html">PostgresqlResultIterator</a><br />
-	    		<a href="../Dao/PostgresqlUserDao.html">PostgresqlUserDao</a><br />
 	    		<a href="../Dao/SqlDao.html">SqlDao</a><br />
 	    		<a href="../Dao/SqlResultIterator.html">SqlResultIterator</a><br />
 	    		<a href="../Dao/XmlDao.html">XmlDao</a><br />
-	    		<a href="../Dao/XmlResultIterator.html">XmlResultIterator</a><br />
 	  </div>
   <div class="package">
 	Exceptions<br />	    &nbsp;&nbsp;		<a href="../Dao/Exceptions/DaoException.html">DaoException</a><br />
@@ -151,6 +133,9 @@
 	    &nbsp;&nbsp;		<a href="../Dao/Exceptions/XmlDaoException.html">XmlDaoException</a><br />
 	  </div>
   <div class="package">
+	DaoFactory<br />	    &nbsp;&nbsp;		<a href="../Dao/DaoFactory/DaoFactory.html">DaoFactory</a><br />
+	  </div>
+  <div class="package">
 	Record<br />	    &nbsp;&nbsp;		<a href="../Dao/Record/Record.html">Record</a><br />
 	    &nbsp;&nbsp;		<a href="../Dao/Record/UserRecord.html">UserRecord</a><br />
 	  </div>
@@ -159,7 +144,7 @@
       <table cellpadding="10" cellspacing="0" width="100%" border="0"><tr><td valign="top">
 
 <h1>Class: SqlDao</h1>
-Source Location: /Dao/SqlDao.php<br /><br />
+Source Location: /Dao/Sql/SqlDao.php<br /><br />
 
 
 <table width="100%" border="0">
@@ -173,13 +158,13 @@ Source Location: /Dao/SqlDao.php<br /><br />
 <h4>Author(s):</h4>
 <ul>
           <li>Matthias Loitsch &lt;<a href="mailto:developer@ma.tthias.com">developer@ma.tthias.com</a>&gt;</li>
-                  </ul>
+            </ul>
 
 
 
 
           
-      
+  
 
 <h4>Copyright:</h4>
 <ul>
@@ -200,7 +185,6 @@ Source Location: /Dao/SqlDao.php<br /><br />
 <h3><a href="#class_methods">Methods</a></h3>
 <ul>
     <li><a href="../Dao/SqlDao.html#method__construct">__construct</a></li>
-    <li><a href="../Dao/SqlDao.html#methodbeginTransaction">beginTransaction</a></li>
     <li><a href="../Dao/SqlDao.html#methodcommit">commit</a></li>
     <li><a href="../Dao/SqlDao.html#methodconvertRemoteValueToTimestamp">convertRemoteValueToTimestamp</a></li>
     <li><a href="../Dao/SqlDao.html#methodcreateDao">createDao</a></li>
@@ -209,8 +193,12 @@ Source Location: /Dao/SqlDao.php<br /><br />
     <li><a href="../Dao/SqlDao.html#methodescapeAttributeName">escapeAttributeName</a></li>
     <li><a href="../Dao/SqlDao.html#methodescapeResourceName">escapeResourceName</a></li>
     <li><a href="../Dao/SqlDao.html#methodescapeString">escapeString</a></li>
+    <li><a href="../Dao/SqlDao.html#methodexportAttributeName">exportAttributeName</a></li>
     <li><a href="../Dao/SqlDao.html#methodexportDate">exportDate</a></li>
+    <li><a href="../Dao/SqlDao.html#methodexportResourceName">exportResourceName</a></li>
+    <li><a href="../Dao/SqlDao.html#methodexportString">exportString</a></li>
     <li><a href="../Dao/SqlDao.html#methodfind">find</a></li>
+    <li><a href="../Dao/SqlDao.html#methodgenerateInsertQuery">generateInsertQuery</a></li>
     <li><a href="../Dao/SqlDao.html#methodgenerateQuery">generateQuery</a></li>
     <li><a href="../Dao/SqlDao.html#methodgenerateSortString">generateSortString</a></li>
     <li><a href="../Dao/SqlDao.html#methodgetData">getData</a></li>
@@ -223,6 +211,7 @@ Source Location: /Dao/SqlDao.php<br /><br />
     <li><a href="../Dao/SqlDao.html#methodinsert">insert</a></li>
     <li><a href="../Dao/SqlDao.html#methodinsertByQuery">insertByQuery</a></li>
     <li><a href="../Dao/SqlDao.html#methodrollback">rollback</a></li>
+    <li><a href="../Dao/SqlDao.html#methodstartTransaction">startTransaction</a></li>
     <li><a href="../Dao/SqlDao.html#methodupdate">update</a></li>
   </ul>
 </td>
@@ -237,12 +226,8 @@ Source Location: /Dao/SqlDao.php<br /><br />
 <h3>Child classes:</h3>
 <div class="tags">
 <dl>
-<dt><a href="../Dao/MysqlDao.html">MysqlDao</a></dt>
-	<dd>The MySqlDao implementation of a SqlDao</dd>
-</dl>
-<dl>
 <dt><a href="../Dao/PostgresqlDao.html">PostgresqlDao</a></dt>
-	<dd>The PostgresqlDao implementation of a SqlDao</dd>
+	<dd>The PostgresqlDao has a few postgresql specific stuff, like automatically selecting the last insert id.</dd>
 </dl>
 </div>
 </td>
@@ -314,6 +299,18 @@ Source Location: /Dao/SqlDao.php<br /><br />
 </dd>
 <dt>
   <a href="../Dao/Dao.html#constINTEGER">Dao::INTEGER</a>
+</dt>
+<dd>
+   
+</dd>
+<dt>
+  <a href="../Dao/Dao.html#constREF">Dao::REF</a>
+</dt>
+<dd>
+   
+</dd>
+<dt>
+  <a href="../Dao/Dao.html#constREFERENCE">Dao::REFERENCE</a>
 </dt>
 <dd>
    
@@ -400,12 +397,6 @@ Source Location: /Dao/SqlDao.php<br /><br />
    
 </dd>
 <dt>
-  <a href="../Dao/Dao.html#var$logger">Dao::$logger</a>
-  </dt>
-<dd>
-   
-</dd>
-<dt>
   <a href="../Dao/Dao.html#var$nullAttributes">Dao::$nullAttributes</a>
   </dt>
 <dd>
@@ -449,12 +440,6 @@ Source Location: /Dao/SqlDao.php<br /><br />
   </dt>
   <dd>
     Has to be called from any extended Dao to make sure everything gets setup properly
-  </dd>
-    <dt>
-    <a href="../Dao/Dao.html#methodaddReference">Dao::addReference()</a>
-  </dt>
-  <dd>
-    Adds a reference definition. This method should be called inside setupReferences().
   </dd>
     <dt>
     <a href="../Dao/Dao.html#methodafterDelete">Dao::afterDelete()</a>
@@ -517,12 +502,6 @@ Source Location: /Dao/SqlDao.php<br /><br />
     Creates a Dao.
   </dd>
     <dt>
-    <a href="../Dao/Dao.html#methoddebug">Dao::debug()</a>
-  </dt>
-  <dd>
-    
-  </dd>
-    <dt>
     <a href="../Dao/Dao.html#methoddeleteById">Dao::deleteById()</a>
   </dt>
   <dd>
@@ -575,6 +554,12 @@ Source Location: /Dao/SqlDao.php<br /><br />
   </dt>
   <dd>
     Escapes a resource name.
+  </dd>
+    <dt>
+    <a href="../Dao/Dao.html#methodexportSequence">Dao::exportSequence()</a>
+  </dt>
+  <dd>
+    Exports a sequence. The generic Dao really can't handle this.
   </dd>
     <dt>
     <a href="../Dao/Dao.html#methodexportString">Dao::exportString()</a>
@@ -637,6 +622,12 @@ Source Location: /Dao/SqlDao.php<br /><br />
     Returns the attributes array
   </dd>
     <dt>
+    <a href="../Dao/Dao.html#methodgetAttributeType">Dao::getAttributeType()</a>
+  </dt>
+  <dd>
+    Returns the type of an attribute (eg.: Dao::INT, etc..)
+  </dd>
+    <dt>
     <a href="../Dao/Dao.html#methodgetById">Dao::getById()</a>
   </dt>
   <dd>
@@ -676,13 +667,13 @@ Source Location: /Dao/SqlDao.php<br /><br />
     <a href="../Dao/Dao.html#methodgetReference">Dao::getReference()</a>
   </dt>
   <dd>
-    Returns the reference for an attribute
+    Returns the reference for an attribute.
   </dd>
     <dt>
-    <a href="../Dao/Dao.html#methodgetReferences">Dao::getReferences()</a>
+    <a href="../Dao/Dao.html#methodgetResourceName">Dao::getResourceName()</a>
   </dt>
   <dd>
-    
+    Returns the resource name
   </dd>
     <dt>
     <a href="../Dao/Dao.html#methodimportAttributeName">Dao::importAttributeName()</a>
@@ -757,12 +748,6 @@ Source Location: /Dao/SqlDao.php<br /><br />
     This is a helper class that defines if an array is a &quot;vector&quot; (has only integer indices starting from 0) or an associative array.
   </dd>
     <dt>
-    <a href="../Dao/Dao.html#methodlog">Dao::log()</a>
-  </dt>
-  <dd>
-    
-  </dd>
-    <dt>
     <a href="../Dao/Dao.html#methodnotNull">Dao::notNull()</a>
   </dt>
   <dd>
@@ -773,18 +758,6 @@ Source Location: /Dao/SqlDao.php<br /><br />
   </dt>
   <dd>
     Goes through the data array returned from the datasource, and converts the values that are necessary.
-  </dd>
-    <dt>
-    <a href="../Dao/Dao.html#methodsetLogger">Dao::setLogger()</a>
-  </dt>
-  <dd>
-    
-  </dd>
-    <dt>
-    <a href="../Dao/Dao.html#methodsetLoggerFactory">Dao::setLoggerFactory()</a>
-  </dt>
-  <dd>
-    
   </dd>
     <dt>
     <a href="../Dao/Dao.html#methodsetupReferences">Dao::setupReferences()</a>
@@ -814,7 +787,7 @@ Source Location: /Dao/SqlDao.php<br /><br />
 <a name="class_details"></a>
 <h3>Class Details</h3>
 <div class="tags">
-[line 24]<br />
+[line 28]<br />
 The SqlDao has all the main functionality for SQL databases.<br /><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
@@ -824,9 +797,6 @@ The SqlDao has all the main functionality for SQL databases.<br /><br /><br /><b
   </tr>
   <tr>
     <td><b>copyright:</b>&nbsp;&nbsp;</td><td>Copyright (c) 2010, Matthias Loitsch</td>
-  </tr>
-  <tr>
-    <td><b>abstract:</b>&nbsp;&nbsp;</td><td></td>
   </tr>
 </table>
 </div>
@@ -840,7 +810,7 @@ The SqlDao has all the main functionality for SQL databases.<br /><br /><br /><b
 	<a name="var$db"></a>
 	<p></p>
 	<h4>$db = <span class="value"></span></h4>
-	<p>[line 29]</p>
+	<p>[line 33]</p>
   <br /><br />
 <h4>Tags:</h4>
 <div class="tags">
@@ -870,7 +840,7 @@ The SqlDao has all the main functionality for SQL databases.<br /><br /><br /><b
 
   <hr />
 	<a name="method__construct"></a>
-	<h3>constructor __construct <span class="smalllinenumber">[line 39]</span></h3>
+	<h3>constructor __construct <span class="smalllinenumber">[line 42]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -929,33 +899,8 @@ $defaultValueAttributes = null])</code>
         <div class="top">[ <a href="#top">Top</a> ]</div>
   </div>
   <hr />
-	<a name="methodbeginTransaction"></a>
-	<h3>method beginTransaction <span class="smalllinenumber">[line 122]</span></h3>
-	<div class="function">
-    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
-    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
-		<code>void beginTransaction(
-)</code>
-    </td></tr></table>
-    </td></tr></table><br />
-	
-		Shorthand for: Dao.getDb()-&gt;beginTransaction()<br /><br /><p>Be careful: this starts a transaction on the database! So all Daos using the same database will be in the same transaction</p><br /><br /><br />
-<h4>Tags:</h4>
-<div class="tags">
-<table border="0" cellspacing="0" cellpadding="0">
-  <tr>
-    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
-  </tr>
-</table>
-</div>
-<br /><br />
-
-	
-        <div class="top">[ <a href="#top">Top</a> ]</div>
-  </div>
-  <hr />
 	<a name="methodcommit"></a>
-	<h3>method commit <span class="smalllinenumber">[line 128]</span></h3>
+	<h3>method commit <span class="smalllinenumber">[line 108]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -980,7 +925,7 @@ $defaultValueAttributes = null])</code>
   </div>
   <hr />
 	<a name="methodconvertRemoteValueToTimestamp"></a>
-	<h3>method convertRemoteValueToTimestamp <span class="smalllinenumber">[line 83]</span></h3>
+	<h3>method convertRemoteValueToTimestamp <span class="smalllinenumber">[line 92]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1022,13 +967,13 @@ $withTime)</code>
   </div>
   <hr />
 	<a name="methodcreateDao"></a>
-	<h3>method createDao <span class="smalllinenumber">[line 60]</span></h3>
+	<h3>method createDao <span class="smalllinenumber">[line 64]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
 		<code><a href="../Dao/SqlDao.html">SqlDao</a> createDao(
 string
-$daoClassName)</code>
+$daoName)</code>
     </td></tr></table>
     </td></tr></table><br />
 	
@@ -1049,7 +994,7 @@ $daoClassName)</code>
     <table border="0" cellspacing="0" cellpadding="0">
           <tr>
         <td class="type">string&nbsp;&nbsp;</td>
-        <td><b>$daoClassName</b>&nbsp;&nbsp;</td>
+        <td><b>$daoName</b>&nbsp;&nbsp;</td>
         <td></td>
       </tr>
         </table>
@@ -1058,36 +1003,27 @@ $daoClassName)</code>
   </div>
   <hr />
 	<a name="methodcreateIterator"></a>
-	<h3>method createIterator <span class="smalllinenumber">[line 75]</span></h3>
+	<h3>method createIterator <span class="smalllinenumber">[line 82]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
-		<code><a href="../Dao/DaoResultIterator.html">DaoResultIterator</a> createIterator(
+		<code><a href="../Dao/SqlResultIterator.html">SqlResultIterator</a> createIterator(
 result
 $result)</code>
     </td></tr></table>
     </td></tr></table><br />
 	
-		Creates an iterator from a php result.<br /><br /><br /><br />
+		Creates an iterator for a sql result.<br /><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
   <tr>
-    <td><b>abstract:</b>&nbsp;&nbsp;</td><td></td>
-  </tr>
-  <tr>
-    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
   </tr>
 </table>
 </div>
 <br /><br />
 
-	<p>Overridden in child classes as:<br />
-		<dl>
-	<dt><a href="../Dao/MysqlDao.html#methodcreateIterator">MysqlDao::createIterator()</a></dt>
-		<dd>Creates an iterator for a mysql result.</dd>
-	</dl>
-	</p>
 	
         <h4>Parameters:</h4>
     <div class="tags">
@@ -1103,7 +1039,7 @@ $result)</code>
   </div>
   <hr />
 	<a name="methoddelete"></a>
-	<h3>method delete <span class="smalllinenumber">[line 248]</span></h3>
+	<h3>method delete <span class="smalllinenumber">[line 236]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1139,7 +1075,7 @@ $record)</code>
   </div>
   <hr />
 	<a name="methodescapeAttributeName"></a>
-	<h3>method escapeAttributeName <span class="smalllinenumber">[line 102]</span></h3>
+	<h3>method escapeAttributeName <span class="smalllinenumber">[line 414]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1149,12 +1085,12 @@ $attributeName)</code>
     </td></tr></table>
     </td></tr></table><br />
 	
-		Calls the internal db-&gt;escapeColumn function<br /><br /><br /><br />
+		Wrapper for the db.<br /><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
   <tr>
-    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
   </tr>
 </table>
 </div>
@@ -1175,7 +1111,7 @@ $attributeName)</code>
   </div>
   <hr />
 	<a name="methodescapeResourceName"></a>
-	<h3>method escapeResourceName <span class="smalllinenumber">[line 112]</span></h3>
+	<h3>method escapeResourceName <span class="smalllinenumber">[line 434]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1185,12 +1121,12 @@ $resourceName = null])</code>
     </td></tr></table>
     </td></tr></table><br />
 	
-		Calls the internal db-&gt;escapeResourceName function<br /><br /><br /><br />
+		Wrapper for the db.<br /><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
   <tr>
-    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
   </tr>
 </table>
 </div>
@@ -1211,7 +1147,7 @@ $resourceName = null])</code>
   </div>
   <hr />
 	<a name="methodescapeString"></a>
-	<h3>method escapeString <span class="smalllinenumber">[line 92]</span></h3>
+	<h3>method escapeString <span class="smalllinenumber">[line 394]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1221,12 +1157,12 @@ $string)</code>
     </td></tr></table>
     </td></tr></table><br />
 	
-		Calls the internal db-&gt;escapeString function<br /><br /><br /><br />
+		Wrapper for the db.<br /><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
   <tr>
-    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
   </tr>
 </table>
 </div>
@@ -1246,8 +1182,50 @@ $string)</code>
         <div class="top">[ <a href="#top">Top</a> ]</div>
   </div>
   <hr />
+	<a name="methodexportAttributeName"></a>
+	<h3>method exportAttributeName <span class="smalllinenumber">[line 424]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>string exportAttributeName(
+
+$attributeName, string
+$string)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Wrapper for the db.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	Overrides <a href="../Dao/Dao.html#methodexportAttributeName">Dao::exportAttributeName()</a> (Takes a php attribute name, converts it via import/export attribute mapping, converts it to the datasource name  and calls escapeAttributeName.)<br /><br />
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">string&nbsp;&nbsp;</td>
+        <td><b>$string</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>$attributeName</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
 	<a name="methodexportDate"></a>
-	<h3>method exportDate <span class="smalllinenumber">[line 403]</span></h3>
+	<h3>method exportDate <span class="smalllinenumber">[line 384]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1288,8 +1266,80 @@ $withTime)</code>
         <div class="top">[ <a href="#top">Top</a> ]</div>
   </div>
   <hr />
+	<a name="methodexportResourceName"></a>
+	<h3>method exportResourceName <span class="smalllinenumber">[line 444]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>string exportResourceName(
+[string
+$resourceName = null])</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Wrapper for the db.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	Overrides <a href="../Dao/Dao.html#methodexportResourceName">Dao::exportResourceName()</a> (Escapes a resource name.)<br /><br />
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">string&nbsp;&nbsp;</td>
+        <td><b>$resourceName</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodexportString"></a>
+	<h3>method exportString <span class="smalllinenumber">[line 404]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>string exportString(
+string
+$string)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Wrapper for the db.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	Overrides <a href="../Dao/Dao.html#methodexportString">Dao::exportString()</a> (If your strings need quoting, do that in here.)<br /><br />
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">string&nbsp;&nbsp;</td>
+        <td><b>$string</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
 	<a name="methodfind"></a>
-	<h3>method find <span class="smalllinenumber">[line 159]</span></h3>
+	<h3>method find <span class="smalllinenumber">[line 140]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1342,8 +1392,50 @@ $resourceName = null])</code>
         <div class="top">[ <a href="#top">Top</a> ]</div>
   </div>
   <hr />
+	<a name="methodgenerateInsertQuery"></a>
+	<h3>method generateInsertQuery <span class="smalllinenumber">[line 205]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>string generateInsertQuery(
+<a href="../Dao/Record/Record.html">Record</a>
+$record)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Generates the query for insertion.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	<p>Overridden in child classes as:<br />
+		<dl>
+	<dt><a href="../Dao/PostgresqlDao.html#methodgenerateInsertQuery">PostgresqlDao::generateInsertQuery()</a></dt>
+		<dd>Generates the query for insertion, but adds the RETURNING clause, so the id  gets returned automatically.</dd>
+	</dl>
+	</p>
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type"><a href="../Dao/Record/Record.html">Record</a>&nbsp;&nbsp;</td>
+        <td><b>$record</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
 	<a name="methodgenerateQuery"></a>
-	<h3>method generateQuery <span class="smalllinenumber">[line 283]</span></h3>
+	<h3>method generateQuery <span class="smalllinenumber">[line 268]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1409,7 +1501,7 @@ $resourceName = null])</code>
   </div>
   <hr />
 	<a name="methodgenerateSortString"></a>
-	<h3>method generateSortString <span class="smalllinenumber">[line 382]</span></h3>
+	<h3>method generateSortString <span class="smalllinenumber">[line 364]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1445,7 +1537,7 @@ $sort)</code>
   </div>
   <hr />
 	<a name="methodgetData"></a>
-	<h3>method getData <span class="smalllinenumber">[line 173]</span></h3>
+	<h3>method getData <span class="smalllinenumber">[line 154]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1499,7 +1591,7 @@ $resourceName = null])</code>
   </div>
   <hr />
 	<a name="methodgetDb"></a>
-	<h3>method getDb <span class="smalllinenumber">[line 51]</span></h3>
+	<h3>method getDb <span class="smalllinenumber">[line 53]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1527,7 +1619,7 @@ $resourceName = null])</code>
   </div>
   <hr />
 	<a name="methodgetFromQuery"></a>
-	<h3>method getFromQuery <span class="smalllinenumber">[line 335]</span></h3>
+	<h3>method getFromQuery <span class="smalllinenumber">[line 324]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1569,7 +1661,7 @@ $returnData = false])</code>
   </div>
   <hr />
 	<a name="methodgetIterator"></a>
-	<h3>method getIterator <span class="smalllinenumber">[line 192]</span></h3>
+	<h3>method getIterator <span class="smalllinenumber">[line 173]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1641,7 +1733,7 @@ $resourceName = null])</code>
   </div>
   <hr />
 	<a name="methodgetIteratorFromQuery"></a>
-	<h3>method getIteratorFromQuery <span class="smalllinenumber">[line 351]</span></h3>
+	<h3>method getIteratorFromQuery <span class="smalllinenumber">[line 339]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1677,7 +1769,7 @@ $query)</code>
   </div>
   <hr />
 	<a name="methodgetLastInsertId"></a>
-	<h3>method getLastInsertId <span class="smalllinenumber">[line 67]</span></h3>
+	<h3>method getLastInsertId <span class="smalllinenumber">[line 72]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1694,27 +1786,18 @@ $query)</code>
     <td><b>return:</b>&nbsp;&nbsp;</td><td>The last id that has been inserted</td>
   </tr>
   <tr>
-    <td><b>abstract:</b>&nbsp;&nbsp;</td><td></td>
-  </tr>
-  <tr>
     <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
   </tr>
 </table>
 </div>
 <br /><br />
 
-	<p>Overridden in child classes as:<br />
-		<dl>
-	<dt><a href="../Dao/MysqlDao.html#methodgetLastInsertId">MysqlDao::getLastInsertId()</a></dt>
-		<dd>Returns the id of the last inserted record.</dd>
-	</dl>
-	</p>
 	
         <div class="top">[ <a href="#top">Top</a> ]</div>
   </div>
   <hr />
 	<a name="methodgetTotalCount"></a>
-	<h3>method getTotalCount <span class="smalllinenumber">[line 260]</span></h3>
+	<h3>method getTotalCount <span class="smalllinenumber">[line 246]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1739,7 +1822,7 @@ $query)</code>
   </div>
   <hr />
 	<a name="methodinsert"></a>
-	<h3>method insert <span class="smalllinenumber">[line 205]</span></h3>
+	<h3>method insert <span class="smalllinenumber">[line 184]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1778,7 +1861,7 @@ $record)</code>
   </div>
   <hr />
 	<a name="methodinsertByQuery"></a>
-	<h3>method insertByQuery <span class="smalllinenumber">[line 366]</span></h3>
+	<h3>method insertByQuery <span class="smalllinenumber">[line 351]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1803,6 +1886,12 @@ $id = null])</code>
 </div>
 <br /><br />
 
+	<p>Overridden in child classes as:<br />
+		<dl>
+	<dt><a href="../Dao/PostgresqlDao.html#methodinsertByQuery">PostgresqlDao::insertByQuery()</a></dt>
+		<dd>Inserts and returns the new id</dd>
+	</dl>
+	</p>
 	
         <h4>Parameters:</h4>
     <div class="tags">
@@ -1823,7 +1912,7 @@ $id = null])</code>
   </div>
   <hr />
 	<a name="methodrollback"></a>
-	<h3>method rollback <span class="smalllinenumber">[line 134]</span></h3>
+	<h3>method rollback <span class="smalllinenumber">[line 116]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1847,8 +1936,33 @@ $id = null])</code>
         <div class="top">[ <a href="#top">Top</a> ]</div>
   </div>
   <hr />
+	<a name="methodstartTransaction"></a>
+	<h3>method startTransaction <span class="smalllinenumber">[line 100]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void startTransaction(
+)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Shorthand for: Dao-&gt;getDb()-&gt;beginTransaction()  Be careful: this starts a transaction on the database! So all Daos using the same database will be in the same transaction.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
 	<a name="methodupdate"></a>
-	<h3>method update <span class="smalllinenumber">[line 228]</span></h3>
+	<h3>method update <span class="smalllinenumber">[line 216]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">

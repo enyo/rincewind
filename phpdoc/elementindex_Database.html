@@ -14,7 +14,7 @@
     <td class="header_menu">
         
                                                                                                 
-                                                                                                                                  		  [ <a href="classtrees_Database.html" class="menu">class tree: Database</a> ]
+                                                                                                                                                      		  [ <a href="classtrees_Database.html" class="menu">class tree: Database</a> ]
 		  [ <a href="elementindex_Database.html" class="menu">index: Database</a> ]
 		  	    [ <a href="elementindex.html" class="menu">all elements</a> ]
     </td>
@@ -34,6 +34,7 @@
               <a href="li_DataSource.html">DataSource</a><br />
               <a href="li_Database.html">Database</a><br />
               <a href="li_Date.html">Date</a><br />
+              <a href="li_Factory.html">Factory</a><br />
               <a href="li_File.html">File</a><br />
               <a href="li_Logger.html">Logger</a><br />
               <a href="li_Profiler.html">Profiler</a><br />
@@ -64,6 +65,12 @@
 			<a href="Database/Exceptions/_Database---DatabaseExceptions.php.html">		DatabaseExceptions.php
 		</a><br>
 	  </div><br />
+	subpackage <b>Updater</b><br>  <div class="package">
+			<a href="Database/Updater/_DatabaseUpdater---DatabaseUpdate.php.html">		DatabaseUpdate.php
+		</a><br>
+			<a href="Database/Updater/_DatabaseUpdater---DatabaseUpdater.php.html">		DatabaseUpdater.php
+		</a><br>
+	  </div><br />
       
             <b>Interfaces:</b><br />
         <div class="package">
@@ -77,6 +84,7 @@
         <div class="package">
 		    		<a href="Database/Database.html">Database</a><br />
 	    		<a href="Database/Mysql.html">Mysql</a><br />
+	    		<a href="Database/Postgresql.html">Postgresql</a><br />
 	  </div>
   <div class="package">
 	Exceptions<br />	    &nbsp;&nbsp;		<a href="Database/Exceptions/SqlConnectionException.html">SqlConnectionException</a><br />
@@ -86,6 +94,13 @@
   <div class="package">
 	DatabaseResult<br />	    &nbsp;&nbsp;		<a href="Database/DatabaseResult/DatabaseResult.html">DatabaseResult</a><br />
 	    &nbsp;&nbsp;		<a href="Database/DatabaseResult/MysqlResult.html">MysqlResult</a><br />
+	    &nbsp;&nbsp;		<a href="Database/DatabaseResult/PostgresqlResult.html">PostgresqlResult</a><br />
+	  </div>
+  <div class="package">
+	Updater<br />	    &nbsp;&nbsp;		<a href="Database/Updater/DatabaseNotInitializedException.html">DatabaseNotInitializedException</a><br />
+	    &nbsp;&nbsp;		<a href="Database/Updater/DatabaseUpdate.html">DatabaseUpdate</a><br />
+	    &nbsp;&nbsp;		<a href="Database/Updater/DatabaseUpdater.html">DatabaseUpdater</a><br />
+	    &nbsp;&nbsp;		<a href="Database/Updater/DatabaseUpdaterException.html">DatabaseUpdaterException</a><br />
 	  </div>
                 </td>
     <td>
@@ -100,6 +115,7 @@
 	[ <a href="elementindex_Database.html#f">f</a> ]
 	[ <a href="elementindex_Database.html#g">g</a> ]
 	[ <a href="elementindex_Database.html#h">h</a> ]
+	[ <a href="elementindex_Database.html#i">i</a> ]
 	[ <a href="elementindex_Database.html#l">l</a> ]
 	[ <a href="elementindex_Database.html#m">m</a> ]
 	[ <a href="elementindex_Database.html#n">n</a> ]
@@ -107,7 +123,9 @@
 	[ <a href="elementindex_Database.html#q">q</a> ]
 	[ <a href="elementindex_Database.html#r">r</a> ]
 	[ <a href="elementindex_Database.html#s">s</a> ]
+	[ <a href="elementindex_Database.html#t">t</a> ]
 	[ <a href="elementindex_Database.html#u">u</a> ]
+	[ <a href="elementindex_Database.html#v">v</a> ]
 	[ <a href="elementindex_Database.html#_">_</a> ]
 
   <hr />
@@ -121,6 +139,10 @@
 				<dd>in file Database.php, method <a href="Database/Database.html#method__destruct">Database::__destruct()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Calls close() to ensure the database connection gets closed when destroyed</dd>
 							<dt><b>__construct</b></dt>
 				<dd>in file DatabaseResult.php, method <a href="Database/DatabaseResult/DatabaseResult.html#method__construct">DatabaseResult::__construct()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;The php result from a query is passed in the constructor</dd>
+							<dt><b>__construct</b></dt>
+				<dd>in file DatabaseUpdater.php, method <a href="Database/Updater/DatabaseUpdater.html#method__construct">DatabaseUpdater::__construct()</a></dd>
+							<dt><b>__construct</b></dt>
+				<dd>in file DatabaseUpdate.php, method <a href="Database/Updater/DatabaseUpdate.html#method__construct">DatabaseUpdate::__construct()</a></dd>
 					</dl>
 	</div>
 	<a href="elementindex_Database.html#top">top</a><br>
@@ -129,8 +151,8 @@
 	<div>
 		<h2>b</h2>
 		<dl>
-							<dt><b>beginTransaction</b></dt>
-				<dd>in file Mysql.php, method <a href="Database/Mysql.html#methodbeginTransaction">Mysql::beginTransaction()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Begins a transaction</dd>
+							<dt><b>$branch</b></dt>
+				<dd>in file DatabaseUpdate.php, variable <a href="Database/Updater/DatabaseUpdate.html#var$branch">DatabaseUpdate::$branch</a></dd>
 					</dl>
 	</div>
 	<a href="elementindex_Database.html#top">top</a><br>
@@ -141,20 +163,32 @@
 		<dl>
 							<dt><b>$charsetName</b></dt>
 				<dd>in file Mysql.php, variable <a href="Database/Mysql.html#var$charsetName">Mysql::$charsetName</a><br>&nbsp;&nbsp;&nbsp;&nbsp;The character set used for connections.</dd>
+							<dt><b>$charsetName</b></dt>
+				<dd>in file Postgresql.php, variable <a href="Database/Postgresql.html#var$charsetName">Postgresql::$charsetName</a><br>&nbsp;&nbsp;&nbsp;&nbsp;The character set used for connections.</dd>
+							<dt><b>$commentString</b></dt>
+				<dd>in file Postgresql.php, variable <a href="Database/Postgresql.html#var$commentString">Postgresql::$commentString</a><br>&nbsp;&nbsp;&nbsp;&nbsp;The string used for comments.</dd>
 							<dt><b>$commentString</b></dt>
 				<dd>in file Mysql.php, variable <a href="Database/Mysql.html#var$commentString">Mysql::$commentString</a><br>&nbsp;&nbsp;&nbsp;&nbsp;The string used for comments.</dd>
 							<dt><b>$connected</b></dt>
 				<dd>in file Database.php, variable <a href="Database/Database.html#var$connected">Database::$connected</a></dd>
 							<dt><b>close</b></dt>
+				<dd>in file Postgresql.php, method <a href="Database/Postgresql.html#methodclose">Postgresql::close()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Closes the database connection</dd>
+							<dt><b>close</b></dt>
 				<dd>in file Mysql.php, method <a href="Database/Mysql.html#methodclose">Mysql::close()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Closes the database connection</dd>
 							<dt><b>close</b></dt>
 				<dd>in file Database.php, method <a href="Database/Database.html#methodclose">Database::close()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Implement your database specific close implementation here.</dd>
 							<dt><b>commit</b></dt>
+				<dd>in file Postgresql.php, method <a href="Database/Postgresql.html#methodcommit">Postgresql::commit()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Commits a transaction</dd>
+							<dt><b>commit</b></dt>
 				<dd>in file Mysql.php, method <a href="Database/Mysql.html#methodcommit">Mysql::commit()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Commits a transaction</dd>
 							<dt><b>connect</b></dt>
-				<dd>in file Mysql.php, method <a href="Database/Mysql.html#methodconnect">Mysql::connect()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;This is the connect function that tries to create a mysql connection, and set the correct character set.</dd>
+				<dd>in file Postgresql.php, method <a href="Database/Postgresql.html#methodconnect">Postgresql::connect()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;This is the connect function that tries to create a postgresql connection, and set the correct character set.</dd>
 							<dt><b>connect</b></dt>
 				<dd>in file Database.php, method <a href="Database/Database.html#methodconnect">Database::connect()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Implement your database specific connection here.</dd>
+							<dt><b>connect</b></dt>
+				<dd>in file Mysql.php, method <a href="Database/Mysql.html#methodconnect">Mysql::connect()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;This is the connect function that tries to create a mysql connection, and set the correct character set.</dd>
+							<dt><b>$currentRowNumber</b></dt>
+				<dd>in file DatabaseResult.php, variable <a href="Database/DatabaseResult/DatabaseResult.html#var$currentRowNumber">DatabaseResult::$currentRowNumber</a><br>&nbsp;&nbsp;&nbsp;&nbsp;The current row number. The first row is 0.</dd>
 					</dl>
 	</div>
 	<a href="elementindex_Database.html#top">top</a><br>
@@ -183,6 +217,20 @@
 				<dd>in file DatabaseResultInterface.php, class <a href="Database/DatabaseResult/DatabaseResultInterface.html">DatabaseResultInterface</a><br>&nbsp;&nbsp;&nbsp;&nbsp;All Database Results have to implement this interface.</dd>
 							<dt><b>DatabaseExceptions.php</b></dt>
 				<dd>procedural page <a href="Database/Exceptions/_Database---DatabaseExceptions.php.html">DatabaseExceptions.php</a></dd>
+							<dt><b>$db</b></dt>
+				<dd>in file DatabaseUpdater.php, variable <a href="Database/Updater/DatabaseUpdater.html#var$db">DatabaseUpdater::$db</a></dd>
+							<dt><b>DatabaseNotInitializedException</b></dt>
+				<dd>in file DatabaseUpdater.php, class <a href="Database/Updater/DatabaseNotInitializedException.html">DatabaseNotInitializedException</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Gets thrown when the database is not initialized yet.</dd>
+							<dt><b>DatabaseUpdate</b></dt>
+				<dd>in file DatabaseUpdate.php, class <a href="Database/Updater/DatabaseUpdate.html">DatabaseUpdate</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Holds all necessary information about a database update, and is used by the  DatabaseUpdater</dd>
+							<dt><b>DatabaseUpdater</b></dt>
+				<dd>in file DatabaseUpdater.php, class <a href="Database/Updater/DatabaseUpdater.html">DatabaseUpdater</a></dd>
+							<dt><b>DatabaseUpdate.php</b></dt>
+				<dd>procedural page <a href="Database/Updater/_DatabaseUpdater---DatabaseUpdate.php.html">DatabaseUpdate.php</a></dd>
+							<dt><b>DatabaseUpdater.php</b></dt>
+				<dd>procedural page <a href="Database/Updater/_DatabaseUpdater---DatabaseUpdater.php.html">DatabaseUpdater.php</a></dd>
+							<dt><b>DatabaseUpdaterException</b></dt>
+				<dd>in file DatabaseUpdater.php, class <a href="Database/Updater/DatabaseUpdaterException.html">DatabaseUpdaterException</a><br>&nbsp;&nbsp;&nbsp;&nbsp;DatabaseUpdaterException.</dd>
 					</dl>
 	</div>
 	<a href="elementindex_Database.html#top">top</a><br>
@@ -198,13 +246,37 @@
 							<dt><b>escapeColumn</b></dt>
 				<dd>in file Database.php, method <a href="Database/Database.html#methodescapeColumn">Database::escapeColumn()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Typically columns are just escaped as strings.</dd>
 							<dt><b>escapeString</b></dt>
-				<dd>in file Mysql.php, method <a href="Database/Mysql.html#methodescapeString">Mysql::escapeString()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Escapes the string for mysql queries.</dd>
+				<dd>in file Postgresql.php, method <a href="Database/Postgresql.html#methodescapeString">Postgresql::escapeString()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Escapes the string for postgresql queries.</dd>
+							<dt><b>escapeString</b></dt>
+				<dd>in file Mysql.php, method <a href="Database/Mysql.html#methodescapeString">Mysql::escapeString()</a></dd>
 							<dt><b>escapeString</b></dt>
 				<dd>in file DatabaseInterface.php, method <a href="Database/DatabaseInterface.html#methodescapeString">DatabaseInterface::escapeString()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Escapes a string so it can be used in a query.</dd>
 							<dt><b>escapeTable</b></dt>
-				<dd>in file Database.php, method <a href="Database/Database.html#methodescapeTable">Database::escapeTable()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Typically tables are just escaped as strings.</dd>
-							<dt><b>escapeTable</b></dt>
 				<dd>in file DatabaseInterface.php, method <a href="Database/DatabaseInterface.html#methodescapeTable">DatabaseInterface::escapeTable()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Escapes a table so it can be used in a query.</dd>
+							<dt><b>escapeTable</b></dt>
+				<dd>in file Database.php, method <a href="Database/Database.html#methodescapeTable">Database::escapeTable()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Typically tables are just escaped as strings.</dd>
+							<dt><b>exportColumn</b></dt>
+				<dd>in file Mysql.php, method <a href="Database/Mysql.html#methodexportColumn">Mysql::exportColumn()</a></dd>
+							<dt><b>exportColumn</b></dt>
+				<dd>in file DatabaseInterface.php, method <a href="Database/DatabaseInterface.html#methodexportColumn">DatabaseInterface::exportColumn()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Escapes a column and puts quotes around it.</dd>
+							<dt><b>exportColumn</b></dt>
+				<dd>in file Postgresql.php, method <a href="Database/Postgresql.html#methodexportColumn">Postgresql::exportColumn()</a></dd>
+							<dt><b>exportString</b></dt>
+				<dd>in file DatabaseInterface.php, method <a href="Database/DatabaseInterface.html#methodexportString">DatabaseInterface::exportString()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Escapes the string, and puts quotes around it.</dd>
+							<dt><b>exportString</b></dt>
+				<dd>in file Postgresql.php, method <a href="Database/Postgresql.html#methodexportString">Postgresql::exportString()</a></dd>
+							<dt><b>exportString</b></dt>
+				<dd>in file Mysql.php, method <a href="Database/Mysql.html#methodexportString">Mysql::exportString()</a></dd>
+							<dt><b>exportTable</b></dt>
+				<dd>in file Postgresql.php, method <a href="Database/Postgresql.html#methodexportTable">Postgresql::exportTable()</a></dd>
+							<dt><b>exportTable</b></dt>
+				<dd>in file DatabaseInterface.php, method <a href="Database/DatabaseInterface.html#methodexportTable">DatabaseInterface::exportTable()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Escapes a table and puts quotes around it.</dd>
+							<dt><b>exportTable</b></dt>
+				<dd>in file Mysql.php, method <a href="Database/Mysql.html#methodexportTable">Mysql::exportTable()</a></dd>
+							<dt><b>$executedUpdates</b></dt>
+				<dd>in file DatabaseUpdater.php, variable <a href="Database/Updater/DatabaseUpdater.html#var$executedUpdates">DatabaseUpdater::$executedUpdates</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Holds the list of that have been executed, or could be executed.</dd>
+							<dt><b>executeUpdate</b></dt>
+				<dd>in file DatabaseUpdater.php, method <a href="Database/Updater/DatabaseUpdater.html#methodexecuteUpdate">DatabaseUpdater::executeUpdate()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Executes an update.</dd>
 					</dl>
 	</div>
 	<a href="elementindex_Database.html#top">top</a><br>
@@ -214,21 +286,29 @@
 		<h2>f</h2>
 		<dl>
 							<dt><b>fetch</b></dt>
-				<dd>in file DatabaseResultInterface.php, method <a href="Database/DatabaseResult/DatabaseResultInterface.html#methodfetch">DatabaseResultInterface::fetch()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;If $field is given, fetchResult is used.</dd>
-							<dt><b>fetch</b></dt>
 				<dd>in file DatabaseResult.php, method <a href="Database/DatabaseResult/DatabaseResult.html#methodfetch">DatabaseResult::fetch()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;This is a shortcut for fetchArray or fetchResult.</dd>
+							<dt><b>fetch</b></dt>
+				<dd>in file DatabaseResultInterface.php, method <a href="Database/DatabaseResult/DatabaseResultInterface.html#methodfetch">DatabaseResultInterface::fetch()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;If $field is given, fetchResult is used.</dd>
 							<dt><b>fetchArray</b></dt>
-				<dd>in file DatabaseResultInterface.php, method <a href="Database/DatabaseResult/DatabaseResultInterface.html#methodfetchArray">DatabaseResultInterface::fetchArray()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns the current row as an associative array.</dd>
+				<dd>in file PostgresqlResult.php, method <a href="Database/DatabaseResult/PostgresqlResult.html#methodfetchArray">PostgresqlResult::fetchArray()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns the array of the current row (or the specified row) and seeks to the  next row.</dd>
 							<dt><b>fetchArray</b></dt>
 				<dd>in file MysqlResult.php, method <a href="Database/DatabaseResult/MysqlResult.html#methodfetchArray">MysqlResult::fetchArray()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;If you pass a row number, seek() is called.</dd>
+							<dt><b>fetchArray</b></dt>
+				<dd>in file DatabaseResultInterface.php, method <a href="Database/DatabaseResult/DatabaseResultInterface.html#methodfetchArray">DatabaseResultInterface::fetchArray()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns the current row as an associative array.</dd>
+							<dt><b>fetchResult</b></dt>
+				<dd>in file PostgresqlResult.php, method <a href="Database/DatabaseResult/PostgresqlResult.html#methodfetchResult">PostgresqlResult::fetchResult()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns a specific field of the current row.</dd>
 							<dt><b>fetchResult</b></dt>
 				<dd>in file MysqlResult.php, method <a href="Database/DatabaseResult/MysqlResult.html#methodfetchResult">MysqlResult::fetchResult()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns a specific field of the result set.</dd>
 							<dt><b>fetchResult</b></dt>
 				<dd>in file DatabaseResultInterface.php, method <a href="Database/DatabaseResult/DatabaseResultInterface.html#methodfetchResult">DatabaseResultInterface::fetchResult()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns the value of one field in the current row.</dd>
 							<dt><b>free</b></dt>
+				<dd>in file PostgresqlResult.php, method <a href="Database/DatabaseResult/PostgresqlResult.html#methodfree">PostgresqlResult::free()</a></dd>
+							<dt><b>free</b></dt>
 				<dd>in file MysqlResult.php, method <a href="Database/DatabaseResult/MysqlResult.html#methodfree">MysqlResult::free()</a></dd>
 							<dt><b>free</b></dt>
 				<dd>in file DatabaseResultInterface.php, method <a href="Database/DatabaseResult/DatabaseResultInterface.html#methodfree">DatabaseResultInterface::free()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;If possible / necessary free the result set.</dd>
+							<dt><b>$filename</b></dt>
+				<dd>in file DatabaseUpdate.php, variable <a href="Database/Updater/DatabaseUpdate.html#var$filename">DatabaseUpdate::$filename</a></dd>
 					</dl>
 	</div>
 	<a href="elementindex_Database.html#top">top</a><br>
@@ -239,14 +319,26 @@
 		<dl>
 							<dt><b>getConnectionString</b></dt>
 				<dd>in file Database.php, method <a href="Database/Database.html#methodgetConnectionString">Database::getConnectionString()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns a string with all the connection parameters.</dd>
-							<dt><b>getResource</b></dt>
-				<dd>in file DatabaseInterface.php, method <a href="Database/DatabaseInterface.html#methodgetResource">DatabaseInterface::getResource()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns the database resource</dd>
+							<dt><b>getLastInsertId</b></dt>
+				<dd>in file Postgresql.php, method <a href="Database/Postgresql.html#methodgetLastInsertId">Postgresql::getLastInsertId()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns the id of the last inserted record for given table.</dd>
+							<dt><b>getLastInsertId</b></dt>
+				<dd>in file Mysql.php, method <a href="Database/Mysql.html#methodgetLastInsertId">Mysql::getLastInsertId()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns the id of the last inserted record.</dd>
+							<dt><b>getLastInsertId</b></dt>
+				<dd>in file DatabaseInterface.php, method <a href="Database/DatabaseInterface.html#methodgetLastInsertId">DatabaseInterface::getLastInsertId()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns the id of the last inserted record.</dd>
 							<dt><b>getResource</b></dt>
 				<dd>in file Database.php, method <a href="Database/Database.html#methodgetResource">Database::getResource()</a></dd>
+							<dt><b>getResource</b></dt>
+				<dd>in file DatabaseInterface.php, method <a href="Database/DatabaseInterface.html#methodgetResource">DatabaseInterface::getResource()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns the database resource</dd>
 							<dt><b>getResult</b></dt>
 				<dd>in file DatabaseResultInterface.php, method <a href="Database/DatabaseResult/DatabaseResultInterface.html#methodgetResult">DatabaseResultInterface::getResult()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns the result stored from the actual php command.</dd>
 							<dt><b>getResult</b></dt>
 				<dd>in file DatabaseResult.php, method <a href="Database/DatabaseResult/DatabaseResult.html#methodgetResult">DatabaseResult::getResult()</a></dd>
+							<dt><b>getAllUpdateFilenames</b></dt>
+				<dd>in file DatabaseUpdater.php, method <a href="Database/Updater/DatabaseUpdater.html#methodgetAllUpdateFilenames">DatabaseUpdater::getAllUpdateFilenames()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns all update files (except for 0000.sql), sorted by their names, as array.</dd>
+							<dt><b>getAllUpdates</b></dt>
+				<dd>in file DatabaseUpdater.php, method <a href="Database/Updater/DatabaseUpdater.html#methodgetAllUpdates">DatabaseUpdater::getAllUpdates()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns all updates, sorted by their update filename, as array.</dd>
+							<dt><b>getExecutedUpdates</b></dt>
+				<dd>in file DatabaseUpdater.php, method <a href="Database/Updater/DatabaseUpdater.html#methodgetExecutedUpdates">DatabaseUpdater::getExecutedUpdates()</a></dd>
 					</dl>
 	</div>
 	<a href="elementindex_Database.html#top">top</a><br>
@@ -261,10 +353,22 @@
 	</div>
 	<a href="elementindex_Database.html#top">top</a><br>
   <hr />
+	<a name="i"></a>
+	<div>
+		<h2>i</h2>
+		<dl>
+							<dt><b>interpretUpdateFilename</b></dt>
+				<dd>in file DatabaseUpdater.php, method <a href="Database/Updater/DatabaseUpdater.html#methodinterpretUpdateFilename">DatabaseUpdater::interpretUpdateFilename()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Turns</dd>
+					</dl>
+	</div>
+	<a href="elementindex_Database.html#top">top</a><br>
+  <hr />
 	<a name="l"></a>
 	<div>
 		<h2>l</h2>
 		<dl>
+							<dt><b>lastError</b></dt>
+				<dd>in file Postgresql.php, method <a href="Database/Postgresql.html#methodlastError">Postgresql::lastError()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns the last sql error</dd>
 							<dt><b>lastError</b></dt>
 				<dd>in file Mysql.php, method <a href="Database/Mysql.html#methodlastError">Mysql::lastError()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns the last sql error</dd>
 							<dt><b>lastError</b></dt>
@@ -282,9 +386,11 @@
 							<dt><b>multiQuery</b></dt>
 				<dd>in file Mysql.php, method <a href="Database/Mysql.html#methodmultiQuery">Mysql::multiQuery()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Performs multiple queries at once, and frees the result afterwards.</dd>
 							<dt><b>multiQuery</b></dt>
+				<dd>in file DatabaseInterface.php, method <a href="Database/DatabaseInterface.html#methodmultiQuery">DatabaseInterface::multiQuery()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Perform multiple queries at once.</dd>
+							<dt><b>multiQuery</b></dt>
 				<dd>in file Database.php, method <a href="Database/Database.html#methodmultiQuery">Database::multiQuery()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Some databases (eg: Mysql) do not support multiple queries by themselves.</dd>
 							<dt><b>multiQuery</b></dt>
-				<dd>in file DatabaseInterface.php, method <a href="Database/DatabaseInterface.html#methodmultiQuery">DatabaseInterface::multiQuery()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Perform multiple queries at once.</dd>
+				<dd>in file Postgresql.php, method <a href="Database/Postgresql.html#methodmultiQuery">Postgresql::multiQuery()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Performs multiple queries at once. For postgresql this is just a wrapper for query.</dd>
 							<dt><b>Mysql</b></dt>
 				<dd>in file Mysql.php, class <a href="Database/Mysql.html">Mysql</a><br>&nbsp;&nbsp;&nbsp;&nbsp;The Mysql Database implementation.</dd>
 							<dt><b>MysqlResult.php</b></dt>
@@ -300,9 +406,13 @@
 		<h2>n</h2>
 		<dl>
 							<dt><b>numRows</b></dt>
+				<dd>in file PostgresqlResult.php, method <a href="Database/DatabaseResult/PostgresqlResult.html#methodnumRows">PostgresqlResult::numRows()</a></dd>
+							<dt><b>numRows</b></dt>
 				<dd>in file MysqlResult.php, method <a href="Database/DatabaseResult/MysqlResult.html#methodnumRows">MysqlResult::numRows()</a></dd>
 							<dt><b>numRows</b></dt>
 				<dd>in file DatabaseResultInterface.php, method <a href="Database/DatabaseResult/DatabaseResultInterface.html#methodnumRows">DatabaseResultInterface::numRows()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns the number of rows</dd>
+							<dt><b>$number</b></dt>
+				<dd>in file DatabaseUpdate.php, variable <a href="Database/Updater/DatabaseUpdate.html#var$number">DatabaseUpdate::$number</a></dd>
 					</dl>
 	</div>
 	<a href="elementindex_Database.html#top">top</a><br>
@@ -317,8 +427,12 @@
 				<dd>in file Database.php, variable <a href="Database/Database.html#var$port">Database::$port</a></dd>
 							<dt><b>Postgresql.php</b></dt>
 				<dd>procedural page <a href="Database/_Database---Postgresql.php.html">Postgresql.php</a></dd>
+							<dt><b>Postgresql</b></dt>
+				<dd>in file Postgresql.php, class <a href="Database/Postgresql.html">Postgresql</a><br>&nbsp;&nbsp;&nbsp;&nbsp;The Postgresql Database implementation.</dd>
 							<dt><b>PostgresqlResult.php</b></dt>
 				<dd>procedural page <a href="Database/DatabaseResult/_DatabaseResult---PostgresqlResult.php.html">PostgresqlResult.php</a></dd>
+							<dt><b>PostgresqlResult</b></dt>
+				<dd>in file PostgresqlResult.php, class <a href="Database/DatabaseResult/PostgresqlResult.html">PostgresqlResult</a><br>&nbsp;&nbsp;&nbsp;&nbsp;The Postgresql DatabaseResult implementation.</dd>
 					</dl>
 	</div>
 	<a href="elementindex_Database.html#top">top</a><br>
@@ -327,6 +441,8 @@
 	<div>
 		<h2>q</h2>
 		<dl>
+							<dt><b>query</b></dt>
+				<dd>in file Postgresql.php, method <a href="Database/Postgresql.html#methodquery">Postgresql::query()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Performs a query</dd>
 							<dt><b>query</b></dt>
 				<dd>in file Mysql.php, method <a href="Database/Mysql.html#methodquery">Mysql::query()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Performs a query</dd>
 							<dt><b>query</b></dt>
@@ -341,6 +457,8 @@
 		<dl>
 							<dt><b>$resource</b></dt>
 				<dd>in file Database.php, variable <a href="Database/Database.html#var$resource">Database::$resource</a></dd>
+							<dt><b>rollback</b></dt>
+				<dd>in file Postgresql.php, method <a href="Database/Postgresql.html#methodrollback">Postgresql::rollback()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Rolls back a transaction</dd>
 							<dt><b>rollback</b></dt>
 				<dd>in file Mysql.php, method <a href="Database/Mysql.html#methodrollback">Mysql::rollback()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Rolls back a transaction</dd>
 							<dt><b>$result</b></dt>
@@ -357,10 +475,20 @@
 	<div>
 		<h2>s</h2>
 		<dl>
-							<dt><b>$search_path</b></dt>
-				<dd>in file Database.php, variable <a href="Database/Database.html#var$search_path">Database::$search_path</a></dd>
+							<dt><b>$searchPath</b></dt>
+				<dd>in file Database.php, variable <a href="Database/Database.html#var$searchPath">Database::$searchPath</a></dd>
+							<dt><b>setCharacterSet</b></dt>
+				<dd>in file Postgresql.php, method <a href="Database/Postgresql.html#methodsetCharacterSet">Postgresql::setCharacterSet()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Sets the charsetName for future queries.</dd>
 							<dt><b>setCharacterSet</b></dt>
 				<dd>in file Mysql.php, method <a href="Database/Mysql.html#methodsetCharacterSet">Mysql::setCharacterSet()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Sets the charsetName for future queries.</dd>
+							<dt><b>startTransaction</b></dt>
+				<dd>in file Postgresql.php, method <a href="Database/Postgresql.html#methodstartTransaction">Postgresql::startTransaction()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Begins a transaction</dd>
+							<dt><b>startTransaction</b></dt>
+				<dd>in file DatabaseInterface.php, method <a href="Database/DatabaseInterface.html#methodstartTransaction">DatabaseInterface::startTransaction()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Starts a transaction in the database.</dd>
+							<dt><b>startTransaction</b></dt>
+				<dd>in file Mysql.php, method <a href="Database/Mysql.html#methodstartTransaction">Mysql::startTransaction()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Begins a transaction</dd>
+							<dt><b>seek</b></dt>
+				<dd>in file PostgresqlResult.php, method <a href="Database/DatabaseResult/PostgresqlResult.html#methodseek">PostgresqlResult::seek()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Doesn't call pg_result_seek() but simply sets the currentRowNumber to the  $rowNumber, because all functions explicitely specify which row to use.</dd>
 							<dt><b>seek</b></dt>
 				<dd>in file MysqlResult.php, method <a href="Database/DatabaseResult/MysqlResult.html#methodseek">MysqlResult::seek()</a></dd>
 							<dt><b>seek</b></dt>
@@ -375,12 +503,42 @@
 	</div>
 	<a href="elementindex_Database.html#top">top</a><br>
   <hr />
+	<a name="t"></a>
+	<div>
+		<h2>t</h2>
+		<dl>
+							<dt><b>$type</b></dt>
+				<dd>in file DatabaseUpdate.php, variable <a href="Database/Updater/DatabaseUpdate.html#var$type">DatabaseUpdate::$type</a></dd>
+					</dl>
+	</div>
+	<a href="elementindex_Database.html#top">top</a><br>
+  <hr />
 	<a name="u"></a>
 	<div>
 		<h2>u</h2>
 		<dl>
 							<dt><b>$user</b></dt>
 				<dd>in file Database.php, variable <a href="Database/Database.html#var$user">Database::$user</a></dd>
+							<dt><b>$updatesPath</b></dt>
+				<dd>in file DatabaseUpdater.php, variable <a href="Database/Updater/DatabaseUpdater.html#var$updatesPath">DatabaseUpdater::$updatesPath</a><br>&nbsp;&nbsp;&nbsp;&nbsp;The location of the update files.</dd>
+							<dt><b>$username</b></dt>
+				<dd>in file DatabaseUpdate.php, variable <a href="Database/Updater/DatabaseUpdate.html#var$username">DatabaseUpdate::$username</a></dd>
+							<dt><b>update</b></dt>
+				<dd>in file DatabaseUpdater.php, method <a href="Database/Updater/DatabaseUpdater.html#methodupdate">DatabaseUpdater::update()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Goes through the update files, and updates them.</dd>
+							<dt><b>updateIsDeprecated</b></dt>
+				<dd>in file DatabaseUpdater.php, method <a href="Database/Updater/DatabaseUpdater.html#methodupdateIsDeprecated">DatabaseUpdater::updateIsDeprecated()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Checks if an update hasn't already been inserted in the database.</dd>
+					</dl>
+	</div>
+	<a href="elementindex_Database.html#top">top</a><br>
+  <hr />
+	<a name="v"></a>
+	<div>
+		<h2>v</h2>
+		<dl>
+							<dt><b>$versionDao</b></dt>
+				<dd>in file DatabaseUpdater.php, variable <a href="Database/Updater/DatabaseUpdater.html#var$versionDao">DatabaseUpdater::$versionDao</a></dd>
+							<dt><b>$versionNumberDigits</b></dt>
+				<dd>in file DatabaseUpdater.php, variable <a href="Database/Updater/DatabaseUpdater.html#var$versionNumberDigits">DatabaseUpdater::$versionNumberDigits</a><br>&nbsp;&nbsp;&nbsp;&nbsp;The number of digits a version number has (0004.sql)</dd>
 					</dl>
 	</div>
 	<a href="elementindex_Database.html#top">top</a><br>

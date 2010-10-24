@@ -13,7 +13,7 @@
   <tr>
     <td class="header_menu">
         
-                                                                                                                                        
+                                                                                                                                                            
                                                                                           		  [ <a href="../classtrees_File.html" class="menu">class tree: File</a> ]
 		  [ <a href="../elementindex_File.html" class="menu">index: File</a> ]
 		  	    [ <a href="../elementindex.html" class="menu">all elements</a> ]
@@ -34,6 +34,7 @@
               <a href="../li_Database.html">Database</a><br />
               <a href="../li_DataSource.html">DataSource</a><br />
               <a href="../li_Date.html">Date</a><br />
+              <a href="../li_Factory.html">Factory</a><br />
               <a href="../li_File.html">File</a><br />
               <a href="../li_Logger.html">Logger</a><br />
               <a href="../li_Profiler.html">Profiler</a><br />
@@ -138,7 +139,7 @@ Source Location: /File/FileRetriever.php<br /><br />
 <a name="class_details"></a>
 <h3>Class Details</h3>
 <div class="tags">
-[line 51]<br />
+[line 50]<br />
 The FileRetriever actually fetches a files, and returns the File object.<br /><br /><p>There is a static File::create() class which actually instantiates the  FileRetriever and gets the file.  The FileRetriever is a class on it's own, so it can be passed to other  objects, so they don't have to call the static File:: functions (which  makes them rather difficult to test.)</p><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
@@ -165,7 +166,7 @@ The FileRetriever actually fetches a files, and returns the File object.<br /><b
 
   <hr />
 	<a name="methodcreate"></a>
-	<h3>method create <span class="smalllinenumber">[line 86]</span></h3>
+	<h3>method create <span class="smalllinenumber">[line 84]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -213,7 +214,7 @@ $maxFileSize = 10000000])</code>
   </div>
   <hr />
 	<a name="methodcreateFromFormUpload"></a>
-	<h3>method createFromFormUpload <span class="smalllinenumber">[line 115]</span></h3>
+	<h3>method createFromFormUpload <span class="smalllinenumber">[line 112]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -258,7 +259,7 @@ $maxFileSize = 100000])</code>
   </div>
   <hr />
 	<a name="methodcreateFromHttp"></a>
-	<h3>method createFromHttp <span class="smalllinenumber">[line 176]</span></h3>
+	<h3>method createFromHttp <span class="smalllinenumber">[line 180]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -267,8 +268,9 @@ array
 $url, [array
 $getParameters = null], [array
 $postParameters = null], [int
-$port = 80], [int
-$timeout = 30])</code>
+$port = null], [int
+$timeout = null], [array
+$headers = null])</code>
     </td></tr></table>
     </td></tr></table><br />
 	
@@ -308,12 +310,17 @@ $timeout = 30])</code>
           <tr>
         <td class="type">int&nbsp;&nbsp;</td>
         <td><b>$port</b>&nbsp;&nbsp;</td>
-        <td></td>
+        <td>If null, the default of 80 is used.</td>
       </tr>
           <tr>
         <td class="type">int&nbsp;&nbsp;</td>
         <td><b>$timeout</b>&nbsp;&nbsp;</td>
-        <td>in seconds</td>
+        <td>in seconds. If null, the default of 30 is used.</td>
+      </tr>
+          <tr>
+        <td class="type">array&nbsp;&nbsp;</td>
+        <td><b>$headers</b>&nbsp;&nbsp;</td>
+        <td>optional array of lines to add to the header. Eg: array('Content-type: text/plain', 'Content-length: 100')</td>
       </tr>
         </table>
     </div><br />
@@ -321,7 +328,7 @@ $timeout = 30])</code>
   </div>
   <hr />
 	<a name="methodcreateFromLocalFile"></a>
-	<h3>method createFromLocalFile <span class="smalllinenumber">[line 156]</span></h3>
+	<h3>method createFromLocalFile <span class="smalllinenumber">[line 159]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -360,7 +367,7 @@ $srcUri)</code>
   </div>
   <hr />
 	<a name="methodgetFile"></a>
-	<h3>method getFile <span class="smalllinenumber">[line 68]</span></h3>
+	<h3>method getFile <span class="smalllinenumber">[line 67]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -402,7 +409,7 @@ $uri)</code>
   </div>
   <hr />
 	<a name="methodprocess"></a>
-	<h3>method process <span class="smalllinenumber">[line 61]</span></h3>
+	<h3>method process <span class="smalllinenumber">[line 59]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">

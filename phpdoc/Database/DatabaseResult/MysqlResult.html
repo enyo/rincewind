@@ -14,7 +14,7 @@
     <td class="header_menu">
         
                                                                             
-                                                                                                                                                      		  [ <a href="../../classtrees_Database.html" class="menu">class tree: Database</a> ]
+                                                                                                                                                                          		  [ <a href="../../classtrees_Database.html" class="menu">class tree: Database</a> ]
 		  [ <a href="../../elementindex_Database.html" class="menu">index: Database</a> ]
 		  	    [ <a href="../../elementindex.html" class="menu">all elements</a> ]
     </td>
@@ -34,6 +34,7 @@
               <a href="../../li_Database.html">Database</a><br />
               <a href="../../li_DataSource.html">DataSource</a><br />
               <a href="../../li_Date.html">Date</a><br />
+              <a href="../../li_Factory.html">Factory</a><br />
               <a href="../../li_File.html">File</a><br />
               <a href="../../li_Logger.html">Logger</a><br />
               <a href="../../li_Profiler.html">Profiler</a><br />
@@ -64,6 +65,12 @@
 			<a href="../../Database/Exceptions/_Database---DatabaseExceptions.php.html">		DatabaseExceptions.php
 		</a><br>
 	  </div><br />
+	subpackage <b>Updater</b><br>  <div class="package">
+			<a href="../../Database/Updater/_DatabaseUpdater---DatabaseUpdate.php.html">		DatabaseUpdate.php
+		</a><br>
+			<a href="../../Database/Updater/_DatabaseUpdater---DatabaseUpdater.php.html">		DatabaseUpdater.php
+		</a><br>
+	  </div><br />
       
             <b>Interfaces:</b><br />
         <div class="package">
@@ -77,6 +84,7 @@
         <div class="package">
 		    		<a href="../../Database/Database.html">Database</a><br />
 	    		<a href="../../Database/Mysql.html">Mysql</a><br />
+	    		<a href="../../Database/Postgresql.html">Postgresql</a><br />
 	  </div>
   <div class="package">
 	Exceptions<br />	    &nbsp;&nbsp;		<a href="../../Database/Exceptions/SqlConnectionException.html">SqlConnectionException</a><br />
@@ -86,6 +94,13 @@
   <div class="package">
 	DatabaseResult<br />	    &nbsp;&nbsp;		<a href="../../Database/DatabaseResult/DatabaseResult.html">DatabaseResult</a><br />
 	    &nbsp;&nbsp;		<a href="../../Database/DatabaseResult/MysqlResult.html">MysqlResult</a><br />
+	    &nbsp;&nbsp;		<a href="../../Database/DatabaseResult/PostgresqlResult.html">PostgresqlResult</a><br />
+	  </div>
+  <div class="package">
+	Updater<br />	    &nbsp;&nbsp;		<a href="../../Database/Updater/DatabaseNotInitializedException.html">DatabaseNotInitializedException</a><br />
+	    &nbsp;&nbsp;		<a href="../../Database/Updater/DatabaseUpdate.html">DatabaseUpdate</a><br />
+	    &nbsp;&nbsp;		<a href="../../Database/Updater/DatabaseUpdater.html">DatabaseUpdater</a><br />
+	    &nbsp;&nbsp;		<a href="../../Database/Updater/DatabaseUpdaterException.html">DatabaseUpdaterException</a><br />
 	  </div>
                 </td>
     <td>
@@ -148,6 +163,12 @@ Source Location: /DatabaseResult/MysqlResult.php<br /><br />
 <h4>Class: <a href="../../Database/DatabaseResult/DatabaseResult.html">DatabaseResult</a></h4>
 <dl>
 <dt>
+  <a href="../../Database/DatabaseResult/DatabaseResult.html#var$currentRowNumber">DatabaseResult::$currentRowNumber</a>
+  </dt>
+<dd>
+   
+</dd>
+<dt>
   <a href="../../Database/DatabaseResult/DatabaseResult.html#var$result">DatabaseResult::$result</a>
   </dt>
 <dd>
@@ -196,7 +217,7 @@ Source Location: /DatabaseResult/MysqlResult.php<br /><br />
 <a name="class_details"></a>
 <h3>Class Details</h3>
 <div class="tags">
-[line 26]<br />
+[line 24]<br />
 The Mysql DatabaseResult implementation.<br /><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
@@ -220,7 +241,7 @@ The Mysql DatabaseResult implementation.<br /><br /><br /><br />
 
   <hr />
 	<a name="methodfetchArray"></a>
-	<h3>method fetchArray <span class="smalllinenumber">[line 40]</span></h3>
+	<h3>method fetchArray <span class="smalllinenumber">[line 33]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -230,7 +251,7 @@ $rowNumber = null])</code>
     </td></tr></table>
     </td></tr></table><br />
 	
-		If you pass a row number, seek() is called.<br /><br /><br /><br />
+		If you pass a row number, seek() is called.<br /><br /><p>The result is then advanced to the next row.</p><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
@@ -256,7 +277,7 @@ $rowNumber = null])</code>
   </div>
   <hr />
 	<a name="methodfetchResult"></a>
-	<h3>method fetchResult <span class="smalllinenumber">[line 51]</span></h3>
+	<h3>method fetchResult <span class="smalllinenumber">[line 49]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -292,7 +313,7 @@ $field)</code>
   </div>
   <hr />
 	<a name="methodfree"></a>
-	<h3>method free <span class="smalllinenumber">[line 73]</span></h3>
+	<h3>method free <span class="smalllinenumber">[line 71]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -317,7 +338,7 @@ $field)</code>
   </div>
   <hr />
 	<a name="methodnumRows"></a>
-	<h3>method numRows <span class="smalllinenumber">[line 60]</span></h3>
+	<h3>method numRows <span class="smalllinenumber">[line 58]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -342,7 +363,7 @@ $field)</code>
   </div>
   <hr />
 	<a name="methodseek"></a>
-	<h3>method seek <span class="smalllinenumber">[line 67]</span></h3>
+	<h3>method seek <span class="smalllinenumber">[line 65]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">

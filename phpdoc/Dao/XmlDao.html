@@ -14,7 +14,7 @@
     <td class="header_menu">
         
                                                         
-                                                                                                                                                                          		  [ <a href="../classtrees_Dao.html" class="menu">class tree: Dao</a> ]
+                                                                                                                                                                                              		  [ <a href="../classtrees_Dao.html" class="menu">class tree: Dao</a> ]
 		  [ <a href="../elementindex_Dao.html" class="menu">index: Dao</a> ]
 		  	    [ <a href="../elementindex.html" class="menu">all elements</a> ]
     </td>
@@ -34,6 +34,7 @@
               <a href="../li_Database.html">Database</a><br />
               <a href="../li_DataSource.html">DataSource</a><br />
               <a href="../li_Date.html">Date</a><br />
+              <a href="../li_Factory.html">Factory</a><br />
               <a href="../li_File.html">File</a><br />
               <a href="../li_Logger.html">Logger</a><br />
               <a href="../li_Profiler.html">Profiler</a><br />
@@ -59,41 +60,29 @@
 		</a><br>
 			<a href="../Dao/_Dao---DaoToOneReference.php.html">		DaoToOneReference.php
 		</a><br>
-			<a href="../Dao/_Dao---FileSourceDao.php.html">		FileSourceDao.php
+			<a href="../Dao/_Dao---File---FileDao.php.html">		FileDao.php
 		</a><br>
-			<a href="../Dao/_Dao---FileSourceResultIterator.php.html">		FileSourceResultIterator.php
+			<a href="../Dao/_Dao---File---FileResultIterator.php.html">		FileResultIterator.php
 		</a><br>
-			<a href="../Dao/_Dao---Json---JsonDao.php.html">		JsonDao.php
+			<a href="../Dao/_Dao---File---JsonDao.php.html">		JsonDao.php
 		</a><br>
-			<a href="../Dao/_Dao---Json---JsonResultIterator.php.html">		JsonResultIterator.php
+			<a href="../Dao/_Dao---Sql---PostgresqlDao.php.html">		PostgresqlDao.php
 		</a><br>
-			<a href="../Dao/_Dao---Mysql---MysqlDao.php.html">		MysqlDao.php
+			<a href="../Dao/_Dao---Sql---SqlDao.php.html">		SqlDao.php
 		</a><br>
-			<a href="../Dao/_Dao---Mysql---MysqlResultIterator.php.html">		MysqlResultIterator.php
-		</a><br>
-			<a href="../Dao/_Dao---Mysql---MysqlUserDao.php.html">		MysqlUserDao.php
-		</a><br>
-			<a href="../Dao/_Dao---Postgresql---PostgresqlDao.php.html">		PostgresqlDao.php
-		</a><br>
-			<a href="../Dao/_Dao---Postgresql---PostgresqlResultIterator.php.html">		PostgresqlResultIterator.php
-		</a><br>
-			<a href="../Dao/_Dao---Postgresql---PostgresqlUserDao.php.html">		PostgresqlUserDao.php
-		</a><br>
-			<a href="../Dao/_Dao---SqlDao.php.html">		SqlDao.php
-		</a><br>
-			<a href="../Dao/_Dao---SqlResultIterator.php.html">		SqlResultIterator.php
+			<a href="../Dao/_Dao---Sql---SqlResultIterator.php.html">		SqlResultIterator.php
 		</a><br>
 			<a href="../Dao/_Dao---UserDaoInterface.php.html">		UserDaoInterface.php
 		</a><br>
-			<a href="../Dao/_Dao---Xml---XmlDao.php.html">		XmlDao.php
+			<a href="../Dao/_Dao---File---XmlDao.php.html">		XmlDao.php
 		</a><br>
-			<a href="../Dao/_Dao---Xml---XmlResultIterator.php.html">		XmlResultIterator.php
+	  </div><br />
+	subpackage <b>DaoFactory</b><br>  <div class="package">
+			<a href="../Dao/DaoFactory/_Factory---DaoFactory.php.html">		DaoFactory.php
 		</a><br>
 	  </div><br />
 	subpackage <b>Exceptions</b><br>  <div class="package">
 			<a href="../Dao/Exceptions/_Dao---DaoExceptions.php.html">		DaoExceptions.php
-		</a><br>
-			<a href="../Dao/Exceptions/_Dao---Json---JsonDaoExceptions.php.html">		JsonDaoExceptions.php
 		</a><br>
 	  </div><br />
 	subpackage <b>Record</b><br>  <div class="package">
@@ -126,20 +115,13 @@
 	    		<a href="../Dao/DaoResultIterator.html">DaoResultIterator</a><br />
 	    		<a href="../Dao/DaoToManyReference.html">DaoToManyReference</a><br />
 	    		<a href="../Dao/DaoToOneReference.html">DaoToOneReference</a><br />
-	    		<a href="../Dao/FileSourceDao.html">FileSourceDao</a><br />
-	    		<a href="../Dao/FileSourceResultIterator.html">FileSourceResultIterator</a><br />
+	    		<a href="../Dao/FileDao.html">FileDao</a><br />
+	    		<a href="../Dao/FileResultIterator.html">FileResultIterator</a><br />
 	    		<a href="../Dao/JsonDao.html">JsonDao</a><br />
-	    		<a href="../Dao/JsonResultIterator.html">JsonResultIterator</a><br />
-	    		<a href="../Dao/MysqlDao.html">MysqlDao</a><br />
-	    		<a href="../Dao/MysqlResultIterator.html">MysqlResultIterator</a><br />
-	    		<a href="../Dao/MysqlUserDao.html">MysqlUserDao</a><br />
 	    		<a href="../Dao/PostgresqlDao.html">PostgresqlDao</a><br />
-	    		<a href="../Dao/PostgresqlResultIterator.html">PostgresqlResultIterator</a><br />
-	    		<a href="../Dao/PostgresqlUserDao.html">PostgresqlUserDao</a><br />
 	    		<a href="../Dao/SqlDao.html">SqlDao</a><br />
 	    		<a href="../Dao/SqlResultIterator.html">SqlResultIterator</a><br />
 	    		<a href="../Dao/XmlDao.html">XmlDao</a><br />
-	    		<a href="../Dao/XmlResultIterator.html">XmlResultIterator</a><br />
 	  </div>
   <div class="package">
 	Exceptions<br />	    &nbsp;&nbsp;		<a href="../Dao/Exceptions/DaoException.html">DaoException</a><br />
@@ -151,6 +133,9 @@
 	    &nbsp;&nbsp;		<a href="../Dao/Exceptions/XmlDaoException.html">XmlDaoException</a><br />
 	  </div>
   <div class="package">
+	DaoFactory<br />	    &nbsp;&nbsp;		<a href="../Dao/DaoFactory/DaoFactory.html">DaoFactory</a><br />
+	  </div>
+  <div class="package">
 	Record<br />	    &nbsp;&nbsp;		<a href="../Dao/Record/Record.html">Record</a><br />
 	    &nbsp;&nbsp;		<a href="../Dao/Record/UserRecord.html">UserRecord</a><br />
 	  </div>
@@ -159,7 +144,7 @@
       <table cellpadding="10" cellspacing="0" width="100%" border="0"><tr><td valign="top">
 
 <h1>Class: XmlDao</h1>
-Source Location: /Dao/Xml/XmlDao.php<br /><br />
+Source Location: /Dao/File/XmlDao.php<br /><br />
 
 
 <table width="100%" border="0">
@@ -168,7 +153,7 @@ Source Location: /Dao/Xml/XmlDao.php<br /><br />
 <h3><a href="#class_details">Class Overview</a></h3>
 <pre><a href="../Dao/Dao.html">Dao</a>
    |
-   --<a href="../Dao/FileSourceDao.html">FileSourceDao</a>
+   --<a href="../Dao/FileDao.html">FileDao</a>
       |
       --XmlDao</pre><br />
 <div class="description">The XmlDao implementation of a FileDao</div><br /><br />
@@ -195,7 +180,6 @@ Source Location: /Dao/Xml/XmlDao.php<br /><br />
 <td valign="top">
 <h3><a href="#class_methods">Methods</a></h3>
 <ul>
-    <li><a href="../Dao/XmlDao.html#methodcreateIterator">createIterator</a></li>
     <li><a href="../Dao/XmlDao.html#methodget">get</a></li>
     <li><a href="../Dao/XmlDao.html#methodgetData">getData</a></li>
     <li><a href="../Dao/XmlDao.html#methodinterpretFileContent">interpretFileContent</a></li>
@@ -281,6 +265,18 @@ Source Location: /Dao/Xml/XmlDao.php<br /><br />
    
 </dd>
 <dt>
+  <a href="../Dao/Dao.html#constREF">Dao::REF</a>
+</dt>
+<dd>
+   
+</dd>
+<dt>
+  <a href="../Dao/Dao.html#constREFERENCE">Dao::REFERENCE</a>
+</dt>
+<dd>
+   
+</dd>
+<dt>
   <a href="../Dao/Dao.html#constSEQ">Dao::SEQ</a>
 </dt>
 <dd>
@@ -329,10 +325,10 @@ Source Location: /Dao/Xml/XmlDao.php<br /><br />
 <td valign="top">
 <h3>Inherited Variables</h3>
 <div class="tags">
-<h4>Class: <a href="../Dao/FileSourceDao.html">FileSourceDao</a></h4>
+<h4>Class: <a href="../Dao/FileDao.html">FileDao</a></h4>
 <dl>
 <dt>
-  <a href="../Dao/FileSourceDao.html#var$fileDataSource">FileSourceDao::$fileDataSource</a>
+  <a href="../Dao/FileDao.html#var$fileDataSource">FileDao::$fileDataSource</a>
   </dt>
 <dd>
    
@@ -368,12 +364,6 @@ Source Location: /Dao/Xml/XmlDao.php<br /><br />
 </dd>
 <dt>
   <a href="../Dao/Dao.html#var$defaultValueAttributes">Dao::$defaultValueAttributes</a>
-  </dt>
-<dd>
-   
-</dd>
-<dt>
-  <a href="../Dao/Dao.html#var$logger">Dao::$logger</a>
   </dt>
 <dd>
    
@@ -415,130 +405,136 @@ Source Location: /Dao/Xml/XmlDao.php<br /><br />
 <td valign="top">
 <h3>Inherited Methods</h3>
 <div class="tags">
-<h4>Class: <a href="../Dao/FileSourceDao.html">FileSourceDao</a></h4>
+<h4>Class: <a href="../Dao/FileDao.html">FileDao</a></h4>
 <dl>
     <dt>
-    <a href="../Dao/FileSourceDao.html#method__construct">FileSourceDao::__construct()</a>
+    <a href="../Dao/FileDao.html#method__construct">FileDao::__construct()</a>
   </dt>
   <dd>
     
   </dd>
     <dt>
-    <a href="../Dao/FileSourceDao.html#methodbeginTransaction">FileSourceDao::beginTransaction()</a>
+    <a href="../Dao/FileDao.html#methodbeginTransaction">FileDao::beginTransaction()</a>
   </dt>
   <dd>
     Overwrite this if your file connection allows transaction.
   </dd>
     <dt>
-    <a href="../Dao/FileSourceDao.html#methodcommit">FileSourceDao::commit()</a>
+    <a href="../Dao/FileDao.html#methodcommit">FileDao::commit()</a>
   </dt>
   <dd>
     Overwrite this if your file connection allows transaction.
   </dd>
     <dt>
-    <a href="../Dao/FileSourceDao.html#methodconvertRemoteValueToTimestamp">FileSourceDao::convertRemoteValueToTimestamp()</a>
+    <a href="../Dao/FileDao.html#methodconvertRemoteValueToTimestamp">FileDao::convertRemoteValueToTimestamp()</a>
   </dt>
   <dd>
     Most file data connections will transfer time values as timestamps.
   </dd>
     <dt>
-    <a href="../Dao/FileSourceDao.html#methodcreateDao">FileSourceDao::createDao()</a>
+    <a href="../Dao/FileDao.html#methodcreateDao">FileDao::createDao()</a>
   </dt>
   <dd>
     Creates a Dao.
   </dd>
     <dt>
-    <a href="../Dao/FileSourceDao.html#methodcreateIterator">FileSourceDao::createIterator()</a>
+    <a href="../Dao/FileDao.html#methodcreateIterator">FileDao::createIterator()</a>
   </dt>
   <dd>
-    Creates an iterator from a data hash.
+    Creates an iterator for a data hash.
   </dd>
     <dt>
-    <a href="../Dao/FileSourceDao.html#methoddelete">FileSourceDao::delete()</a>
+    <a href="../Dao/FileDao.html#methoddelete">FileDao::delete()</a>
   </dt>
   <dd>
     Deletes a record in the database using the id.
   </dd>
     <dt>
-    <a href="../Dao/FileSourceDao.html#methodescapeAttributeName">FileSourceDao::escapeAttributeName()</a>
+    <a href="../Dao/FileDao.html#methodescapeAttributeName">FileDao::escapeAttributeName()</a>
   </dt>
   <dd>
     By default does nothing for FileDaos.
   </dd>
     <dt>
-    <a href="../Dao/FileSourceDao.html#methodescapeResourceName">FileSourceDao::escapeResourceName()</a>
+    <a href="../Dao/FileDao.html#methodescapeResourceName">FileDao::escapeResourceName()</a>
   </dt>
   <dd>
     Does nothing by default.
   </dd>
     <dt>
-    <a href="../Dao/FileSourceDao.html#methodexportMap">FileSourceDao::exportMap()</a>
+    <a href="../Dao/FileDao.html#methodexportMap">FileDao::exportMap()</a>
   </dt>
   <dd>
     This function exports every values of a map
   </dd>
     <dt>
-    <a href="../Dao/FileSourceDao.html#methodfind">FileSourceDao::find()</a>
+    <a href="../Dao/FileDao.html#methodfind">FileDao::find()</a>
   </dt>
   <dd>
     This is the method to get a Record from the database.
   </dd>
     <dt>
-    <a href="../Dao/FileSourceDao.html#methodgenerateSortString">FileSourceDao::generateSortString()</a>
+    <a href="../Dao/FileDao.html#methodgenerateSortString">FileDao::generateSortString()</a>
   </dt>
   <dd>
     This method takes the $sort attribute and returns a typical 'order by ' SQL string.
   </dd>
     <dt>
-    <a href="../Dao/FileSourceDao.html#methodgetData">FileSourceDao::getData()</a>
+    <a href="../Dao/FileDao.html#methodgetData">FileDao::getData()</a>
   </dt>
   <dd>
     Same as get() but returns an array with the data instead of a record
   </dd>
     <dt>
-    <a href="../Dao/FileSourceDao.html#methodgetFileDataSource">FileSourceDao::getFileDataSource()</a>
+    <a href="../Dao/FileDao.html#methodgetFileDataSource">FileDao::getFileDataSource()</a>
   </dt>
   <dd>
     Returns the fileDataSource.
   </dd>
     <dt>
-    <a href="../Dao/FileSourceDao.html#methodgetIterator">FileSourceDao::getIterator()</a>
+    <a href="../Dao/FileDao.html#methodgetFromDataSource">FileDao::getFromDataSource()</a>
+  </dt>
+  <dd>
+    Uses the $fileDataSource to get the data.
+  </dd>
+    <dt>
+    <a href="../Dao/FileDao.html#methodgetIterator">FileDao::getIterator()</a>
   </dt>
   <dd>
     The same as get, but returns an iterator to go through all the rows.
   </dd>
     <dt>
-    <a href="../Dao/FileSourceDao.html#methodgetIteratorFromData">FileSourceDao::getIteratorFromData()</a>
+    <a href="../Dao/FileDao.html#methodgetIteratorFromData">FileDao::getIteratorFromData()</a>
   </dt>
   <dd>
     Returns an Iterator for data
   </dd>
     <dt>
-    <a href="../Dao/FileSourceDao.html#methodgetTotalCount">FileSourceDao::getTotalCount()</a>
+    <a href="../Dao/FileDao.html#methodgetTotalCount">FileDao::getTotalCount()</a>
   </dt>
   <dd>
     Returns the total row count in the resource the Dao is assigned to.
   </dd>
     <dt>
-    <a href="../Dao/FileSourceDao.html#methodinsert">FileSourceDao::insert()</a>
+    <a href="../Dao/FileDao.html#methodinsert">FileDao::insert()</a>
   </dt>
   <dd>
     Inserts a record in the database, and updates the record with the new data (in  case some default values of the database have been set.)
   </dd>
     <dt>
-    <a href="../Dao/FileSourceDao.html#methodinterpretFileContent">FileSourceDao::interpretFileContent()</a>
+    <a href="../Dao/FileDao.html#methodinterpretFileContent">FileDao::interpretFileContent()</a>
   </dt>
   <dd>
     Converts the content returned by the file factory into a usable data array.
   </dd>
     <dt>
-    <a href="../Dao/FileSourceDao.html#methodrollback">FileSourceDao::rollback()</a>
+    <a href="../Dao/FileDao.html#methodrollback">FileDao::rollback()</a>
   </dt>
   <dd>
     Overwrite this if your file connection allows transaction.
   </dd>
     <dt>
-    <a href="../Dao/FileSourceDao.html#methodupdate">FileSourceDao::update()</a>
+    <a href="../Dao/FileDao.html#methodupdate">FileDao::update()</a>
   </dt>
   <dd>
     Updates a record in the database using the id.
@@ -551,12 +547,6 @@ Source Location: /Dao/Xml/XmlDao.php<br /><br />
   </dt>
   <dd>
     Has to be called from any extended Dao to make sure everything gets setup properly
-  </dd>
-    <dt>
-    <a href="../Dao/Dao.html#methodaddReference">Dao::addReference()</a>
-  </dt>
-  <dd>
-    Adds a reference definition. This method should be called inside setupReferences().
   </dd>
     <dt>
     <a href="../Dao/Dao.html#methodafterDelete">Dao::afterDelete()</a>
@@ -619,12 +609,6 @@ Source Location: /Dao/Xml/XmlDao.php<br /><br />
     Creates a Dao.
   </dd>
     <dt>
-    <a href="../Dao/Dao.html#methoddebug">Dao::debug()</a>
-  </dt>
-  <dd>
-    
-  </dd>
-    <dt>
     <a href="../Dao/Dao.html#methoddeleteById">Dao::deleteById()</a>
   </dt>
   <dd>
@@ -677,6 +661,12 @@ Source Location: /Dao/Xml/XmlDao.php<br /><br />
   </dt>
   <dd>
     Escapes a resource name.
+  </dd>
+    <dt>
+    <a href="../Dao/Dao.html#methodexportSequence">Dao::exportSequence()</a>
+  </dt>
+  <dd>
+    Exports a sequence. The generic Dao really can't handle this.
   </dd>
     <dt>
     <a href="../Dao/Dao.html#methodexportString">Dao::exportString()</a>
@@ -739,6 +729,12 @@ Source Location: /Dao/Xml/XmlDao.php<br /><br />
     Returns the attributes array
   </dd>
     <dt>
+    <a href="../Dao/Dao.html#methodgetAttributeType">Dao::getAttributeType()</a>
+  </dt>
+  <dd>
+    Returns the type of an attribute (eg.: Dao::INT, etc..)
+  </dd>
+    <dt>
     <a href="../Dao/Dao.html#methodgetById">Dao::getById()</a>
   </dt>
   <dd>
@@ -778,13 +774,13 @@ Source Location: /Dao/Xml/XmlDao.php<br /><br />
     <a href="../Dao/Dao.html#methodgetReference">Dao::getReference()</a>
   </dt>
   <dd>
-    Returns the reference for an attribute
+    Returns the reference for an attribute.
   </dd>
     <dt>
-    <a href="../Dao/Dao.html#methodgetReferences">Dao::getReferences()</a>
+    <a href="../Dao/Dao.html#methodgetResourceName">Dao::getResourceName()</a>
   </dt>
   <dd>
-    
+    Returns the resource name
   </dd>
     <dt>
     <a href="../Dao/Dao.html#methodimportAttributeName">Dao::importAttributeName()</a>
@@ -859,12 +855,6 @@ Source Location: /Dao/Xml/XmlDao.php<br /><br />
     This is a helper class that defines if an array is a &quot;vector&quot; (has only integer indices starting from 0) or an associative array.
   </dd>
     <dt>
-    <a href="../Dao/Dao.html#methodlog">Dao::log()</a>
-  </dt>
-  <dd>
-    
-  </dd>
-    <dt>
     <a href="../Dao/Dao.html#methodnotNull">Dao::notNull()</a>
   </dt>
   <dd>
@@ -875,18 +865,6 @@ Source Location: /Dao/Xml/XmlDao.php<br /><br />
   </dt>
   <dd>
     Goes through the data array returned from the datasource, and converts the values that are necessary.
-  </dd>
-    <dt>
-    <a href="../Dao/Dao.html#methodsetLogger">Dao::setLogger()</a>
-  </dt>
-  <dd>
-    
-  </dd>
-    <dt>
-    <a href="../Dao/Dao.html#methodsetLoggerFactory">Dao::setLoggerFactory()</a>
-  </dt>
-  <dd>
-    
   </dd>
     <dt>
     <a href="../Dao/Dao.html#methodsetupReferences">Dao::setupReferences()</a>
@@ -916,7 +894,7 @@ Source Location: /Dao/Xml/XmlDao.php<br /><br />
 <a name="class_details"></a>
 <h3>Class Details</h3>
 <div class="tags">
-[line 45]<br />
+[line 34]<br />
 The XmlDao implementation of a FileDao<br /><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
@@ -939,44 +917,8 @@ The XmlDao implementation of a FileDao<br /><br /><br /><br />
 <div class="tags">
 
   <hr />
-	<a name="methodcreateIterator"></a>
-	<h3>method createIterator <span class="smalllinenumber">[line 172]</span></h3>
-	<div class="function">
-    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
-    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
-		<code><a href="../Dao/XmlResultIterator.html">XmlResultIterator</a> createIterator(
-array
-$data)</code>
-    </td></tr></table>
-    </td></tr></table><br />
-	
-		Creates an iterator for a Xml data hash.<br /><br /><br /><br />
-<h4>Tags:</h4>
-<div class="tags">
-<table border="0" cellspacing="0" cellpadding="0">
-  <tr>
-    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
-  </tr>
-</table>
-</div>
-<br /><br />
-
-	Overrides <a href="../Dao/FileSourceDao.html#methodcreateIterator">FileSourceDao::createIterator()</a> (Creates an iterator from a data hash.)<br /><br />
-        <h4>Parameters:</h4>
-    <div class="tags">
-    <table border="0" cellspacing="0" cellpadding="0">
-          <tr>
-        <td class="type">array&nbsp;&nbsp;</td>
-        <td><b>$data</b>&nbsp;&nbsp;</td>
-        <td></td>
-      </tr>
-        </table>
-    </div><br />
-        <div class="top">[ <a href="#top">Top</a> ]</div>
-  </div>
-  <hr />
 	<a name="methodget"></a>
-	<h3>method get <span class="smalllinenumber">[line 148]</span></h3>
+	<h3>method get <span class="smalllinenumber">[line 134]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1024,7 +966,7 @@ $resourceName = null])</code>
   </div>
   <hr />
 	<a name="methodgetData"></a>
-	<h3>method getData <span class="smalllinenumber">[line 161]</span></h3>
+	<h3>method getData <span class="smalllinenumber">[line 147]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1047,7 +989,7 @@ $resourceName = null])</code>
 </div>
 <br /><br />
 
-	Overrides <a href="../Dao/FileSourceDao.html#methodgetData">FileSourceDao::getData()</a> (Same as get() but returns an array with the data instead of a record)<br /><br />
+	Overrides <a href="../Dao/FileDao.html#methodgetData">FileDao::getData()</a> (Same as get() but returns an array with the data instead of a record)<br /><br />
         <h4>Parameters:</h4>
     <div class="tags">
     <table border="0" cellspacing="0" cellpadding="0">
@@ -1072,7 +1014,7 @@ $resourceName = null])</code>
   </div>
   <hr />
 	<a name="methodinterpretFileContent"></a>
-	<h3>method interpretFileContent <span class="smalllinenumber">[line 56]</span></h3>
+	<h3>method interpretFileContent <span class="smalllinenumber">[line 44]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -1087,13 +1029,13 @@ $content)</code>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
   <tr>
-    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
   </tr>
 </table>
 </div>
 <br /><br />
 
-	Overrides <a href="../Dao/FileSourceDao.html#methodinterpretFileContent">FileSourceDao::interpretFileContent()</a> (Converts the content returned by the file factory into a usable data array.)<br /><br />
+	Overrides <a href="../Dao/FileDao.html#methodinterpretFileContent">FileDao::interpretFileContent()</a> (Converts the content returned by the file factory into a usable data array.)<br /><br />
         <h4>Parameters:</h4>
     <div class="tags">
     <table border="0" cellspacing="0" cellpadding="0">

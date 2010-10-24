@@ -13,7 +13,7 @@
   <tr>
     <td class="header_menu">
         
-                                                                                                                                                            
+                                                                                                                                                                                
                                                                       		  [ <a href="classtrees_Logger.html" class="menu">class tree: Logger</a> ]
 		  [ <a href="elementindex_Logger.html" class="menu">index: Logger</a> ]
 		  	    [ <a href="elementindex.html" class="menu">all elements</a> ]
@@ -34,6 +34,7 @@
               <a href="li_DataSource.html">DataSource</a><br />
               <a href="li_Database.html">Database</a><br />
               <a href="li_Date.html">Date</a><br />
+              <a href="li_Factory.html">Factory</a><br />
               <a href="li_File.html">File</a><br />
               <a href="li_Logger.html">Logger</a><br />
               <a href="li_Profiler.html">Profiler</a><br />
@@ -118,14 +119,16 @@
 	<div>
 		<h2>d</h2>
 		<dl>
-							<dt><b>DEBUG</b></dt>
-				<dd>in file Logger.php, class constant <a href="Logger/Logger.html#constDEBUG">Logger::DEBUG</a><br>&nbsp;&nbsp;&nbsp;&nbsp;The different Log levels.</dd>
 							<dt><b>debug</b></dt>
 				<dd>in file Logger.php, method <a href="Logger/Logger.html#methoddebug">Logger::debug()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Log a debug message</dd>
 							<dt><b>debug</b></dt>
 				<dd>in file Log.php, method <a href="Logger/Log.html#methoddebug">Log::debug()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Logs a debug message in the logger for the specific context</dd>
+							<dt><b>DEBUG</b></dt>
+				<dd>in file Logger.php, class constant <a href="Logger/Logger.html#constDEBUG">Logger::DEBUG</a></dd>
 							<dt><b>doLog</b></dt>
 				<dd>in file Logger.php, method <a href="Logger/Logger.html#methoddoLog">Logger::doLog()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;The actual method that logs the message</dd>
+							<dt><b>doLog</b></dt>
+				<dd>in file Log.php, method <a href="Logger/Log.html#methoddoLog">Log::doLog()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Calls the specified method on each logger for the specified context provided.</dd>
 							<dt><b>doLog</b></dt>
 				<dd>in file FileLogger.php, method <a href="Logger/FileLogger.html#methoddoLog">FileLogger::doLog()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Logs the message to a file.</dd>
 					</dl>
@@ -139,7 +142,7 @@
 							<dt><b>error</b></dt>
 				<dd>in file Logger.php, method <a href="Logger/Logger.html#methoderror">Logger::error()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Log an error</dd>
 							<dt><b>ERROR</b></dt>
-				<dd>in file Logger.php, class constant <a href="Logger/Logger.html#constERROR">Logger::ERROR</a><br>&nbsp;&nbsp;&nbsp;&nbsp;The different Log levels.</dd>
+				<dd>in file Logger.php, class constant <a href="Logger/Logger.html#constERROR">Logger::ERROR</a></dd>
 							<dt><b>error</b></dt>
 				<dd>in file Log.php, method <a href="Logger/Log.html#methoderror">Log::error()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Logs an error message in the logger for the specific context</dd>
 					</dl>
@@ -155,7 +158,7 @@
 							<dt><b>fatal</b></dt>
 				<dd>in file Log.php, method <a href="Logger/Log.html#methodfatal">Log::fatal()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Logs a fatal error message in the logger for the specific context</dd>
 							<dt><b>FATAL</b></dt>
-				<dd>in file Logger.php, class constant <a href="Logger/Logger.html#constFATAL">Logger::FATAL</a><br>&nbsp;&nbsp;&nbsp;&nbsp;The different Log levels.</dd>
+				<dd>in file Logger.php, class constant <a href="Logger/Logger.html#constFATAL">Logger::FATAL</a></dd>
 							<dt><b>fatal</b></dt>
 				<dd>in file Logger.php, method <a href="Logger/Logger.html#methodfatal">Logger::fatal()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Log a fatal error</dd>
 							<dt><b>FileLogger</b></dt>
@@ -180,8 +183,8 @@
 				<dd>in file FileLogger.php, method <a href="Logger/FileLogger.html#methodgetFileUri">FileLogger::getFileUri()</a></dd>
 							<dt><b>getLevel</b></dt>
 				<dd>in file Logger.php, method <a href="Logger/Logger.html#methodgetLevel">Logger::getLevel()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns the current level for logging.</dd>
-							<dt><b>getLogger</b></dt>
-				<dd>in file Log.php, method <a href="Logger/Log.html#methodgetLogger">Log::getLogger()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns a logger for a specific context.</dd>
+							<dt><b>getLoggers</b></dt>
+				<dd>in file Log.php, method <a href="Logger/Log.html#methodgetLoggers">Log::getLoggers()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns a list of logger for a specific context.</dd>
 					</dl>
 	</div>
 	<a href="elementindex_Logger.html#top">top</a><br>
@@ -193,7 +196,7 @@
 							<dt><b>$isEnabled</b></dt>
 				<dd>in file Log.php, variable <a href="Logger/Log.html#var$isEnabled">Log::$isEnabled</a><br>&nbsp;&nbsp;&nbsp;&nbsp;This is a simple bool, to be able to check quickly if logging has been enabled or not.</dd>
 							<dt><b>INFO</b></dt>
-				<dd>in file Logger.php, class constant <a href="Logger/Logger.html#constINFO">Logger::INFO</a><br>&nbsp;&nbsp;&nbsp;&nbsp;The different Log levels.</dd>
+				<dd>in file Logger.php, class constant <a href="Logger/Logger.html#constINFO">Logger::INFO</a></dd>
 							<dt><b>info</b></dt>
 				<dd>in file Log.php, method <a href="Logger/Log.html#methodinfo">Log::info()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Logs an info message in the logger for the specific context</dd>
 							<dt><b>info</b></dt>
@@ -211,7 +214,7 @@
 							<dt><b>$levelStrings</b></dt>
 				<dd>in file FileLogger.php, variable <a href="Logger/FileLogger.html#var$levelStrings">FileLogger::$levelStrings</a><br>&nbsp;&nbsp;&nbsp;&nbsp;A list of strings for the different levels, used in the log file.</dd>
 							<dt><b>$loggers</b></dt>
-				<dd>in file Log.php, variable <a href="Logger/Log.html#var$loggers">Log::$loggers</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Contains a list of loggers for each context.</dd>
+				<dd>in file Log.php, variable <a href="Logger/Log.html#var$loggers">Log::$loggers</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Contains a list of lists of loggers for each context.</dd>
 							<dt><b>log</b></dt>
 				<dd>in file Logger.php, method <a href="Logger/Logger.html#methodlog">Logger::log()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;The actual method that logs the message</dd>
 							<dt><b>Log</b></dt>
@@ -253,7 +256,7 @@
 							<dt><b>warn</b></dt>
 				<dd>in file Logger.php, method <a href="Logger/Logger.html#methodwarn">Logger::warn()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Alias for warning</dd>
 							<dt><b>WARNING</b></dt>
-				<dd>in file Logger.php, class constant <a href="Logger/Logger.html#constWARNING">Logger::WARNING</a><br>&nbsp;&nbsp;&nbsp;&nbsp;The different Log levels.</dd>
+				<dd>in file Logger.php, class constant <a href="Logger/Logger.html#constWARNING">Logger::WARNING</a></dd>
 							<dt><b>warning</b></dt>
 				<dd>in file Logger.php, method <a href="Logger/Logger.html#methodwarning">Logger::warning()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Log a warning</dd>
 							<dt><b>warning</b></dt>

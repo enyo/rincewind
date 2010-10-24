@@ -14,7 +14,7 @@
     <td class="header_menu">
         
                                                                             
-                                                                                                                                                      		  [ <a href="../classtrees_Database.html" class="menu">class tree: Database</a> ]
+                                                                                                                                                                          		  [ <a href="../classtrees_Database.html" class="menu">class tree: Database</a> ]
 		  [ <a href="../elementindex_Database.html" class="menu">index: Database</a> ]
 		  	    [ <a href="../elementindex.html" class="menu">all elements</a> ]
     </td>
@@ -34,6 +34,7 @@
               <a href="../li_Database.html">Database</a><br />
               <a href="../li_DataSource.html">DataSource</a><br />
               <a href="../li_Date.html">Date</a><br />
+              <a href="../li_Factory.html">Factory</a><br />
               <a href="../li_File.html">File</a><br />
               <a href="../li_Logger.html">Logger</a><br />
               <a href="../li_Profiler.html">Profiler</a><br />
@@ -64,6 +65,12 @@
 			<a href="../Database/Exceptions/_Database---DatabaseExceptions.php.html">		DatabaseExceptions.php
 		</a><br>
 	  </div><br />
+	subpackage <b>Updater</b><br>  <div class="package">
+			<a href="../Database/Updater/_DatabaseUpdater---DatabaseUpdate.php.html">		DatabaseUpdate.php
+		</a><br>
+			<a href="../Database/Updater/_DatabaseUpdater---DatabaseUpdater.php.html">		DatabaseUpdater.php
+		</a><br>
+	  </div><br />
       
             <b>Interfaces:</b><br />
         <div class="package">
@@ -77,6 +84,7 @@
         <div class="package">
 		    		<a href="../Database/Database.html">Database</a><br />
 	    		<a href="../Database/Mysql.html">Mysql</a><br />
+	    		<a href="../Database/Postgresql.html">Postgresql</a><br />
 	  </div>
   <div class="package">
 	Exceptions<br />	    &nbsp;&nbsp;		<a href="../Database/Exceptions/SqlConnectionException.html">SqlConnectionException</a><br />
@@ -86,6 +94,13 @@
   <div class="package">
 	DatabaseResult<br />	    &nbsp;&nbsp;		<a href="../Database/DatabaseResult/DatabaseResult.html">DatabaseResult</a><br />
 	    &nbsp;&nbsp;		<a href="../Database/DatabaseResult/MysqlResult.html">MysqlResult</a><br />
+	    &nbsp;&nbsp;		<a href="../Database/DatabaseResult/PostgresqlResult.html">PostgresqlResult</a><br />
+	  </div>
+  <div class="package">
+	Updater<br />	    &nbsp;&nbsp;		<a href="../Database/Updater/DatabaseNotInitializedException.html">DatabaseNotInitializedException</a><br />
+	    &nbsp;&nbsp;		<a href="../Database/Updater/DatabaseUpdate.html">DatabaseUpdate</a><br />
+	    &nbsp;&nbsp;		<a href="../Database/Updater/DatabaseUpdater.html">DatabaseUpdater</a><br />
+	    &nbsp;&nbsp;		<a href="../Database/Updater/DatabaseUpdaterException.html">DatabaseUpdaterException</a><br />
 	  </div>
                 </td>
     <td>
@@ -127,10 +142,15 @@ Source Location: /Database/DatabaseInterface.php<br /><br />
     <li><a href="../Database/DatabaseInterface.html#methodescapeColumn">escapeColumn</a></li>
     <li><a href="../Database/DatabaseInterface.html#methodescapeString">escapeString</a></li>
     <li><a href="../Database/DatabaseInterface.html#methodescapeTable">escapeTable</a></li>
+    <li><a href="../Database/DatabaseInterface.html#methodexportColumn">exportColumn</a></li>
+    <li><a href="../Database/DatabaseInterface.html#methodexportString">exportString</a></li>
+    <li><a href="../Database/DatabaseInterface.html#methodexportTable">exportTable</a></li>
+    <li><a href="../Database/DatabaseInterface.html#methodgetLastInsertId">getLastInsertId</a></li>
     <li><a href="../Database/DatabaseInterface.html#methodgetResource">getResource</a></li>
     <li><a href="../Database/DatabaseInterface.html#methodlastError">lastError</a></li>
     <li><a href="../Database/DatabaseInterface.html#methodmultiQuery">multiQuery</a></li>
     <li><a href="../Database/DatabaseInterface.html#methodquery">query</a></li>
+    <li><a href="../Database/DatabaseInterface.html#methodstartTransaction">startTransaction</a></li>
   </ul>
 </td>
 
@@ -150,7 +170,7 @@ Source Location: /Database/DatabaseInterface.php<br /><br />
 <a name="class_details"></a>
 <h3>Class Details</h3>
 <div class="tags">
-[line 24]<br />
+[line 22]<br />
 The database interface.<br /><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
@@ -174,7 +194,7 @@ The database interface.<br /><br /><br /><br />
 
   <hr />
 	<a name="methodescapeColumn"></a>
-	<h3>method escapeColumn <span class="smalllinenumber">[line 60]</span></h3>
+	<h3>method escapeColumn <span class="smalllinenumber">[line 95]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -184,12 +204,18 @@ $column)</code>
     </td></tr></table>
     </td></tr></table><br />
 	
-		Escapes a column so it can be used in a query.<br /><br /><p>IMPORTANT: You still have to put quotes around it.</p><br /><br /><br />
+		Escapes a column so it can be used in a query.<br /><br /><p>IMPORTANT: You still have to put quotes around it.  Use exportColumn() for that.</p><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
   <tr>
+    <td><b>see:</b>&nbsp;&nbsp;</td><td><a href="../Database/DatabaseInterface.html#methodexportColumn">DatabaseInterface::exportColumn()</a></td>
+  </tr>
+  <tr>
     <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+  <tr>
+    <td><b>usedby:</b>&nbsp;&nbsp;</td><td><a href="../Database/DatabaseInterface.html#methodexportColumn">DatabaseInterface::exportColumn()</a></td>
   </tr>
 </table>
 </div>
@@ -210,7 +236,7 @@ $column)</code>
   </div>
   <hr />
 	<a name="methodescapeString"></a>
-	<h3>method escapeString <span class="smalllinenumber">[line 52]</span></h3>
+	<h3>method escapeString <span class="smalllinenumber">[line 75]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -220,12 +246,18 @@ $string)</code>
     </td></tr></table>
     </td></tr></table><br />
 	
-		Escapes a string so it can be used in a query.<br /><br /><p>IMPORTANT: You still have to put quotes around it.</p><br /><br /><br />
+		Escapes a string so it can be used in a query.<br /><br /><p>IMPORTANT: You still have to put quotes around it.  Use exportString() for that.</p><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
   <tr>
+    <td><b>see:</b>&nbsp;&nbsp;</td><td><a href="../Database/DatabaseInterface.html#methodexportString">DatabaseInterface::exportString()</a></td>
+  </tr>
+  <tr>
     <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+  <tr>
+    <td><b>usedby:</b>&nbsp;&nbsp;</td><td><a href="../Database/DatabaseInterface.html#methodexportString">DatabaseInterface::exportString()</a></td>
   </tr>
 </table>
 </div>
@@ -246,7 +278,7 @@ $string)</code>
   </div>
   <hr />
 	<a name="methodescapeTable"></a>
-	<h3>method escapeTable <span class="smalllinenumber">[line 68]</span></h3>
+	<h3>method escapeTable <span class="smalllinenumber">[line 115]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -256,12 +288,18 @@ $table)</code>
     </td></tr></table>
     </td></tr></table><br />
 	
-		Escapes a table so it can be used in a query.<br /><br /><p>IMPORTANT: You still have to put quotes around it.</p><br /><br /><br />
+		Escapes a table so it can be used in a query.<br /><br /><p>IMPORTANT: You still have to put quotes around it.  Use exportTable() for that.</p><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
   <tr>
+    <td><b>see:</b>&nbsp;&nbsp;</td><td><a href="../Database/DatabaseInterface.html#methodexportTable">DatabaseInterface::exportTable()</a></td>
+  </tr>
+  <tr>
     <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+  <tr>
+    <td><b>usedby:</b>&nbsp;&nbsp;</td><td><a href="../Database/DatabaseInterface.html#methodexportTable">DatabaseInterface::exportTable()</a></td>
   </tr>
 </table>
 </div>
@@ -281,8 +319,161 @@ $table)</code>
         <div class="top">[ <a href="#top">Top</a> ]</div>
   </div>
   <hr />
+	<a name="methodexportColumn"></a>
+	<h3>method exportColumn <span class="smalllinenumber">[line 104]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>string exportColumn(
+string
+$column)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Escapes a column and puts quotes around it.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+  <tr>
+    <td><b>uses:</b>&nbsp;&nbsp;</td><td><a href="../Database/DatabaseInterface.html#methodescapeColumn">DatabaseInterface::escapeColumn()</a></td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">string&nbsp;&nbsp;</td>
+        <td><b>$column</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodexportString"></a>
+	<h3>method exportString <span class="smalllinenumber">[line 84]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>string exportString(
+string
+$string)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Escapes the string, and puts quotes around it.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+  <tr>
+    <td><b>uses:</b>&nbsp;&nbsp;</td><td><a href="../Database/DatabaseInterface.html#methodescapeString">DatabaseInterface::escapeString()</a></td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">string&nbsp;&nbsp;</td>
+        <td><b>$string</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodexportTable"></a>
+	<h3>method exportTable <span class="smalllinenumber">[line 124]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>string exportTable(
+string
+$table)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Escapes a table and puts quotes around it.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+  <tr>
+    <td><b>uses:</b>&nbsp;&nbsp;</td><td><a href="../Database/DatabaseInterface.html#methodescapeTable">DatabaseInterface::escapeTable()</a></td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">string&nbsp;&nbsp;</td>
+        <td><b>$table</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodgetLastInsertId"></a>
+	<h3>method getLastInsertId <span class="smalllinenumber">[line 59]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>int getLastInsertId(
+string
+$table)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Returns the id of the last inserted record.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">string&nbsp;&nbsp;</td>
+        <td><b>$table</b>&nbsp;&nbsp;</td>
+        <td>If possible return the last insert id for specified table.</td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
 	<a name="methodgetResource"></a>
-	<h3>method getResource <span class="smalllinenumber">[line 75]</span></h3>
+	<h3>method getResource <span class="smalllinenumber">[line 45]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -307,7 +498,7 @@ $table)</code>
   </div>
   <hr />
 	<a name="methodlastError"></a>
-	<h3>method lastError <span class="smalllinenumber">[line 82]</span></h3>
+	<h3>method lastError <span class="smalllinenumber">[line 51]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -332,7 +523,7 @@ $table)</code>
   </div>
   <hr />
 	<a name="methodmultiQuery"></a>
-	<h3>method multiQuery <span class="smalllinenumber">[line 42]</span></h3>
+	<h3>method multiQuery <span class="smalllinenumber">[line 39]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -368,7 +559,7 @@ $query)</code>
   </div>
   <hr />
 	<a name="methodquery"></a>
-	<h3>method query <span class="smalllinenumber">[line 32]</span></h3>
+	<h3>method query <span class="smalllinenumber">[line 29]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -400,6 +591,31 @@ $query)</code>
       </tr>
         </table>
     </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodstartTransaction"></a>
+	<h3>method startTransaction <span class="smalllinenumber">[line 64]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void startTransaction(
+)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Starts a transaction in the database.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
         <div class="top">[ <a href="#top">Top</a> ]</div>
   </div>
 </div><br />

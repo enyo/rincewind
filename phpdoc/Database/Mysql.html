@@ -14,7 +14,7 @@
     <td class="header_menu">
         
                                                                             
-                                                                                                                                                      		  [ <a href="../classtrees_Database.html" class="menu">class tree: Database</a> ]
+                                                                                                                                                                          		  [ <a href="../classtrees_Database.html" class="menu">class tree: Database</a> ]
 		  [ <a href="../elementindex_Database.html" class="menu">index: Database</a> ]
 		  	    [ <a href="../elementindex.html" class="menu">all elements</a> ]
     </td>
@@ -34,6 +34,7 @@
               <a href="../li_Database.html">Database</a><br />
               <a href="../li_DataSource.html">DataSource</a><br />
               <a href="../li_Date.html">Date</a><br />
+              <a href="../li_Factory.html">Factory</a><br />
               <a href="../li_File.html">File</a><br />
               <a href="../li_Logger.html">Logger</a><br />
               <a href="../li_Profiler.html">Profiler</a><br />
@@ -64,6 +65,12 @@
 			<a href="../Database/Exceptions/_Database---DatabaseExceptions.php.html">		DatabaseExceptions.php
 		</a><br>
 	  </div><br />
+	subpackage <b>Updater</b><br>  <div class="package">
+			<a href="../Database/Updater/_DatabaseUpdater---DatabaseUpdate.php.html">		DatabaseUpdate.php
+		</a><br>
+			<a href="../Database/Updater/_DatabaseUpdater---DatabaseUpdater.php.html">		DatabaseUpdater.php
+		</a><br>
+	  </div><br />
       
             <b>Interfaces:</b><br />
         <div class="package">
@@ -77,6 +84,7 @@
         <div class="package">
 		    		<a href="../Database/Database.html">Database</a><br />
 	    		<a href="../Database/Mysql.html">Mysql</a><br />
+	    		<a href="../Database/Postgresql.html">Postgresql</a><br />
 	  </div>
   <div class="package">
 	Exceptions<br />	    &nbsp;&nbsp;		<a href="../Database/Exceptions/SqlConnectionException.html">SqlConnectionException</a><br />
@@ -86,6 +94,13 @@
   <div class="package">
 	DatabaseResult<br />	    &nbsp;&nbsp;		<a href="../Database/DatabaseResult/DatabaseResult.html">DatabaseResult</a><br />
 	    &nbsp;&nbsp;		<a href="../Database/DatabaseResult/MysqlResult.html">MysqlResult</a><br />
+	    &nbsp;&nbsp;		<a href="../Database/DatabaseResult/PostgresqlResult.html">PostgresqlResult</a><br />
+	  </div>
+  <div class="package">
+	Updater<br />	    &nbsp;&nbsp;		<a href="../Database/Updater/DatabaseNotInitializedException.html">DatabaseNotInitializedException</a><br />
+	    &nbsp;&nbsp;		<a href="../Database/Updater/DatabaseUpdate.html">DatabaseUpdate</a><br />
+	    &nbsp;&nbsp;		<a href="../Database/Updater/DatabaseUpdater.html">DatabaseUpdater</a><br />
+	    &nbsp;&nbsp;		<a href="../Database/Updater/DatabaseUpdaterException.html">DatabaseUpdaterException</a><br />
 	  </div>
                 </td>
     <td>
@@ -133,16 +148,20 @@ Source Location: /Database/Mysql.php<br /><br />
 <td valign="top">
 <h3><a href="#class_methods">Methods</a></h3>
 <ul>
-    <li><a href="../Database/Mysql.html#methodbeginTransaction">beginTransaction</a></li>
     <li><a href="../Database/Mysql.html#methodclose">close</a></li>
     <li><a href="../Database/Mysql.html#methodcommit">commit</a></li>
     <li><a href="../Database/Mysql.html#methodconnect">connect</a></li>
     <li><a href="../Database/Mysql.html#methodescapeString">escapeString</a></li>
+    <li><a href="../Database/Mysql.html#methodexportColumn">exportColumn</a></li>
+    <li><a href="../Database/Mysql.html#methodexportString">exportString</a></li>
+    <li><a href="../Database/Mysql.html#methodexportTable">exportTable</a></li>
+    <li><a href="../Database/Mysql.html#methodgetLastInsertId">getLastInsertId</a></li>
     <li><a href="../Database/Mysql.html#methodlastError">lastError</a></li>
     <li><a href="../Database/Mysql.html#methodmultiQuery">multiQuery</a></li>
     <li><a href="../Database/Mysql.html#methodquery">query</a></li>
     <li><a href="../Database/Mysql.html#methodrollback">rollback</a></li>
     <li><a href="../Database/Mysql.html#methodsetCharacterSet">setCharacterSet</a></li>
+    <li><a href="../Database/Mysql.html#methodstartTransaction">startTransaction</a></li>
   </ul>
 </td>
 
@@ -196,7 +215,7 @@ Source Location: /Database/Mysql.php<br /><br />
    
 </dd>
 <dt>
-  <a href="../Database/Database.html#var$search_path">Database::$search_path</a>
+  <a href="../Database/Database.html#var$searchPath">Database::$searchPath</a>
   </dt>
 <dd>
    
@@ -286,7 +305,7 @@ Source Location: /Database/Mysql.php<br /><br />
 <a name="class_details"></a>
 <h3>Class Details</h3>
 <div class="tags">
-[line 30]<br />
+[line 27]<br />
 The Mysql Database implementation.<br /><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
@@ -309,7 +328,7 @@ The Mysql Database implementation.<br /><br /><br /><br />
 	<a name="var$charsetName"></a>
 	<p></p>
 	<h4>$charsetName = <span class="value">&nbsp;'utf8'</span></h4>
-	<p>[line 42]</p>
+	<p>[line 38]</p>
   The character set used for connections.<br /><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
@@ -333,7 +352,7 @@ The Mysql Database implementation.<br /><br /><br /><br />
 	<a name="var$commentString"></a>
 	<p></p>
 	<h4>$commentString = <span class="value">&nbsp;'--&nbsp;'</span></h4>
-	<p>[line 36]</p>
+	<p>[line 33]</p>
   The string used for comments.<br /><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
@@ -362,33 +381,8 @@ The Mysql Database implementation.<br /><br /><br /><br />
 <div class="tags">
 
   <hr />
-	<a name="methodbeginTransaction"></a>
-	<h3>method beginTransaction <span class="smalllinenumber">[line 59]</span></h3>
-	<div class="function">
-    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
-    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
-		<code>void beginTransaction(
-)</code>
-    </td></tr></table>
-    </td></tr></table><br />
-	
-		Begins a transaction<br /><br /><br /><br />
-<h4>Tags:</h4>
-<div class="tags">
-<table border="0" cellspacing="0" cellpadding="0">
-  <tr>
-    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
-  </tr>
-</table>
-</div>
-<br /><br />
-
-	
-        <div class="top">[ <a href="#top">Top</a> ]</div>
-  </div>
-  <hr />
 	<a name="methodclose"></a>
-	<h3>method close <span class="smalllinenumber">[line 106]</span></h3>
+	<h3>method close <span class="smalllinenumber">[line 97]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -413,7 +407,7 @@ The Mysql Database implementation.<br /><br /><br /><br />
   </div>
   <hr />
 	<a name="methodcommit"></a>
-	<h3>method commit <span class="smalllinenumber">[line 64]</span></h3>
+	<h3>method commit <span class="smalllinenumber">[line 51]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -438,7 +432,7 @@ The Mysql Database implementation.<br /><br /><br /><br />
   </div>
   <hr />
 	<a name="methodconnect"></a>
-	<h3>method connect <span class="smalllinenumber">[line 75]</span></h3>
+	<h3>method connect <span class="smalllinenumber">[line 65]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -463,7 +457,7 @@ The Mysql Database implementation.<br /><br /><br /><br />
   </div>
   <hr />
 	<a name="methodescapeString"></a>
-	<h3>method escapeString <span class="smalllinenumber">[line 52]</span></h3>
+	<h3>method escapeString <span class="smalllinenumber">[line 153]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -473,7 +467,7 @@ $string)</code>
     </td></tr></table>
     </td></tr></table><br />
 	
-		Escapes the string for mysql queries.<br /><br /><br /><br />
+		<br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
@@ -501,8 +495,164 @@ $string)</code>
         <div class="top">[ <a href="#top">Top</a> ]</div>
   </div>
   <hr />
+	<a name="methodexportColumn"></a>
+	<h3>method exportColumn <span class="smalllinenumber">[line 170]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>string exportColumn(
+string
+$column)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		<br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">string&nbsp;&nbsp;</td>
+        <td><b>$column</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodexportString"></a>
+	<h3>method exportString <span class="smalllinenumber">[line 161]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>string exportString(
+string
+$text)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		<br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>return:</b>&nbsp;&nbsp;</td><td>The escaped and quoted string.</td>
+  </tr>
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">string&nbsp;&nbsp;</td>
+        <td><b>$text</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodexportTable"></a>
+	<h3>method exportTable <span class="smalllinenumber">[line 178]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>string exportTable(
+
+$table, string
+$resourceName)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		<br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>return:</b>&nbsp;&nbsp;</td><td>The escaped and quoted table name.</td>
+  </tr>
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">string&nbsp;&nbsp;</td>
+        <td><b>$resourceName</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>$table</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodgetLastInsertId"></a>
+	<h3>method getLastInsertId <span class="smalllinenumber">[line 188]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>int getLastInsertId(
+string
+$table)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Returns the id of the last inserted record.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">string&nbsp;&nbsp;</td>
+        <td><b>$table</b>&nbsp;&nbsp;</td>
+        <td>Gets ignored for mysql</td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
 	<a name="methodlastError"></a>
-	<h3>method lastError <span class="smalllinenumber">[line 156]</span></h3>
+	<h3>method lastError <span class="smalllinenumber">[line 141]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -527,7 +677,7 @@ $string)</code>
   </div>
   <hr />
 	<a name="methodmultiQuery"></a>
-	<h3>method multiQuery <span class="smalllinenumber">[line 135]</span></h3>
+	<h3>method multiQuery <span class="smalllinenumber">[line 122]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -563,7 +713,7 @@ $query)</code>
   </div>
   <hr />
 	<a name="methodquery"></a>
-	<h3>method query <span class="smalllinenumber">[line 122]</span></h3>
+	<h3>method query <span class="smalllinenumber">[line 109]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -599,7 +749,7 @@ $query)</code>
   </div>
   <hr />
 	<a name="methodrollback"></a>
-	<h3>method rollback <span class="smalllinenumber">[line 69]</span></h3>
+	<h3>method rollback <span class="smalllinenumber">[line 58]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -624,7 +774,7 @@ $query)</code>
   </div>
   <hr />
 	<a name="methodsetCharacterSet"></a>
-	<h3>method setCharacterSet <span class="smalllinenumber">[line 96]</span></h3>
+	<h3>method setCharacterSet <span class="smalllinenumber">[line 87]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -656,6 +806,31 @@ $charsetName = null])</code>
       </tr>
         </table>
     </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodstartTransaction"></a>
+	<h3>method startTransaction <span class="smalllinenumber">[line 44]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void startTransaction(
+)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Begins a transaction<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
         <div class="top">[ <a href="#top">Top</a> ]</div>
   </div>
 </div><br />

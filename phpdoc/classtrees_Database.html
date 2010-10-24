@@ -14,7 +14,7 @@
     <td class="header_menu">
         
                                                                             
-                                                                                                                                                      		  [ <a href="classtrees_Database.html" class="menu">class tree: Database</a> ]
+                                                                                                                                                                          		  [ <a href="classtrees_Database.html" class="menu">class tree: Database</a> ]
 		  [ <a href="elementindex_Database.html" class="menu">index: Database</a> ]
 		  	    [ <a href="elementindex.html" class="menu">all elements</a> ]
     </td>
@@ -34,6 +34,7 @@
               <a href="li_Database.html">Database</a><br />
               <a href="li_DataSource.html">DataSource</a><br />
               <a href="li_Date.html">Date</a><br />
+              <a href="li_Factory.html">Factory</a><br />
               <a href="li_File.html">File</a><br />
               <a href="li_Logger.html">Logger</a><br />
               <a href="li_Profiler.html">Profiler</a><br />
@@ -58,19 +59,31 @@
 <div class="classtree">Root class Database</div><br />
 <ul>
 <li><a href="Database/Database.html">Database</a> (implements )<ul>
-<li><a href="Database/Mysql.html">Mysql</a></li></ul></li>
+<li><a href="Database/Mysql.html">Mysql</a></li><li><a href="Database/Postgresql.html">Postgresql</a></li></ul></li>
 </ul>
 
 <hr />
 <div class="classtree">Root class DatabaseResult</div><br />
 <ul>
 <li><a href="Database/DatabaseResult/DatabaseResult.html">DatabaseResult</a> (implements )<ul>
-<li><a href="Database/DatabaseResult/MysqlResult.html">MysqlResult</a></li></ul></li>
+<li><a href="Database/DatabaseResult/MysqlResult.html">MysqlResult</a></li><li><a href="Database/DatabaseResult/PostgresqlResult.html">PostgresqlResult</a></li></ul></li>
 </ul>
+
+<hr />
+<div class="classtree">Root class DatabaseUpdate</div><br />
+<ul>
+<li><a href="Database/Updater/DatabaseUpdate.html">DatabaseUpdate</a></li></ul>
+
+<hr />
+<div class="classtree">Root class DatabaseUpdater</div><br />
+<ul>
+<li><a href="Database/Updater/DatabaseUpdater.html">DatabaseUpdater</a></li></ul>
 
 <hr />
 <div class="classtree">Root class Exception</div><br />
 <ul>
+<li><a href="Database/Updater/DatabaseUpdaterException.html">DatabaseUpdaterException</a><ul>
+<li><a href="Database/Updater/DatabaseNotInitializedException.html">DatabaseNotInitializedException</a></li></ul></li>
 <li><a href="Database/Exceptions/SqlException.html">SqlException</a><ul>
 <li><a href="Database/Exceptions/SqlConnectionException.html">SqlConnectionException</a></li><li><a href="Database/Exceptions/SqlQueryException.html">SqlQueryException</a></li></ul></li>
 </ul>

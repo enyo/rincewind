@@ -1,0 +1,849 @@
+<html>
+<head>
+<title>Docs For Class Postgresql</title>
+<link rel="stylesheet" type="text/css" href="../media/style.css">
+</head>
+<body>
+
+<table border="0" cellspacing="0" cellpadding="0" height="48" width="100%">
+  <tr>
+    <td class="header_top">Database</td>
+  </tr>
+  <tr><td class="header_line"><img src="../media/empty.png" width="1" height="1" border="0" alt=""  /></td></tr>
+  <tr>
+    <td class="header_menu">
+        
+                                                                            
+                                                                                                                                                                          		  [ <a href="../classtrees_Database.html" class="menu">class tree: Database</a> ]
+		  [ <a href="../elementindex_Database.html" class="menu">index: Database</a> ]
+		  	    [ <a href="../elementindex.html" class="menu">all elements</a> ]
+    </td>
+  </tr>
+  <tr><td class="header_line"><img src="../media/empty.png" width="1" height="1" border="0" alt=""  /></td></tr>
+</table>
+
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="200" class="menu">
+	<div id="ric">
+					<p><a href="../ric_README.html">README</a></p>
+			</div>
+      <b>Packages:</b><br />
+              <a href="../li_Config.html">Config</a><br />
+              <a href="../li_Dao.html">Dao</a><br />
+              <a href="../li_Database.html">Database</a><br />
+              <a href="../li_DataSource.html">DataSource</a><br />
+              <a href="../li_Date.html">Date</a><br />
+              <a href="../li_Factory.html">Factory</a><br />
+              <a href="../li_File.html">File</a><br />
+              <a href="../li_Logger.html">Logger</a><br />
+              <a href="../li_Profiler.html">Profiler</a><br />
+              <a href="../li_Storage.html">Storage</a><br />
+            <br /><br />
+                        <b>Files:</b><br />
+      	  <div class="package">
+			<a href="../Database/_Database---Database.php.html">		Database.php
+		</a><br>
+			<a href="../Database/_Database---DatabaseInterface.php.html">		DatabaseInterface.php
+		</a><br>
+			<a href="../Database/_Database---Mysql.php.html">		Mysql.php
+		</a><br>
+			<a href="../Database/_Database---Postgresql.php.html">		Postgresql.php
+		</a><br>
+	  </div><br />
+	subpackage <b>DatabaseResult</b><br>  <div class="package">
+			<a href="../Database/DatabaseResult/_DatabaseResult---DatabaseResult.php.html">		DatabaseResult.php
+		</a><br>
+			<a href="../Database/DatabaseResult/_DatabaseResult---DatabaseResultInterface.php.html">		DatabaseResultInterface.php
+		</a><br>
+			<a href="../Database/DatabaseResult/_DatabaseResult---MysqlResult.php.html">		MysqlResult.php
+		</a><br>
+			<a href="../Database/DatabaseResult/_DatabaseResult---PostgresqlResult.php.html">		PostgresqlResult.php
+		</a><br>
+	  </div><br />
+	subpackage <b>Exceptions</b><br>  <div class="package">
+			<a href="../Database/Exceptions/_Database---DatabaseExceptions.php.html">		DatabaseExceptions.php
+		</a><br>
+	  </div><br />
+	subpackage <b>Updater</b><br>  <div class="package">
+			<a href="../Database/Updater/_DatabaseUpdater---DatabaseUpdate.php.html">		DatabaseUpdate.php
+		</a><br>
+			<a href="../Database/Updater/_DatabaseUpdater---DatabaseUpdater.php.html">		DatabaseUpdater.php
+		</a><br>
+	  </div><br />
+      
+            <b>Interfaces:</b><br />
+        <div class="package">
+		    		<a href="../Database/DatabaseInterface.html">DatabaseInterface</a><br />
+	  </div>
+  <div class="package">
+	DatabaseResult<br />	    &nbsp;&nbsp;		<a href="../Database/DatabaseResult/DatabaseResultInterface.html">DatabaseResultInterface</a><br />
+	  </div>
+      
+            <b>Classes:</b><br />
+        <div class="package">
+		    		<a href="../Database/Database.html">Database</a><br />
+	    		<a href="../Database/Mysql.html">Mysql</a><br />
+	    		<a href="../Database/Postgresql.html">Postgresql</a><br />
+	  </div>
+  <div class="package">
+	Exceptions<br />	    &nbsp;&nbsp;		<a href="../Database/Exceptions/SqlConnectionException.html">SqlConnectionException</a><br />
+	    &nbsp;&nbsp;		<a href="../Database/Exceptions/SqlException.html">SqlException</a><br />
+	    &nbsp;&nbsp;		<a href="../Database/Exceptions/SqlQueryException.html">SqlQueryException</a><br />
+	  </div>
+  <div class="package">
+	DatabaseResult<br />	    &nbsp;&nbsp;		<a href="../Database/DatabaseResult/DatabaseResult.html">DatabaseResult</a><br />
+	    &nbsp;&nbsp;		<a href="../Database/DatabaseResult/MysqlResult.html">MysqlResult</a><br />
+	    &nbsp;&nbsp;		<a href="../Database/DatabaseResult/PostgresqlResult.html">PostgresqlResult</a><br />
+	  </div>
+  <div class="package">
+	Updater<br />	    &nbsp;&nbsp;		<a href="../Database/Updater/DatabaseNotInitializedException.html">DatabaseNotInitializedException</a><br />
+	    &nbsp;&nbsp;		<a href="../Database/Updater/DatabaseUpdate.html">DatabaseUpdate</a><br />
+	    &nbsp;&nbsp;		<a href="../Database/Updater/DatabaseUpdater.html">DatabaseUpdater</a><br />
+	    &nbsp;&nbsp;		<a href="../Database/Updater/DatabaseUpdaterException.html">DatabaseUpdaterException</a><br />
+	  </div>
+                </td>
+    <td>
+      <table cellpadding="10" cellspacing="0" width="100%" border="0"><tr><td valign="top">
+
+<h1>Class: Postgresql</h1>
+Source Location: /Database/Postgresql.php<br /><br />
+
+
+<table width="100%" border="0">
+<tr><td valign="top">
+
+<h3><a href="#class_details">Class Overview</a></h3>
+<pre><a href="../Database/Database.html">Database</a>
+   |
+   --Postgresql</pre><br />
+<div class="description">The Postgresql Database implementation.</div><br /><br />
+<h4>Author(s):</h4>
+<ul>
+          <li>Matthias Loitsch &lt;<a href="mailto:developer@ma.tthias.com">developer@ma.tthias.com</a>&gt;</li>
+            </ul>
+
+
+
+
+          
+  
+
+<h4>Copyright:</h4>
+<ul>
+  <li>Copyright (c) 2010, Matthias Loitsch</li>
+</ul>
+        
+</td>
+
+<td valign="top">
+<h3><a href="#class_vars">Variables</a></h3>
+<ul>
+    <li><a href="../Database/Postgresql.html#var$charsetName">$charsetName</a></li>
+    <li><a href="../Database/Postgresql.html#var$commentString">$commentString</a></li>
+  </ul>
+</td>
+
+
+<td valign="top">
+<h3><a href="#class_methods">Methods</a></h3>
+<ul>
+    <li><a href="../Database/Postgresql.html#methodclose">close</a></li>
+    <li><a href="../Database/Postgresql.html#methodcommit">commit</a></li>
+    <li><a href="../Database/Postgresql.html#methodconnect">connect</a></li>
+    <li><a href="../Database/Postgresql.html#methodescapeString">escapeString</a></li>
+    <li><a href="../Database/Postgresql.html#methodexportColumn">exportColumn</a></li>
+    <li><a href="../Database/Postgresql.html#methodexportString">exportString</a></li>
+    <li><a href="../Database/Postgresql.html#methodexportTable">exportTable</a></li>
+    <li><a href="../Database/Postgresql.html#methodgetLastInsertId">getLastInsertId</a></li>
+    <li><a href="../Database/Postgresql.html#methodlastError">lastError</a></li>
+    <li><a href="../Database/Postgresql.html#methodmultiQuery">multiQuery</a></li>
+    <li><a href="../Database/Postgresql.html#methodquery">query</a></li>
+    <li><a href="../Database/Postgresql.html#methodrollback">rollback</a></li>
+    <li><a href="../Database/Postgresql.html#methodsetCharacterSet">setCharacterSet</a></li>
+    <li><a href="../Database/Postgresql.html#methodstartTransaction">startTransaction</a></li>
+  </ul>
+</td>
+
+</tr></table>
+<hr />
+
+<table width="100%" border="0"><tr>
+
+
+
+
+<td valign="top">
+<h3>Inherited Variables</h3>
+<div class="tags">
+<h4>Class: <a href="../Database/Database.html">Database</a></h4>
+<dl>
+<dt>
+  <a href="../Database/Database.html#var$connected">Database::$connected</a>
+  </dt>
+<dd>
+   
+</dd>
+<dt>
+  <a href="../Database/Database.html#var$dbname">Database::$dbname</a>
+  </dt>
+<dd>
+   
+</dd>
+<dt>
+  <a href="../Database/Database.html#var$host">Database::$host</a>
+  </dt>
+<dd>
+   
+</dd>
+<dt>
+  <a href="../Database/Database.html#var$password">Database::$password</a>
+  </dt>
+<dd>
+   
+</dd>
+<dt>
+  <a href="../Database/Database.html#var$port">Database::$port</a>
+  </dt>
+<dd>
+   
+</dd>
+<dt>
+  <a href="../Database/Database.html#var$resource">Database::$resource</a>
+  </dt>
+<dd>
+   
+</dd>
+<dt>
+  <a href="../Database/Database.html#var$searchPath">Database::$searchPath</a>
+  </dt>
+<dd>
+   
+</dd>
+<dt>
+  <a href="../Database/Database.html#var$user">Database::$user</a>
+  </dt>
+<dd>
+   
+</dd>
+</dl>
+</div>
+</td>
+
+<td valign="top">
+<h3>Inherited Methods</h3>
+<div class="tags">
+<h4>Class: <a href="../Database/Database.html">Database</a></h4>
+<dl>
+    <dt>
+    <a href="../Database/Database.html#method__construct">Database::__construct()</a>
+  </dt>
+  <dd>
+    You have to submit all connection infos in the constructor.
+  </dd>
+    <dt>
+    <a href="../Database/Database.html#methodclose">Database::close()</a>
+  </dt>
+  <dd>
+    Implement your database specific close implementation here.
+  </dd>
+    <dt>
+    <a href="../Database/Database.html#methodconnect">Database::connect()</a>
+  </dt>
+  <dd>
+    Implement your database specific connection here.
+  </dd>
+    <dt>
+    <a href="../Database/Database.html#methodensureConnection">Database::ensureConnection()</a>
+  </dt>
+  <dd>
+    Checks if it's connected, and calls connect() if not.
+  </dd>
+    <dt>
+    <a href="../Database/Database.html#methodescapeColumn">Database::escapeColumn()</a>
+  </dt>
+  <dd>
+    Typically columns are just escaped as strings.
+  </dd>
+    <dt>
+    <a href="../Database/Database.html#methodescapeTable">Database::escapeTable()</a>
+  </dt>
+  <dd>
+    Typically tables are just escaped as strings.
+  </dd>
+    <dt>
+    <a href="../Database/Database.html#methodgetConnectionString">Database::getConnectionString()</a>
+  </dt>
+  <dd>
+    Returns a string with all the connection parameters.
+  </dd>
+    <dt>
+    <a href="../Database/Database.html#methodgetResource">Database::getResource()</a>
+  </dt>
+  <dd>
+    
+  </dd>
+    <dt>
+    <a href="../Database/Database.html#methodmultiQuery">Database::multiQuery()</a>
+  </dt>
+  <dd>
+    Some databases (eg: Mysql) do not support multiple queries by themselves.
+  </dd>
+    <dt>
+    <a href="../Database/Database.html#method__destruct">Database::__destruct()</a>
+  </dt>
+  <dd>
+    Calls close() to ensure the database connection gets closed when destroyed
+  </dd>
+  </dl>
+</div>
+</td>
+
+</tr></table>
+<hr />
+
+<a name="class_details"></a>
+<h3>Class Details</h3>
+<div class="tags">
+[line 27]<br />
+The Postgresql Database implementation.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>author:</b>&nbsp;&nbsp;</td><td>Matthias Loitsch &lt;<a href="mailto:developer@ma.tthias.com">developer@ma.tthias.com</a>&gt;</td>
+  </tr>
+  <tr>
+    <td><b>copyright:</b>&nbsp;&nbsp;</td><td>Copyright (c) 2010, Matthias Loitsch</td>
+  </tr>
+</table>
+</div>
+</div><br /><br />
+<div class="top">[ <a href="#top">Top</a> ]</div><br />
+
+<hr />
+<a name="class_vars"></a>
+<h3>Class Variables</h3>
+<div class="tags">
+	<a name="var$charsetName"></a>
+	<p></p>
+	<h4>$charsetName = <span class="value">&nbsp;'UNICODE'</span></h4>
+	<p>[line 38]</p>
+  The character set used for connections.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
+  </tr>
+</table>
+</div>
+
+  <br />
+	<div class="tags">
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td><b>Type:</b>&nbsp;&nbsp;</td>
+      <td>string</td>
+    </tr>
+      </table>
+	</div><br /><br />
+	<div class="top">[ <a href="#top">Top</a> ]</div><br />
+	<a name="var$commentString"></a>
+	<p></p>
+	<h4>$commentString = <span class="value">&nbsp;'--&nbsp;'</span></h4>
+	<p>[line 33]</p>
+  The string used for comments.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
+  </tr>
+</table>
+</div>
+
+  <br />
+	<div class="tags">
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td><b>Type:</b>&nbsp;&nbsp;</td>
+      <td>string</td>
+    </tr>
+      </table>
+	</div><br /><br />
+	<div class="top">[ <a href="#top">Top</a> ]</div><br />
+</div><br />
+
+<hr />
+<a name="class_methods"></a>
+<h3>Class Methods</h3>
+<div class="tags">
+
+  <hr />
+	<a name="methodclose"></a>
+	<h3>method close <span class="smalllinenumber">[line 120]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void close(
+)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Closes the database connection<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	Overrides <a href="../Database/Database.html#methodclose">Database::close()</a> (Implement your database specific close implementation here.)<br /><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodcommit"></a>
+	<h3>method commit <span class="smalllinenumber">[line 50]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void commit(
+)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Commits a transaction<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodconnect"></a>
+	<h3>method connect <span class="smalllinenumber">[line 64]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void connect(
+)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		This is the connect function that tries to create a postgresql connection, and set the correct character set.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	Overrides <a href="../Database/Database.html#methodconnect">Database::connect()</a> (Implement your database specific connection here.)<br /><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodescapeString"></a>
+	<h3>method escapeString <span class="smalllinenumber">[line 169]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>string escapeString(
+string
+$string)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Escapes the string for postgresql queries.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>return:</b>&nbsp;&nbsp;</td><td>The escaped string</td>
+  </tr>
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">string&nbsp;&nbsp;</td>
+        <td><b>$string</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodexportColumn"></a>
+	<h3>method exportColumn <span class="smalllinenumber">[line 185]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>string exportColumn(
+string
+$column)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		<br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">string&nbsp;&nbsp;</td>
+        <td><b>$column</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodexportString"></a>
+	<h3>method exportString <span class="smalllinenumber">[line 177]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>string exportString(
+string
+$text)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		<br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>return:</b>&nbsp;&nbsp;</td><td>The escaped and quoted string.</td>
+  </tr>
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">string&nbsp;&nbsp;</td>
+        <td><b>$text</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodexportTable"></a>
+	<h3>method exportTable <span class="smalllinenumber">[line 193]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>string exportTable(
+
+$table, string
+$resourceName)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		<br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>return:</b>&nbsp;&nbsp;</td><td>The escaped and quoted table name.</td>
+  </tr>
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">string&nbsp;&nbsp;</td>
+        <td><b>$resourceName</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>$table</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodgetLastInsertId"></a>
+	<h3>method getLastInsertId <span class="smalllinenumber">[line 203]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>int getLastInsertId(
+string
+$table)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Returns the id of the last inserted record for given table.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">string&nbsp;&nbsp;</td>
+        <td><b>$table</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodlastError"></a>
+	<h3>method lastError <span class="smalllinenumber">[line 155]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>string; lastError(
+)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Returns the last sql error<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodmultiQuery"></a>
+	<h3>method multiQuery <span class="smalllinenumber">[line 146]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void multiQuery(
+string
+$query)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Performs multiple queries at once. For postgresql this is just a wrapper for query.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	Overrides <a href="../Database/Database.html#methodmultiQuery">Database::multiQuery()</a> (Some databases (eg: Mysql) do not support multiple queries by themselves.)<br /><br />
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">string&nbsp;&nbsp;</td>
+        <td><b>$query</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodquery"></a>
+	<h3>method query <span class="smalllinenumber">[line 132]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code><a href="../Database/DatabaseResult/PostgresqlResult.html">PostgresqlResult</a> query(
+string
+$query)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Performs a query<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">string&nbsp;&nbsp;</td>
+        <td><b>$query</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodrollback"></a>
+	<h3>method rollback <span class="smalllinenumber">[line 57]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void rollback(
+)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Rolls back a transaction<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodsetCharacterSet"></a>
+	<h3>method setCharacterSet <span class="smalllinenumber">[line 110]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void setCharacterSet(
+[string
+$charsetName = null])</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Sets the charsetName for future queries.<br /><br /><p>If a connection already exists, pg_set_client_encoding() is called.</p><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">string&nbsp;&nbsp;</td>
+        <td><b>$charsetName</b>&nbsp;&nbsp;</td>
+        <td>If null the default is passed to postgresql.</td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodstartTransaction"></a>
+	<h3>method startTransaction <span class="smalllinenumber">[line 43]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void startTransaction(
+)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Begins a transaction<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+</div><br />
+
+
+        <div class="credit">
+		    <hr />
+		    Documentation generated by <a href="http://www.phpdoc.org">phpDocumentor 1.4.3</a>
+	      </div>
+      </td></tr></table>
+    </td>
+  </tr>
+</table>
+
+</body>
+</html>

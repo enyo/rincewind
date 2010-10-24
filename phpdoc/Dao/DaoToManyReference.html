@@ -14,7 +14,7 @@
     <td class="header_menu">
         
                                                         
-                                                                                                                                                                          		  [ <a href="../classtrees_Dao.html" class="menu">class tree: Dao</a> ]
+                                                                                                                                                                                              		  [ <a href="../classtrees_Dao.html" class="menu">class tree: Dao</a> ]
 		  [ <a href="../elementindex_Dao.html" class="menu">index: Dao</a> ]
 		  	    [ <a href="../elementindex.html" class="menu">all elements</a> ]
     </td>
@@ -34,6 +34,7 @@
               <a href="../li_Database.html">Database</a><br />
               <a href="../li_DataSource.html">DataSource</a><br />
               <a href="../li_Date.html">Date</a><br />
+              <a href="../li_Factory.html">Factory</a><br />
               <a href="../li_File.html">File</a><br />
               <a href="../li_Logger.html">Logger</a><br />
               <a href="../li_Profiler.html">Profiler</a><br />
@@ -59,41 +60,29 @@
 		</a><br>
 			<a href="../Dao/_Dao---DaoToOneReference.php.html">		DaoToOneReference.php
 		</a><br>
-			<a href="../Dao/_Dao---FileSourceDao.php.html">		FileSourceDao.php
+			<a href="../Dao/_Dao---File---FileDao.php.html">		FileDao.php
 		</a><br>
-			<a href="../Dao/_Dao---FileSourceResultIterator.php.html">		FileSourceResultIterator.php
+			<a href="../Dao/_Dao---File---FileResultIterator.php.html">		FileResultIterator.php
 		</a><br>
-			<a href="../Dao/_Dao---Json---JsonDao.php.html">		JsonDao.php
+			<a href="../Dao/_Dao---File---JsonDao.php.html">		JsonDao.php
 		</a><br>
-			<a href="../Dao/_Dao---Json---JsonResultIterator.php.html">		JsonResultIterator.php
+			<a href="../Dao/_Dao---Sql---PostgresqlDao.php.html">		PostgresqlDao.php
 		</a><br>
-			<a href="../Dao/_Dao---Mysql---MysqlDao.php.html">		MysqlDao.php
+			<a href="../Dao/_Dao---Sql---SqlDao.php.html">		SqlDao.php
 		</a><br>
-			<a href="../Dao/_Dao---Mysql---MysqlResultIterator.php.html">		MysqlResultIterator.php
-		</a><br>
-			<a href="../Dao/_Dao---Mysql---MysqlUserDao.php.html">		MysqlUserDao.php
-		</a><br>
-			<a href="../Dao/_Dao---Postgresql---PostgresqlDao.php.html">		PostgresqlDao.php
-		</a><br>
-			<a href="../Dao/_Dao---Postgresql---PostgresqlResultIterator.php.html">		PostgresqlResultIterator.php
-		</a><br>
-			<a href="../Dao/_Dao---Postgresql---PostgresqlUserDao.php.html">		PostgresqlUserDao.php
-		</a><br>
-			<a href="../Dao/_Dao---SqlDao.php.html">		SqlDao.php
-		</a><br>
-			<a href="../Dao/_Dao---SqlResultIterator.php.html">		SqlResultIterator.php
+			<a href="../Dao/_Dao---Sql---SqlResultIterator.php.html">		SqlResultIterator.php
 		</a><br>
 			<a href="../Dao/_Dao---UserDaoInterface.php.html">		UserDaoInterface.php
 		</a><br>
-			<a href="../Dao/_Dao---Xml---XmlDao.php.html">		XmlDao.php
+			<a href="../Dao/_Dao---File---XmlDao.php.html">		XmlDao.php
 		</a><br>
-			<a href="../Dao/_Dao---Xml---XmlResultIterator.php.html">		XmlResultIterator.php
+	  </div><br />
+	subpackage <b>DaoFactory</b><br>  <div class="package">
+			<a href="../Dao/DaoFactory/_Factory---DaoFactory.php.html">		DaoFactory.php
 		</a><br>
 	  </div><br />
 	subpackage <b>Exceptions</b><br>  <div class="package">
 			<a href="../Dao/Exceptions/_Dao---DaoExceptions.php.html">		DaoExceptions.php
-		</a><br>
-			<a href="../Dao/Exceptions/_Dao---Json---JsonDaoExceptions.php.html">		JsonDaoExceptions.php
 		</a><br>
 	  </div><br />
 	subpackage <b>Record</b><br>  <div class="package">
@@ -126,20 +115,13 @@
 	    		<a href="../Dao/DaoResultIterator.html">DaoResultIterator</a><br />
 	    		<a href="../Dao/DaoToManyReference.html">DaoToManyReference</a><br />
 	    		<a href="../Dao/DaoToOneReference.html">DaoToOneReference</a><br />
-	    		<a href="../Dao/FileSourceDao.html">FileSourceDao</a><br />
-	    		<a href="../Dao/FileSourceResultIterator.html">FileSourceResultIterator</a><br />
+	    		<a href="../Dao/FileDao.html">FileDao</a><br />
+	    		<a href="../Dao/FileResultIterator.html">FileResultIterator</a><br />
 	    		<a href="../Dao/JsonDao.html">JsonDao</a><br />
-	    		<a href="../Dao/JsonResultIterator.html">JsonResultIterator</a><br />
-	    		<a href="../Dao/MysqlDao.html">MysqlDao</a><br />
-	    		<a href="../Dao/MysqlResultIterator.html">MysqlResultIterator</a><br />
-	    		<a href="../Dao/MysqlUserDao.html">MysqlUserDao</a><br />
 	    		<a href="../Dao/PostgresqlDao.html">PostgresqlDao</a><br />
-	    		<a href="../Dao/PostgresqlResultIterator.html">PostgresqlResultIterator</a><br />
-	    		<a href="../Dao/PostgresqlUserDao.html">PostgresqlUserDao</a><br />
 	    		<a href="../Dao/SqlDao.html">SqlDao</a><br />
 	    		<a href="../Dao/SqlResultIterator.html">SqlResultIterator</a><br />
 	    		<a href="../Dao/XmlDao.html">XmlDao</a><br />
-	    		<a href="../Dao/XmlResultIterator.html">XmlResultIterator</a><br />
 	  </div>
   <div class="package">
 	Exceptions<br />	    &nbsp;&nbsp;		<a href="../Dao/Exceptions/DaoException.html">DaoException</a><br />
@@ -149,6 +131,9 @@
 	    &nbsp;&nbsp;		<a href="../Dao/Exceptions/JsonDaoException.html">JsonDaoException</a><br />
 	    &nbsp;&nbsp;		<a href="../Dao/Exceptions/RecordException.html">RecordException</a><br />
 	    &nbsp;&nbsp;		<a href="../Dao/Exceptions/XmlDaoException.html">XmlDaoException</a><br />
+	  </div>
+  <div class="package">
+	DaoFactory<br />	    &nbsp;&nbsp;		<a href="../Dao/DaoFactory/DaoFactory.html">DaoFactory</a><br />
 	  </div>
   <div class="package">
 	Record<br />	    &nbsp;&nbsp;		<a href="../Dao/Record/Record.html">Record</a><br />
@@ -173,13 +158,13 @@ Source Location: /Dao/DaoToManyReference.php<br /><br />
 <h4>Author(s):</h4>
 <ul>
           <li>Matthias Loitsch &lt;<a href="mailto:developer@ma.tthias.com">developer@ma.tthias.com</a>&gt;</li>
-                                    </ul>
+                        </ul>
 
 
 
 
           
-                  
+          
 
 <h4>Copyright:</h4>
 <ul>
@@ -193,7 +178,8 @@ Source Location: /Dao/DaoToManyReference.php<br /><br />
 <td valign="top">
 <h3><a href="#class_methods">Methods</a></h3>
 <ul>
-    <li><a href="../Dao/DaoToManyReference.html#methodgetData">getData</a></li>
+    <li><a href="../Dao/DaoToManyReference.html#methodcoerce">coerce</a></li>
+    <li><a href="../Dao/DaoToManyReference.html#methodgetReferenced">getReferenced</a></li>
   </ul>
 </td>
 
@@ -211,7 +197,7 @@ Source Location: /Dao/DaoToManyReference.php<br /><br />
 <h4>Class: <a href="../Dao/DaoReference.html">DaoReference</a></h4>
 <dl>
 <dt>
-  <a href="../Dao/DaoReference.html#var$daoClassName">DaoReference::$daoClassName</a>
+  <a href="../Dao/DaoReference.html#var$daoName">DaoReference::$daoName</a>
   </dt>
 <dd>
    
@@ -250,22 +236,28 @@ Source Location: /Dao/DaoToManyReference.php<br /><br />
     
   </dd>
     <dt>
+    <a href="../Dao/DaoReference.html#methodcoerce">DaoReference::coerce()</a>
+  </dt>
+  <dd>
+    Forces a value in a correct representation of the reference.
+  </dd>
+    <dt>
     <a href="../Dao/DaoReference.html#methodcreateDao">DaoReference::createDao()</a>
   </dt>
   <dd>
     Creates a Dao. This calls createDao internally on the sourceDao.
   </dd>
     <dt>
-    <a href="../Dao/DaoReference.html#methodgetDaoClassName">DaoReference::getDaoClassName()</a>
+    <a href="../Dao/DaoReference.html#methodgetDaoName">DaoReference::getDaoName()</a>
   </dt>
   <dd>
     
   </dd>
     <dt>
-    <a href="../Dao/DaoReference.html#methodgetData">DaoReference::getData()</a>
+    <a href="../Dao/DaoReference.html#methodgetForeignDao">DaoReference::getForeignDao()</a>
   </dt>
   <dd>
-    When a record is accessed on a reference attribute, it calls this method to get the actual records or record.
+    Returns the foreign dao. If $daoName is already a dao, it is only  returned. If it's a string, createDao() is called.
   </dd>
     <dt>
     <a href="../Dao/DaoReference.html#methodgetForeignKey">DaoReference::getForeignKey()</a>
@@ -275,6 +267,18 @@ Source Location: /Dao/DaoToManyReference.php<br /><br />
   </dd>
     <dt>
     <a href="../Dao/DaoReference.html#methodgetLocalKey">DaoReference::getLocalKey()</a>
+  </dt>
+  <dd>
+    
+  </dd>
+    <dt>
+    <a href="../Dao/DaoReference.html#methodgetReferenced">DaoReference::getReferenced()</a>
+  </dt>
+  <dd>
+    When a record is accessed on a reference attribute, it calls this method to get the actual records or record.
+  </dd>
+    <dt>
+    <a href="../Dao/DaoReference.html#methodgetSourceDao">DaoReference::getSourceDao()</a>
   </dt>
   <dd>
     
@@ -295,8 +299,8 @@ Source Location: /Dao/DaoToManyReference.php<br /><br />
 <a name="class_details"></a>
 <h3>Class Details</h3>
 <div class="tags">
-[line 34]<br />
-A DaoToManyReference describes references to many resources.<br /><br /><p>The DaoToManyReference works exactly as the DaoReference, but works with  arrays that either contain ids, or data hashes.</p><p>In a DaoToManyReference the localKey has to be of type Dao::SEQUENCE.</p><p>The DaoToManyReference is setup in the Dao with the method addToManyReference(). The  method setupReferences() is used to contain those calls.</p><br /><br /><br />
+[line 27]<br />
+A DaoToManyReference describes references to many resources.<br /><br /><p>The DaoToManyReference works exactly as the DaoReference, but works with  arrays that either contain ids, or data hashes.</p><p>In a DaoToManyReference the localKey, if specified, has to be of type Dao::SEQUENCE.</p><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
@@ -307,16 +311,10 @@ A DaoToManyReference describes references to many resources.<br /><br /><p>The D
     <td><b>copyright:</b>&nbsp;&nbsp;</td><td>Copyright (c) 2010, Matthias Loitsch</td>
   </tr>
   <tr>
-    <td><b>see:</b>&nbsp;&nbsp;</td><td><a href="../Dao/Dao.html#methodaddReference">Dao::addReference()</a></td>
-  </tr>
-  <tr>
-    <td><b>see:</b>&nbsp;&nbsp;</td><td><a href="../Dao/Dao.html#methodsetupReferences">Dao::setupReferences()</a></td>
+    <td><b>see:</b>&nbsp;&nbsp;</td><td><a href="../Dao/DaoToOneReference.html">DaoToOneReference</a></td>
   </tr>
   <tr>
     <td><b>see:</b>&nbsp;&nbsp;</td><td><a href="../Dao/DaoReference.html">DaoReference</a></td>
-  </tr>
-  <tr>
-    <td><b>see:</b>&nbsp;&nbsp;</td><td><a href="../Dao/DaoToOneReference.html">DaoToOneReference</a></td>
   </tr>
 </table>
 </div>
@@ -330,12 +328,51 @@ A DaoToManyReference describes references to many resources.<br /><br /><p>The D
 <div class="tags">
 
   <hr />
-	<a name="methodgetData"></a>
-	<h3>method getData <span class="smalllinenumber">[line 45]</span></h3>
+	<a name="methodcoerce"></a>
+	<h3>method coerce <span class="smalllinenumber">[line 74]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
-		<code>DaoIterator getData(
+		<code>mixed coerce(
+mixed
+$value)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		<br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>return:</b>&nbsp;&nbsp;</td><td>the coerced value.</td>
+  </tr>
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	Overrides <a href="../Dao/DaoReference.html#methodcoerce">DaoReference::coerce()</a> (Forces a value in a correct representation of the reference.)<br /><br />
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">mixed&nbsp;&nbsp;</td>
+        <td><b>$value</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodgetReferenced"></a>
+	<h3>method getReferenced <span class="smalllinenumber">[line 37]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>DaoIterator getReferenced(
 <a href="../Dao/Record/Record.html">Record</a>
 $record, string
 $attribute)</code>
@@ -353,7 +390,7 @@ $attribute)</code>
 </div>
 <br /><br />
 
-	Overrides <a href="../Dao/DaoReference.html#methodgetData">DaoReference::getData()</a> (When a record is accessed on a reference attribute, it calls this method to get the actual records or record.)<br /><br />
+	Overrides <a href="../Dao/DaoReference.html#methodgetReferenced">DaoReference::getReferenced()</a> (When a record is accessed on a reference attribute, it calls this method to get the actual records or record.)<br /><br />
         <h4>Parameters:</h4>
     <div class="tags">
     <table border="0" cellspacing="0" cellpadding="0">

@@ -13,7 +13,7 @@
   <tr>
     <td class="header_menu">
         
-                                                                                                                                                            
+                                                                                                                                                                                
                                                                       		  [ <a href="../classtrees_Logger.html" class="menu">class tree: Logger</a> ]
 		  [ <a href="../elementindex_Logger.html" class="menu">index: Logger</a> ]
 		  	    [ <a href="../elementindex.html" class="menu">all elements</a> ]
@@ -34,6 +34,7 @@
               <a href="../li_Database.html">Database</a><br />
               <a href="../li_DataSource.html">DataSource</a><br />
               <a href="../li_Date.html">Date</a><br />
+              <a href="../li_Factory.html">Factory</a><br />
               <a href="../li_File.html">File</a><br />
               <a href="../li_Logger.html">Logger</a><br />
               <a href="../li_Profiler.html">Profiler</a><br />
@@ -118,9 +119,10 @@ Source Location: /Logger/Log.php<br /><br />
 <ul>
     <li><a href="../Logger/Log.html#methodaddLogger">addLogger</a></li>
     <li><a href="../Logger/Log.html#methoddebug">debug</a></li>
+    <li><a href="../Logger/Log.html#methoddoLog">doLog</a></li>
     <li><a href="../Logger/Log.html#methoderror">error</a></li>
     <li><a href="../Logger/Log.html#methodfatal">fatal</a></li>
-    <li><a href="../Logger/Log.html#methodgetLogger">getLogger</a></li>
+    <li><a href="../Logger/Log.html#methodgetLoggers">getLoggers</a></li>
     <li><a href="../Logger/Log.html#methodinfo">info</a></li>
     <li><a href="../Logger/Log.html#methodsanitizeContext">sanitizeContext</a></li>
     <li><a href="../Logger/Log.html#methodwarning">warning</a></li>
@@ -148,7 +150,7 @@ The Log class is abstract and only used with static function.<br /><br /><p>It's
 <li><div class="src-line">&nbsp;&nbsp;&nbsp;<span class="src-id"><a href="../Logger/Log.html">Log</a></span><span class="src-sym">::</span><a href="../Logger/Log.html#methodaddLogger">addLogger</a><span class="src-sym">(</span><span class="src-var">$someLogger</span><span class="src-sym">,&nbsp;</span><span class="src-str">'Dao'</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
 <li><div class="src-line">&nbsp;&nbsp;&nbsp;<span class="src-id"><a href="../Logger/Log.html">Log</a></span><span class="src-sym">::</span><a href="../Logger/Log.html#methoderror">error</a><span class="src-sym">(</span><span class="src-str">'Some&nbsp;message'</span><span class="src-sym">,&nbsp;</span><span class="src-str">'Dao'</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
 <li><div class="src-line">&nbsp;<span class="src-php">?&gt;</span></div></li>
-</ol></p><p>If you didn't set a logger for a specific context, it will be ignored unless you specified a CATCHALL logger.</p><p>If you don't pass a context, the context Log::GENERAL is used.</p><br /><br /><br />
+</ol></p><p>If you didn't set a logger for a specific context, it will be ignored unless you specified a Log::CATCHALL logger.</p><p>If you don't pass a context, the context Log::GENERAL is used.</p><p>You can pass multiple loggers for one context.</p><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
@@ -173,7 +175,7 @@ The Log class is abstract and only used with static function.<br /><br /><p>It's
 	<a name="var$isEnabled"></a>
 	<p></p>
 	<h4>static $isEnabled = <span class="value">&nbsp;false</span></h4>
-	<p>[line 73]</p>
+	<p>[line 70]</p>
   This is a simple bool, to be able to check quickly if logging has been enabled or not.<br /><br /><p>If one logger gets added for any context this bool is set to true.  This is to prevent having to check an array of loggers, or sanitizing the context if  no logger has been added.</p><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
@@ -198,7 +200,7 @@ The Log class is abstract and only used with static function.<br /><br /><p>It's
 	<p></p>
 	<h4>static $loggers = <span class="value">array()</span></h4>
 	<p>[line 61]</p>
-  Contains a list of loggers for each context.<br /><br /><p>You can add a logger with Log::addLogger()</p><br /><br /><br />
+  Contains a list of lists of loggers for each context.<br /><br /><p>You can add a logger with Log::addLogger()</p><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
@@ -229,7 +231,7 @@ The Log class is abstract and only used with static function.<br /><br /><p>It's
 <div class="tags">
   <hr />
 	<a name="methodaddLogger"></a>
-	<h3>static method addLogger <span class="smalllinenumber">[line 82]</span></h3>
+	<h3>static method addLogger <span class="smalllinenumber">[line 78]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -271,7 +273,7 @@ $context = self::GENERAL])</code>
   </div>
   <hr />
 	<a name="methoddebug"></a>
-	<h3>static method debug <span class="smalllinenumber">[line 113]</span></h3>
+	<h3>static method debug <span class="smalllinenumber">[line 110]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -321,8 +323,65 @@ $additionalInfo = null])</code>
         <div class="top">[ <a href="#top">Top</a> ]</div>
   </div>
   <hr />
+	<a name="methoddoLog"></a>
+	<h3>static method doLog <span class="smalllinenumber">[line 171]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>static bool doLog(
+string
+$method, string
+$message, string
+$context, array
+$additionalInfo)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Calls the specified method on each logger for the specified context provided.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>return:</b>&nbsp;&nbsp;</td><td>true on success, false if no logger specified for the context or the logger below level.</td>
+  </tr>
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">string&nbsp;&nbsp;</td>
+        <td><b>$message</b>&nbsp;&nbsp;</td>
+        <td>debug | info | warning | error | fatal</td>
+      </tr>
+          <tr>
+        <td class="type">string&nbsp;&nbsp;</td>
+        <td><b>$method</b>&nbsp;&nbsp;</td>
+        <td>the method to call on the loggers.</td>
+      </tr>
+          <tr>
+        <td class="type">string&nbsp;&nbsp;</td>
+        <td><b>$context</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+          <tr>
+        <td class="type">array&nbsp;&nbsp;</td>
+        <td><b>$additionalInfo</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
 	<a name="methoderror"></a>
-	<h3>static method error <span class="smalllinenumber">[line 161]</span></h3>
+	<h3>static method error <span class="smalllinenumber">[line 146]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -373,7 +432,7 @@ $additionalInfo = null])</code>
   </div>
   <hr />
 	<a name="methodfatal"></a>
-	<h3>static method fatal <span class="smalllinenumber">[line 177]</span></h3>
+	<h3>static method fatal <span class="smalllinenumber">[line 158]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -423,24 +482,21 @@ $additionalInfo = null])</code>
         <div class="top">[ <a href="#top">Top</a> ]</div>
   </div>
   <hr />
-	<a name="methodgetLogger"></a>
-	<h3>static method getLogger <span class="smalllinenumber">[line 96]</span></h3>
+	<a name="methodgetLoggers"></a>
+	<h3>static method getLoggers <span class="smalllinenumber">[line 94]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
-		<code>static <a href="../Logger/Logger.html">Logger</a> getLogger(
+		<code>static array getLoggers(
 [string
 $context = self::GENERAL])</code>
     </td></tr></table>
     </td></tr></table><br />
 	
-		Returns a logger for a specific context.<br /><br /><br /><br />
+		Returns a list of logger for a specific context.<br /><br /><p>If no loggers have been added for a specific context, all loggers for the  Log::CATCHALL context are returned.</p><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
-  <tr>
-    <td><b>return:</b>&nbsp;&nbsp;</td><td>or null if not set for this context.</td>
-  </tr>
   <tr>
     <td><b>access:</b>&nbsp;&nbsp;</td><td>public</td>
   </tr>
@@ -463,7 +519,7 @@ $context = self::GENERAL])</code>
   </div>
   <hr />
 	<a name="methodinfo"></a>
-	<h3>static method info <span class="smalllinenumber">[line 129]</span></h3>
+	<h3>static method info <span class="smalllinenumber">[line 122]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -514,7 +570,7 @@ $additionalInfo = null])</code>
   </div>
   <hr />
 	<a name="methodsanitizeContext"></a>
-	<h3>static method sanitizeContext <span class="smalllinenumber">[line 191]</span></h3>
+	<h3>static method sanitizeContext <span class="smalllinenumber">[line 185]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -553,7 +609,7 @@ $context)</code>
   </div>
   <hr />
 	<a name="methodwarning"></a>
-	<h3>static method warning <span class="smalllinenumber">[line 145]</span></h3>
+	<h3>static method warning <span class="smalllinenumber">[line 134]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -612,14 +668,14 @@ $additionalInfo = null])</code>
 	<a name="constCATCHALL"></a>
 	<p></p>
 	<h4>CATCHALL = <span class="value">&nbsp;'&nbsp;CATCHALL&nbsp;'</span></h4>
-	<p>[line 53]</p>
+	<p>[line 52]</p>
   The string for the catchall logger.<br /><br />
   <br />
 	<div class="top">[ <a href="#top">Top</a> ]</div><br />
 	<a name="constGENERAL"></a>
 	<p></p>
 	<h4>GENERAL = <span class="value">&nbsp;'&nbsp;GENERAL&nbsp;'</span></h4>
-	<p>[line 46]</p>
+	<p>[line 45]</p>
   The string for the general logger.<br /><br />
   <br />
 	<div class="top">[ <a href="#top">Top</a> ]</div><br />

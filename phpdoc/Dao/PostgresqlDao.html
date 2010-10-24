@@ -14,7 +14,7 @@
     <td class="header_menu">
         
                                                         
-                                                                                                                                                                          		  [ <a href="../classtrees_Dao.html" class="menu">class tree: Dao</a> ]
+                                                                                                                                                                                              		  [ <a href="../classtrees_Dao.html" class="menu">class tree: Dao</a> ]
 		  [ <a href="../elementindex_Dao.html" class="menu">index: Dao</a> ]
 		  	    [ <a href="../elementindex.html" class="menu">all elements</a> ]
     </td>
@@ -34,6 +34,7 @@
               <a href="../li_Database.html">Database</a><br />
               <a href="../li_DataSource.html">DataSource</a><br />
               <a href="../li_Date.html">Date</a><br />
+              <a href="../li_Factory.html">Factory</a><br />
               <a href="../li_File.html">File</a><br />
               <a href="../li_Logger.html">Logger</a><br />
               <a href="../li_Profiler.html">Profiler</a><br />
@@ -59,41 +60,29 @@
 		</a><br>
 			<a href="../Dao/_Dao---DaoToOneReference.php.html">		DaoToOneReference.php
 		</a><br>
-			<a href="../Dao/_Dao---FileSourceDao.php.html">		FileSourceDao.php
+			<a href="../Dao/_Dao---File---FileDao.php.html">		FileDao.php
 		</a><br>
-			<a href="../Dao/_Dao---FileSourceResultIterator.php.html">		FileSourceResultIterator.php
+			<a href="../Dao/_Dao---File---FileResultIterator.php.html">		FileResultIterator.php
 		</a><br>
-			<a href="../Dao/_Dao---Json---JsonDao.php.html">		JsonDao.php
+			<a href="../Dao/_Dao---File---JsonDao.php.html">		JsonDao.php
 		</a><br>
-			<a href="../Dao/_Dao---Json---JsonResultIterator.php.html">		JsonResultIterator.php
+			<a href="../Dao/_Dao---Sql---PostgresqlDao.php.html">		PostgresqlDao.php
 		</a><br>
-			<a href="../Dao/_Dao---Mysql---MysqlDao.php.html">		MysqlDao.php
+			<a href="../Dao/_Dao---Sql---SqlDao.php.html">		SqlDao.php
 		</a><br>
-			<a href="../Dao/_Dao---Mysql---MysqlResultIterator.php.html">		MysqlResultIterator.php
-		</a><br>
-			<a href="../Dao/_Dao---Mysql---MysqlUserDao.php.html">		MysqlUserDao.php
-		</a><br>
-			<a href="../Dao/_Dao---Postgresql---PostgresqlDao.php.html">		PostgresqlDao.php
-		</a><br>
-			<a href="../Dao/_Dao---Postgresql---PostgresqlResultIterator.php.html">		PostgresqlResultIterator.php
-		</a><br>
-			<a href="../Dao/_Dao---Postgresql---PostgresqlUserDao.php.html">		PostgresqlUserDao.php
-		</a><br>
-			<a href="../Dao/_Dao---SqlDao.php.html">		SqlDao.php
-		</a><br>
-			<a href="../Dao/_Dao---SqlResultIterator.php.html">		SqlResultIterator.php
+			<a href="../Dao/_Dao---Sql---SqlResultIterator.php.html">		SqlResultIterator.php
 		</a><br>
 			<a href="../Dao/_Dao---UserDaoInterface.php.html">		UserDaoInterface.php
 		</a><br>
-			<a href="../Dao/_Dao---Xml---XmlDao.php.html">		XmlDao.php
+			<a href="../Dao/_Dao---File---XmlDao.php.html">		XmlDao.php
 		</a><br>
-			<a href="../Dao/_Dao---Xml---XmlResultIterator.php.html">		XmlResultIterator.php
+	  </div><br />
+	subpackage <b>DaoFactory</b><br>  <div class="package">
+			<a href="../Dao/DaoFactory/_Factory---DaoFactory.php.html">		DaoFactory.php
 		</a><br>
 	  </div><br />
 	subpackage <b>Exceptions</b><br>  <div class="package">
 			<a href="../Dao/Exceptions/_Dao---DaoExceptions.php.html">		DaoExceptions.php
-		</a><br>
-			<a href="../Dao/Exceptions/_Dao---Json---JsonDaoExceptions.php.html">		JsonDaoExceptions.php
 		</a><br>
 	  </div><br />
 	subpackage <b>Record</b><br>  <div class="package">
@@ -126,20 +115,13 @@
 	    		<a href="../Dao/DaoResultIterator.html">DaoResultIterator</a><br />
 	    		<a href="../Dao/DaoToManyReference.html">DaoToManyReference</a><br />
 	    		<a href="../Dao/DaoToOneReference.html">DaoToOneReference</a><br />
-	    		<a href="../Dao/FileSourceDao.html">FileSourceDao</a><br />
-	    		<a href="../Dao/FileSourceResultIterator.html">FileSourceResultIterator</a><br />
+	    		<a href="../Dao/FileDao.html">FileDao</a><br />
+	    		<a href="../Dao/FileResultIterator.html">FileResultIterator</a><br />
 	    		<a href="../Dao/JsonDao.html">JsonDao</a><br />
-	    		<a href="../Dao/JsonResultIterator.html">JsonResultIterator</a><br />
-	    		<a href="../Dao/MysqlDao.html">MysqlDao</a><br />
-	    		<a href="../Dao/MysqlResultIterator.html">MysqlResultIterator</a><br />
-	    		<a href="../Dao/MysqlUserDao.html">MysqlUserDao</a><br />
 	    		<a href="../Dao/PostgresqlDao.html">PostgresqlDao</a><br />
-	    		<a href="../Dao/PostgresqlResultIterator.html">PostgresqlResultIterator</a><br />
-	    		<a href="../Dao/PostgresqlUserDao.html">PostgresqlUserDao</a><br />
 	    		<a href="../Dao/SqlDao.html">SqlDao</a><br />
 	    		<a href="../Dao/SqlResultIterator.html">SqlResultIterator</a><br />
 	    		<a href="../Dao/XmlDao.html">XmlDao</a><br />
-	    		<a href="../Dao/XmlResultIterator.html">XmlResultIterator</a><br />
 	  </div>
   <div class="package">
 	Exceptions<br />	    &nbsp;&nbsp;		<a href="../Dao/Exceptions/DaoException.html">DaoException</a><br />
@@ -151,6 +133,9 @@
 	    &nbsp;&nbsp;		<a href="../Dao/Exceptions/XmlDaoException.html">XmlDaoException</a><br />
 	  </div>
   <div class="package">
+	DaoFactory<br />	    &nbsp;&nbsp;		<a href="../Dao/DaoFactory/DaoFactory.html">DaoFactory</a><br />
+	  </div>
+  <div class="package">
 	Record<br />	    &nbsp;&nbsp;		<a href="../Dao/Record/Record.html">Record</a><br />
 	    &nbsp;&nbsp;		<a href="../Dao/Record/UserRecord.html">UserRecord</a><br />
 	  </div>
@@ -159,7 +144,7 @@
       <table cellpadding="10" cellspacing="0" width="100%" border="0"><tr><td valign="top">
 
 <h1>Class: PostgresqlDao</h1>
-Source Location: /Dao/Postgresql/PostgresqlDao.php<br /><br />
+Source Location: /Dao/Sql/PostgresqlDao.php<br /><br />
 
 
 <table width="100%" border="0">
@@ -171,17 +156,17 @@ Source Location: /Dao/Postgresql/PostgresqlDao.php<br /><br />
    --<a href="../Dao/SqlDao.html">SqlDao</a>
       |
       --PostgresqlDao</pre><br />
-<div class="description">The PostgresqlDao implementation of a SqlDao</div><br /><br />
+<div class="description">The PostgresqlDao has a few postgresql specific stuff, like automatically selecting the last insert id.</div><br /><br />
 <h4>Author(s):</h4>
 <ul>
           <li>Matthias Loitsch &lt;<a href="mailto:developer@ma.tthias.com">developer@ma.tthias.com</a>&gt;</li>
-                  </ul>
+            </ul>
 
 
 
 
           
-      
+  
 
 <h4>Copyright:</h4>
 <ul>
@@ -192,6 +177,13 @@ Source Location: /Dao/Postgresql/PostgresqlDao.php<br /><br />
 
 
 
+<td valign="top">
+<h3><a href="#class_methods">Methods</a></h3>
+<ul>
+    <li><a href="../Dao/PostgresqlDao.html#methodgenerateInsertQuery">generateInsertQuery</a></li>
+    <li><a href="../Dao/PostgresqlDao.html#methodinsertByQuery">insertByQuery</a></li>
+  </ul>
+</td>
 
 </tr></table>
 <hr />
@@ -199,15 +191,6 @@ Source Location: /Dao/Postgresql/PostgresqlDao.php<br /><br />
 <table width="100%" border="0"><tr>
 
 
-<td valign="top">
-<h3>Child classes:</h3>
-<div class="tags">
-<dl>
-<dt><a href="../Dao/PostgresqlUserDao.html">PostgresqlUserDao</a></dt>
-	<dd>The PostgresqlUserDao implements the UserDaoInterface.</dd>
-</dl>
-</div>
-</td>
 
 <td valign="top">
 <h3>Inherited Constants</h3>
@@ -276,6 +259,18 @@ Source Location: /Dao/Postgresql/PostgresqlDao.php<br /><br />
 </dd>
 <dt>
   <a href="../Dao/Dao.html#constINTEGER">Dao::INTEGER</a>
+</dt>
+<dd>
+   
+</dd>
+<dt>
+  <a href="../Dao/Dao.html#constREF">Dao::REF</a>
+</dt>
+<dd>
+   
+</dd>
+<dt>
+  <a href="../Dao/Dao.html#constREFERENCE">Dao::REFERENCE</a>
 </dt>
 <dd>
    
@@ -373,12 +368,6 @@ Source Location: /Dao/Postgresql/PostgresqlDao.php<br /><br />
    
 </dd>
 <dt>
-  <a href="../Dao/Dao.html#var$logger">Dao::$logger</a>
-  </dt>
-<dd>
-   
-</dd>
-<dt>
   <a href="../Dao/Dao.html#var$nullAttributes">Dao::$nullAttributes</a>
   </dt>
 <dd>
@@ -424,12 +413,6 @@ Source Location: /Dao/Postgresql/PostgresqlDao.php<br /><br />
     
   </dd>
     <dt>
-    <a href="../Dao/SqlDao.html#methodbeginTransaction">SqlDao::beginTransaction()</a>
-  </dt>
-  <dd>
-    Shorthand for: Dao.getDb()-&gt;beginTransaction()
-  </dd>
-    <dt>
     <a href="../Dao/SqlDao.html#methodcommit">SqlDao::commit()</a>
   </dt>
   <dd>
@@ -451,7 +434,7 @@ Source Location: /Dao/Postgresql/PostgresqlDao.php<br /><br />
     <a href="../Dao/SqlDao.html#methodcreateIterator">SqlDao::createIterator()</a>
   </dt>
   <dd>
-    Creates an iterator from a php result.
+    Creates an iterator for a sql result.
   </dd>
     <dt>
     <a href="../Dao/SqlDao.html#methoddelete">SqlDao::delete()</a>
@@ -463,19 +446,25 @@ Source Location: /Dao/Postgresql/PostgresqlDao.php<br /><br />
     <a href="../Dao/SqlDao.html#methodescapeAttributeName">SqlDao::escapeAttributeName()</a>
   </dt>
   <dd>
-    Calls the internal db-&gt;escapeColumn function
+    Wrapper for the db.
   </dd>
     <dt>
     <a href="../Dao/SqlDao.html#methodescapeResourceName">SqlDao::escapeResourceName()</a>
   </dt>
   <dd>
-    Calls the internal db-&gt;escapeResourceName function
+    Wrapper for the db.
   </dd>
     <dt>
     <a href="../Dao/SqlDao.html#methodescapeString">SqlDao::escapeString()</a>
   </dt>
   <dd>
-    Calls the internal db-&gt;escapeString function
+    Wrapper for the db.
+  </dd>
+    <dt>
+    <a href="../Dao/SqlDao.html#methodexportAttributeName">SqlDao::exportAttributeName()</a>
+  </dt>
+  <dd>
+    Wrapper for the db.
   </dd>
     <dt>
     <a href="../Dao/SqlDao.html#methodexportDate">SqlDao::exportDate()</a>
@@ -484,10 +473,28 @@ Source Location: /Dao/Postgresql/PostgresqlDao.php<br /><br />
     Returns a formatted date, and escaped with exportString.
   </dd>
     <dt>
+    <a href="../Dao/SqlDao.html#methodexportResourceName">SqlDao::exportResourceName()</a>
+  </dt>
+  <dd>
+    Wrapper for the db.
+  </dd>
+    <dt>
+    <a href="../Dao/SqlDao.html#methodexportString">SqlDao::exportString()</a>
+  </dt>
+  <dd>
+    Wrapper for the db.
+  </dd>
+    <dt>
     <a href="../Dao/SqlDao.html#methodfind">SqlDao::find()</a>
   </dt>
   <dd>
     This is the method to get a Record from the database.
+  </dd>
+    <dt>
+    <a href="../Dao/SqlDao.html#methodgenerateInsertQuery">SqlDao::generateInsertQuery()</a>
+  </dt>
+  <dd>
+    Generates the query for insertion.
   </dd>
     <dt>
     <a href="../Dao/SqlDao.html#methodgenerateQuery">SqlDao::generateQuery()</a>
@@ -562,6 +569,12 @@ Source Location: /Dao/Postgresql/PostgresqlDao.php<br /><br />
     Shorthand for: Dao.getDb()-&gt;rollback()
   </dd>
     <dt>
+    <a href="../Dao/SqlDao.html#methodstartTransaction">SqlDao::startTransaction()</a>
+  </dt>
+  <dd>
+    Shorthand for: Dao-&gt;getDb()-&gt;beginTransaction()  Be careful: this starts a transaction on the database! So all Daos using the same database will be in the same transaction.
+  </dd>
+    <dt>
     <a href="../Dao/SqlDao.html#methodupdate">SqlDao::update()</a>
   </dt>
   <dd>
@@ -575,12 +588,6 @@ Source Location: /Dao/Postgresql/PostgresqlDao.php<br /><br />
   </dt>
   <dd>
     Has to be called from any extended Dao to make sure everything gets setup properly
-  </dd>
-    <dt>
-    <a href="../Dao/Dao.html#methodaddReference">Dao::addReference()</a>
-  </dt>
-  <dd>
-    Adds a reference definition. This method should be called inside setupReferences().
   </dd>
     <dt>
     <a href="../Dao/Dao.html#methodafterDelete">Dao::afterDelete()</a>
@@ -643,12 +650,6 @@ Source Location: /Dao/Postgresql/PostgresqlDao.php<br /><br />
     Creates a Dao.
   </dd>
     <dt>
-    <a href="../Dao/Dao.html#methoddebug">Dao::debug()</a>
-  </dt>
-  <dd>
-    
-  </dd>
-    <dt>
     <a href="../Dao/Dao.html#methoddeleteById">Dao::deleteById()</a>
   </dt>
   <dd>
@@ -701,6 +702,12 @@ Source Location: /Dao/Postgresql/PostgresqlDao.php<br /><br />
   </dt>
   <dd>
     Escapes a resource name.
+  </dd>
+    <dt>
+    <a href="../Dao/Dao.html#methodexportSequence">Dao::exportSequence()</a>
+  </dt>
+  <dd>
+    Exports a sequence. The generic Dao really can't handle this.
   </dd>
     <dt>
     <a href="../Dao/Dao.html#methodexportString">Dao::exportString()</a>
@@ -763,6 +770,12 @@ Source Location: /Dao/Postgresql/PostgresqlDao.php<br /><br />
     Returns the attributes array
   </dd>
     <dt>
+    <a href="../Dao/Dao.html#methodgetAttributeType">Dao::getAttributeType()</a>
+  </dt>
+  <dd>
+    Returns the type of an attribute (eg.: Dao::INT, etc..)
+  </dd>
+    <dt>
     <a href="../Dao/Dao.html#methodgetById">Dao::getById()</a>
   </dt>
   <dd>
@@ -802,13 +815,13 @@ Source Location: /Dao/Postgresql/PostgresqlDao.php<br /><br />
     <a href="../Dao/Dao.html#methodgetReference">Dao::getReference()</a>
   </dt>
   <dd>
-    Returns the reference for an attribute
+    Returns the reference for an attribute.
   </dd>
     <dt>
-    <a href="../Dao/Dao.html#methodgetReferences">Dao::getReferences()</a>
+    <a href="../Dao/Dao.html#methodgetResourceName">Dao::getResourceName()</a>
   </dt>
   <dd>
-    
+    Returns the resource name
   </dd>
     <dt>
     <a href="../Dao/Dao.html#methodimportAttributeName">Dao::importAttributeName()</a>
@@ -883,12 +896,6 @@ Source Location: /Dao/Postgresql/PostgresqlDao.php<br /><br />
     This is a helper class that defines if an array is a &quot;vector&quot; (has only integer indices starting from 0) or an associative array.
   </dd>
     <dt>
-    <a href="../Dao/Dao.html#methodlog">Dao::log()</a>
-  </dt>
-  <dd>
-    
-  </dd>
-    <dt>
     <a href="../Dao/Dao.html#methodnotNull">Dao::notNull()</a>
   </dt>
   <dd>
@@ -899,18 +906,6 @@ Source Location: /Dao/Postgresql/PostgresqlDao.php<br /><br />
   </dt>
   <dd>
     Goes through the data array returned from the datasource, and converts the values that are necessary.
-  </dd>
-    <dt>
-    <a href="../Dao/Dao.html#methodsetLogger">Dao::setLogger()</a>
-  </dt>
-  <dd>
-    
-  </dd>
-    <dt>
-    <a href="../Dao/Dao.html#methodsetLoggerFactory">Dao::setLoggerFactory()</a>
-  </dt>
-  <dd>
-    
   </dd>
     <dt>
     <a href="../Dao/Dao.html#methodsetupReferences">Dao::setupReferences()</a>
@@ -940,8 +935,8 @@ Source Location: /Dao/Postgresql/PostgresqlDao.php<br /><br />
 <a name="class_details"></a>
 <h3>Class Details</h3>
 <div class="tags">
-[line 33]<br />
-The PostgresqlDao implementation of a SqlDao<br /><br /><br /><br />
+[line 25]<br />
+The PostgresqlDao has a few postgresql specific stuff, like automatically selecting the last insert id.<br /><br /><p>You can use the generic SqlDao if you want though! The PostgresqlDao is just  faster and optimized for postgresql.</p><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
 <table border="0" cellspacing="0" cellpadding="0">
@@ -951,15 +946,99 @@ The PostgresqlDao implementation of a SqlDao<br /><br /><br /><br />
   <tr>
     <td><b>copyright:</b>&nbsp;&nbsp;</td><td>Copyright (c) 2010, Matthias Loitsch</td>
   </tr>
-  <tr>
-    <td><b>abstract:</b>&nbsp;&nbsp;</td><td></td>
-  </tr>
 </table>
 </div>
 </div><br /><br />
 <div class="top">[ <a href="#top">Top</a> ]</div><br />
 
 
+<hr />
+<a name="class_methods"></a>
+<h3>Class Methods</h3>
+<div class="tags">
+
+  <hr />
+	<a name="methodgenerateInsertQuery"></a>
+	<h3>method generateInsertQuery <span class="smalllinenumber">[line 34]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>string generateInsertQuery(
+<a href="../Dao/Record/Record.html">Record</a>
+$record)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Generates the query for insertion, but adds the RETURNING clause, so the id  gets returned automatically.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	Overrides <a href="../Dao/SqlDao.html#methodgenerateInsertQuery">SqlDao::generateInsertQuery()</a> (Generates the query for insertion.)<br /><br />
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type"><a href="../Dao/Record/Record.html">Record</a>&nbsp;&nbsp;</td>
+        <td><b>$record</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodinsertByQuery"></a>
+	<h3>method insertByQuery <span class="smalllinenumber">[line 47]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>int insertByQuery(
+string
+$query, [int
+$id = null])</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Inserts and returns the new id<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>return:</b>&nbsp;&nbsp;</td><td>The id.</td>
+  </tr>
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	Overrides <a href="../Dao/SqlDao.html#methodinsertByQuery">SqlDao::insertByQuery()</a> (Inserts and returns the new id)<br /><br />
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">string&nbsp;&nbsp;</td>
+        <td><b>$query</b>&nbsp;&nbsp;</td>
+        <td>The query.</td>
+      </tr>
+          <tr>
+        <td class="type">int&nbsp;&nbsp;</td>
+        <td><b>$id</b>&nbsp;&nbsp;</td>
+        <td>If an insert is done with an id, you can pass it. If not, the last insert id is used.</td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+</div><br />
 
 
         <div class="credit">

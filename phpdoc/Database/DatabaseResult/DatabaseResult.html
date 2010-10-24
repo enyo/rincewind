@@ -14,7 +14,7 @@
     <td class="header_menu">
         
                                                                             
-                                                                                                                                                      		  [ <a href="../../classtrees_Database.html" class="menu">class tree: Database</a> ]
+                                                                                                                                                                          		  [ <a href="../../classtrees_Database.html" class="menu">class tree: Database</a> ]
 		  [ <a href="../../elementindex_Database.html" class="menu">index: Database</a> ]
 		  	    [ <a href="../../elementindex.html" class="menu">all elements</a> ]
     </td>
@@ -34,6 +34,7 @@
               <a href="../../li_Database.html">Database</a><br />
               <a href="../../li_DataSource.html">DataSource</a><br />
               <a href="../../li_Date.html">Date</a><br />
+              <a href="../../li_Factory.html">Factory</a><br />
               <a href="../../li_File.html">File</a><br />
               <a href="../../li_Logger.html">Logger</a><br />
               <a href="../../li_Profiler.html">Profiler</a><br />
@@ -64,6 +65,12 @@
 			<a href="../../Database/Exceptions/_Database---DatabaseExceptions.php.html">		DatabaseExceptions.php
 		</a><br>
 	  </div><br />
+	subpackage <b>Updater</b><br>  <div class="package">
+			<a href="../../Database/Updater/_DatabaseUpdater---DatabaseUpdate.php.html">		DatabaseUpdate.php
+		</a><br>
+			<a href="../../Database/Updater/_DatabaseUpdater---DatabaseUpdater.php.html">		DatabaseUpdater.php
+		</a><br>
+	  </div><br />
       
             <b>Interfaces:</b><br />
         <div class="package">
@@ -77,6 +84,7 @@
         <div class="package">
 		    		<a href="../../Database/Database.html">Database</a><br />
 	    		<a href="../../Database/Mysql.html">Mysql</a><br />
+	    		<a href="../../Database/Postgresql.html">Postgresql</a><br />
 	  </div>
   <div class="package">
 	Exceptions<br />	    &nbsp;&nbsp;		<a href="../../Database/Exceptions/SqlConnectionException.html">SqlConnectionException</a><br />
@@ -86,6 +94,13 @@
   <div class="package">
 	DatabaseResult<br />	    &nbsp;&nbsp;		<a href="../../Database/DatabaseResult/DatabaseResult.html">DatabaseResult</a><br />
 	    &nbsp;&nbsp;		<a href="../../Database/DatabaseResult/MysqlResult.html">MysqlResult</a><br />
+	    &nbsp;&nbsp;		<a href="../../Database/DatabaseResult/PostgresqlResult.html">PostgresqlResult</a><br />
+	  </div>
+  <div class="package">
+	Updater<br />	    &nbsp;&nbsp;		<a href="../../Database/Updater/DatabaseNotInitializedException.html">DatabaseNotInitializedException</a><br />
+	    &nbsp;&nbsp;		<a href="../../Database/Updater/DatabaseUpdate.html">DatabaseUpdate</a><br />
+	    &nbsp;&nbsp;		<a href="../../Database/Updater/DatabaseUpdater.html">DatabaseUpdater</a><br />
+	    &nbsp;&nbsp;		<a href="../../Database/Updater/DatabaseUpdaterException.html">DatabaseUpdaterException</a><br />
 	  </div>
                 </td>
     <td>
@@ -127,6 +142,7 @@ Source Location: /DatabaseResult/DatabaseResult.php<br /><br />
 <td valign="top">
 <h3><a href="#class_vars">Variables</a></h3>
 <ul>
+    <li><a href="../../Database/DatabaseResult/DatabaseResult.html#var$currentRowNumber">$currentRowNumber</a></li>
     <li><a href="../../Database/DatabaseResult/DatabaseResult.html#var$result">$result</a></li>
   </ul>
 </td>
@@ -154,6 +170,10 @@ Source Location: /DatabaseResult/DatabaseResult.php<br /><br />
 <dl>
 <dt><a href="../../Database/DatabaseResult/MysqlResult.html">MysqlResult</a></dt>
 	<dd>The Mysql DatabaseResult implementation.</dd>
+</dl>
+<dl>
+<dt><a href="../../Database/DatabaseResult/PostgresqlResult.html">PostgresqlResult</a></dt>
+	<dd>The Postgresql DatabaseResult implementation.</dd>
 </dl>
 </div>
 </td>
@@ -190,6 +210,30 @@ If you implement a DatabaseResult (eg: for mysql) extend this class.<br /><br />
 <a name="class_vars"></a>
 <h3>Class Variables</h3>
 <div class="tags">
+	<a name="var$currentRowNumber"></a>
+	<p></p>
+	<h4>$currentRowNumber = <span class="value">&nbsp;0</span></h4>
+	<p>[line 39]</p>
+  The current row number. The first row is 0.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>access:</b>&nbsp;&nbsp;</td><td>protected</td>
+  </tr>
+</table>
+</div>
+
+  <br />
+	<div class="tags">
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td><b>Type:</b>&nbsp;&nbsp;</td>
+      <td>int</td>
+    </tr>
+      </table>
+	</div><br /><br />
+	<div class="top">[ <a href="#top">Top</a> ]</div><br />
 	<a name="var$result"></a>
 	<p></p>
 	<h4>$result = <span class="value">&nbsp;false</span></h4>
@@ -226,7 +270,7 @@ If you implement a DatabaseResult (eg: for mysql) extend this class.<br /><br />
 
   <hr />
 	<a name="method__construct"></a>
-	<h3>constructor __construct <span class="smalllinenumber">[line 39]</span></h3>
+	<h3>constructor __construct <span class="smalllinenumber">[line 46]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -262,7 +306,7 @@ $result)</code>
   </div>
   <hr />
 	<a name="methodfetch"></a>
-	<h3>method fetch <span class="smalllinenumber">[line 57]</span></h3>
+	<h3>method fetch <span class="smalllinenumber">[line 64]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -304,7 +348,7 @@ $field = null])</code>
   </div>
   <hr />
 	<a name="methodgetResult"></a>
-	<h3>method getResult <span class="smalllinenumber">[line 47]</span></h3>
+	<h3>method getResult <span class="smalllinenumber">[line 54]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -335,7 +379,7 @@ $field = null])</code>
   </div>
   <hr />
 	<a name="methodreset"></a>
-	<h3>method reset <span class="smalllinenumber">[line 64]</span></h3>
+	<h3>method reset <span class="smalllinenumber">[line 71]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">

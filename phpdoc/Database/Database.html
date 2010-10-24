@@ -14,7 +14,7 @@
     <td class="header_menu">
         
                                                                             
-                                                                                                                                                      		  [ <a href="../classtrees_Database.html" class="menu">class tree: Database</a> ]
+                                                                                                                                                                          		  [ <a href="../classtrees_Database.html" class="menu">class tree: Database</a> ]
 		  [ <a href="../elementindex_Database.html" class="menu">index: Database</a> ]
 		  	    [ <a href="../elementindex.html" class="menu">all elements</a> ]
     </td>
@@ -34,6 +34,7 @@
               <a href="../li_Database.html">Database</a><br />
               <a href="../li_DataSource.html">DataSource</a><br />
               <a href="../li_Date.html">Date</a><br />
+              <a href="../li_Factory.html">Factory</a><br />
               <a href="../li_File.html">File</a><br />
               <a href="../li_Logger.html">Logger</a><br />
               <a href="../li_Profiler.html">Profiler</a><br />
@@ -64,6 +65,12 @@
 			<a href="../Database/Exceptions/_Database---DatabaseExceptions.php.html">		DatabaseExceptions.php
 		</a><br>
 	  </div><br />
+	subpackage <b>Updater</b><br>  <div class="package">
+			<a href="../Database/Updater/_DatabaseUpdater---DatabaseUpdate.php.html">		DatabaseUpdate.php
+		</a><br>
+			<a href="../Database/Updater/_DatabaseUpdater---DatabaseUpdater.php.html">		DatabaseUpdater.php
+		</a><br>
+	  </div><br />
       
             <b>Interfaces:</b><br />
         <div class="package">
@@ -77,6 +84,7 @@
         <div class="package">
 		    		<a href="../Database/Database.html">Database</a><br />
 	    		<a href="../Database/Mysql.html">Mysql</a><br />
+	    		<a href="../Database/Postgresql.html">Postgresql</a><br />
 	  </div>
   <div class="package">
 	Exceptions<br />	    &nbsp;&nbsp;		<a href="../Database/Exceptions/SqlConnectionException.html">SqlConnectionException</a><br />
@@ -86,6 +94,13 @@
   <div class="package">
 	DatabaseResult<br />	    &nbsp;&nbsp;		<a href="../Database/DatabaseResult/DatabaseResult.html">DatabaseResult</a><br />
 	    &nbsp;&nbsp;		<a href="../Database/DatabaseResult/MysqlResult.html">MysqlResult</a><br />
+	    &nbsp;&nbsp;		<a href="../Database/DatabaseResult/PostgresqlResult.html">PostgresqlResult</a><br />
+	  </div>
+  <div class="package">
+	Updater<br />	    &nbsp;&nbsp;		<a href="../Database/Updater/DatabaseNotInitializedException.html">DatabaseNotInitializedException</a><br />
+	    &nbsp;&nbsp;		<a href="../Database/Updater/DatabaseUpdate.html">DatabaseUpdate</a><br />
+	    &nbsp;&nbsp;		<a href="../Database/Updater/DatabaseUpdater.html">DatabaseUpdater</a><br />
+	    &nbsp;&nbsp;		<a href="../Database/Updater/DatabaseUpdaterException.html">DatabaseUpdaterException</a><br />
 	  </div>
                 </td>
     <td>
@@ -133,7 +148,7 @@ Source Location: /Database/Database.php<br /><br />
     <li><a href="../Database/Database.html#var$password">$password</a></li>
     <li><a href="../Database/Database.html#var$port">$port</a></li>
     <li><a href="../Database/Database.html#var$resource">$resource</a></li>
-    <li><a href="../Database/Database.html#var$search_path">$search_path</a></li>
+    <li><a href="../Database/Database.html#var$searchPath">$searchPath</a></li>
     <li><a href="../Database/Database.html#var$user">$user</a></li>
   </ul>
 </td>
@@ -168,6 +183,10 @@ Source Location: /Database/Database.php<br /><br />
 <dt><a href="../Database/Mysql.html">Mysql</a></dt>
 	<dd>The Mysql Database implementation.</dd>
 </dl>
+<dl>
+<dt><a href="../Database/Postgresql.html">Postgresql</a></dt>
+	<dd>The Postgresql Database implementation.</dd>
+</dl>
 </div>
 </td>
 
@@ -180,7 +199,7 @@ Source Location: /Database/Database.php<br /><br />
 <a name="class_details"></a>
 <h3>Class Details</h3>
 <div class="tags">
-[line 25]<br />
+[line 22]<br />
 If you implement a Database (eg: for mysql) extend this class.<br /><br /><br /><br />
 <h4>Tags:</h4>
 <div class="tags">
@@ -206,7 +225,7 @@ If you implement a Database (eg: for mysql) extend this class.<br /><br /><br />
 	<a name="var$connected"></a>
 	<p></p>
 	<h4>$connected = <span class="value">&nbsp;false</span></h4>
-	<p>[line 30]</p>
+	<p>[line 27]</p>
   <br /><br />
 <h4>Tags:</h4>
 <div class="tags">
@@ -230,7 +249,7 @@ If you implement a Database (eg: for mysql) extend this class.<br /><br /><br />
 	<a name="var$dbname"></a>
 	<p></p>
 	<h4>$dbname = <span class="value"></span></h4>
-	<p>[line 50]</p>
+	<p>[line 43]</p>
   <br /><br />
 <h4>Tags:</h4>
 <div class="tags">
@@ -254,7 +273,7 @@ If you implement a Database (eg: for mysql) extend this class.<br /><br /><br />
 	<a name="var$host"></a>
 	<p></p>
 	<h4>$host = <span class="value"></span></h4>
-	<p>[line 40]</p>
+	<p>[line 35]</p>
   <br /><br />
 <h4>Tags:</h4>
 <div class="tags">
@@ -278,7 +297,7 @@ If you implement a Database (eg: for mysql) extend this class.<br /><br /><br />
 	<a name="var$password"></a>
 	<p></p>
 	<h4>$password = <span class="value"></span></h4>
-	<p>[line 60]</p>
+	<p>[line 51]</p>
   <br /><br />
 <h4>Tags:</h4>
 <div class="tags">
@@ -302,7 +321,7 @@ If you implement a Database (eg: for mysql) extend this class.<br /><br /><br />
 	<a name="var$port"></a>
 	<p></p>
 	<h4>$port = <span class="value"></span></h4>
-	<p>[line 45]</p>
+	<p>[line 39]</p>
   <br /><br />
 <h4>Tags:</h4>
 <div class="tags">
@@ -326,7 +345,7 @@ If you implement a Database (eg: for mysql) extend this class.<br /><br /><br />
 	<a name="var$resource"></a>
 	<p></p>
 	<h4>$resource = <span class="value"></span></h4>
-	<p>[line 35]</p>
+	<p>[line 31]</p>
   <br /><br />
 <h4>Tags:</h4>
 <div class="tags">
@@ -350,10 +369,10 @@ If you implement a Database (eg: for mysql) extend this class.<br /><br /><br />
       </table>
 	</div><br /><br />
 	<div class="top">[ <a href="#top">Top</a> ]</div><br />
-	<a name="var$search_path"></a>
+	<a name="var$searchPath"></a>
 	<p></p>
-	<h4>$search_path = <span class="value"></span></h4>
-	<p>[line 65]</p>
+	<h4>$searchPath = <span class="value"></span></h4>
+	<p>[line 55]</p>
   <br /><br />
 <h4>Tags:</h4>
 <div class="tags">
@@ -377,7 +396,7 @@ If you implement a Database (eg: for mysql) extend this class.<br /><br /><br />
 	<a name="var$user"></a>
 	<p></p>
 	<h4>$user = <span class="value"></span></h4>
-	<p>[line 55]</p>
+	<p>[line 47]</p>
   <br /><br />
 <h4>Tags:</h4>
 <div class="tags">
@@ -407,7 +426,7 @@ If you implement a Database (eg: for mysql) extend this class.<br /><br /><br />
 
   <hr />
 	<a name="method__construct"></a>
-	<h3>constructor __construct <span class="smalllinenumber">[line 78]</span></h3>
+	<h3>constructor __construct <span class="smalllinenumber">[line 67]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -417,7 +436,8 @@ $dbname, [string
 $user = null], [string
 $host = null], [string
 $port = null], [string
-$password = null])</code>
+$password = null], [
+$searchPath = null])</code>
     </td></tr></table>
     </td></tr></table><br />
 	
@@ -461,13 +481,18 @@ $password = null])</code>
         <td><b>$password</b>&nbsp;&nbsp;</td>
         <td></td>
       </tr>
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>$searchPath</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
         </table>
     </div><br />
         <div class="top">[ <a href="#top">Top</a> ]</div>
   </div>
   <hr />
 	<a name="method__destruct"></a>
-	<h3>destructor __destruct <span class="smalllinenumber">[line 148]</span></h3>
+	<h3>destructor __destruct <span class="smalllinenumber">[line 147]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -495,7 +520,7 @@ $password = null])</code>
   </div>
   <hr />
 	<a name="methodclose"></a>
-	<h3>method close <span class="smalllinenumber">[line 96]</span></h3>
+	<h3>method close <span class="smalllinenumber">[line 85]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -523,13 +548,17 @@ $password = null])</code>
 	<dt><a href="../Database/Mysql.html#methodclose">Mysql::close()</a></dt>
 		<dd>Closes the database connection</dd>
 	</dl>
+		<dl>
+	<dt><a href="../Database/Postgresql.html#methodclose">Postgresql::close()</a></dt>
+		<dd>Closes the database connection</dd>
+	</dl>
 	</p>
 	
         <div class="top">[ <a href="#top">Top</a> ]</div>
   </div>
   <hr />
 	<a name="methodconnect"></a>
-	<h3>method connect <span class="smalllinenumber">[line 91]</span></h3>
+	<h3>method connect <span class="smalllinenumber">[line 80]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -557,13 +586,17 @@ $password = null])</code>
 	<dt><a href="../Database/Mysql.html#methodconnect">Mysql::connect()</a></dt>
 		<dd>This is the connect function that tries to create a mysql connection, and set the correct character set.</dd>
 	</dl>
+		<dl>
+	<dt><a href="../Database/Postgresql.html#methodconnect">Postgresql::connect()</a></dt>
+		<dd>This is the connect function that tries to create a postgresql connection, and set the correct character set.</dd>
+	</dl>
 	</p>
 	
         <div class="top">[ <a href="#top">Top</a> ]</div>
   </div>
   <hr />
 	<a name="methodensureConnection"></a>
-	<h3>method ensureConnection <span class="smalllinenumber">[line 101]</span></h3>
+	<h3>method ensureConnection <span class="smalllinenumber">[line 90]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -588,7 +621,7 @@ $password = null])</code>
   </div>
   <hr />
 	<a name="methodescapeColumn"></a>
-	<h3>method escapeColumn <span class="smalllinenumber">[line 158]</span></h3>
+	<h3>method escapeColumn <span class="smalllinenumber">[line 156]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -630,7 +663,7 @@ $column)</code>
   </div>
   <hr />
 	<a name="methodescapeTable"></a>
-	<h3>method escapeTable <span class="smalllinenumber">[line 167]</span></h3>
+	<h3>method escapeTable <span class="smalllinenumber">[line 165]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -672,7 +705,7 @@ $table)</code>
   </div>
   <hr />
 	<a name="methodgetConnectionString"></a>
-	<h3>method getConnectionString <span class="smalllinenumber">[line 131]</span></h3>
+	<h3>method getConnectionString <span class="smalllinenumber">[line 118]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -708,7 +741,7 @@ $separator = '/'])</code>
   </div>
   <hr />
 	<a name="methodgetResource"></a>
-	<h3>method getResource <span class="smalllinenumber">[line 109]</span></h3>
+	<h3>method getResource <span class="smalllinenumber">[line 99]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -742,7 +775,7 @@ $separator = '/'])</code>
   </div>
   <hr />
 	<a name="methodmultiQuery"></a>
-	<h3>method multiQuery <span class="smalllinenumber">[line 122]</span></h3>
+	<h3>method multiQuery <span class="smalllinenumber">[line 109]</span></h3>
 	<div class="function">
     <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
@@ -767,6 +800,10 @@ $query)</code>
 		<dl>
 	<dt><a href="../Database/Mysql.html#methodmultiQuery">Mysql::multiQuery()</a></dt>
 		<dd>Performs multiple queries at once, and frees the result afterwards.</dd>
+	</dl>
+		<dl>
+	<dt><a href="../Database/Postgresql.html#methodmultiQuery">Postgresql::multiQuery()</a></dt>
+		<dd>Performs multiple queries at once. For postgresql this is just a wrapper for query.</dd>
 	</dl>
 	</p>
 			<hr class="separator" />

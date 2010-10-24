@@ -1,12 +1,12 @@
 <?php
 
 /**
- * This file contains the SQL Dao definition.
+ * This file contains the FileDao definition.
  *
  * @author Matthias Loitsch <developer@ma.tthias.com>
  * @copyright Copyright (c) 2010, Matthias Loitsch
  * @package Dao
- * */
+ */
 /**
  * Loading the abstract Dao Class
  * Checking for the class is actually faster then include_once
@@ -14,24 +14,23 @@
 if ( ! class_exists('Dao', false)) include dirname(__FILE__) . '/Dao.php';
 
 /**
- * The FileSourceDao is used to get a file somewhere, interpret it and act as a normal datasource.
+ * Loading the JsonResultIterator
+ */
+include dirname(__FILE__) . '/FileResultIterator.php';
+
+/**
+ * The FileDao is used to get a file somewhere, interpret it and act as a normal datasource.
  *
  * @author Matthias Loitsch <developer@ma.tthias.com>
  * @copyright Copyright (c) 2010, Matthias Loitsch
  * @package Dao
- * */
-abstract class FileSourceDao extends Dao {
+ */
+abstract class FileDao extends Dao {
 
   /**
    * @var mixed
    */
   protected $fileDataSource;
-
-  /**
-   * Whether the datasource returns the id, or the whole object on insert.
-   * @var bool
-   */
-  protected $dataSourceReturnsIdOnInsert = true;
 
   /**
    * @param FileDataSource $fileDataSource The fileDataSource is used to create the requests.
@@ -60,7 +59,7 @@ abstract class FileSourceDao extends Dao {
    * implementation of instantiating Daos.
    *
    * @param string $daoName
-   * @return FileSourceDao
+   * @return FileDao
    */
   public function createDao($daoName) {
     $daoClassName = $daoName . 'Dao';
@@ -68,12 +67,14 @@ abstract class FileSourceDao extends Dao {
   }
 
   /**
-   * Creates an iterator from a data hash.
+   * Creates an iterator for a data hash.
    *
    * @param array $data
    * @return FileResultIterator
    */
-  abstract public function createIterator($data);
+  public function createIterator($data) {
+    return new FileResultIterator($data, $this);
+  }
 
   /**
    * Most file data connections will transfer time values as timestamps.
@@ -197,7 +198,6 @@ abstract class FileSourceDao extends Dao {
     return $this->getIteratorFromData($data);
   }
 
-
   /**
    * Inserts a record in the database, and updates the record with the new data (in
    * case some default values of the database have been set.)
@@ -215,14 +215,14 @@ abstract class FileSourceDao extends Dao {
 
     $result = $this->fileDataSource->insert($this->resourceName, $attributes);
 
-    if ($this->dataSourceReturnsIdOnInsert) {
+    if ($this->fileDataSource->returnsIdOnInsert()) {
       $data = $this->getData(array('id' => $result));
     }
     else {
       $data = $this->interpretFileContent($result);
     }
 
-    if (!$data || !is_array($data)) throw new DaoException('The data returned from the datasource after insert was invalid (resource: ' . $this->getResourceName() . ').');
+    if ( ! $data || ! is_array($data)) throw new DaoException('The data returned from the datasource after insert was invalid (resource: ' . $this->getResourceName() . ').');
 
     $this->updateRecordWithData($data, $record);
 

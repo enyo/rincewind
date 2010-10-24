@@ -27,6 +27,20 @@ class DataSourceException extends Exception { };
  */
 abstract class DataSource {
 
+  /**
+   * Whether the datasource returns the id, or the whole set on insert.
+   *
+   * @var bool
+   */
+  protected $returnsIdOnInsert = true;
+  
+  /**
+   * @return bool
+   * @uses $returnsIdOnInsert
+   */
+  public function returnsIdOnInsert() {
+    return $this->returnsIdOnInsert;
+  }
 
   /**
    * Returns a specific record.

@@ -6,25 +6,23 @@
  * @author Matthias Loitsch <developer@ma.tthias.com>
  * @copyright Copyright (c) 2010, Matthias Loitsch
  * @package Dao
- **/
-
-
-
+ */
 /**
  * Loading the FileDao
  */
-include dirname(dirname(__FILE__)) . '/FileSourceDao.php';
+include dirname(__FILE__) . '/FileDao.php';
 
 /**
- * Loading the Exceptions
+ * The Exception base class for JsonDaoExceptions.
+ *
+ * @author Matthias Loitsch <developer@ma.tthias.com>
+ * @copyright Copyright (c) 2010, Matthias Loitsch
+ * @package Dao
+ * @subpackage Exceptions
  */
-include_once dirname(__FILE__) . '/JsonDaoExceptions.php';
+class JsonDaoException extends DaoException {
 
-/**
- * Loading the JsonResultIterator
- */
-include dirname(__FILE__) . '/JsonResultIterator.php';
-
+}
 
 /**
  * The JsonDao implementation of a FileSourceDao
@@ -32,9 +30,8 @@ include dirname(__FILE__) . '/JsonResultIterator.php';
  * @author Matthias Loitsch <developer@ma.tthias.com>
  * @copyright Copyright (c) 2010, Matthias Loitsch
  * @package Dao
- **/
-class JsonDao extends FileSourceDao {
-
+ */
+class JsonDao extends FileDao {
 
   /**
    * Intepretes the json content, and returns it.
@@ -44,26 +41,16 @@ class JsonDao extends FileSourceDao {
   public function interpretFileContent($content) {
     $return = json_decode($content, true);
     if ($return === null) {
-      Log::error('Json could not be decoded.', 'JsonDao', array('content'=>$content));
+      Log::error('Json could not be decoded.', 'JsonDao', array('content' => $content));
       throw new JsonDaoException("Json could not be decoded.");
     }
     return $return;
   }
 
   /**
-   * Creates an iterator for a json data hash.
-   *
-   * @param array $data
-   * @return JsonResultIterator
-   */
-  public function createIterator($data) {
-    return new JsonResultIterator($data, $this);
-  }
-
-  /**
    * Doesn't work for JSON normally.
    */
-  public  function startTransaction() {
+  public function startTransaction() {
     throw new JsonDaoException('Transactions not implemented.');
   }
 
@@ -79,5 +66,6 @@ class JsonDao extends FileSourceDao {
   public function exportSequence($value) {
     return is_array($value) ? $value : array($value);
   }
+
 }
 

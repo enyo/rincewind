@@ -1,33 +1,30 @@
 <?php
 
-
 /**
  * This file contains the FileResultIterator definition.
  *
  * @author Matthias Loitsch <developer@ma.tthias.com>
  * @copyright Copyright (c) 2010, Matthias Loitsch
  * @package Dao
- **/
-
+ */
 /**
  * Loading the DaoResultIterator
  */
-if (!class_exists('DaoResultIterator', false)) include dirname(__FILE__) . '/DaoResultIterator.php';
+if ( ! class_exists('DaoResultIterator', false)) include dirname(__FILE__) . '/DaoResultIterator.php';
 
 /**
- * This class implements the FileSourceResultIterator.
+ * This class implements the FileResultIterator.
  *
  * @author Matthias Loitsch <developer@ma.tthias.com>
  * @copyright Copyright (c) 2010, Matthias Loitsch
  * @package Dao
- */ 
-abstract class FileSourceResultIterator extends DaoResultIterator {
+ */
+class FileResultIterator extends DaoResultIterator {
 
   /**
    * @var array
    */
   protected $data = false;
-
 
   /**
    * @param array $data
@@ -39,7 +36,6 @@ abstract class FileSourceResultIterator extends DaoResultIterator {
     $this->dao = $dao;
     $this->next();
   }
-
 
   /**
    * @return array
@@ -61,7 +57,6 @@ abstract class FileSourceResultIterator extends DaoResultIterator {
     return $this;
   }
 
-
   /**
    * Set the pointer to the next row.
    * @return FileResultIterator Returns itself for chaining.
@@ -80,5 +75,4 @@ abstract class FileSourceResultIterator extends DaoResultIterator {
   }
 
 }
-
 

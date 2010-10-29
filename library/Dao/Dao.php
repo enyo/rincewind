@@ -167,7 +167,7 @@ abstract class Dao implements DaoInterface {
     if ($defaultValueAttributes) $this->defaultValueAttributes = $defaultValueAttributes;
 
     if ( ! $this->resourceName) {
-      throw new DaoException('No resource name provided.');
+      throw new DaoException('No resource name provided in class ' . get_class($this) . '.');
     }
     if ( ! is_array($this->attributes)) {
       throw new DaoException('No attributes provied.');
@@ -723,7 +723,7 @@ abstract class Dao implements DaoInterface {
       }
     }
     foreach ($neededValues as $attributeName => $type) {
-      if ($type != Dao::IGNORE) {
+      if ($type !== Dao::IGNORE && $type !== Dao::REFERENCE) {
         if ($this->notNull($attributeName)) {
           $trace = debug_backtrace();
           trigger_error('The attribute "' . $attributeName . '" (resource: "' . $this->resourceName . '") was not transmitted from data source', E_USER_WARNING);

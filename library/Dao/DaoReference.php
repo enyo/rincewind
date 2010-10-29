@@ -93,20 +93,23 @@ abstract class DaoReference {
    * @var Dao
    */
   protected $sourceDao;
+  /**
+   * @var bool
+   */
+  protected $export;
 
   /**
    * @param string|Dao $daoName
    * @param string $localKey
    * @param string $foreignKey
-   * @param Dao $sourceDao The this reference is assigned to. If you don't set it in the
-   *                       constructor, it has to be set with setSourceDao(). The addReference
-   *                       function of the Dao does this for you.
+   * @param bool $exportReference specifies if this reference should be sent to the
+   *                              datasource when saving.
    */
-  public function __construct($daoName, $localKey = null, $foreignKey = 'id', $sourceDao = null) {
+  public function __construct($daoName, $localKey = null, $foreignKey = 'id', $export = false) {
     $this->daoName = $daoName;
     $this->localKey = $localKey;
     $this->foreignKey = $foreignKey;
-    $this->sourceDao = $sourceDao;
+    $this->export = $export;
   }
 
   /**
@@ -122,6 +125,13 @@ abstract class DaoReference {
    */
   public function getSourceDao() {
     return $this->sourceDao;
+  }
+
+  /**
+   * @return bool
+   */
+  public function export() {
+    return $this->export;
   }
 
   /**

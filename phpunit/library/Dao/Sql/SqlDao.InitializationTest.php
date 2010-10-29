@@ -4,11 +4,11 @@ require_once 'PHPUnit/Framework.php';
 
 require_once dirname(__FILE__) . '/../../../setup.php';
 
-require_once LIBRARY_PATH . 'Dao/Sql/SqlDao.php';
+require_once LIBRARY_PATH . 'Dao/Sql/SqlDaoBase.php';
 
 
 
-class SpecificSqlDao extends SqlDao {
+class SpecificSqlDaoBase extends SqlDaoBase {
 
   protected $db = 'DB';
   protected $resourceName = 'Resource Name';
@@ -22,9 +22,9 @@ class SpecificSqlDao extends SqlDao {
 
 
 /**
- * Test class for SqlDao.
+ * Test class for SqlDaoBase.
  */
-class SqlDaoInitializationTest extends PHPUnit_Framework_TestCase {
+class SqlDaoBaseInitializationTest extends PHPUnit_Framework_TestCase {
 
   protected $sqlDao;
 
@@ -36,14 +36,14 @@ class SqlDaoInitializationTest extends PHPUnit_Framework_TestCase {
    * @expectedException DaoException
    */
   public function testThrowsExceptionIfNoResourceNameProvided() {
-    new SqlDao(null);
+    new SqlDaoBase(null);
   }
 
   /**
    * @expectedException DaoException
    */
   public function testThrowsExceptionIfNoAttributesProvided() {
-    new SqlDao(null, 'resource name');
+    new SqlDaoBase(null, 'resource name');
   }
 
 
@@ -54,7 +54,7 @@ class SqlDaoInitializationTest extends PHPUnit_Framework_TestCase {
     $nullAttributes = array('null', 'attributes');
     $defaultValueAttributes = array('default', 'value', 'attributes');
 
-    $sqlDao= new SqlDao($db, $resourceName, $attributes, $nullAttributes, $defaultValueAttributes);
+    $sqlDao= new SqlDaoBase($db, $resourceName, $attributes, $nullAttributes, $defaultValueAttributes);
 
     $this->assertEquals($db, $sqlDao->getDb());
     $this->assertEquals($attributes, $sqlDao->getAttributes());
@@ -70,7 +70,7 @@ class SqlDaoInitializationTest extends PHPUnit_Framework_TestCase {
     $nullAttributes = array('null', 'attributes');
     $defaultValueAttributes = array('default', 'value', 'attributes');
 
-    $sqlDao= new SpecificSqlDao($db);
+    $sqlDao= new SpecificSqlDaoBase($db);
 
     $this->assertEquals($db, $sqlDao->getDb());
     $this->assertEquals($attributes, $sqlDao->getAttributes());

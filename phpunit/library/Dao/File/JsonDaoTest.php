@@ -4,22 +4,22 @@ require_once 'PHPUnit/Framework.php';
 
 require_once dirname(__FILE__) . '/../../../setup.php';
 
-require_once LIBRARY_PATH . 'Dao/Json/JsonDao.php';
+require_once LIBRARY_PATH . 'Dao/File/JsonDaoBase.php';
 
 
 
 /**
- * Test class for JsonDao.
+ * Test class for JsonDaoBase.
  */
-class JsonDaoTest extends PHPUnit_Framework_TestCase {
+class JsonDaoBaseTest extends PHPUnit_Framework_TestCase {
 
   /**
-   * @var JsonDao
+   * @var JsonDaoBase
    */
   private $jsonDao;
 
   public function setUp() {
-    $this->jsonDao = new JsonDao(null, 'some name', array('id'=>Dao::INT));
+    $this->jsonDao = new JsonDaoBase(null, 'some name', array('id'=>Dao::INT));
   }
 
 
@@ -36,7 +36,7 @@ class JsonDaoTest extends PHPUnit_Framework_TestCase {
 
 
   /**
-   * @covers JsonDao::createIterator
+   * @covers JsonDaoBase::createIterator
    */
   public function testCreateIteratorReturnsJsonResultIterator() {
     $iterator = $this->jsonDao->createIterator(array('some'=>'data'));
@@ -46,7 +46,7 @@ class JsonDaoTest extends PHPUnit_Framework_TestCase {
   }
 
   /**
-   * @covers JsonDao::interpretFileContent
+   * @covers JsonDaoBase::interpretFileContent
    */
   public function testInterpretFileContentDecodesJson() {
     $decoded = $this->jsonDao->interpretFileContent('{ "a": "bc" }');
@@ -54,7 +54,7 @@ class JsonDaoTest extends PHPUnit_Framework_TestCase {
 
 
   /**
-   * @covers JsonDao::interpretFileContent
+   * @covers JsonDaoBase::interpretFileContent
    * @backupStaticAttributes enabled
    */
   public function testInterpretFileContentThrowsExceptionIfWrongJson() {

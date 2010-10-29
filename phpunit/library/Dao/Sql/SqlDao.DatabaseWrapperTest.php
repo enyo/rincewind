@@ -4,7 +4,7 @@ require_once 'PHPUnit/Framework.php';
 
 require_once dirname(__FILE__) . '/../../../setup.php';
 
-require_once LIBRARY_PATH . 'Dao/Sql/SqlDao.php';
+require_once LIBRARY_PATH . 'Dao/Sql/SqlDaoBase.php';
 require_once LIBRARY_PATH . 'Database/DatabaseInterface.php';
 
 /**
@@ -18,7 +18,7 @@ class SqlDaoDatabaseWrapperTest extends PHPUnit_Framework_TestCase {
   public function setUp() {
     $this->db = $this->getMock('DatabaseInterface', array('escapeString', 'exportString', 'escapeColumn', 'exportColumn', 'escapeTable', 'exportTable', 'query', 'multiQuery', 'getResource', 'lastError', 'getLastInsertId', 'startTransaction'), array(), '', false);
 
-    $this->sqlDao = new SqlDao($this->db, 'tablename', array('id'=>Dao::INT));
+    $this->sqlDao = new SqlDaoBase($this->db, 'tablename', array('id'=>Dao::INT));
   }
 
   public function testEscapeAndExportFunctionsGetForwardedProperly() {

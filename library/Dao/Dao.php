@@ -267,7 +267,7 @@ abstract class Dao implements DaoInterface {
    * exception.
    *
    * @param string $attributeName
-   * @return Record|DaoResultIterator
+   * @return DaoReference
    * @uses $references
    */
   public function getReference($attributeName) {
@@ -279,7 +279,7 @@ abstract class Dao implements DaoInterface {
 
       $methodName = 'get' . ucfirst($attributeName) . 'Reference';
 
-      if (!method_exists($this, $methodName)) {
+      if ( ! method_exists($this, $methodName)) {
         Log::fatal("Can't create a reference, because $methodName does not exist.", 'Dao', array('Resource' => $this->getResourceName(), 'Attribute' => $attributeName));
         throw new DaoException("The method $methodName does not exist to create the reference.");
       }
@@ -629,27 +629,66 @@ abstract class Dao implements DaoInterface {
    * Returns the arrays containing the attributes, and values to perform an insert.
    * Values that are null are simply left out. So are Dao::IGNORE types.
    *
+   * Attributes of type Dao::REFERENCE are left out, if the DaoReference has set
+   * export to false.
+   *
    * @param Record $record
-   * @return array With $attributes and $values as 0 and 1st index respectively.
+   * @return array With exported $attributeName as index and exported $value as value.
    */
-  protected function generateInsertArrays($record) {
-    $values = array();
-    $attributeNames = array();
+  protected function getInsertValues($record) {
+    $attributes = array();
     $id = null;
     foreach ($this->attributes as $attributeName => $type) {
       if ($type === Dao::IGNORE) continue;
       if ($type === Dao::REFERENCE) {
+        $reference = $this->getReference($attributeName);
+        if ( ! $reference->export()) continue;
         $value = $record->getDirectly($attributeName);
       }
       else {
         $value = $record->get($attributeName);
       }
       if ($value !== null) {
-        $attributeNames[] = $this->exportAttributeName($attributeName);
-        $values[] = $this->exportValue($value, $type, $this->notNull($attributeName));
+        $attributes[$this->exportAttributeName($attributeName)] = $this->exportValue($value, $type, $this->notNull($attributeName));
       }
     }
-    return array($attributeNames, $values);
+    return $attributes;
+  }
+
+  /**
+   * Retruns a list of attributes that should be present in an update.
+   * 
+   * The returned array looks exactly the same as with getInsertAttributes.
+   *
+   * This should always be used to get the attributes since it takes into consideration
+   * the DaoReferences and their export attributes.
+   *
+   * @param Record $record
+   * @return array
+   * @todo merge with getInsertAttributes() because they are nearly identical.
+   */
+  protected function getUpdateValues($record) {
+    $attributes = array();
+    foreach ($this->attributes as $attributeName => $type) {
+      $addToAttributes = false;
+      if ($attributeName !== 'id' && $type !== Dao::IGNORE) {
+        if ($type === Dao::REFERENCE) {
+          if ($this->getReference($attributeName)->export()) {
+            $addToAttributes = true;
+            $value = $record->getDirectly($attributeName);
+          }
+        }
+        else {
+          $addToAttributes = true;
+          $value = $record->get($attributeName);
+        }
+      }
+      if ($addToAttributes) {
+        $attributes[$this->exportAttributeName($attributeName)] = $this->exportValue($value, $type, $this->notNull($attributeName));
+      }
+    }
+
+    return $attributes;
   }
 
   /**
@@ -908,6 +947,9 @@ abstract class Dao implements DaoInterface {
   /**
    * Exports a PHP value into a value understood by the Database
    *
+   * If the attribute is a reference, and the value is a record, the id gets
+   * exported.
+   *
    * @param mixed $internalValue The value to be imported
    * @param int $type The type (selected from Dao)
    * @param bool $notNull Whether the value can be null or not
@@ -939,7 +981,7 @@ abstract class Dao implements DaoInterface {
       case Dao::IGNORE: return $internalValue;
         break;
       case Dao::REFERENCE:
-        // TODO.. don't really know what to do exactly here.
+        if (is_a($internalValue, 'Record')) return $internalValue->getDao()->exportId($internalValue->get('id'));
         return $internalValue;
         break;
       default: throw new DaoException('Unhandled type when exporting a value.');
@@ -997,6 +1039,17 @@ abstract class Dao implements DaoInterface {
    */
   public function exportBool($bool) {
     return $bool ? 'true' : 'false';
+  }
+
+  /**
+   * Should be used whenever an id gets exported. At the moment this is just
+   * a wrapper for integer, but I plan on supporting multiple id types.
+   * 
+   * @param int $id
+   * @return int
+   */
+  public function exportId($id) {
+    return $this->exportInteger($id);
   }
 
   /**

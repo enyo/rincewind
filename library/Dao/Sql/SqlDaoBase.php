@@ -203,7 +203,8 @@ class SqlDaoBase extends Dao {
    * @return string
    */
   protected function generateInsertQuery($record) {
-    list ($columns, $values) = $this->generateInsertArrays($record);
+    $values = $this->getInsertValues($record);
+    $columns = array_keys($values);
     return "insert into " . $this->exportResourceName() . " (" . implode(', ', $columns) . ") values (" . implode(', ', $values) . ")";
   }
 
@@ -215,8 +216,8 @@ class SqlDaoBase extends Dao {
    */
   public function update($record) {
     $values = array();
-    foreach ($this->attributes as $column => $type) {
-      if ($column != 'id' && $type != Dao::IGNORE) $values[] = $this->exportAttributeName($column) . '=' . $this->exportValue($record->get($column), $type, $this->notNull($column));
+    foreach ($this->getUpdateValues($record) as $column => $value) {
+      $values[] = $column . '=' . $value;
     }
 
     $updateSql = "update " . $this->exportResourceName() . " set " . implode(', ', $values) . " where id=" . $this->exportInteger($record->id);

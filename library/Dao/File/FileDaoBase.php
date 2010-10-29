@@ -211,9 +211,7 @@ abstract class FileDaoBase extends Dao {
    */
   public function insert($record) {
 
-    list ($attributeNames, $values) = $this->generateInsertArrays($record);
-
-    $attributes = array_combine($attributeNames, $values);
+    $attributes = $this->getInsertValues($record);
 
     $result = $this->fileDataSource->insert($this->resourceName, $attributes);
 
@@ -243,16 +241,8 @@ abstract class FileDaoBase extends Dao {
    * @uses $fileDataSource
    */
   public function update($record) {
-    $attributes = array();
 
-    foreach ($this->attributes as $attributeName => $type) {
-      if ($type === Dao::REFERENCE) {
-        $attributes[$attributeName] = $record->getDirectly($attributeName);
-      }
-      elseif ($attributeName != 'id' && $type != Dao::IGNORE) $attributes[$attributeName] = $this->exportValue($record->get($attributeName), $type, $this->notNull($attributeName));
-    }
-
-    $result = $this->fileDataSource->update($this->resourceName, $record->id, $attributes);
+    $result = $this->fileDataSource->update($this->resourceName, $record->id, $this->getUpdateValues($record));
 
     if ($this->fileDataSource->returnsDataOnUpdate()) {
       $data = $this->interpretFileContent($result);

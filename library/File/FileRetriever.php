@@ -105,11 +105,11 @@ class FileRetriever {
    * This method is the way to get a file from a form upload.
    *
    * @param array $FILE the array obtained from $_FILES
-   * @param int $maxFileSize in kiloBytes
+   * @param int $maxFileSize in kiloBytes Leave null if your php config handles your file size limits.
    * @deprecated use get() instead
    * @return File
    */
-  public function createFromFormUpload($FILE, $maxFileSize = 100000) {
+  public function createFromFormUpload($FILE, $maxFileSize = null) {
     if ( ! is_array($FILE) || count($FILE) === 0) {
       throw new FileRetrieverException('The FILE array from the form was not valid.');
     }
@@ -121,7 +121,7 @@ class FileRetriever {
     if ($FILE['error'] !== 0) {
       switch ($FILE['error']) {
         case UPLOAD_ERR_INI_SIZE: throw new FileRetrieverException('The uploaded file exceeds the upload_max_filesize directive in php.ini.');
-        case UPLOAD_ERR_FORM_SIZE: throw new FileRetrieverException('The uploaded file exceeds ' . ($maxFileSize / 1000) . 'kB.');
+        case UPLOAD_ERR_FORM_SIZE: throw new FileRetrieverException('The uploaded file exceeds the specified form size.');
         case UPLOAD_ERR_PARTIAL: throw new FileRetrieverException('The uploaded file was only partially uploaded.');
         case UPLOAD_ERR_NO_FILE: throw new FileRetrieverException('No file was uploaded.');
         case UPLOAD_ERR_NO_TMP_DIR: throw new FileRetrieverException('Missing a temporary folder.');
@@ -133,7 +133,7 @@ class FileRetriever {
       throw new FileRetrieverException('The file was probably larger than allowed by the html property MAX_FILE_SIZE.');
     }
 
-    if ($FILE['size'] > $maxFileSize) {
+    if ($maxFileSize && $FILE['size'] > $maxFileSize) {
       throw new FileRetrieverException('The uploaded file exceeds ' . ($maxFileSize / 1000) . 'kB.');
     }
 

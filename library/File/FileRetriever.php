@@ -110,19 +110,15 @@ class FileRetriever {
    * @return File
    */
   public function createFromFormUpload($FILE, $maxFileSize = 100000) {
-    if ( ! is_array($FILE) || count($FILE) == 0) {
+    if ( ! is_array($FILE) || count($FILE) === 0) {
       throw new FileRetrieverException('The FILE array from the form was not valid.');
     }
 
-    if (empty($FILE['tmp_name']) || empty($FILE['size'])) {
-      throw new FileRetrieverException('The file was probably larger than allowed by the html property MAX_FILE_SIZE.');
-    }
-
-    if ($FILE['error'] == UPLOAD_ERR_NO_FILE) {
+    if ($FILE['error'] === UPLOAD_ERR_NO_FILE) {
       return null;
     }
 
-    if ($FILE['error'] != 0) {
+    if ($FILE['error'] !== 0) {
       switch ($FILE['error']) {
         case UPLOAD_ERR_INI_SIZE: throw new FileRetrieverException('The uploaded file exceeds the upload_max_filesize directive in php.ini.');
         case UPLOAD_ERR_FORM_SIZE: throw new FileRetrieverException('The uploaded file exceeds ' . ($maxFileSize / 1000) . 'kB.');
@@ -131,6 +127,10 @@ class FileRetriever {
         case UPLOAD_ERR_NO_TMP_DIR: throw new FileRetrieverException('Missing a temporary folder.');
         case UPLOAD_ERR_CANT_WRITE: throw new FileRetrieverException('Failed to write file to disk.');
       }
+    }
+
+    if (empty($FILE['tmp_name']) || empty($FILE['size'])) {
+      throw new FileRetrieverException('The file was probably larger than allowed by the html property MAX_FILE_SIZE.');
     }
 
     if ($FILE['size'] > $maxFileSize) {
@@ -221,10 +221,10 @@ class FileRetriever {
 
     curl_close($curlHandle);
 
-    if (!$info['http_code'] || $info['http_code'] >= 400) {
+    if ( ! $info['http_code'] || $info['http_code'] >= 400) {
       $errorCode = $info['http_code'] ? $info['http_code'] : 400;
       $errorTypes = array(400 => 'Bad Request', 500 => 'Internal Server Error');
-      Log::warning('File could not be downloaded.', 'FileRetriever', array('url' => $realUrl, 'port' => $port, 'errorCode' => $errorCode, 'postParams' => $postParameters ? $postParameters : 'NONE', 'response'=>$result));
+      Log::warning('File could not be downloaded.', 'FileRetriever', array('url' => $realUrl, 'port' => $port, 'errorCode' => $errorCode, 'postParams' => $postParameters ? $postParameters : 'NONE', 'response' => $result));
       throw new FileRetrieverException($errorCode . ' - ' . $errorTypes[floor($errorCode / 100) * 100] . ': ' . $result, $errorCode);
     }
 

@@ -6,21 +6,18 @@
  * @author Matthias Loitsch <developer@ma.tthias.com>
  * @copyright Copyright (c) 2010, Matthias Loitsch
  * @package File
- **/
-
-
+ */
 /**
  * Loading the file class
  */
-if (!class_exists('File', false)) require(dirname(__FILE__) . '/File.php');
+if ( ! class_exists('File', false)) require dirname(__FILE__) . '/File.php';
 
 
 /**
  * Loading the file retriever class.
- * They are codependent.
+ * They are codependent. Do not remove the include_once.
  */
-if (!class_exists('ImageFileRetriever', false)) require(dirname(__FILE__) . '/ImageFileRetriever.php');
-
+include_once dirname(__FILE__) . '/ImageFileRetriever.php';
 
 /**
  * The Exception base class for ImageFileException.
@@ -30,10 +27,9 @@ if (!class_exists('ImageFileRetriever', false)) require(dirname(__FILE__) . '/Im
  * @package File
  * @subpackage FileExceptions
  */
-class ImageFileException extends FileException { }
+class ImageFileException extends FileException {
 
-
-
+}
 
 /**
  * You get an ImageFile by calling ImageFileFactory::get($uri).
@@ -46,18 +42,13 @@ class ImageFileException extends FileException { }
  * @package File
  */
 class ImageFile extends File {
-  
+
   protected $width;
   protected $height;
   protected $type;
   protected $image;
-
   protected $destinationWidth;
   protected $destinationHeight;
-
-
-
-
 
   /**
    * Creates an ImageFile instead of File.
@@ -67,34 +58,51 @@ class ImageFile extends File {
     return new ImageFile($uri);
   }
 
-
   /**
    * @param int $type One of IMAGETYPE_XXX
    */
-  public function setType($type)     { $this->type = $type; }
+  public function setType($type) {
+    $this->type = $type;
+  }
 
-  public function setWidth($width)   { $this->width = $width; }
-  public function setHeight($height) { $this->height = $height; }
+  public function setWidth($width) {
+    $this->width = $width;
+  }
 
-  public function setDestinationWidth($width)   { $this->destinationWidth = $width; }
-  public function setDestinationHeight($height) {  $this->destinationHeight = $height; }
+  public function setHeight($height) {
+    $this->height = $height;
+  }
 
+  public function setDestinationWidth($width) {
+    $this->destinationWidth = $width;
+  }
 
-  public function getWidth()  { return $this->width; }
-  public function getHeight() { return $this->height; }
+  public function setDestinationHeight($height) {
+    $this->destinationHeight = $height;
+  }
 
-  public function getDestinationWidth()  { return $this->destinationWidth ? $this->destinationWidth : $this->width; }
-  public function getDestinationHeight() { return $this->destinationHeight ? $this->destinationHeight : $this->height; }
+  public function getWidth() {
+    return $this->width;
+  }
 
+  public function getHeight() {
+    return $this->height;
+  }
 
+  public function getDestinationWidth() {
+    return $this->destinationWidth ? $this->destinationWidth : $this->width;
+  }
 
+  public function getDestinationHeight() {
+    return $this->destinationHeight ? $this->destinationHeight : $this->height;
+  }
 
   /**
    * Returns the image created with imagecreatefromXXX.
    * This method caches the image, so don't be afraid to call it several times.
    */
   public function getImage() {
-    if (!$this->image) {
+    if ( ! $this->image) {
       switch ($this->type) {
         case IMAGETYPE_GIF:
           $this->image = imagecreatefromgif($this->uri);
@@ -106,14 +114,13 @@ class ImageFile extends File {
           $this->image = imagecreatefrompng($this->uri);
           break;
         default:
-          throw new ImageFileException ('Unable to extract the image from the file.');
+          throw new ImageFileException('Unable to extract the image from the file.');
           break;
       }
     }
 
     return $this->image;
   }
-
 
   /**
    * This is the same as File::save() except that it converts the image to another image format if the suffix is another one.
@@ -144,7 +151,6 @@ class ImageFile extends File {
     $image = $this->getResized($proportions, $crop, $dontDistort, $cropOffsets, $mode);
     $this->saveImage($trgUri, $mode, $image);
   }
-  
 
   /**
    * Saves the image.
@@ -160,31 +166,53 @@ class ImageFile extends File {
 
     switch ($suffix) {
       case 'png':
-        if (!$image && $this->type == IMAGETYPE_PNG) { $justSave = true; break; }
-        if (!$image) { $image = $this->getImage(); }
-        if (!@imagepng ($image, $trgUri)) { throw new ImageFileException ("Could not write to: $trgUri"); }
+        if ( ! $image && $this->type == IMAGETYPE_PNG) {
+          $justSave = true;
+          break;
+        }
+        if ( ! $image) {
+          $image = $this->getImage();
+        }
+        if ( ! @imagepng($image, $trgUri)) {
+          throw new ImageFileException("Could not write to: $trgUri");
+        }
         break;
       case 'jpg':
       case 'jpeg':
-        if (!$image && $this->type == IMAGETYPE_JPEG) { $justSave = true; break; }
-        if (!$image) { $image = $this->getImage(); }
-        if (!@imagejpeg ($image, $trgUri)) { throw new ImageFileException ("Could not write to: $trgUri"); }
+        if ( ! $image && $this->type == IMAGETYPE_JPEG) {
+          $justSave = true;
+          break;
+        }
+        if ( ! $image) {
+          $image = $this->getImage();
+        }
+        if ( ! @imagejpeg($image, $trgUri)) {
+          throw new ImageFileException("Could not write to: $trgUri");
+        }
         break;
       case 'gif':
-        if (!$image && $this->type == IMAGETYPE_GIF) { $justSave = true; break; }
-        if (!$image) { $image = $this->getImage(); }
-        if (!@imagegif ($image, $trgUri)) { throw new ImageFileException ("Could not write to: $trgUri"); }
+        if ( ! $image && $this->type == IMAGETYPE_GIF) {
+          $justSave = true;
+          break;
+        }
+        if ( ! $image) {
+          $image = $this->getImage();
+        }
+        if ( ! @imagegif($image, $trgUri)) {
+          throw new ImageFileException("Could not write to: $trgUri");
+        }
         break;
       default:
-        throw new ImageUploadException ('Unknown image extension');
+        throw new ImageUploadException('Unknown image extension');
     }
     if ($justSave) {
       $this->save($trgUri, $mode);
       $this->uri = $trgUri; // To avoid the problem that file uploads can access the file only once.
     }
-    else { chmod($trgUri, $mode); }
+    else {
+      chmod($trgUri, $mode);
+    }
   }
-
 
   /**
    * Resizes the original image, and returns it.
@@ -197,30 +225,37 @@ class ImageFile extends File {
    * @param int $mode
    */
   protected function getResized($proportions, $crop, $dontDistort, $cropOffsets, $mode) {
-    if (!$proportions[0] && !$proportions[1]) { throw new ImageFileException('Wrong proportions.'); }
+    if ( ! $proportions[0] && ! $proportions[1]) {
+      throw new ImageFileException('Wrong proportions.');
+    }
     $srcRatio = $this->width / $this->height;
-    if (!$proportions[0] || !$proportions[1]) {
+    if ( ! $proportions[0] || ! $proportions[1]) {
       $crop = false;
       $dontDistort = true;
     }
     else {
-      if ($proportions[0] == $this->width && $proportions[1] == $this->height) { return null; /* Nothing to be done */ }
+      if ($proportions[0] == $this->width && $proportions[1] == $this->height) {
+        return null; /* Nothing to be done */
+      }
       $trgRatio = $proportions[0] / $proportions[1];
-      if ($srcRatio == $trgRatio) { $crop = false; }
+      if ($srcRatio == $trgRatio) {
+        $crop = false;
+      }
     }
-    
+
     $trgWidth = $proportions[0];
     $trgHeight = $proportions[1];
     $srcWidth = $this->width;
     $srcHeight = $this->height;
     $srcX = 0;
     $srcY = 0;
-    
-    if (!$crop && !$dontDistort) { /* Just resize the image to the new proportions. Nevermind the ratio. */ }
+
+    if ( ! $crop && ! $dontDistort) { /* Just resize the image to the new proportions. Nevermind the ratio. */
+    }
     elseif ($crop) {
       if (is_int($cropOffsets[0])) $srcX = $cropOffsets[0];
       if (is_int($cropOffsets[1])) $srcY = $cropOffsets[1];
-      
+
       $dontDistort = true;
       if ($srcRatio < $trgRatio) {
         // Source is proportinally higher than source. So: scale to width, and cut height.
@@ -229,9 +264,11 @@ class ImageFile extends File {
           $span = $this->height - $srcHeight;
           $srcY = round(($span * $cropOffsets[1]) / 100);
         }
-      } else {
+      }
+      else {
         // Target is wider. If they are equal $crop as already been set to false.
-        $srcWidth = round($srcHeight * $trgRatio);;
+        $srcWidth = round($srcHeight * $trgRatio);
+        ;
         if (is_float($cropOffsets[0])) {
           $span = $this->width - $srcWidth;
           $srcX = round(($span * $cropOffsets[0]) / 100);
@@ -240,22 +277,27 @@ class ImageFile extends File {
     }
     else {
       if ($proportions[0] && $proportions[1]) {
-        if ($trgRatio == $srcRatio)    {
+        if ($trgRatio == $srcRatio) {
           if ($trgWidth > $this->width || $trgHeight > $this->height) return null; // To prevent upsizing
+
         }
         elseif ($srcRatio > $trgRatio) {
           if ($trgWidth > $this->width) return null; // To prevent upsizing
-          $trgHeight = round($trgWidth  / $srcRatio);
+ $trgHeight = round($trgWidth / $srcRatio);
         }
         else {
           if ($trgHeight > $this->height) return null; // To prevent upsizing
-          $trgWidth  = round($trgHeight * $srcRatio);
+ $trgWidth = round($trgHeight * $srcRatio);
         }
       }
-      elseif ($proportions[0]) { $trgHeight = round($trgWidth  / $srcRatio); }
-      elseif ($proportions[1]) { $trgWidth  = round($trgHeight * $srcRatio); }
+      elseif ($proportions[0]) {
+        $trgHeight = round($trgWidth / $srcRatio);
+      }
+      elseif ($proportions[1]) {
+        $trgWidth = round($trgHeight * $srcRatio);
+      }
     }
-    
+
     $newImage = imagecreatetruecolor($trgWidth, $trgHeight);
 
     imagecopyresampled($newImage, $this->getImage(), 0, 0, $srcX, $srcY, $trgWidth, $trgHeight, $srcWidth, $srcHeight);
@@ -263,15 +305,12 @@ class ImageFile extends File {
     return $newImage;
   }
 
-
   /**
    * Destroys the image if it has been created
    */
   public function __destruct() {
     if ($this->image) @imagedestroy($this->image);
   }
-
-
 
   /**
    * This is a wrapper for (new ImageFileRetriever())->create()

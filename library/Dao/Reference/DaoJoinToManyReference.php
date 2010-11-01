@@ -51,9 +51,7 @@ class DaoJoinToManyReference extends DaoReference {
    * @return DaoIterator
    */
   public function getReferenced($record, $attribute) {
-    $foreignDao = $this->getForeignDao();
-
-    return $foreignDao->getIterator(array($this->getForeignKey()=>$record->get($this->getLocalKey())));
+    return $this->getForeignDao()->getIterator(array($this->getForeignKey()=>$record->get($this->getLocalKey())));
   }
 
   /**

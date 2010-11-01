@@ -81,10 +81,13 @@ class DaoReferenceException extends Exception {
 abstract class DaoReference {
 
   /**
-   * The dao class name used to get the referenced foreign Record.
+   * The foreign dao.
+   * Never access this property directly.
+   * Use the getter for it, because this might be a string.
+   * 
    * @var string
    */
-  protected $foreignDaoName;
+  private $foreignDao;
   /**
    * The local key. eg: address_id
    * @var string
@@ -113,7 +116,7 @@ abstract class DaoReference {
    *                              datasource when saving.
    */
   public function __construct($foreignDaoName, $localKey = null, $foreignKey = 'id', $export = false) {
-    $this->foreignDaoName = $foreignDaoName;
+    $this->foreignDao = $foreignDaoName;
     $this->localKey = $localKey;
     $this->foreignKey = $foreignKey;
     $this->export = $export;
@@ -142,13 +145,6 @@ abstract class DaoReference {
   }
 
   /**
-   * @return string|Dao
-   */
-  public function getForeignDaoName() {
-    return $this->foreignDaoName;
-  }
-
-  /**
    * @return string
    */
   public function getForeignKey() {
@@ -163,25 +159,26 @@ abstract class DaoReference {
   }
 
   /**
-   * Returns the foreign dao. If $daoName is already a dao, it is only
-   * returned. If it's a string, createDao() is called.
+   * Returns the foreign dao.
+   *
    * @return Dao
+   * @uses $foreignDao
    * @uses createDao()
    */
   public function getForeignDao() {
-    $dao = $this->getForeignDaoName();
-    if (is_string($dao)) $dao = $this->createDao($dao);
-    return $dao;
+    return $this->foreignDao = $this->createDao($this->foreignDao);
   }
 
   /**
    * Creates a Dao. This calls createDao internally on the sourceDao.
+   * If it's already a dao, it's just returned.
    *
-   * @param string $daoName
+   * @param string|Dao $daoName
    * @return Dao
    */
   public function createDao($daoName) {
-    return $this->sourceDao->createDao($daoName);
+    if (is_a($daoName, 'Dao')) return $daoName;
+    else return $this->getSourceDao()->createDao($daoName);
   }
 
   /**

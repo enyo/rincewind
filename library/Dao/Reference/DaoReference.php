@@ -84,7 +84,7 @@ abstract class DaoReference {
    * The dao class name used to get the referenced foreign Record.
    * @var string
    */
-  protected $daoName;
+  protected $foreignDaoName;
   /**
    * The local key. eg: address_id
    * @var string
@@ -106,14 +106,14 @@ abstract class DaoReference {
   protected $export;
 
   /**
-   * @param string|Dao $daoName
+   * @param string|Dao $foreignDaoName
    * @param string $localKey
    * @param string $foreignKey
    * @param bool $exportReference specifies if this reference should be sent to the
    *                              datasource when saving.
    */
-  public function __construct($daoName, $localKey = null, $foreignKey = 'id', $export = false) {
-    $this->daoName = $daoName;
+  public function __construct($foreignDaoName, $localKey = null, $foreignKey = 'id', $export = false) {
+    $this->foreignDaoName = $foreignDaoName;
     $this->localKey = $localKey;
     $this->foreignKey = $foreignKey;
     $this->export = $export;
@@ -144,8 +144,8 @@ abstract class DaoReference {
   /**
    * @return string|Dao
    */
-  public function getDaoName() {
-    return $this->daoName;
+  public function getForeignDaoName() {
+    return $this->foreignDaoName;
   }
 
   /**
@@ -169,7 +169,7 @@ abstract class DaoReference {
    * @uses createDao()
    */
   public function getForeignDao() {
-    $dao = $this->getDaoName();
+    $dao = $this->getForeignDaoName();
     if (is_string($dao)) $dao = $this->createDao($dao);
     return $dao;
   }

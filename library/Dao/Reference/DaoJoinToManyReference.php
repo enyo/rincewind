@@ -27,19 +27,19 @@ if ( ! class_exists('DaoReference', false)) include dirname(__FILE__) . '/DaoRef
  * @see DaoReference
  * @see DaoToOneReference
  */
-class DaoJoinManyReference extends DaoReference {
+class DaoJoinToManyReference extends DaoReference {
 
   /**
    * Be careful, the order for foreign and local key are inversed.
    *
    * DaoJoinManyReferences can't be exported
    *
-   * @param string|Dao $daoName
+   * @param string|Dao $foreignDaoName
    * @param string $foreignKey
    * @param string $localKey
    */
-  public function __construct($daoName, $foreignKey, $localKey = 'id') {
-    parent::__construct($daoName, $localKey, $foreignKey, false);
+  public function __construct($foreignDaoName, $foreignKey, $localKey = 'id') {
+    parent::__construct($foreignDaoName, $localKey, $foreignKey, false);
   }
 
   /**

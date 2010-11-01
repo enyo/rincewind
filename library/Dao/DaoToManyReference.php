@@ -8,6 +8,10 @@
  * @copyright Copyright (c) 2010, Matthias Loitsch
  * @package Dao
  */
+/**
+ * Including DaoReference
+ */
+if ( ! class_exists('DaoReference', false)) include dirname(__FILE__) . '/DaoReference.php';
 
 /**
  * A DaoToManyReference describes references to many resources.

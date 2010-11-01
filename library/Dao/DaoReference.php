@@ -10,6 +10,13 @@
  */
 
 /**
+ * The DaoReferenceException
+ */
+class DaoReferenceException extends Exception {
+
+}
+
+/**
  * A DaoReference describes references between two resources.
  *
  * To setup a reference, you have to define the attribute that should act as reference
@@ -197,14 +204,3 @@ abstract class DaoReference {
    */
   abstract public function coerce($value);
 }
-
-/**
- * Loading the DaoToManyReference
- */
-include dirname(__FILE__) . '/DaoToManyReference.php';
-
-/**
- * Loading the DaoToOneReference
- */
-include dirname(__FILE__) . '/DaoToOneReference.php';
-

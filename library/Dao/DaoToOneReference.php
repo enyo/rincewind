@@ -8,6 +8,11 @@
  * @copyright Copyright (c) 2010, Matthias Loitsch
  * @package Dao
  */
+/**
+ * Including DaoReference
+ */
+if ( ! class_exists('DaoReference', false)) include dirname(__FILE__) . '/DaoReference.php';
+
 
 /**
  * A DaoToOneReference describes a reference to another record in another resource.

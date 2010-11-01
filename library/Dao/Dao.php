@@ -33,11 +33,6 @@ include dirname(dirname(__FILE__)) . '/Record/Record.php';
 include dirname(__FILE__) . '/DaoExceptions.php';
 
 /**
- * Loading the DaoReference
- */
-include dirname(__FILE__) . '/DaoReference.php';
-
-/**
  * Loading the DaoKeyListIterator Class
  */
 include dirname(__FILE__) . '/DaoKeyListIterator.php';

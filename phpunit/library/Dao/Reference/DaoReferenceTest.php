@@ -2,9 +2,10 @@
 
 require_once 'PHPUnit/Framework.php';
 
-require_once dirname(__FILE__) . '/../../setup.php';
+require_once dirname(__FILE__) . '/../../../setup.php';
 
 require_once LIBRARY_PATH . 'Dao/Dao.php';
+require_once LIBRARY_PATH . 'Dao/Reference/DaoReference.php';
 
 /**
  * Test class for DaoReference.
@@ -28,14 +29,14 @@ class DaoReferenceTest extends PHPUnit_Framework_TestCase {
     $daoReference = $this->getMockForAbstractClass('DaoReference', array('Address', 'localKey', 'foreignKey', false));
 
     self::assertSame(false, $daoReference->export());
-    self::assertSame('Address', $daoReference->getDaoName());
+//    self::assertSame('Address', $daoReference->getDaoName());
     self::assertSame('localKey', $daoReference->getLocalKey());
     self::assertSame('foreignKey', $daoReference->getForeignKey());
 
 
     $daoReference = $this->getMockForAbstractClass('DaoReference', array('Address'));
 
-    self::assertSame('Address', $daoReference->getDaoName());
+//    self::assertSame('Address', $daoReference->getDaoName());
     self::assertSame('id', $daoReference->getForeignKey());
     self::assertNull($daoReference->getSourceDao());
     self::assertNull($daoReference->getLocalKey());
@@ -90,10 +91,14 @@ class DaoReferenceTest extends PHPUnit_Framework_TestCase {
   /**
    * @covers DaoReference::getForeignDao
    */
-  public function testGetForeignDaoSimplyReturnsDaoClassNameIfItsADao() {
+  public function testGetForeignDaoSimplyReturnsForeignDaoIfItsADaoAlready() {
 
-    $daoReference = $this->getMock('DaoReference', array('createDao', 'getReferenced', 'coerce'), array($this->dao));
-    $daoReference->expects($this->never())->method('createDao');
+    $daoReference = $this->getMock('DaoReference', array('getReferenced', 'coerce'), array($this->dao));
+    $this->getMockForAbstractClass('Dao', array('createDao'), 'NotAbstractDao2', false);
+    $sourceDao = $this->getMock('NotAbstractDao2', array('createDao'), array(), '', false);
+    $sourceDao->expects($this->never())->method('createDao');
+    $daoReference->setSourceDao($sourceDao);
+//    $daoReference->expects($this->never())->method('createDao');
     self::assertSame($this->dao, $daoReference->getForeignDao());
 
   }

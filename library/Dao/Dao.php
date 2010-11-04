@@ -360,18 +360,6 @@ abstract class Dao implements DaoInterface {
   abstract protected function generateSortString($sort);
 
   /**
-   * If the passed parameter is not an array, but a Record, then it gets the changed values out of it.
-   *
-   * @param array|Record $mapOrRecord
-   * @return array
-   */
-  protected function interpretMap($mapOrRecord) {
-    if (is_array($mapOrRecord)) return $mapOrRecord;
-    if ($mapOrRecord instanceof Record) return $mapOrRecord->getChangedValues();
-    throw new DaoWrongValueException("The passed map is neither an array nor a Record.");
-  }
-
-  /**
    * Returns the attributes array
    * @return array
    */
@@ -703,15 +691,18 @@ abstract class Dao implements DaoInterface {
 
   /**
    * Prepares the data, and gets a new record.
-   * This is the way you should get a Record from datasource data with.
+   * This is the way you should get a Record from datasource-data with.
    *
    * @param array $data The data returned from the datasource
+   * @param bool $existsInDatabase
+   * @param bool $prepareData If true, gprepareDataForRecord() is called before getting the record.
    * @see prepareDataForRecord()
    * @see getRecordFromPreparedData()
    * @return Record
    */
-  public function getRecordFromData($data) {
-    return $this->getRecordFromPreparedData($this->prepareDataForRecord($data));
+  public function getRecordFromData($data, $existsInDatabase = true, $prepareData = true) {
+    if ($prepareData === true) $data = $this->prepareDataForRecord($data);
+    return $this->getRecordFromPreparedData($data);
   }
 
   /**

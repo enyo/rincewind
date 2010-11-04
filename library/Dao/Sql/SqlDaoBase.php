@@ -137,7 +137,7 @@ class SqlDaoBase extends Dao {
    * @see get()
    * @return Record
    */
-  public function find($map = null, $exportValues = true, $resourceName = null) {
+  public function find($map, $exportValues = true, $resourceName = null) {
     return $this->getFromQuery($this->generateQuery($map, $sort = null, $offset = null, $limit = 1, $exportValues, $resourceName ? $resourceName : ($this->viewName ? $this->viewName : $this->resourceName)));
   }
 
@@ -274,7 +274,7 @@ class SqlDaoBase extends Dao {
       trigger_error('Wrong parameters in ' . $trace[0]['file'] . ' on line ' . $trace[0]['line'], E_USER_ERROR);
     }
 
-    $map = $this->interpretMap($map);
+    if ( ! is_array($map)) throw new DaoWrongValueException("The passed map is not an array.");
 
     $assignments = array();
 

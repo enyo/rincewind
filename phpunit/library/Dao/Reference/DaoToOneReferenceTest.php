@@ -2,9 +2,10 @@
 
 require_once 'PHPUnit/Framework.php';
 
-require_once dirname(__FILE__) . '/../../setup.php';
+require_once dirname(__FILE__) . '/../../../setup.php';
 
 require_once LIBRARY_PATH . 'Dao/Dao.php';
+require_once LIBRARY_PATH . 'Dao/Reference/DaoToOneReference.php';
 
 /**
  * Test class for DaoToOneReference.
@@ -48,10 +49,10 @@ class DaoToOneReferenceTest extends PHPUnit_Framework_TestCase {
    */
   public function testReferenceGetsByIdIfPresentDataIsInt() {
     $this->getMockForAbstractClass('Dao', array('createDao'), 'BBB_NotAbstractDao2', false);
-    $this->dao = $this->getMock('BBB_NotAbstractDao2', array('getById'), array(), '', false);
+    $this->dao = $this->getMock('BBB_NotAbstractDao2', array('getRecordFromData'), array(), '', false);
 
     $this->record->expects($this->once())->method('getDirectly')->with('address')->will($this->returnValue(123));
-    $this->dao->expects($this->once())->method('getById')->with(123)->will($this->returnValue('RECORD'));
+    $this->dao->expects($this->once())->method('getRecordFromData')->with(array('id'=>123), true, false)->will($this->returnValue('RECORD'));
 
     $reference = new DaoToOneReference($this->dao, 'localKey', 'foreignKey');
 
@@ -95,11 +96,9 @@ class DaoToOneReferenceTest extends PHPUnit_Framework_TestCase {
 
     $newRecord = $this->getMock('Record', array(), array(), '', false);
     $dao->expects($this->once())->method('get')->with(array('foreignKey'=>1234))->will($this->returnValue($newRecord));
-    $newRecord->expects($this->once())->method('getArray')->will($this->returnValue(array('a', 'b')));
 
     // make sure the records gets the data set.
-    $this->record->expects($this->once())->method('setDirectly')->with('address', array('a', 'b'));
-
+    $this->record->expects($this->once())->method('setDirectly')->with('address', self::isInstanceOf('Record'));
 
     $reference = new DaoToOneReference($dao, 'localKey', 'foreignKey');
     self::assertSame($newRecord, $reference->getReferenced($this->record, 'address'));

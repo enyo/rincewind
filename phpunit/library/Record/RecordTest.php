@@ -15,6 +15,7 @@ class RecordTest extends PHPUnit_Framework_TestSuite {
     $suite = new PHPUnit_Framework_TestSuite();
 
     $suite->addTestFile(dirname(__FILE__) . '/Record.CoerceTest.php');
+    $suite->addTestFile(dirname(__FILE__) . '/Record.LazyLoading.php');
 
     return $suite;
   }

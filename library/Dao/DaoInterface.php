@@ -50,7 +50,7 @@ interface DaoInterface {
    * @return Record
    * @see get()
    */
-  public function find($map = null, $exportValues = true, $resourceName = null);
+  public function find($map, $exportValues = true, $resourceName = null);
 
 
   /**
@@ -196,9 +196,11 @@ interface DaoInterface {
    * (Typically this array comes from DatabaseResult::fetchArray())
    *
    * @param array $data
+   * @param bool $existsInDatabase
+   * @param bool $prepareData If true, gprepareDataForRecord() is called before getting the record.
    * @return Record
    */
-  public function getRecordFromData($data);
+  public function getRecordFromData($data, $existsInDatabase = true, $prepareData = true);
 
 }
 

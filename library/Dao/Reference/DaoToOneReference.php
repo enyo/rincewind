@@ -13,7 +13,6 @@
  */
 if ( ! class_exists('DaoReference', false)) include dirname(__FILE__) . '/DaoReference.php';
 
-
 /**
  * A DaoToOneReference describes a reference to another record in another resource.
  *
@@ -33,49 +32,59 @@ class DaoToOneReference extends DaoReference {
 
   /**
    * Returns a Record for a specific reference.
-   * It then sets the hash in the Record so it can be retrieved next time.
-   * If it is accessed after that, the already fetched DataHash is used.
    * A DataSource can directly return the DataHash, so it doesn't have to be fetched.
    *
    * @param Record $record
-   * @param string $attribute The attribute it's being accessed on
+   * @param string $attributeName The attribute it's being accessed on
    * @return Record
    */
-  public function getReferenced($record, $attribute) {
+  public function getReferenced($record, $attributeName) {
 
-    $foreignDao = $this->getForeignDao();
-
-    if ($data = $record->getDirectly($attribute)) {
+    if ($data = $record->getDirectly($attributeName)) {
       if (is_array($data)) {
         // If the data hash exists already, just return the Record with it.
-        return $foreignDao->getRecordFromData($data);
+        return $this->cacheAndReturn($record, $attributeName, $this->getForeignDao()->getRecordFromData($data));
       }
       elseif (is_int($data)) {
-        // If data is an integer, it must be the id.
-        return $foreignDao->getById($data);
+        // If data is an integer, it must be the id. So just get the record set with the data.
+        return $this->cacheAndReturn($record, $attributeName, $this->getForeignDao()->getRecordFromData(array('id' => (int) $data), true, false));
+      }
+      elseif (is_a($data, 'Record')) {
+        // The record is cached. Just return it.
+        return $data;
       }
       else {
-        Log::warning(sprintf('The data hash for `%s` was set but incorrect.', $attribute));
+        Log::warning(sprintf('The data hash for `%s` was set but incorrect.', $attributeName));
         return null;
       }
     }
     else {
-      // Otherwise: get the data hash, store it in the Record that's referencing it, and
-      // return the Record.
+      // Otherwise: get the data hash and return the Record.
       $localKey = $this->getLocalKey();
       $foreignKey = $this->getForeignKey();
 
       if ($localKey && $foreignKey) {
         $localValue = $record->get($localKey);
         if ($localValue === null) return null;
-        $return = $foreignDao->get(array($foreignKey => $localValue));
-        $record->setDirectly($attribute, $return->getArray());
-        return $return;
+        return $this->cacheAndReturn($record, $attributeName, $this->getForeignDao()->get(array($foreignKey => $localValue)));
       }
       else {
         return null;
       }
     }
+  }
+
+  /**
+   * Stores the referenced record in the source record and returns the referenced.
+   * 
+   * @param Record $record
+   * @param string $attributeName
+   * @param Record $value
+   * @return Record
+   */
+  protected function cacheAndReturn($record, $attributeName, $value) {
+    $record->setDirectly($attributeName, $value);
+    return $value;
   }
 
   /**

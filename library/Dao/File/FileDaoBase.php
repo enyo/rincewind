@@ -143,7 +143,7 @@ abstract class FileDaoBase extends Dao {
    *                          $this->resourceName is used.
    * @return Record
    */
-  public function find($map = null, $exportValues = true, $resourceName = null) {
+  public function find($map, $exportValues = true, $resourceName = null) {
 
     $content = $this->getFromDataSource($map, $exportValues, $resourceName);
 
@@ -285,7 +285,7 @@ abstract class FileDaoBase extends Dao {
    */
   protected function exportMap($map) {
 
-    $map = $this->interpretMap($map);
+    if ( ! is_array($map)) throw new DaoWrongValueException("The passed map is not an array.");
 
     $assignments = array();
 

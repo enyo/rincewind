@@ -101,25 +101,28 @@ if ( ! class_exists('Date', false)) include dirname(dirname(__FILE__)) . '/Date/
  * */
 abstract class Dao implements DaoInterface {
   /*   * #@+
-   * Data types
+   * Data types.
+   * If you write your own datatypes, make sure to start at 100.
    *
-   * @var int
+   * All types below 100 are reserved to the standard Dao values.
+   *
+   * @var string
    */
-  const INT = 1;
+  const INT = 'Integer';
   const INTEGER = self::INT;
-  const FLOAT = 2;
-  const BOOL = 3;
+  const FLOAT = 'Float';
+  const BOOL = 'Bool';
   const BOOLEAN = self::BOOL;
-  const TIMESTAMP = 4;
+  const TIMESTAMP = 'DateWithTime';
   const DATE_WITH_TIME = self::TIMESTAMP;
-  const DATE = 5;
-  const TEXT = 6;
+  const DATE = 'Date';
+  const TEXT = 'String';
   const STRING = self::TEXT;
-  const SEQUENCE = 7;
+  const SEQUENCE = 'Sequence';
   const SEQ = self::SEQUENCE;
-  const REFERENCE = 8;
+  const REFERENCE = 'Reference';
   const REF = self::REFERENCE;
-  const IGNORE = -1;
+  const IGNORE = 'Ignore';
   /*   * #@- */
 
 
@@ -801,35 +804,14 @@ abstract class Dao implements DaoInterface {
     if ( ! $notNull && $externalValue === null) {
       return null;
     }
-    $dateWithTime = false;
+
     try {
-      if (is_array($type)) {
-        return $this->importEnum($externalValue, $type);
-      }
-      switch ($type) {
-        case Dao::BOOL: return $this->importBool($externalValue);
-          break;
-        case Dao::INT: return $this->importInteger($externalValue);
-          break;
-        case Dao::FLOAT: return $this->importFloat($externalValue);
-          break;
-        case Dao::TEXT: return $this->importString($externalValue);
-          break;
-        case Dao::DATE_WITH_TIME: $dateWithTime = true; // No break
-        case Dao::DATE: return $this->importDate($externalValue, $dateWithTime);
-          break;
-        case Dao::SEQUENCE: return $this->importSequence($externalValue);
-          break;
-        case Dao::REFERENCE:
-          if ($externalValue === null && $notNull) throw new DaoException('Reference is marked as not null, but the value to import is null.');
-          return $externalValue; // Leave it untouched. The reference will do the rest.
-          break;
-        default: throw new DaoException('Unknown type when importing the value.');
-          break;
-      }
+      $importMethod = 'import' . (is_array($type) ? 'Enum' : $type);
+      if ( ! method_exists($this, $importMethod)) throw new DaoException('The import method ' . $importMethod . ' does not exist.');
+      return $this->$importMethod($externalValue, $type);
     }
     catch (Exception $e) {
-      throw new Exception('There was an error processing the attribute "' . $attributeName . '" in resource "' . $this->resourceName . '": ' . $e->getMessage());
+      throw new Exception('There was an error importing the attribute "' . $attributeName . '" in resource "' . $this->resourceName . '": ' . $e->getMessage());
     }
   }
 
@@ -849,10 +831,19 @@ abstract class Dao implements DaoInterface {
    * If you do not count on implementing this just overwrite the function and throw a DaoNotSupportedException inside.
    *
    * @param string $value
-   * @param bool $withTime
    */
-  public function importDate($value, $withTime) {
-    return $this->convertRemoteValueToTimestamp($value, $withTime);
+  public function importDate($value) {
+    return $this->convertRemoteValueToTimestamp($value, false);
+  }
+
+  /**
+   * Calls convertRemoteValueToTimestamp and returns a Date Object.
+   * If you do not count on implementing this just overwrite the function and throw a DaoNotSupportedException inside.
+   *
+   * @param string $value
+   */
+  public function importDateWithTime($value) {
+    return $this->convertRemoteValueToTimestamp($value, true);
   }
 
   /**
@@ -931,6 +922,17 @@ abstract class Dao implements DaoInterface {
   }
 
   /**
+   * Just makes sure the reference is not null
+   *
+   * @param mixed $value
+   * @return mixed
+   */
+  public function importReference($value) {
+    if ($value === null) throw new DaoException('Reference is marked as not null, but the value to import is null.');
+    return $value; // Leave it untouched. The reference will do the rest.
+  }
+
+  /**
    * Exports a PHP value into a value understood by the Database
    *
    * If the attribute is a reference, and the value is a record, the id gets
@@ -946,32 +948,14 @@ abstract class Dao implements DaoInterface {
     if ( ! $notNull && $internalValue === NULL) {
       return $this->exportNull();
     }
-    if (is_array($type)) {
-      return $this->exportEnum($internalValue, $type);
+
+    try {
+      $exportMethod = 'export' . (is_array($type) ? 'Enum' : $type);
+      if ( ! method_exists($this, $exportMethod)) throw new DaoException('The export method ' . $exportMethod . ' does not exist.');
+      return $this->$exportMethod($internalValue, $type);
     }
-    $dateWithTime = false;
-    switch ($type) {
-      case Dao::BOOL: return $this->exportBool($internalValue);
-        break;
-      case Dao::INT: return $this->exportInteger($internalValue);
-        break;
-      case Dao::FLOAT: return $this->exportFloat($internalValue);
-        break;
-      case Dao::TEXT: return $this->exportString($internalValue);
-        break;
-      case Dao::DATE_WITH_TIME: $dateWithTime = true; // No break
-      case Dao::DATE: return $this->exportDate($internalValue, $dateWithTime);
-        break;
-      case Dao::SEQUENCE: return $this->exportSequence($internalValue);
-        break;
-      case Dao::IGNORE: return $internalValue;
-        break;
-      case Dao::REFERENCE:
-        if (is_a($internalValue, 'Record')) return $internalValue->getDao()->exportId($internalValue->get('id'));
-        return $internalValue;
-        break;
-      default: throw new DaoException('Unhandled type when exporting a value.');
-        break;
+    catch (Exception $e) {
+      throw new Exception('There was an error exporting the attribute "' . $attributeName . '" in resource "' . $this->resourceName . '": ' . $e->getMessage());
     }
   }
 
@@ -1056,10 +1040,17 @@ abstract class Dao implements DaoInterface {
 
   /**
    * @param Date $date
-   * @param bool $withTime
    * @return int a timestamp
    */
-  public function exportDate($date, $withTime) {
+  public function exportDate($date) {
+    return $this->exportInteger($date->getTimestamp());
+  }
+
+  /**
+   * @param Date $date
+   * @return int a timestamp
+   */
+  public function exportDateWithTime($date) {
     return $this->exportInteger($date->getTimestamp());
   }
 
@@ -1085,6 +1076,16 @@ abstract class Dao implements DaoInterface {
    */
   public function exportSequence($value) {
     throw new DaoException('The generic Dao does not support exporting Sequences.');
+  }
+
+  /**
+   * Returns the value as is, or extracts the id from the record.
+   * @param mixed $value
+   * @return int
+   */
+  public function exportReference($value) {
+    if (is_a($value, 'Record')) return $value->getDao()->exportId($value->get('id'));
+    return $value;
   }
 
   /**

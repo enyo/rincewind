@@ -382,8 +382,18 @@ class SqlDaoBase extends Dao {
    * @param bool $withTime
    * @return string
    */
-  public function exportDate($date, $withTime) {
-    return $this->exportString($date->format('Y-m-d' . ($withTime ? ' H:i:s' : '')));
+  public function exportDate($date) {
+    return $this->exportString($date->format('Y-m-d'));
+  }
+
+  /**
+   * Returns a formatted date, and escaped with exportString.
+   * @param Date $date
+   * @param bool $withTime
+   * @return string
+   */
+  public function exportDateWithTime($date) {
+    return $this->exportString($date->format('Y-m-d H:i:s'));
   }
 
   /**

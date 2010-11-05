@@ -24,17 +24,32 @@ class FileResultIterator extends DaoResultIterator {
   /**
    * @var array
    */
-  protected $data = false;
+  protected $result = false;
 
   /**
-   * @param array $data
+   * @param DataSourceResult $result
    * @param Dao $dao
    */
-  public function __construct($data, $dao) {
-    $this->data = $data;
-    $this->length = count($data);
-    $this->dao = $dao;
+  public function __construct($result, $dao) {
+    parent::__construct($dao);
+    $this->result = $result;
     $this->next();
+  }
+
+  /**
+   * Wrapper for $result
+   * @return int
+   */
+  public function countTotal() {
+    return $this->result->countTotal();
+  }
+
+  /**
+   * Wrapper for $result
+   * @return int
+   */
+  public function count() {
+    return $this->result->count();
   }
 
   /**
@@ -42,7 +57,7 @@ class FileResultIterator extends DaoResultIterator {
    * @uses $data
    */
   public function getData() {
-    return $this->data;
+    return $this->result->getData();
   }
 
   /**
@@ -71,7 +86,9 @@ class FileResultIterator extends DaoResultIterator {
    * @return array
    */
   protected function getCurrentData() {
-    return $this->key() > $this->count() ? null : $this->data[$this->key() - 1];
+    if ($this->key() > $this->count()) return null;
+    $this->result->seek($this->key() - 1);
+    return $this->result->fetch();
   }
 
 }

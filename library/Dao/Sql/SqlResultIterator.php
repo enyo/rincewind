@@ -32,10 +32,10 @@ class SqlResultIterator extends DaoResultIterator {
    * @param result $result
    * @param Dao $dao
    */
-  public function __construct($result, $dao) {
+  public function __construct($result, $dao, $totalLength = null) {
+    parent::__construct($dao, $totalLength);
     $this->result = $result;
     $this->length = $result->numRows();
-    $this->dao = $dao;
     $this->next();
   }
 

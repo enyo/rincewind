@@ -6,7 +6,7 @@
  * @author Matthias Loitsch <developer@ma.tthias.com>
  * @copyright Copyright (c) 2010, Matthias Loitsch
  * @package Dao
- * */
+ */
 
 /**
  * The Dao Result iterator is returned whenever a query returns more than one row.
@@ -26,7 +26,7 @@
  * @author Matthias Loitsch <developer@ma.tthias.com>
  * @copyright Copyright (c) 2010, Matthias Loitsch
  * @package Dao
- * */
+ */
 abstract class DaoResultIterator implements Iterator {
 
   /**
@@ -39,6 +39,12 @@ abstract class DaoResultIterator implements Iterator {
    * @var int
    */
   protected $length = 0;
+  /**
+   * The number of rows
+   *
+   * @var int
+   */
+  protected $totalLength = null;
   /**
    * Stores the current key (in this case: row number) of the iterator.
    * @var integer
@@ -55,8 +61,9 @@ abstract class DaoResultIterator implements Iterator {
   /**
    * @param Dao $dao
    */
-  public function __construct($dao) {
+  public function __construct($dao, $totalLength = null) {
     $this->dao = $dao;
+    $this->totalLength = $totalLength;
   }
 
   /**
@@ -118,6 +125,10 @@ abstract class DaoResultIterator implements Iterator {
    */
   public function count() {
     return $this->length;
+  }
+
+  public function countTotal() {
+    return $this->totalLength ? $this->totalLength : $this->count();
   }
 
 }

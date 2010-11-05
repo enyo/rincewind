@@ -18,6 +18,19 @@ if ( ! class_exists('Dao', false)) include dirname(__FILE__) . '/../Dao.php';
  */
 include dirname(__FILE__) . '/FileResultIterator.php';
 
+
+/**
+ * The Exception base class for FileDaoExceptions.
+ *
+ * @author Matthias Loitsch <developer@ma.tthias.com>
+ * @copyright Copyright (c) 2010, Matthias Loitsch
+ * @package Dao
+ * @subpackage Exceptions
+ */
+class FileDaoException extends DaoException {
+
+}
+
 /**
  * The FileDaoBase is used to get a file somewhere, interpret it and act as a normal datasource.
  *
@@ -27,7 +40,7 @@ include dirname(__FILE__) . '/FileResultIterator.php';
  * @copyright Copyright (c) 2010, Matthias Loitsch
  * @package Dao
  */
-abstract class FileDaoBase extends Dao {
+class FileDaoBase extends Dao {
 
   /**
    * @var mixed
@@ -69,13 +82,13 @@ abstract class FileDaoBase extends Dao {
   }
 
   /**
-   * Creates an iterator for a data hash.
+   * Creates an iterator for a DataSource result.
    *
-   * @param array $data
+   * @param DataSourceResult $result
    * @return FileResultIterator
    */
-  public function createIterator($data) {
-    return new FileResultIterator($data, $this);
+  public function createIterator($result) {
+    return new FileResultIterator($result, $this);
   }
 
   /**
@@ -114,7 +127,7 @@ abstract class FileDaoBase extends Dao {
    * @param array $map
    * @param bool $exportValues
    * @param string $resourceName
-   * @return string
+   * @return DataSourceResult
    * @uses $fileDataSource
    */
   protected function getFromDataSource($map, $exportValues, $resourceName) {
@@ -145,9 +158,7 @@ abstract class FileDaoBase extends Dao {
    */
   public function find($map, $exportValues = true, $resourceName = null) {
 
-    $content = $this->getFromDataSource($map, $exportValues, $resourceName);
-
-    $data = $this->interpretFileContent($content);
+    $data = $this->getFromDataSource($map, $exportValues, $resourceName)->fetch();
 
     if ( ! $data || ! is_array($data)) return null;
 
@@ -164,20 +175,12 @@ abstract class FileDaoBase extends Dao {
    * @return array
    */
   public function getData($map, $exportValues = true, $resourceName = null) {
-    $content = $this->getFromDataSource($map, $exportValues, $resourceName);
-    $data = $this->interpretFileContent($content);
+    $data = $this->getFromDataSource($map, $exportValues, $resourceName)->fetch();
 
     if ( ! $data || ! is_array($data)) throw new DaoNotFoundException("The query did not return any results.");
 
     return $this->prepareDataForRecord($data);
   }
-
-  /**
-   * Converts the content returned by the file factory into a usable data array.
-   * @param string $content
-   * @return array The data array
-   */
-  abstract public function interpretFileContent($content);
 
   /**
    * The same as get, but returns an iterator to go through all the rows.
@@ -193,11 +196,9 @@ abstract class FileDaoBase extends Dao {
    * @uses $fileDataSource
    */
   public function getIterator($map, $sort = null, $offset = null, $limit = null, $exportValues = true, $resourceName = null) {
-    $content = $this->fileDataSource->getList($this->exportResourceName($resourceName ? $resourceName : ($this->viewName ? $this->viewName : $this->resourceName)), $exportValues ? $this->exportMap($map) : $map, $this->generateSortString($sort), $offset, $limit);
+    $result = $this->fileDataSource->getList($this->exportResourceName($resourceName ? $resourceName : ($this->viewName ? $this->viewName : $this->resourceName)), $exportValues ? $this->exportMap($map) : $map, $this->generateSortString($sort), $offset, $limit);
 
-    $data = $this->interpretFileContent($content);
-
-    return $this->getIteratorFromData($data);
+    return $this->createIterator($result);
   }
 
   /**
@@ -216,7 +217,7 @@ abstract class FileDaoBase extends Dao {
     $result = $this->fileDataSource->insert($this->resourceName, $attributes);
 
     if ($this->fileDataSource->returnsDataOnInsert()) {
-      $data = $this->interpretFileContent($result);
+      $data = $result->fetch();
     }
     else {
       $data = $this->getData(array('id' => $result));
@@ -245,7 +246,7 @@ abstract class FileDaoBase extends Dao {
     $result = $this->fileDataSource->update($this->resourceName, $record->id, $this->getUpdateValues($record));
 
     if ($this->fileDataSource->returnsDataOnUpdate()) {
-      $data = $this->interpretFileContent($result);
+      $data = $result->fetch();
       if ( ! $data || ! is_array($data)) throw new DaoException('The data returned from the datasource after update was invalid (resource: ' . $this->getResourceName() . ').');
       $this->updateRecordWithData($data, $record);
     }
@@ -307,16 +308,6 @@ abstract class FileDaoBase extends Dao {
   }
 
   /**
-   * Returns an Iterator for data
-   *
-   * @param string $data
-   * @return FileResultIterator
-   */
-  protected function getIteratorFromData($data) {
-    return $this->createIterator($data, $this);
-  }
-
-  /**
    * This method takes the $sort attribute and returns a typical 'order by ' SQL string.
    * If $sort is false then the $this->defaultSort is used if it exists.
    * The sort is passed to interpretSortVariable to get a valid attributes list.
@@ -355,6 +346,26 @@ abstract class FileDaoBase extends Dao {
    */
   protected function escapeResourceName($resourceName = null) {
     return $resourceName ? $resourceName : $this->resourceName;
+  }
+
+  /**
+   * Doesn't work for JSON normally.
+   */
+  public function startTransaction() {
+    throw new FileDaoException('Transactions not implemented.');
+  }
+
+  /**
+   * Returns an array.
+   *
+   * If the value is already an array, it just returns it. Otherwise it puts the
+   * value in an array.
+   *
+   * @param mixed $value
+   * @return array
+   */
+  public function exportSequence($value) {
+    return is_array($value) ? $value : array($value);
   }
 
 }

@@ -1,13 +1,12 @@
 <?php
 
-
 /**
  * This file contains the basic DataSource class.
  *
  * @author Matthias Loitsch <developer@ma.tthias.com>
  * @copyright Copyright (c) 2010, Matthias Loitsch
  * @package DataSource
- **/
+ */
 
 /**
  * The Exception base class for DataSourceException.
@@ -17,8 +16,14 @@
  * @package DataSource
  * @subpackage DataSourceExceptions
  */
-class DataSourceException extends Exception { };
+class DataSourceException extends Exception {
 
+}
+
+/**
+ * Including DataSourceResult
+ */
+include dirname(__FILE__) . '/DataSourceResult.php';
 
 /**
  * @author Matthias Loitsch <developer@ma.tthias.com>
@@ -33,7 +38,7 @@ abstract class DataSource {
    * @var bool
    */
   protected $returnsDataOnInsert = true;
-  
+
   /**
    * @return bool
    * @uses $returnsDataOnInsert
@@ -66,7 +71,6 @@ abstract class DataSource {
    */
   abstract public function get($resource, $id);
 
-
   /**
    * Returns a record, defined by attributes.
    *
@@ -75,7 +79,6 @@ abstract class DataSource {
    * @return string The file content
    */
   abstract public function find($resource, $attributes);
-
 
   /**
    * Returns all objects found.
@@ -116,6 +119,4 @@ abstract class DataSource {
    */
   abstract public function delete($resource, $id);
 }
-
-
 

@@ -62,8 +62,7 @@ class PostgresqlResult extends DatabaseResult {
    * @param int $rowNumber
    */
   public function seek($rowNumber) {
-    $rowNumber = (int) $rowNumber;
-    $this->currentRowNumber = $rowNumber;
+    $this->currentRowNumber = (int) $rowNumber;
   }
 
   public function free() {

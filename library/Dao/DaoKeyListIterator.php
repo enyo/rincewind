@@ -86,6 +86,7 @@ class DaoKeyListIterator extends DaoResultIterator {
   /**
    * Fetches the current data.
    * @return array
+   * @todo there should be exporting of the key... don't know if here!
    */
   protected function getCurrentData() {
     return $this->key() > $this->count() ? null : $this->dao->getData(array($this->keyName => $this->keyList[$this->key() - 1]));

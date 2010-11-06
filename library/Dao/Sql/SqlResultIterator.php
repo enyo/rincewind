@@ -44,7 +44,7 @@ class SqlResultIterator extends DaoResultIterator {
    * @return SqlResultIterator Returns itself for chaining.
    */
   public function rewind() {
-    if ($this->length > 0) {
+    if ($this->count() > 0) {
       $this->result->reset();
       $this->currentKey = 0;
       $this->next();

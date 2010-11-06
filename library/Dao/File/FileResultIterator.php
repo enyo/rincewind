@@ -65,7 +65,7 @@ class FileResultIterator extends DaoResultIterator {
    * @return FileResultIterator Returns itself for chaining.
    */
   public function rewind() {
-    if ($this->length > 0) {
+    if ($this->count() > 0) {
       $this->currentKey = 0;
       $this->next();
     }

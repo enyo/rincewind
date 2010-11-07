@@ -132,7 +132,7 @@ class FileDaoBase extends Dao {
    */
   protected function getFromDataSource($map, $exportValues, $resourceName) {
     if (count($map) === 1 && array_key_exists('id', $map)) {
-      return $this->fileDataSource->get($this->exportResourceName($resourceName ? $resourceName : ($this->viewName ? $this->viewName : $this->resourceName)), $map['id']);
+      return $this->fileDataSource->get($this->exportResourceName($resourceName ? $resourceName : ($this->viewName ? $this->viewName : $this->resourceName)), $this->exportId($map['id']));
     }
     else {
       return $this->fileDataSource->find($this->exportResourceName($resourceName ? $resourceName : ($this->viewName ? $this->viewName : $this->resourceName)), $exportValues ? $this->exportMap($map) : $map);

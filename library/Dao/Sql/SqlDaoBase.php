@@ -235,7 +235,7 @@ class SqlDaoBase extends Dao {
    * @param Record $record
    */
   public function delete($record) {
-    $this->db->query("delete from " . $this->exportResourceName() . " where id=" . $this->exportValue($record->id, $this->attributes['id']));
+    $this->db->query("delete from " . $this->exportResourceName() . " where id=" . $this->exportValue('id', $record->id, $this->attributes['id']));
     $this->afterDelete($record);
   }
 
@@ -295,7 +295,7 @@ class SqlDaoBase extends Dao {
       $escapedValue = $value;
       if ($exportValues) {
         $type = $this->attributes[$column];
-        $escapedValue = $this->exportValue($value, $type, $this->notNull($column));
+        $escapedValue = $this->exportValue($column, $value, $type, $this->notNull($column));
       }
       $assignments[] = $this->exportAttributeName($column) . ($value === null ? ($operator == '=' ? ' is null' : ' is not null') : $operator . $escapedValue);
     }

@@ -9,9 +9,9 @@
  * @package Dao
  */
 /**
- * Including DaoReference
+ * Including BasicDaoReference
  */
-if ( ! class_exists('DaoReference', false)) include dirname(__FILE__) . '/DaoReference.php';
+if ( ! class_exists('BasicDaoReference', false)) include dirname(__FILE__) . '/BasicDaoReference.php';
 
 /**
  * A DaoToManyReference describes references to many resources.
@@ -28,7 +28,7 @@ if ( ! class_exists('DaoReference', false)) include dirname(__FILE__) . '/DaoRef
  * @see DaoReference
  * @see DaoToOneReference
  */
-class DaoToManyReference extends DaoReference {
+class DaoToManyReference extends BasicDaoReference {
 
   /**
    * Returns a DaoIterator for a specific reference.

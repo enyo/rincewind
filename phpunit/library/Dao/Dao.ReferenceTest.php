@@ -5,7 +5,7 @@ require_once 'PHPUnit/Framework.php';
 require_once dirname(__FILE__) . '/../../setup.php';
 
 require_once LIBRARY_PATH . 'Dao/Dao.php';
-require_once LIBRARY_PATH . 'Dao/Reference/DaoReference.php';
+require_once LIBRARY_PATH . 'Dao/Reference/BasicDaoReference.php';
 
 
 
@@ -50,7 +50,7 @@ class Dao_ReferenceTest extends PHPUnit_Framework_TestCase {
    * @covers Dao::getReference
    */
   public function testReferenceGetsSourceDaoInjected() {
-    $reference = $this->getMock('DaoReference', array('setSourceDao', 'getReferenced', 'coerce'), array(), '', false);
+    $reference = $this->getMock('BasicDaoReference', array('setSourceDao', 'getReferenced', 'coerce'), array(), '', false);
     $this->dao->expects($this->once())->method('getUserReference')->will($this->returnValue($reference));
     // TODO: I don't know why, but self::identicalTo doesn't work here... neither does equaltTo, with a bigger maxdepth, because
     // then the new object has the reference, whereas the old one doesn't.
@@ -62,7 +62,7 @@ class Dao_ReferenceTest extends PHPUnit_Framework_TestCase {
    * @covers Dao::getReference
    */
   public function testGettingReference() {
-    $reference = $this->getMockForAbstractClass('DaoReference', array(), '', false);
+    $reference = $this->getMockForAbstractClass('BasicDaoReference', array(), '', false);
     $this->dao->expects($this->once())->method('getUserReference')->will($this->returnValue($reference));
     self::assertEquals($reference, $this->dao->getReference('user'));
   }
@@ -72,7 +72,7 @@ class Dao_ReferenceTest extends PHPUnit_Framework_TestCase {
    * @covers Dao::getReference
    */
   public function testGettingReferenceCachesTheReference() {
-    $reference = $this->getMockForAbstractClass('DaoReference', array(), '', false);
+    $reference = $this->getMockForAbstractClass('BasicDaoReference', array(), '', false);
     $this->dao->expects($this->once())->method('getUserReference')->will($this->returnValue($reference));
     self::assertEquals($reference, $this->dao->getReference('user'));
     self::assertEquals($reference, $this->dao->getReference('user'));

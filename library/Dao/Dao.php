@@ -170,8 +170,6 @@ abstract class Dao implements DaoInterface {
     if ( ! is_array($this->attributes)) {
       throw new DaoException('No attributes provied.');
     }
-
-    $this->setupReferences();
   }
 
   /**
@@ -221,8 +219,9 @@ abstract class Dao implements DaoInterface {
    */
   protected $additionalAttributes = array();
   /**
-   * The references array contains a list of DaoReference instances to map certain attributes to other resources.
-   * You set them in the setupReferences method, that gets called in the constructor.
+   * The references array contains a list of cached DaoReference instances to
+   * map certain attributes to other resources. They are all fetched by calling
+   * getXXXReference().
    *
    * This array would look like this then:
    * <code>
@@ -235,24 +234,8 @@ abstract class Dao implements DaoInterface {
    *
    * @var array
    * @see DaoReference
-   * @see setupReferences()
-   * @see addReference()
-   * @see addToManyReference()
    */
   protected $references = array();
-
-  /**
-   * Overwrite this in a specific Dao implementation to setup the references.
-   * Setting the references directly to the member variables is not possible since a reference is an object.
-   * This function gets called from the constructor.
-   * You should call addReference() or addToManyReference() inside this function.
-   *
-   * @see addReference()
-   * @see addToManyReference()
-   */
-  protected function setupReferences() {
-
-  }
 
   /**
    * Returns the reference for an attribute.
@@ -635,7 +618,7 @@ abstract class Dao implements DaoInterface {
         $value = $record->get($attributeName);
       }
       if ($value !== null) {
-        $attributes[$this->exportAttributeName($attributeName)] = $this->exportValue($value, $type, $this->notNull($attributeName));
+        $attributes[$this->exportAttributeName($attributeName)] = $this->exportValue($attributeName, $value, $type, $this->notNull($attributeName));
       }
     }
     return $attributes;
@@ -670,7 +653,7 @@ abstract class Dao implements DaoInterface {
         }
       }
       if ($addToAttributes) {
-        $attributes[$this->exportAttributeName($attributeName)] = $this->exportValue($value, $type, $this->notNull($attributeName));
+        $attributes[$this->exportAttributeName($attributeName)] = $this->exportValue($attributeName, $value, $type, $this->notNull($attributeName));
       }
     }
 
@@ -791,8 +774,11 @@ abstract class Dao implements DaoInterface {
   }
 
   /**
-   * Imports an external value (either from datasource, or xml, etc...) into an expected PHP variable.
-   * If the attribute can be null, null will be returned.
+   * Imports an external value (either from datasource, or xml, etc...) into an
+   * expected PHP variable.
+   * If the attribute can be null, null will be returned; otherwise this calls
+   * the appropriate method internally (importDate(), importString(), etc...)
+   * and passes it 3 parameters: $externalValue, $type, $attributeName.
    *
    * @param string $attributeName
    * @param mixed $externalValue The value to be imported
@@ -808,10 +794,10 @@ abstract class Dao implements DaoInterface {
     try {
       $importMethod = 'import' . (is_array($type) ? 'Enum' : $type);
       if ( ! method_exists($this, $importMethod)) throw new DaoException('The import method ' . $importMethod . ' does not exist.');
-      return $this->$importMethod($externalValue, $type);
+      return $this->$importMethod($externalValue, $type, $attributeName);
     }
-    catch (Exception $e) {
-      throw new Exception('There was an error importing the attribute "' . $attributeName . '" in resource "' . $this->resourceName . '": ' . $e->getMessage());
+    catch (DaoException $e) {
+      throw new DaoException('There was an error importing the attribute "' . $attributeName . '" in resource "' . $this->resourceName . '": ' . $e->getMessage());
     }
   }
 
@@ -927,35 +913,36 @@ abstract class Dao implements DaoInterface {
    * @param mixed $value
    * @return mixed
    */
-  public function importReference($value) {
+  public function importReference($value, $type, $attributeName) {
     if ($value === null) throw new DaoException('Reference is marked as not null, but the value to import is null.');
-    return $value; // Leave it untouched. The reference will do the rest.
+    return $this->getReference($attributeName)->importValue($value);
   }
 
   /**
    * Exports a PHP value into a value understood by the Database
    *
-   * If the attribute is a reference, and the value is a record, the id gets
-   * exported.
+   * This calls the appropriate export method (exportNull(), exportString(),
+   * etc...).
    *
+   * @param string $attributeName
    * @param mixed $internalValue The value to be imported
    * @param int $type The type (selected from Dao)
    * @param bool $notNull Whether the value can be null or not
    *
    * @return mixed
    */
-  public function exportValue($internalValue, $type, $notNull = true) {
-    if ( ! $notNull && $internalValue === NULL) {
-      return $this->exportNull();
-    }
+  public function exportValue($attributeName, $internalValue, $type, $notNull = true) {
+    if ( ! $notNull && $internalValue === NULL) return $this->exportNull();
+
+    if ($type === Dao::IGNORE) return $this->exportNull();
 
     try {
       $exportMethod = 'export' . (is_array($type) ? 'Enum' : $type);
       if ( ! method_exists($this, $exportMethod)) throw new DaoException('The export method ' . $exportMethod . ' does not exist.');
-      return $this->$exportMethod($internalValue, $type);
+      return $this->$exportMethod($internalValue, $type, $attributeName);
     }
-    catch (Exception $e) {
-      throw new Exception('There was an error exporting the attribute "' . $attributeName . '" in resource "' . $this->resourceName . '": ' . $e->getMessage());
+    catch (DaoException $e) {
+      throw new DaoException('There was an error exporting the attribute "' . $attributeName . '" in resource "' . $this->resourceName . '": ' . $e->getMessage());
     }
   }
 
@@ -1079,13 +1066,12 @@ abstract class Dao implements DaoInterface {
   }
 
   /**
-   * Returns the value as is, or extracts the id from the record.
+   * Calls exportValue on the reference.
    * @param mixed $value
    * @return int
    */
-  public function exportReference($value) {
-    if (is_a($value, 'Record')) return $value->getDao()->exportId($value->get('id'));
-    return $value;
+  public function exportReference($value, $type, $attributeName) {
+    return $this->getReference($attributeName)->exportValue($value);
   }
 
   /**

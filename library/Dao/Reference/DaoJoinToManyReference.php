@@ -9,9 +9,9 @@
  * @package Dao
  */
 /**
- * Including DaoReference
+ * Including BasicDaoReference
  */
-if ( ! class_exists('DaoReference', false)) include dirname(__FILE__) . '/DaoReference.php';
+if ( ! class_exists('BasicDaoReference', false)) include dirname(__FILE__) . '/BasicDaoReference.php';
 
 /**
  * A DaoToManyReference describes references to many resources by joining.
@@ -27,7 +27,7 @@ if ( ! class_exists('DaoReference', false)) include dirname(__FILE__) . '/DaoRef
  * @see DaoReference
  * @see DaoToOneReference
  */
-class DaoJoinToManyReference extends DaoReference {
+class DaoJoinToManyReference extends BasicDaoReference {
 
   /**
    * Be careful, the order for foreign and local key are inversed.

@@ -40,16 +40,6 @@ class Dao_BasicTest extends PHPUnit_Framework_TestCase {
     $this->getMockForAbstractClass('Dao', array('resource_name'));
   }
 
-  /**
-   * @covers Dao::__construct
-   * @covers Dao::setupReferences
-   */
-  public function testConstructorCallsSetupReferences() {
-    $mock = $this->getMock('Dao', $GLOBALS['DAO_ABSTRACT_METHODS'], array(), '', false);
-    $mock->expects($this->once())->method('setupReferences');
-    $mock->__construct('resource_name', array('id'=>Dao::INT));
-  }
-
   public function testAttributesPassedInConstructorAreStored() {
     $attributes = array('id'=>Dao::INT, 'name'=>Dao::STRING);
     $nullAttributes = array('id');
@@ -68,52 +58,50 @@ class Dao_BasicTest extends PHPUnit_Framework_TestCase {
    */
   public function testExportValueCallsTheAppropriateExportMethods() {
     $methods = $GLOBALS['DAO_ABSTRACT_METHODS'];
-    array_push($methods, 'exportNull', 'exportEnum', 'exportBool', 'exportInteger', 'exportFloat', 'exportString', 'exportDate', 'exportSequence');
-    $mock = $this->getMock('Dao', $methods, array(), '', false);
+    array_push($methods, 'exportNull', 'exportEnum', 'exportBool', 'exportInteger', 'exportFloat', 'exportString', 'exportDate', 'exportDateWithTime', 'exportSequence');
+    $mock = $this->getMock('Dao', $methods, array('resource name', array('attr')));
 
-    $mock->expects($this->once())->method('exportNull');
-    $mock->exportValue(null, Dao::INT, false);
+    $mock->expects($this->exactly(2))->method('exportNull')->will($this->returnValue('NULL123')); // Will be called twice because of exporting Dao::IGNORE
+    self::assertEquals('NULL123', $mock->exportValue('attributeName', null, Dao::INT, false));
+    self::assertEquals('NULL123', $mock->exportValue('attributeName', 'SOME VALUE', Dao::IGNORE));
 
-    $mock->expects($this->once())->method('exportEnum')->with('value1', array('value1', 'value2', 'value3'));
-    $mock->exportValue('value1', array('value1', 'value2', 'value3'));
+    $mock->expects($this->once())->method('exportEnum')->with('value1', array('value1', 'value2', 'value3'))->will($this->returnValue('enum 123'));
+    self::assertEquals('enum 123', $mock->exportValue('attributeName', 'value1', array('value1', 'value2', 'value3')));
 
-    $mock->expects($this->once())->method('exportBool')->with(true);
-    $mock->exportValue(true, Dao::BOOL);
+    $mock->expects($this->once())->method('exportBool')->with(true)->will($this->returnValue('bool 123'));
+    self::assertEquals('bool 123', $mock->exportValue('attributeName', true, Dao::BOOL));
 
-    $mock->expects($this->once())->method('exportInteger')->with(123);
-    $mock->exportValue(123, Dao::INT);
+    $mock->expects($this->once())->method('exportInteger')->with(123)->will($this->returnValue('int 123'));
+    self::assertEquals('int 123', $mock->exportValue('attributeName', 123, Dao::INT));
 
-    $mock->expects($this->once())->method('exportFloat')->with(123.12);
-    $mock->exportValue(123.12, Dao::FLOAT);
+    $mock->expects($this->once())->method('exportFloat')->with(123.12)->will($this->returnValue('float 123'));
+    self::assertEquals('float 123', $mock->exportValue('attributeName', 123.12, Dao::FLOAT));
 
-    $mock->expects($this->once())->method('exportString')->with('some string');
-    $mock->exportValue('some string', Dao::TEXT);
-
-
-
-    $mock->expects($this->exactly(2))->method('exportDate')->with('some date');
-    $mock->exportValue('some date', Dao::DATE_WITH_TIME);
-
-    // TODO: This should check for true and false.
-    // Right now it's not possible to setup to expectations for the same method......... wtf?
-    // $mock->expects($this->once())->method('exportDate')->with('some date', false);
-    $mock->exportValue('some date', Dao::DATE);
+    $mock->expects($this->once())->method('exportString')->with('some string')->will($this->returnValue('string 123'));
+    self::assertEquals('string 123', $mock->exportValue('attributeName', 'some string', Dao::TEXT));
 
 
 
-    $mock->expects($this->once())->method('exportSequence')->with(array(1, 2, 3, 4));
-    $mock->exportValue(array(1, 2, 3, 4), Dao::SEQUENCE);
+    $mock->expects($this->once())->method('exportDateWithTime')->with('some date')->will($this->returnValue('datewithtime 123'));
+    self::assertEquals('datewithtime 123', $mock->exportValue('attributeName', 'some date', Dao::DATE_WITH_TIME));
+
+    $mock->expects($this->once())->method('exportDate')->with('some date')->will($this->returnValue('date 123'));
+    self::assertEquals('date 123', $mock->exportValue('attributeName', 'some date', Dao::DATE));
 
 
 
-    self::assertEquals('SOME VALUE', $mock->exportValue('SOME VALUE', Dao::IGNORE));
+    $mock->expects($this->once())->method('exportSequence')->with(array(1, 2, 3, 4))->will($this->returnValue('seq 123'));
+    self::assertEquals('seq 123', $mock->exportValue('attributeName', array(1, 2, 3, 4), Dao::SEQUENCE));
+
+
+
 
     try {
-      $mock->exportValue('some thing', 'Unknown type');
+      $mock->exportValue('attributeName', 'some thing', 'Unknown type');
       self::fail('Unknwon types should result in exception.');
     }
     catch (DaoException $e) {
-      self::assertEquals('Unhandled type when exporting a value.', $e->getMessage());
+      self::assertEquals('There was an error exporting the attribute "attributeName" in resource "resource name": The export method exportUnknown type does not exist.', $e->getMessage());
     }
 
   }

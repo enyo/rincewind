@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file contains the DaoReference definition that's used to describe
+ * This file contains the DaoReference interface that's used to describe
  * references in a datasource.
  *
  * @author Matthias Loitsch <developer@ma.tthias.com>
@@ -22,35 +22,28 @@ class DaoReferenceException extends Exception {
  * To setup a reference, you have to define the attribute that should act as reference
  * as Dao::REFERENCE, and then create a method that's called getATTRIBUTEReference().
  * (eg.: getAddressReference()).
+ * This method has to return a reference implementing the DaoReference interface.
  *
  * When you then access the reference (eg.: $user->address) for the first time,
- * internally the Dao will call getAddressReference() to get the reference, and cache
- * it for future use. This reference object then instantatiates the reference Dao
- * if you passed a string as dao (you should have a look at Dao->createDao() to
- * implement your method of Dao instantation... you'll probably want to use a
- * factory there), or uses the Dao you provided to get the referenced Record(s).
- *
- * It is not necessary to provide the local key in 2 cases:
- *
- * 1) You know the data source always returns the data hash(s) of a reference
- * directly to avoid traffic overhead (this makes especially sense with
- * FileSourceDaos like the JsonDao).
- * In this case you only need to specify the Dao since the Dao does not have to
- * link / fetch the data hash itself, but only to instantiate the Record(s) with
- * the given hash.
- *
- * 2) The reference you are defining is also the id it's referencing.
- * In this case you don't need to specify the local key, since the local key is
- * the reference attribute itself.
- *
- * There is no problem whatsoever in combining those 2.
+ * internally the Record will call getReference('address') on its Dao (which
+ * calls getAddressReference(), and caches the reference so the method is only
+ * called once in the lifetime of a Dao) and then call getReferenced() on the
+ * reference, passing itself (the record) and the attribute name of the reference.
+ * The method getReferenced then returns a Record or a DaoResultIterator.
  *
  *
- * If you are never only interested in the id itself, but always only in the object,
- * you can just setup a reference over the id itself. In this case, the attribute
- * should not have the name id of course. If you're free to change names then
- * just changing `countryId` to `country`, and setting up a reference to fetch
- * it automatically is the sweetest.
+ * When you set an attribute that is a reference on a record, internally the
+ * reference will be fetched, and coerce() is called on the reference, to make
+ * sure it is in a valid format.
+ *
+ * When data is imported, the importValue() on the reference is called, to make
+ * sure the imported value is in a correct format. (This makes sense if your
+ * reference can handle IDs, or a complete datahash)
+ *
+ * The same goes for exporting: if a record is saved, the reference is asked
+ * to be exported (and exportValue() is called), *if* the reference method
+ * export() returns true. If not, the reference will never be saved to the
+ * datasource.
  *
  *
  * Before setting up a DaoReference:
@@ -78,108 +71,32 @@ class DaoReferenceException extends Exception {
  * @see Dao::setupReferences()
  * @see Dao::addReference()
  */
-abstract class DaoReference {
-
-  /**
-   * The foreign dao.
-   * Never access this property directly.
-   * Use the getter for it, because this might be a string.
-   * 
-   * @var string
-   */
-  private $foreignDao;
-  /**
-   * The local key. eg: address_id
-   * @var string
-   */
-  protected $localKey;
-  /**
-   * The foreign key. eg: id
-   * @var string
-   */
-  protected $foreignKey;
-  /**
-   * The Dao this reference is assigned to.
-   * @var Dao
-   */
-  protected $sourceDao;
-  /**
-   * @var bool
-   */
-  protected $export;
-
-  /**
-   * @param string|Dao $foreignDaoName
-   * @param string $localKey
-   * @param string $foreignKey
-   * @param bool $exportReference specifies if this reference should be sent to the
-   *                              datasource when saving.
-   */
-  public function __construct($foreignDaoName, $localKey = null, $foreignKey = 'id', $export = false) {
-    $this->foreignDao = $foreignDaoName;
-    $this->localKey = $localKey;
-    $this->foreignKey = $foreignKey;
-    $this->export = $export;
-  }
+interface DaoReference {
 
   /**
    * Sets the source dao.
    * @param Dao $dao
    */
-  public function setSourceDao($dao) {
-    $this->sourceDao = $dao;
-  }
-
-  /**
-   * @return Dao
-   */
-  public function getSourceDao() {
-    return $this->sourceDao;
-  }
+  public function setSourceDao($dao);
 
   /**
    * @return bool
    */
-  public function export() {
-    return $this->export;
-  }
+  public function export();
 
   /**
-   * @return string
+   * Called by the Dao when exporting values, and export() returns true.
+   * 
+   * @param mixed $value
    */
-  public function getForeignKey() {
-    return $this->foreignKey;
-  }
+  public function exportValue($value);
 
   /**
-   * @return string
-   */
-  public function getLocalKey() {
-    return $this->localKey;
-  }
-
-  /**
-   * Returns the foreign dao.
+   * Called by the Dao when importing values.
    *
-   * @return Dao
-   * @uses $foreignDao
-   * @uses createDao()
+   * @param mixed $value
    */
-  public function getForeignDao() {
-    return $this->foreignDao = $this->createDao($this->foreignDao);
-  }
-
-  /**
-   * Creates a Dao. This calls createDao internally on the sourceDao.
-   * If it's already a dao, it's just returned.
-   *
-   * @param string|Dao $daoName
-   * @return Dao
-   */
-  public function createDao($daoName) {
-    if (is_a($daoName, 'Dao')) return $daoName;
-    else return $this->getSourceDao()->createDao($daoName);
-  }
+  public function importValue($value);
 
   /**
    * When a record is accessed on a reference attribute, it calls this method to get the actual records or record.
@@ -188,10 +105,12 @@ abstract class DaoReference {
    * @param string $attribute The attribute it's accessed on.
    * @return Record|DaoResultIterator
    */
-  abstract public function getReferenced($record, $attribute);
+  public function getReferenced($record, $attribute);
 
   /**
-   * Forces a value in a correct representation of the reference.
+   * Forces a value in a correct representation of the reference. When you call
+   * set() on a Record, the record calls coerce() internally, and forwards it
+   * to the Reference coerce() method if the attribute is of type Dao::REFERENCE.
    *
    * This can be either an integer as id, or an array of integers, or the data
    * itself, etc...
@@ -199,5 +118,6 @@ abstract class DaoReference {
    * @param mixed $value
    * @return mixed the coerced value.
    */
-  abstract public function coerce($value);
+  public function coerce($value);
+
 }

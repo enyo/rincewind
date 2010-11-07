@@ -301,7 +301,7 @@ class FileDaoBase extends Dao {
       }
 
       $type = $this->attributes[$attributeName];
-      $map[$this->exportAttributeName($attributeName)] = $this->exportValue($value, $type, $this->notNull($attributeName));
+      $map[$this->exportAttributeName($attributeName)] = $this->exportValue($attributeName, $value, $type, $this->notNull($attributeName));
     }
 
     return $map;

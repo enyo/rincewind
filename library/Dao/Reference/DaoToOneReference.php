@@ -9,9 +9,9 @@
  * @package Dao
  */
 /**
- * Including DaoReference
+ * Including BasicDaoReference
  */
-if ( ! class_exists('DaoReference', false)) include dirname(__FILE__) . '/DaoReference.php';
+if ( ! class_exists('BasicDaoReference', false)) include dirname(__FILE__) . '/BasicDaoReference.php';
 
 /**
  * A DaoToOneReference describes a reference to another record in another resource.
@@ -28,7 +28,7 @@ if ( ! class_exists('DaoReference', false)) include dirname(__FILE__) . '/DaoRef
  * @see DaoReference
  * @see DaoToManyReference
  */
-class DaoToOneReference extends DaoReference {
+class DaoToOneReference extends BasicDaoReference {
 
   /**
    * Returns a Record for a specific reference.

@@ -64,7 +64,7 @@ class Postgresql extends Database {
   protected function connect() {
 
     if ( ! function_exists("pg_connect")) {
-      throw new SqlException("The function pg_connect is not available! Please install the postgresql php module.");
+      throw new DatabaseException("The function pg_connect is not available! Please install the postgresql php module.");
     }
 
     $connection_string = "";
@@ -87,7 +87,7 @@ class Postgresql extends Database {
     $this->resource = pg_connect($connection_string);
 
     if ( ! $this->resource) {
-      throw new SqlException("Sorry, impossible to connect to the server with this connection string: '" . $this->getConnectionString() . "'.");
+      throw new DatabaseException("Sorry, impossible to connect to the server with this connection string: '" . $this->getConnectionString() . "'.");
     }
 
     $this->connected = true;
@@ -132,7 +132,7 @@ class Postgresql extends Database {
   public function query($query) {
     $result = @pg_query($this->resource, $query);
     if ($result === false) {
-      throw new SqlQueryException("There was a problem with the query.\nThe server responded: " . $this->lastError());
+      throw new DatabaseQueryException("There was a problem with the query.\nThe server responded: " . $this->lastError());
     }
     return new PostgresqlResult($result);
   }

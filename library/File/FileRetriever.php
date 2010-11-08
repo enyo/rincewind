@@ -30,9 +30,25 @@ if ( ! class_exists('Log', false)) include dirname(__FILE__) . '/../Logger/Log.p
  */
 class FileRetrieverException extends FileException {
 
-}
+  /**
+   * The response from server
+   * @var string
+   */
+  protected $response;
 
-;
+  public function  __construct($message, $code, $response) {
+    parent::__construct($message, $code);
+    $this->response = $response;
+  }
+
+  /**
+   * @return string
+   */
+  public function getResponse() {
+    return $this->response;
+  }
+
+}
 
 /**
  * The FileRetriever actually fetches a files, and returns the File object.
@@ -225,7 +241,7 @@ class FileRetriever {
       $errorCode = $info['http_code'] ? $info['http_code'] : 400;
       $errorTypes = array(400 => 'Bad Request', 500 => 'Internal Server Error');
       Log::warning('File could not be downloaded.', 'FileRetriever', array('url' => $realUrl, 'port' => $port, 'errorCode' => $errorCode, 'postParams' => $postParameters ? $postParameters : 'NONE', 'response' => $result));
-      throw new FileRetrieverException($errorCode . ' - ' . $errorTypes[floor($errorCode / 100) * 100] . ': ' . $result, $errorCode);
+      throw new FileRetrieverException($errorCode . ' - ' . $errorTypes[floor($errorCode / 100) * 100], $errorCode, $result);
     }
 
     $file = $this->getFile($url);

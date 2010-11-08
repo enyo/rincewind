@@ -115,7 +115,7 @@ class DatabaseUpdater {
     try {
       $this->versionDao->find(array('number' => 1)); // Throws exception if database not setup.
     }
-    catch (SqlQueryException $e) {
+    catch (DatabaseQueryException $e) {
       if ($this->initializeIfNecessary) {
         $this->executeUpdate(new DatabaseUpdate($this->initUpdateFilename, 0, 'sql'));
       }
@@ -210,7 +210,7 @@ class DatabaseUpdater {
       try {
         $this->db->multiQuery(file_get_contents($this->updatesPath . $update->filename));
       }
-      catch (SqlQueryException $e) {
+      catch (DatabaseQueryException $e) {
         throw new DatabaseUpdaterException('Error in file: ' . $update->filename . "\n" . $e->getMessage());
       }
     }

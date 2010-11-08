@@ -87,7 +87,7 @@ abstract class BasicDaoReference implements DaoReference {
    * The foreign key. eg: id
    * @var string
    */
-  protected $foreignKey;
+  protected $foreignKey = 'id';
   /**
    * The Dao this reference is assigned to.
    * @var Dao
@@ -101,14 +101,14 @@ abstract class BasicDaoReference implements DaoReference {
   /**
    * @param string|Dao $foreignDaoName
    * @param string $localKey
-   * @param string $foreignKey
+   * @param string $foreignKey If null, the default 'id' is used.
    * @param bool $exportReference specifies if this reference should be sent to the
    *                              datasource when saving.
    */
-  public function __construct($foreignDaoName, $localKey = null, $foreignKey = 'id', $export = false) {
+  public function __construct($foreignDaoName, $localKey = null, $foreignKey = null, $export = false) {
     $this->foreignDao = $foreignDaoName;
     $this->localKey = $localKey;
-    $this->foreignKey = $foreignKey;
+    if ($foreignKey !== null) $this->foreignKey = $foreignKey;
     $this->export = $export;
   }
 

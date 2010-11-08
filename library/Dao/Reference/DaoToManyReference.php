@@ -77,5 +77,30 @@ class DaoToManyReference extends BasicDaoReference {
     return ($value === null) ? null : (array) $value;
   }
 
+  /**
+   * @param mixed $value
+   * @return array
+   */
+  public function exportValue($value) {
+    $values = array();
+    if (is_array($value)) {
+      $foreignDao = $this->getForeignDao();
+      foreach ($value as $id) {
+        $values[] = $foreignDao->exportId($id);
+      }
+    }
+    return $values;
+  }
+
+
+  /**
+   * Just returns the value.
+   * @param mixed $value
+   * @return mixed
+   */
+  public function importValue($value) {
+    return (array) $value;
+  }
+
 }
 

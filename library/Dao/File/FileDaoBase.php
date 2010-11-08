@@ -368,5 +368,12 @@ class FileDaoBase extends Dao {
     return is_array($value) ? $value : array($value);
   }
 
+  /**
+   * @return null
+   */
+  public function exportNull() {
+    return null;
+  }
+
 }
 

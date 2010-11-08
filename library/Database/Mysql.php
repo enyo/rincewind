@@ -64,13 +64,13 @@ class Mysql extends Database {
    */
   protected function connect() {
     if ( ! function_exists("mysqli_connect")) {
-      throw new SqlException("The function mysqli_connect is not available! Please install the mysqli php module.");
+      throw new DatabaseException("The function mysqli_connect is not available! Please install the mysqli php module.");
     }
 
     $this->resource = new mysqli($this->host, $this->user, $this->password, $this->dbname, $this->port);
 
     if ($this->resource->connect_error) {
-      throw new SqlConnectionException("Sorry, impossible to connect to the server with this connection string: '" . $this->getConnectionString() . "'. " . ' (#' . $this->resource->connect_errno . ' ' . $this->resource->connect_error);
+      throw new DatabaseConnectionException("Sorry, impossible to connect to the server with this connection string: '" . $this->getConnectionString() . "'. " . ' (#' . $this->resource->connect_errno . ' ' . $this->resource->connect_error);
     }
 
     $this->connected = true;
@@ -109,7 +109,7 @@ class Mysql extends Database {
   public function query($query) {
     $result = @$this->resource->query($query);
     if ($result === false) {
-      throw new SqlQueryException("There was a problem with the query.\nThe server responded: " . $this->lastError());
+      throw new DatabaseQueryException("There was a problem with the query.\nThe server responded: " . $this->lastError());
     }
     return new MysqlResult($result);
   }
@@ -122,7 +122,7 @@ class Mysql extends Database {
   public function multiQuery($query) {
     $result = @$this->resource->multi_query($query);
     if ($result === false) {
-      throw new SqlQueryException("There was a problem with the query.\nThe server responded: " . $this->lastError());
+      throw new DatabaseQueryException("There was a problem with the query.\nThe server responded: " . $this->lastError());
     }
 
     // This is really strange:

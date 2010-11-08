@@ -18,7 +18,7 @@
  * @package Database
  * @subpackage Exceptions
  */
-class SqlException extends Exception { }
+class DatabaseException extends Exception { }
 
 /**
  * If the database can not connect it throws this exception.
@@ -28,7 +28,7 @@ class SqlException extends Exception { }
  * @package Database
  * @subpackage Exceptions
  */
-class SqlConnectionException extends SqlException { }
+class DatabaseConnectionException extends DatabaseException { }
 
 /**
  * If a query fails, this exception gets thrown.
@@ -38,5 +38,5 @@ class SqlConnectionException extends SqlException { }
  * @package Database
  * @subpackage Exceptions
  */
-class SqlQueryException extends SqlException { }
+class DatabaseQueryException extends DatabaseException { }
 

@@ -99,7 +99,7 @@ interface DaoInterface {
    * Retrieves all rows
    * @return DaoResultIterator
    */
-  public function getAll();
+  public function getAll($sort = null, $offset = null, $limit = null, $retrieveTotalRowCount = false);
 
   /**
    * Takes a Record and inserts it in the datasource.

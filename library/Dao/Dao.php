@@ -489,11 +489,12 @@ abstract class Dao implements DaoInterface {
    * @param string|array $sort
    * @param int $offset
    * @param int $limit
+   * @param bool $retrieveTotalRowCount
    * @return DaoResultIterator
    * @see DaoResultIterator
    */
-  public function getAll($sort = null, $offset = null, $limit = null) {
-    return $this->getIterator(array(), $sort, $offset, $limit);
+  public function getAll($sort = null, $offset = null, $limit = null, $retrieveTotalRowCount = false) {
+    return $this->getIterator(array(), $sort, $offset, $limit, true, null, $retrieveTotalRowCount);
   }
 
   /**

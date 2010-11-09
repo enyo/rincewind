@@ -90,7 +90,7 @@ abstract class DataSource {
    * @param int $limit 
    * @return string The file content
    */
-  abstract public function getList($resource, $attributes = null, $sort = null, $offset = null, $limit = null);
+  abstract public function getList($resource, $attributes = null, $sort = null, $offset = null, $limit = null, $retrieveTotalRowCount = false);
 
   /**
    * Inserts the object, and returns the id.

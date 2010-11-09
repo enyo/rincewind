@@ -48,7 +48,7 @@ class FileDaoBase extends Dao {
   protected $fileDataSource;
 
   /**
-   * @param FileDataSource $fileDataSource The fileDataSource is used to create the requests.
+   * @param HttpDataSource $fileDataSource The fileDataSource is used to create the requests.
    * @param string $resourceName You can specify this as an attribute when writing a Dao implementation
    * @param array $attributes You can specify this as an attribute when writing a Dao implementation
    * @param array $nullAttributes You can specify this as an attribute when writing a Dao implementation
@@ -62,9 +62,9 @@ class FileDaoBase extends Dao {
   /**
    * Returns the fileDataSource.
    *
-   * @return FileDataSource
+   * @return HttpDataSource
    */
-  public function getFileDataSource() {
+  public function getHttpDataSource() {
     return $this->fileDataSource;
   }
 
@@ -78,7 +78,7 @@ class FileDaoBase extends Dao {
    */
   public function createDao($daoName) {
     $daoClassName = $daoName . 'Dao';
-    return new $daoClassName($this->getFileDataSource());
+    return new $daoClassName($this->getHttpDataSource());
   }
 
   /**
@@ -191,11 +191,12 @@ class FileDaoBase extends Dao {
    * @param int $limit 
    * @param bool $exportValues
    * @param string $resourceName
+   * @param bool $retrieveTotalRowCount
    * @return DaoResultIterator
    * @see get()
    * @uses $fileDataSource
    */
-  public function getIterator($map, $sort = null, $offset = null, $limit = null, $exportValues = true, $resourceName = null) {
+  public function getIterator($map, $sort = null, $offset = null, $limit = null, $exportValues = true, $resourceName = null, $retrieveTotalRowCount = false) {
     $result = $this->fileDataSource->getList($this->exportResourceName($resourceName ? $resourceName : ($this->viewName ? $this->viewName : $this->resourceName)), $exportValues ? $this->exportMap($map) : $map, $this->generateSortString($sort), $offset, $limit);
 
     return $this->createIterator($result);

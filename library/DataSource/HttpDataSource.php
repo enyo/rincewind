@@ -2,7 +2,7 @@
 
 
 /**
- * This file contains the basic FileDataSource class.
+ * This file contains the basic HttpDataSource class.
  *
  * @author Matthias Loitsch <developer@ma.tthias.com>
  * @copyright Copyright (c) 2010, Matthias Loitsch
@@ -25,14 +25,14 @@ if (!class_exists('File', false)) require(dirname(dirname(__FILE__)) . '/File/Fi
 
 
 /**
- * The Exception base class for FileDataSourceException.
+ * The Exception base class for HttpDataSourceException.
  *
  * @author Matthias Loitsch <developer@ma.tthias.com>
  * @copyright Copyright (c) 2010, Matthias Loitsch
  * @package DataSource
  * @subpackage DataSourceExceptions
  */
-class FileDataSourceException extends DataSourceException { };
+class HttpDataSourceException extends DataSourceException { };
 
 
 /**
@@ -45,7 +45,7 @@ class FileDataSourceException extends DataSourceException { };
  * @copyright Copyright (c) 2010, Matthias Loitsch
  * @package DataSource
  */
-abstract class FileDataSource extends DataSource {
+abstract class HttpDataSource extends DataSource {
 
   /**
    * This is the object used to actually get the files.

@@ -166,11 +166,13 @@ class SqlDaoBase extends Dao {
    * @param int $limit 
    * @param bool $exportValues
    * @param string $resourceName
+   * @param bool $retrieveTotalRowCount
    * @see get()
    * @see generateQuery()
    * @return DaoResultIterator
    */
-  public function getIterator($map, $sort = null, $offset = null, $limit = null, $exportValues = true, $resourceName = null) {
+  public function getIterator($map, $sort = null, $offset = null, $limit = null, $exportValues = true, $resourceName = null, $retrieveTotalRowCount = false) {
+    if ($retrieveTotalRowCount) throw new DaoException ('Retrieving total row count is not yet implemented in the SqlDaoBase.');
     return $this->getIteratorFromQuery($this->generateQuery($map, $sort, $offset, $limit, $exportValues, $resourceName ? $resourceName : ($this->viewName ? $this->viewName : $this->resourceName)));
   }
 

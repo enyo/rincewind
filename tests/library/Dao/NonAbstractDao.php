@@ -13,7 +13,7 @@ class NonAbstractDao extends Dao {
   public function get($map = null, $exportValues = true, $resourceName = null) { }
   public function find($map = null, $exportValues = true, $resourceName = null) { }
   public function getData($map, $exportValues = true, $resourceName = null) { }
-  public function getIterator($map, $sort = null, $offset = null, $limit = null, $exportValues = true, $resourceName = null) { }
+  public function getIterator($map, $sort = null, $offset = null, $limit = null, $exportValues = true, $resourceName = null, $retrieveTotalRowCount = false) { }
   public function insert($object) { }
   public function update($object) { }
   public function delete($object) { }

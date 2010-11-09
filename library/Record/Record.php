@@ -226,7 +226,7 @@ class Record implements RecordInterface {
       return null;
     }
     $attributeType = $this->getAttributeType($attributeName);
-    if ($value !== null && ($attributeType == Dao::DATE || $attributeType == Dao::DATE_WITH_TIME)) $value = new Date($value);
+    if ($value !== null && ($attributeType === Dao::DATE || $attributeType === Dao::DATE_WITH_TIME)) $value = new Date($value, ($attributeType === Dao::DATE_WITH_TIME));
     return $value;
   }
 

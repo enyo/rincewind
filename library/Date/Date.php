@@ -6,8 +6,7 @@
  * @author Matthias Loitsch <developer@ma.tthias.com>
  * @copyright Copyright (c) 2010, Matthias Loitsch
  * @package Date
- **/
-
+ */
 
 /**
  * The Date Exception
@@ -16,9 +15,10 @@
  * @copyright Copyright (c) 2010, Matthias Loitsch
  * @package Date
  * @subpackage Exceptions
- **/
-class DateException extends Exception { }
+ */
+class DateException extends Exception {
 
+}
 
 /**
  * The Date object is used to store the date and time.
@@ -36,8 +36,7 @@ class Date {
    *
    * @var string
    */
-  protected $defaultFormat = 'Y-m-d H:i:s';
-  
+  protected $defaultFormat;
   /**
    * The time of the date object.
    *
@@ -49,12 +48,15 @@ class Date {
    * The time is specified in the constructor
    *
    * @param int|string $time Integer for a timestamp, String for strtotime() or null for current time.
+   * @param bool $withTime
    */
-  public function __construct($time = null) {
-    if (!$time)                                        $this->timestamp = time();
+  public function __construct($time = null, $withTime = true) {
+    if ( ! $time) $this->timestamp = time();
     elseif (is_numeric($time) && $time == (int) $time) $this->timestamp = (int) $time;
-    else                                               $this->timestamp = strtotime($time);
-    if (!$this->timestamp) throw new DateException('This date could not be converted: "' . $time . '"');
+    else $this->timestamp = strtotime($time);
+    if ( ! $this->timestamp) throw new DateException('This date could not be converted: "' . $time . '"');
+
+    $this->defaultFormat = $withTime ? 'Y-m-d H:i:s' : 'Y-m-d';
   }
 
   /**
@@ -67,27 +69,29 @@ class Date {
     return date($format === null ? $this->defaultFormat : $format, $this->timestamp);
   }
 
-
-
   /**
    * Simply returns the timestamp.
    * @return int
    */
-  public function getTimestamp() { return $this->timestamp; }
-
+  public function getTimestamp() {
+    return $this->timestamp;
+  }
 
   /**
    * @param string $format Sets the defaultFormat.
    */
-  public function setFormat($format) { $this->defaultFormat = $format; }
+  public function setFormat($format) {
+    $this->defaultFormat = $format;
+  }
 
   /**
    * Calls format()
    *
    * @see format()
    */
-  public function __toString() { return $this->format(); }
+  public function __toString() {
+    return $this->format();
+  }
 
 }
-
 

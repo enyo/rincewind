@@ -58,7 +58,7 @@ class DaoReferenceTest extends PHPUnit_Framework_TestCase {
   }
 
   /**
-   * @covers DaoReference::createDao
+   * @covers BasicDaoReference::createDao
    */
   public function testCreateDaoForwardsToSourceDao() {
 
@@ -78,7 +78,7 @@ class DaoReferenceTest extends PHPUnit_Framework_TestCase {
 
 
   /**
-   * @covers DaoReference::getForeignDao
+   * @covers BasicDaoReference::getForeignDao
    */
   public function testGetForeignDaoCallsCreateDaoIfNecessary() {
 
@@ -89,7 +89,7 @@ class DaoReferenceTest extends PHPUnit_Framework_TestCase {
   }
 
   /**
-   * @covers DaoReference::getForeignDao
+   * @covers BasicDaoReference::getForeignDao
    */
   public function testGetForeignDaoSimplyReturnsForeignDaoIfItsADaoAlready() {
 

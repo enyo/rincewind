@@ -92,7 +92,7 @@ abstract class Log {
    * @return array
    */
   public static function getLoggers($context = self::GENERAL) {
-    if ( ! self::$isEnabled) return null;
+    if ( ! self::$isEnabled) return array();
     $context = self::sanitizeContext($context);
     if (isset(self::$loggers[$context])) return self::$loggers[$context];
     elseif (isset(self::$loggers[self::CATCHALL])) return self::$loggers[self::CATCHALL];

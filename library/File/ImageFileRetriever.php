@@ -66,5 +66,13 @@ class ImageFileRetriever extends FileRetriever {
     return new ImageFile($uri);
   }
 
+  /**
+   * @param string $srcUri
+   * @return ImageFile
+   */
+  public function createFromLocalFile($srcUri) {
+    return parent::createFromLocalFile($srcUri);
+  }
+  
 }
 

@@ -32,6 +32,18 @@ class ImageFileException extends FileException {
 }
 
 /**
+ * Gets thrown by getRectanglesToResize when the file should just stay the original.
+ * 
+ * @author Matthias Loitsch <developer@ma.tthias.com>
+ * @copyright Copyright (c) 2010, Matthias Loitsch
+ * @package File
+ * @subpackage FileExceptions
+ */
+class ImageFileTakeOriginalException extends FileException {
+  
+}
+
+/**
  * Used to define a rectangle in an image.
  */
 class ImageRectangle {
@@ -244,84 +256,88 @@ class ImageFile extends File {
    * @return array Containg to ImageRectangle objects. The first one being the source, the second the target.
    */
   static public function getRectanglesToResize($srcProportions, $trgProportions, $crop, $dontDistort, $cropOffsets) {
+    if ( ! $srcProportions[0] || ! $srcProportions[1]) {
+      throw new ImageFileException('Wrong source proportions.');
+    }
     if ( ! $trgProportions[0] && ! $trgProportions[1]) {
-      throw new ImageFileException('Wrong proportions.');
+      throw new ImageFileException('Wrong target proportions.');
     }
 
-    try {
-      $srcRatio = $srcProportions[0] / $srcProportions[1];
-      if ( ! $trgProportions[0] || ! $trgProportions[1]) {
-        $crop = false;
-        $dontDistort = true;
-      }
-      else {
-        if ($trgProportions[0] == $srcProportions[0] && $trgProportions[1] == $srcProportions[1]) {
-          throw new Exception(); /* Nothing to be done */
-        }
-        $trgRatio = $trgProportions[0] / $trgProportions[1];
-        if ($srcRatio == $trgRatio) {
-          $crop = false;
-        }
-      }
+    $srcRatio = $srcProportions[0] / $srcProportions[1];
+    if ( ! $trgProportions[0] || ! $trgProportions[1]) {
+      $crop = false;
+      $dontDistort = true;
+    }
 
-      $trgWidth = $trgProportions[0];
-      $trgHeight = $trgProportions[1];
-      $srcWidth = $srcProportions[0];
-      $srcHeight = $srcProportions[1];
-      $srcX = 0;
-      $srcY = 0;
+    $trgRatio = $trgProportions[0] / $trgProportions[1];
+    if ($srcRatio == $trgRatio) {
+      $crop = false;
+    }
 
-      if ( ! $crop && ! $dontDistort) { /* Just resize the image to the new proportions. Nevermind the ratio. */
-      }
-      elseif ($crop) {
-        if (is_int($cropOffsets[0])) $srcX = $cropOffsets[0];
-        if (is_int($cropOffsets[1])) $srcY = $cropOffsets[1];
+    $trgWidth = $trgProportions[0];
+    $trgHeight = $trgProportions[1];
+    $srcWidth = $srcProportions[0];
+    $srcHeight = $srcProportions[1];
+    $srcX = 0;
+    $srcY = 0;
+    
+    if ($trgHeight > $srcHeight) $trgHeight = $srcHeight; // Prevent upsizing
+    if ($trgWidth > $srcWidth) $trgWidth = $srcWidth; // Prevent upsizing
+    $trgRatio = $trgWidth / $trgHeight;
 
-        $dontDistort = true;
-        if ($srcRatio < $trgRatio) {
-          // Source is proportinally higher than source. So: scale to width, and cut height.
-          $srcHeight = round($srcWidth / $trgRatio);
-          if (is_float($cropOffsets[1])) {
-            $span = $srcProportions[1] - $srcHeight;
-            $srcY = round(($span * $cropOffsets[1]) / 100);
-          }
-        }
-        else {
-          // Target is wider. If they are equal $crop as already been set to false.
-          $srcWidth = round($srcHeight * $trgRatio);
-          if (is_float($cropOffsets[0])) {
-            $span = $srcProportions[0] - $srcWidth;
-            $srcX = round(($span * $cropOffsets[0]) / 100);
-          }
+    if ($srcWidth == $trgWidth && $srcHeight == $trgHeight) {
+      throw new ImageFileTakeOriginalException(); /* Nothing to be done */
+    }
+
+      
+
+    if ( ! $crop && ! $dontDistort) { /* Just resize the image to the new proportions. Nevermind the ratio. */
+    }
+    elseif ($crop) {
+      if (is_int($cropOffsets[0])) $srcX = $cropOffsets[0];
+      if (is_int($cropOffsets[1])) $srcY = $cropOffsets[1];
+
+      $dontDistort = true;
+      if ($srcRatio < $trgRatio) {
+        // Source is proportionally higher than source. So: scale to width, and cut height.
+        $srcHeight = round($srcWidth / $trgRatio);
+        if (is_float($cropOffsets[1])) {
+          $span = $srcProportions[1] - $srcHeight;
+          $srcY = round(($span * $cropOffsets[1]) / 100);
         }
       }
       else {
-        if ($trgProportions[0] && $trgProportions[1]) {
-          if ($trgRatio == $srcRatio) {
-            if ($trgWidth > $srcProportions[0] || $trgHeight > $srcProportions[1]) throw new Exception(); // To prevent upsizing
-          }
-          elseif ($srcRatio > $trgRatio) {
-            if ($trgWidth > $srcProportions[0]) throw new Exception(); // To prevent upsizing
-            $trgHeight = round($trgWidth / $srcRatio);
-          }
-          else {
-            if ($trgHeight > $srcProportions[1]) throw new Exception(); // To prevent upsizing
-            $trgWidth = round($trgHeight * $srcRatio);
-          }
+        // Target is wider. If they are equal $crop as already been set to false.
+        $srcWidth = round($srcHeight * $trgRatio);
+        if (is_float($cropOffsets[0])) {
+          $span = $srcProportions[0] - $srcWidth;
+          $srcX = round(($span * $cropOffsets[0]) / 100);
         }
-        elseif ($trgProportions[0]) {
+      }
+    }
+    else {
+      if ($trgProportions[0] && $trgProportions[1]) {
+        if ($trgRatio == $srcRatio) {
+          if ($trgWidth > $srcProportions[0] || $trgHeight > $srcProportions[1]) throw new ImageFileTakeOriginalException(); // To prevent upsizing
+        }
+        elseif ($srcRatio > $trgRatio) {
+          if ($trgWidth > $srcProportions[0]) throw new ImageFileTakeOriginalException(); // To prevent upsizing
           $trgHeight = round($trgWidth / $srcRatio);
         }
-        elseif ($trgProportions[1]) {
+        else {
+          if ($trgHeight > $srcProportions[1]) throw new ImageFileTakeOriginalException(); // To prevent upsizing
           $trgWidth = round($trgHeight * $srcRatio);
         }
       }
+      elseif ($trgProportions[0]) {
+        $trgHeight = round($trgWidth / $srcRatio);
+      }
+      elseif ($trgProportions[1]) {
+        $trgWidth = round($trgHeight * $srcRatio);
+      }
+    }
 
-      return array(new ImageRectangle($srcX, $srcY, $srcWidth, $srcHeight), new ImageRectangle(0, 0, $trgWidth, $trgHeight));
-    }
-    catch (Exception $e) {
-      return array(new ImageRectangle(0, 0, $srcProportions[0], $srcProportions[1]), new ImageRectangle(0, 0, $srcProportions[0], $srcProportions[1]));
-    }
+    return array(new ImageRectangle($srcX, $srcY, $srcWidth, $srcHeight), new ImageRectangle(0, 0, $trgWidth, $trgHeight));
   }
 
   /**
@@ -336,12 +352,12 @@ class ImageFile extends File {
    */
   protected function getResized($proportions, $crop, $dontDistort, $cropOffsets, $mode) {
 
-    list($srcRectangle, $trgRectangle) = self::getRectanglesToResize(array($this->width, $this->height), $proportions, $crop, $dontDistort, $cropOffsets, $mode);
-
-    if ($srcRectangle->width == $trgRectangle->width &&
-        $srcRectangle->height == $trgRectangle->height &&
-        $srcRectangle->x == $trgRectangle->x &&
-        $srcRectangle->y == $trgRectangle->y) return null;
+    try {
+      list($srcRectangle, $trgRectangle) = self::getRectanglesToResize(array($this->width, $this->height), $proportions, $crop, $dontDistort, $cropOffsets, $mode);
+    }
+    catch (ImageFileTakeOriginalException $e) {
+      return null;
+    }
 
     $newImage = imagecreatetruecolor($trgRectangle->width, $trgRectangle->height);
 

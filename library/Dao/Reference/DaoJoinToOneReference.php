@@ -62,7 +62,7 @@ class DaoJoinToOneReference extends BasicDaoReference {
    * @return mixed the coerced value.
    */
   public function coerce($value) {
-    if (is_object($value) && is_a($value, 'Record')) return $value->get('id');
+    if (is_object($value) && $value instanceof Record) return $value->get('id');
     return ($value === null) ? null : (int) $value;
   }
 

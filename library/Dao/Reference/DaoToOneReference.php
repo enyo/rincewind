@@ -49,7 +49,7 @@ class DaoToOneReference extends BasicDaoReference {
         // If data is an integer, it must be the id. So just get the record set with the data.
         return $this->cacheAndReturn($record, $attributeName, $this->getForeignDao()->getRecordFromData(array('id' => (int) $data), true, false));
       }
-      elseif (is_a($data, 'Record')) {
+      elseif ($data instanceof Record) {
         // The record is cached. Just return it.
         return $data;
       }
@@ -92,7 +92,7 @@ class DaoToOneReference extends BasicDaoReference {
    * @return mixed the coerced value.
    */
   public function coerce($value) {
-    if (is_object($value) && is_a($value, 'Record')) return $value->get('id');
+    if (is_object($value) && $value instanceof Record) return $value->get('id');
     return ($value === null) ? null : (int) $value;
   }
 

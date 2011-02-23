@@ -167,7 +167,7 @@ abstract class BasicDaoReference implements DaoReference {
    * @return Dao
    */
   public function createDao($daoName) {
-    if (is_a($daoName, 'Dao')) return $daoName;
+    if ($daoName instanceof Dao) return $daoName;
     else return $this->getSourceDao()->createDao($daoName);
   }
 
@@ -181,7 +181,7 @@ abstract class BasicDaoReference implements DaoReference {
    * @return mixed
    */
   public function exportValue($value) {
-    if (is_a($value, 'Record')) return $value->getDao()->exportId($value->get('id'));
+    if ($value instanceof Record) return $value->getDao()->exportId($value->get('id'));
     return $this->getForeignDao()->exportId($value);
   }
 

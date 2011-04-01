@@ -280,7 +280,7 @@ class ImageFile extends File {
     $srcHeight = $srcProportions[1];
     $srcX = 0;
     $srcY = 0;
-    
+
     if ($trgHeight > $srcHeight) $trgHeight = $srcHeight; // Prevent upsizing
     if ($trgWidth > $srcWidth) $trgWidth = $srcWidth; // Prevent upsizing
     $trgRatio = $trgWidth / $trgHeight;
@@ -289,7 +289,7 @@ class ImageFile extends File {
       throw new ImageFileTakeOriginalException(); /* Nothing to be done */
     }
 
-      
+
 
     if ( ! $crop && ! $dontDistort) { /* Just resize the image to the new proportions. Nevermind the ratio. */
     }
@@ -359,9 +359,21 @@ class ImageFile extends File {
       return null;
     }
 
-    $newImage = imagecreatetruecolor($trgRectangle->width, $trgRectangle->height);
+    $createAlphaImage = $this->type == IMAGETYPE_PNG;
+    $srcImage = $this->getImage();
 
-    imagecopyresampled($newImage, $this->getImage(), $trgRectangle->x, $trgRectangle->y, $srcRectangle->x, $srcRectangle->y, $trgRectangle->width, $trgRectangle->height, $srcRectangle->width, $srcRectangle->height);
+    if ($createAlphaImage) {
+      $newImage = imagecreatetruecolor($trgRectangle->width, $trgRectangle->height);
+      imagealphablending($newImage, false);
+      imagesavealpha($newImage, true);
+
+      imagealphablending($srcImage, true);
+    }
+    else {
+      $newImage = imagecreatetruecolor($trgRectangle->width, $trgRectangle->height);
+    }
+
+    imagecopyresampled($newImage, $srcImage, $trgRectangle->x, $trgRectangle->y, $srcRectangle->x, $srcRectangle->y, $trgRectangle->width, $trgRectangle->height, $srcRectangle->width, $srcRectangle->height);
 
     return $newImage;
   }

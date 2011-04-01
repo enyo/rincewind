@@ -247,6 +247,7 @@ class FileRetriever {
     $file = $this->getFile($url);
     $file->setSource(File::SOURCE_HTTP);
     $file->setContent($result);
+    $file->setSize($info['size_download']);
 
     $this->process($file);
 

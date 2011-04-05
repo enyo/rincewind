@@ -118,43 +118,22 @@ class SqlDaoBase extends Dao {
   }
 
   /**
-   * This is the method to get a Record from the database.
-   * If you want to select more records, call getIterator.
-   * This function returns null if nothing has been found. If you want it to throw an exception (for
-   * chaining) you can call get(), which is mostly a wrapper for find().
-   * 
+   * Down the road, this is the only function that actually gets the data out of the data source.
    *
-   * @param array|Record $map A map or record containing the attributes.
-   * @param bool $exportValues When you want to have complete control over the $map
-   *                           attributes, you can set exportValues to false, so they
-   *                           won't be processed.
-   *                           WARNING: Be sure to escape them yourself if you do so.
-   * @param string $resourceName You can specify a different resource (most probably a view)
-   *                          to get data from.
-   *                          If not set, $this->viewName will be used if present; if not
-   *                          $this->resourceName is used.
-   * @see generateQuery()
-   * @see get()
-   * @return Record
-   */
-  public function find($map, $exportValues = true, $resourceName = null) {
-    return $this->getFromQuery($this->generateQuery($map, $sort = null, $offset = null, $limit = 1, $exportValues, $resourceName ? $resourceName : ($this->viewName ? $this->viewName : $this->resourceName)));
-  }
-
-  /**
-   * Same as get() but returns an array with the data instead of a record
+   * get, find, getData, findData
    *
    * @param array|Record $map
    * @param bool $exportValues
    * @param string $resourceName
    * @see get()
-   * @see generateQuery()
+   * @see find()
+   * @see getData()
+   * @see findData()
    * @return array
    */
-  public function getData($map, $exportValues = true, $resourceName = null) {
-    $data = $this->getFromQuery($this->generateQuery($map, $sort = null, $offset = null, $limit = 1, $exportValues, $resourceName ? $resourceName : ($this->viewName ? $this->viewName : $this->resourceName)), $returnData = true);
-    if ( ! $data) throw new DaoNotFoundException("The query did not return any results.");
-    return $this->prepareDataForRecord($data);
+  public function doFindData($map, $exportValues = true, $resourceName = null) {
+    $data = $this->getDataFromQuery($this->generateQuery($map, $sort = null, $offset = null, $limit = 1, $exportValues, $resourceName ? $resourceName : ($this->viewName ? $this->viewName : $this->resourceName)));
+    return $data ? $data : null;
   }
 
   /**
@@ -172,7 +151,7 @@ class SqlDaoBase extends Dao {
    * @return DaoResultIterator
    */
   public function getIterator($map, $sort = null, $offset = null, $limit = null, $exportValues = true, $resourceName = null, $retrieveTotalRowCount = false) {
-    if ($retrieveTotalRowCount) throw new DaoException ('Retrieving total row count is not yet implemented in the SqlDaoBase.');
+    if ($retrieveTotalRowCount) throw new DaoException('Retrieving total row count is not yet implemented in the SqlDaoBase.');
     return $this->getIteratorFromQuery($this->generateQuery($map, $sort, $offset, $limit, $exportValues, $resourceName ? $resourceName : ($this->viewName ? $this->viewName : $this->resourceName)));
   }
 
@@ -317,20 +296,17 @@ class SqlDaoBase extends Dao {
   }
 
   /**
-   * Returns a Record or data array from a query.
+   * Returns a data array from a query.
    * Returns null if nothing found.
    *
    * @param string $query
-   * @param bool $returnData If set to true, only the data as array is returned, not a Record.
    * @return Record|array
    */
-  protected function getFromQuery($query, $returnData = false) {
+  protected function getDataFromQuery($query) {
     $result = $this->db->query($query);
     if ($result->numRows() == 0) return null;
 
-    if ($returnData) return $result->fetchArray();
-
-    return $this->getRecordFromData($result->fetchArray());
+    return $result->fetchArray();
   }
 
   /**

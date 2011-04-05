@@ -66,6 +66,18 @@ interface DaoInterface {
 
 
   /**
+   * The same as getData(), but returns null if not found instead of exception.
+   *
+   * @param array|Record $map
+   * @param bool $exportValues
+   * @param string $resourceName
+   * @return array
+   * @see getData()
+   */
+  public function findData($map, $exportValues = true, $resourceName = null);
+
+
+  /**
    * The same as get, but returns an iterator to go through all the rows.
    *
    * @param array $map

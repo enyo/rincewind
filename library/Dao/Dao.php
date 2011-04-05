@@ -219,6 +219,30 @@ abstract class Dao implements DaoInterface {
    */
   protected $additionalAttributes = array();
   /**
+   * A Memcache object to store cached objects.
+   * 
+   * @var Memcache
+   */
+  protected $memcache = null;
+  /**
+   * Whether to use the memcache or not.
+   * 
+   * @var bool
+   */
+  protected $useCache = false;
+  /**
+   * Seconds til the cache expires
+   * @var int
+   */
+  protected $cacheExpire = 3600; // 1 hour
+  /**
+   * Is used to prefix the keys in memcache.
+   * To see the final key, look at generate cacheKey
+   * @var string
+   * @see generateCacheKey
+   */
+  protected $cachePrefix = '';
+  /**
    * The references array contains a list of cached DaoReference instances to
    * map certain attributes to other resources. They are all fetched by calling
    * getXXXReference().
@@ -337,6 +361,88 @@ abstract class Dao implements DaoInterface {
   }
 
   /**
+   * Returns the record, or null.
+   * 
+   * @param type $map
+   * @param type $exportValues
+   * @param type $resourceName 
+   * @return Record
+   */
+  public function find($map, $exportValues = true, $resourceName = null) {
+    $data = $this->findData($map, $exportValues, $resourceName);
+    if ( ! $data) return null;
+    return $this->getRecordFromPreparedData($data);
+  }
+
+  /**
+   *
+   * @param type $map
+   * @param type $exportValues
+   * @param type $resourceName
+   * @return type 
+   */
+  public function getData($map = null, $exportValues = true, $resourceName = null) {
+    $data = $this->findData($map, $exportValues, $resourceName);
+    if ( ! $data) throw new DaoNotFoundException('Did not find any record.');
+    return $data;
+  }
+
+  /**
+   * This calls doFindData() to get the actual data, and then prepares and returns it for the record.
+   * 
+   * This is the actual method that takes care of memcaching.
+   *
+   * @param array|Record $map
+   * @param bool $exportValues
+   * @param string $resourceName
+   * @return array
+   * @see doFindData()
+   */
+  public final function findData($map, $exportValues = true, $resourceName = null) {
+    $cacheKey = null;
+    if ($this->useCache && $this->memcache && array_key_exists('id', $map)) {
+      $cacheKey = $this->generateCacheKey($map['id']);
+      if ($recordData = $this->memcache->get($cacheKey)) {
+        // Exists in database, do not prepare data, because when the data comes
+        // from the datasource, it gets prepared, and put in the record. This data
+        // is directly put in the memcache.
+        return $recordData;
+      }
+    }
+
+    $data = $this->doFindData($map, $exportValues, $resourceName);
+
+    if ( ! $data) return null;
+
+    $data = $this->prepareDataForRecord($data);
+
+    if ($cacheKey) {
+      $this->memcache->set($cacheKey, $data, 0, $this->cacheExpire);
+    }
+    return $data;
+  }
+
+  /**
+   * The key is: $cachePrefix . $resourceName . '_' . $id
+   *
+   * @param int $id 
+   */
+  protected function generateCacheKey($id) {
+    return $this->cachePrefix . $this->resourceName . '_' . $id;
+  }
+
+  /**
+   * This function actually gets the data.
+   *
+   * @param array|Record $map
+   * @param bool $exportValues
+   * @param string $resourceName
+   * @return array
+   * @see getData()
+   */
+  abstract protected function doFindData($map, $exportValues, $resourceName);
+
+  /**
    * Given the $sort parameter, it generates a sort String used in the query.
    * If $sort is not provied, $defaultSort is used.
    *
@@ -397,6 +503,20 @@ abstract class Dao implements DaoInterface {
   }
 
   /**
+   * @return Memcache
+   */
+  public function getMemcache() {
+    return $this->memcache;
+  }
+
+  /**
+   * @param Memcache $memcache 
+   */
+  public function setMemcache($memcache) {
+    $this->memcache = $memcache;
+  }
+
+  /**
    * Temporarly all getXXXIterator() calls get converted to getXXX().
    * This is deprecated and only a transition! If you get warnings: Correct the code.
    * The next release will not support getXXXIterator()
@@ -419,7 +539,7 @@ abstract class Dao implements DaoInterface {
    * @see Record
    */
   protected function afterInsert($record) {
-
+    
   }
 
   /**
@@ -430,7 +550,7 @@ abstract class Dao implements DaoInterface {
    * @see Record
    */
   protected function afterUpdate($record) {
-
+    
   }
 
   /**
@@ -663,9 +783,7 @@ abstract class Dao implements DaoInterface {
 
   /**
    * Returns a data record with the data in it.
-   * Override this function if you want a specific Record, not the default one.
-   * Using your own Record is sometimes useful if your datasource has a strange
-   * naming convention and you have to do different name conversion than the default
+   * Override this function if you need to instantiate your record differently.
    * one.
    *
    * @param array $data

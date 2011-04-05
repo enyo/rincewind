@@ -162,7 +162,6 @@ class Record implements RecordInterface {
    * @return array
    */
   public function getArray() {
-    $data = array();
     return $this->data;
   }
 

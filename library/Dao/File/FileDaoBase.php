@@ -18,7 +18,6 @@ if ( ! class_exists('Dao', false)) include dirname(__FILE__) . '/../Dao.php';
  */
 include dirname(__FILE__) . '/FileResultIterator.php';
 
-
 /**
  * The Exception base class for FileDaoExceptions.
  *
@@ -28,7 +27,7 @@ include dirname(__FILE__) . '/FileResultIterator.php';
  * @subpackage Exceptions
  */
 class FileDaoException extends DaoException {
-
+  
 }
 
 /**
@@ -140,33 +139,7 @@ class FileDaoBase extends Dao {
   }
 
   /**
-   * This is the method to get a Record from the database.
-   * If you want to select more records, call getIterator.
-   * If you call get() without parameters, a "raw record" will be returned, containing
-   * only default values, and null as id.
-   *
-   * @param array|Record $map A map containing the attributes.
-   * @param bool $exportValues When you want to have complete control over the $map
-   *                           attributes, you can set exportValues to false, so they
-   *                           won't be processed.
-   *                           WARNING: Be sure to escape them yourself if you do so.
-   * @param string $resourceName You can specify a different resource (most probably a view)
-   *                          to get data from.
-   *                          If not set, $this->viewName will be used if present; if not
-   *                          $this->resourceName is used.
-   * @return Record
-   */
-  public function find($map, $exportValues = true, $resourceName = null) {
-
-    $data = $this->getFromDataSource($map, $exportValues, $resourceName)->fetch();
-
-    if ( ! $data || ! is_array($data)) return null;
-
-    return $this->getRecordFromData($data);
-  }
-
-  /**
-   * Same as get() but returns an array with the data instead of a record
+   * The connection to the datasource
    *
    * @param array|Record $map
    * @param bool $exportValues
@@ -174,12 +147,9 @@ class FileDaoBase extends Dao {
    * @see get()
    * @return array
    */
-  public function getData($map, $exportValues = true, $resourceName = null) {
+  public function doFindData($map, $exportValues = true, $resourceName = null) {
     $data = $this->getFromDataSource($map, $exportValues, $resourceName)->fetch();
-
-    if ( ! $data || ! is_array($data)) throw new DaoNotFoundException("The query did not return any results.");
-
-    return $this->prepareDataForRecord($data);
+    return $data && is_array($data) ? $data : null;
   }
 
   /**

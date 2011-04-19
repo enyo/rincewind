@@ -4,7 +4,7 @@ require_once 'PHPUnit/Framework.php';
 
 require_once dirname(__FILE__) . '/../../../setup.php';
 
-require_once LIBRARY_PATH . 'Dao/File/FileDaoBase.php';
+require_once RINCEWIND_PATH . 'Dao/File/FileDaoBase.php';
 
 
 

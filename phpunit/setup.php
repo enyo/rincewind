@@ -32,5 +32,6 @@ abstract class Log {
 
 define('TESTS_PATH', dirname(__FILE__) . '/');
 
-define('LIBRARY_PATH', dirname(dirname(__FILE__)) . '/library/');
+define('RINCEWIND_PATH', dirname(dirname(__FILE__)) . '/library/');
 
+include RINCEWIND_PATH . 'rincewind.php';

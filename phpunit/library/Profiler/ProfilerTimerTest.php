@@ -2,7 +2,9 @@
 
 require_once 'PHPUnit/Framework.php';
 
-require_once dirname(__FILE__) . '/../../../library/Profiler/ProfilerTimer.php';
+require_once dirname(__FILE__) . '/../../setup.php';
+
+require_class('ProfilerTimer', 'Profiler');
 
 /**
  * Test class for ProfilerTimer.

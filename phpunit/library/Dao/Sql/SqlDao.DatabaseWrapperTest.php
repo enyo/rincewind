@@ -4,8 +4,8 @@ require_once 'PHPUnit/Framework.php';
 
 require_once dirname(__FILE__) . '/../../../setup.php';
 
-require_once LIBRARY_PATH . 'Dao/Sql/SqlDaoBase.php';
-require_once LIBRARY_PATH . 'Database/DatabaseInterface.php';
+require_once RINCEWIND_PATH . 'Dao/Sql/SqlDaoBase.php';
+require_once RINCEWIND_PATH . 'Database/DatabaseInterface.php';
 
 /**
  * Test class for SqlDao. This testcase makes sure that all calls get forwarded correctly to the database object.

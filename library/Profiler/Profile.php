@@ -6,8 +6,7 @@
  * @author Matthias Loitsch <matthias@loitsch.com>
  * @copyright Copyright (c) 2010, Matthias Loitsch
  * @package Profiler
- **/
-
+ */
 
 /**
  * The abstract Profile class is very small, and only a static wrapper for a specific
@@ -27,7 +26,6 @@ abstract class Profile {
    */
   protected static $profiler;
 
-
   /**
    * @param Profiler $profiler
    */
@@ -35,6 +33,12 @@ abstract class Profile {
     self::$profiler = $profiler;
   }
 
+  /**
+   * @return Profiler
+   */
+  public static function getProfiler() {
+    return self::$profiler;
+  }
 
   /**
    * Reroutes to self::$profiler->start()
@@ -46,7 +50,6 @@ abstract class Profile {
     if (self::$profiler) self::$profiler->start($context, $section);
   }
 
-
   /**
    * Reroutes to self::$profiler->stop()
    * @see $profiler
@@ -54,6 +57,5 @@ abstract class Profile {
   public static function stop() {
     if (self::$profiler) self::$profiler->stop();
   }
-
 
 }

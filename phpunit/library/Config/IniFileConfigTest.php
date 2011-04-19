@@ -3,7 +3,7 @@
 require_once 'PHPUnit/Framework.php';
 require_once dirname(dirname(dirname(__FILE__))) . '/setup.php';
 
-require_once LIBRARY_PATH . 'Config/IniFileConfig.php';
+require_once RINCEWIND_PATH . 'Config/IniFileConfig.php';
 
 /**
  * Test class for IniFileConfig.

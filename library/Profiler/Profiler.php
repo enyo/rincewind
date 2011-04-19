@@ -17,7 +17,6 @@ require_class('Profile', 'Profiler');
  */
 require_class('ProfilerTimer', 'Profiler');
 
-
 /**
  * Normally you don't use an instance of Profiler to profile your app, but you set a Profiler instance
  * to the static Profile class.
@@ -31,7 +30,11 @@ class Profiler {
   /**
    * @var float
    */
-  protected $totalStartTime;
+  protected $startTime;
+  /**
+   * @var float
+   */
+  protected $endTime;
   /**
    *
    * @var array
@@ -42,14 +45,33 @@ class Profiler {
    * @var array
    */
   protected $times = array();
+  /**
+   * @var float
+   */
+  protected $totalTimersDuration = 0.0;
+  /**
+   * @var ProfilerPrinterDelegate
+   */
+  protected $printerDelegate;
 
   /**
    * The profiler starts to profile as soon as it is instanciated.
+   * @param ProfilerPrinterDelegate $printerDelegate
    */
-  public function __construct() {
-    $this->totalStartTime = microtime(true);
+  public function __construct($printerDelegate = null) {
+    $this->startTime = microtime(true);
+    if ( ! $printerDelegate) {
+      require_class('DefaultHtmlProfilerPrinterDelegate', 'Profiler');
+      $printerDelegate = new DefaultHtmlProfilerPrinterDelegate();
+    }
+    $this->printerDelegate = $printerDelegate;
   }
 
+  /**
+   * Starts a timer
+   * @param string $context
+   * @param string $section 
+   */
   public function start($context, $section) {
     if (count($this->timerStack) !== 0) {
       $lastTimer = end($this->timerStack);
@@ -58,9 +80,56 @@ class Profiler {
     $this->timerStack[] = new ProfilerTimer();
   }
 
+  /**
+   * Stops the last timer.
+   */
   public function stop() {
-    $lastTimer = end($this->timerStack);
-    $lastTimer;
+    $lastTimer = array_pop($this->timerStack);
+    $lastTimer->end();
+    $this->totalTimersDuration += $lastTimer->getDuration();
+    if (count($this->timerStack) !== 0) {
+      $previousTimer = end($this->timerStack);
+      $previousTimer->resume();
+    }
+  }
+
+  /**
+   * Ends the profiling process.
+   */
+  public function end() {
+    for ($i = 0; $i < count($this->timerStack); $i ++ ) {
+      $this->stop();
+    }
+    $this->endTime = microtime(true);
+  }
+
+  /**
+   * @return bool
+   */
+  public function didEnd() {
+    return $this->endTime !== null;
+  }
+
+  /**
+   * @return ProfilePrinter
+   */
+  public function getPrinterDelegate() {
+    return $this->printerDelegate;
+  }
+
+  /**
+   * @return ProfilePrinter
+   */
+  public function setPrinterDelegate($printerDelegate) {
+    $this->printerDelegate = $printerDelegate;
+  }
+
+  /**
+   * Uses the printer delegate to print the results of the Profiler.
+   */
+  public function printResult() {
+    if ( ! $this->didEnd()) $this->end();
+    $this->printerDelegate->printProfiler($this);
   }
 
 }

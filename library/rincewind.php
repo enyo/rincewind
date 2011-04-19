@@ -9,6 +9,25 @@
  */
 
 /**
+ *
+ * @param string $interfaceOrClassName 
+ * @param string $fileUriOrService 
+ * @return string the File URI
+ */
+function _rw_determineFileUri($interfaceOrClassName, $fileUriOrService) {
+  if ($fileUriOrService === null) {
+    $fileUri = dirname(__FILE__) . '/' . $interfaceOrClassName . '/' . $interfaceOrClassName . '.php';
+  }
+  elseif (strpos($fileUriOrService, '/') !== 0) {
+    $fileUri = dirname(__FILE__) . '/' . $fileUriOrService . '/' . $interfaceOrClassName . '.php';
+  }
+  else {
+    $fileUri = $fileUriOrService;
+  }
+  return $fileUri;
+}
+
+/**
  * Includes a file only if class does not exist.
  * 
  * @param string $className
@@ -19,15 +38,19 @@
  */
 function require_class($className, $fileUriOrService = null) {
   if ( ! class_exists($className, false)) {
-    if ($fileUriOrService === null) {
-      $fileUri = dirname(__FILE__) . '/' . $className . '/' . $className . '.php';
-    }
-    elseif (strpos($fileUriOrService, '/') !== 0) {
-      $fileUri = dirname(__FILE__) . '/' . $fileUriOrService . '/' . $className . '.php';
-    }
-    else {
-      $fileUri = $fileUriOrService;
-    }
-    include $fileUri;
+    include _rw_determineFileUri($className, $fileUriOrService);
+  }
+}
+
+/**
+ * Includes a file only if interface does not exist.
+ * 
+ * @param string $interfaceName
+ * @param string $fileUriOrService 
+ * @see require_class
+ */
+function require_interface($interfaceName, $fileUriOrService = null) {
+  if ( ! interface_exists($interfaceName, false)) {
+    include _rw_determineFileUri($interfaceName, $fileUriOrService);
   }
 }

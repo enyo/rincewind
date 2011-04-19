@@ -36,6 +36,10 @@ class Profiler {
    */
   protected $endTime;
   /**
+   * @var array The list of actions to be evaluated later.
+   */
+  protected $actionProtocol = array();
+  /**
    *
    * @var array
    */
@@ -44,7 +48,7 @@ class Profiler {
    *
    * @var array
    */
-  protected $times = array();
+  protected $timings = array();
   /**
    * @var float
    */
@@ -55,16 +59,29 @@ class Profiler {
   protected $printerDelegate;
 
   /**
-   * The profiler starts to profile as soon as it is instanciated.
+   * The profiler starts to profile as soon as it is instantiated.
    * @param ProfilerPrinterDelegate $printerDelegate
    */
   public function __construct($printerDelegate = null) {
     $this->startTime = microtime(true);
-    if ( ! $printerDelegate) {
-      require_class('DefaultHtmlProfilerPrinterDelegate', 'Profiler');
-      $printerDelegate = new DefaultHtmlProfilerPrinterDelegate();
-    }
     $this->printerDelegate = $printerDelegate;
+  }
+
+  /**
+   * Stores a start in protocol
+   * 
+   * @param string $context
+   * @param string $section 
+   */
+  public function start($context, $section = null) {
+    $this->actionProtocol[] = array('start', microtime(true), $context, $section);
+  }
+
+  /**
+   * Stores a stop in protocol
+   */
+  public function stop() {
+    $this->actionProtocol[] = array('stop', microtime(true));
   }
 
   /**
@@ -72,24 +89,40 @@ class Profiler {
    * @param string $context
    * @param string $section 
    */
-  public function start($context, $section) {
+  protected function startTimer($time, $context, $section) {
     if (count($this->timerStack) !== 0) {
       $lastTimer = end($this->timerStack);
-      $lastTimer->pause();
+      $lastTimer->pause($time);
     }
-    $this->timerStack[] = new ProfilerTimer();
+    $this->timerStack[] = new ProfilerTimer($context, $section, $time);
   }
 
   /**
    * Stops the last timer.
    */
-  public function stop() {
+  protected function stopTimer($time) {
     $lastTimer = array_pop($this->timerStack);
-    $lastTimer->end();
+    $lastTimer->end($time);
     $this->totalTimersDuration += $lastTimer->getDuration();
+
+    
+    $context = $lastTimer->getContext();
+    $section = $lastTimer->getSection();
+    if ( ! array_key_exists($context, $this->timings)) $this->timings[$context] = array('duration' => 0.0, 'calls' => 0, 'sections'=>array());
+
+    $this->timings[$context]['duration'] += $lastTimer->getDuration();
+    $this->timings[$context]['calls'] ++;
+
+    if ($section) {
+      if ( ! array_key_exists($section, $this->timings[$context]['sections'])) $this->timings[$context]['sections'][$section] = array('duration' => 0.0, 'calls' => 0);
+      $this->timings[$context]['sections'][$section]['duration'] += $lastTimer->getDuration();
+      $this->timings[$context]['sections'][$section]['calls'] ++;
+      ksort($this->timings[$context]['sections']);
+    }
+
     if (count($this->timerStack) !== 0) {
       $previousTimer = end($this->timerStack);
-      $previousTimer->resume();
+      $previousTimer->resume($time);
     }
   }
 
@@ -101,6 +134,7 @@ class Profiler {
       $this->stop();
     }
     $this->endTime = microtime(true);
+    $this->evaluateProtocol();
   }
 
   /**
@@ -110,6 +144,44 @@ class Profiler {
     return $this->endTime !== null;
   }
 
+  /**
+   * Goes through the protocol, and replays all the actions. This time for real.
+   */
+  protected function evaluateProtocol() {
+    foreach ($this->actionProtocol as $action) {
+      switch ($action[0]) {
+        case 'start':
+          $this->startTimer($action[1], $action[2], $action[3]);
+          break;
+        case 'stop':
+          $this->stopTimer($action[1]);
+          break;
+      }
+    }
+    ksort($this->timings);
+  }
+
+  /**
+   * @return array
+   */
+  public function getTimings() {
+    return $this->timings;
+  }
+
+  /**
+   * @return float
+   */
+  public function getTotalDuration() {
+    return $this->endTime - $this->startTime;
+  }
+
+  /**
+   * @return float
+   */
+  public function getTotalTimersDuration() {
+    return $this->totalTimersDuration;
+  }
+ 
   /**
    * @return ProfilePrinter
    */
@@ -129,6 +201,10 @@ class Profiler {
    */
   public function printResult() {
     if ( ! $this->didEnd()) $this->end();
+    if ( ! $this->printerDelegate) {
+      require_class('DefaultHtmlProfilerPrinterDelegate', 'Profiler');
+      $this->printerDelegate = new DefaultHtmlProfilerPrinterDelegate();
+    }
     $this->printerDelegate->printProfiler($this);
   }
 

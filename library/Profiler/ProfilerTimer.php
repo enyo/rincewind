@@ -18,6 +18,14 @@
 class ProfilerTimer {
 
   /**
+   * @var string
+   */
+  private $context;
+  /**
+   * @var string
+   */
+  private $section;
+  /**
    * @var float
    */
   private $startTime;
@@ -40,18 +48,36 @@ class ProfilerTimer {
 
   /**
    * Sets the startTime
+   * @param float $time
    */
-  public function __construct() {
-    $this->startTime = microtime(true);
+  public function __construct($context, $section = null, $time = null) {
+    $this->context = $context;
+    $this->section = $section;
+    $this->startTime = $time === null ? microtime(true) : $time;
   }
 
   /**
    * Sets the endtime, and calculates the duration
+   * @param float $time
    */
-  public function end() {
+  public function end($time = null) {
     $this->resume();
-    $this->endTime = microtime(true);
+    $this->endTime = $time === null ? microtime(true) : $time;
     $this->duration = $this->endTime - $this->startTime;
+  }
+
+  /**
+   * @return string
+   */
+  public function getContext() {
+    return $this->context;
+  }
+
+  /**
+   * @return string
+   */
+  public function getSection() {
+    return $this->section;
   }
 
   /**
@@ -100,17 +126,21 @@ class ProfilerTimer {
 
   /**
    * Pauses the timer
+   * @param float $time
    */
-  public function pause() {
-    if ( ! $this->isPaused()) $this->pauseStartTime = microtime(true);
+  public function pause($time = null) {
+    if ( ! $this->isPaused()) $this->pauseStartTime = ($time === null ? microtime(true) : $time);
   }
 
   /**
    * Resumes the timer
+   * @param float $time
    */
-  public function resume() {
+  public function resume($time = null) {
     if ($this->isPaused()) {
-      $this->totalPauseDuration += microtime(true) - $this->pauseStartTime;
+      $time = $time === null ? microtime(true) : $time;
+      $pauseDuration = $time - $this->pauseStartTime;
+      $this->totalPauseDuration += $pauseDuration;
       $this->pauseStartTime = null;
     }
   }

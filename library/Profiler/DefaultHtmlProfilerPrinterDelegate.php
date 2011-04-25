@@ -84,7 +84,7 @@ class DefaultHtmlProfilerPrinterDelegate implements ProfilerPrinterDelegate {
     echo '<tr class="labels"><th>Context</th><th>Section</th><th colspan="4">Duration (ms)</th><th>Callcount</th></tr>';
 
     foreach ($profiler->getTimings() as $contextName => $timing) {
-      $this->printRow(self::CONTEXT, $contextName, $timing['duration'], $timing['duration'] / $profiler->getTotalTimersDuration(), $timing['calls'], 'context ' . ($timing['duration'] >= $profiler->getTotalDuration() / 3 ? ' expensive' : ''));
+      $this->printRow(self::CONTEXT, $contextName, $timing['duration'], $timing['duration'] / $profiler->getTotalDuration(), $timing['calls'], 'context ' . ($timing['duration'] >= $profiler->getTotalDuration() / 3 ? ' expensive' : ''));
       if (count($timing['sections']) !== 0) {
         $remainingCalls = $timing['calls'];
         $remainingDuration = $timing['duration'];
@@ -100,7 +100,8 @@ class DefaultHtmlProfilerPrinterDelegate implements ProfilerPrinterDelegate {
         }
       }
     }
-    $this->printRow(self::CONTEXT, 'Not profiled', $profiler->getTotalDuration() - $profiler->getTotalTimersDuration(), $profiler->getTotalTimersDuration() / $profiler->getTotalDuration(), '');
+    $notProfiledDuration = $profiler->getTotalDuration() - $profiler->getTotalTimersDuration();
+    $this->printRow(self::CONTEXT, 'Not profiled', $notProfiledDuration, $notProfiledDuration / $profiler->getTotalDuration(), '');
 
     $this->printRow(self::CONTEXT, 'TOTAL', $profiler->getTotalDuration(), 1, '', 'total');
 

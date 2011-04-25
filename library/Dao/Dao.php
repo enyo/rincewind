@@ -7,10 +7,6 @@
  * @copyright Copyright (c) 2010, Matthias Loitsch
  * @package Dao
  * */
-/**
- * Loading the Log class.
- */
-if ( ! class_exists('Log', false)) include(dirname(dirname(__FILE__)) . '/Logger/Log.php');
 
 /**
  * Loading the interface

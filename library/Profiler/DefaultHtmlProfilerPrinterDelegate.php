@@ -13,6 +13,8 @@
 require_interface('ProfilerPrinterDelegate', 'Profiler');
 
 /**
+ * Very simple, very ugly ProfilerPrinter
+ * 
  * @author Matthias Loitsch <matthias@loitsch.com>
  * @copyright Copyright (c) 2010, Matthias Loitsch
  * @package Profiler
@@ -32,7 +34,11 @@ class DefaultHtmlProfilerPrinterDelegate implements ProfilerPrinterDelegate {
         font-family: courier, monospace;
         font-size: 12px;
         border-collapse: collapse;
+        border: 1px solid gray;
         }
+      .rincewind-profiler-output tr:nth-child(odd) td {
+        background: #f6f6f6;
+      }
       .rincewind-profiler-output th {
         border-bottom: 1px solid gray;
         padding: 10px 6px;
@@ -47,6 +53,9 @@ class DefaultHtmlProfilerPrinterDelegate implements ProfilerPrinterDelegate {
         border-left: none;
         border-right: none;
         }
+      .rincewind-profiler-output tr.context.expensive td {
+        color: #aa0000;
+      }
       .rincewind-profiler-output td.context {
         font-weight: bold;
         padding-right: 20px;
@@ -55,6 +64,7 @@ class DefaultHtmlProfilerPrinterDelegate implements ProfilerPrinterDelegate {
         color: red;
       }
       .rincewind-profiler-output .total td {
+        border-top: 1px solid gray;
         background: #f3f3f3;
         padding: 6px 6px;
       }
@@ -70,8 +80,9 @@ class DefaultHtmlProfilerPrinterDelegate implements ProfilerPrinterDelegate {
     </style>';
     echo '<div class="rincewind-profiler-output"><table border="0">';
     echo '<tr class="labels"><th>Context</th><th>Section</th><th colspan="2">Duration (ms)</th><th>Callcount</th></tr>';
+
     foreach ($profiler->getTimings() as $contextName => $timing) {
-      $this->printRow($contextName, null, $timing['duration'], null, $timing['calls'], 'context');
+      $this->printRow($contextName, null, $timing['duration'], null, $timing['calls'], 'context ' . ($timing['duration'] >= $profiler->getTotalDuration() / 3 ? ' expensive' : ''));
       if (count($timing['sections']) !== 0) {
         $remainingCalls = $timing['calls'];
         $remainingDuration = $timing['duration'];
@@ -88,8 +99,6 @@ class DefaultHtmlProfilerPrinterDelegate implements ProfilerPrinterDelegate {
       }
     }
     $this->printRow('Not profiled', null, $profiler->getTotalDuration() - $profiler->getTotalTimersDuration(), null, '');
-
-    echo '<tr style="height: 10px;"></tr>';
 
     $this->printRow('TOTAL', null, $profiler->getTotalDuration(), null, '', 'total');
 

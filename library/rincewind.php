@@ -54,3 +54,16 @@ function require_interface($interfaceName, $fileUriOrService = null) {
     include _rw_determineFileUri($interfaceName, $fileUriOrService);
   }
 }
+
+/**
+ * Now include the important static classes.
+ */
+/**
+ * Loading the Log class.
+ */
+require_class('Log', 'Logger');
+
+/**
+ * Loading the Profile class.
+ */
+require_class('Profile', 'Profiler');

@@ -20,6 +20,8 @@ require_interface('ProfilerPrinterDelegate', 'Profiler');
  * @package Profiler
  */
 class DefaultHtmlProfilerPrinterDelegate implements ProfilerPrinterDelegate {
+  const CONTEXT = 1;
+  const SECTION = 2;
 
   /**
    * @param Profiler $profiler 
@@ -79,45 +81,65 @@ class DefaultHtmlProfilerPrinterDelegate implements ProfilerPrinterDelegate {
         }
     </style>';
     echo '<div class="rincewind-profiler-output"><table border="0">';
-    echo '<tr class="labels"><th>Context</th><th>Section</th><th colspan="2">Duration (ms)</th><th>Callcount</th></tr>';
+    echo '<tr class="labels"><th>Context</th><th>Section</th><th colspan="4">Duration (ms)</th><th>Callcount</th></tr>';
 
     foreach ($profiler->getTimings() as $contextName => $timing) {
-      $this->printRow($contextName, null, $timing['duration'], null, $timing['calls'], 'context ' . ($timing['duration'] >= $profiler->getTotalDuration() / 3 ? ' expensive' : ''));
+      $this->printRow(self::CONTEXT, $contextName, $timing['duration'], $timing['duration'] / $profiler->getTotalTimersDuration(), $timing['calls'], 'context ' . ($timing['duration'] >= $profiler->getTotalDuration() / 3 ? ' expensive' : ''));
       if (count($timing['sections']) !== 0) {
         $remainingCalls = $timing['calls'];
         $remainingDuration = $timing['duration'];
 
         foreach ($timing['sections'] as $sectionName => $sectionTiming) {
-          $this->printRow(null, $sectionName, null, $sectionTiming['duration'], $sectionTiming['calls']);
+          $this->printRow(self::SECTION, $sectionName, $sectionTiming['duration'], $sectionTiming['duration'] / $timing['duration'], $sectionTiming['calls']);
           $remainingCalls -= $sectionTiming['calls'];
           $remainingDuration -= $sectionTiming['duration'];
         }
 
         if ($remainingCalls || $remainingDuration) {
-          $this->printRow(null, 'Unspecified', null, $remainingDuration, $remainingCalls, 'unspecified');
+          $this->printRow(self::SECTION, 'Unspecified', $remainingDuration, $remainingDuration / $timing['duration'], $remainingCalls, 'unspecified');
         }
       }
     }
-    $this->printRow('Not profiled', null, $profiler->getTotalDuration() - $profiler->getTotalTimersDuration(), null, '');
+    $this->printRow(self::CONTEXT, 'Not profiled', $profiler->getTotalDuration() - $profiler->getTotalTimersDuration(), $profiler->getTotalTimersDuration() / $profiler->getTotalDuration(), '');
 
-    $this->printRow('TOTAL', null, $profiler->getTotalDuration(), null, '', 'total');
+    $this->printRow(self::CONTEXT, 'TOTAL', $profiler->getTotalDuration(), 1, '', 'total');
 
     echo '</table></div>';
   }
 
-  protected function printRow($contextName, $sectionName, $contextDuration, $sectionDuration, $calls, $trClass = '') {
+  protected function printRow($type, $name, $duration, $percentage, $calls, $trClass = '') {
     echo '<tr class="' . $trClass . '">';
-    echo '<td ' . ( ! $sectionName ? 'colspan="2"' : '') . ' class="context">' . $contextName . '</td>';
-    if ($sectionName) echo '<td class="section">' . $sectionName . '</td>';
-    echo '<td class="duration context-duration">' . $this->formatDuration($contextDuration) . '</td>';
-    echo '<td class="duration section-duration">' . $this->formatDuration($sectionDuration) . '</td>';
+    if ($type === self::CONTEXT) {
+      echo '<td colspan="2" class="context">' . $name . '</td>';
+    }
+    else {
+      echo '<td class="context"></td>';
+      echo '<td class="section">' . $name . '</td>';
+    }
+
+    $formattedDuration = $this->formatDuration($duration);
+    $formattedPercentage = $this->formatPercentage($percentage);
+    
+    $contextDuration = $type === self::CONTEXT ? $formattedDuration : '';
+    $sectionDuration = $type === self::SECTION ? $formattedDuration : '';
+    $contextPercentage = $type === self::CONTEXT ? $formattedPercentage : '';
+    $sectionPercentage = $type === self::SECTION ? $formattedPercentage : '';
+
+
+    echo '<td class="duration context-duration">' . $contextDuration . '</td>';
+    echo '<td class="percentage context-percentage">' . $contextPercentage . '</td>';
+    echo '<td class="duration section-duration">' . $sectionDuration . '</td>';
+    echo '<td class="percentage section-percentage">' . $sectionPercentage . '</td>';
     echo '<td class="call-count">' . $calls . '</td>';
     echo '</tr>';
   }
 
   protected function formatDuration($seconds) {
-    if ($seconds === null) return '';
     return number_format(round($seconds * 1000, 4), 4);
+  }
+
+  protected function formatPercentage($percentage) {
+    return '(' . number_format(round($percentage * 100, 2), 2) . '%)';
   }
 
 }

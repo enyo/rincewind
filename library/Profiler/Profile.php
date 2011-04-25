@@ -58,4 +58,12 @@ abstract class Profile {
     if (self::$profiler) self::$profiler->stop();
   }
 
+  /**
+   * If a profile has been attached, then printResult() will be called on it.
+   * @see Profiler::printResult
+   */
+  public static function printResult() {
+    if (self::$profiler) self::$profiler->printResult();
+  }
+
 }

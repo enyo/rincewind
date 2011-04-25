@@ -70,7 +70,7 @@ class DefaultHtmlProfilerPrinterDelegate implements ProfilerPrinterDelegate {
         background: #f3f3f3;
         padding: 6px 6px;
       }
-      .rincewind-profiler-output .duration, .rincewind-profiler-output .call-count {
+      .rincewind-profiler-output .duration, .rincewind-profiler-output .percentage, .rincewind-profiler-output .call-count {
         text-align: right;
         }
       .rincewind-profiler-output .context-duration {
@@ -83,8 +83,9 @@ class DefaultHtmlProfilerPrinterDelegate implements ProfilerPrinterDelegate {
     echo '<div class="rincewind-profiler-output"><table border="0">';
     echo '<tr class="labels"><th>Context</th><th>Section</th><th colspan="4">Duration (ms)</th><th>Callcount</th></tr>';
 
+    $timingsCount = count($profiler->getTimings());
     foreach ($profiler->getTimings() as $contextName => $timing) {
-      $this->printRow(self::CONTEXT, $contextName, $timing['duration'], $timing['duration'] / $profiler->getTotalDuration(), $timing['calls'], 'context ' . ($timing['duration'] >= $profiler->getTotalDuration() / 3 ? ' expensive' : ''));
+      $this->printRow(self::CONTEXT, $contextName, $timing['duration'], $timing['duration'] / $profiler->getTotalDuration(), $timing['calls'], 'context ' . ($timing['duration'] >= $profiler->getTotalDuration() * 2 / $timingsCount ? ' expensive' : ''));
       if (count($timing['sections']) !== 0) {
         $remainingCalls = $timing['calls'];
         $remainingDuration = $timing['duration'];
@@ -136,11 +137,11 @@ class DefaultHtmlProfilerPrinterDelegate implements ProfilerPrinterDelegate {
   }
 
   protected function formatDuration($seconds) {
-    return number_format(round($seconds * 1000, 4), 4);
+    return number_format(round($seconds * 1000, 1), 1);
   }
 
   protected function formatPercentage($percentage) {
-    return '(' . number_format(round($percentage * 100, 2), 2) . '%)';
+    return '(' . number_format(round($percentage * 100, 1), 1) . '%)';
   }
 
 }

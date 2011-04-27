@@ -1,15 +1,12 @@
 <?php
 
-
 /**
  * This file contains the basic HttpDataSource class.
  *
  * @author Matthias Loitsch <developer@ma.tthias.com>
  * @copyright Copyright (c) 2010, Matthias Loitsch
  * @package DataSource
- **/
-
-
+ * */
 /**
  * Loading the data source class
  */
@@ -20,9 +17,7 @@ include(dirname(__FILE__) . '/DataSource.php');
 /**
  * Loading the file class
  */
-if (!class_exists('File', false)) require(dirname(dirname(__FILE__)) . '/File/File.php');
-
-
+if ( ! class_exists('File', false)) require(dirname(dirname(__FILE__)) . '/File/File.php');
 
 /**
  * The Exception base class for HttpDataSourceException.
@@ -32,8 +27,11 @@ if (!class_exists('File', false)) require(dirname(dirname(__FILE__)) . '/File/Fi
  * @package DataSource
  * @subpackage DataSourceExceptions
  */
-class HttpDataSourceException extends DataSourceException { };
+class HttpDataSourceException extends DataSourceException {
+  
+}
 
+;
 
 /**
  * This data source is used to get files to use for a Dao.
@@ -52,13 +50,11 @@ abstract class HttpDataSource extends DataSource {
    * @var FileRetriever
    */
   protected $fileRetriever;
-
   /**
    * This is the base url to connect to the backend.
    * @var string
    */
   protected $baseUrl;
-
   /**
    * This is the port used to connect to the backend.
    * @var int
@@ -76,7 +72,12 @@ abstract class HttpDataSource extends DataSource {
     $this->port = $port;
   }
 
+  /**
+   * @return int
+   */
+  public function getPort() {
+    return $this->port;
+  }
+
 }
-
-
 

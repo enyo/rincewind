@@ -215,13 +215,13 @@ abstract class Dao implements DaoInterface {
    */
   protected $additionalAttributes = array();
   /**
-   * A Memcache object to store cached objects.
+   * A Cache object to store cached objects.
    * 
-   * @var Memcache
+   * @var Cache
    */
-  protected $memcache = null;
+  protected $cache = null;
   /**
-   * Whether to use the memcache or not.
+   * Whether to use the cache or not.
    * 
    * @var bool
    */
@@ -232,7 +232,7 @@ abstract class Dao implements DaoInterface {
    */
   protected $cacheExpire = 3600; // 1 hour
   /**
-   * Is used to prefix the keys in memcache.
+   * Is used to prefix the keys in cache.
    * To see the final key, look at generate cacheKey
    * @var string
    * @see generateCacheKey
@@ -396,12 +396,12 @@ abstract class Dao implements DaoInterface {
    */
   public final function findData($map, $exportValues = true, $resourceName = null) {
     $cacheKey = null;
-    if ($this->useCache && $this->memcache && array_key_exists('id', $map)) {
+    if ($this->useCache && $this->cache && array_key_exists('id', $map)) {
       $cacheKey = $this->generateCacheKey($map['id']);
-      if ($recordData = $this->memcache->get($cacheKey)) {
+      if ($recordData = $this->cache->get($cacheKey)) {
         // Exists in database, do not prepare data, because when the data comes
         // from the datasource, it gets prepared, and put in the record. This data
-        // is directly put in the memcache.
+        // is directly put in the cache.
         return $recordData;
       }
     }
@@ -413,7 +413,7 @@ abstract class Dao implements DaoInterface {
     $data = $this->prepareDataForRecord($data);
 
     if ($cacheKey) {
-      $this->memcache->set($cacheKey, $data, 0, $this->cacheExpire);
+      $this->cache->set($cacheKey, $data, $this->cacheExpire);
     }
     return $data;
   }
@@ -499,17 +499,17 @@ abstract class Dao implements DaoInterface {
   }
 
   /**
-   * @return Memcache
+   * @return Cache
    */
-  public function getMemcache() {
-    return $this->memcache;
+  public function getCache() {
+    return $this->cache;
   }
 
   /**
-   * @param Memcache $memcache 
+   * @param Cache $cache 
    */
-  public function setMemcache($memcache) {
-    $this->memcache = $memcache;
+  public function setCache($cache) {
+    $this->cache = $cache;
   }
 
   /**

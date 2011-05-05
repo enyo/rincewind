@@ -23,11 +23,11 @@ include dirname(__FILE__) . '/ConfigExceptions.php';
 abstract class Config {
 
   /**
-   * @var Memcache
+   * @var Cache
    */
-  protected $memcache;
+  protected $cache;
   /**
-   * Is used to prefix the keys in memcache.
+   * Is used to prefix the keys in cache.
    * @var string
    */
   protected $cachePrefix = 'config__';
@@ -66,13 +66,11 @@ abstract class Config {
     $section = $section ? $section : $this->defaultSection;
     $section = $this->sanitizeToken($section);
 
-    if ($this->memcache) {
+    if ($this->cache) {
       $key = $this->generateCacheKey($variable, $section);
-      // Haven't found a better way to test if the key actually exists.
-      // Since I store false and null attributes in configs, I can't test if result === false
-      $config = $this->memcache->get(array($key));
-      if (array_key_exists($key, $config)) {
-        return $config[$key];
+      $value = $this->cache->get($key, $found);
+      if ($found) {
+        return $value;
       }
     }
 
@@ -84,7 +82,7 @@ abstract class Config {
       if ( ! isset($this->config[$section])) throw new ConfigException("Section '$section' does not exist.");
       if ( ! array_key_exists($variable, $this->config[$section])) throw new ConfigException("Variable '$section.$variable' does not exist.");
 
-      if ($this->memcache) {
+      if ($this->cache) {
         foreach ($this->config as $tmp_section => $tmp_variables) {
           foreach ($tmp_variables as $tmp_variable => $tmp_config) {
             $this->cacheConfig($tmp_variable, $tmp_config, $tmp_section);
@@ -97,7 +95,7 @@ abstract class Config {
     else {
       if ( ! array_key_exists($variable, $this->config)) throw new ConfigException("Variable '$variable' does not exist.");
 
-      if ($this->memcache) {
+      if ($this->cache) {
         foreach ($this->config as $tmp_variable => $tmp_config) {
           $this->cacheConfig($tmp_variable, $tmp_config);
         }
@@ -122,8 +120,8 @@ abstract class Config {
    * @param string $section
    */
   public function cacheConfig($variable, $config, $section = '') {
-    if ($this->memcache) {
-      $this->memcache->set($this->generateCacheKey($variable, $section), $config, 0, $this->cacheExpire);
+    if ($this->cache) {
+      $this->cache->set($this->generateCacheKey($variable, $section), $config, $this->cacheExpire);
     }
   }
 

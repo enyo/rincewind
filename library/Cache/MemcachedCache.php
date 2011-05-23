@@ -77,4 +77,9 @@ class MemcachedCache implements Cache {
     return $this->memcached->set($key, $var, $expiration === null ? 0 : $expiration);
   }
 
+  public function flush() {
+    if ( ! $this->memcached) throw new CacheException('No memcached defined.');
+    $this->memcached->flush();
+  }
+
 }

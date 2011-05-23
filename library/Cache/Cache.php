@@ -41,4 +41,9 @@ interface Cache {
    * @return bool True on success, false on failure
    */
   public function set($key, $var, $expiration = null);
+
+  /**
+   * Empties the cache
+   */
+  public function flush();
 }

@@ -474,7 +474,11 @@ class Record implements RecordInterface {
         if ( ! $quiet && $value === null) trigger_error('The value of the type "REFERENCE" for "' . $attributeName . '" is not allowed to be null in ' . $trace[0]['file'] . ' on line ' . $trace[0]['line'], E_USER_WARNING);
         return $return;
         break;
-      default: trigger_error('Unknown type in ' . $trace[0]['file'] . ' on line ' . $trace[0]['line'], E_USER_ERROR);
+      case Dao::IGNORE:
+        Log::warning('Trying to coerce a value that is of type ignore!', 'Record', array('attributeName' => $attributeName, 'dao' => $dao->getResourceName()));
+        return $value;
+        break;
+      default: trigger_error('Unknown type (' . $type . ') in ' . $trace[0]['file'] . ' on line ' . $trace[0]['line'], E_USER_ERROR);
     }
   }
 

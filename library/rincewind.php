@@ -9,6 +9,18 @@
  */
 
 /**
+ * Defines the current rincewind version
+ */
+define('RINCEWIND_VERSION', '2.3.3');
+
+
+/**
+ * Includes the basic types.
+ */
+include dirname(__FILE__) . '/rincewind.types.php';
+
+
+/**
  *
  * @param string $interfaceOrClassName 
  * @param string $fileUriOrService 

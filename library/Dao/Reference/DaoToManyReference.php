@@ -72,9 +72,20 @@ class DaoToManyReference extends BasicDaoReference {
   /**
    * @param mixed $value
    * @return mixed the coerced value.
+   * @throws DaoCoerceException
    */
   public function coerce($value) {
-    return ($value === null) ? null : (array) $value;
+    try {
+      if ( ! is_array($value)) throw new Exception();
+      $newValue = array();
+      foreach ($value as $id) {
+        $newValue[] = $this->getForeignDao()->coerceId($id);
+      }
+      return $newValue;
+    }
+    catch (Exception $e) {
+      throw new DaoCoerceException(array(), "Invalid ToManyReference provided.");
+    }
   }
 
   /**
@@ -91,7 +102,6 @@ class DaoToManyReference extends BasicDaoReference {
     }
     return $values;
   }
-
 
   /**
    * Just returns the value.

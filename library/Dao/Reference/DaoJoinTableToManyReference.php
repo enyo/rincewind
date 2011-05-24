@@ -51,19 +51,16 @@ class DaoJoinTableToManyReference extends BasicDaoReference {
    * @var Dao
    */
   protected $joinDao;
-
   /**
    * The key in the join table, that points to the local key.
    * @var string
    */
   protected $joinToLocalKey;
-
   /**
    * The key in the join table, that points to the foreign key.
    * @var string
    */
   protected $joinToForeignKey;
-
 
   /**
    * Be careful about the order of the daos.
@@ -134,7 +131,7 @@ class DaoJoinTableToManyReference extends BasicDaoReference {
   /**
    * @param mixed $value
    */
-  public function  exportValue($value) {
+  public function exportValue($value) {
     throw new DaoReferenceException('JoinManyReferences should never be exported.');
   }
 
@@ -143,13 +140,17 @@ class DaoJoinTableToManyReference extends BasicDaoReference {
    * @return mixed the coerced value.
    */
   public function coerce($value) {
-    if (is_array($value)) {
+    try {
+      if ( ! is_array($value)) throw new Exception();
       $newValue = array();
       foreach ($value as $id) {
-        $newValue = (int) $id;
+        $newValue[] = $this->getForeignDao()->coerceId($id);
       }
+      return $newValue;
     }
-    else return array();
+    catch (Exception $e) {
+      throw new DaoCoerceException(array(), "Invalid JoinTableToManyReference provided.");
+    }
   }
 
 }

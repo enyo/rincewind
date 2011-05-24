@@ -7,7 +7,6 @@
  * @copyright Copyright (c) 2010, Matthias Loitsch
  * @package Dao
  * */
-
 /**
  * Loading the interface
  */
@@ -853,7 +852,7 @@ abstract class Dao implements DaoInterface {
         if ($this->notNull($attributeName)) {
           $trace = debug_backtrace();
           trigger_error('The attribute "' . $attributeName . '" (resource: "' . $this->resourceName . '") was not transmitted from data source', E_USER_WARNING);
-          $recordData[$attributeName] = Record::coerce($this, $attributeName, null, $type, false, $quiet = true);
+          $recordData[$attributeName] = $this->coerce($attributeName, null, $type, false, $quiet = true);
         }
         else {
           $recordData[$attributeName] = null;
@@ -883,7 +882,7 @@ abstract class Dao implements DaoInterface {
       if (in_array($attributeName, $this->nullAttributes) || in_array($attributeName, $this->defaultValueAttributes)) {
         $data[$attributeName] = null;
       }
-      elseif ($type != Dao::IGNORE) $data[$attributeName] = Record::coerce($this, $attributeName, null, $type, $allowNull = false, $quiet = true);
+      elseif ($type != Dao::IGNORE) $data[$attributeName] = $this->coerce($attributeName, null, $type, $allowNull = false, $quiet = true);
     }
     return $this->getRecordFromPreparedData($data, $existsInDatabase = false);
   }
@@ -1052,9 +1051,15 @@ abstract class Dao implements DaoInterface {
     if ($type === Dao::IGNORE) return $this->exportNull();
 
     try {
-      $exportMethod = 'export' . (is_array($type) ? 'Enum' : $type);
-      if ( ! method_exists($this, $exportMethod)) throw new DaoException('The export method ' . $exportMethod . ' does not exist.');
-      return $this->$exportMethod($internalValue, $type, $attributeName);
+      if (is_array($type)) {
+        // Enum
+        $exportMethod = 'exportEnum';
+      }
+      else {
+        $exportMethod = 'export' . $type;
+        if ( ! method_exists($this, $exportMethod)) throw new DaoException('The export method ' . $exportMethod . ' does not exist.');
+      }
+      return $this->$exportMethod($internalValue, $attributeName, $type);
     }
     catch (DaoException $e) {
       throw new DaoException('There was an error exporting the attribute "' . $attributeName . '" in resource "' . $this->resourceName . '": ' . $e->getMessage());
@@ -1114,8 +1119,9 @@ abstract class Dao implements DaoInterface {
   }
 
   /**
-   * Should be used whenever an id gets exported. At the moment this is just
-   * a wrapper for integer, but I plan on supporting multiple id types.
+   * Should be used whenever an id gets exported.
+   * 
+   * At the moment this only supports integers, but I plan to support more id types in the future
    * 
    * @param int $id
    * @return int
@@ -1163,7 +1169,7 @@ abstract class Dao implements DaoInterface {
    * @param array $list
    * @return string
    */
-  public function exportEnum($value, $list) {
+  public function exportEnum($value, $attributeName, $list) {
     if ( ! in_array($value, $list)) throw new DaoWrongValueException("The value provided is not defined in the enum.");
     return $this->exportString($value);
   }
@@ -1183,10 +1189,173 @@ abstract class Dao implements DaoInterface {
   /**
    * Calls exportValue on the reference.
    * @param mixed $value
+   * @param string $attributeName
    * @return int
    */
-  public function exportReference($value, $type, $attributeName) {
+  public function exportReference($value, $attributeName) {
     return $this->getReference($attributeName)->exportValue($value);
+  }
+
+  /**
+   * When set() is called on a record, the record coerces the value into the correct
+   * typ by calling this coerce() method.
+   *
+   * If the type is a reference, then the coerce method on the reference is called.
+   *
+   * @param string $attributeName
+   * @param mixed $value
+   * @param int $type one of Dao::INT, Dao::STRING, etc..
+   * @param bool $allowNull
+   * @param bool $quiet If true, no warnings are displayed
+   * @return mixed
+   */
+  public function coerce($attributeName, $value, $type, $allowNull = false, $quiet = false) {
+    if ($allowNull && $value === null) {
+      return null;
+    }
+    try {
+      if ($type === Dao::IGNORE) {
+        Log::warning('Trying to coerce a value that is of type ignore!', 'Record', array('attributeName' => $attributeName, 'dao' => $this->getResourceName()));
+        return null;
+      }
+
+      if (is_array($type)) {
+        if ( ! count($type)) trigger_error("Invalid enum for '" . $this->getResourceName() . ".$attributeName'.", E_USER_ERROR);
+        $coerceMethod = 'coerceEnum';
+      }
+      else {
+        $coerceMethod = 'coerce' . $type;
+        if ( ! method_exists($this, $coerceMethod)) throw new DaoException('The coerce method ' . $coerceMethod . ' does not exist.');
+      }
+
+      return $this->$coerceMethod($value, $attributeName, $type);
+    }
+    catch (DaoCoerceException $e) {
+      $message = $e->getMessage();
+      if ( ! $quiet && ! empty($message)) trigger_error($message . " (" . $this->getResourceName() . ".$attributeName)", E_USER_WARNING);
+      return $allowNull ? null : $e->getFallbackValue();
+    }
+  }
+
+  /**
+   * At the moment this only supports integers, but I plan on supporting more.
+   * 
+   * If the value is an object, it returns the id of the object.
+   * 
+   * @param mixed $id
+   * @return mixed 
+   * @throws DaoCoerceException
+   */
+  public function coerceId($id) {
+    if (is_object($id) && $id instanceof Record) return $id->get('id');
+
+    if (is_int($id) || is_numeric($id)) return (int) $id;
+
+    throw new DaoCoerceException(null, "Invalid id provided.");
+  }
+
+  /**
+   * @param mixed $value
+   * @param string $attributeName
+   * @param array $list
+   * @return mixed 
+   * @throws DaoCoerceException
+   */
+  public function coerceEnum($value, $attributeName, $list) {
+    if (in_array($value, $list)) return $value;
+
+    throw new DaoCoerceException($list[0], "Invalid enum value provided.");
+  }
+
+  /**
+   * @param mixed $value
+   * @return bool
+   * @throws DaoCoerceException
+   */
+  public function coerceBool($value) {
+    if ($value === true || $value === 'true' || $value === '1' || $value === 1) return true;
+    if ($value === false || $value === 'false' || $value === '0' || $value === 0) return false;
+
+    throw new DaoCoerceException(true, "Invalid boolean provided.");
+  }
+
+  /**
+   * @param mixed $value
+   * @return int
+   * @throws DaoCoerceException
+   */
+  public function coerceInteger($value) {
+    if (is_int($value) || is_numeric($value)) {
+      return (int) $value;
+    }
+
+    throw new DaoCoerceException(0, "Invalid integer provided.");
+  }
+
+  /**
+   * @param mixed $value
+   * @return float
+   * @throws DaoCoerceException
+   */
+  public function coerceFloat($value) {
+    if (is_float($value) || is_numeric($value)) return (float) $value;
+
+    throw new DaoCoerceException(0.0, "Invalid float provided.");
+  }
+
+  /**
+   * @param mixed $value
+   * @return int
+   * @throws DaoCoerceException
+   */
+  public function coerceDate($value) {
+    if ($value instanceof Date) return $value->getTimestamp();
+
+    if (is_numeric($value)) return (int) $value;
+
+    throw new DaoCoerceException(time(), "Invalid date provided.");
+  }
+
+  /**
+   * @param mixed $value
+   * @return int
+   * @throws DaoCoerceException
+   * @uses coerceDate
+   */
+  public function coerceDateWithTime($value) {
+    return $this->coerceDate($value);
+  }
+
+  /**
+   * @param mixed $value
+   * @return string
+   * @throws DaoCoerceException
+   */
+  public function coerceString($value) {
+    if (is_string($value) || is_numeric($value)) return (string) $value;
+
+    throw new DaoCoerceException('', "Invalid date provided.");
+  }
+
+  /**
+   * @param mixed $value
+   * @return array
+   * @throws DaoCoerceException
+   */
+  public function coerceSequence($value) {
+    if (is_array($value)) return $value;
+
+    throw new DaoCoerceException(array(), "Invalid sequence provided.");
+  }
+
+  /**
+   * @param mixed $value
+   * @param string $attributeName
+   * @return mixed 
+   * @throws DaoCoerceException because the Reference coerce function might throw it.
+   */
+  public function coerceReference($value, $attributeName) {
+    return $this->getReference($attributeName)->coerce($value);
   }
 
   /**

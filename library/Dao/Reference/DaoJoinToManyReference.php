@@ -51,31 +51,34 @@ class DaoJoinToManyReference extends BasicDaoReference {
    * @return DaoIterator
    */
   public function getReferenced($record, $attribute) {
-    return $this->getForeignDao()->getIterator(array($this->getForeignKey()=>$record->get($this->getLocalKey())));
+    return $this->getForeignDao()->getIterator(array($this->getForeignKey() => $record->get($this->getLocalKey())));
   }
-
 
   /**
    * @param mixed $value
    */
-  public function  exportValue($value) {
+  public function exportValue($value) {
     throw new DaoReferenceException('JoinManyReferences should never be exported.');
   }
 
   /**
    * @param mixed $value
    * @return mixed the coerced value.
+   * @throws DaoCoerceException
    */
   public function coerce($value) {
-    if (is_array($value)) {
+    try {
+      if ( ! is_array($value)) throw new Exception();
       $newValue = array();
       foreach ($value as $id) {
-        $newValue = (int) $id;
+        $newValue[] = $this->getForeignDao()->coerceId($id);
       }
+      return $newValue;
     }
-    else return array();
+    catch (Exception $e) {
+      throw new DaoCoerceException(array(), "Invalid JoinToManyReference provided.");
+    }
   }
-
 
 }
 

@@ -90,10 +90,10 @@ class DaoToOneReference extends BasicDaoReference {
   /**
    * @param mixed $value
    * @return mixed the coerced value.
+   * @throws DaoCoerceException
    */
   public function coerce($value) {
-    if (is_object($value) && $value instanceof Record) return $value->get('id');
-    return ($value === null) ? null : (int) $value;
+    return $this->getForeignDao()->coerceId($value);
   }
 
 }

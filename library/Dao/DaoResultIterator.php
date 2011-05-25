@@ -131,5 +131,21 @@ abstract class DaoResultIterator implements Iterator {
     return $this->totalLength ? $this->totalLength : $this->count();
   }
 
+  /**
+   * Returns all records as arrays in a list.
+   * 
+   * @param bool $resolveReferences
+   * @return array
+   */
+  public function getArray($resolveReferences = false) {
+    $array = array();
+
+    foreach ($this as $record) {
+      $array[] = $record->getArray($resolveReferences);
+    }
+
+    return $array;
+  }
+
 }
 

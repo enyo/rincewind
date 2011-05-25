@@ -108,11 +108,14 @@ class Record implements RecordInterface {
    * Sets a new data array, resets the changedAttributes array and clears the computed attributes cache.
    *
    * @param array $data
+   * @return Record itself for chaining
    */
   public function setData($data) {
+    if ( ! is_array($data)) trigger_error('Tried to set data that is not an array.', E_USER_ERROR);
     $this->changedAttributes = array();
     $this->clearComputedAttributesCache();
     $this->data = $data;
+    return $this;
   }
 
   /**
@@ -159,10 +162,26 @@ class Record implements RecordInterface {
   /**
    * Returns an associative array with the values.
    *
+   * If $resolveReferences is true, this goes through all references, and gets the data from those records and so on.
+   * Be careful not to create endless loops.
+   * 
+   * @param bool $resolveReferences
    * @return array
    */
-  public function getArray() {
-    return $this->data;
+  public function getArray($resolveReferences = false) {
+    $data = $this->data;
+    if ($resolveReferences) {
+      foreach ($this->dao->getAttributes() as $attributeName => $type) {
+        if ($type === Dao::REFERENCE) {
+          $referenced = $this->get($attributeName);
+          if ($referenced !== null) {
+            // In this case, $referenced is either a Record, or a DaoResultIterator (which supports getArray as well)
+            $data[$attributeName] = $referenced->getArray($resolveReferences);
+          }
+        }
+      }
+    }
+    return $data;
   }
 
   /**
@@ -388,6 +407,13 @@ class Record implements RecordInterface {
       return;
     }
     return $attributeTypes[$attributeName];
+  }
+
+  /**
+   * String representation of the record
+   */
+  public function __toString() {
+    return get_class($this) . ' #' . ($this->id ? $this->id : 'Unspecified');
   }
 
 }

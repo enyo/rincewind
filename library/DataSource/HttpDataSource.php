@@ -79,5 +79,12 @@ abstract class HttpDataSource extends DataSource {
     return $this->port;
   }
 
+  /**
+   * @return string 
+   */
+  public function getBaseUrl() {
+    return $this->baseUrl;
+  }
+
 }
 

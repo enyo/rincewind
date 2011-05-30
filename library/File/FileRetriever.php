@@ -231,8 +231,14 @@ class FileRetriever {
       }
     }
 
+    $startTime = microtime(true);
+
     $result = curl_exec($curlHandle);
 
+    $endTime = microtime(true);
+    
+    Log::debug("Received file in " . round($endTime - $startTime, 2) . "s", 'FileRetriever');
+    
     $info = curl_getinfo($curlHandle);
 
     curl_close($curlHandle);
@@ -250,6 +256,7 @@ class FileRetriever {
     $file->setSize($info['size_download']);
 
     $this->process($file);
+
 
     return $file;
   }

@@ -68,7 +68,7 @@ class HtmlLogger extends Logger {
         position: absolute;
         top: 5px;
         left: 0;
-        width: 80px;
+        width: 120px;
         text-align: right;
         display: inline-block;
         margin-right: 5px;
@@ -77,13 +77,14 @@ class HtmlLogger extends Logger {
       }
       .logger-line .logger-message {
         display: block;
-        margin-left: 90px;
+        margin-left: 130px;
         overflow: auto;
       }
       
       .logger-line .logger-additional-info {
         display: block;
-        margin-left: 85px;
+        margin-left: 135px;
+        margin-top: 5px;
         background: #f3f3f3;
         padding: 10px;
         overflow: auto;

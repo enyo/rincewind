@@ -25,7 +25,7 @@ require_interface('Dispatcher');
 class DefaultDispatcher implements Dispatcher {
 
   /**
-   * SiteControllerFactory
+   * ControllerFactory
    * 
    * @var type 
    */
@@ -36,7 +36,7 @@ class DefaultDispatcher implements Dispatcher {
   private $defaultControllerName;
 
   /**
-   * @param SiteControllerFactory $controllerFactory 
+   * @param ControllerFactory $controllerFactory 
    * @param string $defaultControllerName
    */
   public function __construct($controllerFactory, $defaultControllerName = 'Home') {
@@ -62,9 +62,88 @@ class DefaultDispatcher implements Dispatcher {
         $controller = $this->controllerFactory->get($this->defaultControllerName);
       }
 
-      if ( ! $skipControllerInitialization) $controller->initialize();
+      $errorDuringRender = false;
 
-      $controller->render(true);
+      try {
+        // Try to dispatch to the actual action.
+
+        $actionParameters = explode('/', isset($_GET['action']) ? $_GET['action'] : 'index');
+
+        $action = $actionParameters[0];
+        array_shift($actionParameters);
+
+        if ($action{0} === '_') throw new DispatcherException('Tried to access method with underscore.', array('action' => $action));
+
+        try {
+          // Check if the action is valid
+          $reflectionClass = new ReflectionClass($controller);
+
+          $actionMethod = $reflectionClass->getMethod($action);
+
+          if ($action !== 'index' && (method_exists('Controller', $action) || ! $actionMethod->isPublic() || ($actionMethod->class !== get_class($controller)))) throw new Exception();
+        }
+        catch (Exception $e) {
+          throw new DispatcherException('Tried to access invalid action.', array('Action' => $action[0]));
+        }
+
+        $controller->setAction($action);
+
+        $parameters = array();
+        $stringParameters = array();
+
+        $i = 0;
+        foreach ($actionMethod->getParameters() as $parameter) {
+          $actionParameter = isset($actionParameters[$i]) ? $actionParameters[$i] : null;
+
+          if ($actionParameter === null) {
+            if ( ! $parameter->isDefaultValueAvailable()) {
+              throw new DispatcherException('Not all parameters supplied.');
+            }
+            // Well: there is no more additional query, and apparently the rest of the parameters are optional, so continue.
+            continue;
+          }
+          if ($parameterTypeClass = $parameter->getClass()) {
+            if ( ! $parameterTypeClass->isSubclassOf('RW_Type')) throw new Exception('Invalid parameter type.');
+            $parameterTypeClassName = $parameterTypeClass->getName();
+            $parameters[] = new $parameterTypeClassName($actionParameter);
+          }
+          else {
+            $parameters[] = $actionParameter;
+          }
+          $stringParameters[] = $actionParameter;
+          $i ++;
+        }
+        $controller->setActionParameters($stringParameters);
+
+        if ( ! $skipControllerInitialization) $controller->initialize();
+
+        $controller->initData();
+
+        try {
+          // This actually calls the apropriate action.
+          call_user_func_array(array($controller, $action), $parameters);
+        }
+        catch (Exception $e) {
+          throw new DispatcherException($e->getMessage());
+        }
+
+        $controller->render(true);
+      }
+      catch (DispatcherException $e) {
+        $errorDuringRender = true;
+        $additionalInfo = $e->getAdditionalInfo();
+        $additionalInfo['controllerName'] = $controllerName;
+        Log::warning($e->getMessage(), 'Dispatcher', $additionalInfo);
+      }
+      catch (Exception $e) {
+        $additionalInfo = array();
+        $additionalInfo['controllerName'] = $controllerName;
+        Log::warning($e->getMessage(), 'Dispatcher', $additionalInfo);
+      }
+
+      if ($errorDuringRender) {
+        $controller->renderError();
+      }
     }
     catch (Exception $e) {
       die('<h1 class="error">' . $e->getMessage() . '</h1>');

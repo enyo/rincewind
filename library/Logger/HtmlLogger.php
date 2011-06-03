@@ -1,0 +1,132 @@
+<?php
+
+/**
+ * This file contains the FileLogger definition.
+ *
+ * @author Matthias Loitsch <developer@ma.tthias.com>
+ * @copyright Copyright (c) 2010, Matthias Loitsch
+ * @package Logger
+ * */
+/**
+ * Include the Logger
+ */
+if ( ! class_exists('Logger', false)) include(dirname(__FILE__) . '/Logger.php');
+
+/**
+ * The HtmlLogger is the default implementation for a logger logging as html.
+ * This logger just writes to the output.
+ *
+ * @author Matthias Loitsch <developer@ma.tthias.com>
+ * @copyright Copyright (c) 2010, Matthias Loitsch
+ * @package Logger
+ * */
+class HtmlLogger extends Logger {
+
+  /**
+   * Writes the log message to output.
+   *
+   * @param string $message
+   * @param int $level
+   * @param string $context Can contain a context to log for.
+   * @param array $additionalInfo An associative array with more info. Eg: array('content'=>'Some stuff')
+   */
+  public function doLog($message, $level, $context, $additionalInfo) {
+    echo $this->formatMessage($message, $level, $context, $additionalInfo);
+  }
+
+  /**
+   * Returns the css that styles the lines
+   */
+  public function getDefaultCss() {
+    $css = '
+      .logger-line {
+        border-bottom: 1px solid #eee;
+        padding: 5px 0;
+        position: relative;
+        font-family: courier, monospace;
+      }
+      .logger-line.logger-level-INFO .logger-context {
+        color: black;
+      }
+      .logger-line.logger-level-DEBUG .logger-context {
+        color: gray;
+      }
+      .logger-line.logger-level-WARN .logger-context {
+        color: orange;
+      }
+      .logger-line.logger-level-ERROR .logger-context {
+        color: red;
+      }
+      .logger-line.logger-level-FATAL .logger-context {
+        color: red;
+        font-weight: bold;
+      }
+      .logger-line .logger-level {
+        display: none;
+      }
+      .logger-line .logger-context {
+        position: absolute;
+        top: 5px;
+        left: 0;
+        width: 80px;
+        text-align: right;
+        display: inline-block;
+        margin-right: 5px;
+        padding-right: 5px;
+        border-right: 1px solid #ccc;
+      }
+      .logger-line .logger-message {
+        display: block;
+        margin-left: 90px;
+        overflow: auto;
+      }
+      
+      .logger-line .logger-additional-info {
+        display: block;
+        margin-left: 85px;
+        background: #f3f3f3;
+        padding: 10px;
+        overflow: auto;
+      }
+            
+      .logger-line .logger-additional-info-set {
+        display: block;
+      }
+      .logger-line .logger-additional-info-set .logger-key {
+        font-weight: bold;
+      }
+      .logger-line .logger-additional-info-set .logger-key:after {
+        content: " => ";
+      }
+    ';
+    return $css;
+  }
+
+  /**
+   * Formats a message so it can be included in the file.
+   *
+   * If you overwrite it, don't forget the newline at the end.
+   *
+   * @param string $message
+   * @param int $level
+   * @param string $context Can contain a context to log for.
+   * @param array $additionalInfo An associative array with more info. Eg: array('content'=>'Some stuff')
+   */
+  protected function formatMessage($message, $level, $context, $additionalInfo) {
+    $line = '<div class="logger-line logger-level-' . $this->levelStrings[$level] . '">';
+    $line .= '<span class="logger-level">' . $this->levelStrings[$level] . '</span>';
+    $line .= '<span class="logger-context">' . ($context ? $context : '-') . '</span>';
+    $line .= '<span class="logger-message">' . $message . '</span>';
+    if ($additionalInfo) {
+      $line .= ' <span class="logger-additional-info">';
+      foreach ($additionalInfo as $key => $value) {
+        $line .= '<span class="logger-additional-info-set"><span class="logger-key">' . $key . '</span> <span class="logger-value">' . print_r($value, true) . '</span></span>';
+      }
+      $line .= '</span>';
+    }
+    $line .= '</div>';
+    return $line;
+  }
+
+}
+

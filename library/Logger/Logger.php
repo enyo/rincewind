@@ -38,6 +38,18 @@ abstract class Logger {
   /*   * #@- */
 
   /**
+   * A list of strings for the different levels, used in output.
+   *
+   * @var array
+   */
+  protected $levelStrings = array(
+      Logger::DEBUG => 'DEBUG'
+      , Logger::INFO => 'INFO '
+      , Logger::WARNING => 'WARN '
+      , Logger::ERROR => 'ERROR'
+      , Logger::FATAL => 'FATAL'
+  );
+  /**
    * The minimum level a message has to have to be logged.
    * Eg: If level is Logger::WARN then WARN, ERROR and FATAL will be logged.
    *
@@ -50,9 +62,11 @@ abstract class Logger {
    *
    * @param int $level
    * @see $level
+   * @return Logger itself for chaining.
    */
   public function setLevel($level) {
     $this->level = (int) $level;
+    return $this;
   }
 
   /**

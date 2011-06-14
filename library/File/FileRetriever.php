@@ -209,7 +209,7 @@ class FileRetriever {
                 'Headers' => $headers ? implode(', ', $headers) : 'NONE',
                 'Post' => $postParameters ? $postParameters : 'NONE');
     
-    Log::debug("Getting: $realUrl", 'FileRetriever', $logInfo);
+    Log::info("Getting: $realUrl", 'FileRetriever', $logInfo);
 
     curl_setopt($curlHandle, CURLOPT_URL, $realUrl);
     if ($headers) {
@@ -251,6 +251,11 @@ class FileRetriever {
       $logInfo['Response'] = (($result !== false && $result !== '') ? $result : 'NONE');
       Log::warning('File could not be downloaded.', 'FileRetriever', $logInfo);
       throw new FileRetrieverException($errorCode . ' - ' . $errorTypes[floor($errorCode / 100) * 100], $errorCode, $result);
+    }
+    else {
+      if ($info['size_download'] <= 1000) {
+        Log::debug("Result: " . $result, 'FileRetriever');
+      }
     }
 
     $file = $this->getFile($url);

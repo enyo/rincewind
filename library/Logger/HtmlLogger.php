@@ -114,14 +114,21 @@ class HtmlLogger extends Logger {
    * @param array $additionalInfo An associative array with more info. Eg: array('content'=>'Some stuff')
    */
   protected function formatMessage($message, $level, $context, $additionalInfo) {
-    $line = '<div class="logger-line logger-level-' . $this->levelStrings[$level] . '">';
+    $line = '<div class="logger-line logger-level-' . $this->levelStrings[$level] . ' logger-context-' . $context . '">';
     $line .= '<span class="logger-level">' . $this->levelStrings[$level] . '</span>';
     $line .= '<span class="logger-context">' . ($context ? $context : '-') . '</span>';
     $line .= '<span class="logger-message">' . $message . '</span>';
     if ($additionalInfo) {
       $line .= ' <span class="logger-additional-info">';
       foreach ($additionalInfo as $key => $value) {
-        $line .= '<span class="logger-additional-info-set"><span class="logger-key">' . $key . '</span> <span class="logger-value">' . print_r($value, true) . '</span></span>';
+        $valueOutput = print_r($value, true);
+        if (strlen($valueOutput) > 203) {
+          // Check if the value is binary.
+          if (substr_count($blk, "^ -~", "^\r\n") / 512 > 0.3 || substr_count($blk, "\x00") > 0) {
+            $valueOutput = '[ Contains binary data ]';
+          }
+        }
+        $line .= '<span class="logger-additional-info-set"><span class="logger-key">' . $key . '</span> <span class="logger-value">' . $valueOutput . '</span></span>';
       }
       $line .= '</span>';
     }

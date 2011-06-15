@@ -9,6 +9,13 @@
  */
 
 /**
+ * Gets thrown when a string can not be sanitized
+ */
+class SanitizerException {
+  
+}
+
+/**
  * The sanitizer interface.
  *
  * @author Matthias Loitsch <developer@ma.tthias.com>

@@ -31,8 +31,6 @@ class UsernameSanitizerTest extends PHPUnit_Framework_TestCase {
   }
 
   /**
-   * @covers Profile::setProfiler
-   * @covers Profile::getProfiler
    */
   public function testSanitizing() {
     $test = '  m@TiAs.com';

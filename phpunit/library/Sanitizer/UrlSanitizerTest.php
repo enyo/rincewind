@@ -31,8 +31,6 @@ class UrlSanitizerTest extends PHPUnit_Framework_TestCase {
   }
 
   /**
-   * @covers Profile::setProfiler
-   * @covers Profile::getProfiler
    */
   public function testSanitizing() {
     $test = 'Šíleně žluťoučký Vašek úpěl olol! Älter Über Örtlich   Spaß';

@@ -7,18 +7,16 @@
  * @author Matthias Loitsch <matthias@loitsch.com>
  * @copyright Copyright (c) 2010, Matthias Loitsch
  */
-
 /**
  * Defines the current rincewind version
  */
-define('RINCEWIND_VERSION', '2.3.3');
+define('RINCEWIND_VERSION', 203030);
 
 
 /**
  * Includes the basic types.
  */
 include dirname(__FILE__) . '/rincewind.types.php';
-
 
 /**
  *

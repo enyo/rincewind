@@ -82,12 +82,18 @@ class HtmlLogger extends Logger {
       }
       
       .logger-line .logger-additional-info {
-        display: block;
-        margin-left: 135px;
-        margin-top: 5px;
+        display: none;
         background: #f3f3f3;
         padding: 10px;
         overflow: auto;
+        position: absolute;
+        top: 20px;
+        left: 250px;
+        right: 0;
+        z-index: 200;
+      }
+      .logger-line:hover .logger-additional-info, .logger-line .logger-additional-info:hover {
+        display: block;
       }
             
       .logger-line .logger-additional-info-set {
@@ -124,9 +130,9 @@ class HtmlLogger extends Logger {
         $valueOutput = print_r($value, true);
         if (strlen($valueOutput) > 203) {
           // Check if the value is binary.
-          if (substr_count($blk, "^ -~", "^\r\n") / 512 > 0.3 || substr_count($blk, "\x00") > 0) {
-            $valueOutput = '[ Contains binary data ]';
-          }
+//          if (substr_count($blk, "^ -~", "^\r\n") / 512 > 0.3 || substr_count($blk, "\x00") > 0) {
+//            $valueOutput = '[ Contains binary data ]';
+//          }
         }
         $line .= '<span class="logger-additional-info-set"><span class="logger-key">' . $key . '</span> <span class="logger-value">' . $valueOutput . '</span></span>';
       }

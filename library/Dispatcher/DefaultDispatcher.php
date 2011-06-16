@@ -34,14 +34,19 @@ class DefaultDispatcher implements Dispatcher {
    * @var string
    */
   private $defaultControllerName;
+  /**
+   * @var Sanitizer
+   */
+  private $actionSanitizer;
 
   /**
    * @param ControllerFactory $controllerFactory 
    * @param string $defaultControllerName
    */
-  public function __construct($controllerFactory, $defaultControllerName = 'Home') {
+  public function __construct($controllerFactory, Sanitizer $actionSanitizer, $defaultControllerName = 'Home') {
     $this->controllerFactory = $controllerFactory;
     $this->defaultControllerName = $defaultControllerName;
+    $this->actionSanitizer = $actionSanitizer;
   }
 
   /**
@@ -63,10 +68,10 @@ class DefaultDispatcher implements Dispatcher {
       }
 
       $errorDuringRender = false;
+      $controller->initData();
 
       try {
         // Try to dispatch to the actual action.
-
         $actionParameters = explode('/', isset($_GET['action']) ? $_GET['action'] : 'index');
 
         $action = $actionParameters[0];
@@ -74,6 +79,8 @@ class DefaultDispatcher implements Dispatcher {
 
         if ($action{0} === '_') throw new DispatcherException('Tried to access method with underscore.', array('action' => $action));
 
+        $action = $this->actionSanitizer->sanitize($action);
+        
         try {
           // Check if the action is valid
           $reflectionClass = new ReflectionClass($controller);
@@ -83,7 +90,7 @@ class DefaultDispatcher implements Dispatcher {
           if ($action !== 'index' && (method_exists('Controller', $action) || ! $actionMethod->isPublic() || ($actionMethod->class !== get_class($controller)))) throw new Exception();
         }
         catch (Exception $e) {
-          throw new DispatcherException('Tried to access invalid action.', array('Action' => $action[0]));
+          throw new DispatcherException('Tried to access invalid action.', array('Action' => $action));
         }
 
         $controller->setAction($action);
@@ -117,8 +124,6 @@ class DefaultDispatcher implements Dispatcher {
 
         if ( ! $skipControllerInitialization) $controller->initialize();
 
-        $controller->initData();
-
         try {
           // This actually calls the apropriate action.
           call_user_func_array(array($controller, $action), $parameters);
@@ -136,8 +141,11 @@ class DefaultDispatcher implements Dispatcher {
         Log::warning($e->getMessage(), 'Dispatcher', $additionalInfo);
       }
       catch (Exception $e) {
+        $errorDuringRender = true;
         $additionalInfo = array();
         $additionalInfo['controllerName'] = $controllerName;
+        $additionalInfo['exceptionThrown'] = get_class($e);
+        $additionalInfo['error'] = $e->getMessage();
         Log::warning($e->getMessage(), 'Dispatcher', $additionalInfo);
       }
 

@@ -17,7 +17,10 @@ class EncryptionException extends Exception {
 }
 
 /**
- * The Encryption interface is used for all encryption related methods.
+ * The Encryption class is used to en- or decrypt text.
+ * 
+ * It gets configured in the constructor, and the en/decrypt methods can
+ * be invoked without further configuring.
  *
  * @author Matthias Loitsch <developer@ma.tthias.com>
  * @copyright Copyright (c) 2010, Matthias Loitsch

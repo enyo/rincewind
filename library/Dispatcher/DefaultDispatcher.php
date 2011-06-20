@@ -132,7 +132,13 @@ class DefaultDispatcher implements Dispatcher {
           throw new DispatcherException($e->getMessage());
         }
 
-        $controller->render(true);
+        try {
+          $controller->render(true);
+        }
+        catch (Exception $e) {
+          // TODO: Maybe handle this differently?
+          die('<h1 class="error">' . $e->getMessage() . '</h1>');
+        }
       }
       catch (DispatcherException $e) {
         $errorDuringRender = true;

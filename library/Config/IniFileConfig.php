@@ -42,12 +42,13 @@ class IniFileConfig extends Config {
    * @param bool $useSections To overwrite the default
    * @param string $defaultSection To overwrite the default.
    */
-  public function __construct($configFileUri, $defaultConfigFileUri = null, $useSections = null, $defaultSection = null) {
+  public function __construct($configFileUri, $defaultConfigFileUri = null, $useSections = null, $defaultSection = null, $cache = null) {
     if ($useSections !== null) $this->useSections = (bool) $useSections;
     if ($defaultSection !== null) $this->setDefaultSection($defaultSection);
 
     $this->configFileUri = $configFileUri;
     $this->defaultConfigFileUri = $defaultConfigFileUri;
+    $this->cache = $cache;
   }
 
 

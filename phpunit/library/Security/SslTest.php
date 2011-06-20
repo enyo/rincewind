@@ -64,6 +64,12 @@ class SslTest extends PHPUnit_Framework_TestCase {
   public function testDecryptThrowsExceptionIfNoSalt() {
     self::markTestIncomplete();
   }
+  
+  public function testIvGetsCalculatedAutomaticallyButCanBeSet() {
+    self::assertSame(16, $this->ssl->getCipherIvLength());
+    $ssl = new Ssl('AES-128-CFB8', '*%=XC=Hj!bUXKQP;;8y', '`/:p@:f8;', 4, 5, 9);
+    self::assertSame(9, $ssl->getCipherIvLength());
+  }
 
 }
 

@@ -51,13 +51,21 @@ class Ssl extends Encryption {
    * @param string $salt
    * @param int $ivMaxChars null if you want a full iv. If you provide a number, the rest of the iv will be padded.
    * @param int $nonceChars 
+   * @param int $cipherIvLength If null, the iv length gets calculated with openssl_cipher_iv_length()
    */
-  public function __construct($cipher, $password, $salt, $ivMaxChars = 4, $nonceChars = 5) {
+  public function __construct($cipher, $password, $salt, $ivMaxChars = 4, $nonceChars = 5, $cipherIvLength = null) {
     parent::__construct($password, $salt);
     $this->cipher = $cipher;
-    $this->cipherIvLength = openssl_cipher_iv_length($this->cipher);
+    $this->cipherIvLength = $cipherIvLength ? $cipherIvLength : openssl_cipher_iv_length($this->cipher);
     $this->ivMaxChars = $ivMaxChars;
     $this->nonceChars = $nonceChars;
+  }
+
+  /**
+   * @return int
+   */
+  public function getCipherIvLength() {
+    return $this->cipherIvLength;
   }
 
   /**

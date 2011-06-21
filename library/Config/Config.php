@@ -127,7 +127,10 @@ abstract class Config {
 
   /**
    * Implement this to load your configuration.
-   * It should only load the configuration once! If you want to reload it, use reload() instead.
+   * It should only load the configuration once!
+   * If you want to reload it, use reload() instead.
+   * This method should also overwrite any possible cached values. Do *not* check
+   * if the value is already cached here, and leave it be.
    */
   abstract public function load();
 

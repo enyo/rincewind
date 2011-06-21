@@ -134,7 +134,7 @@ class HtmlLogger extends Logger {
 //            $valueOutput = '[ Contains binary data ]';
 //          }
         }
-        $line .= '<span class="logger-additional-info-set"><span class="logger-key">' . $key . '</span> <span class="logger-value">' . $valueOutput . '</span></span>';
+        $line .= '<span class="logger-additional-info-set"><span class="logger-key">' . htmlentities($key) . '</span> <span class="logger-value">' . htmlentities($valueOutput) . '</span></span>';
       }
       $line .= '</span>';
     }

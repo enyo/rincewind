@@ -101,7 +101,7 @@ class Ssl extends Encryption {
    * 
    * BE CAREFUL!!!
    * 
-   * Never let the message from the SecurityUtilsException be visible for the user.
+   * Never let the message from the EncryptionException be visible to the user.
    * This could result in a security risk.
    * The exception message is only for debugging purpose.
    * 

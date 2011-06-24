@@ -31,7 +31,6 @@ class HttpDataSourceException extends DataSourceException {
   
 }
 
-;
 
 /**
  * This data source is used to get files to use for a Dao.

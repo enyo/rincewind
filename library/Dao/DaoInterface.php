@@ -90,10 +90,11 @@ interface DaoInterface {
    * @param bool $exportValues
    * @param string $resourceName
    * @param bool $retrieveTotalRowCount Every Dao can implement a way to retrieve the total row if limit is not null
+   * @param array $additionalInfo
    * @see get()
    * @return DaoResultIterator
    */
-  public function getIterator($map, $sort = null, $offset = null, $limit = null, $exportValues = true, $resourceName = null, $retrieveTotalRowCount = false);
+  public function getIterator($map, $sort = null, $offset = null, $limit = null, $exportValues = true, $resourceName = null, $retrieveTotalRowCount = false, $additionalInfo = null);
 
   /**
    * @param int $id

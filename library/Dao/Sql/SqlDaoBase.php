@@ -150,9 +150,9 @@ class SqlDaoBase extends Dao {
    * @see generateQuery()
    * @return DaoResultIterator
    */
-  public function getIterator($map, $sort = null, $offset = null, $limit = null, $exportValues = true, $resourceName = null, $retrieveTotalRowCount = false) {
+  protected function doGetIteratorResult($map, $sort, $offset, $limit, $exportValues, $resourceName, $retrieveTotalRowCount, $additionalInfo) {
     if ($retrieveTotalRowCount) throw new DaoException('Retrieving total row count is not yet implemented in the SqlDaoBase.');
-    return $this->getIteratorFromQuery($this->generateQuery($map, $sort, $offset, $limit, $exportValues, $resourceName ? $resourceName : ($this->viewName ? $this->viewName : $this->resourceName)));
+    return $this->db->query($this->generateQuery($map, $sort, $offset, $limit, $exportValues, $resourceName ? $resourceName : ($this->viewName ? $this->viewName : $this->resourceName)));
   }
 
   /**
@@ -307,16 +307,6 @@ class SqlDaoBase extends Dao {
     if ($result->numRows() == 0) return null;
 
     return $result->fetchArray();
-  }
-
-  /**
-   * Returns an Iterator for a query
-   *
-   * @param string $query
-   * @return SqlResultIterator
-   */
-  protected function getIteratorFromQuery($query) {
-    return $this->createIterator($this->db->query($query));
   }
 
   /**

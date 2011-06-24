@@ -232,9 +232,9 @@ abstract class Dao implements DaoInterface {
   protected $cacheExpire = 3600; // 1 hour
   /**
    * Is used to prefix the keys in cache.
-   * To see the final key, look at generate cacheKey
+   * To see the final key, look at generateCacheKey
    * @var string
-   * @see generateCacheKey
+   * @see generateCacheKey()
    */
   protected $cachePrefix = '';
   /**
@@ -337,7 +337,7 @@ abstract class Dao implements DaoInterface {
    * If you call get() without parameters, a "raw record" will be returned, containing
    * only default values, and null as id.
    *
-   * @param array|Record $map A map or record containing the attribute assignments.
+   * @param int|array|Record $map A map or record containing the attribute assignments. If it's an integer it will be converted to array('id'=>INT)
    * @param bool $exportValues When you want to have complete control over the $map
    *                           attribute names, you can set exportValues to false, so they
    *                           won't be processed.
@@ -387,16 +387,20 @@ abstract class Dao implements DaoInterface {
    * 
    * This is the actual method that takes care of memcaching.
    *
-   * @param array|Record $map
+   * @param int|array|Record $map If it's an int, it will be converted to array('id'=>INT)
    * @param bool $exportValues
    * @param string $resourceName
    * @return array
    * @see doFindData()
    */
   public final function findData($map, $exportValues = true, $resourceName = null) {
+    if (is_int($map)) $map = array('id' => $map);
+
+    $id = is_array($map) ? array_key_exists('id', $map) : $map->id;
+
     $cacheKey = null;
-    if ($this->useCache && $this->cache && array_key_exists('id', $map)) {
-      $cacheKey = $this->generateCacheKey($map['id']);
+    if ($this->useCache && $this->cache && $id) {
+      $cacheKey = $this->generateCacheKey($id);
       if ($recordData = $this->cache->get($cacheKey)) {
         // Exists in database, do not prepare data, because when the data comes
         // from the datasource, it gets prepared, and put in the record. This data
@@ -418,9 +422,34 @@ abstract class Dao implements DaoInterface {
   }
 
   /**
+   * The same as get, but returns an iterator to go through all the rows.
+   *
+   * @param Record|array $map
+   * @param array|string $sort
+   * @param int $offset
+   * @param int $limit
+   * @param bool $exportValues
+   * @param string $resourceName
+   * @param array $additionalInfo Used to pass additional info to the data source if needed.
+   *
+   * @param bool $retrieveTotalRowCount 
+   */
+  public function getIterator($map, $sort = null, $offset = null, $limit = null, $exportValues = true, $resourceName = null, $retrieveTotalRowCount = false, $additionalInfo = null) {
+    $result = $this->getIteratorResult($map, $sort, $offset, $limit, $exportValues, $resourceName, $retrieveTotalRowCount, $additionalInfo);
+    return $this->createIterator($result);
+  }
+
+  /**
+   * Creates an iterator from a result.
+   * 
+   * @return DaoResultIterator
+   */
+  abstract public function createIterator($result);
+
+  /**
    * The key is: $cachePrefix . $resourceName . '_' . $id
    *
-   * @param int $id 
+   * @param int|string $id 
    */
   protected function generateCacheKey($id) {
     return $this->cachePrefix . $this->resourceName . '_' . $id;
@@ -436,6 +465,40 @@ abstract class Dao implements DaoInterface {
    * @see getData()
    */
   abstract protected function doFindData($map, $exportValues, $resourceName);
+
+  /**
+   * Forwards to doGetIteratorResult.
+   * Overwrite this to do any iterator result caching.
+   * 
+   * @param Record|array $map
+   * @param array|string $sort
+   * @param int $offset
+   * @param int $limit
+   * @param bool $exportValues
+   * @param string $resourceName
+   * @param bool $retrieveTotalRowCount 
+   * @param array $additionalInfo
+   * @return result
+   */
+  public function getIteratorResult($map, $sort, $offset, $limit, $exportValues, $resourceName, $retrieveTotalRowCount, $additionalInfo) {
+    return $this->doGetIteratorResult($map, $sort, $offset, $limit, $exportValues, $resourceName, $retrieveTotalRowCount, $additionalInfo);
+  }
+
+  /**
+   * This method actually gets the data.
+   *
+   *
+   * @param Record|array $map
+   * @param array|string $sort
+   * @param int $offset
+   * @param int $limit
+   * @param bool $exportValues
+   * @param string $resourceName
+   * @param bool $retrieveTotalRowCount 
+   * @param array $additionalInfo
+   * @return result
+   */
+  abstract protected function doGetIteratorResult($map, $sort, $offset, $limit, $exportValues, $resourceName, $retrieveTotalRowCount, $additionalInfo);
 
   /**
    * Given the $sort parameter, it generates a sort String used in the query.

@@ -162,14 +162,13 @@ class FileDaoBase extends Dao {
    * @param bool $exportValues
    * @param string $resourceName
    * @param bool $retrieveTotalRowCount
-   * @return DaoResultIterator
+   * @param array $additionalInfo
+   * @return DataSourceResult
    * @see get()
    * @uses $fileDataSource
    */
-  public function getIterator($map, $sort = null, $offset = null, $limit = null, $exportValues = true, $resourceName = null, $retrieveTotalRowCount = false) {
-    $result = $this->fileDataSource->getList($this->exportResourceName($resourceName ? $resourceName : ($this->viewName ? $this->viewName : $this->resourceName)), $exportValues ? $this->exportMap($map) : $map, $this->generateSortString($sort), $offset, $limit, $retrieveTotalRowCount);
-
-    return $this->createIterator($result);
+  public function doGetIteratorResult($map, $sort, $offset, $limit, $exportValues, $resourceName, $retrieveTotalRowCount, $additionalInfo) {
+    return $this->fileDataSource->getList($this->exportResourceName($resourceName ? $resourceName : ($this->viewName ? $this->viewName : $this->resourceName)), $exportValues ? $this->exportMap($map) : $map, $this->generateSortString($sort), $offset, $limit, $retrieveTotalRowCount);
   }
 
   /**

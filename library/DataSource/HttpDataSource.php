@@ -31,7 +31,6 @@ class HttpDataSourceException extends DataSourceException {
   
 }
 
-
 /**
  * This data source is used to get files to use for a Dao.
  * It implements basic Dao functionality like view(), list(), update(),
@@ -59,16 +58,22 @@ abstract class HttpDataSource extends DataSource {
    * @var int
    */
   protected $port;
+  /**
+   * @var int
+   */
+  protected $timeout;
 
   /**
    * @param FileRetriever $fileRetriever
    * @param string $baseUrl
    * @param int $port
+   * @param int $timeout
    */
-  public function __construct($fileRetriever, $baseUrl, $port = 80) {
+  public function __construct($fileRetriever, $baseUrl, $port = 80, $timeout = 20) {
     $this->fileRetriever = $fileRetriever;
     $this->baseUrl = $baseUrl;
     $this->port = $port;
+    $this->timeout = $timeout;
   }
 
   /**
@@ -83,6 +88,10 @@ abstract class HttpDataSource extends DataSource {
    */
   public function getBaseUrl() {
     return $this->baseUrl;
+  }
+
+  public function getTimeout() {
+    return $this->timeout;
   }
 
 }

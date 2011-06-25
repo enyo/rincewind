@@ -124,13 +124,8 @@ class DefaultDispatcher implements Dispatcher {
 
         if ( ! $skipControllerInitialization) $controller->initialize();
 
-        try {
-          // This actually calls the apropriate action.
-          call_user_func_array(array($controller, $action), $parameters);
-        }
-        catch (Exception $e) {
-          throw new DispatcherException($e->getMessage());
-        }
+        // This actually calls the apropriate action.
+        call_user_func_array(array($controller, $action), $parameters);
 
         try {
           $controller->render(true);
@@ -145,6 +140,10 @@ class DefaultDispatcher implements Dispatcher {
         $additionalInfo = $e->getAdditionalInfo();
         $additionalInfo['controllerName'] = $controllerName;
         Log::warning($e->getMessage(), 'Dispatcher', $additionalInfo);
+      }
+      catch (ErrorMessageException $e) {
+        $errorDuringRender = true;
+        $this->addErrorMessage($e->getMessage());
       }
       catch (Exception $e) {
         $errorDuringRender = true;

@@ -39,8 +39,8 @@ class SqlDaoBase extends Dao {
    * @param array $nullAttributes You should specify this as an attribute when writing a Dao implementation
    * @param array $defaultValueAttributes You should specify this as an attribute when writing a Dao implementation
    */
-  public function __construct($db, $resourceName = null, $attributes = null, $nullAttributes = null, $defaultValueAttributes = null) {
-    parent::__construct($resourceName, $attributes, $nullAttributes, $defaultValueAttributes);
+  public function __construct($db) {
+    parent::__construct();
     $this->db = $db;
   }
 

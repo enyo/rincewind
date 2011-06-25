@@ -48,13 +48,9 @@ class FileDaoBase extends Dao {
 
   /**
    * @param HttpDataSource $fileDataSource The fileDataSource is used to create the requests.
-   * @param string $resourceName You can specify this as an attribute when writing a Dao implementation
-   * @param array $attributes You can specify this as an attribute when writing a Dao implementation
-   * @param array $nullAttributes You can specify this as an attribute when writing a Dao implementation
-   * @param array $defaultValueAttributes You can specify this as an attribute when writing a Dao implementation
    */
-  public function __construct($fileDataSource, $resourceName = null, $attributes = null, $nullAttributes = null, $defaultValueAttributes = null) {
-    parent::__construct($resourceName, $attributes, $nullAttributes, $defaultValueAttributes);
+  public function __construct($fileDataSource) {
+    parent::__construct();
     $this->fileDataSource = $fileDataSource;
   }
 

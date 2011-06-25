@@ -148,25 +148,55 @@ abstract class Dao implements DaoInterface {
    * The constructor checks if the resourceName and attributes array are set (either
    * with the constructor or as properties) and throws an Exception if not.
    *
-   * @param string $resourceName You should specify this as an attribute when writing a Dao implementation
-   * @param array $attributes You should specify this as an attribute when writing a Dao implementation
-   * @param array $nullAttributes You should specify this as an attribute when writing a Dao implementation
-   * @param array $defaultValueAttributes You should specify this as an attribute when writing a Dao implementation
+   * Do not forget to call parent::__construct() when you overwrite this method!
+   * 
    */
-  public function __construct($resourceName = null, $attributes = null, $nullAttributes = null, $defaultValueAttributes = null) {
-    if ($resourceName) $this->resourceName = $resourceName;
-    if ($attributes) $this->attributes = $attributes;
-    if ($nullAttributes) $this->nullAttributes = $nullAttributes;
-    if ($defaultValueAttributes) $this->defaultValueAttributes = $defaultValueAttributes;
+  public function __construct() {
+    array_merge($this->attributes, $this->additionalAttributes());
+    array_merge($this->nullAttributes, $this->additionalNullAttributes());
+    array_merge($this->defaultValueAttributes, $this->additionalDefaultValueAttributes());
 
     if ( ! $this->resourceName) {
       throw new DaoException('No resource name provided in class ' . get_class($this) . '.');
     }
-    if ( ! is_array($this->attributes)) {
+    if (count($this->attributes) === 0) {
       throw new DaoException('No attributes provied.');
     }
   }
 
+  /**
+   * Don't forget to call
+   * array_merge(parent::additionalAttributes(), $attributes)
+   * when you overwrite this method.
+   * 
+   * @return array
+   */
+  protected function additionalAttributes() {
+    return array();
+  }
+  
+  /**
+   * Don't forget to call
+   * array_merge(parent::additionalNullAttributes(), $attributes)
+   * when you overwrite this method.
+   * 
+   * @return array
+   */
+  protected function additionalNullAttributes() {
+    return array();
+  }
+  
+  /**
+   * Don't forget to call
+   * array_merge(parent::additionalDefaultValueAttributes(), $attributes)
+   * when you overwrite this method.
+   * 
+   * @return array
+   */
+  protected function additionalDefaultValueAttributes() {
+    return array();
+  }
+  
   /**
    * This is the resource name this Dao works with.
    * @var string
@@ -201,7 +231,7 @@ abstract class Dao implements DaoInterface {
    *
    * @var array
    */
-  protected $attributes;
+  protected $attributes = array();
   /**
    * This works exactly the same as the attributes, except that it only defines attributes, that may additionally be returned by the
    * datasource (for example in joins).
@@ -892,6 +922,9 @@ abstract class Dao implements DaoInterface {
     $recordData = array();
 
     $neededValues = $this->attributes;
+
+    if ( ! is_array($data)) trigger_error('The data provided was not an array (' . $this->resourceName . ').', E_USER_ERROR);
+
     foreach ($data as $attributeName => $value) {
       $attributeName = $this->importAttributeName($attributeName);
       if (array_key_exists($attributeName, $this->attributes)) {

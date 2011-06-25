@@ -93,6 +93,7 @@ class FileLogger extends Logger {
         $line .= ' [' . $key . ' => ' . print_r($value, true) . '] ';
       }
       $line .= ')';
+      $line = str_replace("\n", ' ', $line);
     }
     return $line . "\n";
   }

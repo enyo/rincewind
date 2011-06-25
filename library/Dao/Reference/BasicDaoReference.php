@@ -97,6 +97,10 @@ abstract class BasicDaoReference implements DaoReference {
    * @var bool
    */
   protected $export;
+  /**
+   * @var bool
+   */
+  protected $exportData;
 
   /**
    * @param string|Dao $foreignDaoName
@@ -104,12 +108,14 @@ abstract class BasicDaoReference implements DaoReference {
    * @param string $foreignKey If null, the default 'id' is used.
    * @param bool $exportReference specifies if this reference should be sent to the
    *                              datasource when saving.
+   * @param bool $exportData If true, the complete data will be exported, not only the id.
    */
-  public function __construct($foreignDaoName, $localKey = null, $foreignKey = null, $export = false) {
+  public function __construct($foreignDaoName, $localKey = null, $foreignKey = null, $export = false, $exportData = false) {
     $this->foreignDao = $foreignDaoName;
     $this->localKey = $localKey;
     if ($foreignKey !== null) $this->foreignKey = $foreignKey;
     $this->export = $export;
+    $this->exportData = $exportData;
   }
 
   /**
@@ -132,6 +138,10 @@ abstract class BasicDaoReference implements DaoReference {
    */
   public function export() {
     return $this->export;
+  }
+
+  public function getExportData() {
+    return $this->exportData;
   }
 
   /**
@@ -175,14 +185,23 @@ abstract class BasicDaoReference implements DaoReference {
    * If it's a record, the id of the record is taken, and exportId() is called on
    * it from the records Dao.
    *
-   * Otherwise, the $value is jsut exported with exportId() on the foreign Dao.
+   * Otherwise, the $value is just exported with exportId() on the foreign Dao.
+   * 
+   * If $exportData is true, then an array will be returned.
    *
    * @param mixed $value
    * @return mixed
    */
   public function exportValue($value) {
-    if ($value instanceof Record) return $value->getDao()->exportId($value->get('id'));
-    return $this->getForeignDao()->exportId($value);
+    if ($this->exportData) {
+      if ($value instanceof Record) return $value->getArray();
+      if (is_array($value)) return $value;
+      return $this->getForeignDao()->exportId($value);
+    }
+    else {
+      if ($value instanceof Record) return $value->getDao()->exportId($value->get('id'));
+      return $this->getForeignDao()->exportId($value);
+    }
   }
 
   /**

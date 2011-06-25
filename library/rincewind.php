@@ -10,8 +10,28 @@
 /**
  * Defines the current rincewind version
  */
-define('RINCEWIND_VERSION', 203030);
+define('RINCEWIND_VERSION', 20303);
 
+if ( ! defined('REQUIRED_RINCEWIND_VERSION')) trigger_error('You should set a REQUIRED_RINCEWIND_VERSION (' . RINCEWIND_VERSION . ').', E_USER_WARNING);
+
+/**
+ * @param int $version
+ * @return string
+ */
+function RW_formatVersion($version) {
+  $v0 = (int) ($version / 10000);
+  $version -= $v0 * 10000;
+  $v1 = (int) ($version / 100);
+  $v2 = $version - $v1 * 100;
+  return $v0 . '.' . $v1 . '.' . $v2;
+}
+
+/**
+ * Triggers error if the required version is highe then the actual version.
+ */
+if (defined('REQUIRED_RINCEWIND_VERSION') && REQUIRED_RINCEWIND_VERSION > RINCEWIND_VERSION) {
+  die('The required rincewind version (' . RW_formatVersion(REQUIRED_RINCEWIND_VERSION) . ') is higher than the actual version (' . RW_formatVersion(RINCEWIND_VERSION) . ').');
+}
 
 /**
  * Includes the basic types.
@@ -24,7 +44,7 @@ include dirname(__FILE__) . '/rincewind.types.php';
  * @param string $fileUriOrService 
  * @return string the File URI
  */
-function _rw_determineFileUri($interfaceOrClassName, $fileUriOrService) {
+function RW_determineFileUri($interfaceOrClassName, $fileUriOrService) {
   if ($fileUriOrService === null) {
     $fileUri = dirname(__FILE__) . '/' . $interfaceOrClassName . '/' . $interfaceOrClassName . '.php';
   }
@@ -48,7 +68,7 @@ function _rw_determineFileUri($interfaceOrClassName, $fileUriOrService) {
  */
 function require_class($className, $fileUriOrService = null) {
   if ( ! class_exists($className, false)) {
-    include _rw_determineFileUri($className, $fileUriOrService);
+    include RW_determineFileUri($className, $fileUriOrService);
   }
 }
 
@@ -61,7 +81,7 @@ function require_class($className, $fileUriOrService = null) {
  */
 function require_interface($interfaceName, $fileUriOrService = null) {
   if ( ! interface_exists($interfaceName, false)) {
-    include _rw_determineFileUri($interfaceName, $fileUriOrService);
+    include RW_determineFileUri($interfaceName, $fileUriOrService);
   }
 }
 

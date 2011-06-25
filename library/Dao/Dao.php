@@ -152,9 +152,10 @@ abstract class Dao implements DaoInterface {
    * 
    */
   public function __construct() {
-    array_merge($this->attributes, $this->additionalAttributes());
-    array_merge($this->nullAttributes, $this->additionalNullAttributes());
-    array_merge($this->defaultValueAttributes, $this->additionalDefaultValueAttributes());
+    $this->attributes = array_merge($this->attributes, $this->additionalAttributes());
+    $this->nullAttributes = array_merge($this->nullAttributes, $this->additionalNullAttributes());
+    $this->defaultValueAttributes = array_merge($this->defaultValueAttributes, $this->additionalDefaultValueAttributes());
+    $this->attributeImportMapping = array_merge($this->attributeImportMapping, $this->additionalAttributeImportMapping());
 
     if ( ! $this->resourceName) {
       throw new DaoException('No resource name provided in class ' . get_class($this) . '.');
@@ -174,7 +175,7 @@ abstract class Dao implements DaoInterface {
   protected function additionalAttributes() {
     return array();
   }
-  
+
   /**
    * Don't forget to call
    * array_merge(parent::additionalNullAttributes(), $attributes)
@@ -185,7 +186,7 @@ abstract class Dao implements DaoInterface {
   protected function additionalNullAttributes() {
     return array();
   }
-  
+
   /**
    * Don't forget to call
    * array_merge(parent::additionalDefaultValueAttributes(), $attributes)
@@ -196,7 +197,14 @@ abstract class Dao implements DaoInterface {
   protected function additionalDefaultValueAttributes() {
     return array();
   }
-  
+
+  /**
+   * @return array
+   */
+  protected function additionalAttributeImportMapping() {
+    return array();
+  }
+
   /**
    * This is the resource name this Dao works with.
    * @var string
@@ -315,6 +323,7 @@ abstract class Dao implements DaoInterface {
       }
 
       $reference = $this->$methodName();
+      if ( ! $reference || ! is_a($reference, 'DaoReference')) trigger_error('The reference returned by ' . $this->resourceName . '/' . $methodName . ' is null or invalid.', E_USER_ERROR);
       $reference->setSourceDao($this);
       return $this->references[$attributeName] = $reference;
     }

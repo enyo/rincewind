@@ -433,9 +433,19 @@ abstract class Dao implements DaoInterface {
    * @see doFindData()
    */
   public final function findData($map, $exportValues = true, $resourceName = null) {
-    if (is_int($map)) $map = array('id' => $map);
 
-    $id = is_array($map) ? array_key_exists('id', $map) : $map->id;
+    $id = null;
+
+    if (is_int($map)) {
+      $id = $map;
+      $map = array('id' => $map);
+    }
+    elseif (is_array($map) && array_key_exists('id', $map)) {
+      $id = $map['id'];
+    }
+    elseif (is_a($map, 'Record')) {
+      $id = $map->id;
+    }
 
     $cacheKey = null;
     if ($this->useCache && $this->cache && $id) {
@@ -454,7 +464,12 @@ abstract class Dao implements DaoInterface {
 
     $data = $this->prepareDataForRecord($data);
 
+    if ($id && isset($data['id']) && $data['id'] != $id) {
+      throw new DaoException('The id returned from the datasource was not the same as the id fetched.');
+    }
+
     if ($cacheKey) {
+      // It doesnt make sense to cache a record, if it never gets fetched by id.
       $this->cache->set($cacheKey, $data, $this->cacheExpire);
     }
     return $data;

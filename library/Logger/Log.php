@@ -28,8 +28,6 @@ if ( ! class_exists('LogException', false)) include dirname(__FILE__) . '/Logger
  *
  * If you didn't set a logger for a specific context, it will be ignored unless you specified a Log::CATCHALL logger.
  *
- * If you don't pass a context, the context Log::GENERAL is used.
- *
  * You can pass multiple loggers for one context.
  *
  * @author Matthias Loitsch <developer@ma.tthias.com>
@@ -37,13 +35,6 @@ if ( ! class_exists('LogException', false)) include dirname(__FILE__) . '/Logger
  * @package Logger
  */
 abstract class Log {
-  /**
-   * The string for the general logger.
-   *
-   * @var string
-   */
-  const GENERAL = ' GENERAL ';
-
   /**
    * The string for the catchall logger.
    *
@@ -75,8 +66,8 @@ abstract class Log {
    * @param Logger $logger
    * @param string $context Only letters, numbers, underscore and dash is allowed to avoid errors.
    */
-  public static function addLogger($logger, $context = self::GENERAL) {
-    if ($context !== self::GENERAL && $context !== self::CATCHALL && (empty($context) || preg_replace('/[^a-z0-9\_\-]/im', '', $context) != $context)) throw new LogException("The context name '$context' is not allowed.");
+  public static function addLogger($logger, $context = self::CATCHALL) {
+    if ($context !== self::CATCHALL && (empty($context) || preg_replace('/[^a-z0-9\_\-]/im', '', $context) != $context)) throw new LogException("The context name '$context' is not allowed.");
     self::$isEnabled = true;
     $context = self::sanitizeContext($context);
     if ( ! array_key_exists($context, self::$loggers)) self::$loggers[$context] = array();
@@ -91,7 +82,7 @@ abstract class Log {
    * @param string $context
    * @return array
    */
-  public static function getLoggers($context = self::GENERAL) {
+  public static function getLoggers($context = self::CATCHALL) {
     if ( ! self::$isEnabled) return array();
     $context = self::sanitizeContext($context);
     if (isset(self::$loggers[$context])) return self::$loggers[$context];
@@ -107,7 +98,7 @@ abstract class Log {
    * @param array $additionalInfo An associative array with more info. Eg: array('content'=>'Some stuff')
    * @return bool true on success, false if no logger specified for the context or the logger below level.
    */
-  public static function debug($message, $context = self::GENERAL, $additionalInfo = null) {
+  public static function debug($message, $context = null, $additionalInfo = null) {
     return self::doLog('debug', $message, $context, $additionalInfo);
   }
 
@@ -119,7 +110,7 @@ abstract class Log {
    * @param array $additionalInfo An associative array with more info. Eg: array('content'=>'Some stuff')
    * @return bool true on success, false if no logger specified for the context or the logger below level.
    */
-  public static function info($message, $context = self::GENERAL, $additionalInfo = null) {
+  public static function info($message, $context = null, $additionalInfo = null) {
     return self::doLog('info', $message, $context, $additionalInfo);
   }
 
@@ -131,7 +122,7 @@ abstract class Log {
    * @param array $additionalInfo An associative array with more info. Eg: array('content'=>'Some stuff')
    * @return bool true on success, false if no logger specified for the context or the logger below level.
    */
-  public static function warning($message, $context = self::GENERAL, $additionalInfo = null) {
+  public static function warning($message, $context = null, $additionalInfo = null) {
     return self::doLog('warning', $message, $context, $additionalInfo);
   }
 
@@ -143,7 +134,7 @@ abstract class Log {
    * @param array $additionalInfo An associative array with more info. Eg: array('content'=>'Some stuff')
    * @return bool true on success, false if no logger specified for the context or the logger below level.
    */
-  public static function error($message, $context = self::GENERAL, $additionalInfo = null) {
+  public static function error($message, $context = null, $additionalInfo = null) {
     return self::doLog('error', $message, $context, $additionalInfo);
   }
 
@@ -155,7 +146,7 @@ abstract class Log {
    * @param array $additionalInfo An associative array with more info. Eg: array('content'=>'Some stuff')
    * @return bool true on success, false if no logger specified for the context or the logger below level.
    */
-  public static function fatal($message, $context = self::GENERAL, $additionalInfo = null) {
+  public static function fatal($message, $context = null, $additionalInfo = null) {
     return self::doLog('fatal', $message, $context, $additionalInfo);
   }
 
@@ -170,8 +161,8 @@ abstract class Log {
    */
   protected static function doLog($method, $message, $context, $additionalInfo) {
     $logged = false;
-    foreach (self::getLoggers($context) as $logger) {
-      $logged = $logger->$method($message, ($context === self::GENERAL || $context === self::CATCHALL) ? null : $context, $additionalInfo) || $logged;
+    foreach (self::getLoggers($context ? $context : self::CATCHALL) as $logger) {
+      $logged = $logger->$method($message, $context, $additionalInfo) || $logged;
     }
     return $logged;
   }
@@ -183,7 +174,7 @@ abstract class Log {
    * @return string sanitized context.
    */
   protected static function sanitizeContext($context) {
-    if ($context === self::GENERAL || $context === self::CATCHALL) return $context;
+    if ($context === self::CATCHALL) return $context;
     return strtolower($context);
   }
 

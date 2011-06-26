@@ -61,10 +61,16 @@ abstract class Config {
    * @param string $section If null, $this->defaultSection will be used if set.
    */
   public function get($variable, $section = null) {
+    $saveVariable = $variable;
     $variable = $this->sanitizeToken($variable);
 
     $section = $section ? $section : $this->defaultSection;
+    $saveSection = $section;
     $section = $this->sanitizeToken($section);
+
+    if ($saveVariable != $variable || $saveSection != $section) {
+      Log::warning('Passed variable or section not sanitized.', 'Deprecated', array('section' => $saveSection . ' -- ' . $section, 'variable' => $saveVariable . ' -- ' . $variable));
+    }
 
     if ($this->cache) {
       $key = $this->generateCacheKey($variable, $section);

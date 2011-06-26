@@ -86,6 +86,17 @@ function require_interface($interfaceName, $fileUriOrService = null) {
 }
 
 /**
+ * If the path is without leading /, then it will be appended to $root.
+ * Otherwise it gets returned.
+ * 
+ * @param string $path
+ * @param string $root 
+ */
+function RW_path($path, $root) {
+  return strpos($path, '/') === 0 ? $path : $root . $path;
+}
+
+/**
  * Now include the important static classes.
  */
 /**

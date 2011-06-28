@@ -66,6 +66,11 @@ class SslTest extends PHPUnit_Framework_TestCase {
     $ssl = new Ssl('AES-128-CFB8', '*%=XC=Hj!bUXKQP;;8y', '`/:p@:f8;', 8);
     $encrypted = $ssl->encrypt('TEST');
     self::assertSame(8, strpos($encrypted, '.'));
+
+    $ssl = new Ssl('AES-128-CFB8', '*%=XC=Hj!bUXKQP;;8y', '`/:p@:f8;', '8');
+    $encrypted = $ssl->encrypt('TEST');
+    self::assertSame(8, strpos($encrypted, '.'), 'String as iv length should also work.');
+
     $ssl = new Ssl('AES-128-CFB8', '*%=XC=Hj!bUXKQP;;8y', '`/:p@:f8;', null);
     $encrypted = $ssl->encrypt('TEST');
     self::assertSame(16, strpos($encrypted, '.'));

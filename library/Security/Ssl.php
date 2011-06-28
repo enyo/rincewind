@@ -56,9 +56,10 @@ class Ssl extends Encryption {
   public function __construct($cipher, $password, $salt, $ivMaxChars = 4, $nonceChars = 5, $cipherIvLength = null) {
     parent::__construct($password, $salt);
     $this->cipher = $cipher;
+    $cipherIvLength = (int) $cipherIvLength;
     $this->cipherIvLength = $cipherIvLength ? $cipherIvLength : openssl_cipher_iv_length($this->cipher);
-    $this->ivMaxChars = $ivMaxChars;
-    $this->nonceChars = $nonceChars;
+    $this->ivMaxChars = $ivMaxChars === null ? $ivMaxChars : (int) $ivMaxChars;
+    $this->nonceChars = (int) $nonceChars;
   }
 
   /**

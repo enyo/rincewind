@@ -48,14 +48,15 @@ abstract class Encryption {
   }
 
   /**
-   * 
+   * @param mixed $data
    */
-  abstract public function encrypt($string);
+  abstract public function encrypt($data);
 
   /**
-   * 
+   * @param string $encryptedData
+   * @return mixed $data
    */
-  abstract public function decrypt($encryptedString);
+  abstract public function decrypt($encryptedData);
 
   /**
    * Encodes a string with base64.

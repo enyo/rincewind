@@ -69,33 +69,43 @@ class Ssl extends Encryption {
   }
 
   /**
-   * Returns a base64 encoded, openssl encrypted string with the encryption password and
+   * Returns a base64 encoded, openssl encrypted string with the encryption
+   * password and
    * a salt.
    * 
-   * Do not rely on the way this is encrypted, just use it in conjunction with decrypt.
+   * Do not rely on the way this is encrypted, just use it in conjunction with
+   * decrypt.
    * 
    * BEWARE of any changes in different release versions because you'll might be
    * unable to decrypt after a change.
    * 
-   * @param string $string
+   * If the data is not a string, it gets serialized.
+   * 
+   * @param mixed $data
    */
-  public function encrypt($string) {
+  public function encrypt($data) {
+    if (is_string($data)) $data = 'p-' . $data; // plain
+    else $data = 's-' . serialize($data); // serialized
+
     $nonce = $this->generateNonce($this->nonceChars);
 
-    $iv = $this->generateNonce($this->ivMaxChars ? (int) $this->ivMaxChars : $this->cipherIvLength, true);
+    $iv = $this->generateNonce(is_int($this->ivMaxChars) ? $this->ivMaxChars : $this->cipherIvLength, true);
 
-    return $iv . '.' . Encryption::base64Encode(openssl_encrypt($this->salt . $string . $nonce, $this->cipher, $this->password, true, $this->padIv($iv, $this->cipherIvLength)));
+    return ($iv ? $iv . '.' : '') . Encryption::base64Encode(openssl_encrypt($this->salt . $data . $nonce, $this->cipher, $this->password, true, $this->padIv($iv, $this->cipherIvLength)));
   }
 
   /**
-   * Verifies that a sigend + encrypted string is valid and returns the decrypted string.
+   * Verifies that a sigend + encrypted string is valid and returns the
+   * decrypted string.
    * 
    * This method...
    * 
    * 1. ...takes the iv from the beginning of the string
    * 2. ...does a base64_decode of the rest of the string
-   * 3. ...checks that the ssl encryption is correct (decrypts the string with the correct cipher and password).
-   * 4. ...checks that the salt is present and at the beginning of the the string.
+   * 3. ...checks that the ssl encryption is correct (decrypts the string with
+   *       the correct cipher and password).
+   * 4. ...checks that the salt is present and at the beginning of the the
+   *       string.
    * 5. ...removes the random characters from the end of the string
    * 
    * 
@@ -105,31 +115,52 @@ class Ssl extends Encryption {
    * This could result in a security risk.
    * The exception message is only for debugging purpose.
    * 
-   * @param string $encryptedString
-   * @return string
+   * If the data that has been encrypted wasn't a string, it gets serialized by
+   * this method.
+   * 
+   * @param string $encryptedData
+   * @return mixed
    * @throws EncryptionException
    */
-  public function decrypt($encryptedString) {
-    $encryptedString = explode('.', $encryptedString);
-    if (count($encryptedString) !== 2) throw new EncryptionException('The encrypted string did not have an iv.');
+  public function decrypt($encryptedData) {
+    $encryptedData = explode('.', $encryptedData);
+    if (count($encryptedData) !== 1 && count($encryptedData) !== 2) throw new EncryptionException('The encrypted string did not have a correct iv.');
 
-    $iv = $encryptedString[0];
-    $encryptedString = Encryption::base64Decode($encryptedString[1]);
+    if (count($encryptedData) === 1) {
+      // No IV has been chosen
+      $iv = '';
+      $encryptedData = Encryption::base64Decode($encryptedData[0]);
+    }
+    elseif (count($encryptedData) === 2) {
+      // IV present
+      $iv = $encryptedData[0];
+      if ( ! $iv) throw new EncryptionException('IV was empty.');
+      $encryptedData = Encryption::base64Decode($encryptedData[1]);
+    }
 
-    if ( ! $iv) throw new EncryptionException('IV was empty.');
-    if ( ! $encryptedString) throw new EncryptionException('Encrypted string is not base64.');
+    if ( ! $encryptedData) throw new EncryptionException('Encrypted string is not base64.');
 
     $iv = $this->padIv($iv, $this->cipherIvLength);
 
-    $decrypted = openssl_decrypt($encryptedString, $this->cipher, $this->password, true, $iv);
+    $decrypted = openssl_decrypt($encryptedData, $this->cipher, $this->password, true, $iv);
 
     if ($decrypted === false) throw new EncryptionException('Encrypted string is not correctly openssl encrypted.');
 
-    if (strpos($decrypted, $this->salt) !== 0) throw new EncryptionException('Encrypted string does not contain the salt.');
+    $saltLength = strlen($this->salt);
 
-    $string = substr($decrypted, strlen($this->salt), strlen($decrypted) - strlen($this->salt) - $this->nonceChars);
+    if (substr($decrypted, 0, $saltLength) !== $this->salt) throw new EncryptionException('Encrypted string does not contain the salt.');
 
-    return $string;
+    $dataInfoLength = 2;
+    $dataInfo = substr($decrypted, $saltLength, $dataInfoLength);
+    if ($dataInfo !== 's-' && $dataInfo !== 'p-') throw new EncryptionException('Encrypted string does not contain data information.');
+
+    $data = substr($decrypted, $saltLength + $dataInfoLength, strlen($decrypted) - $saltLength - $dataInfoLength - $this->nonceChars);
+
+    if ($dataInfo === 's-') {
+      $data = unserialize($data);
+    }
+
+    return $data;
   }
 
   /**
@@ -148,6 +179,8 @@ class Ssl extends Encryption {
    * @return string
    */
   private function generateNonce($nonceChars, $onlyUrlSave = false) {
+    if ($nonceChars === 0) return '';
+
     $charset = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_';
     if ( ! $onlyUrlSave) $charset .= './*^!@#$%& ';
     $charsetLength = strlen($charset);

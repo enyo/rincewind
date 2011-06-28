@@ -51,6 +51,14 @@ class SslTest extends PHPUnit_Framework_TestCase {
     self::assertSame('test@email.com', $this->ssl->decrypt($secondEncrypted));
   }
 
+  public function testEncryptingAndDecryptingData() {
+    $data = array('a'=>'b');
+    $encrypted = $this->ssl->encrypt($data);
+    echo $encrypted;
+    $decrypted = $this->ssl->decrypt($encrypted);
+    self::assertEquals($data, $decrypted);
+  }
+  
   public function testEncryptWithSpecifiedIVLenght() {
     $ssl = new Ssl('AES-128-CFB8', '*%=XC=Hj!bUXKQP;;8y', '`/:p@:f8;');
     $encrypted = $ssl->encrypt('TEST');
@@ -61,11 +69,15 @@ class SslTest extends PHPUnit_Framework_TestCase {
     $ssl = new Ssl('AES-128-CFB8', '*%=XC=Hj!bUXKQP;;8y', '`/:p@:f8;', null);
     $encrypted = $ssl->encrypt('TEST');
     self::assertSame(16, strpos($encrypted, '.'));
+    $ssl = new Ssl('AES-128-CFB8', '*%=XC=Hj!bUXKQP;;8y', '`/:p@:f8;', 0);
+    $encrypted = $ssl->encrypt('TEST');
+    self::assertSame(false, strpos($encrypted, '.'));
+    self::assertSame('TEST', $ssl->decrypt($encrypted));
   }
 
-  public function testDecryptThrowsExceptionIfNoIv() {
-    $this->setExpectedException('EncryptionException', 'The encrypted string did not have an iv.');
-    self::assertSame('test@email.com', $this->ssl->decrypt('does not contain iv'));
+  public function testDecryptThrowsExceptionIfNoCorrectIv() {
+    $this->setExpectedException('EncryptionException', 'IV was empty.');
+    self::assertSame('test@email.com', $this->ssl->decrypt('.does not contain iv'));
   }
 
   public function testDecryptThrowsExceptionIfNoSalt() {

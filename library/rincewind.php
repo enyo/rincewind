@@ -14,23 +14,47 @@ define('RINCEWIND_VERSION', 20304);
 
 if ( ! defined('REQUIRED_RINCEWIND_VERSION')) trigger_error('You should set a REQUIRED_RINCEWIND_VERSION (' . RINCEWIND_VERSION . ').', E_USER_WARNING);
 
-/**
- * @param int $version
- * @return string
- */
-function RW_formatVersion($version) {
-  $v0 = (int) ($version / 10000);
-  $version -= $v0 * 10000;
-  $v1 = (int) ($version / 100);
-  $v2 = $version - $v1 * 100;
-  return $v0 . '.' . $v1 . '.' . $v2;
+class RW {
+
+  /**
+   * @param int $version
+   * @return string
+   */
+  public static function formatVersion($version) {
+    $v0 = (int) ($version / 10000);
+    $version -= $v0 * 10000;
+    $v1 = (int) ($version / 100);
+    $v2 = $version - $v1 * 100;
+    return $v0 . '.' . $v1 . '.' . $v2;
+  }
+
+  /**
+   * Checks if the provided file uri is writable (or if the parent directory is
+   * writable if the file doesn't exist).
+   * @param string $fileUri 
+   */
+  public static function isWritable($fileUri) {
+    return (file_exists($fileUri) && is_writable($fileUri)) || ( ! file_exists($fileUri) && is_writable(dirname($fileUri)));
+  }
+
+  /**
+   * If the path is without leading /, then it will be appended to $root.
+   * Otherwise it gets returned.
+   * 
+   * @param string $path
+   * @param string $root 
+   */
+  public static function path($path, $root) {
+    return strpos($path, '/') === 0 ? $path : $root . $path;
+  }
+
 }
 
 /**
  * Triggers error if the required version is highe then the actual version.
  */
 if (defined('REQUIRED_RINCEWIND_VERSION') && REQUIRED_RINCEWIND_VERSION > RINCEWIND_VERSION) {
-  die('The required rincewind version (' . RW_formatVersion(REQUIRED_RINCEWIND_VERSION) . ') is higher than the actual version (' . RW_formatVersion(RINCEWIND_VERSION) . ').');
+  die('The required rincewind version (' . RW::formatVersion(REQUIRED_RINCEWIND_VERSION) . ') is higher than the actual version (' . RW::formatVersion(RINCEWIND_VERSION) . ').');
 }
 
 /**
@@ -83,17 +107,6 @@ function require_interface($interfaceName, $fileUriOrService = null) {
   if ( ! interface_exists($interfaceName, false)) {
     include RW_determineFileUri($interfaceName, $fileUriOrService);
   }
-}
-
-/**
- * If the path is without leading /, then it will be appended to $root.
- * Otherwise it gets returned.
- * 
- * @param string $path
- * @param string $root 
- */
-function RW_path($path, $root) {
-  return strpos($path, '/') === 0 ? $path : $root . $path;
 }
 
 /**

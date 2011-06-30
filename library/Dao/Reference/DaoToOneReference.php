@@ -75,19 +75,6 @@ class DaoToOneReference extends BasicDaoReference {
   }
 
   /**
-   * Stores the referenced record in the source record and returns the referenced.
-   * 
-   * @param Record $record
-   * @param string $attributeName
-   * @param Record $value
-   * @return Record
-   */
-  protected function cacheAndReturn($record, $attributeName, $value) {
-    $record->setDirectly($attributeName, $value);
-    return $value;
-  }
-
-  /**
    * @param mixed $value
    * @return mixed the coerced value.
    * @throws DaoCoerceException

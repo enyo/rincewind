@@ -9,9 +9,9 @@
  * @package Dao
  */
 /**
- * Including BasicDaoReference
+ * Including the basic dao reference.
  */
-if ( ! class_exists('BasicDaoReference', false)) include dirname(__FILE__) . '/BasicDaoReference.php';
+require_class('BasicDaoToManyReference', dirname(__FILE__) . '/BasicDaoToManyReference.php');
 
 /**
  * A DaoJoinTableToManyReference describes references to many resources joined by
@@ -44,7 +44,7 @@ if ( ! class_exists('BasicDaoReference', false)) include dirname(__FILE__) . '/B
  * @see DaoReference
  * @see DaoToOneReference
  */
-class DaoJoinTableToManyReference extends BasicDaoReference {
+class DaoJoinTableToManyReference extends BasicDaoToManyReference {
 
   /**
    * The dao used to join.

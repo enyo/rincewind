@@ -9,9 +9,9 @@
  * @package Dao
  */
 /**
- * Including BasicDaoReference
+ * Including the basic dao reference.
  */
-if ( ! class_exists('BasicDaoReference', false)) include dirname(__FILE__) . '/BasicDaoReference.php';
+require_class('BasicDaoToManyReference', dirname(__FILE__) . '/BasicDaoToManyReference.php');
 
 /**
  * A DaoToManyReference describes references to many resources by joining.
@@ -27,7 +27,7 @@ if ( ! class_exists('BasicDaoReference', false)) include dirname(__FILE__) . '/B
  * @see DaoReference
  * @see DaoToOneReference
  */
-class DaoJoinToManyReference extends BasicDaoReference {
+class DaoJoinToManyReference extends BasicDaoToManyReference {
 
   /**
    * Be careful, the order for foreign and local key are inversed.
@@ -47,11 +47,27 @@ class DaoJoinToManyReference extends BasicDaoReference {
    * A DataSource can directly return the DataHash, so it doesn't have to be fetched.
    *
    * @param Record $record
-   * @param string $attribute The attribute it's being accessed on
+   * @param string $attributeName The attribute it's being accessed on
    * @return DaoIterator
    */
-  public function getReferenced($record, $attribute) {
-    return $this->getForeignDao()->getIterator(array($this->getForeignKey() => $record->get($this->getLocalKey())));
+  public function getReferenced($record, $attributeName) {
+    if ($data = $record->getDirectly($attributeName)) {
+      if (is_array($data)) {
+        // If the data hash exists already, just return the Iterator with it.
+        return $this->cacheAndReturn($record, $attributeName, $this->getForeignDao()->createIterator($data));
+      }
+      elseif ($data instanceof Iterator) {
+        // The iterator is cached. Just return it.
+        return $data;
+      }
+      else {
+        Log::warning(sprintf('The data hash for `%s` was set but incorrect.', $attributeName));
+        return null;
+      }
+    }
+    else {
+      return $this->cacheAndReturn($record, $attributeName, $this->getForeignDao()->getIterator(array($this->getForeignKey() => $record->get($this->getLocalKey()))));
+    }
   }
 
   /**

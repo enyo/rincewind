@@ -99,8 +99,11 @@ interface DaoReference {
   public function importValue($value);
 
   /**
-   * When a record is accessed on a reference attribute, it calls this method to get the actual records or record.
+   * When a record is accessed on a reference attribute, it calls this method to
+   * get the actual records or record.
    *
+   * This method is in charge of caching the result of the reference.
+   * 
    * @param Record $record The record the reference is accessed at.
    * @param string $attribute The attribute it's accessed on.
    * @return Record|DaoResultIterator

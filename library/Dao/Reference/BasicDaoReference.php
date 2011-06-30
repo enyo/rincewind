@@ -213,4 +213,17 @@ abstract class BasicDaoReference implements DaoReference {
     return $value;
   }
 
+  /**
+   * Stores the referenced record in the source record and returns the referenced.
+   * 
+   * @param Record $record
+   * @param string $attributeName
+   * @param Record|Iterator $value
+   * @return Record
+   */
+  protected function cacheAndReturn($record, $attributeName, $value) {
+    $record->setDirectly($attributeName, $value);
+    return $value;
+  }
+
 }

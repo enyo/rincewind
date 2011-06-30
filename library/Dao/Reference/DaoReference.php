@@ -13,7 +13,7 @@
  * The DaoReferenceException
  */
 class DaoReferenceException extends Exception {
-
+  
 }
 
 /**
@@ -102,7 +102,9 @@ interface DaoReference {
    * When a record is accessed on a reference attribute, it calls this method to
    * get the actual records or record.
    *
-   * This method is in charge of caching the result of the reference.
+   * This method is in charge of caching the reference. If it's a ToOne reference,
+   * the reference can directly cache the result.
+   * If it's a ToMany reference, the iterator is in charge of caching it.
    * 
    * @param Record $record The record the reference is accessed at.
    * @param string $attribute The attribute it's accessed on.
@@ -122,5 +124,4 @@ interface DaoReference {
    * @return mixed the coerced value.
    */
   public function coerce($value);
-
 }

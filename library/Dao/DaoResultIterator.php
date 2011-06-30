@@ -57,13 +57,22 @@ abstract class DaoResultIterator implements Iterator {
    * @see asArrays()
    */
   protected $returnRecordsAsArray = false;
+  /**
+   * @var bool
+   */
+  protected $userRequestCache = true;
+  /**
+   * @var array
+   */
+  protected $requestCachedRecords = array();
 
   /**
    * @param Dao $dao
    */
-  public function __construct($dao, $totalLength = null) {
+  public function __construct($dao, $totalLength = null, $cacheValues = true) {
     $this->dao = $dao;
     $this->totalLength = $totalLength;
+    $this->userRequestCache = $cacheValues;
   }
 
   /**
@@ -82,8 +91,28 @@ abstract class DaoResultIterator implements Iterator {
    */
   public function current() {
     if ( ! $this->valid()) return null;
-    $record = $this->dao->getRecordFromData($this->getCurrentData());
+    $record = null;
+    if ($this->userRequestCache) {
+      $record = $this->getCachedRecord();
+    }
+    if ( ! $record) {
+      $record = $this->cacheAndReturnRecord($this->dao->getRecordFromData($this->getCurrentData()));
+    }
     return $this->returnRecordsAsArray ? $record->getArray() : $record;
+  }
+
+  /**
+   * If there is a cached record for the key, it gets returned.
+   * 
+   * @return Record
+   */
+  protected function getCachedRecord() {
+    if (isset($this->requestCachedRecords[$this->key()])) return $this->requestCachedRecords[$this->key()];
+  }
+
+  protected function cacheAndReturnRecord($record) {
+    $this->cachedRecord[$this->key()] = $record;
+    return $record;
   }
 
   /**

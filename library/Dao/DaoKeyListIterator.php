@@ -30,6 +30,10 @@ class DaoKeyListIterator extends DaoResultIterator {
    * @var string
    */
   private $keyName;
+  /**
+   * @var array
+   */
+  private $cachedValues = array();
 
   /**
    * @param array $keyList

@@ -38,15 +38,20 @@ class DefaultDispatcher implements Dispatcher {
    * @var Sanitizer
    */
   private $actionSanitizer;
+  /**
+   * @var UtilsFactory
+   */
+  private $utils;
 
   /**
    * @param ControllerFactory $controllerFactory 
    * @param string $defaultControllerName
    */
-  public function __construct($controllerFactory, Sanitizer $actionSanitizer, $defaultControllerName = 'Home') {
+  public function __construct($controllerFactory, Sanitizer $actionSanitizer, UtilsFactory $utils, $defaultControllerName = 'Home') {
     $this->controllerFactory = $controllerFactory;
     $this->defaultControllerName = $defaultControllerName;
     $this->actionSanitizer = $actionSanitizer;
+    $this->utils = $utils;
   }
 
   /**
@@ -67,7 +72,8 @@ class DefaultDispatcher implements Dispatcher {
         $controller = $this->controllerFactory->get($this->defaultControllerName);
       }
 
-      $errorDuringRender = false;
+      $errorDuringRender = null;
+      $errorCode = null;
       $controller->initData();
 
       try {
@@ -77,10 +83,10 @@ class DefaultDispatcher implements Dispatcher {
         $action = $actionParameters[0];
         array_shift($actionParameters);
 
-        if ($action{0} === '_') throw new DispatcherException('Tried to access method with underscore.', array('action' => $action));
+        if ($action{0} === '_') throw new DispatcherInfoException('Tried to access method with underscore.', array('action' => $action));
 
         $action = $this->actionSanitizer->sanitize($action);
-        
+
         try {
           // Check if the action is valid
           $reflectionClass = new ReflectionClass($controller);
@@ -90,7 +96,7 @@ class DefaultDispatcher implements Dispatcher {
           if ($action !== 'index' && (method_exists('Controller', $action) || ! $actionMethod->isPublic() || ($actionMethod->class !== get_class($controller)))) throw new Exception();
         }
         catch (Exception $e) {
-          throw new DispatcherException('Tried to access invalid action.', array('Action' => $action));
+          throw new DispatcherInfoException('Tried to access invalid action.', array('Action' => $action));
         }
 
         $controller->setAction($action);
@@ -104,7 +110,7 @@ class DefaultDispatcher implements Dispatcher {
 
           if ($actionParameter === null) {
             if ( ! $parameter->isDefaultValueAvailable()) {
-              throw new DispatcherException('Not all parameters supplied.');
+              throw new DispatcherInfoException('Not all parameters supplied.');
             }
             // Well: there is no more additional query, and apparently the rest of the parameters are optional, so continue.
             continue;
@@ -135,7 +141,11 @@ class DefaultDispatcher implements Dispatcher {
           die('<h1 class="error">' . $e->getMessage() . '</h1>');
         }
       }
-      catch (DispatcherException $e) {
+      catch(InvalidUrlException $e) {
+        $errorDuringRender = true;
+        $errorCode = 404;
+      }
+      catch (DispatcherInfoException $e) {
         $errorDuringRender = true;
         $additionalInfo = $e->getAdditionalInfo();
         $additionalInfo['controllerName'] = $controllerName;
@@ -143,7 +153,7 @@ class DefaultDispatcher implements Dispatcher {
       }
       catch (ErrorMessageException $e) {
         $errorDuringRender = true;
-        $this->addErrorMessage($e->getMessage());
+        $this->utils->message()->addErrorMessage($e->getMessage());
       }
       catch (Exception $e) {
         $errorDuringRender = true;
@@ -155,7 +165,7 @@ class DefaultDispatcher implements Dispatcher {
       }
 
       if ($errorDuringRender) {
-        $controller->renderError();
+        $controller->renderError($errorCode);
       }
     }
     catch (Exception $e) {

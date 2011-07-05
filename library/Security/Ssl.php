@@ -33,6 +33,10 @@ class Ssl extends Encryption {
    */
   private $ivMaxChars;
   /**
+   * @var bool
+   */
+  private $useMd5NotRandom;
+  /**
    * Used by generateNonce to determine how many characters should be used as
    * nonce.
    * 
@@ -50,16 +54,18 @@ class Ssl extends Encryption {
    * @param string $password
    * @param string $salt
    * @param int $ivMaxChars null if you want a full iv. If you provide a number, the rest of the iv will be padded.
+   * @param bool $useMd5NotRandom If true, the IV will be extracted from md5 of the data.
    * @param int $nonceChars 
    * @param int $cipherIvLength If null, the iv length gets calculated with openssl_cipher_iv_length()
    */
-  public function __construct($cipher, $password, $salt, $ivMaxChars = 4, $nonceChars = 5, $cipherIvLength = null) {
+  public function __construct($cipher, $password, $salt, $ivMaxChars = 4, $useMd5NotRandom = false, $nonceChars = 5, $cipherIvLength = null) {
     parent::__construct($password, $salt);
     $this->cipher = $cipher;
     $cipherIvLength = (int) $cipherIvLength;
-    $this->cipherIvLength = $cipherIvLength ? $cipherIvLength : openssl_cipher_iv_length($this->cipher);
-    $this->ivMaxChars = $ivMaxChars === null ? $ivMaxChars : (int) $ivMaxChars;
+    $this->cipherIvLength = $cipherIvLength ? (int) $cipherIvLength : openssl_cipher_iv_length($this->cipher);
+    $this->ivMaxChars = $ivMaxChars === null ? null : (int) $ivMaxChars;
     $this->nonceChars = (int) $nonceChars;
+    $this->useMd5NotRandom = $useMd5NotRandom;
   }
 
   /**
@@ -85,12 +91,20 @@ class Ssl extends Encryption {
    * @param mixed $data
    */
   public function encrypt($data) {
-    if (is_string($data)) $data = 'p-' . $data; // plain
-    else $data = 's-' . serialize($data); // serialized
+    if (is_string($data))
+      $data = 'p-' . $data; // plain
+    else
+      $data = 's-' . serialize($data); // serialized
 
     $nonce = $this->generateNonce($this->nonceChars);
 
-    $iv = $this->generateNonce(is_int($this->ivMaxChars) ? $this->ivMaxChars : $this->cipherIvLength, true);
+    if ($this->useMd5NotRandom) {
+      // Using the md5 of data as IV
+      $iv = substr(md5($data), 0, $this->ivMaxChars);
+    } else {
+      // Complete random IV
+      $iv = $this->generateNonce(is_int($this->ivMaxChars) ? $this->ivMaxChars : $this->cipherIvLength, true);
+    }
 
     return ($iv ? $iv . '.' : '') . Encryption::base64Encode(openssl_encrypt($this->salt . $data . $nonce, $this->cipher, $this->password, true, $this->padIv($iv, $this->cipherIvLength)));
   }
@@ -125,40 +139,45 @@ class Ssl extends Encryption {
    */
   public function decrypt($encryptedData) {
     $encryptedData = explode('.', $encryptedData);
-    if (count($encryptedData) !== 1 && count($encryptedData) !== 2) throw new EncryptionException('The encrypted string did not have a correct iv.');
+    if (count($encryptedData) !== 1 && count($encryptedData) !== 2)
+      throw new EncryptionException('The encrypted string did not have a correct iv.');
 
     if (count($encryptedData) === 1) {
       // No IV has been chosen
       $iv = '';
       $encryptedData = Encryption::base64Decode($encryptedData[0]);
-    }
-    elseif (count($encryptedData) === 2) {
+    } elseif (count($encryptedData) === 2) {
       // IV present
       $iv = $encryptedData[0];
-      if ( ! $iv) throw new EncryptionException('IV was empty.');
+      if (!$iv)
+        throw new EncryptionException('IV was empty.');
       $encryptedData = Encryption::base64Decode($encryptedData[1]);
     }
 
-    if ( ! $encryptedData) throw new EncryptionException('Encrypted string is not base64.');
+    if (!$encryptedData)
+      throw new EncryptionException('Encrypted string is not base64.');
 
     $iv = $this->padIv($iv, $this->cipherIvLength);
 
     $decrypted = openssl_decrypt($encryptedData, $this->cipher, $this->password, true, $iv);
 
-    if ($decrypted === false) throw new EncryptionException('Encrypted string is not correctly openssl encrypted.');
+    if ($decrypted === false)
+      throw new EncryptionException('Encrypted string is not correctly openssl encrypted.');
 
     $saltLength = strlen($this->salt);
 
-    if (substr($decrypted, 0, $saltLength) !== $this->salt) throw new EncryptionException('Encrypted string does not contain the salt.');
+    if (substr($decrypted, 0, $saltLength) !== $this->salt)
+      throw new EncryptionException('Encrypted string does not contain the salt.');
 
     $dataInfoLength = 2;
     $dataInfo = substr($decrypted, $saltLength, $dataInfoLength);
-    if ($dataInfo !== 's-' && $dataInfo !== 'p-') throw new EncryptionException('Encrypted string does not contain data information.');
+    if ($dataInfo !== 's-' && $dataInfo !== 'p-')
+      throw new EncryptionException('Encrypted string does not contain data information.');
 
     $data = substr($decrypted, $saltLength + $dataInfoLength, strlen($decrypted) - $saltLength - $dataInfoLength - $this->nonceChars);
 
     if ($dataInfo === 's-') {
-      $data = unserialize($data);
+      $data = @unserialize($data);
     }
 
     return $data;
@@ -180,15 +199,17 @@ class Ssl extends Encryption {
    * @return string
    */
   private function generateNonce($nonceChars, $onlyUrlSave = false) {
-    if ($nonceChars === 0) return '';
+    if ($nonceChars === 0)
+      return '';
 
     $charset = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_';
-    if ( ! $onlyUrlSave) $charset .= './*^!@#$%& ';
+    if (!$onlyUrlSave)
+      $charset .= './*^!@#$%& ';
     $charsetLength = strlen($charset);
 
     $str = '';
 
-    for ($i = 0; $i < $nonceChars; $i ++ ) {
+    for ($i = 0; $i < $nonceChars; $i++) {
       $str .= $charset[mt_rand(0, $charsetLength - 1)];
     }
 

@@ -52,13 +52,13 @@ class SslTest extends PHPUnit_Framework_TestCase {
   }
 
   public function testEncryptingAndDecryptingData() {
-    $data = array('a'=>'b');
+    $data = array('a' => 'b');
     $encrypted = $this->ssl->encrypt($data);
     echo $encrypted;
     $decrypted = $this->ssl->decrypt($encrypted);
     self::assertEquals($data, $decrypted);
   }
-  
+
   public function testEncryptWithSpecifiedIVLenght() {
     $ssl = new Ssl('AES-128-CFB8', '*%=XC=Hj!bUXKQP;;8y', '`/:p@:f8;');
     $encrypted = $ssl->encrypt('TEST');
@@ -80,6 +80,20 @@ class SslTest extends PHPUnit_Framework_TestCase {
     self::assertSame('TEST', $ssl->decrypt($encrypted));
   }
 
+  public function testUsingNoIVOrNonceResultsInSameHashEverytime() {
+    $ssl = new Ssl('AES-128-CFB8', '*%=XC=Hj!bUXKQP;;8y', '`/:p@:f8;', 0, false, 0);
+    $encrypted = $ssl->encrypt('TEST');
+    $encrypted2 = $ssl->encrypt('TEST');
+    self::assertSame($encrypted, $encrypted2);
+  }
+
+  public function testUsingMd5AsIVResultsInSameHashEverytime() {
+    $ssl = new Ssl('AES-128-CFB8', '*%=XC=Hj!bUXKQP;;8y', '`/:p@:f8;', 10, true, 0);
+    $encrypted = $ssl->encrypt('TEST');
+    $encrypted2 = $ssl->encrypt('TEST');
+    self::assertSame($encrypted, $encrypted2);
+  }
+
   public function testDecryptThrowsExceptionIfNoCorrectIv() {
     $this->setExpectedException('EncryptionException', 'IV was empty.');
     self::assertSame('test@email.com', $this->ssl->decrypt('.does not contain iv'));
@@ -91,7 +105,7 @@ class SslTest extends PHPUnit_Framework_TestCase {
 
   public function testIvGetsCalculatedAutomaticallyButCanBeSet() {
     self::assertSame(16, $this->ssl->getCipherIvLength());
-    $ssl = new Ssl('AES-128-CFB8', '*%=XC=Hj!bUXKQP;;8y', '`/:p@:f8;', 4, 5, 9);
+    $ssl = new Ssl('AES-128-CFB8', '*%=XC=Hj!bUXKQP;;8y', '`/:p@:f8;', 4, false, 5, 9);
     self::assertSame(9, $ssl->getCipherIvLength());
   }
 

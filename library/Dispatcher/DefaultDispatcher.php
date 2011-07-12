@@ -133,6 +133,8 @@ class DefaultDispatcher implements Dispatcher {
         // This actually calls the apropriate action.
         call_user_func_array(array($controller, $action), $parameters);
 
+        $controller->extendData();
+        
         try {
           $controller->render(true);
         }

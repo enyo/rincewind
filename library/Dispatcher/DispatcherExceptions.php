@@ -48,8 +48,49 @@ class DispatcherInfoException extends DispatcherException {
  * @copyright Copyright (c) 2010, I-Netcompany
  * @package Controller
  */
-class InvalidUrlException extends DispatcherException {
-  
+class ErrorCode extends DispatcherException {
+  /**
+   * @var int
+   */
+  const BAD_REQUEST = 400;
+  /**
+   * @var int
+   */
+  const UNAUTHORIZED = 401;
+  /**
+   * @var int
+   */
+  const PAYMENT_REQUIRED = 402;
+  /**
+   * @var int
+   */
+  const FORBIDDEN = 403;
+  /**
+   * @var int
+   */
+  const NOT_FOUND = 404;
+  /**
+   * @var int
+   */
+  const METHOD_NOT_ALLOWED = 405;
+  /**
+   * @var int
+   */
+  const INTERNAL_SERVER_ERROR = 500;
+  /**
+   * @var int
+   */
+  const NOT_IMPLEMENTED = 501;
+
+  /**
+   *
+   * @param int $code See the constants defined in this class
+   * @param string $message
+   */
+  public function __construct($code, $message = null, $previous = null) {
+    parent::__construct($message, $code, $previous);
+  }
+
 }
 
 /**

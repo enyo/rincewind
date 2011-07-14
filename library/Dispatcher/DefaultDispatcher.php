@@ -73,7 +73,7 @@ class DefaultDispatcher implements Dispatcher {
       }
 
       $errorDuringRender = null;
-      $errorCode = null;
+      $errorCode = ErrorCode::INTERNAL_SERVER_ERROR;
       $controller->initData();
 
       try {
@@ -143,9 +143,9 @@ class DefaultDispatcher implements Dispatcher {
           die('<h1 class="error">' . $e->getMessage() . '</h1>');
         }
       }
-      catch(InvalidUrlException $e) {
+      catch(ErrorCode $e) {
         $errorDuringRender = true;
-        $errorCode = 404;
+        $errorCode = $e->getCode();
       }
       catch (DispatcherInfoException $e) {
         $errorDuringRender = true;

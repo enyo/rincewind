@@ -378,12 +378,11 @@ abstract class Controller {
 
   /**
    * Renders the error site.
+   * @param int $errorCode
+   * @param bool $output
    */
-  public function renderError($errorCode = null, $output = true) {
-    $templateName = 'error';
-    if ($errorCode) {
-      $templateName .= '.' . $errorCode;
-    }
+  public function renderError($errorCode, $output = true) {
+    $templateName = 'errors/error.' . $errorCode;
     $this->setTemplateName($templateName);
     $this->render($output);
   }

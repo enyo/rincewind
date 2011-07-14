@@ -1,10 +1,10 @@
 <?php
 
-require_once 'PHPUnit/Framework.php';
 
 require_once dirname(__FILE__) . '/../../setup.php';
 
-require_once RINCEWIND_PATH . 'Dao/Dao.php';
+require_class('Dao');
+require_class('Record');
 
 /**
  * Test class for Record.
@@ -22,9 +22,9 @@ class Record_LazyLoading_Test extends PHPUnit_Framework_TestCase {
   }
 
   public function testLoadPassesOnlyIdIfExistsInDatabase() {
-    $record = new Record(array('id' => 4, 'name' => 'test'), $this->dao, TRUE);
+    $record = new Record(array('id' => 4, 'name' => 'test'), $this->dao, true);
     $this->dao->expects($this->any())->method('getAttributes')->will($this->returnValue(array('id' => Dao::INT, 'name' => Dao::STRING)));
-    $this->dao->expects($this->once())->method('getData')->with(array('id' => 4));
+    $this->dao->expects($this->once())->method('getData')->with(array('id' => 4))->will($this->returnValue(array()));
     $record->load();
   }
 

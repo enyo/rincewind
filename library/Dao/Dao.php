@@ -18,11 +18,6 @@ include dirname(__FILE__) . '/DaoInterface.php';
 include dirname(__FILE__) . '/DaoAttributeAssignment.php';
 
 /**
- * Loading the Record Class
- */
-include dirname(dirname(__FILE__)) . '/Record/Record.php';
-
-/**
  * Loading the Exceptions
  */
 include dirname(__FILE__) . '/DaoExceptions.php';
@@ -38,9 +33,14 @@ include dirname(__FILE__) . '/DaoKeyListIterator.php';
 include dirname(__FILE__) . '/DaoHashListIterator.php';
 
 /**
+ * Loading the Record Class
+ */
+require_class('Record');
+
+/**
  * Loading the Date Class
  */
-if ( ! class_exists('Date', false)) include dirname(dirname(__FILE__)) . '/Date/Date.php';
+require_class('Date');
 
 /**
  * This abstract base class for all Daos.
@@ -157,7 +157,7 @@ abstract class Dao implements DaoInterface {
     $this->defaultValueAttributes = array_merge($this->defaultValueAttributes, $this->additionalDefaultValueAttributes());
     $this->attributeImportMapping = array_merge($this->attributeImportMapping, $this->additionalAttributeImportMapping());
 
-    if ( ! $this->resourceName) {
+    if (!$this->resourceName) {
       throw new DaoException('No resource name provided in class ' . get_class($this) . '.');
     }
     if (count($this->attributes) === 0) {
@@ -309,7 +309,7 @@ abstract class Dao implements DaoInterface {
    * @uses $references
    */
   public function getReference($attributeName) {
-    if ( ! isset($this->references[$attributeName])) {
+    if (!isset($this->references[$attributeName])) {
       if ($this->getAttributeType($attributeName) !== Dao::REFERENCE) {
         Log::fatal("Can't create a reference for an attribute that is not of type Dao::REFERENCE.", 'Dao', array('Resource' => $this->getResourceName(), 'Attribute' => $attributeName));
         throw new DaoException("Can't create the reference for attribute $attributeName.");
@@ -317,13 +317,14 @@ abstract class Dao implements DaoInterface {
 
       $methodName = 'get' . ucfirst($attributeName) . 'Reference';
 
-      if ( ! method_exists($this, $methodName)) {
+      if (!method_exists($this, $methodName)) {
         Log::fatal("Can't create a reference, because $methodName does not exist.", 'Dao', array('Resource' => $this->getResourceName(), 'Attribute' => $attributeName));
         throw new DaoException("The method $methodName does not exist to create the reference.");
       }
 
       $reference = $this->$methodName();
-      if ( ! $reference || ! is_a($reference, 'DaoReference')) trigger_error('The reference returned by ' . $this->resourceName . '/' . $methodName . ' is null or invalid.', E_USER_ERROR);
+      if (!$reference || !is_a($reference, 'DaoReference'))
+        trigger_error('The reference returned by ' . $this->resourceName . '/' . $methodName . ' is null or invalid.', E_USER_ERROR);
       $reference->setSourceDao($this);
       return $this->references[$attributeName] = $reference;
     }
@@ -388,9 +389,11 @@ abstract class Dao implements DaoInterface {
    * @return Record
    */
   public function get($map = null, $exportValues = true, $resourceName = null) {
-    if ( ! $map) return $this->getRawRecord();
+    if (!$map)
+      return $this->getRawRecord();
     $record = $this->find($map, $exportValues, $resourceName);
-    if ( ! $record) throw new DaoNotFoundException('Did not find any record.');
+    if (!$record)
+      throw new DaoNotFoundException('Did not find any record.');
     return $record;
   }
 
@@ -404,7 +407,8 @@ abstract class Dao implements DaoInterface {
    */
   public function find($map, $exportValues = true, $resourceName = null) {
     $data = $this->findData($map, $exportValues, $resourceName);
-    if ( ! $data) return null;
+    if (!$data)
+      return null;
     return $this->getRecordFromPreparedData($data);
   }
 
@@ -417,7 +421,8 @@ abstract class Dao implements DaoInterface {
    */
   public function getData($map = null, $exportValues = true, $resourceName = null) {
     $data = $this->findData($map, $exportValues, $resourceName);
-    if ( ! $data) throw new DaoNotFoundException('Did not find any record.');
+    if (!$data)
+      throw new DaoNotFoundException('Did not find any record.');
     return $data;
   }
 
@@ -439,11 +444,9 @@ abstract class Dao implements DaoInterface {
     if (is_int($map)) {
       $id = $map;
       $map = array('id' => $map);
-    }
-    elseif (is_array($map) && array_key_exists('id', $map)) {
+    } elseif (is_array($map) && array_key_exists('id', $map)) {
       $id = $map['id'];
-    }
-    elseif (is_a($map, 'Record')) {
+    } elseif (is_a($map, 'Record')) {
       $id = $map->id;
     }
 
@@ -460,7 +463,8 @@ abstract class Dao implements DaoInterface {
 
     $data = $this->doFindData($map, $exportValues, $resourceName);
 
-    if ( ! $data) return null;
+    if (!$data)
+      return null;
 
     $data = $this->prepareDataForRecord($data);
 
@@ -577,8 +581,10 @@ abstract class Dao implements DaoInterface {
    * @return int null if the attribute does not exist.
    */
   public function getAttributeType($attributeName) {
-    if (isset($this->attributes[$attributeName])) return $this->attributes[$attributeName];
-    else return null;
+    if (isset($this->attributes[$attributeName]))
+      return $this->attributes[$attributeName];
+    else
+      return null;
   }
 
   /**
@@ -814,7 +820,7 @@ abstract class Dao implements DaoInterface {
    * @return bool
    */
   public function notNull($attributeName) {
-    return ! in_array($attributeName, $this->nullAttributes);
+    return!in_array($attributeName, $this->nullAttributes);
   }
 
   /**
@@ -841,10 +847,12 @@ abstract class Dao implements DaoInterface {
     $attributes = array();
     $id = null;
     foreach ($this->attributes as $attributeName => $type) {
-      if ($type === Dao::IGNORE) continue;
+      if ($type === Dao::IGNORE)
+        continue;
       if ($type === Dao::REFERENCE) {
         $reference = $this->getReference($attributeName);
-        if ( ! $reference->export()) continue;
+        if (!$reference->export())
+          continue;
         $value = $record->getDirectly($attributeName);
       }
       else {
@@ -879,8 +887,7 @@ abstract class Dao implements DaoInterface {
             $addToAttributes = true;
             $value = $record->getDirectly($attributeName);
           }
-        }
-        else {
+        } else {
           $addToAttributes = true;
           $value = $record->get($attributeName);
         }
@@ -918,7 +925,8 @@ abstract class Dao implements DaoInterface {
    * @return Record
    */
   public function getRecordFromData($data, $existsInDatabase = true, $prepareData = true) {
-    if ($prepareData === true) $data = $this->prepareDataForRecord($data);
+    if ($prepareData === true)
+      $data = $this->prepareDataForRecord($data);
     return $this->getRecordFromPreparedData($data);
   }
 
@@ -947,7 +955,8 @@ abstract class Dao implements DaoInterface {
 
     $neededValues = $this->attributes;
 
-    if ( ! is_array($data)) trigger_error('The data provided was not an array (' . $this->resourceName . ').', E_USER_ERROR);
+    if (!is_array($data))
+      trigger_error('The data provided was not an array (' . $this->resourceName . ').', E_USER_ERROR);
 
     foreach ($data as $attributeName => $value) {
       $attributeName = $this->importAttributeName($attributeName);
@@ -956,13 +965,11 @@ abstract class Dao implements DaoInterface {
         if ($this->attributes[$attributeName] !== Dao::IGNORE) {
           $recordData[$attributeName] = $this->importValue($attributeName, $value, $this->attributes[$attributeName], $this->notNull($attributeName));
         }
-      }
-      elseif (array_key_exists($attributeName, $this->additionalAttributes)) {
+      } elseif (array_key_exists($attributeName, $this->additionalAttributes)) {
         if ($this->additionalAttributes[$attributeName] !== Dao::IGNORE) {
           $recordData[$attributeName] = $this->importValue($attributeName, $value, $this->additionalAttributes[$attributeName], $this->notNull($attributeName));
         }
-      }
-      else {
+      } else {
         $trace = debug_backtrace();
         trigger_error('The type for attribute "' . $attributeName . '" (resource: "' . $this->resourceName . '") is not defined', E_USER_WARNING);
       }
@@ -973,8 +980,7 @@ abstract class Dao implements DaoInterface {
           $trace = debug_backtrace();
           trigger_error('The attribute "' . $attributeName . '" (resource: "' . $this->resourceName . '") was not transmitted from data source', E_USER_WARNING);
           $recordData[$attributeName] = $this->coerce($attributeName, null, $type, false, $quiet = true);
-        }
-        else {
+        } else {
           $recordData[$attributeName] = null;
         }
       }
@@ -1001,8 +1007,8 @@ abstract class Dao implements DaoInterface {
     foreach ($this->attributes as $attributeName => $type) {
       if (in_array($attributeName, $this->nullAttributes) || in_array($attributeName, $this->defaultValueAttributes)) {
         $data[$attributeName] = null;
-      }
-      elseif ($type != Dao::IGNORE) $data[$attributeName] = $this->coerce($attributeName, null, $type, $allowNull = false, $quiet = true);
+      } elseif ($type != Dao::IGNORE)
+        $data[$attributeName] = $this->coerce($attributeName, null, $type, $allowNull = false, $quiet = true);
     }
     return $this->getRecordFromPreparedData($data, $existsInDatabase = false);
   }
@@ -1021,16 +1027,16 @@ abstract class Dao implements DaoInterface {
    * @return mixed
    */
   public function importValue($attributeName, $externalValue, $type, $notNull = true) {
-    if ( ! $notNull && $externalValue === null) {
+    if (!$notNull && $externalValue === null) {
       return null;
     }
 
     try {
       $importMethod = 'import' . (is_array($type) ? 'Enum' : $type);
-      if ( ! method_exists($this, $importMethod)) throw new DaoException('The import method ' . $importMethod . ' does not exist.');
+      if (!method_exists($this, $importMethod))
+        throw new DaoException('The import method ' . $importMethod . ' does not exist.');
       return $this->$importMethod($externalValue, $type, $attributeName);
-    }
-    catch (DaoException $e) {
+    } catch (DaoException $e) {
       throw new DaoException('There was an error importing the attribute "' . $attributeName . '" in resource "' . $this->resourceName . '": ' . $e->getMessage());
     }
   }
@@ -1107,7 +1113,8 @@ abstract class Dao implements DaoInterface {
    * @return string
    */
   public function importEnum($value, $list) {
-    if ( ! in_array($value, $list)) throw new DaoException("The value provided is not defined in the enum.");
+    if (!in_array($value, $list))
+      throw new DaoException("The value provided is not defined in the enum.");
     return (string) $value;
   }
 
@@ -1118,8 +1125,10 @@ abstract class Dao implements DaoInterface {
    * @return bool
    */
   public function importBool($value) {
-    if ( ! $value) return false;
-    if (is_int($value)) return true;
+    if (!$value)
+      return false;
+    if (is_int($value))
+      return true;
     $value = strtolower($value);
     switch ($value) {
       case 'false': case 'f': case '0': return false;
@@ -1148,7 +1157,8 @@ abstract class Dao implements DaoInterface {
    * @return mixed
    */
   public function importReference($value, $type, $attributeName) {
-    if ($value === null) throw new DaoException('Reference is marked as not null, but the value to import is null.');
+    if ($value === null)
+      throw new DaoException('Reference is marked as not null, but the value to import is null.');
     return $this->getReference($attributeName)->importValue($value);
   }
 
@@ -1166,22 +1176,23 @@ abstract class Dao implements DaoInterface {
    * @return mixed
    */
   public function exportValue($attributeName, $internalValue, $type, $notNull = true) {
-    if ( ! $notNull && $internalValue === NULL) return $this->exportNull();
+    if (!$notNull && $internalValue === NULL)
+      return $this->exportNull();
 
-    if ($type === Dao::IGNORE) return $this->exportNull();
+    if ($type === Dao::IGNORE)
+      return $this->exportNull();
 
     try {
       if (is_array($type)) {
         // Enum
         $exportMethod = 'exportEnum';
-      }
-      else {
+      } else {
         $exportMethod = 'export' . $type;
-        if ( ! method_exists($this, $exportMethod)) throw new DaoException('The export method ' . $exportMethod . ' does not exist.');
+        if (!method_exists($this, $exportMethod))
+          throw new DaoException('The export method ' . $exportMethod . ' does not exist.');
       }
       return $this->$exportMethod($internalValue, $attributeName, $type);
-    }
-    catch (DaoException $e) {
+    } catch (DaoException $e) {
       throw new DaoException('There was an error exporting the attribute "' . $attributeName . '" in resource "' . $this->resourceName . '": ' . $e->getMessage());
     }
   }
@@ -1290,7 +1301,8 @@ abstract class Dao implements DaoInterface {
    * @return string
    */
   public function exportEnum($value, $attributeName, $list) {
-    if ( ! in_array($value, $list)) throw new DaoWrongValueException("The value provided is not defined in the enum.");
+    if (!in_array($value, $list))
+      throw new DaoWrongValueException("The value provided is not defined in the enum.");
     return $this->exportString($value);
   }
 
@@ -1340,19 +1352,21 @@ abstract class Dao implements DaoInterface {
       }
 
       if (is_array($type)) {
-        if ( ! count($type)) trigger_error("Invalid enum for '" . $this->getResourceName() . ".$attributeName'.", E_USER_ERROR);
+        if (!count($type))
+          trigger_error("Invalid enum for '" . $this->getResourceName() . ".$attributeName'.", E_USER_ERROR);
         $coerceMethod = 'coerceEnum';
       }
       else {
         $coerceMethod = 'coerce' . $type;
-        if ( ! method_exists($this, $coerceMethod)) throw new DaoException('The coerce method ' . $coerceMethod . ' does not exist.');
+        if (!method_exists($this, $coerceMethod))
+          throw new DaoException('The coerce method ' . $coerceMethod . ' does not exist.');
       }
 
       return $this->$coerceMethod($value, $attributeName, $type);
-    }
-    catch (DaoCoerceException $e) {
+    } catch (DaoCoerceException $e) {
       $message = $e->getMessage();
-      if ( ! $quiet && ! empty($message)) trigger_error($message . " (" . $this->getResourceName() . ".$attributeName)", E_USER_WARNING);
+      if (!$quiet && !empty($message))
+        trigger_error($message . " (" . $this->getResourceName() . ".$attributeName)", E_USER_WARNING);
       return $allowNull ? null : $e->getFallbackValue();
     }
   }
@@ -1367,9 +1381,11 @@ abstract class Dao implements DaoInterface {
    * @throws DaoCoerceException
    */
   public function coerceId($id) {
-    if (is_object($id) && $id instanceof Record) return $id->get('id');
+    if (is_object($id) && $id instanceof Record)
+      return $id->get('id');
 
-    if (is_int($id) || is_numeric($id)) return (int) $id;
+    if (is_int($id) || is_numeric($id))
+      return (int) $id;
 
     throw new DaoCoerceException(null, "Invalid id provided.");
   }
@@ -1382,7 +1398,8 @@ abstract class Dao implements DaoInterface {
    * @throws DaoCoerceException
    */
   public function coerceEnum($value, $attributeName, $list) {
-    if (in_array($value, $list)) return $value;
+    if (in_array($value, $list))
+      return $value;
 
     throw new DaoCoerceException($list[0], "Invalid enum value provided.");
   }
@@ -1393,8 +1410,10 @@ abstract class Dao implements DaoInterface {
    * @throws DaoCoerceException
    */
   public function coerceBool($value) {
-    if ($value === true || $value === 'true' || $value === '1' || $value === 1) return true;
-    if ($value === false || $value === 'false' || $value === '0' || $value === 0) return false;
+    if ($value === true || $value === 'true' || $value === '1' || $value === 1)
+      return true;
+    if ($value === false || $value === 'false' || $value === '0' || $value === 0)
+      return false;
 
     throw new DaoCoerceException(true, "Invalid boolean provided.");
   }
@@ -1418,7 +1437,8 @@ abstract class Dao implements DaoInterface {
    * @throws DaoCoerceException
    */
   public function coerceFloat($value) {
-    if (is_float($value) || is_numeric($value)) return (float) $value;
+    if (is_float($value) || is_numeric($value))
+      return (float) $value;
 
     throw new DaoCoerceException(0.0, "Invalid float provided.");
   }
@@ -1429,9 +1449,11 @@ abstract class Dao implements DaoInterface {
    * @throws DaoCoerceException
    */
   public function coerceDate($value) {
-    if ($value instanceof Date) return $value->getTimestamp();
+    if ($value instanceof Date)
+      return $value->getTimestamp();
 
-    if (is_numeric($value)) return (int) $value;
+    if (is_numeric($value))
+      return (int) $value;
 
     throw new DaoCoerceException(time(), "Invalid date provided.");
   }
@@ -1452,7 +1474,8 @@ abstract class Dao implements DaoInterface {
    * @throws DaoCoerceException
    */
   public function coerceString($value) {
-    if (is_string($value) || is_numeric($value)) return (string) $value;
+    if (is_string($value) || is_numeric($value))
+      return (string) $value;
 
     throw new DaoCoerceException('', "Invalid date provided.");
   }
@@ -1463,7 +1486,8 @@ abstract class Dao implements DaoInterface {
    * @throws DaoCoerceException
    */
   public function coerceSequence($value) {
-    if (is_array($value)) return $value;
+    if (is_array($value))
+      return $value;
 
     throw new DaoCoerceException(array(), "Invalid sequence provided.");
   }
@@ -1489,21 +1513,24 @@ abstract class Dao implements DaoInterface {
    * @return array An array containing all attributes to sort by, escaped, and ASC or DESC appended. E.g.: array('name DESC', 'age');
    */
   protected function interpretSortVariable($sort) {
-    if ( ! is_array($sort)) {
+    if (!is_array($sort)) {
       return $this->attributeExists($sort) ? array($this->exportAttributeName($sort)) : null;
     }
 
-    if (count($sort) == 0) return null;
+    if (count($sort) == 0)
+      return null;
 
     $attributeArray = array();
     if (self::isVector($sort)) {
       foreach ($sort as $attributeName) {
-        if ($this->attributeExists($attributeName)) $attributeArray[] = $this->exportAttributeName($attributeName);
+        if ($this->attributeExists($attributeName))
+          $attributeArray[] = $this->exportAttributeName($attributeName);
       }
     }
     else {
       foreach ($sort as $attributeName => $sort) {
-        if ($this->attributeExists($attributeName)) $attributeArray[] = $this->exportAttributeName($attributeName) . ($sort == Dao::DESC ? ' desc' : '');
+        if ($this->attributeExists($attributeName))
+          $attributeArray[] = $this->exportAttributeName($attributeName) . ($sort == Dao::DESC ? ' desc' : '');
       }
     }
 

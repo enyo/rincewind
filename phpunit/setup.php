@@ -34,4 +34,5 @@ define('TESTS_PATH', dirname(__FILE__) . '/');
 
 define('RINCEWIND_PATH', dirname(dirname(__FILE__)) . '/library/');
 
+define('REQUIRED_RINCEWIND_VERSION', 20306);
 include RINCEWIND_PATH . 'rincewind.php';

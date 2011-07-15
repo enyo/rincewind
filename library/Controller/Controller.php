@@ -354,39 +354,6 @@ abstract class Controller {
     $this->model->assign($name, $value);
   }
 
-  /**
-   * Gets the data object from the Theme object, then calls initData() and extendData() with it. So when you write
-   * a specific Controller implementation, overwrite extendData() to put your own data inside.
-   *
-   * It then calls the processSite() method on the theme and returns the output.
-   *
-   * If $initalizationFailed is true, then extendDate is *not* called, and processSite
-   * is called with the error template name.
-   *
-   * @param bool $output If true, directly output the result, do not return it.
-   * @see extendData()
-   * @see Theme
-   * @see Theme::processSite()
-   * @todo handle errors in url parsing better!
-   */
-  public function render($output = true) {
-
-    $this->theme->processSite($this->getTemplateName(), $this->model, $output);
-  }
-
-  /**
-   * Renders the error site.
-   * @param int $errorCode
-   * @param bool $output
-   */
-  public function renderError($errorCode = null, $output = true) {
-    $templateName = 'errors/error';
-    if ($errorCode) {
-      $templateName .= '.' . $errorCode;
-    }
-    $this->setTemplateName($templateName);
-    $this->render($output);
-  }
 
   /**
    * eg: MyAccountController -> my_account

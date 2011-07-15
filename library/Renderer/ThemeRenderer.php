@@ -8,9 +8,9 @@
  * @package Renderer
  */
 /**
- * Including Theme interface
+ * Including Renderer interface
  */
-require_interface('Theme');
+require_interface('Renderer');
 
 /**
  * The renderer interface
@@ -19,7 +19,7 @@ require_interface('Theme');
  * @copyright Copyright (c) 2010, I-Netcompany
  * @package Renderer
  */
-abstract class ThemeRenderer implements Theme {
+abstract class ThemeRenderer implements Renderer {
 
   /**
    * @var Theme

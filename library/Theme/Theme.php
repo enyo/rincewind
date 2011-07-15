@@ -158,7 +158,7 @@ class Theme {
    * @return string
    */
   public function getTemplatesPath() {
-    return $this->getPatch('templates');
+    return $this->getPath('templates');
   }
 
   /**

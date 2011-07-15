@@ -39,10 +39,19 @@ interface Renderer {
    * Renders the data with the template.
    *
    * @param string $siteName
-   * @param mixed $data
+   * @param mixed $model
    * @param bool $output Whether it should return or output the rendered page.
    * @return string null if output = true
    */
-  public function render($templateName, $data, $output = true);
+  public function render($templateName, $model, $output = true);
+  /**
+   * Renders the data with the template.
+   *
+   * @param int $errorCode
+   * @param mixed $model
+   * @param bool $output Whether it should return or output the rendered page.
+   * @return string null if output = true
+   */
+  public function renderError($errorCode, $model, $output = true);
 }
 

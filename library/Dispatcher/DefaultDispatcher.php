@@ -25,14 +25,10 @@ require_interface('Dispatcher');
 class DefaultDispatcher implements Dispatcher {
 
   /**
-   * ControllerFactory
-   * 
    * @var type 
    */
   private $controllerFactory;
   /**
-   * Renderer
-   * 
    * @var Renderer
    */
   private $renderer;
@@ -50,10 +46,13 @@ class DefaultDispatcher implements Dispatcher {
   private $utils;
 
   /**
-   * @param ControllerFactory $controllerFactory 
-   * @param string $defaultControllerName
+   * @param ControllerFactory $controllerFactory
+   * @param Renderer $renderer
+   * @param Sanitizer $actionSanitizer
+   * @param UtilsFactory $utils
+   * @param string $defaultControllerName 
    */
-  public function __construct($controllerFactory, Renderer $renderer, Sanitizer $actionSanitizer, UtilsFactory $utils, $defaultControllerName = 'Home') {
+  public function __construct(ControllerFactory $controllerFactory, Renderer $renderer, Sanitizer $actionSanitizer, UtilsFactory $utils, $defaultControllerName = 'Home') {
     $this->controllerFactory = $controllerFactory;
     $this->renderer = $renderer;
     $this->defaultControllerName = $defaultControllerName;
@@ -68,6 +67,8 @@ class DefaultDispatcher implements Dispatcher {
   public function dispatch($skipControllerInitialization = false) {
     try {
 
+      // TODO: since the rendering is not done by the controller anymore, put the complete controller initialization in the try block.
+
       $controllerName = isset($_GET['controller']) ? trim($_GET['controller']) : $this->defaultControllerName;
 
       $controllerName = ucfirst(preg_replace('/\-([a-z])/e', 'strtoupper("$1")', $controllerName));
@@ -80,109 +81,113 @@ class DefaultDispatcher implements Dispatcher {
       }
 
       $errorDuringRender = null;
-      $errorCode = ErrorCode::INTERNAL_SERVER_ERROR;
-      $controller->initData();
+      $errorCode = null;
+
+      $model = $this->renderer->getModel();
 
       try {
-        // Try to dispatch to the actual action.
-        $actionParameters = explode('/', isset($_GET['action']) ? $_GET['action'] : 'index');
-
-        $action = $actionParameters[0];
-        array_shift($actionParameters);
-
-        if ($action{0} === '_')
-          throw new DispatcherInfoException('Tried to access method with underscore.', array('action' => $action));
-
-        $action = $this->actionSanitizer->sanitize($action);
-
         try {
-          // Check if the action is valid
-          $reflectionClass = new ReflectionClass($controller);
+          $controller->setModel($model);
+          $controller->initModel();
 
-          $actionMethod = $reflectionClass->getMethod($action);
+          // Try to dispatch to the actual action.
+          $actionParameters = explode('/', isset($_GET['action']) ? $_GET['action'] : 'index');
 
-          if ($action !== 'index' && (method_exists('Controller', $action) || !$actionMethod->isPublic() || ($actionMethod->class !== get_class($controller))))
-            throw new Exception();
-        }
-        catch (Exception $e) {
-          throw new DispatcherInfoException('Tried to access invalid action.', array('Action' => $action));
-        }
+          $action = $actionParameters[0];
+          array_shift($actionParameters);
 
-        $controller->setAction($action);
+          if ($action{0} === '_') {
+            throw new ErrorCode(ErrorCode::NOT_FOUND, 'Tried to access action with underscore.');
+          }
 
-        $parameters = array();
-        $stringParameters = array();
+          $action = $this->actionSanitizer->sanitize($action);
 
-        $i = 0;
-        foreach ($actionMethod->getParameters() as $parameter) {
-          $actionParameter = isset($actionParameters[$i]) ? $actionParameters[$i] : null;
+          try {
+            // Check if the action is valid
+            $reflectionClass = new ReflectionClass($controller);
 
-          if ($actionParameter === null) {
-            if (!$parameter->isDefaultValueAvailable()) {
-              throw new DispatcherInfoException('Not all parameters supplied.');
+            $actionMethod = $reflectionClass->getMethod($action);
+
+            if ($action !== 'index' && (method_exists('Controller', $action) || !$actionMethod->isPublic() || ($actionMethod->class !== get_class($controller))))
+              throw new DispatcherException();
+          }
+          catch (DispatcherException $e) {
+            throw new ErrorCode(ErrorCode::NOT_FOUND, 'Tried to access invalid action.');
+          }
+
+          $controller->setAction($action);
+
+          $parameters = array();
+          $stringParameters = array();
+
+          $i = 0;
+          foreach ($actionMethod->getParameters() as $parameter) {
+            $actionParameter = isset($actionParameters[$i]) ? $actionParameters[$i] : null;
+
+            if ($actionParameter === null) {
+              if (!$parameter->isDefaultValueAvailable()) {
+                throw new ErrorCode(ErrorCode::BAD_REQUEST, 'Not all parameters supplied.');
+              }
+              // Well: there is no more additional query, and apparently the rest of the parameters are optional, so continue.
+              continue;
             }
-            // Well: there is no more additional query, and apparently the rest of the parameters are optional, so continue.
-            continue;
+            if ($parameterTypeClass = $parameter->getClass()) {
+              if (!$parameterTypeClass->isSubclassOf('RW_Type')) {
+                throw new ErrorCode(ErrorCode::BAD_REQUEST, 'Invalid parameter type.');
+              }
+              $parameterTypeClassName = $parameterTypeClass->getName();
+              $parameters[] = new $parameterTypeClassName($actionParameter);
+            }
+            else {
+              $parameters[] = $actionParameter;
+            }
+            $stringParameters[] = $actionParameter;
+            $i++;
           }
-          if ($parameterTypeClass = $parameter->getClass()) {
-            if (!$parameterTypeClass->isSubclassOf('RW_Type'))
-              throw new Exception('Invalid parameter type.');
-            $parameterTypeClassName = $parameterTypeClass->getName();
-            $parameters[] = new $parameterTypeClassName($actionParameter);
+          $controller->setActionParameters($stringParameters);
+
+          if (!$skipControllerInitialization)
+            $controller->initialize();
+
+          // This actually calls the apropriate action.
+          call_user_func_array(array($controller, $action), $parameters);
+
+          $controller->extendModel();
+
+          try {
+            $model->assign('errorMessages', $this->utils->message()->getErrorMessages());
+            $model->assign('successMessages', $this->utils->message()->getSuccessMessages());
+            $this->renderer->render($controller->getTemplateName(), $model, true);
           }
-          else {
-            $parameters[] = $actionParameter;
+          catch (Exception $e) {
+            throw new ErrorCode(ErrorCode::INTERNAL_SERVER_ERROR, 'Error during render.');
           }
-          $stringParameters[] = $actionParameter;
-          $i++;
         }
-        $controller->setActionParameters($stringParameters);
-
-        if (!$skipControllerInitialization)
-          $controller->initialize();
-
-        // This actually calls the apropriate action.
-        call_user_func_array(array($controller, $action), $parameters);
-
-        $controller->extendData();
-
-        $this->assign('errorMessages', $this->messageDelegate->getErrorMessages());
-        $this->assign('successMessages', $this->messageDelegate->getSuccessMessages());
-
-        try {
-
-          $controller->render(true);
+        catch (ErrorMessageException $e) {
+          $errorDuringRender = true;
+          $this->utils->message()->addErrorMessage($e->getMessage());
         }
         catch (Exception $e) {
-          // TODO: Maybe handle this differently?
-          die('<h1 class="error">' . $e->getMessage() . '</h1>');
+          $additionalInfo = array();
+          $additionalInfo['controllerName'] = $controllerName;
+          $additionalInfo['action'] = $action;
+          $additionalInfo['exceptionThrown'] = get_class($e);
+          $additionalInfo['error'] = $e->getMessage();
+          Log::warning($e->getMessage(), 'Dispatcher', $additionalInfo);
+          throw new ErrorCode(ErrorCode::INTERNAL_SERVER_ERROR);
         }
       }
       catch (ErrorCode $e) {
+        // All other exceptions have already been caught.
         $errorDuringRender = true;
         $errorCode = $e->getCode();
-      }
-      catch (DispatcherInfoException $e) {
-        $errorDuringRender = true;
-        $additionalInfo = $e->getAdditionalInfo();
-        $additionalInfo['controllerName'] = $controllerName;
-        Log::warning($e->getMessage(), 'Dispatcher', $additionalInfo);
-      }
-      catch (ErrorMessageException $e) {
-        $errorDuringRender = true;
-        $this->utils->message()->addErrorMessage($e->getMessage());
-      }
-      catch (Exception $e) {
-        $errorDuringRender = true;
-        $additionalInfo = array();
-        $additionalInfo['controllerName'] = $controllerName;
-        $additionalInfo['exceptionThrown'] = get_class($e);
-        $additionalInfo['error'] = $e->getMessage();
-        Log::warning($e->getMessage(), 'Dispatcher', $additionalInfo);
+        $e->writeHttpHeader();
       }
 
       if ($errorDuringRender) {
-        $controller->renderError($errorCode);
+        $model->assign('errorMessages', $this->utils->message()->getErrorMessages());
+        $model->assign('successMessages', $this->utils->message()->getSuccessMessages());
+        $this->renderer->renderError($errorCode, $model, true);
       }
     }
     catch (Exception $e) {

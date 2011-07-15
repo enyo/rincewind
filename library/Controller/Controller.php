@@ -67,7 +67,7 @@ abstract class Controller {
    *
    * @var Data
    */
-  protected $currentData;
+  protected $model;
   /**
    *
    * @var LocationDelegate
@@ -351,7 +351,7 @@ abstract class Controller {
    * @param mixed $value 
    */
   protected function assign($name, $value) {
-    $this->currentData->assign($name, $value);
+    $this->model->assign($name, $value);
   }
 
   /**
@@ -370,10 +370,8 @@ abstract class Controller {
    * @todo handle errors in url parsing better!
    */
   public function render($output = true) {
-    $this->assign('errorMessages', $this->messageDelegate->getErrorMessages());
-    $this->assign('successMessages', $this->messageDelegate->getSuccessMessages());
 
-    $this->theme->processSite($this->getTemplateName(), $this->currentData, $output);
+    $this->theme->processSite($this->getTemplateName(), $this->model, $output);
   }
 
   /**
@@ -401,14 +399,24 @@ abstract class Controller {
   }
 
   /**
-   * Initializes the currentData object.
-   * 
-   * Here the basic information is put in a Dwoo_Data object.
-   * 
-   * @uses currentData
+   * @param mixed $model 
    */
-  public function initData() {
-    $this->currentData = $this->theme->getDataObject();
+  public function setModel($model) {
+    $this->model = $model;
+  }
+
+  /**
+   * @return mixed
+   */
+  public function getModel() {
+    return $this->model;
+  }
+  
+  /**
+   * Initializes the model with basic information
+   */
+  public function initModel() {
+    
   }
 
   /**
@@ -416,7 +424,7 @@ abstract class Controller {
    * 
    * @uses currentData
    */
-  public function extendData() {
+  public function extendModel() {
     
   }
 

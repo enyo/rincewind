@@ -145,6 +145,7 @@ class DefaultDispatcher implements Dispatcher {
       }
       catch(ErrorCode $e) {
         $errorDuringRender = true;
+        $e->writeHttpHeader();
         $errorCode = $e->getCode();
       }
       catch (DispatcherInfoException $e) {

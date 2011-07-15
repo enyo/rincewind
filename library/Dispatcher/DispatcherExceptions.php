@@ -10,38 +10,6 @@ class DispatcherException extends Exception {
 }
 
 /**
- * The Dispatcher .
- *
- * @author Matthias Loitsch <developer@ma.tthias.com>
- * @copyright Copyright (c) 2010, Matthias Loitsch
- * @package Dispatcher
- */
-class DispatcherInfoException extends DispatcherException {
-
-  /**
-   * @var array
-   */
-  protected $additionalInfo;
-
-  /**
-   * @param string $message
-   * @param array $additionalInfo 
-   */
-  public function __construct($message, array $additionalInfo = array()) {
-    parent::__construct($message);
-    $this->additionalInfo = $additionalInfo;
-  }
-
-  /**
-   * @return array
-   */
-  public function getAdditionalInfo() {
-    return $this->additionalInfo;
-  }
-
-}
-
-/**
  * Can be thrown to add an error message.
  *
  * @author Matthias Loitsch <matthias@loitsch.com>
@@ -49,5 +17,14 @@ class DispatcherInfoException extends DispatcherException {
  * @package Controller
  */
 class ErrorMessageException extends DispatcherException {
-  
+
+  /**
+   * @param string $message
+   * @param int $code
+   * @param type $previous 
+   */
+  public function __construct($message, $code = null, $previous = null) {
+    parent::__construct($message, $code, $previous);
+  }
+
 }

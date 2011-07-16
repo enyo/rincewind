@@ -7,10 +7,13 @@
  * @copyright Copyright (c) 2010, Matthias Loitsch
  * @package Dispatcher
  */
+
 /**
- * Including exceptions
+ * DispatcherException gets thrown when the dispatcher tries to dispatch
  */
-require_class('DispatcherException', dirname(__FILE__) . '/DispatcherExceptions.php');
+class DispatcherException extends Exception {
+  
+}
 
 /**
  * The Dispatcher interface.

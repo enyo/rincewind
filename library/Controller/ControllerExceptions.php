@@ -29,6 +29,26 @@ class Error extends ControllerException {
 }
 
 /**
+ * Can be thrown to add an error message.
+ *
+ * @author Matthias Loitsch <matthias@loitsch.com>
+ * @copyright Copyright (c) 2010, I-Netcompany
+ * @package Controller
+ */
+class ErrorMessageException extends DispatcherException {
+
+  /**
+   * @param string $message
+   * @param int $code
+   * @param type $previous 
+   */
+  public function __construct($message, $code = null, $previous = null) {
+    parent::__construct($message, $code, $previous);
+  }
+
+}
+
+/**
  * Thrown when a http error code should be sent.
  *
  * @author Matthias Loitsch <matthias@loitsch.com>
@@ -60,6 +80,48 @@ class ErrorCode extends DispatcherException {
    * @var int
    */
   const NOT_IMPLEMENTED = 501;
+
+  /**
+   * Throws a 400 ErrorCode exception
+   */
+  static function badRequest() {
+    throw new ErrorCode(self::BAD_REQUEST);
+  }
+
+  /**
+   * Throws a 403 ErrorCode exception
+   */
+  static function forbidden() {
+    throw new ErrorCode(self::FORBIDDEN);
+  }
+
+  /**
+   * Throws a 404 ErrorCode exception
+   */
+  static function notFound() {
+    throw new ErrorCode(self::NOT_FOUND);
+  }
+
+  /**
+   * Throws a 405 ErrorCode exception
+   */
+  static function methodNotAllowed() {
+    throw new ErrorCode(self::METHOD_NOT_ALLOWED);
+  }
+
+  /**
+   * Throws a 500 ErrorCode exception
+   */
+  static function internalServerError() {
+    throw new ErrorCode(self::INTERNAL_SERVER_ERROR);
+  }
+
+  /**
+   * Throws a 501 ErrorCode exception
+   */
+  static function notImplemented() {
+    throw new ErrorCode(self::NOT_IMPLEMENTED);
+  }
 
   /**
    *
@@ -95,7 +157,7 @@ class ErrorCode extends DispatcherException {
         $text = 'Not Implemented';
         break;
     }
-    header('HTTP/1.0 ' . $this->code . ' ' .$text);
+    header('HTTP/1.0 ' . $this->code . ' ' . $text);
   }
 
 }

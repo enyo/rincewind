@@ -19,33 +19,32 @@ require_interface('Renderer');
  * @copyright Copyright (c) 2010, I-Netcompany
  * @package Renderer
  */
-abstract class ThemeRenderer implements Renderer {
+abstract class BaseRenderer implements Renderer {
 
   /**
-   * @var Theme
+   * @var string
    */
-  protected $theme;
+  protected $templatesPath;
 
   /**
-   * @param Theme $theme 
+   * @param string $templatesPath
    */
-  public function __construct(Theme $theme) {
-    $this->theme = $theme;
-  }
-
-  /**
-   * @param string $templateName
-   * @return string
-   */
-  protected function getTemplateUri($templateName) {
-    return $this->theme->getTemplateUri($templateName);
+  public function __construct($templatesPath = null) {
+    $this->templatesPath = $templatesPath;
   }
 
   /**
    * @return string
    */
-  protected function getTemplatesPath() {
-    return $this->theme->getTemplatesPath();
+  public function getTemplatesPath() {
+    return $this->templatesPath;
+  }
+
+  /**
+   * @param string $templatesPath 
+   */
+  public function setTemplatesPath($templatesPath) {
+    $this->templatesPath = $templatesPath;
   }
 
 }

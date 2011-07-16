@@ -33,6 +33,10 @@ class DefaultDispatcher implements Dispatcher {
    */
   private $renderer;
   /**
+   * @var Theme
+   */
+  private $theme;
+  /**
    * @var string
    */
   private $defaultControllerName;
@@ -48,13 +52,15 @@ class DefaultDispatcher implements Dispatcher {
   /**
    * @param ControllerFactory $controllerFactory
    * @param Renderer $renderer
+   * @param Theme $theme
    * @param Sanitizer $actionSanitizer
    * @param UtilsFactory $utils
    * @param string $defaultControllerName 
    */
-  public function __construct(ControllerFactory $controllerFactory, Renderer $renderer, Sanitizer $actionSanitizer, UtilsFactory $utils, $defaultControllerName = 'Home') {
+  public function __construct(ControllerFactory $controllerFactory, Renderer $renderer, Theme $theme, Sanitizer $actionSanitizer, UtilsFactory $utils, $defaultControllerName = 'Home') {
     $this->controllerFactory = $controllerFactory;
     $this->renderer = $renderer;
+    $this->theme = $theme;
     $this->defaultControllerName = $defaultControllerName;
     $this->actionSanitizer = $actionSanitizer;
     $this->utils = $utils;
@@ -67,28 +73,33 @@ class DefaultDispatcher implements Dispatcher {
   public function dispatch($skipControllerInitialization = false) {
     try {
 
-      // TODO: since the rendering is not done by the controller anymore, put the complete controller initialization in the try block.
+      $model = $this->renderer->getModel();
+      $this->renderer->setTemplatesPath($this->theme->getTemplatesPath());
 
       $controllerName = isset($_GET['controller']) ? trim($_GET['controller']) : $this->defaultControllerName;
 
       $controllerName = ucfirst(preg_replace('/\-([a-z])/e', 'strtoupper("$1")', $controllerName));
 
+      $invalidControllerName = false;
       try {
         $controller = $this->controllerFactory->get($controllerName);
       }
       catch (ControllerFactoryException $e) {
+        // Not failing just yet, so the model gets initialized.
+        $invalidControllerName = true;
         $controller = $this->controllerFactory->get($this->defaultControllerName);
       }
 
-      $errorDuringRender = null;
-      $errorCode = null;
-
-      $model = $this->renderer->getModel();
+      $controller->setModel($model);
+      $controller->initModel();
 
       try {
+        if ($invalidControllerName) {
+          ErrorCode::notFound();
+        }
         try {
-          $controller->setModel($model);
-          $controller->initModel();
+          $errorDuringRender = null;
+          $errorCode = null;
 
           // Try to dispatch to the actual action.
           $actionParameters = explode('/', isset($_GET['action']) ? $_GET['action'] : 'index');
@@ -111,7 +122,7 @@ class DefaultDispatcher implements Dispatcher {
             if ($action !== 'index' && (method_exists('Controller', $action) || !$actionMethod->isPublic() || ($actionMethod->class !== get_class($controller))))
               throw new DispatcherException();
           }
-          catch (DispatcherException $e) {
+          catch (Exception $e) {
             throw new ErrorCode(ErrorCode::NOT_FOUND, 'Tried to access invalid action.');
           }
 
@@ -131,7 +142,7 @@ class DefaultDispatcher implements Dispatcher {
               // Well: there is no more additional query, and apparently the rest of the parameters are optional, so continue.
               continue;
             }
-            if ($parameterTypeClass = $parameter->getClass()) {
+            if (($parameterTypeClass = $parameter->getClass()) != false) {
               if (!$parameterTypeClass->isSubclassOf('RW_Type')) {
                 throw new ErrorCode(ErrorCode::BAD_REQUEST, 'Invalid parameter type.');
               }
@@ -167,10 +178,14 @@ class DefaultDispatcher implements Dispatcher {
           $errorDuringRender = true;
           $this->utils->message()->addErrorMessage($e->getMessage());
         }
+        catch (ErrorCode $e) {
+          throw $e;
+        }
         catch (Exception $e) {
           $additionalInfo = array();
           $additionalInfo['controllerName'] = $controllerName;
-          $additionalInfo['action'] = $action;
+          if (isset($action))
+            $additionalInfo['action'] = $action;
           $additionalInfo['exceptionThrown'] = get_class($e);
           $additionalInfo['error'] = $e->getMessage();
           Log::warning($e->getMessage(), 'Dispatcher', $additionalInfo);
@@ -191,7 +206,13 @@ class DefaultDispatcher implements Dispatcher {
       }
     }
     catch (Exception $e) {
-      die('<h1 class="error">' . $e->getMessage() . '</h1>');
+      try {
+        Log::fatal('There has been a fatal error dispatching.', 'Dispatcher', array('error' => $e->getMessage()));
+        $this->renderer->renderFatalError(true);
+      }
+      catch (Exception $e) {
+        die('<h1 class="error">Fatal error...</h1>');
+      }
     }
   }
 

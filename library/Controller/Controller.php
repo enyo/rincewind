@@ -380,7 +380,13 @@ abstract class Controller {
   }
   
   /**
-   * Initializes the model with basic information
+   * Initializes the model with basic information.
+   * 
+   * This should not be controller or action specific!
+   * If something goes wrong during initModel(), renderFatalError() will be called
+   * on the renderer.
+   * Fatal errors are not pretty.
+   * 
    */
   public function initModel() {
     

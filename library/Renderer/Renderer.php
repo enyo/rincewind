@@ -34,7 +34,7 @@ interface Renderer {
    * @return mixed
    */
   public function getModel();
-  
+
   /**
    * Renders the data with the template.
    *
@@ -44,8 +44,12 @@ interface Renderer {
    * @return string null if output = true
    */
   public function render($templateName, $model, $output = true);
+
   /**
    * Renders the data with the template.
+   * This render method assumes that the model attribute is set and valid, and 
+   * there has been an error processing the action, not initializing the data.
+   * 
    *
    * @param int $errorCode
    * @param mixed $model
@@ -53,5 +57,20 @@ interface Renderer {
    * @return string null if output = true
    */
   public function renderError($errorCode, $model, $output = true);
+
+  
+  /**
+   * Gets called when there was a problem initializing the data.
+   * The template this renders should not access any data in the model.
+   * 
+   * @param bool $output
+   */
+  public function renderFatalError($output = true);
+
+
+  /**
+   * @param string $path
+   */
+  public function setTemplatesPath($path);
 }
 

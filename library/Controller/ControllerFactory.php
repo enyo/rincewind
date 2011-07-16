@@ -64,8 +64,7 @@ abstract class ControllerFactory {
   /**
    * Returns a specific controller, passing on all the objects the Factory got in the constructor.
    *
-   * This method also takes care of dependency injections. If it finds a method
-   * called setShopDaoFactory() on the siteController for instance, it injects the factory.
+   * This method also takes care of dependency injections.
    * 
    * @param string $controllerName
    * @param bool $skipInitialization If true, neither authorize(), initialize() nor validate() is called on the Controller.

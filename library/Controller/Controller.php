@@ -56,10 +56,6 @@ abstract class Controller {
    */
   protected $keepInHistory = true;
   /**
-   * @var Theme
-   */
-  protected $theme;
-  /**
    * @var MessageUtils
    */
   private $messageDelegate;
@@ -80,13 +76,11 @@ abstract class Controller {
   protected $history;
 
   /**
-   * @param Theme $theme
    * @param MessageDelegate $messageDelegate
    * @param LocationDelegate $locationDelegate
    * @param History $history 
    */
-  public function __construct(Theme $theme, MessageDelegate $messageDelegate, LocationDelegate $locationDelegate, History $history) {
-    $this->theme = $theme;
+  public function __construct(MessageDelegate $messageDelegate, LocationDelegate $locationDelegate, History $history) {
     $this->messageDelegate = $messageDelegate;
     $this->history = $history;
     $this->setLocationDelegate($locationDelegate);

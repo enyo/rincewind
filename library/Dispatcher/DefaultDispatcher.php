@@ -171,7 +171,7 @@ class DefaultDispatcher implements Dispatcher {
             $this->renderer->render($controller->getTemplateName(), $model, true);
           }
           catch (Exception $e) {
-            throw new ErrorCode(ErrorCode::INTERNAL_SERVER_ERROR, 'Error during render.');
+            throw new ErrorCode(ErrorCode::INTERNAL_SERVER_ERROR, 'Error during render: ' . $e->getMessage());
           }
         }
         catch (ErrorMessageException $e) {
@@ -197,6 +197,10 @@ class DefaultDispatcher implements Dispatcher {
         $errorDuringRender = true;
         $errorCode = $e->getCode();
         $e->writeHttpHeader();
+
+        if ($e->getMessage()) {
+          Log::debug($e->getMessage(), 'Dispatcher');
+        }
       }
 
       if ($errorDuringRender) {

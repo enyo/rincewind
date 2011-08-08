@@ -168,7 +168,10 @@ class DefaultDispatcher implements Dispatcher {
           try {
             $model->assign('errorMessages', $this->utils->message()->getErrorMessages());
             $model->assign('successMessages', $this->utils->message()->getSuccessMessages());
-            $this->renderer->render($controller->getTemplateName(), $model, true);
+            // I do not let the renderer render directly, in case and exception
+            // gets thrown during rendering. This way I can avoid a page being
+            // rendered halfway through, and then the error page being rendered.
+            echo $this->renderer->render($controller->getTemplateName(), $model, false);
           }
           catch (Exception $e) {
             throw new ErrorCode(ErrorCode::INTERNAL_SERVER_ERROR, 'Error during render: ' . $e->getMessage());

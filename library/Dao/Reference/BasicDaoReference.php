@@ -11,7 +11,7 @@
 /**
  * Including the interface.
  */
-if ( ! interface_exists('DaoReference', false)) include dirname(__FILE__) . '/DaoReference.php';
+if (!interface_exists('DaoReference', false)) include dirname(__FILE__) . '/DaoReference.php';
 
 /**
  *
@@ -106,7 +106,7 @@ abstract class BasicDaoReference implements DaoReference {
    * @param string|Dao $foreignDaoName
    * @param string $localKey
    * @param string $foreignKey If null, the default 'id' is used.
-   * @param bool $exportReference specifies if this reference should be sent to the
+   * @param bool $export specifies if this reference should be sent to the
    *                              datasource when saving.
    * @param bool $exportData If true, the complete data will be exported, not only the id.
    */
@@ -190,13 +190,21 @@ abstract class BasicDaoReference implements DaoReference {
    * If $exportData is true, then an array will be returned.
    *
    * @param mixed $value
+   * @param bool $ignoreNullValues
+   * @param bool $ignoreId
    * @return mixed
    */
-  public function exportValue($value) {
+  public function exportValue($value, $ignoreNullValues = false, $ignoreId = false) {
     if ($this->exportData) {
-      if ($value instanceof Record) return $value->getArray();
-      if (is_array($value)) return $value;
-      return $this->getForeignDao()->exportId($value);
+
+      $foreignDao = $this->getForeignDao();
+
+      if ($value instanceof Record || is_array($value)) {
+        return $foreignDao->getExportedValues($value, $ignoreNullValues, $ignoreId);
+      }
+      else {
+        return $foreignDao->exportId($value);
+      }
     }
     else {
       if ($value instanceof Record) return $value->getDao()->exportId($value->get('id'));

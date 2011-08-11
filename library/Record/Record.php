@@ -78,7 +78,7 @@ class Record implements RecordInterface {
   public function __construct($data, $dao, $existsInDatabase = false) {
     $this->setData($data);
     $this->dao = $dao;
-    $this->existsInDatabase = ! ! $existsInDatabase;
+    $this->existsInDatabase = !!$existsInDatabase;
   }
 
   /**
@@ -94,7 +94,7 @@ class Record implements RecordInterface {
    * @param bool $existsInDatabase
    */
   public function setExistsInDatabase($existsInDatabase = true) {
-    $this->existsInDatabase = ! ! $existsInDatabase;
+    $this->existsInDatabase = !!$existsInDatabase;
   }
 
   /**
@@ -111,7 +111,7 @@ class Record implements RecordInterface {
    * @return Record itself for chaining
    */
   public function setData($data) {
-    if ( ! is_array($data)) trigger_error('Tried to set data that is not an array.', E_USER_ERROR);
+    if (!is_array($data)) trigger_error('Tried to set data that is not an array.', E_USER_ERROR);
     $this->changedAttributes = array();
     $this->clearComputedAttributesCache();
     $this->data = $data;
@@ -125,7 +125,7 @@ class Record implements RecordInterface {
    * @return Record itself for chaining.
    */
   public function save() {
-    if ( ! $this->existsInDatabase) {
+    if (!$this->existsInDatabase) {
       $this->getDao()->insert($this);
     }
     else {
@@ -139,7 +139,7 @@ class Record implements RecordInterface {
    * Throws an exception if no id is set.
    */
   public function delete() {
-    if ( ! $this->id) throw new RecordException("Can't delete a record with no id.");
+    if (!$this->id) throw new RecordException("Can't delete a record with no id.");
     $this->getDao()->delete($this);
   }
 
@@ -219,8 +219,8 @@ class Record implements RecordInterface {
     $attributes = $this->dao->getAttributes();
     if (array_key_exists($attributeName, $attributes)) {
       if ($attributes[$attributeName] !== Dao::REFERENCE) {
-        if ( ! array_key_exists($attributeName, $this->data)) {
-          if ( ! $this->existsInDatabase()) throw new RecordException('The record did not have all attributes set properly! The attribute missing: ' . $attributeName);
+        if (!array_key_exists($attributeName, $this->data)) {
+          if (!$this->existsInDatabase()) throw new RecordException('The record did not have all attributes set properly! The attribute missing: ' . $attributeName);
           // Well, the record exists in database, and has not the complete hash set yet! So load it.
           $this->load();
         }
@@ -299,7 +299,7 @@ class Record implements RecordInterface {
    * @return Record Returns itself for chaining.
    */
   public function set($attributeName, $value) {
-    if ( ! array_key_exists($attributeName, $this->dao->getAttributes())) {
+    if (!array_key_exists($attributeName, $this->dao->getAttributes())) {
       $this->triggerUndefinedAttributeError($attributeName);
       return $this;
     }
@@ -355,7 +355,13 @@ class Record implements RecordInterface {
    * Overloading the Record
    */
   public function __isset($attributeName) {
-    return isset($this->data[$attributeName]);
+    if ($this->dao->getAttributeType($attributeName) !== Dao::REFERENCE) {
+      return isset($this->data[$attributeName]);
+    }
+    else {
+      $reference = $this->get($attributeName);
+      return $reference !== null;
+    }
   }
 
   public function __set($phpColumn, $value) {

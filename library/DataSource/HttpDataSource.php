@@ -13,12 +13,6 @@
 include(dirname(__FILE__) . '/DataSource.php');
 
 
-
-/**
- * Loading the file class
- */
-if ( ! class_exists('File', false)) require(dirname(dirname(__FILE__)) . '/File/File.php');
-
 /**
  * The Exception base class for HttpDataSourceException.
  *
@@ -45,54 +39,25 @@ abstract class HttpDataSource extends DataSource {
 
   /**
    * This is the object used to actually get the files.
-   * @var FileRetriever
+   * @var HttpServer
    */
-  protected $fileRetriever;
-  /**
-   * This is the base url to connect to the backend.
-   * @var string
-   */
-  protected $baseUrl;
-  /**
-   * This is the port used to connect to the backend.
-   * @var int
-   */
-  protected $port;
-  /**
-   * @var int
-   */
-  protected $timeout;
+  protected $httpServer;
 
   /**
-   * @param FileRetriever $fileRetriever
-   * @param string $baseUrl
-   * @param int $port
-   * @param int $timeout
+   * @param HttpServer $httpServer
    */
-  public function __construct($fileRetriever, $baseUrl, $port = 80, $timeout = 20) {
-    $this->fileRetriever = $fileRetriever;
-    $this->baseUrl = $baseUrl;
-    $this->port = $port;
-    $this->timeout = $timeout;
+  public function __construct($httpServer) {
+    $this->httpServer = $httpServer;
   }
 
   /**
-   * @return int
+   * @return HttpServer
    */
-  public function getPort() {
-    return $this->port;
+  public function getHttpServer() {
+    return $this->httpServer;
   }
 
-  /**
-   * @return string 
-   */
-  public function getBaseUrl() {
-    return $this->baseUrl;
-  }
 
-  public function getTimeout() {
-    return $this->timeout;
-  }
-
+  
 }
 

@@ -61,39 +61,45 @@ class sfServiceContainerBuilder extends sfServiceContainer
    */
   public function getService($id)
   {
+    Profile::start('SymfonyContainer', 'Getting service');
     try
     {
-      return parent::getService($id);
+      $return = parent::getService($id);
     }
     catch (InvalidArgumentException $e)
     {
       if (isset($this->loading[$id]))
       {
+        Profile::stop();
         throw new LogicException(sprintf('The service "%s" has a circular reference to itself.', $id));
       }
 
       if (!$this->hasServiceDefinition($id) && isset($this->aliases[$id]))
       {
-        return $this->getService($this->aliases[$id]);
+        $return = $this->getService($this->aliases[$id]);
       }
+      else {
 
-      $definition = $this->getServiceDefinition($id);
+        $definition = $this->getServiceDefinition($id);
 
-      $this->loading[$id] = true;
+        $this->loading[$id] = true;
 
-      if ($definition->isShared())
-      {
-        $service = $this->services[$id] = $this->createService($definition);
+        if ($definition->isShared())
+        {
+          $service = $this->services[$id] = $this->createService($definition);
+        }
+        else
+        {
+          $service = $this->createService($definition);
+        }
+
+        unset($this->loading[$id]);
+
+        $return = $service;
       }
-      else
-      {
-        $service = $this->createService($definition);
-      }
-
-      unset($this->loading[$id]);
-
-      return $service;
     }
+    Profile::stop();
+    return $return;
   }
 
   /**

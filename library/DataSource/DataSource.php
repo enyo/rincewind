@@ -10,6 +10,9 @@
 
 /**
  * The Exception base class for DataSourceException.
+ * 
+ * The DataSourceException has no message, only error codes.
+ * 
  *
  * @author Matthias Loitsch <developer@ma.tthias.com>
  * @copyright Copyright (c) 2010, Matthias Loitsch
@@ -17,6 +20,29 @@
  * @subpackage DataSourceExceptions
  */
 class DataSourceException extends Exception {
+
+  /**
+   * @var string
+   */
+  protected $errorToken;
+  /**
+   * @var int
+   */
+  protected $httpCode;
+
+  public function __construct($errorToken = '', $httpCode = 200, $code = null, $previous = null) {
+    parent::__construct('', $code, $previous);
+    $this->errorToken = $errorToken;
+    $this->httpCode = $httpCode;
+  }
+
+  public function getErrorToken() {
+    return $this->errorToken;
+  }
+
+  public function getHttpCode() {
+    return $this->httpCode;
+  }
 
 }
 

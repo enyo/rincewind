@@ -71,6 +71,7 @@ class DefaultDispatcher implements Dispatcher {
    * @param bool $skipControllerInitialization
    */
   public function dispatch($skipControllerInitialization = false) {
+    Profile::start('Dispatcher', 'Dispatching');
     try {
 
       $model = $this->renderer->getModel();
@@ -221,6 +222,7 @@ class DefaultDispatcher implements Dispatcher {
         die('<h1 class="error">Fatal error...</h1>');
       }
     }
+    Profile::stop();
   }
 
 }

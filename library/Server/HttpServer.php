@@ -176,6 +176,9 @@ class HttpServer {
       if ($info['size_download'] <= 1000) {
         Log::debug("Result: " . $result, 'HttpServer');
       }
+      else {
+        Log::debug("Shortened Result: " . substr($result, 0, 300) . ' [ ... ] ' . substr($result, -300), 'HttpServer');
+      }
     }
 
     return new HttpServerResponse($result, $errorCode, $info['size_download']);

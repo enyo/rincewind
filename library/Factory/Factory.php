@@ -20,7 +20,7 @@ abstract class Factory {
   /**
    * @var array
    */
-  protected $cache = array();
+  protected $cachedDaos = array();
 
   /**
    * Either returns the cached object, or creates it with create(), caches it,
@@ -55,7 +55,7 @@ abstract class Factory {
    * @return bool
    */
   protected function isCached($resourceName) {
-    return isset($this->cache[$resourceName]);
+    return isset($this->cachedDaos[$resourceName]);
   }
 
   /**
@@ -63,7 +63,7 @@ abstract class Factory {
    * @param mixed $object
    */
   protected function cache($resourceName, $object) {
-    $this->cache[$resourceName] = $object;
+    $this->cachedDaos[$resourceName] = $object;
   }
 
   /**
@@ -74,7 +74,7 @@ abstract class Factory {
    * @return mixed
    */
   protected function getCached($resourceName) {
-    return $this->cache[$resourceName];
+    return $this->cachedDaos[$resourceName];
   }
 
 }

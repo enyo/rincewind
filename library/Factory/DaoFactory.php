@@ -29,11 +29,24 @@ class DaoFactory extends Factory {
   protected $dataSource;
 
   /**
+   * @var string
+   */
+  protected $daosPath;
+
+  /**
+   * If set, it gets submitted to daos when instantiating.
+   * @var Cache
+   */
+  protected $daoCache;
+
+  /**
    *
    * @param Database $dataSource
    */
-  public function __construct($dataSource) {
+  public function __construct($dataSource, $daosPath, $daoCache = null) {
     $this->dataSource = $dataSource;
+    $this->daosPath = $daosPath;
+    $this->daoCache = $daoCache;
   }
 
   /**
@@ -45,8 +58,13 @@ class DaoFactory extends Factory {
    */
   protected function create($resourceName) {
     $className = $resourceName . 'Dao';
-    // The Dao itself gets included by the autoload function.
-    return new $className($this->dataSource);
+
+    require_class($className, $this->daosPath . $className . '.php');
+    $dao = new $className($this->dataSource, $this->container->shopDaoFactory);
+    if ($this->daoCache) {
+      $dao->setCache($this->daoCache);
+    }
+    return $dao;
   }
 
   /**

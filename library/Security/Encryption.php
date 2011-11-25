@@ -28,6 +28,12 @@ class EncryptionException extends Exception {
  * @subpackage Encryption
  */
 abstract class Encryption {
+
+  /**
+   * Used internally when no serialization has to be done.
+   */
+  const SERIALIZE_NONE = 'p';
+
   /**
    * Use json when serializing data for encryption.
    */

@@ -96,7 +96,7 @@ class Ssl extends Encryption {
    * @param mixed $data
    */
   public function encrypt($data) {
-    if (is_string($data)) $data = 'p-' . $data; // plain
+    if (is_string($data)) $data = self::SERIALIZE_NONE . '-' . $data; // plain
     elseif ($this->serializationFormat === self::SERIALIZE_JSON) $data = self::SERIALIZE_JSON . '-' . json_encode($data); // json
     elseif ($this->serializationFormat === self::SERIALIZE_PHP) $data = self::SERIALIZE_PHP . '-' . serialize($data); // serialized
 
@@ -172,7 +172,7 @@ class Ssl extends Encryption {
 
     $dataInfoLength = 2;
     $dataInfo = substr($decrypted, $saltLength, $dataInfoLength);
-    if ($dataInfo !== 's-' && $dataInfo !== self::SERIALIZE_PHP . '-' && $dataInfo !== self::SERIALIZE_JSON . '-') throw new EncryptionException('Encrypted string does not contain data information.');
+    if ($dataInfo !== self::SERIALIZE_NONE . '-' && $dataInfo !== self::SERIALIZE_PHP . '-' && $dataInfo !== self::SERIALIZE_JSON . '-') throw new EncryptionException('Encrypted string does not contain data information.');
 
     $data = substr($decrypted, $saltLength + $dataInfoLength, strlen($decrypted) - $saltLength - $dataInfoLength - $this->nonceChars);
 

@@ -91,7 +91,7 @@ abstract class Logger {
 
   /**
    * Log a debug message
-   * 
+   *
    * @param string $message
    * @param string $context Optional context to log for.
    * @param array $additionalInfo An associative array with more info. Eg: array('content'=>'Some stuff')
@@ -103,7 +103,7 @@ abstract class Logger {
 
   /**
    * Log an info message
-   * 
+   *
    * @param string $message
    * @param string $context Optional context to log for.
    * @param array $additionalInfo An associative array with more info. Eg: array('content'=>'Some stuff')
@@ -115,7 +115,7 @@ abstract class Logger {
 
   /**
    * Log a warning
-   * 
+   *
    * @param string $message
    * @param string $context Optional context to log for.
    * @param array $additionalInfo An associative array with more info. Eg: array('content'=>'Some stuff')
@@ -127,7 +127,7 @@ abstract class Logger {
 
   /**
    * Alias for warning
-   * 
+   *
    * @param string $message
    * @param string $context Optional context to log for.
    * @param array $additionalInfo An associative array with more info. Eg: array('content'=>'Some stuff')
@@ -139,7 +139,7 @@ abstract class Logger {
 
   /**
    * Log an error
-   * 
+   *
    * @param string $message
    * @param string $context Optional context to log for.
    * @param array $additionalInfo An associative array with more info. Eg: array('content'=>'Some stuff')
@@ -151,7 +151,7 @@ abstract class Logger {
 
   /**
    * Log a fatal error
-   * 
+   *
    * @param string $message
    * @param string $context Optional context to log for.
    * @param array $additionalInfo An associative array with more info. Eg: array('content'=>'Some stuff')
@@ -171,7 +171,9 @@ abstract class Logger {
    * @return bool true on success, false if nothing has been logged.
    */
   protected function log($message, $level, $context = null, $additionalInfo = null) {
-    if ($additionalInfo && ! is_array($additionalInfo)) throw new LoggerException("Additional info has to be an array.");
+    if ($additionalInfo && ! is_array($additionalInfo)) {
+      $additionalInfo = array('serializedInfo' => base64_encode(serialize($additionalInfo)));
+    }
     if ( ! $this->shouldLog($level)) return false;
     $this->doLog($message, $level, $context, $additionalInfo);
     return true;

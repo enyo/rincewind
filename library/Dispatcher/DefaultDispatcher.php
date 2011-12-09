@@ -14,7 +14,7 @@ require_interface('Dispatcher');
 
 /**
  * The DefaultDispatcher works with the controllerFactory.
- * 
+ *
  * It tries to instantiate the appropriate controller, and to call the right action on it.
  * If it works, the dispatcher is very happy about it.
  *
@@ -25,7 +25,7 @@ require_interface('Dispatcher');
 class DefaultDispatcher implements Dispatcher {
 
   /**
-   * @var type 
+   * @var type
    */
   private $controllerFactory;
   /**
@@ -55,7 +55,7 @@ class DefaultDispatcher implements Dispatcher {
    * @param Theme $theme
    * @param Sanitizer $actionSanitizer
    * @param UtilsFactory $utils
-   * @param string $defaultControllerName 
+   * @param string $defaultControllerName
    */
   public function __construct(ControllerFactory $controllerFactory, Renderer $renderer, Theme $theme, Sanitizer $actionSanitizer, UtilsFactory $utils, $defaultControllerName = 'Home') {
     $this->controllerFactory = $controllerFactory;
@@ -158,8 +158,9 @@ class DefaultDispatcher implements Dispatcher {
           }
           $controller->setActionParameters($stringParameters);
 
-          if (!$skipControllerInitialization)
+          if (!$skipControllerInitialization) {
             $controller->initialize();
+          }
 
           // This actually calls the apropriate action.
           call_user_func_array(array($controller, $action), $parameters);

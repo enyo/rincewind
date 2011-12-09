@@ -172,7 +172,7 @@ abstract class Logger {
    */
   protected function log($message, $level, $context = null, $additionalInfo = null) {
     if ($additionalInfo && ! is_array($additionalInfo)) {
-      $additionalInfo = array('serializedInfo' => base64_encode(serialize($additionalInfo)));
+      $additionalInfo = array('jsonInfo' => json_encode($additionalInfo));
     }
     if ( ! $this->shouldLog($level)) return false;
     $this->doLog($message, $level, $context, $additionalInfo);

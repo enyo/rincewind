@@ -10,9 +10,9 @@
 
 /**
  * The Exception base class for DataSourceException.
- * 
+ *
  * The DataSourceException has no message, only error codes.
- * 
+ *
  *
  * @author Matthias Loitsch <developer@ma.tthias.com>
  * @copyright Copyright (c) 2010, Matthias Loitsch
@@ -24,11 +24,11 @@ class DataSourceException extends Exception {
   /**
    * @var string
    */
-  protected $errorToken;
+  public $errorToken;
   /**
    * @var int
    */
-  protected $httpCode;
+  public $httpCode;
 
   public function __construct($errorToken = '', $httpCode = 200, $code = null, $previous = null) {
     parent::__construct('', $code, $previous);
@@ -111,9 +111,9 @@ abstract class DataSource {
    *
    * @param string $resource
    * @param array $attributes Associative array
-   * @param mixed $sort 
-   * @param int $offset 
-   * @param int $limit 
+   * @param mixed $sort
+   * @param int $offset
+   * @param int $limit
    * @return string The file content
    */
   abstract public function getList($resource, $attributes = null, $sort = null, $offset = null, $limit = null, $retrieveTotalRowCount = false);

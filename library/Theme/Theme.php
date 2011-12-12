@@ -16,7 +16,7 @@
  * @package Theme
  */
 class ThemeException extends Exception {
-  
+
 }
 
 /**
@@ -31,7 +31,7 @@ class Theme {
 
   /**
    * Gets set in the constructor
-   * 
+   *
    * @var string
    */
   protected $themesPath;
@@ -93,7 +93,7 @@ class Theme {
 
     if ($section && $name) {
       if (!isset($this->config[$section]) || !isset($this->config[$section][$name]))
-        throw new RendererException("Unknown setting `$section`.`$name`.");
+        throw new ThemeException("Unknown setting `$section`.`$name`.");
       return $this->config[$section][$name];
     }
     else
@@ -146,10 +146,10 @@ class Theme {
       return;
 
     if (!is_dir($this->getRootPath())) {
-      throw new RendererException("The theme folder " . $this->getRootPath() . " does not exist.");
+      throw new ThemeException("The theme folder " . $this->getRootPath() . " does not exist.");
     }
     if (!is_file($this->getRootPath() . $this->configUri)) {
-      throw new RendererException("The config file (" . $this->getRootPath() . $this->configUri . ") was not found.");
+      throw new ThemeException("The config file (" . $this->getRootPath() . $this->configUri . ") was not found.");
     }
     $this->config = parse_ini_file($this->getRootPath() . $this->configUri, true);
   }

@@ -173,7 +173,7 @@ class DefaultDispatcher implements Dispatcher {
             // I do not let the renderer render directly, in case and exception
             // gets thrown during rendering. This way I can avoid a page being
             // rendered halfway through, and then the error page being rendered.
-            echo $this->renderer->render($controller->getTemplateName(), $model, false);
+            echo $this->renderer->render($controller->getViewName(), $model, false);
           }
           catch (Exception $e) {
             throw new ErrorCode(ErrorCode::INTERNAL_SERVER_ERROR, 'Error during render: ' . $e->getMessage());

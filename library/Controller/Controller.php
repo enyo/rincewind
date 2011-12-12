@@ -49,7 +49,7 @@ abstract class Controller {
    * You can set this, to use another template than the default controller template.
    * @var string If not set, the controller and action names are used.
    */
-  private $templateName;
+  private $viewName;
   /**
    * Eg.: Register or login should not be kept in the history.
    * @var bool Defines if the site should stay in the history.
@@ -78,7 +78,7 @@ abstract class Controller {
   /**
    * @param MessageDelegate $messageDelegate
    * @param LocationDelegate $locationDelegate
-   * @param History $history 
+   * @param History $history
    */
   public function __construct(MessageDelegate $messageDelegate, LocationDelegate $locationDelegate, History $history) {
     $this->messageDelegate = $messageDelegate;
@@ -113,7 +113,7 @@ abstract class Controller {
 
   /**
    *
-   * @param string $action 
+   * @param string $action
    */
   public function setAction($action) {
     $this->action = $action;
@@ -127,7 +127,7 @@ abstract class Controller {
   }
 
   /**
-   * @param array $actionParameters 
+   * @param array $actionParameters
    */
   public function setActionParameters(array $actionParameters) {
     $this->actionParameters = $actionParameters;
@@ -135,14 +135,14 @@ abstract class Controller {
 
   /**
    * Returns either $templateName or, if not set, the controller name + the action (eg.: product.show).
-   * 
+   *
    * @return string
    * @uses $templateName
    * @see setTemplateName()
    */
-  public function getTemplateName() {
-    if ($this->templateName) {
-      $templateName = $this->templateName;
+  public function getViewName() {
+    if ($this->viewName) {
+      $templateName = $this->viewName;
     } else {
       $templateName = $this->convertPhpNameToTemplateName($this->getName());
       if ($this->getAction() !== 'index') {
@@ -154,12 +154,12 @@ abstract class Controller {
   }
 
   /**
-   * @param string $templateName 
+   * @param string $viewName
    * @uses $templateName
    * @see getTemplateName()
    */
-  public function setTemplateName($templateName) {
-    $this->templateName = $templateName;
+  public function setViewName($viewName) {
+    $this->viewName = $viewName;
   }
 
   /**
@@ -212,24 +212,24 @@ abstract class Controller {
    * @see initialize()
    */
   public function authorize() {
-    
+
   }
 
   /**
    * This is the second function called in initialize().
    * If the site needs some preparing (e.g.: Reading some GET vars, or setting main variables), this
    * is the place to do it.
-   * 
+   *
    * You should mainly put stuff in here, that makes sense for the whole controller, for all actions.
    *
    * @see initialize()
    */
   public function prepare() {
-    
+
   }
 
   /**
-   * @param LocationDelegate $locationDelegate 
+   * @param LocationDelegate $locationDelegate
    */
   public function setLocationDelegate(LocationDelegate $locationDelegate) {
     $locationDelegate->setController($this);
@@ -265,7 +265,7 @@ abstract class Controller {
 
   /**
    * Wrapper for LocationDelegate
-   * 
+   *
    * @param string $targetControllerName if null, the current url is used.
    * @param string,... $action A list of possible action strings.
    * @param array $get
@@ -278,7 +278,7 @@ abstract class Controller {
 
   /**
    * Wrapper for LocationDelegate
-   * 
+   *
    * @param string $targetControllerName if null, the current url is used.
    * @param string,... $action A list of possible action strings.
    * @param array $get
@@ -291,7 +291,7 @@ abstract class Controller {
 
   /**
    * Wrapper for LocationDelegate
-   * 
+   *
    * @param string $targetControllerName if null, the current url is used.
    * @param [string..] $action A list of possible action strings.
    * @param array $get
@@ -304,7 +304,7 @@ abstract class Controller {
 
   /**
    * Wrapper for LocationDelegate
-   * 
+   *
    * @param string $error
    * @param string $targetControllerName if null, the current url is used.
    * @param [string..] $action A list of possible action strings.
@@ -317,7 +317,7 @@ abstract class Controller {
 
   /**
    * Wrapper for LocationDelegate
-   * 
+   *
    * @param string $success
    * @param string $targetControllerName if null, the current url is used.
    * @param [string..] $action A list of possible action strings.
@@ -342,7 +342,7 @@ abstract class Controller {
   /**
    * Assign a value to the data object.
    * @param string $name
-   * @param mixed $value 
+   * @param mixed $value
    */
   protected function assign($name, $value) {
     $this->model->assign($name, $value);
@@ -351,7 +351,7 @@ abstract class Controller {
 
   /**
    * eg: MyAccountController -> my_account
-   * 
+   *
    * @return string
    */
   protected function convertPhpNameToTemplateName($name) {
@@ -360,7 +360,7 @@ abstract class Controller {
   }
 
   /**
-   * @param mixed $model 
+   * @param mixed $model
    */
   public function setModel($model) {
     $this->model = $model;
@@ -372,27 +372,27 @@ abstract class Controller {
   public function getModel() {
     return $this->model;
   }
-  
+
   /**
    * Initializes the model with basic information.
-   * 
+   *
    * This should not be controller or action specific!
    * If something goes wrong during initModel(), renderFatalError() will be called
    * on the renderer.
    * Fatal errors are not pretty.
-   * 
+   *
    */
   public function initModel() {
-    
+
   }
 
   /**
    * This gets called after the current action has been executed.
-   * 
+   *
    * @uses currentData
    */
   public function extendModel() {
-    
+
   }
 
 }

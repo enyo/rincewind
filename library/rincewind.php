@@ -10,7 +10,7 @@
 /**
  * Defines the current rincewind version
  */
-define('RINCEWIND_VERSION', 20400);
+define('RINCEWIND_VERSION', 20500);
 
 if ( ! defined('REQUIRED_RINCEWIND_VERSION')) trigger_error('You should set a REQUIRED_RINCEWIND_VERSION (' . RINCEWIND_VERSION . ').', E_USER_WARNING);
 
@@ -31,7 +31,7 @@ class RW {
   /**
    * Checks if the provided file uri is writable (or if the parent directory is
    * writable if the file doesn't exist).
-   * @param string $fileUri 
+   * @param string $fileUri
    */
   public static function isWritable($fileUri) {
     return (file_exists($fileUri) && is_writable($fileUri)) || ( ! file_exists($fileUri) && is_writable(dirname($fileUri)));
@@ -40,9 +40,9 @@ class RW {
   /**
    * If the path is without leading /, then it will be appended to $root.
    * Otherwise it gets returned.
-   * 
+   *
    * @param string $path
-   * @param string $root 
+   * @param string $root
    */
   public static function path($path, $root) {
     return strpos($path, '/') === 0 ? $path : $root . $path;
@@ -64,8 +64,8 @@ include dirname(__FILE__) . '/rincewind.types.php';
 
 /**
  *
- * @param string $interfaceOrClassName 
- * @param string $fileUriOrService 
+ * @param string $interfaceOrClassName
+ * @param string $fileUriOrService
  * @return string the File URI
  */
 function RW_determineFileUri($interfaceOrClassName, $fileUriOrService) {
@@ -83,7 +83,7 @@ function RW_determineFileUri($interfaceOrClassName, $fileUriOrService) {
 
 /**
  * Includes a file only if class does not exist.
- * 
+ *
  * @param string $className
  * @param string $fileUriOrService Can either be an absolute path to the file, or
  *                                 the relative path from the library root directory.
@@ -98,9 +98,9 @@ function require_class($className, $fileUriOrService = null) {
 
 /**
  * Includes a file only if interface does not exist.
- * 
+ *
  * @param string $interfaceName
- * @param string $fileUriOrService 
+ * @param string $fileUriOrService
  * @see require_class
  */
 function require_interface($interfaceName, $fileUriOrService = null) {

@@ -21,7 +21,11 @@ class ThemeException extends Exception {
 
 /**
  * The theme class is used to handle all theme specific settings.
- * It's also used to transform all templates in the site.
+ * It loads a theme configuration and knows where the templates, stylesheets,
+ * javascript files, etc... are stored.
+ *
+ * The actual rendering is done by the Renderer which gets the paths from
+ * the Theme. The Dispatcher is used to pass this information to the Renderer.
  *
  * @author Matthias Loitsch <m@tthias.com>
  * @copyright Copyright (c) 2010, I-Netcompany

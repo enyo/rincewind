@@ -12,12 +12,6 @@
  */
 require_class('BaseRenderer', 'Renderer');
 
-
-/**
- * Including Dwoo
- */
-include LIBRARY_PATH . '/ThirdParty/dwoo/dwooAutoload.php';
-
 /**
  * The DwooRenderer is the dwoo implementation of a Renderer.
  *
@@ -26,14 +20,35 @@ include LIBRARY_PATH . '/ThirdParty/dwoo/dwooAutoload.php';
  * @package Renderer
  */
 class DwooRenderer extends BaseRenderer {
+  /**
+   * The file extension the renderer will handle
+   * @var string
+   */
+  static public $templateFileExtension = 'html';
+
+  /**
+   * A list of content types this Renderer accepts.
+   * If it's the string * then any content type is accepted.
+   *
+   * @var string
+   */
+  static public $acceptedContentTypes = array('application/xhtml+xml', 'text/html', '*');
 
   /**
    * @var string
    */
   protected $functionsPath;
 
-  public function __construct($functionsPath, $templatesPath = null) {
+  /**
+   * Includes the dwooAutoload php
+   *
+   * @param string $dwooAutoloadUri /URI/of/dwoo/dwooAutoload.php
+   * @param string $functionsPath Dwoo functions
+   * @param string $templatesPath
+   */
+  public function __construct($dwooAutoloadUri, $functionsPath, $templatesPath = null) {
     parent::__construct($templatesPath);
+    include $dwooAutoloadUri;
     $this->functionsPath = $functionsPath;
   }
 
@@ -50,56 +65,35 @@ class DwooRenderer extends BaseRenderer {
    * Renders the html.
    *
    * @param string $viewName
-   * @param Dwoo_Data $model
+   * @param Model $model
    * @param bool $output
    * @return string
    * @see getTemplateUri()
    */
-  public function render($viewName, $model, $output = true) {
+  public function render($viewName, Model $model, $output = true) {
 
     Profile::start('Theme', 'Generate HTML');
 
-    $templateName = $viewName . '.html';
+    $templateName = $viewName . '.' . static::$templateFileExtension;
 
     $dwoo = new Dwoo();
 
     $dwoo->getLoader()->addDirectory($this->functionsPath);
 
     Profile::start('Theme', 'Create template file.');
-    $template = new Dwoo_Template_File($viewName . '.html');
+    $template = new Dwoo_Template_File($templateName);
     $template->setIncludePath($this->getTemplatesPath());
     Profile::stop();
 
     Profile::start('Theme', 'Render');
-    $rendered = $dwoo->get($template, $model, null, $output);
+    $dwooData = new Dwoo_Data();
+    $dwooData->setData($model->getData());
+    $rendered = $dwoo->get($template, $dwooData, null, $output);
     Profile::stop();
 
     Profile::stop();
 
     return $output ? null : $rendered;
-  }
-
-  /**
-   * Renders the error site.
-   *
-   * @param int $errorCode
-   * @param mixed $model
-   * @param bool $output
-   */
-  public function renderError($errorCode, $model, $output = true) {
-    $viewName = 'errors/error';
-    if ($errorCode) {
-      $viewName .= '.' . $errorCode;
-    }
-    return $this->render($viewName, $model, $output);
-  }
-
-  /**
-   * Renders a fatal error.
-   * @param bool $output
-   */
-  public function renderFatalError($output = true) {
-    return $this->render('errors/fatal_error', array(), $output);
   }
 
 }

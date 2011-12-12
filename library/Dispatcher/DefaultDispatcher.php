@@ -13,6 +13,11 @@
 require_interface('Dispatcher');
 
 /**
+ * Including exceptions
+ */
+require_class('Model', 'Renderer');
+
+/**
  * The DefaultDispatcher works with the controllerFactory.
  *
  * It tries to instantiate the appropriate controller, and to call the right action on it.
@@ -28,22 +33,27 @@ class DefaultDispatcher implements Dispatcher {
    * @var type
    */
   private $controllerFactory;
+
   /**
-   * @var Renderer
+   * @var Renderers
    */
-  private $renderer;
+  private $renderers;
+
   /**
    * @var Theme
    */
   private $theme;
+
   /**
    * @var string
    */
   private $defaultControllerName;
+
   /**
    * @var Sanitizer
    */
   private $actionSanitizer;
+
   /**
    * @var UtilsFactory
    */
@@ -51,19 +61,66 @@ class DefaultDispatcher implements Dispatcher {
 
   /**
    * @param ControllerFactory $controllerFactory
-   * @param Renderer $renderer
+   * @param Renderer $renderers
    * @param Theme $theme
    * @param Sanitizer $actionSanitizer
    * @param UtilsFactory $utils
    * @param string $defaultControllerName
    */
-  public function __construct(ControllerFactory $controllerFactory, Renderer $renderer, Theme $theme, Sanitizer $actionSanitizer, UtilsFactory $utils, $defaultControllerName = 'Home') {
+  public function __construct(ControllerFactory $controllerFactory, Renderers $renderers, Theme $theme, Sanitizer $actionSanitizer, UtilsFactory $utils, $defaultControllerName = 'Home') {
     $this->controllerFactory = $controllerFactory;
-    $this->renderer = $renderer;
+    $this->renderers = $renderers;
     $this->theme = $theme;
     $this->defaultControllerName = $defaultControllerName;
     $this->actionSanitizer = $actionSanitizer;
     $this->utils = $utils;
+  }
+
+  /**
+   * Returns the accepted content types from accept header.
+   *
+   * Tries to return an array sorted by this rules:
+   *
+   * http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html
+   *
+   * @param string $acceptHeader
+   */
+  public function getAcceptContentTypes($acceptHeader) {
+    $groupedContentTypes = array();
+
+    $headerContentTypes = explode(',', $acceptHeader);
+    foreach ($headerContentTypes as $ct) {
+      $ct = explode(';', $ct);
+
+      $contentType = trim(array_shift($ct));
+
+      $quality = 100;
+
+      foreach ($ct as $qValue) {
+        $qValue = trim($qValue);
+        if (substr($qValue, 0, 2) === 'q=') {
+          // Is really the qvalue not the extension
+          $quality = (int) (substr($qValue, 2) * 100);
+        }
+      }
+
+      if (!array_key_exists($quality, $groupedContentTypes)) {
+        $groupedContentTypes[$quality] = array($contentType);
+      }
+      else {
+        // TODO: a broader content type should not come before a more specific one.
+        array_unshift($groupedContentTypes[$quality], $contentType);
+      }
+    }
+    krsort($groupedContentTypes);
+
+    $contentTypes = array();
+    foreach ($groupedContentTypes as $contentTypesGroup) {
+      foreach ($contentTypesGroup as $contentType) {
+        $contentTypes[] = $contentType;
+      }
+    }
+    return $contentTypes;
   }
 
   /**
@@ -73,9 +130,6 @@ class DefaultDispatcher implements Dispatcher {
   public function dispatch($skipControllerInitialization = false) {
     Profile::start('Dispatcher', 'Dispatching');
     try {
-
-      $model = $this->renderer->getModel();
-      $this->renderer->setTemplatesPath($this->theme->getTemplatesPath());
 
       $controllerName = isset($_GET['controller']) ? trim($_GET['controller']) : $this->defaultControllerName;
 
@@ -91,10 +145,14 @@ class DefaultDispatcher implements Dispatcher {
         $controller = $this->controllerFactory->get($this->defaultControllerName);
       }
 
+      $model = new Model();
       $controller->setModel($model);
       $controller->initModel();
 
       try {
+
+        $contentTypes = $this->getAcceptContentTypes($_SERVER['HTTP_ACCEPT']);
+
         if ($invalidControllerName) {
           ErrorCode::notFound();
         }
@@ -120,8 +178,7 @@ class DefaultDispatcher implements Dispatcher {
 
             $actionMethod = $reflectionClass->getMethod($action);
 
-            if ($action !== 'index' && (method_exists('Controller', $action) || !$actionMethod->isPublic() || ($actionMethod->class !== get_class($controller))))
-              throw new DispatcherException();
+            if ($action !== 'index' && (method_exists('Controller', $action) || !$actionMethod->isPublic() || ($actionMethod->class !== get_class($controller)))) throw new DispatcherException();
           }
           catch (Exception $e) {
             throw new ErrorCode(ErrorCode::NOT_FOUND, 'Tried to access invalid action.');
@@ -170,10 +227,11 @@ class DefaultDispatcher implements Dispatcher {
           try {
             $model->assign('errorMessages', $this->utils->message()->getErrorMessages());
             $model->assign('successMessages', $this->utils->message()->getSuccessMessages());
+
             // I do not let the renderer render directly, in case and exception
             // gets thrown during rendering. This way I can avoid a page being
             // rendered halfway through, and then the error page being rendered.
-            echo $this->renderer->render($controller->getViewName(), $model, false);
+            echo $this->renderers->render($controller->getViewName(), $model, $this->theme->getTemplatesPath(), $contentTypes, false);
           }
           catch (Exception $e) {
             throw new ErrorCode(ErrorCode::INTERNAL_SERVER_ERROR, 'Error during render: ' . $e->getMessage());
@@ -189,8 +247,7 @@ class DefaultDispatcher implements Dispatcher {
         catch (Exception $e) {
           $additionalInfo = array();
           $additionalInfo['controllerName'] = $controllerName;
-          if (isset($action))
-            $additionalInfo['action'] = $action;
+          if (isset($action)) $additionalInfo['action'] = $action;
           $additionalInfo['exceptionThrown'] = get_class($e);
           $additionalInfo['error'] = $e->getMessage();
           Log::warning($e->getMessage(), 'Dispatcher', $additionalInfo);
@@ -211,13 +268,13 @@ class DefaultDispatcher implements Dispatcher {
       if ($errorDuringRender) {
         $model->assign('errorMessages', $this->utils->message()->getErrorMessages());
         $model->assign('successMessages', $this->utils->message()->getSuccessMessages());
-        $this->renderer->renderError($errorCode, $model, true);
+        $this->renderers->renderError($errorCode, $model, $this->theme->getTemplatesPath(), $contentTypes, true);
       }
     }
     catch (Exception $e) {
       try {
         Log::fatal('There has been a fatal error dispatching.', 'Dispatcher', array('error' => $e->getMessage()));
-        $this->renderer->renderFatalError(true);
+        $this->renderers->renderFatalError($this->theme->getTemplatesPath(), $contentTypes, true);
       }
       catch (Exception $e) {
         die('<h1 class="error">Fatal error...</h1>');

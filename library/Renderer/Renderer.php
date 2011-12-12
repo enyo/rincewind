@@ -29,46 +29,32 @@ class RendererException extends Exception {
 interface Renderer {
 
   /**
-   * Returns a model.
+   * Checks if this class can actually handle the view.
+   * Overwrite this to implement your logic.
    *
-   * @return mixed
+   * @param string $viewName
+   * @param string $templatesPath
+   * @param string $requestedContentType
    */
-  public function getModel();
+  static public function accepts($viewName, $templatesPath, $requestedContentType = null);
 
   /**
    * Renders the data with the template.
    *
    * @param string $view
-   * @param mixed $model
+   * @param Model $model
    * @param bool $output Whether it should return or output the rendered page.
    * @return string null if output = true
    */
-  public function render($view, $model, $output = true);
+  public function render($view, Model $model, $output = true);
 
   /**
-   * Renders the data with the template.
-   * This render method assumes that the model attribute is set and valid, and
-   * there has been an error processing the action, not initializing the data.
-   *
-   *
-   * @param int $errorCode
-   * @param mixed $model
-   * @param bool $output Whether it should return or output the rendered page.
-   * @return string null if output = true
+   * @return string
    */
-  public function renderError($errorCode, $model, $output = true);
-
-
-  /**
-   * Gets called when there was a problem initializing the data.
-   * The template this renders should not access any data in the model.
-   *
-   * @param bool $output
-   */
-  public function renderFatalError($output = true);
-
+  public function getTemplatesPath();
 
   /**
+   * If you don't need/use templates, just implement an empty method.
    * @param string $path
    */
   public function setTemplatesPath($path);

@@ -90,7 +90,7 @@ class FileLogger extends Logger {
     if ($additionalInfo) {
       $line .= ' (';
       foreach ($additionalInfo as $key => $value) {
-        $line .= ' [' . $key . ' => ' . print_r($value, true) . '] ';
+        $line .= ' [' . $key . ' => ' . (is_object($value) ? get_class($value) . ' # ' . spl_object_hash($value) : print_r($value, true)) . '] ';
       }
       $line .= ')';
       $line = str_replace("\n", ' ', $line);

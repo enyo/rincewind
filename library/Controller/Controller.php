@@ -61,7 +61,7 @@ abstract class Controller {
   private $messageDelegate;
   /**
    *
-   * @var Data
+   * @var Model
    */
   protected $model;
   /**
@@ -360,14 +360,14 @@ abstract class Controller {
   }
 
   /**
-   * @param mixed $model
+   * @param Model $model
    */
   public function setModel($model) {
     $this->model = $model;
   }
 
   /**
-   * @return mixed
+   * @return Model
    */
   public function getModel() {
     return $this->model;

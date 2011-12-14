@@ -55,9 +55,8 @@ abstract class BaseRenderer implements Renderer {
    * @param string $requestedContentType
    */
   static function accepts($viewName, $templatesPath, $requestedContentType = null) {
-    if (is_file($templatesPath . $viewName . '.' . static::$templateFileExtension)) {
-      // The template file exists.
-
+    if (!static::$templateFileExtension || is_file($templatesPath . $viewName . '.' . static::$templateFileExtension)) {
+      // The template file exists or this renderer does not use templates.
       if ($requestedContentType === null) return true;
 
       if (in_array($requestedContentType, static::$acceptedContentTypes)) return true;

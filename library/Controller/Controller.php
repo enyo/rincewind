@@ -18,6 +18,11 @@ include dirname(__FILE__) . '/ControllerExceptions.php';
 require_class('DispatcherException', dirname(__FILE__) . '/DispatcherExceptions.php');
 
 /**
+ * Including model
+ */
+require_class('Model', 'Renderer');
+
+/**
  * The Controller is the base class for every Controller type.
  *
  * When a Controller gets initialized, the constructor calls
@@ -343,9 +348,10 @@ abstract class Controller {
    * Assign a value to the data object.
    * @param string $name
    * @param mixed $value
+   * @param int $clearance
    */
-  protected function assign($name, $value) {
-    $this->model->assign($name, $value);
+  protected function assign($name, $value, $clearance = Model::UNPUBLISHABLE) {
+    $this->model->assign($name, $value, $clearance);
   }
 
 

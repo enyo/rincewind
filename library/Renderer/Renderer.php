@@ -43,10 +43,11 @@ interface Renderer {
    *
    * @param string $view
    * @param Model $model
+   * @param MessageDelegate $messageDelegate
    * @param bool $output Whether it should return or output the rendered page.
    * @return string null if output = true
    */
-  public function render($view, Model $model, $output = true);
+  public function render($view, Model $model, MessageDelegate $messageDelegate, $output = true);
 
   /**
    * @return string

@@ -83,17 +83,18 @@ class Renderers {
    *
    * @param string $viewName
    * @param Model $model
+   * @param MessageDelegate $messageDelegate
    * @param string $templatesPath
    * @param array $requestedContentTypes
    * @param bool $output
    */
-  public function render($viewName, Model $model, $templatesPath, $requestedContentTypes, $output = true) {
+  public function render($viewName, Model $model, MessageDelegate $messageDelegate, $templatesPath, $requestedContentTypes, $output = true) {
     $renderer = $this->getAppropriateRenderer($viewName, $templatesPath, $requestedContentTypes);
     if (!$renderer) {
       Log::error('View could not be rendered because no renderer can handle it.', 'Renderer', array($viewName, $model, $templatesPath, $requestedContentTypes, $output));
       throw new RenderersException('No renderer can handle this request.');
     }
-    return $renderer->render($viewName, $model, $output);
+    return $renderer->render($viewName, $model, $messageDelegate, $output);
   }
 
   /**
@@ -102,25 +103,27 @@ class Renderers {
    *
    * @param int $errorCode
    * @param Model $model
+   * @param MessageDelegate $messageDelegate
    * @param string $templatesPath
    * @param array $requestedContentTypes
    * @param bool $output Whether it should return or output the rendered page.
    * @return string null if output = true
    */
-  public function renderError($errorCode, Model $model, $templatesPath, $requestedContentTypes, $output = true) {
-    return $this->render('errors/error.' . $errorCode, $model, $templatesPath, $requestedContentTypes, $output);
+  public function renderError($errorCode, Model $model, MessageDelegate $messageDelegate, $templatesPath, $requestedContentTypes, $output = true) {
+    return $this->render('errors/error.' . $errorCode, $model, $messageDelegate, $templatesPath, $requestedContentTypes, $output);
   }
 
   /**
    * Gets called when there was a problem initializing the data.
    * The template this renders should not access any data in the model.
    *
+   * @param MessageDelegate $messageDelegate
    * @param string $templatesPath
    * @param array $requestedContentTypes
    * @param bool $output
    */
-  public function renderFatalError($templatesPath, $requestedContentTypes, $output = true) {
-    return $this->render('errors/fatal_error', new Model(), $templatesPath, $requestedContentTypes, $output);
+  public function renderFatalError(MessageDelegate $messageDelegate, $templatesPath, $requestedContentTypes, $output = true) {
+    return $this->render('errors/fatal_error', new Model(), $messageDelegate, $templatesPath, $requestedContentTypes, $output);
   }
 
 }

@@ -225,10 +225,7 @@ class DefaultDispatcher implements Dispatcher {
           $controller->extendModel();
 
           try {
-            $model->assign('errorMessages', $this->utils->message()->getErrorMessages());
-            $model->assign('successMessages', $this->utils->message()->getSuccessMessages());
-
-            $this->renderers->render($controller->getViewName(), $model, $this->theme->getTemplatesPath(), $contentTypes);
+            $this->renderers->render($controller->getViewName(), $model, $this->utils->message(), $this->theme->getTemplatesPath(), $contentTypes);
           }
           catch (Exception $e) {
             throw new ErrorCode(ErrorCode::INTERNAL_SERVER_ERROR, 'Error during render: ' . $e->getMessage());
@@ -263,15 +260,13 @@ class DefaultDispatcher implements Dispatcher {
       }
 
       if ($errorDuringRender) {
-        $model->assign('errorMessages', $this->utils->message()->getErrorMessages());
-        $model->assign('successMessages', $this->utils->message()->getSuccessMessages());
-        $this->renderers->renderError($errorCode, $model, $this->theme->getTemplatesPath(), $contentTypes);
+        $this->renderers->renderError($errorCode, $model, $this->utils->message(), $this->theme->getTemplatesPath(), $contentTypes);
       }
     }
     catch (Exception $e) {
       try {
         Log::fatal('There has been a fatal error dispatching.', 'Dispatcher', array('error' => $e->getMessage()));
-        $this->renderers->renderFatalError($this->theme->getTemplatesPath(), $contentTypes);
+        $this->renderers->renderFatalError($this->utils->message(), $this->theme->getTemplatesPath(), $contentTypes);
       }
       catch (Exception $e) {
         die('<h1 class="error">Fatal error...</h1>');

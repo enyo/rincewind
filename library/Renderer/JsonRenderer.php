@@ -29,12 +29,22 @@ class JsonRenderer extends BaseRenderer {
   /**
    * {@inheritdoc}
    */
-  public function render($viewName, Model $model, $output = true) {
+  public function render($viewName, Model $model, MessageDelegate $messageDelegate, $output = true) {
 
     Profile::start('Renderer', 'Generate JSON');
 
-    $json = json_encode($model->getData(Model::PUBLISHABLE));
+    if (strpos($viewName, 'errors/') === 0) {
+      $data = array('error' => substr($viewName, strlen('errors/')));
+    }
+    else {
+      $c = $model->getData(Model::PUBLISHABLE);
+      $data = array('content' => count($c) === 0 ? null : $c);
+    }
 
+    if (count ($messageDelegate->getErrorMessages())) $data['errorMessages'] = $messageDelegate->getErrorMessages();
+    if (count ($messageDelegate->getSuccessMessages())) $data['successMessages'] = $messageDelegate->getSuccessMessages();
+
+    $json = json_encode($data);
 
     $this->setHeader('Content-type: application/json', $output);
     if ($output) {

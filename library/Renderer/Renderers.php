@@ -59,17 +59,19 @@ class Renderers {
    *
    * @param string $viewName
    * @param string $templatesPath
-   * @param array $contentTypes
+   * @param array $requestedContentTypes
    * @return Renderer
    */
-  public function getAppropriateRenderer($viewName, $templatesPath, $contentTypes) {
-    if (!$contentTypes) $contentTypes = array();
-    array_push($contentTypes, '*'); // This is the catch all content type.
-    foreach ($contentTypes as $contentType) {
+  public function getAppropriateRenderer($viewName, $templatesPath, $requestedContentTypes) {
+    if (!$requestedContentTypes) $requestedContentTypes = array();
+    array_push($requestedContentTypes, '*'); // This is the catch all content type.
+    foreach ($requestedContentTypes as $contentType) {
       foreach ($this->renderersList as $rendererInfo) {
         list($rendererClassName, $rendererServiceName) = $rendererInfo;
         if (call_user_func($rendererClassName . '::accepts', $viewName, $templatesPath, $contentType)) {
-          return $this->container->getService($rendererServiceName);
+          $renderer = $this->container->getService($rendererServiceName);
+          $renderer->setTemplatesPath($templatesPath);
+          return $renderer;
         }
       }
     }
@@ -82,15 +84,15 @@ class Renderers {
    * @param string $viewName
    * @param Model $model
    * @param string $templatesPath
-   * @param string $contentType
+   * @param array $requestedContentTypes
+   * @param bool $output
    */
-  public function render($viewName, Model $model, $templatesPath, $contentType, $output) {
-    $renderer = $this->getAppropriateRenderer($viewName, $templatesPath, $contentType);
+  public function render($viewName, Model $model, $templatesPath, $requestedContentTypes, $output = true) {
+    $renderer = $this->getAppropriateRenderer($viewName, $templatesPath, $requestedContentTypes);
     if (!$renderer) {
-      Log::error('View could not be rendered because no renderer can handle it.', 'Renderer', array($viewName, $model, $templatesPath, $contentType, $output));
+      Log::error('View could not be rendered because no renderer can handle it.', 'Renderer', array($viewName, $model, $templatesPath, $requestedContentTypes, $output));
       throw new RenderersException('No renderer can handle this request.');
     }
-    $renderer->setTemplatesPath($templatesPath);
     return $renderer->render($viewName, $model, $output);
   }
 
@@ -101,16 +103,12 @@ class Renderers {
    * @param int $errorCode
    * @param Model $model
    * @param string $templatesPath
-   * @param string $contentType
+   * @param array $requestedContentTypes
    * @param bool $output Whether it should return or output the rendered page.
    * @return string null if output = true
    */
-  public function renderError($errorCode, Model $model, $templatesPath, $contentType, $output = true) {
-    $viewName = 'errors/error';
-    if ($errorCode) {
-      $viewName .= '.' . $errorCode;
-    }
-    return $this->render($viewName, $model, $templatesPath, $contentType, $output);
+  public function renderError($errorCode, Model $model, $templatesPath, $requestedContentTypes, $output = true) {
+    return $this->render('errors/error.' . $errorCode, $model, $templatesPath, $requestedContentTypes, $output);
   }
 
   /**
@@ -118,11 +116,11 @@ class Renderers {
    * The template this renders should not access any data in the model.
    *
    * @param string $templatesPath
-   * @param string $contentType
+   * @param array $requestedContentTypes
    * @param bool $output
    */
-  public function renderFatalError($templatesPath, $contentType, $output = true) {
-    return $this->render('errors/fatal_error', new Model(), $templatesPath, $contentType, $output);
+  public function renderFatalError($templatesPath, $requestedContentTypes, $output = true) {
+    return $this->render('errors/fatal_error', new Model(), $templatesPath, $requestedContentTypes, $output);
   }
 
 }

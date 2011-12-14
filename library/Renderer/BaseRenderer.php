@@ -13,7 +13,8 @@
 require_interface('Renderer');
 
 /**
- * The renderer interface
+ * The base renderer.
+ * You should always extend this class unless you really know what you're doing.
  *
  * @author Matthias Loitsch <m@tthias.com>
  * @copyright Copyright (c) 2010, I-Netcompany
@@ -22,7 +23,11 @@ require_interface('Renderer');
 abstract class BaseRenderer implements Renderer {
 
   /**
-   * The file extension the renderer will handle
+   * The file extension the renderer will handle.
+   *
+   * Set this to null if your renderer does not actually render templates (eg: JSON
+   * or XML renderers).
+   *
    * @var string
    */
   static public $templateFileExtension = 'html';
@@ -36,6 +41,11 @@ abstract class BaseRenderer implements Renderer {
    * @var string
    */
   static public $acceptedContentTypes = array('text/html', 'application/xhtml+xml', '*');
+
+  /**
+   * @var array
+   */
+  protected $headers = array();
 
   /**
    * Checks if this class can actually handle the view.
@@ -80,6 +90,26 @@ abstract class BaseRenderer implements Renderer {
    */
   public function setTemplatesPath($templatesPath) {
     $this->templatesPath = $templatesPath;
+  }
+
+  /**
+   * Stores the header so it can be applied later.
+   *
+   * @param string $header
+   * @param bool $applyDirectly
+   * @see applyHeaders()
+   */
+  protected function setHeader($header, $applyDirectly = false) {
+    if ($applyDirectly) header($header);
+    else $this->headers[] = $header;
+  }
+
+  /**
+   * Actually applies the headers set by this renderer.
+   */
+  public function applyHeaders() {
+    foreach ($this->headers as $header)
+      header($header);
   }
 
 }

@@ -20,6 +20,7 @@ require_class('BaseRenderer', 'Renderer');
  * @package Renderer
  */
 class DwooRenderer extends BaseRenderer {
+
   /**
    * The file extension the renderer will handle
    * @var string
@@ -53,26 +54,11 @@ class DwooRenderer extends BaseRenderer {
   }
 
   /**
-   * Returns a data object to be filled with everything needed to process a site.
-   *
-   * @return Dwoo_Data
-   */
-  public function getModel() {
-    return new Dwoo_Data();
-  }
-
-  /**
-   * Renders the html.
-   *
-   * @param string $viewName
-   * @param Model $model
-   * @param bool $output
-   * @return string
-   * @see getTemplateUri()
+   * {@inheritdoc}
    */
   public function render($viewName, Model $model, $output = true) {
 
-    Profile::start('Theme', 'Generate HTML');
+    Profile::start('Renderer', 'Generate HTML');
 
     $templateName = $viewName . '.' . static::$templateFileExtension;
 
@@ -80,15 +66,19 @@ class DwooRenderer extends BaseRenderer {
 
     $dwoo->getLoader()->addDirectory($this->functionsPath);
 
-    Profile::start('Theme', 'Create template file.');
+    Profile::start('Renderer', 'Create template file.');
     $template = new Dwoo_Template_File($templateName);
     $template->setIncludePath($this->getTemplatesPath());
     Profile::stop();
 
-    Profile::start('Theme', 'Render');
+    Profile::start('Renderer', 'Render');
     $dwooData = new Dwoo_Data();
     $dwooData->setData($model->getData());
-    $rendered = $dwoo->get($template, $dwooData, null, $output);
+    $this->setHeader('Content-type: text/html', $output);
+    // I do never output directly from dwoo to have the possibility to show an error page if there was a render error.
+    $result = $rendered = $dwoo->get($template, $dwooData, null, false);
+    if ($output) echo $result;
+
     Profile::stop();
 
     Profile::stop();

@@ -69,6 +69,7 @@ class Renderers {
       foreach ($this->renderersList as $rendererInfo) {
         list($rendererClassName, $rendererServiceName) = $rendererInfo;
         if (call_user_func($rendererClassName . '::accepts', $viewName, $templatesPath, $contentType)) {
+          Log::debug('Using ' . $rendererClassName, 'Renderer');
           $renderer = $this->container->getService($rendererServiceName);
           $renderer->setTemplatesPath($templatesPath);
           return $renderer;

@@ -33,24 +33,36 @@ class DwooRenderer extends BaseRenderer {
    *
    * @var string
    */
-  static public $acceptedContentTypes = array('application/xhtml+xml', 'text/html', '*');
+  static public $acceptedContentTypes = array('text/html', '*');
 
   /**
    * @var string
    */
   protected $functionsPath;
+  /**
+   * @var string
+   */
+  protected $compiledPath;
+  /**
+   * @var string
+   */
+  protected $cachePath;
 
   /**
    * Includes the dwooAutoload php
    *
    * @param string $dwooAutoloadUri /URI/of/dwoo/dwooAutoload.php
+   * @param string $compiledPath;
+   * @param string $cachePath;
    * @param string $functionsPath Dwoo functions
    * @param string $templatesPath
    */
-  public function __construct($dwooAutoloadUri, $functionsPath, $templatesPath = null) {
+  public function __construct($dwooAutoloadUri, $compiledPath, $cachePath, $functionsPath, $templatesPath = null) {
     parent::__construct($templatesPath);
     include $dwooAutoloadUri;
     $this->functionsPath = $functionsPath;
+    $this->compiledPath = $compiledPath;
+    $this->cachePath = $cachePath;
   }
 
   /**
@@ -62,7 +74,7 @@ class DwooRenderer extends BaseRenderer {
 
     $templateName = $viewName . '.' . static::$templateFileExtension;
 
-    $dwoo = new Dwoo();
+    $dwoo = new Dwoo($this->compiledPath, $this->cachePath);
 
     $dwoo->getLoader()->addDirectory($this->functionsPath);
 

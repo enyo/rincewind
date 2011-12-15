@@ -15,7 +15,7 @@ The biggest and probably most used part of the library is the Dao.
 Once your Dao is configured (simply define the attributes you have in your resource), you access your datasource like this:
 
     <?php
-    $user = $userDao->getById($id);
+    $user = $userDao->get($id); // is the same as $userDao->getById($id)
     $user->set('firstName', 'John');
     $user->lastName = 'Doe'; // Is the same as $user->set('lastName', 'Doe');
     $user->save();
@@ -38,7 +38,7 @@ Eg.: You can specify that the attribute `address_id` points to the foreign key `
 This means that you can then simply access the address like this:
 
     <?php
-    $user = $userDao->getById($id);
+    $user = $userDao->get($id);
     $address = $user->address; // Instead of: $address = $addressDao->getById($user->addressId)
     ?>
 
@@ -51,7 +51,7 @@ Json:
 Your application:
 
     <?php
-    $user = $userDao->getById($id);
+    $user = $userDao->get($id);
     foreach ($user->addresses as $address) {
       // Your code here
     }
@@ -62,7 +62,7 @@ Those two possibilities can be mixed without any problem, and it's the servers c
 
 The submitted data could look like this:
 
-    { "id": 4, "username": "Joe", "address_id": 3, "address": { "id": 3, "street": "Somethinglane 3" }}
+    { "id": 4, "username": "Joe", "address": { "id": 3, "street": "Somethinglane 3" }}
 
 This works for chained references too of course!
 This would be the most direct way to access the country name of the user with username 'Billy' if you had 4 resources: users, addresses, cities and countries, and they were all joined:
@@ -140,7 +140,7 @@ After doing some testing I realized that this still is much faster then using in
 **A** Because I find it important that you can chain commands without having to worry if the object has been found.  
 A simple example:
 
-`$myDao->getById(1)->set('name', 'Matthias')->save();`
+`$myDao->get(1)->set('name', 'Matias')->save();`
 
-This would not be possible if getById() returned null.
+This would not be possible if get() returned null.
 If you don't need chaining, but simply want to test if a row exists, use find() instead, which does the same as get, but returns null if nothing's found.

@@ -41,18 +41,43 @@ class TwigRenderer extends BaseRenderer {
   protected $cachePath;
 
   /**
+   * @var array
+   */
+  protected $extensions = array();
+
+  /**
+   * @var array
+   */
+  protected $globals = array();
+
+  /**
    * Includes the dwooAutoload php
    *
    * @param string $twigAutoloaderUri /URI/of/twig/Autoloader.php
    * @param string $cachePath
    * @param string $templatesPath
    */
-  public function __construct($twigAutoloaderUri, $cachePath, $templatesPath = null) {
+  public function __construct($twigAutoloaderUri, $cachePath = false, $templatesPath = null) {
     parent::__construct($templatesPath);
 
     require_once $twigAutoloaderUri;
     Twig_Autoloader::register();
     $this->cachePath = $cachePath;
+  }
+
+  /**
+   * @param Twig_ExtensionInterface $extension
+   */
+  public function addExtension($extension) {
+    $this->extensions[] = $extension;
+  }
+
+  /**
+   * @param string $name
+   * @param object
+   */
+  public function addGlobal($name, $global) {
+    $this->globals[$name] = $global;
   }
 
   /**
@@ -67,13 +92,17 @@ class TwigRenderer extends BaseRenderer {
     $loader = new Twig_Loader_Filesystem($this->templatesPath);
     $twig = new Twig_Environment($loader, array('cache' => $this->cachePath));
 
+    foreach ($this->extensions as $extension) {
+      $twig->addExtension($extension);
+    }
+    foreach ($this->globals as $name => $global) {
+      $twig->addGlobal($name, $global);
+    }
 
-    $modelData = $model->getData();
-    $modelData['errorMessages'] = $messageDelegate->getErrorMessages();
-    $modelData['successMessages'] = $messageDelegate->getSuccessMessages();
+    $twig->addGlobal('notifications', $messageDelegate);
 
     $this->setHeader('Content-type: text/html', $output);
-    $result = $twig->render($templateName, $modelData);
+    $result = $twig->render($templateName, $model->getData());
 
     if ($output) echo $result;
 

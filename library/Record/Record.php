@@ -121,7 +121,7 @@ class Record implements RecordInterface {
   /**
    * When there is an id, update() is called on the dao.
    * If there is no id insert() is called, and the dao updates the data in this Record.
-   * 
+   *
    * @return Record itself for chaining.
    */
   public function save() {
@@ -164,7 +164,7 @@ class Record implements RecordInterface {
    *
    * If $resolveReferences is true, this goes through all references, and gets the data from those records and so on.
    * Be careful not to create endless loops.
-   * 
+   *
    * @param bool $resolveReferences
    * @return array
    */
@@ -370,27 +370,6 @@ class Record implements RecordInterface {
 
   public function __get($phpColumn) {
     return $this->get($phpColumn);
-  }
-
-  function __call($method, $param) {
-    if (strpos($method, 'get') === 0 || strpos($method, 'set') === 0 || strpos($method, 'has') === 0 || strpos($method, 'is') === 0) {
-      $trace = debug_backtrace();
-      trigger_error("Deprecated method call: $method! Do not use getters or setters, but do directly access the properties! Call was in " . $trace[1]['file'] . ' on line ' . $trace[1]['line'], E_USER_WARNING);
-    }
-
-    if (strpos($method, 'is') === 0 || strpos($method, 'has') === 0) {
-      return $this->get($method);
-    }
-    elseif (strpos($method, 'get') === 0) {
-      return $this->get($this->convertGetMethodToPhpColumn($method));
-    }
-    elseif (strpos($method, 'set') === 0) {
-      return $this->set($this->convertSetMethodToPhpColumn($method), $param[0]);
-    }
-    else {
-      $trace = debug_backtrace();
-      trigger_error("Call to undefined method $method in " . $trace[1]['file'] . ' on line ' . $trace[1]['line'], E_USER_ERROR);
-    }
   }
 
   /**

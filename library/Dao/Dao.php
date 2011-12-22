@@ -149,7 +149,7 @@ abstract class Dao implements DaoInterface {
    * with the constructor or as properties) and throws an Exception if not.
    *
    * Do not forget to call parent::__construct() when you overwrite this method!
-   * 
+   *
    */
   public function __construct() {
     $this->attributes = array_merge($this->attributes, $this->additionalAttributes());
@@ -169,7 +169,7 @@ abstract class Dao implements DaoInterface {
    * Don't forget to call
    * array_merge(parent::additionalAttributes(), $attributes)
    * when you overwrite this method.
-   * 
+   *
    * @return array
    */
   protected function additionalAttributes() {
@@ -180,7 +180,7 @@ abstract class Dao implements DaoInterface {
    * Don't forget to call
    * array_merge(parent::additionalNullAttributes(), $attributes)
    * when you overwrite this method.
-   * 
+   *
    * @return array
    */
   protected function additionalNullAttributes() {
@@ -191,7 +191,7 @@ abstract class Dao implements DaoInterface {
    * Don't forget to call
    * array_merge(parent::additionalDefaultValueAttributes(), $attributes)
    * when you overwrite this method.
-   * 
+   *
    * @return array
    */
   protected function additionalDefaultValueAttributes() {
@@ -253,13 +253,13 @@ abstract class Dao implements DaoInterface {
   protected $additionalAttributes = array();
   /**
    * A Cache object to store cached objects.
-   * 
+   *
    * @var Cache
    */
   protected $cache = null;
   /**
    * Whether to use the cache or not.
-   * 
+   *
    * @var bool
    */
   protected $useCache = false;
@@ -396,10 +396,10 @@ abstract class Dao implements DaoInterface {
 
   /**
    * Returns the record, or null.
-   * 
+   *
    * @param type $map
    * @param type $exportValues
-   * @param type $resourceName 
+   * @param type $resourceName
    * @return Record
    */
   public function find($map, $exportValues = true, $resourceName = null) {
@@ -413,7 +413,7 @@ abstract class Dao implements DaoInterface {
    * @param type $map
    * @param type $exportValues
    * @param type $resourceName
-   * @return type 
+   * @return type
    */
   public function getData($map = null, $exportValues = true, $resourceName = null) {
     $data = $this->findData($map, $exportValues, $resourceName);
@@ -423,7 +423,7 @@ abstract class Dao implements DaoInterface {
 
   /**
    * This calls doFindData() to get the actual data, and then prepares and returns it for the record.
-   * 
+   *
    * This is the actual method that takes care of memcaching.
    *
    * @param int|array|Record $map If it's an int, it will be converted to array('id'=>INT)
@@ -486,7 +486,7 @@ abstract class Dao implements DaoInterface {
    * @param string $resourceName
    * @param array $additionalInfo Used to pass additional info to the data source if needed.
    *
-   * @param bool $retrieveTotalRowCount 
+   * @param bool $retrieveTotalRowCount
    */
   public function getIterator($map, $sort = null, $offset = null, $limit = null, $exportValues = true, $resourceName = null, $retrieveTotalRowCount = false, $additionalInfo = null) {
     $result = $this->getIteratorResult($map, $sort, $offset, $limit, $exportValues, $resourceName, $retrieveTotalRowCount, $additionalInfo);
@@ -495,7 +495,7 @@ abstract class Dao implements DaoInterface {
 
   /**
    * Creates an iterator from a result.
-   * 
+   *
    * @return DaoResultIterator
    */
   abstract public function createIterator($result);
@@ -503,7 +503,7 @@ abstract class Dao implements DaoInterface {
   /**
    * The key is: $cachePrefix . $resourceName . '_' . $id
    *
-   * @param int|string $id 
+   * @param int|string $id
    */
   protected function generateCacheKey($id) {
     return $this->cachePrefix . $this->resourceName . '_' . $id;
@@ -523,14 +523,14 @@ abstract class Dao implements DaoInterface {
   /**
    * Forwards to doGetIteratorResult.
    * Overwrite this to do any iterator result caching.
-   * 
+   *
    * @param Record|array $map
    * @param array|string $sort
    * @param int $offset
    * @param int $limit
    * @param bool $exportValues
    * @param string $resourceName
-   * @param bool $retrieveTotalRowCount 
+   * @param bool $retrieveTotalRowCount
    * @param array $additionalInfo
    * @return result
    */
@@ -548,7 +548,7 @@ abstract class Dao implements DaoInterface {
    * @param int $limit
    * @param bool $exportValues
    * @param string $resourceName
-   * @param bool $retrieveTotalRowCount 
+   * @param bool $retrieveTotalRowCount
    * @param array $additionalInfo
    * @return result
    */
@@ -622,7 +622,7 @@ abstract class Dao implements DaoInterface {
   }
 
   /**
-   * @param Cache $cache 
+   * @param Cache $cache
    */
   public function setCache($cache) {
     $this->cache = $cache;
@@ -651,7 +651,7 @@ abstract class Dao implements DaoInterface {
    * @see Record
    */
   protected function afterInsert($record) {
-    
+
   }
 
   /**
@@ -662,7 +662,7 @@ abstract class Dao implements DaoInterface {
    * @see Record
    */
   protected function afterUpdate($record) {
-    
+
   }
 
   /**
@@ -673,7 +673,7 @@ abstract class Dao implements DaoInterface {
    * @see Record
    */
   protected function afterDelete($record) {
-    
+
   }
 
   /**
@@ -707,7 +707,7 @@ abstract class Dao implements DaoInterface {
 
   /**
    * Gets the record by id and deletes it.
-   * 
+   *
    * @param int $id
    */
   public function deleteById($id) {
@@ -801,7 +801,7 @@ abstract class Dao implements DaoInterface {
    * Per default this simply transforms the_attribute to theAttribute.
    *
    * @param string $attributeName
-   * @return string 
+   * @return string
    * @see convertAttributeNameToDatasourceName()
    */
   protected function convertAttributeNameToPhpName($attributeName) {
@@ -830,12 +830,12 @@ abstract class Dao implements DaoInterface {
   /**
    * Takes a record, and returns an array with all the values that are exported,
    * and meant to be inserted in the datasource.
-   * 
+   *
    * Attributes with type Dao::IGNORE are completely ignored.
-   * 
+   *
    * If an attribute is a reference, the reference is asked (via export()) if it
    * should be exported.
-   * 
+   *
    * @param Record|array $recordOrData
    * @param bool $ignoreNullValues If true, null values are simply not added to the array
    * @param bool $ignoreId If true, the id will not be added.
@@ -880,7 +880,7 @@ abstract class Dao implements DaoInterface {
 
   /**
    * Returns the arrays containing the attributes, and values to perform an insert.
-   * 
+   *
    * Simply calls and returns getExportedValues($record, $ignoreNullValues = true, $ignoreId = false)
    *
    * @param Record $record
@@ -893,7 +893,7 @@ abstract class Dao implements DaoInterface {
 
   /**
    * Returns a list of attributes that should be present in an update.
-   * 
+   *
    * Simply calls and returns getExportedValues($record, $ignoreNullValues = false, $ignoreId = true)
    *
    * @param Record $record
@@ -911,10 +911,11 @@ abstract class Dao implements DaoInterface {
    *
    * @param array $data
    * @param bool $existsInDatabase
+   * @param bool $isLoaded Wether this record has been fully loaded, or if the data is just part of it (the id for example)
    * @return Record
    */
-  protected function getRecordFromPreparedData($data, $existsInDatabase = true) {
-    return new $this->recordClassName($data, $this, $existsInDatabase);
+  protected function getRecordFromPreparedData($data, $existsInDatabase = true, $isLoaded = true) {
+    return new $this->recordClassName($data, $this, $existsInDatabase, $isLoaded);
   }
 
   /**
@@ -923,14 +924,15 @@ abstract class Dao implements DaoInterface {
    *
    * @param array $data The data returned from the datasource
    * @param bool $existsInDatabase
-   * @param bool $prepareData If true, gprepareDataForRecord() is called before getting the record.
+   * @param bool $isLoaded
+   * @param bool $prepareData If true, prepareDataForRecord() is called before getting the record.
    * @see prepareDataForRecord()
    * @see getRecordFromPreparedData()
    * @return Record
    */
-  public function getRecordFromData($data, $existsInDatabase = true, $prepareData = true) {
+  public function getRecordFromData($data, $existsInDatabase = true, $isLoaded = true, $prepareData = true) {
     if ($prepareData === true) $data = $this->prepareDataForRecord($data);
-    return $this->getRecordFromPreparedData($data);
+    return $this->getRecordFromPreparedData($data, $existsInDatabase, $isLoaded);
   }
 
   /**
@@ -1015,7 +1017,7 @@ abstract class Dao implements DaoInterface {
       }
       elseif ($type != Dao::IGNORE) $data[$attributeName] = $this->coerce($attributeName, null, $type, $allowNull = false, $quiet = true);
     }
-    return $this->getRecordFromPreparedData($data, $existsInDatabase = false);
+    return $this->getRecordFromPreparedData($data, false, false);
   }
 
   /**
@@ -1253,9 +1255,9 @@ abstract class Dao implements DaoInterface {
 
   /**
    * Should be used whenever an id gets exported.
-   * 
+   *
    * At the moment this only supports integers, but I plan to support more id types in the future
-   * 
+   *
    * @param int $id
    * @return int
    */
@@ -1375,11 +1377,11 @@ abstract class Dao implements DaoInterface {
 
   /**
    * At the moment this only supports integers, but I plan on supporting more.
-   * 
+   *
    * If the value is an object, it returns the id of the object.
-   * 
+   *
    * @param mixed $id
-   * @return mixed 
+   * @return mixed
    * @throws DaoCoerceException
    */
   public function coerceId($id) {
@@ -1394,7 +1396,7 @@ abstract class Dao implements DaoInterface {
    * @param mixed $value
    * @param string $attributeName
    * @param array $list
-   * @return mixed 
+   * @return mixed
    * @throws DaoCoerceException
    */
   public function coerceEnum($value, $attributeName, $list) {
@@ -1487,7 +1489,7 @@ abstract class Dao implements DaoInterface {
   /**
    * @param mixed $value
    * @param string $attributeName
-   * @return mixed 
+   * @return mixed
    * @throws DaoCoerceException because the Reference coerce function might throw it.
    */
   public function coerceReference($value, $attributeName) {

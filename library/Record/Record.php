@@ -34,12 +34,14 @@ class Record implements RecordInterface {
    * @var array
    */
   protected $data;
+
   /**
    * Contains a list of changed attributes (when set() is called)
    * Indices are the attribute names.
    * @var array
    */
   protected $changedAttributes;
+
   /**
    * This is the cache for computed properties.
    * Whenever a computed property is accessed, it first looks if it exists here.
@@ -47,6 +49,7 @@ class Record implements RecordInterface {
    * @var array
    */
   protected $computedAttributesCache = array();
+
   /**
    * This array contains all the dependencies on how caches are done for computed attributes.
    * The index is the name of the attribute and the value is either the name or an array of names
@@ -59,10 +62,12 @@ class Record implements RecordInterface {
    * @var array
    */
   protected $cacheDependencies = array();
+
   /**
    * @var Dao
    */
   protected $dao;
+
   /**
    * Whether the Data exists in database or not. (RawRecords don't)
    * @var bool
@@ -70,15 +75,25 @@ class Record implements RecordInterface {
   protected $existsInDatabase;
 
   /**
+   * Whether the record is fully loaded or just initialized partially.
+   *
+   * @var type
+   */
+  protected $isLoaded;
+
+  /**
    * Every record holds a reference to it's dao.
    *
    * @param array $data The complete data in an associative array.
    * @param Dao $dao The dao that created this record.
+   * @param bool $existsInDatabase If the record actually exists in the databse.
+   * @param bool $isLoaded
    */
-  public function __construct($data, $dao, $existsInDatabase = false) {
+  public function __construct($data, $dao, $existsInDatabase = false, $isLoaded = false) {
     $this->setData($data);
     $this->dao = $dao;
     $this->existsInDatabase = !!$existsInDatabase;
+    $this->isLoaded = !!$isLoaded;
   }
 
   /**
@@ -95,6 +110,13 @@ class Record implements RecordInterface {
    */
   public function setExistsInDatabase($existsInDatabase = true) {
     $this->existsInDatabase = !!$existsInDatabase;
+  }
+
+  /**
+   * @param bool $isLoaded
+   */
+  public function setIsLoaded($isLoaded = true) {
+    $this->isLoaded = !!$isLoaded;
   }
 
   /**
@@ -156,6 +178,7 @@ class Record implements RecordInterface {
     if (count($map) === 0) throw new RecordException('You tried to load a Record which had not attributes set.');
     $this->setData($this->dao->getData($map));
     $this->setExistsInDatabase();
+    $this->setIsLoaded();
     return $this;
   }
 
@@ -219,13 +242,7 @@ class Record implements RecordInterface {
     $attributes = $this->dao->getAttributes();
     if (array_key_exists($attributeName, $attributes)) {
       if ($attributes[$attributeName] !== Dao::REFERENCE) {
-        if (!array_key_exists($attributeName, $this->data)) {
-          if (!$this->existsInDatabase()) throw new RecordException('The record did not have all attributes set properly! The attribute missing: ' . $attributeName);
-          // Well, the record exists in database, and has not the complete hash set yet! So load it.
-          $this->load();
-        }
-
-        $value = $this->data[$attributeName];
+        $value = $this->getDirectly($attributeName);
       }
       else {
         // It's a reference
@@ -282,13 +299,24 @@ class Record implements RecordInterface {
 
   /**
    * You should NEVER use this function your app.
-   * This is only a helper function for Daos to access the data directly.
+   * This is only a helper function for Daos or References to access the data directly.
+   *
+   * This method makes sure the record has been properly loaded.
    *
    * @param string $attributeName
    * @param mixed $value
    */
   public function getDirectly($attributeName) {
-    return isset($this->data[$attributeName]) ? $this->data[$attributeName] : null;
+    if (!array_key_exists($attributeName, $this->dao->getAttributes())) trigger_error('Tried to access invalid attribute: ' . $attributeName, E_USER_ERROR);
+
+    if (!array_key_exists($attributeName, $this->data) && !$this->isLoaded) {
+      // If this attribute is not a reference, and is hat not been set yet, that means the record has to be loaded.
+      if (!$this->existsInDatabase()) throw new RecordException('The record did not have all attributes set properly! The attribute missing: ' . $attributeName);
+      // Well, the record exists in database, and has not the complete hash set yet! So load it.
+      $this->load();
+    }
+
+    return array_key_exists($attributeName, $this->data) ? $this->data[$attributeName] : null;
   }
 
   /**

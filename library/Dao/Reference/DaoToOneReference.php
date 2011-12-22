@@ -47,7 +47,7 @@ class DaoToOneReference extends BasicDaoReference {
       }
       elseif (is_int($data)) {
         // If data is an integer, it must be the id. So just get the record set with the data.
-        return $this->cacheAndReturn($record, $attributeName, $this->getForeignDao()->getRecordFromData(array('id' => (int) $data), true, false));
+        return $this->cacheAndReturn($record, $attributeName, $this->getForeignDao()->getRecordFromData(array('id' => (int) $data), true, false, false));
       }
       elseif ($data instanceof Record) {
         // The record is cached. Just return it.

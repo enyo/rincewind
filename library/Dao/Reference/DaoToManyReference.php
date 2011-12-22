@@ -40,7 +40,7 @@ class DaoToManyReference extends BasicDaoToManyReference {
    */
   public function getReferenced($record, $attribute) {
 
-    if ($data = $record->getDirectly($attribute)) {
+    if (($data = $record->getDirectly($attribute))) {
       if (is_array($data)) {
         if (count($data) === 0 || is_array(reset($data))) {
           // The data hash is an array, either empty, or containing the hashes.

@@ -10,7 +10,7 @@
 /**
  * Defines the current rincewind version
  */
-define('RINCEWIND_VERSION', 20501);
+define('RINCEWIND_VERSION', 20502);
 
 if ( ! defined('REQUIRED_RINCEWIND_VERSION')) trigger_error('You should set a REQUIRED_RINCEWIND_VERSION (' . RINCEWIND_VERSION . ').', E_USER_WARNING);
 

@@ -78,7 +78,7 @@ class Theme {
    */
   protected function getRootPath() {
     if (!$this->rootPath) {
-      $this->rootPath = $this->themesPath . '/' . $this->getToken() . '/';
+      $this->rootPath = $this->themesPath . $this->getToken() . '/';
     }
     return $this->rootPath;
   }

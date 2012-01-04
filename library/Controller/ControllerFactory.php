@@ -23,7 +23,7 @@ class ControllerFactoryException extends Exception {
  * @copyright Copyright (c) 2009, Matthias Loitsch
  * @package Controller
  */
-abstract class ControllerFactory {
+class ControllerFactory {
 
   /**
    * @var sfServiceContainer

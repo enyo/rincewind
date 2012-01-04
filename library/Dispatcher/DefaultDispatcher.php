@@ -55,25 +55,25 @@ class DefaultDispatcher implements Dispatcher {
   private $actionSanitizer;
 
   /**
-   * @var UtilsFactory
+   * @var NotificationCenter
    */
-  private $utils;
+  private $notificationCenter;
 
   /**
    * @param ControllerFactory $controllerFactory
    * @param Renderer $renderers
    * @param Theme $theme
    * @param Sanitizer $actionSanitizer
-   * @param UtilsFactory $utils
+   * @param NotificationCenter $notificationCenter
    * @param string $defaultControllerName
    */
-  public function __construct(ControllerFactory $controllerFactory, Renderers $renderers, Theme $theme, Sanitizer $actionSanitizer, UtilsFactory $utils, $defaultControllerName = 'Home') {
+  public function __construct(ControllerFactory $controllerFactory, Renderers $renderers, Theme $theme, Sanitizer $actionSanitizer, NotificationCenter $notificationCenter, $defaultControllerName = 'Home') {
     $this->controllerFactory = $controllerFactory;
     $this->renderers = $renderers;
     $this->theme = $theme;
     $this->defaultControllerName = $defaultControllerName;
     $this->actionSanitizer = $actionSanitizer;
-    $this->utils = $utils;
+    $this->notificationCenter = $notificationCenter;
   }
 
   /**
@@ -225,7 +225,7 @@ class DefaultDispatcher implements Dispatcher {
           $controller->extendModel();
 
           try {
-            $this->renderers->render($controller->getViewName(), $model, $this->utils->message(), $this->theme->getTemplatesPath(), $contentTypes);
+            $this->renderers->render($controller->getViewName(), $model, $this->notificationCenter, $this->theme->getTemplatesPath(), $contentTypes);
           }
           catch (Exception $e) {
             throw new ErrorCode(ErrorCode::INTERNAL_SERVER_ERROR, 'Error during render: ' . $e->getMessage());
@@ -233,7 +233,7 @@ class DefaultDispatcher implements Dispatcher {
         }
         catch (ErrorMessageException $e) {
           $errorDuringRender = true;
-          $this->utils->message()->addErrorMessage($e->getMessage());
+          $this->notificationCenter->addError($e->getMessage());
         }
         catch (ErrorCode $e) {
           throw $e;
@@ -260,13 +260,13 @@ class DefaultDispatcher implements Dispatcher {
       }
 
       if ($errorDuringRender) {
-        $this->renderers->renderError($errorCode, $model, $this->utils->message(), $this->theme->getTemplatesPath(), $contentTypes);
+        $this->renderers->renderError($errorCode, $model, $this->notificationCenter, $this->theme->getTemplatesPath(), $contentTypes);
       }
     }
     catch (Exception $e) {
       try {
         Log::fatal('There has been a fatal error dispatching.', 'Dispatcher', array('error' => $e->getMessage()));
-        $this->renderers->renderFatalError($this->utils->message(), $this->theme->getTemplatesPath(), $contentTypes);
+        $this->renderers->renderFatalError($this->notificationCenter, $this->theme->getTemplatesPath(), $contentTypes);
       }
       catch (Exception $e) {
         die('<h1 class="error">Fatal error...</h1>');

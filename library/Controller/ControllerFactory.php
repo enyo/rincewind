@@ -12,7 +12,7 @@
  * Thrown when a Controller is not found.
  */
 class ControllerFactoryException extends Exception {
-  
+
 }
 
 /**
@@ -65,7 +65,7 @@ abstract class ControllerFactory {
    * Returns a specific controller, passing on all the objects the Factory got in the constructor.
    *
    * This method also takes care of dependency injections.
-   * 
+   *
    * @param string $controllerName
    * @param bool $skipInitialization If true, neither authorize(), initialize() nor validate() is called on the Controller.
    * @return Controller
@@ -95,11 +95,13 @@ abstract class ControllerFactory {
     return $siteController;
   }
 
-  
+
   /**
    * @param string $className
    * @return Controller
    */
-  abstract protected function getController($className);
-  
+  protected function getController($className) {
+    return new $className($this->container->notificationCenter, $this->container->locationUtils, $this->container->history);
+  }
+
 }

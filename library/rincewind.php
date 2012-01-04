@@ -10,7 +10,12 @@
 /**
  * Defines the current rincewind version
  */
-define('RINCEWIND_VERSION', '2.6.0');
+define('RINCEWIND_VERSION', '2.6.1');
+
+/**
+ * Defines the path to the rincewind library.
+ */
+define('RINCEWIND_PATH', __DIR__ . '/');
 
 if ( ! defined('REQUIRED_RINCEWIND_VERSION')) trigger_error('You should set a REQUIRED_RINCEWIND_VERSION (' . RINCEWIND_VERSION . ').', E_USER_WARNING);
 
@@ -70,10 +75,10 @@ include dirname(__FILE__) . '/rincewind.types.php';
  */
 function RW_determineFileUri($interfaceOrClassName, $fileUriOrService) {
   if ($fileUriOrService === null) {
-    $fileUri = dirname(__FILE__) . '/' . $interfaceOrClassName . '/' . $interfaceOrClassName . '.php';
+    $fileUri = __DIR__ . '/' . $interfaceOrClassName . '/' . $interfaceOrClassName . '.php';
   }
   elseif (strpos($fileUriOrService, '/') !== 0) {
-    $fileUri = dirname(__FILE__) . '/' . $fileUriOrService . '/' . $interfaceOrClassName . '.php';
+    $fileUri = __DIR__ . '/' . $fileUriOrService . '/' . $interfaceOrClassName . '.php';
   }
   else {
     $fileUri = $fileUriOrService;

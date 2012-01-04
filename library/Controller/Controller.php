@@ -61,9 +61,9 @@ abstract class Controller {
    */
   protected $keepInHistory = true;
   /**
-   * @var MessageUtils
+   * @var NotificationCenter
    */
-  private $messageDelegate;
+  private $notificationCenter;
   /**
    *
    * @var Model
@@ -81,12 +81,12 @@ abstract class Controller {
   protected $history;
 
   /**
-   * @param MessageDelegate $messageDelegate
+   * @param NotificationCenter $notificationCenter
    * @param LocationDelegate $locationDelegate
    * @param History $history
    */
-  public function __construct(MessageDelegate $messageDelegate, LocationDelegate $locationDelegate, History $history) {
-    $this->messageDelegate = $messageDelegate;
+  public function __construct(NotificationCenter $notificationCenter, LocationDelegate $locationDelegate, History $history) {
+    $this->notificationCenter = $notificationCenter;
     $this->history = $history;
     $this->setLocationDelegate($locationDelegate);
   }
@@ -191,11 +191,11 @@ abstract class Controller {
    */
   final public function initialize() {
     if (($error = $this->locationDelegate->getUrlErrorMessage()) !== null) {
-      $this->addErrorMessage($error);
+      $this->addError($error);
     }
 
     if (($success = $this->locationDelegate->getUrlSuccessMessage()) !== null) {
-      $this->addSuccessMessage($success);
+      $this->addSuccess($success);
     }
 
     try {
@@ -249,23 +249,23 @@ abstract class Controller {
   }
 
   /**
-   * Wrapper for MessageUtils::addErrorMessage()
+   * Wrapper for NotificationCenter::addError()
    *
    * @param string|array $message
-   * @see MessageUtils::addErrorMessage()
+   * @see NotificationCenter::addError()
    */
-  public function addErrorMessage($message) {
-    $this->messageDelegate->addErrorMessage($message);
+  public function addError($message) {
+    $this->notificationCenter->addError($message);
   }
 
   /**
-   * Wrapper for MessageUtils::addSuccessMessage()
+   * Wrapper for NotificationCenter::addSuccess()
    *
    * @param string|array $message
-   * @see MessageUtils::addSuccessMessage()
+   * @see NotificationCenter::addSuccess()
    */
-  public function addSuccessMessage($message) {
-    $this->messageDelegate->addSuccessMessage($message);
+  public function addSuccess($message) {
+    $this->notificationCenter->addSuccess($message);
   }
 
   /**

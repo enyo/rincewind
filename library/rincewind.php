@@ -10,11 +10,11 @@
 /**
  * Defines the current rincewind version
  */
-define('RINCEWIND_VERSION', 20502);
+define('RINCEWIND_VERSION', '2.6.0');
 
 if ( ! defined('REQUIRED_RINCEWIND_VERSION')) trigger_error('You should set a REQUIRED_RINCEWIND_VERSION (' . RINCEWIND_VERSION . ').', E_USER_WARNING);
 
-class RW {
+abstract class RW {
 
   /**
    * @param int $version
@@ -51,10 +51,10 @@ class RW {
 }
 
 /**
- * Triggers error if the required version is highe then the actual version.
+ * Triggers error if the required version is higher then the actual version.
  */
-if (defined('REQUIRED_RINCEWIND_VERSION') && REQUIRED_RINCEWIND_VERSION > RINCEWIND_VERSION) {
-  die('The required rincewind version (' . RW::formatVersion(REQUIRED_RINCEWIND_VERSION) . ') is higher than the actual version (' . RW::formatVersion(RINCEWIND_VERSION) . ').');
+if (version_compare(RINCEWIND_VERSION, REQUIRED_RINCEWIND_VERSION) < 0) {
+  die('The required rincewind version (' . REQUIRED_RINCEWIND_VERSION . ') is higher than the actual version (' . RINCEWIND_VERSION . ').');
 }
 
 /**
@@ -110,7 +110,7 @@ function require_interface($interfaceName, $fileUriOrService = null) {
 }
 
 /**
- * Now include the important static classes.
+ * Now include the necessary static classes.
  */
 /**
  * Loading the Log class.

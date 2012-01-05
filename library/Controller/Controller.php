@@ -40,6 +40,10 @@ require_class('Model', 'Renderer');
 abstract class Controller {
 
   /**
+   * @var sfServiceContainer
+   */
+  protected $container;
+  /**
    * Contains the action name. Eg.: index
    * @var array
    */
@@ -60,10 +64,6 @@ abstract class Controller {
    */
   protected $keepInHistory = true;
   /**
-   * @var NotificationCenter
-   */
-  private $notificationCenter;
-  /**
    *
    * @var Model
    */
@@ -73,20 +73,13 @@ abstract class Controller {
    * @var Router
    */
   protected $router;
-  /**
-   *
-   * @var History
-   */
-  protected $history;
 
   /**
-   * @param NotificationCenter $notificationCenter
+   * @param sfServiceContainer $container
    * @param Router $router
-   * @param History $history
    */
-  public function __construct(NotificationCenter $notificationCenter, Router $router, History $history) {
-    $this->notificationCenter = $notificationCenter;
-    $this->history = $history;
+  public function __construct(sfServiceContainer $container, Router $router) {
+    $this->container = $container;
     $this->router = $router;
   }
 
@@ -108,11 +101,26 @@ abstract class Controller {
   }
 
   /**
+   * Returns the name, sanitized with the controllerNameToUrlSanitizer
+   * @return string
+   */
+  public function getUrlName() {
+    return $this->container->controllerNameToUrlSanitizer->sanitize($this->getName());
+  }
+
+  /**
    * Returns the action
    * @return string
    */
   public function getAction() {
     return $this->action;
+  }
+  /**
+   * Returns the string, sanitized with the actionToUrlSanitizer
+   * @return string
+   */
+  public function getUrlAction() {
+    return $this->container->actionToUrlSanitizer->sanitize($this->getAction());
   }
 
   /**
@@ -185,7 +193,7 @@ abstract class Controller {
    * @see ErrorMessageException
    */
   final public function initialize() {
-    $this->router->setCurrentRoute($this->getName(), $this->getAction(), $this->getActionParameters());
+    $this->router->setCurrentRoute($this->getUrlName(), $this->getUrlAction(), $this->getActionParameters());
 
     if (($error = $this->router->getUrlError()) !== null) {
       $this->addError($error);
@@ -203,7 +211,7 @@ abstract class Controller {
       throw new ControllerException('Database error.');
     }
     if ($this->keepInHistory()) {
-      $this->history->addUrl($this->getUrl());
+      $this->container->history->addUrl($this->router->getUrl());
     }
   }
 
@@ -244,7 +252,7 @@ abstract class Controller {
    * @see NotificationCenter::addError()
    */
   public function addError($message) {
-    $this->notificationCenter->addError($message);
+    $this->container->notificationCenter->addError($message);
   }
 
   /**
@@ -254,20 +262,7 @@ abstract class Controller {
    * @see NotificationCenter::addSuccess()
    */
   public function addSuccess($message) {
-    $this->notificationCenter->addSuccess($message);
-  }
-
-  /**
-   * Wrapper for Router
-   *
-   * @param string $targetControllerName if null, the current url is used.
-   * @param string,... $action A list of possible action strings.
-   * @param array $get
-   * @uses Router::getUrl()
-   */
-  public function getUrl() {
-    $params = func_get_args();
-    return call_user_func_array(array($this->router, 'getUrl'), func_get_args());
+    $this->container->notificationCenter->addSuccess($message);
   }
 
   /**
@@ -315,7 +310,9 @@ abstract class Controller {
    *
    */
   public function initModel() {
-
+    $this->model->assign('controller', $this, Model::UNPUBLISHABLE);
+    $this->model->assign('router', $this->container->router, Model::UNPUBLISHABLE);
+    $this->model->assign('config', $this->container->config, Model::UNPUBLISHABLE);
   }
 
   /**

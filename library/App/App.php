@@ -103,8 +103,18 @@ class App {
      * Sanitizer
      */
     $this->container->
-        register('actionSanitizer', 'DashesToCamelizedSanitizer')->
+        register('actionFromUrlSanitizer', 'DashesToCamelizedSanitizer')->
         setFile(RINCEWIND_PATH . 'Sanitizer/DashesToCamelizedSanitizer.php');
+    $this->container->
+        register('actionToUrlSanitizer', 'CamelizedToDashesSanitizer')->
+        setFile(RINCEWIND_PATH . 'Sanitizer/CamelizedToDashesSanitizer.php');
+
+    $this->container->
+        register('controllerNameFromUrlSanitizer', 'DashesToCamelizedSanitizer')->
+        addArgument(true)->
+        setFile(RINCEWIND_PATH . 'Sanitizer/DashesToCamelizedSanitizer.php');
+    $this->container->setAlias('controllerNameToUrlSanitizer', 'actionToUrlSanitizer');
+
     /**
      * NotificationCenter
      */
@@ -158,7 +168,8 @@ class App {
         addArgument(new sfServiceReference('controllerFactory'))->
         addArgument(new sfServiceReference('renderers'))->
         addArgument(new sfServiceReference('theme'))->
-        addArgument(new sfServiceReference('actionSanitizer'))->
+        addArgument(new sfServiceReference('controllerNameFromUrlSanitizer'))->
+        addArgument(new sfServiceReference('actionFromUrlSanitizer'))->
         addArgument(new sfServiceReference('notificationCenter'))->
         setFile(RINCEWIND_PATH . 'Dispatcher/DefaultDispatcher.php');
   }

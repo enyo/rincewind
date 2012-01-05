@@ -100,6 +100,7 @@ class TwigRenderer extends BaseRenderer {
     }
 
     $twig->addGlobal('notifications', $notificationCenter);
+//    $twig->addGlobal('controller', $);
 
     $this->setHeader('Content-type: text/html', $output);
     $result = $twig->render($templateName, $model->getData());

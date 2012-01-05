@@ -52,7 +52,11 @@ class DefaultDispatcher implements Dispatcher {
   /**
    * @var Sanitizer
    */
-  private $actionSanitizer;
+  private $controllerFromUrlSanitizer;
+  /**
+   * @var Sanitizer
+   */
+  private $actionFromUrlSanitizer;
 
   /**
    * @var NotificationCenter
@@ -63,16 +67,18 @@ class DefaultDispatcher implements Dispatcher {
    * @param ControllerFactory $controllerFactory
    * @param Renderer $renderers
    * @param Theme $theme
-   * @param Sanitizer $actionSanitizer
+   * @param Sanitizer $controllerFromUrlSanitizer
+   * @param Sanitizer $actionFromUrlSanitizer
    * @param NotificationCenter $notificationCenter
    * @param string $defaultControllerName
    */
-  public function __construct(ControllerFactory $controllerFactory, Renderers $renderers, Theme $theme, Sanitizer $actionSanitizer, NotificationCenter $notificationCenter, $defaultControllerName = 'Home') {
+  public function __construct(ControllerFactory $controllerFactory, Renderers $renderers, Theme $theme, Sanitizer $controllerFromUrlSanitizer, Sanitizer $actionFromUrlSanitizer, NotificationCenter $notificationCenter, $defaultControllerName = 'Home') {
     $this->controllerFactory = $controllerFactory;
     $this->renderers = $renderers;
     $this->theme = $theme;
     $this->defaultControllerName = $defaultControllerName;
-    $this->actionSanitizer = $actionSanitizer;
+    $this->controllerFromUrlSanitizer = $controllerFromUrlSanitizer;
+    $this->actionFromUrlSanitizer = $actionFromUrlSanitizer;
     $this->notificationCenter = $notificationCenter;
   }
 
@@ -133,7 +139,7 @@ class DefaultDispatcher implements Dispatcher {
 
       $controllerName = isset($_GET['controller']) ? trim($_GET['controller']) : $this->defaultControllerName;
 
-      $controllerName = ucfirst(preg_replace('/\-([a-z])/e', 'strtoupper("$1")', $controllerName));
+      $controllerName = $this->controllerFromUrlSanitizer->sanitize($controllerName);
 
       $invalidControllerName = false;
       try {
@@ -170,7 +176,7 @@ class DefaultDispatcher implements Dispatcher {
             throw new ErrorCode(ErrorCode::NOT_FOUND, 'Tried to access action with underscore.');
           }
 
-          $action = $this->actionSanitizer->sanitize($action);
+          $action = $this->actionFromUrlSanitizer->sanitize($action);
 
           try {
             // Check if the action is valid
@@ -225,7 +231,7 @@ class DefaultDispatcher implements Dispatcher {
           $controller->extendModel();
 
           try {
-            $this->renderers->render($controller->getViewName(), $model, $this->notificationCenter, $this->theme->getTemplatesPath(), $contentTypes);
+            $this->renderers->render($controller->getViewName(), $model, $this->notificationCenter, $this->theme->getTemplatesPath(), $contentTypes, $controller);
           }
           catch (Exception $e) {
             throw new ErrorCode(ErrorCode::INTERNAL_SERVER_ERROR, 'Error during render: ' . $e->getMessage());

@@ -58,7 +58,7 @@ class Theme {
    *
    * @var string
    */
-  protected $configUri = 'config';
+  protected $configUri = 'theme.conf';
 
   /**
    * @param string $themesPath

@@ -101,7 +101,7 @@ class ControllerFactory {
    * @return Controller
    */
   protected function getController($className) {
-    return new $className($this->container->notificationCenter, $this->container->locationUtils, $this->container->history);
+    return new $className($this->container->notificationCenter, $this->container->router, $this->container->history);
   }
 
 }

@@ -1,37 +1,45 @@
 <?php
 
 /**
- * This file contains the DefaultLocationDelegate definition.
+ * This file contains the Router definition.
  *
  * @author Matthias Loitsch <matthias@loitsch.com>
  * @copyright Copyright (c) 2010, I-Netcompany
- * @package Controller
+ * @package Router
  */
 /**
- * Including the LocationDelegate
+ * Including the Router
  */
-require_interface('LocationDelegate', 'Controller');
+require_interface('Router');
 
 /**
  * @author Matthias Loitsch <matthias@loitsch.com>
  * @copyright Copyright (c) 2009, Matthias Loitsch
  * @package Utils
- * @package Location
+ * @package Router
  */
-class DefaultLocationDelegate implements LocationDelegate {
+class DefaultRouter implements Router {
 
   /**
-   * @var Controller
+   * @var string
    */
-  protected $controller;
+  protected $currentControllerName;
+
   /**
-   * @var Encryption
+   * @var string
    */
-  protected $urlEncryption;
+  protected $currentAction;
+
+  /**
+   * @var string
+   */
+  protected $currentActionParameters;
+
   /**
    * @var bool
    */
   protected $useRestfulUrls;
+
   /**
    * The url root, in case your site is not running on / but in a folder
    * @var string
@@ -40,18 +48,19 @@ class DefaultLocationDelegate implements LocationDelegate {
   protected $urlRoot = '/';
 
   /**
-   * The delegate has to receive the controller in the constructor.
-   * @param Encryption $urlEncryption
-   * @param string $domainHttpString
    * @param bool $useRestfulUrls
    */
-  public function __construct(Encryption $urlEncryption, $useRestfulUrls = true) {
-    $this->urlEncryption = $urlEncryption;
+  public function __construct($useRestfulUrls = true) {
     $this->useRestfulUrls = $useRestfulUrls;
   }
 
-  public function setController(Controller $controller) {
-    $this->controller = $controller;
+  /**
+   * {@inheritdoc}
+   */
+  public function setCurrentRoute($controllerName, $action = null, array $actionParameters = array()) {
+    $this->currentControllerName = $controllerName;
+    $this->currentAction = $action;
+    $this->currentActionParameters = $actionParameters;
   }
 
   /**
@@ -59,15 +68,6 @@ class DefaultLocationDelegate implements LocationDelegate {
    */
   public function setUrlRoot($urlRoot) {
     $this->urlRoot = $urlRoot;
-  }
-
-  /**
-   * TODO This should be done with a sanitizer, and not here!
-   * @param string $name
-   * @return string
-   */
-  private function tmp_convertControllerName($name) {
-    return preg_replace('/([A-Z])/e', 'strtolower("-$1")', lcfirst($name));
   }
 
   /**
@@ -80,13 +80,18 @@ class DefaultLocationDelegate implements LocationDelegate {
     return preg_replace('/[^a-zA-Z0-9\-\_\.]/im', '-', $name);
   }
 
-
+  /**
+   * {@inheritdoc}
+   */
   public function getUrl($targetControllerName = null) {
     $arguments = func_get_args();
     list($targetControllerName, $action, $actionParameters, $get) = $this->interpretUrlArguments($targetControllerName, $arguments);
     return $this->generateUrl($targetControllerName, $action, $actionParameters, $get);
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getLink($targetControllerName = null) {
     $arguments = func_get_args();
     list($targetControllerName, $action, $actionParameters, $get) = $this->interpretUrlArguments($targetControllerName, $arguments);
@@ -107,10 +112,11 @@ class DefaultLocationDelegate implements LocationDelegate {
 
     $usingActiveUrl = false;
     if ($targetControllerName === null) {
+      if (!$this->currentControllerName) throw new RouterException('No current controller set.');
       $usingActiveUrl = true;
-      $targetControllerName = $this->tmp_convertControllerName($this->controller->getName());
-      $action = $this->tmp_convertControllerName($this->controller->getAction());
-      $actionParameters = $this->controller->getActionParameters();
+      $targetControllerName = $this->currentControllerName;
+      $action = $this->currentAction;
+      $actionParameters = $this->currentActionParameters;
     }
 
     $argumentCount = count($arguments);
@@ -119,8 +125,7 @@ class DefaultLocationDelegate implements LocationDelegate {
         $argument = $arguments[$i];
         if (is_array($argument)) {
           $get = $argument;
-          if ($i !== $argumentCount - 1)
-            trigger_error('Only the last argument can be an array of GET parameters.', E_USER_ERROR);
+          if ($i !== $argumentCount - 1) trigger_error('Only the last argument can be an array of GET parameters.', E_USER_ERROR);
         }
         else {
           if ($usingActiveUrl) {
@@ -128,10 +133,8 @@ class DefaultLocationDelegate implements LocationDelegate {
             // action information.
             trigger_error('When using active URL, you can\'t pass additional action information.', E_USER_ERROR);
           }
-          if ($i === 1)
-            $action = rawurlencode((string) $argument);
-          else
-            $actionParameters[] = rawurlencode((string) $argument);
+          if ($i === 1) $action = rawurlencode((string) $argument);
+          else $actionParameters[] = rawurlencode((string) $argument);
         }
       }
     }
@@ -152,8 +155,7 @@ class DefaultLocationDelegate implements LocationDelegate {
   private function generateUrl($targetControllerName, $action, array $actionParameters, array $get, $error = null, $success = null) {
     $targetControllerName = rawurlencode($targetControllerName);
 
-    if (count($actionParameters) === 0 && $action === 'index')
-      $action = null;
+    if (count($actionParameters) === 0 && $action === 'index') $action = null;
 
     $actionString = null;
     if ($action) {
@@ -163,39 +165,61 @@ class DefaultLocationDelegate implements LocationDelegate {
     }
 
     if ($error) {
-      $error = $this->urlEncryption->encrypt($error);
+      $error = $this->exportUrlMessage($error);
       $get['error'] = $error;
     }
     if ($success) {
-      $success = $this->urlEncryption->encrypt($success);
+      $success = $this->exportUrlMessage($success);
       $get['success'] = $success;
     }
 
     if ($this->useRestfulUrls) {
       $url = $this->urlRoot . rawurlencode($targetControllerName);
-      if ($actionString)
-        $url .= '/' . $actionString;
-      if (count($get))
-        $url .= '?' . http_build_query($get);
+      if ($actionString) $url .= '/' . $actionString;
+      if (count($get)) $url .= '?' . http_build_query($get);
     }
     else {
       $url = $this->urlRoot . '?controller=' . rawurlencode($targetControllerName);
-      if ($actionString)
-        $url .= '&action=' . $actionString;
-      if (count($get))
-        $url .= '&' . http_build_query($get);
+      if ($actionString) $url .= '&action=' . $actionString;
+      if (count($get)) $url .= '&' . http_build_query($get);
     }
     return $url;
   }
 
+  /**
+   * Prepares the message to be written in an url
+   * Overwrite it to do something special like encryption.
+   *
+   * @param string $message
+   * @return string
+   */
+  protected function exportUrlMessage($message) {
+    return $message;
+  }
+  /**
+   * Reads the message in again.
+   * Overwrite it to do something special like decryption.
+   *
+   * @param string $message
+   * @return string
+   */
+  protected function importUrlMessage($message) {
+    return $message;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function redirect($targetControllerName = null) {
     $params = func_get_args();
     $url = call_user_func_array(array($this, 'getUrl'), $params);
     $this->redirectToUrl($url);
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function redirectWithError($error, $targetControllerName = null) {
-
     $arguments = func_get_args();
     array_shift($arguments);
     list($targetControllerName, $action, $actionParameters, $get) = $this->interpretUrlArguments($targetControllerName, $arguments);
@@ -204,6 +228,9 @@ class DefaultLocationDelegate implements LocationDelegate {
     $this->redirectToUrl($url);
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function redirectWithSuccess($success, $targetControllerName = null) {
     $arguments = func_get_args();
     array_shift($arguments);
@@ -217,13 +244,13 @@ class DefaultLocationDelegate implements LocationDelegate {
    * Returns an url error if set.
    * @return string null if none
    */
-  public function getUrlErrorMessage() {
+  public function getUrlError() {
     if (isset($_GET['error'])) {
       try {
-        $error = $this->urlEncryption->decrypt($_GET['error']);
-        if (!empty($error))
-          return $error;
-      } catch (Exception $e) {
+        $error = $this->importUrlMessage($_GET['error']);
+        if (!empty($error)) return $error;
+      }
+      catch (Exception $e) {
         // Ignore fake error message.
         Log::info('Incorrect error message.', 'Controller', array('error', $_GET['error']));
       }
@@ -235,13 +262,13 @@ class DefaultLocationDelegate implements LocationDelegate {
    * Returns an url success if set.
    * @return string null if none
    */
-  public function getUrlSuccessMessage() {
+  public function getUrlSuccess() {
     if (isset($_GET['success'])) {
       try {
-        $success = $this->urlEncryption->decrypt($_GET['success']);
-        if (!empty($success))
-          return $success;
-      } catch (Exception $e) {
+        $success = $this->importUrlMessage($_GET['success']);
+        if (!empty($success)) return $success;
+      }
+      catch (Exception $e) {
         // Ignore fake success message.
         Log::info('Incorrect success message.', 'Controller', $_GET['success']);
       }
@@ -249,6 +276,9 @@ class DefaultLocationDelegate implements LocationDelegate {
     return null;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function redirectToUrl($url) {
     header('Location: ' . $url);
     die();

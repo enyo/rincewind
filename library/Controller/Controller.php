@@ -27,8 +27,7 @@ require_class('Model', 'Renderer');
  *
  * When a Controller gets initialized, the constructor calls
  * - authorize()
- * - initialize()
- * - validate()
+ * - prepare()
  * in that order.
  *
  * You then get the html output from the Controller, by calling getHtml()
@@ -71,9 +70,9 @@ abstract class Controller {
   protected $model;
   /**
    *
-   * @var LocationDelegate
+   * @var Router
    */
-  protected $locationDelegate;
+  protected $router;
   /**
    *
    * @var History
@@ -82,13 +81,13 @@ abstract class Controller {
 
   /**
    * @param NotificationCenter $notificationCenter
-   * @param LocationDelegate $locationDelegate
+   * @param Router $router
    * @param History $history
    */
-  public function __construct(NotificationCenter $notificationCenter, LocationDelegate $locationDelegate, History $history) {
+  public function __construct(NotificationCenter $notificationCenter, Router $router, History $history) {
     $this->notificationCenter = $notificationCenter;
     $this->history = $history;
-    $this->setLocationDelegate($locationDelegate);
+    $this->router = $router;
   }
 
   /**
@@ -149,9 +148,9 @@ abstract class Controller {
     if ($this->viewName) {
       $templateName = $this->viewName;
     } else {
-      $templateName = $this->convertPhpNameToTemplateName($this->getName());
+      $templateName = $this->convertPhpNameToViewName($this->getName());
       if ($this->getAction() !== 'index') {
-        $templateName .= '.' . $this->convertPhpNameToTemplateName($this->getAction());
+        $templateName .= '.' . $this->convertPhpNameToViewName($this->getAction());
       }
     }
 
@@ -175,26 +174,24 @@ abstract class Controller {
   }
 
   /**
-   * Calls authorize, prepare and validate in this order.
+   * Calls authorize and prepare in this order.
    * The ControllerFactory calls initialize when creating a controller, if $skipInitialization == false
    *
    * If you skip it, make sure you call all methods yourself!
    *
-   * If validate() throws a ErrorMessageException, the exception gets caught,
-   * and the message added to the message list.
-   *
    *
    * @see authorize()
    * @see prepare()
-   * @see validate()
    * @see ErrorMessageException
    */
   final public function initialize() {
-    if (($error = $this->locationDelegate->getUrlErrorMessage()) !== null) {
+    $this->router->setCurrentRoute($this->getName(), $this->getAction(), $this->getActionParameters());
+
+    if (($error = $this->router->getUrlError()) !== null) {
       $this->addError($error);
     }
 
-    if (($success = $this->locationDelegate->getUrlSuccessMessage()) !== null) {
+    if (($success = $this->router->getUrlSuccess()) !== null) {
       $this->addSuccess($success);
     }
 
@@ -234,18 +231,10 @@ abstract class Controller {
   }
 
   /**
-   * @param LocationDelegate $locationDelegate
+   * @return Router
    */
-  public function setLocationDelegate(LocationDelegate $locationDelegate) {
-    $locationDelegate->setController($this);
-    $this->locationDelegate = $locationDelegate;
-  }
-
-  /**
-   * @return LocationDelegate
-   */
-  public function getLocationDelegate() {
-    return $this->locationDelegate;
+  public function getRouter() {
+    return $this->router;
   }
 
   /**
@@ -269,79 +258,16 @@ abstract class Controller {
   }
 
   /**
-   * Wrapper for LocationDelegate
+   * Wrapper for Router
    *
    * @param string $targetControllerName if null, the current url is used.
    * @param string,... $action A list of possible action strings.
    * @param array $get
-   * @uses LocationDelegate::getUrl()
+   * @uses Router::getUrl()
    */
   public function getUrl() {
     $params = func_get_args();
-    return call_user_func_array(array($this->locationDelegate, 'getUrl'), func_get_args());
-  }
-
-  /**
-   * Wrapper for LocationDelegate
-   *
-   * @param string $targetControllerName if null, the current url is used.
-   * @param string,... $action A list of possible action strings.
-   * @param array $get
-   * @uses LocationDelegate::getLink()
-   */
-  public function getLink() {
-    $params = func_get_args();
-    return call_user_func_array(array($this->locationDelegate, 'getLink'), func_get_args());
-  }
-
-  /**
-   * Wrapper for LocationDelegate
-   *
-   * @param string $targetControllerName if null, the current url is used.
-   * @param [string..] $action A list of possible action strings.
-   * @param array $get
-   * @uses getUrl()
-   */
-  public function redirect() {
-    $params = func_get_args();
-    return call_user_func_array(array($this->locationDelegate, 'redirect'), func_get_args());
-  }
-
-  /**
-   * Wrapper for LocationDelegate
-   *
-   * @param string $error
-   * @param string $targetControllerName if null, the current url is used.
-   * @param [string..] $action A list of possible action strings.
-   * @param array $get
-   */
-  public function redirectWithError() {
-    $params = func_get_args();
-    return call_user_func_array(array($this->locationDelegate, 'redirectWithError'), func_get_args());
-  }
-
-  /**
-   * Wrapper for LocationDelegate
-   *
-   * @param string $success
-   * @param string $targetControllerName if null, the current url is used.
-   * @param [string..] $action A list of possible action strings.
-   * @param array $get
-   */
-  public function redirectWithSuccess() {
-    $params = func_get_args();
-    return call_user_func_array(array($this->locationDelegate, 'redirectWithSuccess'), func_get_args());
-  }
-
-  /**
-   * Wrapper for LocationDelegate
-   *
-   * @param string $url
-   * @uses $locationDelegate::redirectToUrl()
-   */
-  public function redirectToUrl($url) {
-    $params = func_get_args();
-    return call_user_func_array(array($this->locationDelegate, 'redirectToUrl'), func_get_args());
+    return call_user_func_array(array($this->router, 'getUrl'), func_get_args());
   }
 
   /**
@@ -360,7 +286,7 @@ abstract class Controller {
    *
    * @return string
    */
-  protected function convertPhpNameToTemplateName($name) {
+  protected function convertPhpNameToViewName($name) {
     $templateName = lcfirst(str_replace('Controller', '', $name));
     return preg_replace('/([A-Z])/e', 'strtolower("_$1")', $templateName);
   }

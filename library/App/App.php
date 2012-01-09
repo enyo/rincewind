@@ -34,8 +34,14 @@ class App {
   }
 
   public function setup() {
+    /**
+     * Setup system config
+     */
+    require_class('IniFileConfig', 'Config');
+    $config = new IniFileConfig(ROOT_PATH . '/includes/local.conf', ROOT_PATH . '/includes/default.conf', true);
 
-    $this->setupContainer();
+
+    $this->setupContainer($config);
 
     /**
      * Include the main ini file.
@@ -59,18 +65,12 @@ class App {
     $this->appConfigFileUri = preg_replace('/\{([^\}]+)\}/ie', 'constant("$1")', $this->appConfigFileUri);
   }
 
-  protected function setupContainer() {
+  protected function setupContainer($config) {
     include RINCEWIND_PATH . 'SymfonyServiceContainer/sfServiceContainerAutoloader.php';
 
     sfServiceContainerAutoloader::register();
 
     $this->container = new sfServiceContainerBuilder();
-
-    /**
-     * Setup system config
-     */
-    require_class('IniFileConfig', 'Config');
-    $config = new IniFileConfig(ROOT_PATH . '/includes/local.conf', ROOT_PATH . '/includes/default.conf', true);
 
     /**
      * Make the system config available as symfony parameters.

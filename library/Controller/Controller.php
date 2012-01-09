@@ -64,12 +64,10 @@ abstract class Controller {
    */
   protected $keepInHistory = true;
   /**
-   *
    * @var Model
    */
   protected $model;
   /**
-   *
    * @var Router
    */
   protected $router;

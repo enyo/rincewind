@@ -1,40 +1,42 @@
 <?php
 
 /**
- * This file contains the LocationDelegate interface definition.
+ * This file contains the Router interface definition.
  *
  * @author Matthias Loitsch <matthias@loitsch.com>
  * @copyright Copyright (c) 2010, I-Netcompany
- * @package Controller
+ * @package Router
  */
 
 /**
  * @author Matthias Loitsch <matthias@loitsch.com>
  * @copyright Copyright (c) 2009, Matthias Loitsch
- * @package Controller
+ * @package Router
  */
-interface LocationDelegate {
+interface Router {
 
   /**
-   * @param Controller $controller
+   * @param string $controllerName
+   * @param string $action
+   * @param array $actionParameters
    */
-  public function setController(Controller $controller);
+  public function setCurrentRoute($controllerName, $action = null, array $actionParameters = array());
 
   /**
    * A call to this could look like this:
-   * 
+   *
    *     getUrl('address', 'delete', 2, array('confirmed' => true))
-   * 
+   *
    * This would result in:
    *     /address/delete/2?confirmed=true
    * or
    *     ?controller=address&action=delete/2&confirmed=true
-   * 
+   *
    * If you want to redirect to the current url, use:
    *     getUrl()
    * or if you want to pass get parameters to the current url, use:
-   *     getUrl(null, array('confirmed' => true)) 
-   * 
+   *     getUrl(null, array('confirmed' => true))
+   *
    * @param string $targetControllerName if null, the current url is used.
    * @param string,... $action A list of possible action strings.
    * @param array $get
@@ -44,7 +46,7 @@ interface LocationDelegate {
   /**
    * The same as getUrl, but without session ID information, and with
    * http://linktosite/ prepended.
-   * 
+   *
    * @param string $targetControllerName if null, the current url is used.
    * @param string,... $action A list of possible action strings.
    * @param array $get
@@ -54,7 +56,7 @@ interface LocationDelegate {
 
   /**
    * Uses getUrl to get the url, and redirect there.
-   * 
+   *
    * @param string $targetControllerName if null, the current url is used.
    * @param [string..] $action A list of possible action strings.
    * @param array $get
@@ -64,7 +66,7 @@ interface LocationDelegate {
 
   /**
    * The same as redirect, but adds an encrypted error as get variable.
-   * 
+   *
    * @param string $error
    * @param string $targetControllerName if null, the current url is used.
    * @param [string..] $action A list of possible action strings.
@@ -76,17 +78,17 @@ interface LocationDelegate {
    * Returns an url error if set.
    * @return string null if none
    */
-  public function getUrlErrorMessage();
+  public function getUrlError();
 
   /**
    * Returns an url success if set.
    * @return string null if none
    */
-  public function getUrlSuccessMessage();
+  public function getUrlSuccess();
 
   /**
    * The same as redirect, but adds an encrypted success as get variable.
-   * 
+   *
    * @param string $success
    * @param string $targetControllerName if null, the current url is used.
    * @param [string..] $action A list of possible action strings.
@@ -96,7 +98,7 @@ interface LocationDelegate {
 
   /**
    * Redirects to url, and exits.
-   * 
+   *
    * @param string $url
    */
   public function redirectToUrl($url);

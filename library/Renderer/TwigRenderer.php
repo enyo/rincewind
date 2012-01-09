@@ -83,7 +83,7 @@ class TwigRenderer extends BaseRenderer {
   /**
    * {@inheritdoc}
    */
-  public function render($viewName, Model $model, MessageDelegate $messageDelegate, $output = true) {
+  public function render($viewName, Model $model, NotificationCenter $notificationCenter, $output = true) {
 
     Profile::start('Renderer', 'Rendering HTML');
 
@@ -99,7 +99,8 @@ class TwigRenderer extends BaseRenderer {
       $twig->addGlobal($name, $global);
     }
 
-    $twig->addGlobal('notifications', $messageDelegate);
+    $twig->addGlobal('notifications', $notificationCenter);
+//    $twig->addGlobal('controller', $);
 
     $this->setHeader('Content-type: text/html', $output);
     $result = $twig->render($templateName, $model->getData());

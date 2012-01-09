@@ -68,7 +68,7 @@ class DwooRenderer extends BaseRenderer {
   /**
    * {@inheritdoc}
    */
-  public function render($viewName, Model $model, MessageDelegate $messageDelegate, $output = true) {
+  public function render($viewName, Model $model, NotificationCenter $notificationCenter, $output = true) {
 
     Profile::start('Renderer', 'Generate HTML');
 
@@ -87,8 +87,8 @@ class DwooRenderer extends BaseRenderer {
     $dwooData = new Dwoo_Data();
     $dwooData->setData($model->getData());
 
-    $dwooData->assign('errorMessages', $messageDelegate->getErrorMessages());
-    $dwooData->assign('successMessages', $messageDelegate->getSuccessMessages());
+    $dwooData->assign('errorMessages', $notificationCenter->getErrors());
+    $dwooData->assign('successMessages', $notificationCenter->getSuccesses());
 
     $this->setHeader('Content-type: text/html', $output);
     // I do never output directly from dwoo to have the possibility to show an error page if there was a render error.

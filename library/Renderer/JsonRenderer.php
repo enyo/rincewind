@@ -29,7 +29,7 @@ class JsonRenderer extends BaseRenderer {
   /**
    * {@inheritdoc}
    */
-  public function render($viewName, Model $model, MessageDelegate $messageDelegate, $output = true) {
+  public function render($viewName, Model $model, NotificationCenter $notificationCenter, $output = true) {
 
     Profile::start('Renderer', 'Generate JSON');
 
@@ -41,8 +41,8 @@ class JsonRenderer extends BaseRenderer {
       $data = array('content' => count($c) === 0 ? null : $c);
     }
 
-    if (count ($messageDelegate->getErrorMessages())) $data['errorMessages'] = $messageDelegate->getErrorMessages();
-    if (count ($messageDelegate->getSuccessMessages())) $data['successMessages'] = $messageDelegate->getSuccessMessages();
+    if (count ($notificationCenter->getErrors())) $data['errorMessages'] = $notificationCenter->getErrors();
+    if (count ($notificationCenter->getSuccesses())) $data['successMessages'] = $notificationCenter->getSuccesses();
 
     $json = json_encode($data);
 

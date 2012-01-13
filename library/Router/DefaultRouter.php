@@ -235,7 +235,7 @@ class DefaultRouter implements Router {
     $arguments = func_get_args();
     array_shift($arguments);
     list($targetControllerName, $action, $actionParameters, $get) = $this->interpretUrlArguments($targetControllerName, $arguments);
-    $url = $this->generateUrl($targetControllerName, $action, $actionParameters, $get);
+    $url = $this->generateUrl($targetControllerName, $action, $actionParameters, $get, null, $success);
 
     $this->redirectToUrl($url);
   }

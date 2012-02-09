@@ -8,6 +8,15 @@
  * @package Router
  */
 
+
+/**
+ * RouterException
+ */
+class RouterException extends Exception {
+  
+}
+
+
 /**
  * @author Matthias Loitsch <matthias@loitsch.com>
  * @copyright Copyright (c) 2009, Matthias Loitsch

@@ -101,7 +101,9 @@ class ControllerFactory {
    * @return Controller
    */
   protected function getController($className) {
-    return new $className($this->container, $this->container->router);
+    $controller = new $className($this->container->router);
+    if ($controller instanceof ContainerAware) $controller->setContainer($this->container);
+    return $controller;
   }
 
 }

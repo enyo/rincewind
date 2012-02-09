@@ -152,7 +152,7 @@ class DefaultRouter implements Router {
    * @param string $error
    * @param string $success
    */
-  private function generateUrl($targetControllerName, $action, array $actionParameters, array $get, $error = null, $success = null) {
+  protected function generateUrl($targetControllerName, $action, array $actionParameters, array $get, $error = null, $success = null) {
     $targetControllerName = rawurlencode($targetControllerName);
 
     if (count($actionParameters) === 0 && $action === 'index') $action = null;

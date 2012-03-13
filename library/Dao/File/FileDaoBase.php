@@ -254,7 +254,7 @@ class FileDaoBase extends Dao {
 
     if ( ! is_array($map)) throw new DaoWrongValueException("The passed map is not an array.");
 
-    $assignments = array();
+    $exportedMap = array();
 
     foreach ($map as $attributeName => $value) {
       if ($value instanceof DaoAttributeAssignment) {
@@ -267,10 +267,10 @@ class FileDaoBase extends Dao {
       }
 
       $type = $this->attributes[$attributeName];
-      $map[$this->exportAttributeName($attributeName)] = $this->exportValue($attributeName, $value, $type, $this->notNull($attributeName));
+      $exportedMap[$this->exportAttributeName($attributeName)] = $this->exportValue($attributeName, $value, $type, $this->notNull($attributeName));
     }
 
-    return $map;
+    return $exportedMap;
   }
 
   /**

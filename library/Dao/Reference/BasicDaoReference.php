@@ -89,6 +89,14 @@ abstract class BasicDaoReference implements DaoReference {
    */
   protected $foreignKey = 'id';
   /**
+   * Can contain values the referenced records will be filtered with.
+   * 
+   * Eg.: array('deleted' => false)
+   * 
+   * @var array
+   */
+  protected $filterMap;
+  /**
    * The Dao this reference is assigned to.
    * @var Dao
    */
@@ -109,13 +117,15 @@ abstract class BasicDaoReference implements DaoReference {
    * @param bool $export specifies if this reference should be sent to the
    *                              datasource when saving.
    * @param bool $exportData If true, the complete data will be exported, not only the id.
+   * @param array $filterMap
    */
-  public function __construct($foreignDaoName, $localKey = null, $foreignKey = null, $export = false, $exportData = false) {
+  public function __construct($foreignDaoName, $localKey = null, $foreignKey = null, $export = false, $exportData = false, $filterMap = null) {
     $this->foreignDao = $foreignDaoName;
     $this->localKey = $localKey;
     if ($foreignKey !== null) $this->foreignKey = $foreignKey;
     $this->export = $export;
     $this->exportData = $exportData;
+    $this->filterMap = $filterMap;
   }
 
   /**
@@ -232,6 +242,19 @@ abstract class BasicDaoReference implements DaoReference {
   protected function cacheAndReturn($record, $attributeName, $value) {
     $record->setDirectly($attributeName, $value);
     return $value;
+  }
+
+  /**
+   * Adds the filterMap to the provided map.
+   * If values exist in both, $map will override the $filterMap
+   * 
+   * @param  array $map The map to add the filter to
+   * @return array
+   * @uses  $filterMap
+   */
+  protected function applyFilter($map) {
+    if (!$this->filterMap) return $map;
+    else return array_merge($this->filterMap, $map);
   }
 
 }

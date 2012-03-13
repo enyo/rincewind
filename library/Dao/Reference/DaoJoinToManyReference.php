@@ -38,8 +38,8 @@ class DaoJoinToManyReference extends BasicDaoToManyReference {
    * @param string $foreignKey
    * @param string $localKey
    */
-  public function __construct($foreignDaoName, $foreignKey, $localKey = 'id') {
-    parent::__construct($foreignDaoName, $localKey, $foreignKey, false);
+  public function __construct($foreignDaoName, $foreignKey, $localKey = 'id', $filterMap = null) {
+    parent::__construct($foreignDaoName, $localKey, $foreignKey, false, false, $filterMap);
   }
 
   /**
@@ -66,7 +66,7 @@ class DaoJoinToManyReference extends BasicDaoToManyReference {
       }
     }
     else {
-      return $this->cacheAndReturn($record, $attributeName, $this->getForeignDao()->getIterator(array($this->getForeignKey() => $record->get($this->getLocalKey()))));
+      return $this->cacheAndReturn($record, $attributeName, $this->getForeignDao()->getIterator($this->applyFilter(array($this->getForeignKey() => $record->get($this->getLocalKey())))));
     }
   }
 

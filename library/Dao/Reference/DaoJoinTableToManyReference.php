@@ -73,9 +73,10 @@ class DaoJoinTableToManyReference extends BasicDaoToManyReference {
    * @param string $joinToForeignKey
    * @param string $localKey
    * @param string $foreignKey
+   * @param array $filterMap
    */
-  public function __construct($foreignDaoName, $joinDaoName, $joinToLocalKey, $joinToForeignKey, $localKey = 'id', $foreignKey = 'id') {
-    parent::__construct($foreignDaoName, $localKey, $foreignKey, false);
+  public function __construct($foreignDaoName, $joinDaoName, $joinToLocalKey, $joinToForeignKey, $localKey = 'id', $foreignKey = 'id', $filterMap = null) {
+    parent::__construct($foreignDaoName, $localKey, $foreignKey, false, false, $filterMap);
     $this->joinDao = $joinDaoName;
     $this->joinToLocalKey = $joinToLocalKey;
     $this->joinToForeignKey = $joinToForeignKey;
@@ -116,7 +117,7 @@ class DaoJoinTableToManyReference extends BasicDaoToManyReference {
     $joinDao = $this->getJoinDao();
 
     // Get all joins, that point to the local key.
-    $joins = $joinDao->getIterator(array($this->getJoinToLocalKey() => $record->get($this->getLocalKey())));
+    $joins = $joinDao->getIterator($this->applyFilter(array($this->getJoinToLocalKey() => $record->get($this->getLocalKey()))));
 
     // Extract an array of foreign keys.
     $foreignKeys = array();

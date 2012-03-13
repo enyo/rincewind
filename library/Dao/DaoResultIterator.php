@@ -10,7 +10,8 @@
 
 /**
  * The Dao Result iterator is returned whenever a query returns more than one row.
- * It implements the default php Iterator Interface, so foreach() and stuff works on it.
+ * It implements the default php Iterator Interface, so foreach() works on it, and the Countable interface
+ * so you can call count($someResultIterator)
  *
  * Typical usage:
  * <code>
@@ -27,7 +28,7 @@
  * @copyright Copyright (c) 2010, Matthias Loitsch
  * @package Dao
  */
-abstract class DaoResultIterator implements Iterator {
+abstract class DaoResultIterator implements Iterator, Countable {
 
   /**
    * @var Dao

@@ -1,0 +1,16 @@
+{
+  "files": [
+    {
+      "name": "README.markdown",
+      "regexs": [
+        "Version ###"
+      ]
+    },
+    {
+      "name": "library/rincewind.php",
+      "regexs": [
+        "define\\('RINCEWIND_VERSION', '###'\\)"
+      ]
+    }
+  ]
+}

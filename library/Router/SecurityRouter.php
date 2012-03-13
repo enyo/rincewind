@@ -10,7 +10,7 @@
 /**
  * Including the Router
  */
-require_class('DefaultRouter');
+require_class('DefaultRouter', 'Router');
 
 /**
  * @author Matthias Loitsch <matthias@loitsch.com>
@@ -18,7 +18,7 @@ require_class('DefaultRouter');
  * @package Utils
  * @package Router
  */
-class SecurityRouter implements DefaultRouter {
+class SecurityRouter extends DefaultRouter {
 
   /**
    * @var Encryption

@@ -18,6 +18,11 @@ include dirname(__FILE__) . '/ControllerExceptions.php';
 require_class('DispatcherException', dirname(__FILE__) . '/DispatcherExceptions.php');
 
 /**
+ * Including ContainerAware interface
+ */
+require_interface('ContainerAware');
+
+/**
  * Including model
  */
 require_class('Model', 'Renderer');
@@ -37,7 +42,7 @@ require_class('Model', 'Renderer');
  * @copyright Copyright (c) 2009, Matthias Loitsch
  * @package Controller
  */
-abstract class Controller {
+abstract class Controller implements ContainerAware {
 
   /**
    * @var sfServiceContainer
@@ -73,13 +78,42 @@ abstract class Controller {
   protected $router;
 
   /**
-   * @param sfServiceContainer $container
    * @param Router $router
    */
-  public function __construct(sfServiceContainer $container, Router $router) {
-    $this->container = $container;
+  public function __construct(Router $router) {
     $this->router = $router;
   }
+
+  /**
+   * @param sfServiceContainer $container
+   */
+  public function setContainer($container) {
+    $this->verifyRequiredServices($container);
+    $this->container = $container;
+  }
+
+  /**
+   * @return sfServiceContainer
+   */
+  public function getContainer() {
+    return $this->container;
+  }
+
+  /**
+   * The default is an empty array
+   * @return array
+   */
+  public function getRequiredServices() {
+    return array();
+  }
+
+  public function verifyRequiredServices($container) {
+    foreach ($this->getRequiredServices() as $service) {
+      if (!$container->hasService($service)) {
+        throw new ControllerException(sprintf('The service definition "%s" was not present.', $service));
+      }
+    }
+   }
 
   /**
    * Overwrite this function to return a title (html meta tag <title></title>)

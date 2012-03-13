@@ -90,6 +90,7 @@ class DefaultDispatcher implements Dispatcher {
    * http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html
    *
    * @param string $acceptHeader
+   * @return array
    */
   public function getAcceptContentTypes($acceptHeader) {
     $groupedContentTypes = array();
@@ -135,6 +136,9 @@ class DefaultDispatcher implements Dispatcher {
    */
   public function dispatch($skipControllerInitialization = false) {
     Profile::start('Dispatcher', 'Dispatching');
+
+    $contentTypes = array();
+
     try {
 
       $controllerName = isset($_GET['controller']) ? trim($_GET['controller']) : $this->defaultControllerName;
@@ -155,9 +159,9 @@ class DefaultDispatcher implements Dispatcher {
       $controller->setModel($model);
       $controller->initModel();
 
-      try {
+      $contentTypes = $this->getAcceptContentTypes($_SERVER['HTTP_ACCEPT']);
 
-        $contentTypes = $this->getAcceptContentTypes($_SERVER['HTTP_ACCEPT']);
+      try {
 
         if ($invalidControllerName) {
           ErrorCode::notFound();

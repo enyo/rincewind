@@ -10,7 +10,7 @@
 /**
  * Defines the current rincewind version
  */
-define('RINCEWIND_VERSION', '2.6.4-dev');
+define('RINCEWIND_VERSION', '2.6.4');
 
 /**
  * Defines the path to the rincewind library.

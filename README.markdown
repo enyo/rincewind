@@ -1,4 +1,4 @@
-# Rincewind Version 2.6.4
+# Rincewind Version 2.6.5-dev
 
 Is a PHP library.
 

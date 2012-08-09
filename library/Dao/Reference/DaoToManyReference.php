@@ -92,12 +92,18 @@ class DaoToManyReference extends BasicDaoToManyReference {
    * @param mixed $value
    * @return array
    */
-  public function exportValue($value) {
+  public function exportValue($value, $ignoreNullValues = false, $ignoreId = false) {
     $values = array();
     if (is_array($value)) {
       $foreignDao = $this->getForeignDao();
-      foreach ($value as $id) {
-        $values[] = $foreignDao->exportId($id);
+      foreach ($value as $idOrRecord) {
+        if ($idOrRecord instanceof Record || is_array($idOrRecord)) {
+          $values[] = $foreignDao->getExportedValues($idOrRecord, $ignoreNullValues, $ignoreId);
+
+        }
+        else {
+          $values[] = $foreignDao->exportId($idOrRecord);
+        }
       }
     }
     return $values;

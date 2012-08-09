@@ -90,6 +90,8 @@ class DaoToManyReference extends BasicDaoToManyReference {
 
   /**
    * @param mixed $value
+   * @param bool $ignoreNullValues
+   * @param bool $ignoreId
    * @return array
    */
   public function exportValue($value, $ignoreNullValues = false, $ignoreId = false) {

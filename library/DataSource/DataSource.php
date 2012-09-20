@@ -31,7 +31,7 @@ class DataSourceException extends Exception {
   public $httpCode;
 
   public function __construct($errorToken = '', $httpCode = 200, $code = null, $previous = null) {
-    parent::__construct('', $code, $previous);
+    parent::__construct("Data source error with code $httpCode.", $code, $previous);
     $this->errorToken = $errorToken;
     $this->httpCode = $httpCode;
   }

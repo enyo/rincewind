@@ -112,11 +112,16 @@ class DefaultRouter implements Router {
 
     $usingActiveUrl = false;
     if ($targetControllerName === null) {
-      if (!$this->currentControllerName) throw new RouterException('No current controller set.');
       $usingActiveUrl = true;
-      $targetControllerName = $this->currentControllerName;
-      $action = $this->currentAction;
-      $actionParameters = $this->currentActionParameters;
+      if (!$this->currentControllerName) {
+        Log::warning("Trying to get current url but no current controller set.");
+        $targetControllerName = "home";
+      }
+      else {
+        $targetControllerName = $this->currentControllerName;
+        $action = $this->currentAction;
+        $actionParameters = $this->currentActionParameters;
+      }
     }
 
     $argumentCount = count($arguments);

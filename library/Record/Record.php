@@ -238,7 +238,6 @@ class Record implements RecordInterface {
    * @return mixed
    */
   public function get($attributeName) {
-
     $attributes = $this->dao->getAttributes();
     if (array_key_exists($attributeName, $attributes)) {
       if ($attributes[$attributeName] !== Dao::REFERENCE) {
@@ -384,6 +383,7 @@ class Record implements RecordInterface {
    */
   public function __isset($attributeName) {
     if ($this->dao->getAttributeType($attributeName) !== Dao::REFERENCE) {
+      if (!$this->isLoaded) $this->load();
       return isset($this->data[$attributeName]);
     }
     else {

@@ -383,7 +383,7 @@ class Record implements RecordInterface {
    */
   public function __isset($attributeName) {
     if ($this->dao->getAttributeType($attributeName) !== Dao::REFERENCE) {
-      if (!$this->isLoaded) $this->load();
+      if (!$this->isLoaded and !array_key_exists($attributeName, $this->data)) $this->load();
       return isset($this->data[$attributeName]);
     }
     else {

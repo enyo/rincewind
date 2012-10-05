@@ -72,12 +72,10 @@ abstract class Config {
       Log::warning('Passed variable or section not sanitized.', 'Deprecated', array('section' => $saveSection . ' -- ' . $section, 'variable' => $saveVariable . ' -- ' . $variable));
     }
 
-    if ($this->cache) {
-      $key = $this->generateCacheKey($variable, $section);
-      $value = $this->cache->get($key, $found);
-      if ($found) {
-        return $value;
-      }
+
+    $value = $this->getCached($variable, $found, $section);
+    if ($found) {
+      return $value;
     }
 
     $this->load();
@@ -85,27 +83,13 @@ abstract class Config {
     if ($this->useSections) {
       if ( ! $section) throw new ConfigException('No section set.');
 
-      if ( ! isset($this->config[$section])) throw new ConfigException("Section '$section' does not exist.");
+      if ( ! array_key_exists($section, $this->config)) throw new ConfigException("Section '$section' does not exist.");
       if ( ! array_key_exists($variable, $this->config[$section])) throw new ConfigException("Variable '$section.$variable' does not exist.");
-
-      if ($this->cache) {
-        foreach ($this->config as $tmp_section => $tmp_variables) {
-          foreach ($tmp_variables as $tmp_variable => $tmp_config) {
-            $this->cacheConfig($tmp_variable, $tmp_config, $tmp_section);
-          }
-        }
-      }
 
       return $this->config[$section][$variable];
     }
     else {
       if ( ! array_key_exists($variable, $this->config)) throw new ConfigException("Variable '$variable' does not exist.");
-
-      if ($this->cache) {
-        foreach ($this->config as $tmp_variable => $tmp_config) {
-          $this->cacheConfig($tmp_variable, $tmp_config);
-        }
-      }
 
       return $this->config[$variable];
     }
@@ -120,32 +104,61 @@ abstract class Config {
     return $this->cachePrefix . $variable . ($this->useSections ? '__' . $section : '');
   }
 
+
   /**
-   * @param string $variable
-   * @param mixed $config 
-   * @param string $section
+   * Caches the complete config
    */
-  public function cacheConfig($variable, $config, $section = '') {
+  protected function cacheConfig() {
     if ($this->cache) {
-      $this->cache->set($this->generateCacheKey($variable, $section), $config, $this->cacheExpire);
+      if ($this->useSections) {
+        foreach ($this->config as $section => $variables) {
+          foreach ($variables as $variable => $value) {
+            $this->cache->set($this->generateCacheKey($variable, $section), $value, $this->cacheExpire);
+          }
+        }
+      }
+      else {
+        foreach ($this->config as $variable => $value) {
+          $this->cache->set($this->generateCacheKey($variable), $value, $this->cacheExpire);
+        }
+      }
     }
   }
 
   /**
-   * Implement this to load your configuration.
-   * It should only load the configuration once!
-   * If you want to reload it, use reload() instead.
-   * This method should also overwrite any possible cached values. Do *not* check
-   * if the value is already cached here, and leave it be.
+   * Returns the cached value if present.
+   * @param  string $variable
+   * @param  bool $found Gets set to true if found
+   * @param  string $section optional
+   * @return mixed
    */
-  abstract public function load();
+  public function getCached($variable, &$found, $section = null) {
+    if (!$this->cache) {
+      $found = false;
+      return;
+    }
+    $key = $this->generateCacheKey($variable, $section);
+    return $this->cache->get($key, $found);
+  }
+
 
   /**
-   * Sets $config to null;
-   * @uses $config
+   * @return Cache
    */
-  public function clear() {
-    $this->config = null;
+  public function getCache() {
+    return $this->cache;
+  }
+
+  /**
+   * Calls doLoad() and cacheConfig().
+   * Does nothing if the config is already loaded.
+   * If you want to reload it, use reload() instead.
+   * @return [type] [description]
+   */
+  public final function load() {
+    if ($this->config) return;
+    $this->doLoad();
+    $this->cacheConfig();
   }
 
   /**
@@ -154,6 +167,21 @@ abstract class Config {
   public function reload() {
     $this->clear();
     $this->load();
+  }
+
+
+  /**
+   * Implement this to actually load your configuration.
+   * This function should put fill the `$this->config` array.
+   */
+  abstract protected function doLoad();
+
+  /**
+   * Sets $config to null;
+   * @uses $config
+   */
+  public function clear() {
+    $this->config = null;
   }
 
   /**

@@ -46,4 +46,10 @@ interface Cache {
    * Empties the cache
    */
   public function flush();
+
+  /**
+   * Returns stats about the cache
+   * @return array
+   */
+  public function getStats();
 }

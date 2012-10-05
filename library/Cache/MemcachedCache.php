@@ -82,4 +82,10 @@ class MemcachedCache implements Cache {
     $this->memcached->flush();
   }
 
+
+  public function getStats() {
+    if ( ! $this->memcached) throw new CacheException('No memcached defined.');
+    return $this->memcached->getStats();
+  }
+
 }

@@ -55,8 +55,7 @@ class IniFileConfig extends Config {
   /**
    * Loads and caches the config files
    */
-  public function load() {
-    if ($this->config) return;
+  public function doLoad() {
     Profile::start('IniFileConfig', 'Load');
     if ($this->defaultConfigFileUri) $this->config = $this->mergeConfigArrays(parse_ini_file($this->defaultConfigFileUri, $this->useSections), parse_ini_file($this->configFileUri, $this->useSections));
     else                             $this->config = parse_ini_file($this->configFileUri, $this->useSections);

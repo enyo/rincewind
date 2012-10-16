@@ -244,6 +244,7 @@ class DefaultDispatcher implements Dispatcher {
         catch (ErrorMessageException $e) {
           $errorDuringRender = true;
           $this->notificationCenter->addError($e->getMessage());
+          $errorCode = 400;
         }
         catch (ErrorCode $e) {
           throw $e;

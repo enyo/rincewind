@@ -37,18 +37,29 @@ class HttpServer {
   protected $timeout;
 
   /**
+   * Normally query strings that contain arrays are inserted like this:
+   * 
+   *   ar[0]=xx&ar[1]=xx&ar[2]=xx
+   * 
+   * If this is set to true, then it will be turned do ar=xx&ar=xx&ar=xx
+   * @var boolean
+   */
+  protected $removeBracketsFromQueryArray;
+
+  /**
    * @param string $domain Without slash or protocol
    * @param string $path Without slash at the beginning, but a slash in the end.
    * @param int $port 
    * @param bool $useHttps
    * @param int $timeout in seconds
    */
-  function __construct($domain, $path = '/', $port = 80, $useHttps = false, $timeout = 60) {
+  function __construct($domain, $path = '/', $port = 80, $useHttps = false, $timeout = 60, $removeBracketsFromQueryArray = false) {
     $this->useHttps = $useHttps;
     $this->domain = $domain;
     $this->path = $path;
     $this->port = $port;
     $this->timeout = $timeout;
+    $this->removeBracketsFromQueryArray = $removeBracketsFromQueryArray;
   }
 
   /**
@@ -116,7 +127,11 @@ class HttpServer {
     $url = $this->getCompleteUrl($query);
 
     if ($getParameters && is_array($getParameters) && count($getParameters) > 0) {
-      $url .= '?' . http_build_query($getParameters);
+      $queryString = http_build_query($getParameters);
+      if ($this->removeBracketsFromQueryArray) {
+        $queryString = preg_replace('/\%5B[0-9]+%5D/', '' , $queryString);
+      }
+      $url .= '?' . $queryString;
     }
 
 

@@ -118,6 +118,7 @@ abstract class Dao implements DaoInterface {
   const REFERENCE = 'Reference';
   const REF = self::REFERENCE;
   const IGNORE = 'Ignore';
+  const COMPUTED = 'Computed';
   /*   * #@- */
 
 

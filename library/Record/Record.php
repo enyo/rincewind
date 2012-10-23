@@ -239,28 +239,25 @@ class Record implements RecordInterface {
    */
   public function get($attributeName) {
     $attributes = $this->dao->getAttributes();
-    if (array_key_exists($attributeName, $attributes)) {
-      if ($attributes[$attributeName] !== Dao::REFERENCE) {
-        $value = $this->getDirectly($attributeName);
-      }
-      else {
-        // It's a reference
-        $reference = $this->dao->getReference($attributeName);
-        return $reference->getReferenced($this, $attributeName);
-      }
-    }
-    elseif (array_key_exists($attributeName, $this->dao->getAdditionalAttributes())) {
-      $value = array_key_exists($attributeName, $this->data) ? $this->data[$attributeName] : null;
-    }
-    elseif (method_exists($this, '_' . $attributeName)) {
-      return $this->getComputedAttribute($attributeName);
-    }
-    else {
+    $attributeType = $this->getAttributeType($attributeName);
+
+    if (!$attributeType) {
       $this->triggerUndefinedAttributeError($attributeName);
       return null;
     }
-    $attributeType = $this->getAttributeType($attributeName);
-    if ($value !== null && ($attributeType === Dao::DATE || $attributeType === Dao::DATE_WITH_TIME)) $value = new Date($value, ($attributeType === Dao::DATE_WITH_TIME));
+
+    if ($attributeType === Dao::REFERENCE) {
+      $reference = $this->dao->getReference($attributeName);
+      $value = $reference->getReferenced($this, $attributeName);
+    }
+    elseif ($attributeType === Dao::COMPUTED) {
+      $value = $this->getComputedAttribute($attributeName);
+    }
+    else {
+      $value = $this->getDirectly($attributeName);
+      if ($value !== null && ($attributeType === Dao::DATE || $attributeType === Dao::DATE_WITH_TIME)) $value = new Date($value, ($attributeType === Dao::DATE_WITH_TIME));
+    }
+
     return $value;
   }
 
@@ -382,13 +379,19 @@ class Record implements RecordInterface {
    * Overloading the Record
    */
   public function __isset($attributeName) {
-    if ($this->dao->getAttributeType($attributeName) !== Dao::REFERENCE) {
-      if (!$this->isLoaded and !array_key_exists($attributeName, $this->data)) $this->load();
-      return isset($this->data[$attributeName]);
-    }
-    else {
+    $attributeType = $this->getAttributeType($attributeName);
+    if (!$attributeType) return null;
+
+    if ($attributeType === Dao::REFERENCE) {
       $reference = $this->get($attributeName);
       return $reference !== null;
+    }
+    elseif ($attributeType === Dao::COMPUTED) {
+      return $this->get($attributeName) !== null;
+    }
+    else {
+      if (!$this->isLoaded and !array_key_exists($attributeName, $this->data)) $this->load();
+      return isset($this->data[$attributeName]);
     }
   }
 
@@ -408,18 +411,13 @@ class Record implements RecordInterface {
    * @return INT
    */
   protected function getAttributeType($attributeName) {
-    if (array_key_exists($attributeName, $this->dao->getAttributes())) {
-      $attributeTypes = $this->dao->getAttributes();
+    $attributeType = $this->dao->getAttributeType($attributeName);
+
+    if (!$attributeType && method_exists($this, '_' . $attributeName)) {
+      $attributeType = Dao::COMPUTED;
     }
-    elseif (array_key_exists($attributeName, $this->dao->getAdditionalAttributes())) {
-      $attributeTypes = $this->dao->getAdditionalAttributes();
-    }
-    else {
-      $trace = debug_backtrace();
-      trigger_error('No valid type found for attribute `' . $attributeName . '` in ' . $trace[0]['file'] . ' on line ' . $trace[0]['line'], E_USER_ERROR);
-      return;
-    }
-    return $attributeTypes[$attributeName];
+
+    return $attributeType;
   }
 
   /**

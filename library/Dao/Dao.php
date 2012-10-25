@@ -154,7 +154,7 @@ abstract class Dao implements DaoInterface {
    */
   public function __construct() {
     $this->attributes = array_merge($this->attributes, $this->additionalAttributes());
-    $this->nullAttributes = array_merge($this->nullAttributes, $this->additionalNullAttributes());
+    $this->nullAttributes = array_merge($this->nullAttributes, $this->additionalNullAttributes(), $this->getPseudoAttributes());
     $this->defaultValueAttributes = array_merge($this->defaultValueAttributes, $this->additionalDefaultValueAttributes());
     $this->attributeImportMapping = array_merge($this->attributeImportMapping, $this->additionalAttributeImportMapping());
 
@@ -241,17 +241,6 @@ abstract class Dao implements DaoInterface {
    * @var array
    */
   protected $attributes = array();
-  /**
-   * This works exactly the same as the attributes, except that it only defines attributes, that may additionally be returned by the
-   * datasource (for example in joins).
-   * Those values can *not* be set in the Records afterwards, but are checked for their types when retrieved.
-   * When trying to get an additional attribute out of a Record, that has not been retrieved from the datasource, the Record should
-   * just return null and not error.
-   * When trying to set an additional attribute the Record should trigger an error.
-   *
-   * @var array
-   */
-  protected $additionalAttributes = array();
   /**
    * A Cache object to store cached objects.
    *
@@ -361,6 +350,17 @@ abstract class Dao implements DaoInterface {
    * @var array
    */
   protected $nullAttributes = array();
+  /**
+   * An array of attributes that can not be set and aren't submitted to the server.
+   * 
+   * They serve mainly as a possibility to transmit additional data, like from
+   * a SQL view for example.
+   *
+   * Pseudo attributes are automatically in the nullAttributes list.
+   * 
+   * @var array
+   */
+  protected $pseudoAttributes = array();
   /**
    * This is a list of attributes that have default values in the datasource.
    * This means that, if the values are NULL, and the entry is inserted in the datasource, they will not be
@@ -607,6 +607,14 @@ abstract class Dao implements DaoInterface {
   }
 
   /**
+   * Returns the pseudo attributes
+   * @return array
+   */
+  public function getPseudoAttributes() {
+    return $this->pseudoAttributes;
+  }
+
+  /**
    * Returns the default value attributes
    *
    * @return array
@@ -683,7 +691,7 @@ abstract class Dao implements DaoInterface {
    * @param string $attributeName
    */
   protected function attributeExists($attributeName) {
-    return isset($this->attributes[$attributeName]) || isset($this->additionalAttributes[$attributeName]);
+    return isset($this->attributes[$attributeName]);
   }
 
   /**
@@ -847,9 +855,11 @@ abstract class Dao implements DaoInterface {
     $isRecord = is_a($recordOrData, 'Record');
 
     $attributes = array();
+    $pseudoAttributes = $this->getPseudoAttributes();
 
     foreach ($this->attributes as $attributeName => $type) {
       if ($type === Dao::IGNORE) continue;
+      if (in_array($attributeName, $pseudoAttributes)) continue;
 
       if ($ignoreId && $attributeName === 'id') continue;
 
@@ -960,20 +970,20 @@ abstract class Dao implements DaoInterface {
     $recordData = array();
 
     $neededValues = $this->attributes;
+    foreach ($this->pseudoAttributes as $attributeName) {
+      unset($neededValues[$attributeName]);
+    }
 
     if (!is_array($data)) trigger_error('The data provided was not an array (' . $this->resourceName . ').', E_USER_ERROR);
 
     foreach ($data as $attributeName => $value) {
       $attributeName = $this->importAttributeName($attributeName);
       if (array_key_exists($attributeName, $this->attributes)) {
-        unset($neededValues[$attributeName]);
+        if (!in_array($attributeName, $this->pseudoAttributes)) {
+          unset($neededValues[$attributeName]);
+        }
         if ($this->attributes[$attributeName] !== Dao::IGNORE) {
           $recordData[$attributeName] = $this->importValue($attributeName, $value, $this->attributes[$attributeName], $this->notNull($attributeName));
-        }
-      }
-      elseif (array_key_exists($attributeName, $this->additionalAttributes)) {
-        if ($this->additionalAttributes[$attributeName] !== Dao::IGNORE) {
-          $recordData[$attributeName] = $this->importValue($attributeName, $value, $this->additionalAttributes[$attributeName], $this->notNull($attributeName));
         }
       }
       else {

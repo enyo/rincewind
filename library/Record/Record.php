@@ -323,10 +323,12 @@ class Record implements RecordInterface {
    * @return Record Returns itself for chaining.
    */
   public function set($attributeName, $value) {
-    if (!array_key_exists($attributeName, $this->dao->getAttributes())) {
+    $pseudoAttributes = $this->dao->getPseudoAttributes();
+    if (!array_key_exists($attributeName, $this->dao->getAttributes()) || in_array($attributeName, $pseudoAttributes)) {
       $this->triggerUndefinedAttributeError($attributeName);
       return $this;
     }
+
     $value = $this->dao->coerce($attributeName, $value, $this->getAttributeType($attributeName), in_array($attributeName, $this->dao->getNullAttributes()));
     $this->data[$attributeName] = $value;
     $this->changedAttributes[$attributeName] = true;

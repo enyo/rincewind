@@ -204,9 +204,6 @@ class Record implements RecordInterface {
         }
       }
     }
-    foreach ($this->dao->getPseudoAttributes() as $attributeName => $type) {
-      unset($data[$attributeName]);
-    }
     return $data;
   }
 

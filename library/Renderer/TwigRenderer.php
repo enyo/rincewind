@@ -51,18 +51,24 @@ class TwigRenderer extends BaseRenderer {
   protected $globals = array();
 
   /**
+   * @var boolean
+   */
+  protected $debug;
+
+  /**
    * Includes the dwooAutoload php
    *
    * @param string $twigAutoloaderUri /URI/of/twig/Autoloader.php
    * @param string $cachePath
    * @param string $templatesPath
    */
-  public function __construct($twigAutoloaderUri, $cachePath = false, $templatesPath = null) {
+  public function __construct($twigAutoloaderUri, $cachePath = false, $templatesPath = null, $debug = false) {
     parent::__construct($templatesPath);
 
     require_once $twigAutoloaderUri;
     Twig_Autoloader::register();
     $this->cachePath = $cachePath;
+    $this->debug = $debug;
   }
 
   /**
@@ -90,7 +96,7 @@ class TwigRenderer extends BaseRenderer {
     $templateName = $viewName . '.' . static::$templateFileExtension;
 
     $loader = new Twig_Loader_Filesystem($this->templatesPath);
-    $twig = new Twig_Environment($loader, array('cache' => $this->cachePath));
+    $twig = new Twig_Environment($loader, array('cache' => $this->cachePath, 'debug' => $this->debug));
 
     foreach ($this->extensions as $extension) {
       $twig->addExtension($extension);

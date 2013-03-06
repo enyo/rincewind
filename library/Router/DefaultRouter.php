@@ -77,7 +77,10 @@ class DefaultRouter implements Router {
    * @return string
    */
   public function urlName($name) {
-    return preg_replace('/[^a-zA-Z0-9\-\_\.]/im', '-', $name);
+    setlocale(LC_CTYPE, "en_US.UTF-8");
+    $name = iconv('utf-8', 'ascii//TRANSLIT', $name);
+    $name = preg_replace('/[^a-zA-Z0-9\-\_\.]+/im', '-', $name);
+    return $name;
   }
 
   /**

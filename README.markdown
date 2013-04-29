@@ -3,6 +3,13 @@
 Is a PHP library.
 
 
+> I haven't worked on this library in a while! (Actually, I don't code in PHP that much anymore).
+> This project is pretty much dead, and I suggest you use one of the other great libraries there are
+> (like [cake php](http://cakephp.org/) or [symfony](http://symfony.com/))
+>
+> I intend to extract the Dao part of it and release a standalone version though since I haven't found
+> anything comparable yet.
+
 ## Short introduction
 
 This library is meant to facilitate common tasks in PHP.
@@ -14,21 +21,22 @@ The biggest and probably most used part of the library is the Dao.
 
 Once your Dao is configured (simply define the attributes you have in your resource), you access your datasource like this:
 
-    <?php
-    $user = $userDao->get($id); // is the same as $userDao->getById($id)
-    $user->set('firstName', 'John');
-    $user->lastName = 'Doe'; // Is the same as $user->set('lastName', 'Doe');
-    $user->save();
-    ?>
+```php
+$user = $userDao->get($id); // is the same as $userDao->getById($id)
+$user->set('firstName', 'John');
+$user->lastName = 'Doe'; // Is the same as $user->set('lastName', 'Doe');
+$user->save();
+```
 
 You can also chain calls like this:
 
-    <?php
-    $userDao->get() // Gets a "raw" object, ready to be filled with data.
-      ->set('firstName', 'John')
-      ->set('lastName', 'Doe')
-      ->save(); // Inserts the object in the database.
-    ?>
+
+```php
+$userDao->get() // Gets a "raw" object, ready to be filled with data.
+        ->set('firstName', 'John')
+        ->set('lastName', 'Doe')
+        ->save(); // Inserts the object in the database.
+```
 
 One thing that's really cool with Daos are references.
 

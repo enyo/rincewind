@@ -40,7 +40,7 @@ class SecurityRouter extends DefaultRouter {
    *
    * {@inheritdoc}
    */
-  protected function exportUrlMessage($message) {
+  public function exportUrlMessage($message) {
     return $this->urlEncryption->encrypt($message);
   }
   /**

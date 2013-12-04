@@ -98,7 +98,7 @@ class DefaultRouter implements Router {
   public function getLink($targetControllerName = null) {
     $arguments = func_get_args();
     list($targetControllerName, $action, $actionParameters, $get) = $this->interpretUrlArguments($targetControllerName, $arguments);
-    return 'http://' . @$_SERVER['SERVER_NAME'] . $this->generateUrl($targetControllerName, $action, $actionParameters, $get);
+    return 'http://' . @$_SERVER['HTTP_HOST'] . $this->generateUrl($targetControllerName, $action, $actionParameters, $get);
   }
 
   /**
@@ -201,7 +201,7 @@ class DefaultRouter implements Router {
    * @param string $message
    * @return string
    */
-  protected function exportUrlMessage($message) {
+  public function exportUrlMessage($message) {
     return $message;
   }
   /**
